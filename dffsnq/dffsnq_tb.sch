@@ -37,7 +37,7 @@ C {lab_wire.sym} 150 50 2 0 {name=p7 sig_type=std_logic lab=vss}
 C {lab_wire.sym} -150 50 0 0 {name=p8 sig_type=std_logic lab=vdd}
 C {code_shown.sym} -510 -210 0 0 {name=INCLUDE
 only_toplevel=false
-value=".include /foss/designs/DBSchip/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice"}
+value=".include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice"}
 C {vsource.sym} -626.5625 -6.71875 0 0 {name=V1 value=3.3 savecurrent=false}
 C {gnd.sym} -626.5625 63.28125 0 0 {name=l1 lab=GND}
 C {lab_wire.sym} -626.5625 -76.71875 3 0 {name=p9 sig_type=std_logic lab=vdd}
@@ -124,4 +124,4 @@ value="
 .lib $::180MCU_MODELS/sm141064.ngspice typical
 "}
 C {lab_wire.sym} 190 -60 0 0 {name=p6 sig_type=std_logic lab=Q}
-C {gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.sym} 0 0 0 0 {}
+C {gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.sym} 0 0 0 0 {name=x1}

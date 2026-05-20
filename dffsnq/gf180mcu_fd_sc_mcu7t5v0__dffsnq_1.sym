@@ -1,7 +1,8 @@
 v {xschem version=3.4.7 file_version=1.2}
 G {}
 K {type=primitive
-format="@name @pinlist @symname"}
+format="@name @pinlist @symname"
+template="name=x1"}
 V {}
 S {}
 E {}
@@ -16,7 +17,7 @@ L 4 90 50 110 50 {}
 L 4 -50 -70 0 0 {}
 L 4 0 0 50 -70 {}
 B 5 -112.5 -62.5 -107.5 -57.5 {name=D dir=in lab=D}
-B 5 -2.5 87.5 2.5 92.5 {name=SETN dir=in lab=RN}
+B 5 -2.5 87.5 2.5 92.5 {name=SETN dir=in lab=SETN}
 B 5 -2.5 -92.5 2.5 -87.5 {name=CLK dir=in lab=CLK}
 B 5 107.5 -62.5 112.5 -57.5 {name=Q dir=out lab=Q}
 B 5 -112.5 47.5 -107.5 52.5 {name=VDD dir=inout lab=VDD}

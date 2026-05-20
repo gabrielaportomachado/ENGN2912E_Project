@@ -2,7 +2,7 @@ v {xschem version=3.4.7 file_version=1.2}
 G {}
 K {type=primitive
 format="@name @pinlist @symname"
-"}
+template="name=x1"}
 V {}
 S {}
 E {}
