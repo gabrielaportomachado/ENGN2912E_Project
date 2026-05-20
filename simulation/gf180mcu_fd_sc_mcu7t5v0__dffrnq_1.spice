@@ -1,0 +1,11 @@
+** sch_path: /foss/designs/DBSchip/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.sch
+.subckt gf180mcu_fd_sc_mcu7t5v0__dffrnq_1 D Q RN CLK VDD VNW VPW VSS
+*.PININFO D:I RN:I CLK:I Q:O VDD:I VNW:I VPW:I VSS:I
+**** begin user architecture code
+
+
+.include /foss/designs/DBSchip/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.cdl
+
+
+**** end user architecture code
+.ends
