@@ -42,3 +42,6 @@ M_tp5 net4 RN VDD VNW pfet_05v0 W=1e-06 L=5e-07
 M_tp4 VDD net8 net4 VNW pfet_05v0 W=1e-06 L=5e-07
 M_tp1 Q net4 VDD VNW pfet_05v0 W=1.215e-06 L=5e-07
 .ENDS
+
+
+******* EOF
