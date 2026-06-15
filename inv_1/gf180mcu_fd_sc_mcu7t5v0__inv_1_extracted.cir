@@ -1,0 +1,8 @@
+* Extracted by KLayout with GF180MCU LVS runset on : 12/06/2026 20:30
+
+.SUBCKT gf180mcu_fd_sc_mcu7t5v0__inv_1 VSS ZN I VDD gf180mcu_gnd
+M$1 ZN I VDD \$6 pfet_05v0 L=0.5U W=1.22U AS=0.5368P AD=0.5368P PS=3.32U
++ PD=3.32U
+M$2 ZN I VSS gf180mcu_gnd nfet_05v0 L=0.6U W=0.82U AS=0.3608P AD=0.3608P
++ PS=2.52U PD=2.52U
+.ENDS gf180mcu_fd_sc_mcu7t5v0__inv_1
