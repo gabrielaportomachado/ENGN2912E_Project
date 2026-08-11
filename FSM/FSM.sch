@@ -4,8 +4,8 @@ K {}
 V {}
 S {}
 E {}
-N -160 -470 -160 -420 {lab=vdd}
-N -140 -470 -140 -420 {lab=vdd}
+N -160 -510 -160 -460 {lab=vdd}
+N -140 -510 -140 -460 {lab=vdd}
 N -160 -100 -160 -50 {lab=vdd}
 N -140 -100 -140 -50 {lab=vdd}
 N 100 -150 100 -100 {lab=vdd}
@@ -24,10 +24,10 @@ N 560 110 610 110 {lab=vss}
 N 560 510 610 510 {lab=vss}
 N 560 550 610 550 {lab=vss}
 N 560 550 610 550 {lab=vss}
-N -160 -220 -160 -170 {lab=vss}
-N -140 -220 -140 -170 {lab=vss}
+N -160 -260 -160 -210 {lab=vss}
+N -140 -260 -140 -210 {lab=vss}
 N -160 90 -160 140 {lab=vss}
-N -140 90 -140 140 {lab=vss}
+N -140 100 -140 150 {lab=vss}
 N 100 100 100 150 {lab=vss}
 N 120 100 120 150 {lab=vss}
 N 450 150 450 210 {lab=RSTn}
@@ -38,13 +38,13 @@ N 450 590 450 650 {lab=RSTn}
 N 450 650 450 660 {lab=RSTn}
 N 450 350 450 410 {lab=CLK}
 N 450 340 450 350 {lab=CLK}
-N -280 -340 -170 -340 {lab=REC_EN}
-N -280 -300 -170 -300 {lab=S0}
+N -280 -380 -170 -380 {lab=REC_EN}
+N -280 -340 -170 -340 {lab=S0}
 N -30 410 80 410 {lab=REC_EN}
 N -300 20 -190 20 {lab=MODE}
-N -110 20 90 20 {lab=#net1}
-N -30 -320 80 -320 {lab=TREAT_EN}
-N -20 -20 90 -20 {lab=TREAT_EN}
+N -110 -20 90 -20 {lab=TREAT_EN}
+N -30 -360 80 -360 {lab=TREAT_EN}
+N -20 20 90 20 {lab=#net1}
 N -30 470 80 470 {lab=TREAT_EN}
 N 200 440 340 440 {lab=#net2}
 N 230 -0 340 -0 {lab=#net3}
@@ -53,14 +53,15 @@ N 560 440 660 440 {lab=S0}
 N 140 250 140 360 {lab=MODE}
 N 110 570 110 620 {lab=vss}
 N 130 570 130 620 {lab=vss}
-C {nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.sym} -110 -320 0 0 {name=x1}
+N -110 20 -20 20 {lab=#net1}
+C {nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.sym} -110 -360 0 0 {name=x1}
 C {nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.sym} 150 0 0 0 {name=x2}
 C {inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.sym} -160 20 0 0 {name=x3}
 C {mux2_1/gf180mcu_fd_sc_mcu7t5v0__mux2_1.sym} 140 440 0 0 {name=x4}
 C {dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.sym} 450 60 0 0 {name=x5}
 C {dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.sym} 450 500 0 0 {name=x6}
-C {lab_wire.sym} -160 -460 3 0 {name=p1 sig_type=std_logic lab=vdd}
-C {lab_wire.sym} -140 -460 3 0 {name=p2 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} -160 -500 3 0 {name=p1 sig_type=std_logic lab=vdd}
+C {lab_wire.sym} -140 -500 3 0 {name=p2 sig_type=std_logic lab=vdd}
 C {lab_wire.sym} -160 -90 3 0 {name=p3 sig_type=std_logic lab=vdd}
 C {lab_wire.sym} -140 -90 3 0 {name=p4 sig_type=std_logic lab=vdd}
 C {lab_wire.sym} 100 -140 3 0 {name=p5 sig_type=std_logic lab=vdd}
@@ -75,22 +76,22 @@ C {lab_wire.sym} 600 70 0 0 {name=p13 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 600 110 0 0 {name=p14 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 600 510 0 0 {name=p15 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 600 550 0 0 {name=p16 sig_type=std_logic lab=vss}
-C {lab_wire.sym} -160 -210 3 0 {name=p17 sig_type=std_logic lab=vss}
-C {lab_wire.sym} -140 -210 3 0 {name=p18 sig_type=std_logic lab=vss}
+C {lab_wire.sym} -160 -250 3 0 {name=p17 sig_type=std_logic lab=vss}
+C {lab_wire.sym} -140 -250 3 0 {name=p18 sig_type=std_logic lab=vss}
 C {lab_wire.sym} -160 100 3 0 {name=p19 sig_type=std_logic lab=vss}
-C {lab_wire.sym} -140 100 3 0 {name=p20 sig_type=std_logic lab=vss}
+C {lab_wire.sym} -140 110 3 0 {name=p20 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 100 110 3 0 {name=p21 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 120 110 3 0 {name=p22 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 450 190 3 0 {name=p23 sig_type=std_logic lab=RSTn}
 C {lab_wire.sym} 450 -70 1 0 {name=p24 sig_type=std_logic lab=CLK}
 C {lab_wire.sym} 450 630 3 0 {name=p25 sig_type=std_logic lab=RSTn}
 C {lab_wire.sym} 450 370 1 0 {name=p26 sig_type=std_logic lab=CLK}
-C {lab_wire.sym} -250 -340 0 0 {name=p27 sig_type=std_logic lab=REC_EN}
-C {lab_wire.sym} -250 -300 0 0 {name=p28 sig_type=std_logic lab=S0}
+C {lab_wire.sym} -250 -380 0 0 {name=p27 sig_type=std_logic lab=REC_EN}
+C {lab_wire.sym} -250 -340 0 0 {name=p28 sig_type=std_logic lab=S0}
 C {lab_wire.sym} 0 410 0 0 {name=p29 sig_type=std_logic lab=REC_EN}
 C {lab_wire.sym} -270 20 0 0 {name=p30 sig_type=std_logic lab=MODE}
-C {lab_wire.sym} 70 -320 0 0 {name=p31 sig_type=std_logic lab=TREAT_EN}
-C {lab_wire.sym} 50 -20 0 0 {name=p32 sig_type=std_logic lab=TREAT_EN}
+C {lab_wire.sym} 70 -360 0 0 {name=p31 sig_type=std_logic lab=TREAT_EN}
+C {lab_wire.sym} 60 -20 0 0 {name=p32 sig_type=std_logic lab=TREAT_EN}
 C {lab_wire.sym} 40 470 0 0 {name=p33 sig_type=std_logic lab=TREAT_EN}
 C {opin.sym} 880 -180 0 0 {name=p34 lab=REC_EN}
 C {ipin.sym} -540 -130 0 0 {name=p35 lab=MODE}
@@ -104,3 +105,12 @@ C {lab_wire.sym} 610 440 0 0 {name=p42 sig_type=std_logic lab=S0}
 C {lab_wire.sym} 140 280 1 0 {name=p43 sig_type=std_logic lab=MODE}
 C {lab_wire.sym} 110 580 3 0 {name=p44 sig_type=std_logic lab=vss}
 C {lab_wire.sym} 130 580 3 0 {name=p45 sig_type=std_logic lab=vss}
+C {code_shown.sym} -240 700 0 0 {name=INCLUDE
+only_toplevel=false
+value="
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
+.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.spice
+.include /foss/designs/DBSchip/mux2_1/gf180mcu_fd_sc_mcu7t5v0__mux2_1.spice
+.include /foss/designs/DBSchip/nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.spice
+"}

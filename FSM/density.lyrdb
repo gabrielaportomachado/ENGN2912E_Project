@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<report-database>
+ <description>GF180 DENSITY DRC Run Report at</description>
+ <original-file>/foss/designs/DBSchip/FSM/FSM.gds</original-file>
+ <generator>drc: script='/foss/pdks/gf180mcuD/libs.tech/klayout/macros/gf180mcu_drc.lydrc'</generator>
+ <top-cell>FSM</top-cell>
+ <tags>
+ </tags>
+ <categories>
+  <category>
+   <name>M2.4</name>
+   <description>M2.4 : Metal2 coverage over the entire die shall be &gt;30%
+                (Refer to section 13.0 for Dummy Metal fill guidelines.
+                 Customer needs to ensure enough dummy metal to satisfy Metal2 coverage) : 30%</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>M3.4</name>
+   <description>M3.4 : metal3 coverage over the entire die shall be &gt;30%
+                    (Refer to section 13.0 for Dummy Metal fill guidelines.
+                    Customer needs to ensure enough dummy metal to satisfy metal3 coverage) : 30%</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>M4.4</name>
+   <description>M4.4 : metal4 coverage over the entire die shall be &gt;30%
+                    (Refer to section 13.0 for Dummy Metal fill guidelines.
+                    Customer needs to ensure enough dummy metal to satisfy metal4 coverage) : 30%</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>M5.4</name>
+   <description>M5.4 : metal5 coverage over the entire die shall be &gt;30%
+                    (Refer to section 13.0 for Dummy Metal fill guidelines.
+                    Customer needs to ensure enough dummy metal to satisfy metal5 coverage) : 30%</description>
+   <categories>
+   </categories>
+  </category>
+  <category>
+   <name>MT.3</name>
+   <description>MT.3 : MetalTop coverage over the entire die shall be &gt;30%
+                                (Refer to section 10.3 for Dummy Metal-fill guidelines.
+                                Customer needs to ensure enough dummy metal to satisfy Metaln coverage) : 30%</description>
+   <categories>
+   </categories>
+  </category>
+ </categories>
+ <cells>
+  <cell>
+   <name>FSM</name>
+   <variant/>
+   <layout-name/>
+   <references>
+   </references>
+  </cell>
+ </cells>
+ <items>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-6.74,7.465;-6.74,7.865;-3.32,7.865;-3.32,8.535;-2.92,8.535;-2.92,8.135;-3.04,8.135;-3.04,7.585;-6.34,7.585;-6.34,7.465)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-13.08,8.165;-13.08,11.745;-13.2,11.745;-13.2,12.145;-12.8,12.145;-12.8,8.565;-12.28,8.565;-12.28,8.165)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (8.675,8.135;8.675,8.535;9.765,8.535;9.765,12.205;10.165,12.205;10.165,11.805;10.045,11.805;10.045,8.255;9.075,8.255;9.075,8.135)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-14.44,6.905;-14.44,12.325;-14.56,12.325;-14.56,12.725;-14.16,12.725;-14.16,7.185;12.835,7.185;12.835,7.305;13.235,7.305;13.235,6.905)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-10.54,8.84;-10.54,12.535;-10.66,12.535;-10.66,12.935;-10.26,12.935;-10.26,9.12;-9.95,9.12;-9.95,9.24;-9.55,9.24;-9.55,8.84)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-6.335,8.145;-6.335,8.545;-6.145,8.545;-6.145,13.175;-5.015,13.175;-5.015,13.295;-4.615,13.295;-4.615,12.895;-5.865,12.895;-5.865,8.145)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-13.76,7.575;-13.76,11.745;-13.88,11.745;-13.88,12.145;-13.76,12.145;-13.76,12.705;-11.45,12.705;-11.45,13.495;-6.43,13.495;-6.43,12.875;-6.83,12.875;-6.83,13.215;-11.17,13.215;-11.17,12.425;-13.48,12.425;-13.48,7.855;-9.32,7.855;-9.32,7.975;-8.92,7.975;-8.92,7.575)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-2.005,12.895;-2.005,13.295;-1.94,13.295;-1.94,13.575;-5.59,13.575;-5.59,13.505;-5.99,13.505;-5.99,13.905;-5.59,13.905;-5.59,13.855;-1.66,13.855;-1.66,13.295;-1.605,13.295;-1.605,12.895)</value>
+   </values>
+  </item>
+  <item>
+   <tags/>
+   <category>'M2.4'</category>
+   <cell>FSM</cell>
+   <visited>false</visited>
+   <multiplicity>1</multiplicity>
+   <comment/>
+   <image/>
+   <values>
+    <value>polygon: (-12.13,12.985;-12.13,13.385;-12.01,13.385;-12.01,14.47;13.18,14.47;13.18,14.525;13.58,14.525;13.58,14.125;13.18,14.125;13.18,14.19;-11.73,14.19;-11.73,12.985)</value>
+   </values>
+  </item>
+ </items>
+</report-database>

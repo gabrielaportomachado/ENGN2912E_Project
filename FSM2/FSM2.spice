@@ -1,0 +1,21 @@
+** sch_path: /foss/designs/DBSchip/FSM2/FSM2.sch
+.subckt FSM2 REC_EN TREAT_EN MODE RSTn CLK vdd vss
+*.PININFO REC_EN:O MODE:I RSTn:I CLK:I TREAT_EN:O vdd:B vss:B
+x1 S0 REC_EN TREAT_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+x5 net2 RSTn CLK REC_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x6 net1 RSTn CLK S0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffsnq_1
+x2 S0 MODE net2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+x3 REC_EN MODE net1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+**** begin user architecture code
+
+
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.cdl
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.cdl
+.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.cdl
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.cdl
+.include /foss/designs/DBSchip/nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.cdl
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.cdl
+
+
+**** end user architecture code
+.ends

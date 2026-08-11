@@ -1,0 +1,95 @@
+** sch_path: /foss/designs/DBSchip/FSM2/FSM_tb2.sch
+.subckt FSM_tb2
+
+V1 vdd GND 5
+V2 vss GND 0
+V3 MODE GND 0
+V4 CLK GND 3.3
+V5 RSTn GND 3.3
+C1 REC_EN GND 25f m=1
+C2 TREAT_EN GND 25f m=1
+x1 REC_EN TREAT_EN MODE RSTn CLK vdd vss FSM2
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.spice
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.spice
+
+
+
+
+.control
+save all
+**
+** ---- clock ----
+let fclk     = 1e5
+let tper_clk = 1/fclk
+let tfr_clk  = 0.01*tper_clk
+let ton_clk  = 0.5*tper_clk - 2*tfr_clk
+let tper2clk = 0.95*tper_clk
+**
+** ---- resolution follows the fastest edge in the deck ----
+let tmax  = tfr_clk/200
+let tstep = tmax
+**
+** ---- 24 clock periods is enough to walk every transition ----
+let tstop = 24*tper_clk
+**
+** ---- MODE: square wave, 8 clock periods per half ----
+let tfr    = tfr_clk
+let tper_D = 16*tper_clk
+let ton_D  = 0.5*tper_D - 2*tfr
+**
+** ---- RSTn: low for the first 2 clock periods, then high ----
+let td_R = 2*tper_clk
+**
+alter @v4[PULSE] = [ 0 3.3 0 $&tfr_clk $&tfr_clk $&ton_clk $&tper2clk 0 ]
+alter @v3[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&ton_D $&tper_D 0 ]
+alter @v5[PULSE] = [ 0 3.3 $&td_R $&tfr $&tfr $&tstop $&tstop 0 ]
+**
+op
+
+tran $&tstep $&tstop 0 $&tmax
+
+**
+plot v(clk) v(mode)+5 v(rstn)+10 v(rec_en)+15 v(treat_en)+20
+write fsm_fast.raw
+.endc
+
+
+
+
+
+**** end user architecture code
+.ends
+
+* expanding   symbol:  FSM2/FSM2.sym # of pins=7
+** sym_path: /foss/designs/DBSchip/FSM2/FSM2.sym
+** sch_path: /foss/designs/DBSchip/FSM2/FSM2.sch
+.subckt FSM2 REC_EN TREAT_EN MODE RSTn CLK vdd vss
+*.PININFO REC_EN:O MODE:I RSTn:I CLK:I TREAT_EN:O vdd:B vss:B
+x1 REC_EN S0 TREAT_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+x5 net2 RSTn CLK REC_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x6 net1 RSTn CLK S0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffsnq_1
+**** begin user architecture code
+
+
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
+.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.spice
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.spice
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.spice
+
+
+**** end user architecture code
+x2 S0 MODE net2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+x3 REC_EN MODE net1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+.ends
+
+.GLOBAL GND

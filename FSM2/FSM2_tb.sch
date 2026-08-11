@@ -23,8 +23,7 @@ N 10 -100 10 -60 {lab=RSTn}
 N 80 -100 80 -60 {lab=vss}
 N 140 -10 310 -10 {lab=REC_EN}
 N 140 10 230 10 {lab=TREAT_EN}
-C {FSM.sym} 0 0 0 0 {name=x1}
-C {vsource.sym} -556.5625 -6.71875 0 0 {name=V1 value=3.3 savecurrent=false}
+C {vsource.sym} -556.5625 -6.71875 0 0 {name=V1 value=5 savecurrent=false}
 C {gnd.sym} -556.5625 63.28125 0 0 {name=l1 lab=GND}
 C {lab_wire.sym} -556.5625 -76.71875 3 0 {name=p9 sig_type=std_logic lab=vdd}
 C {vsource.sym} -486.5625 -6.71875 0 0 {name=V2 value=0 savecurrent=false}
@@ -67,61 +66,47 @@ only_toplevel=false
 value="
 .include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
 .include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
-.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.spice
-.include /foss/designs/DBSchip/mux2_1/gf180mcu_fd_sc_mcu7t5v0__mux2_1.spice
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.spice
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.spice
 .include /foss/designs/DBSchip/nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.spice
 "}
-C {code_shown.sym} 687.1875 -505.15625 0 0 {name=s1 only_toplevel=false value="
+C {code_shown.sym} 637.1875 -255.15625 0 0 {name=s1 only_toplevel=false value="
 .control
 save all
-
-** Define input signals
-let fsig = 1e3
-let tper = 1/fsig
-let tper2 = 0.95*tper
-let tfr = 0.01*tper
-let ton_clk = 0.5*tper - 2*tfr
-
-** Define transient params
-let tstop  = 2*tper
-let tstep  = 0.001 * tper
-let tstop3 = 8*tstop
-
-** --- D waveform: high in 1st+3rd quarters, low in 2nd+4th ---
-** Achieve this by making D a square wave whose PERIOD = tstop3/2
-** Then it is high for tstop3/4, low for tstop3/4, repeating.
-let tper_D = tstop3/2
-let ton_D  = 0.5*tper_D - 2*tfr
-
-** --- async reset waveform: high first half, low second half ---
-** Make one high pulse that lasts tstop3/2, with a very long period so it doesn't repeat.
-let tper_R = 2*tstop3
-let ton_R  = 0.5*tstop3 - 2*tfr
-
-** NEW: fast clock independent of fsig
+**
+** ---- clock ----
 let fclk     = 1e5
 let tper_clk = 1/fclk
-let tper2clk = 0.95*tper_clk
 let tfr_clk  = 0.01*tper_clk
 let ton_clk  = 0.5*tper_clk - 2*tfr_clk
-
-** Clock on V4 (unchanged)
+let tper2clk = 0.95*tper_clk
+**
+** ---- resolution follows the fastest edge in the deck ----
+let tmax  = tfr_clk/200
+let tstep = tmax
+**
+** ---- 24 clock periods is enough to walk every transition ----
+let tstop = 24*tper_clk
+**
+** ---- MODE: square wave, 8 clock periods per half ----
+let tfr    = tfr_clk
+let tper_D = 16*tper_clk
+let ton_D  = 0.5*tper_D - 2*tfr
+**
+** ---- RSTn: low for the first 2 clock periods, then high ----
+let td_R = 2*tper_clk
+**
 alter @v4[PULSE] = [ 0 3.3 0 $&tfr_clk $&tfr_clk $&ton_clk $&tper2clk 0 ]
-
-** D on V3 (quarter pattern across full tstop3)
-alter @v3[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&ton_D  $&tper_D 0 ]
-
-** Async reset on V5 (high first half, low second half)
-alter @v5[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&ton_R  $&tper_R 0 ]
-
-** Simulation
+alter @v3[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&ton_D $&tper_D 0 ]
+alter @v5[PULSE] = [ 0 3.3 $&td_R $&tfr $&tfr $&tstop $&tstop 0 ]
+**
 op
-tran $&tstep $&tstop3
 
+tran $&tstep $&tstop 0 $&tmax
+
+**
 plot v(clk) v(mode)+5 v(rstn)+10 v(rec_en)+15 v(treat_en)+20
-
-** Save waveform
-write dff_tb.raw
+write fsm_fast.raw
 .endc
 
 
@@ -129,3 +114,4 @@ write dff_tb.raw
 "}
 C {lab_wire.sym} 250 -10 0 0 {name=p6 sig_type=std_logic lab=REC_EN}
 C {lab_wire.sym} 150 10 2 0 {name=p7 sig_type=std_logic lab=TREAT_EN}
+C {FSM2/FSM2.sym} 0 0 0 0 {name=x1}

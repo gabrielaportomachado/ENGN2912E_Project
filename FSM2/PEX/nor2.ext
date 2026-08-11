@@ -1,0 +1,50 @@
+timestamp 1615011819
+version 8.3
+tech gf180mcuD
+style ngspice()
+scale 1000 1 0.5
+resistclasses 1000000 3250000 6300 7000 6300 7000 7300 1000000 60000 185000 60000 185000 6300 7000 6300 7000 6800 7300 350000 310000 1000000 90 90 90 90 60
+parameters nfet_10v0_asym l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters nfet_06v0_dss l=l w=w a1=as p1=ps a2=ad p2=pd l1=s_sab l2=d_sab
+parameters nfet_05v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters nfet_06v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters pfet_10v0_asym l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters pfet_06v0_dss l=l w=w a1=as p1=ps a2=ad p2=pd l1=s_sab l2=d_sab
+parameters pfet_05v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+parameters pfet_06v0 l=l w=w a1=as p1=ps a2=ad p2=pd
+port "VDD" 5 1602 -1873 1602 -1873 m1
+port "TREAT_EN" 2 1658 -1592 1658 -1592 m1
+port "VSS" 4 1614 -1059 1614 -1059 m1
+port "A2" 3 1670 -1362 1670 -1362 m1
+port "REC_EN" 1 1438 -1524 1438 -1524 m1
+node "a_1490_n1804#" 13 0 1490 -1804 mvpdif 0 0 0 0 0 0 0 0 0 0 32696 756 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "VDD" 20 219.033 1602 -1873 m1 0 0 0 0 0 0 0 0 0 0 21472 664 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 90668 2020 0 0 0 0 0 0 0 0
+node "TREAT_EN" 27 58.8861 1658 -1592 m1 0 0 0 0 0 0 0 0 11752 434 21472 664 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 51072 1682 0 0 0 0 0 0 0 0
+node "VSS" 38 377.595 1614 -1059 m1 0 0 0 0 0 0 0 0 19888 804 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 128786 2262 0 0 0 0 0 0 0 0
+node "A2" 51 328.637 1670 -1362 m1 0 0 0 0 0 0 0 0 0 0 0 0 73940 1638 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 25942 948 0 0 0 0 0 0 0 0
+node "REC_EN" 51 334.514 1438 -1524 m1 0 0 0 0 0 0 0 0 0 0 0 0 73940 1638 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 26108 978 0 0 0 0 0 0 0 0
+node "w_1180_n1958#" 1629 1311.58 1180 -1958 nw 437192 2724 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+substrate "VSUBS" 0 0 -1073741817 -1073741817 space 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+cap "REC_EN" "A2" 37.8142
+cap "REC_EN" "VDD" 255.318
+cap "VSS" "TREAT_EN" 87.3786
+cap "VSS" "a_1490_n1804#" 0.607288
+cap "a_1490_n1804#" "TREAT_EN" 23.6927
+cap "w_1180_n1958#" "VSS" 12.1441
+cap "w_1180_n1958#" "TREAT_EN" 19.7829
+cap "VDD" "A2" 22.6956
+cap "VSS" "REC_EN" 44.5203
+cap "REC_EN" "TREAT_EN" 378.409
+cap "REC_EN" "a_1490_n1804#" 8.97893
+cap "w_1180_n1958#" "REC_EN" 128.798
+cap "VSS" "A2" 162.246
+cap "TREAT_EN" "A2" 578.53
+cap "VSS" "VDD" 25.9064
+cap "VDD" "TREAT_EN" 117.921
+cap "a_1490_n1804#" "VDD" 13.9637
+cap "w_1180_n1958#" "A2" 133.142
+cap "w_1180_n1958#" "VDD" 94.2061
+device msubckt pfet_05v0 1624 -1804 1625 -1803 l=100 w=244 "w_1180_n1958#" "A2" 200 0 "a_1490_n1804#" 244 16348,378 "TREAT_EN" 244 21472,664
+device msubckt pfet_05v0 1390 -1804 1391 -1803 l=100 w=244 "w_1180_n1958#" "REC_EN" 200 0 "VDD" 244 21472,664 "a_1490_n1804#" 244 16348,378
+device msubckt nfet_05v0 1614 -1306 1615 -1305 l=120 w=113 "VSUBS" "A2" 240 0 "TREAT_EN" 113 5876,217 "VSS" 113 9944,402
+device msubckt nfet_05v0 1390 -1306 1391 -1305 l=120 w=113 "VSUBS" "REC_EN" 240 0 "VSS" 113 9944,402 "TREAT_EN" 113 5876,217
