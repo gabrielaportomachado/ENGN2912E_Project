@@ -32,10 +32,10 @@ C {lab_wire.sym} -486.5625 -76.71875 3 0 {name=p10 sig_type=std_logic lab=vss}
 C {vsource.sym} -426.5625 -6.71875 0 0 {name=V3 value=0 savecurrent=false}
 C {gnd.sym} -426.5625 63.28125 0 0 {name=l5 lab=GND}
 C {lab_wire.sym} -426.5625 -86.71875 3 0 {name=p11 sig_type=std_logic lab=MODE}
-C {vsource.sym} -366.5625 -6.71875 0 0 {name=V4 value=3.3 savecurrent=false}
+C {vsource.sym} -366.5625 -6.71875 0 0 {name=V4 value=5 savecurrent=false}
 C {gnd.sym} -366.5625 63.28125 0 0 {name=l6 lab=GND}
 C {lab_wire.sym} -366.5625 -76.71875 3 0 {name=p12 sig_type=std_logic lab=CLK}
-C {vsource.sym} -296.5625 -6.71875 0 0 {name=V5 value=3.3 savecurrent=false}
+C {vsource.sym} -296.5625 -6.71875 0 0 {name=V5 value=5 savecurrent=false}
 C {gnd.sym} -296.5625 63.28125 0 0 {name=l7 lab=GND}
 C {lab_wire.sym} -296.5625 -76.71875 3 0 {name=p13 sig_type=std_logic lab=RSTn}
 C {capa.sym} 310 20 0 0 {name=C1
@@ -96,9 +96,9 @@ let ton_D  = 0.5*tper_D - 2*tfr
 ** ---- RSTn: low for the first 2 clock periods, then high ----
 let td_R = 2*tper_clk
 **
-alter @v4[PULSE] = [ 0 3.3 0 $&tfr_clk $&tfr_clk $&ton_clk $&tper2clk 0 ]
-alter @v3[PULSE] = [ 0 3.3 0 $&tfr $&tfr $&ton_D $&tper_D 0 ]
-alter @v5[PULSE] = [ 0 3.3 $&td_R $&tfr $&tfr $&tstop $&tstop 0 ]
+alter @v4[PULSE] = [ 0 5 0 $&tfr_clk $&tfr_clk $&ton_clk $&tper2clk 0 ]
+alter @v3[PULSE] = [ 0 5 0 $&tfr $&tfr $&ton_D $&tper_D 0 ]
+alter @v5[PULSE] = [ 0 5 $&td_R $&tfr $&tfr $&tstop $&tstop 0 ]
 **
 op
 
