@@ -1,0 +1,70 @@
+** sch_path: /foss/designs/DBSchip/ROW/READY_sweep/CHANNEL.sch
+**.subckt CHANNEL MODE RSTn CLK VDD VSS SW_REC SW_IPG SW_RECb SW_IPGb ENi READY
+*.ipin MODE
+*.ipin RSTn
+*.ipin CLK
+*.iopin VDD
+*.iopin VSS
+*.opin SW_REC
+*.opin SW_IPG
+*.opin SW_RECb
+*.opin SW_IPGb
+*.ipin ENi
+*.ipin READY
+x1 MODE RSTn CLK VDD VSS REC_EN TREAT_EN MODE+FSM
+x2 ENi RSTn CLK ENi_q VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x3 ENi_q RSTn CLK ENi_q2 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x4 READY REC_EN ENi_q2 SW_RECb VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__nand3_1
+x5 SW_RECb SW_REC VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__inv_1
+x6 READY TREAT_EN ENi_q2 SW_IPGb VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__nand3_1
+x7 SW_IPGb SW_IPG VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__inv_1
+**.ends
+
+* expanding   symbol:  MODE+FSM/MODE+FSM.sym # of pins=7
+** sym_path: /foss/designs/DBSchip/MODE+FSM/MODE+FSM.sym
+** sch_path: /foss/designs/DBSchip/MODE+FSM/MODE+FSM.sch
+.subckt MODE+FSM MODE RSTn CLK VDD VSS REC_EN TREAT_EN
+*.ipin MODE
+*.ipin RSTn
+*.ipin CLK
+*.iopin VDD
+*.iopin VSS
+*.opin REC_EN
+*.opin TREAT_EN
+x2 REC_EN TREAT_EN MODE_q2 RSTn CLK VDD VSS FSM2
+x1 MODE RSTn CLK MODE_q VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x3 MODE_q RSTn CLK MODE_q2 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+.ends
+
+
+* expanding   symbol:  FSM2/FSM2.sym # of pins=7
+** sym_path: /foss/designs/DBSchip/FSM2/FSM2.sym
+** sch_path: /foss/designs/DBSchip/FSM2/FSM2.sch
+.subckt FSM2 REC_EN TREAT_EN MODE RSTn CLK vdd vss
+*.opin REC_EN
+*.ipin MODE
+*.ipin RSTn
+*.ipin CLK
+*.opin TREAT_EN
+*.iopin vdd
+*.iopin vss
+x1 S0 REC_EN TREAT_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+x5 net2 RSTn CLK REC_EN vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x6 net1 RSTn CLK S0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffsnq_1
+**** begin user architecture code
+
+
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
+.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.spice
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.spice
+.include /foss/designs/DBSchip/nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.spice
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.spice
+
+
+**** end user architecture code
+x2 S0 MODE net2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+x3 REC_EN MODE net1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+.ends
+
+.end

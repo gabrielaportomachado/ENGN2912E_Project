@@ -1,0 +1,45 @@
+v {xschem version=3.4.7 file_version=1.2}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+V {}
+S {}
+E {}
+L 4 -150 -10 -130 -10 {}
+L 4 -150 10 -130 10 {}
+L 4 -20 60 -20 80 {}
+L 4 0 60 0 80 {}
+L 4 20 60 20 80 {}
+L 4 130 -30 150 -30 {}
+L 4 130 -10 150 -10 {}
+L 4 130 10 150 10 {}
+L 4 130 30 150 30 {}
+L 7 -10 -80 -10 -60 {}
+L 7 10 -80 10 -60 {}
+B 5 -152.5 -12.5 -147.5 -7.5 {name=READY dir=in}
+B 5 -152.5 7.5 -147.5 12.5 {name=ENi dir=in}
+B 5 -22.5 77.5 -17.5 82.5 {name=MODE dir=in}
+B 5 -2.5 77.5 2.5 82.5 {name=RSTn dir=in}
+B 5 17.5 77.5 22.5 82.5 {name=CLK dir=in}
+B 5 -12.5 -82.5 -7.5 -77.5 {name=VDD dir=inout}
+B 5 7.5 -82.5 12.5 -77.5 {name=VSS dir=inout}
+B 5 147.5 -32.5 152.5 -27.5 {name=SW_REC dir=out}
+B 5 147.5 -12.5 152.5 -7.5 {name=SW_IPG dir=out}
+B 5 147.5 7.5 152.5 12.5 {name=SW_RECb dir=out}
+B 5 147.5 27.5 152.5 32.5 {name=SW_IPGb dir=out}
+P 4 5 130 -60 -130 -60 -130 60 130 60 130 -60 {}
+T {@symname} -49.5 -16 0 0 0.3 0.3 {}
+T {@name} -25 -2 0 0 0.2 0.2 {}
+T {READY} -125 -14 0 0 0.2 0.2 {}
+T {ENi} -125 6 0 0 0.2 0.2 {}
+T {MODE} -24 55 3 0 0.2 0.2 {}
+T {RSTn} -4 55 3 0 0.2 0.2 {}
+T {CLK} 16 55 3 0 0.2 0.2 {}
+T {VDD} -14 -55 3 1 0.2 0.2 {}
+T {VSS} 6 -55 3 1 0.2 0.2 {}
+T {SW_REC} 125 -34 0 1 0.2 0.2 {}
+T {SW_IPG} 125 -14 0 1 0.2 0.2 {}
+T {SW_RECb} 125 6 0 1 0.2 0.2 {}
+T {SW_IPGb} 125 26 0 1 0.2 0.2 {}

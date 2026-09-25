@@ -1,0 +1,113 @@
+** sch_path: /foss/designs/DBSchip/ROW/READY_sweep/READYsweep.sch
+**.subckt READYsweep
+x1 VDD RSTn CLK RDY1 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x2 RDY1 RSTn CLK RDY2 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x3 RDY2 RSTn CLK RDY3 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+x4 RDY3 RSTn CLK RDY4 VDD VDD VSS VSS gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+V1 VDD GND 5
+V2 VSS GND 0
+V3 MODE GND 0
+V4 CLK GND 0
+V5 RSTn GND 0
+V6 ENi GND 5
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.include /foss/designs/DBSchip/dffsnq/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1.spice
+.include /foss/designs/DBSchip/dffrnq/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1.spice
+.include /foss/designs/DBSchip/and2/gf180mcu_fd_sc_mcu7t5v0__and2_1.spice
+.include /foss/designs/DBSchip/or2/gf180mcu_fd_sc_mcu7t5v0__or2_1.spice
+.include /foss/designs/DBSchip/nor2/gf180mcu_fd_sc_mcu7t5v0__nor2_1.spice
+.include /foss/designs/DBSchip/nand3/gf180mcu_fd_sc_mcu7t5v0__nand3_1.spice
+.include /foss/designs/DBSchip/inv_1/gf180mcu_fd_sc_mcu7t5v0__inv_1.spice
+.include /foss/designs/DBSchip/ROW/READY_sweep/CHANNEL_sub.spice
+
+
+
+
+* port order confirmed from **.subckt line of CHANNEL.spice
+.subckt chan ENi MODE RSTn CLK READY SW_REC SW_IPG SW_RECb SW_IPGb VDD VSS
+XD MODE RSTn CLK VDD VSS SW_REC SW_IPG SW_RECb SW_IPGb ENi READY CHANNEL
+.ends
+XU1 ENi MODE RSTn CLK RDY1 SW_REC1 SW_IPG1 SW_RECB1 SW_IPGB1 VDD VSS chan
+XU2 ENi MODE RSTn CLK RDY2 SW_REC2 SW_IPG2 SW_RECB2 SW_IPGB2 VDD VSS chan
+XU3 ENi MODE RSTn CLK RDY3 SW_REC3 SW_IPG3 SW_RECB3 SW_IPGB3 VDD VSS chan
+XU4 ENi MODE RSTn CLK RDY4 SW_REC4 SW_IPG4 SW_RECB4 SW_IPGB4 VDD VSS chan
+CI1 SW_IPG1 0 25f
+CI2 SW_IPG2 0 25f
+CI3 SW_IPG3 0 25f
+CI4 SW_IPG4 0 25f
+CR1 SW_REC1 0 25f
+CR2 SW_REC2 0 25f
+CR3 SW_REC3 0 25f
+CR4 SW_REC4 0 25f
+
+
+
+.control
+save all
+**
+** ---- clock ----
+let fclk     = 1e5
+let tper_clk = 1/fclk
+let tfr_clk  = 0.01*tper_clk
+let ton_clk  = 0.5*tper_clk - 2*tfr_clk
+let tper2clk = 0.95*tper_clk
+**
+** ---- resolution follows the fastest edge in the deck ----
+let tmax  = tfr_clk/200
+let tstep = tmax
+**
+let tstop = 24*tper_clk
+**
+** ---- MODE: square wave, 8 clock periods per half ----
+let tfr    = tfr_clk
+let tper_D = 16*tper_clk
+let ton_D  = 0.5*tper_D - 2*tfr
+**
+** ---- RSTn: low for the first 2 clock periods, then high ----
+let td_R = 2*tper_clk
+**
+alter @v4[PULSE] = [ 0 5 0 $&tfr_clk $&tfr_clk $&ton_clk $&tper2clk 0 ]
+alter @v3[PULSE] = [ 0 5 0 $&tfr $&tfr $&ton_D $&tper_D 0 ]
+alter @v5[PULSE] = [ 0 5 $&td_R $&tfr $&tfr $&tstop $&tstop 0 ]
+**
+op
+
+tran $&tstep $&tstop 0 $&tmax
+
+**
+** ---- the N sweep ----
+plot v(sw_ipg1) v(sw_ipg2)+6 v(sw_ipg3)+12 v(sw_ipg4)+18
+**
+** ---- READY against its own output, N=1 and N=4 ----
+plot v(clk) v(rstn)+6 v(rdy1)+12 v(sw_ipg1)+18 v(rdy4)+24 v(sw_ipg4)+30
+**
+** ---- worst-case output excursion while READY is still low ----
+** If maximum() is not recognised, try vecmax().
+let pre1 = v(sw_ipg1) * (v(rdy1) < 2.5)
+let pre2 = v(sw_ipg2) * (v(rdy2) < 2.5)
+let pre3 = v(sw_ipg3) * (v(rdy3) < 2.5)
+let pre4 = v(sw_ipg4) * (v(rdy4) < 2.5)
+print maximum(pre1)
+print maximum(pre2)
+print maximum(pre3)
+print maximum(pre4)
+**
+wrdata channel_ready_5v0_100k.txt v(clk) v(rstn) v(rdy1) v(rdy2) v(rdy3) v(rdy4)
+wrdata channel_swipg_5v0_100k.txt v(clk) v(rstn) v(sw_ipg1) v(sw_ipg2) v(sw_ipg3) v(sw_ipg4)
+wrdata channel_swrec_5v0_100k.txt v(clk) v(rstn) v(sw_rec1) v(sw_rec2) v(sw_rec3) v(sw_rec4)
+**
+write channel_ready_sweep_5v0_100k.raw
+.endc
+
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end

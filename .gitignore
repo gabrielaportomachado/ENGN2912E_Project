@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+
+# Large simulation outputs (regenerate from the sweep testbenches)
+RDY/READY_sweep/*.raw
+RDY/READY_sweep/*.txt
