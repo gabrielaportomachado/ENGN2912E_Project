@@ -1,0 +1,376 @@
+$date
+	Sat Oct 17 16:54:35 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module dbs_tb $end
+$var wire 16 ! rec [15:0] $end
+$var wire 16 " ipg [15:0] $end
+$var parameter 32 # N $end
+$var real 1 $ TD_R $end
+$var real 1 % TFR $end
+$var real 1 & TON_CLK $end
+$var real 1 ' TON_D $end
+$var real 1 ( TPER2CLK $end
+$var real 1 ) TPER_CLK $end
+$var real 1 * TPER_D $end
+$var real 1 + TSTOP $end
+$var reg 1 , clk $end
+$var reg 16 - en [15:0] $end
+$var reg 1 . mode $end
+$var reg 1 / ready $end
+$var reg 1 0 rstn $end
+$var reg 16 1 vals [15:0] $end
+$var integer 32 2 errors [31:0] $end
+$var integer 32 3 fd [31:0] $end
+$var integer 32 4 k [31:0] $end
+$scope module dut $end
+$var wire 1 , clk $end
+$var wire 16 5 en [15:0] $end
+$var wire 1 . mode $end
+$var wire 1 / ready $end
+$var wire 1 0 rstn $end
+$var wire 16 6 vals [15:0] $end
+$var wire 16 7 sw_rec_b [15:0] $end
+$var wire 16 8 sw_rec [15:0] $end
+$var wire 16 9 sw_ipg_b [15:0] $end
+$var wire 16 : sw_ipg [15:0] $end
+$var wire 16 ; rec [15:0] $end
+$var wire 16 < ipg [15:0] $end
+$var parameter 32 = N $end
+$scope begin transmission_gates[0] $end
+$var parameter 2 > j $end
+$upscope $end
+$scope begin transmission_gates[1] $end
+$var parameter 2 ? j $end
+$upscope $end
+$scope begin transmission_gates[2] $end
+$var parameter 3 @ j $end
+$upscope $end
+$scope begin transmission_gates[3] $end
+$var parameter 3 A j $end
+$upscope $end
+$scope begin transmission_gates[4] $end
+$var parameter 4 B j $end
+$upscope $end
+$scope begin transmission_gates[5] $end
+$var parameter 4 C j $end
+$upscope $end
+$scope begin transmission_gates[6] $end
+$var parameter 4 D j $end
+$upscope $end
+$scope begin transmission_gates[7] $end
+$var parameter 4 E j $end
+$upscope $end
+$scope begin transmission_gates[8] $end
+$var parameter 5 F j $end
+$upscope $end
+$scope begin transmission_gates[9] $end
+$var parameter 5 G j $end
+$upscope $end
+$scope begin transmission_gates[10] $end
+$var parameter 5 H j $end
+$upscope $end
+$scope begin transmission_gates[11] $end
+$var parameter 5 I j $end
+$upscope $end
+$scope begin transmission_gates[12] $end
+$var parameter 5 J j $end
+$upscope $end
+$scope begin transmission_gates[13] $end
+$var parameter 5 K j $end
+$upscope $end
+$scope begin transmission_gates[14] $end
+$var parameter 5 L j $end
+$upscope $end
+$scope begin transmission_gates[15] $end
+$var parameter 5 M j $end
+$upscope $end
+$scope module ctrl $end
+$var wire 1 , clk $end
+$var wire 16 N en [15:0] $end
+$var wire 1 . mode $end
+$var wire 1 / ready $end
+$var wire 1 0 rstn $end
+$var wire 1 O treat_en $end
+$var wire 1 P rec_en $end
+$var parameter 32 Q N $end
+$var reg 16 R en_reg_1 [15:0] $end
+$var reg 16 S en_reg_2 [15:0] $end
+$var reg 16 T sw_ipg [15:0] $end
+$var reg 16 U sw_ipg_b [15:0] $end
+$var reg 16 V sw_rec [15:0] $end
+$var reg 16 W sw_rec_b [15:0] $end
+$var integer 32 X i [31:0] $end
+$scope module fsm_inst $end
+$var wire 1 , clk $end
+$var wire 1 . mode $end
+$var wire 1 P rec_en $end
+$var wire 1 0 rstn $end
+$var wire 1 O treat_en $end
+$var reg 1 Y s0 $end
+$var reg 1 Z s1 $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10000 Q
+b1111 M
+b1110 L
+b1101 K
+b1100 J
+b1011 I
+b1010 H
+b1001 G
+b1000 F
+b111 E
+b110 D
+b101 C
+b100 B
+b11 A
+b10 @
+b1 ?
+b0 >
+b10000 =
+r240000 +
+r160000 *
+r10000 )
+r9500 (
+r79800 '
+r4800 &
+r100 %
+r20000 $
+b10000 #
+$end
+#0
+$dumpvars
+xZ
+xY
+bx X
+bx W
+bx V
+bx U
+bx T
+bx S
+bx R
+xP
+xO
+b1111111111111111 N
+bx <
+bx ;
+bx :
+bx 9
+bx 8
+bx 7
+b1010010111000011 6
+b1111111111111111 5
+bx 4
+b10000000000000000000000000000011 3
+b0 2
+b1010010111000011 1
+00
+1/
+0.
+b1111111111111111 -
+0,
+bx "
+bx !
+$end
+#50000
+bz "
+bz <
+bz !
+bz ;
+0O
+b0 :
+b0 T
+b0 8
+b0 V
+b1111111111111111 9
+b1111111111111111 U
+b1111111111111111 7
+b1111111111111111 W
+b10000 X
+0P
+0Z
+1Y
+b0 S
+b0 R
+1.
+1,
+#51000
+b10000 4
+#4950000
+0,
+#9550000
+1,
+#14450000
+0,
+#19050000
+1,
+#20050000
+10
+#23950000
+0,
+#28550000
+b10000 X
+b1111111111111111 R
+1P
+1Z
+1,
+#33450000
+0,
+#38050000
+b1010010111000011 !
+b1010010111000011 ;
+b1111111111111111 8
+b1111111111111111 V
+b0 7
+b0 W
+b10000 X
+b1111111111111111 S
+1,
+#38051000
+b10000 4
+#42950000
+0,
+#47550000
+1,
+#52450000
+0,
+#57050000
+1,
+#61950000
+0,
+#66550000
+1,
+#71450000
+0,
+#76050000
+1,
+#79950000
+0.
+#80950000
+0,
+#85550000
+bz !
+bz ;
+b0 8
+b0 V
+b1111111111111111 7
+b1111111111111111 W
+b10000 X
+0P
+0Z
+1,
+#85551000
+b10000 4
+#90450000
+0,
+#95050000
+b1010010111000011 "
+b1010010111000011 <
+b1111111111111111 :
+b1111111111111111 T
+b0 9
+b0 U
+b10000 X
+1O
+0Y
+1,
+#95051000
+b10000 4
+#99950000
+0,
+#104550000
+1,
+#109450000
+0,
+#114050000
+1,
+#118950000
+0,
+#123550000
+1,
+#128450000
+0,
+#133050000
+1,
+#137950000
+0,
+#142550000
+1,
+#147450000
+0,
+#152050000
+1,
+#156950000
+0,
+#160050000
+1.
+#161550000
+bz "
+bz <
+b0 :
+b0 T
+b1111111111111111 9
+b1111111111111111 U
+b10000 X
+0O
+1Y
+1,
+#161551000
+b10000 4
+#166450000
+0,
+#171050000
+b1010010111000011 !
+b1010010111000011 ;
+b1111111111111111 8
+b1111111111111111 V
+b0 7
+b0 W
+b10000 X
+1P
+1Z
+1,
+#171051000
+b10000 4
+#175950000
+0,
+#180550000
+1,
+#185450000
+0,
+#190050000
+1,
+#194950000
+0,
+#199550000
+1,
+#204450000
+0,
+#209050000
+1,
+#213950000
+0,
+#218550000
+1,
+#223450000
+0,
+#228050000
+1,
+#232950000
+0,
+#237550000
+1,
+#239950000
+0.
+#240000000
