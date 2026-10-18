@@ -1,0 +1,53 @@
+** sch_path: /foss/designs/ENGN2912E_Project/TGATE/tb_tgate_hiz.sch
+**.subckt tb_tgate_hiz
+V_vdd VDD GND 3.3
+V_c cnode GND 0
+V_cbar cbarnode GND 3.3
+V_in innode GND 0
+.save i(v_in)
+V_bias biasnode GND 1.65
+R_bias outnode biasnode 100Meg
+x1 outnode cnode cbarnode innode VDD GND TGATE
+**** begin user architecture code
+
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+
+
+
+.control
+save all
+dc V_in 0 3.3 0.05
+let ileak = abs(i(V_in))
+let imax  = vecmax(ileak)
+echo TGATE off-state max leakage = $&imax A
+if $&imax > 1e-9
+  echo FAIL_TGATE_HIZ leakage exceeds 1nA threshold
+else
+  echo PASS_TGATE_HIZ leakage below 1nA
+end
+write tb_tgate_hiz.raw
+.endc
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  TGATE.sym # of pins=6
+** sym_path: /foss/designs/ENGN2912E_Project/TGATE/TGATE.sym
+** sch_path: /foss/designs/ENGN2912E_Project/TGATE/TGATE.sch
+.subckt TGATE out c cbar in VDD VSS
+*.ipin in
+*.opin out
+*.ipin cbar
+*.ipin c
+*.iopin VDD
+*.iopin VSS
+XM1 out cbar in VDD pfet_05v0 L=0.6u W=1.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+XM2 out c in VSS nfet_05v0 L=0.6u W=0.565u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
++ ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
+.ends
+
+.GLOBAL GND
+.end
