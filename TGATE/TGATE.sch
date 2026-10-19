@@ -4,16 +4,16 @@ K {}
 V {}
 S {}
 E {}
-N -50 -60 -50 -30 {lab=in}
-N -50 -60 40 -60 {lab=in}
-N 40 -60 130 -60 {lab=in}
-N 130 -60 130 -30 {lab=in}
-N -50 30 -50 60 {lab=out}
-N -50 60 40 60 {lab=out}
-N 40 60 130 60 {lab=out}
-N 130 30 130 60 {lab=out}
-N -120 -0 -90 0 {lab=cbar}
-N 170 0 200 0 {lab=c}
+N -50 -60 -50 -30 {lab=IN}
+N -50 -60 40 -60 {lab=IN}
+N 40 -60 130 -60 {lab=IN}
+N 130 -60 130 -30 {lab=IN}
+N -50 30 -50 60 {lab=OUT}
+N -50 60 40 60 {lab=OUT}
+N 40 60 130 60 {lab=OUT}
+N 130 30 130 60 {lab=OUT}
+N -120 -0 -90 0 {lab=CBAR}
+N 170 0 200 0 {lab=C}
 N -50 -0 -30 -0 {lab=VDD}
 N -30 -20 -30 -0 {lab=VDD}
 N 90 0 130 -0 {lab=VSS}
@@ -46,9 +46,9 @@ sa=0 sb=0 sd=0
 model=nfet_05v0
 spiceprefix=X
 }
-C {ipin.sym} 40 -60 1 0 {name=p1 lab=in}
-C {opin.sym} 40 60 1 0 {name=p2 lab=out}
-C {ipin.sym} -120 0 0 0 {name=p3 lab=cbar}
-C {ipin.sym} 200 0 2 0 {name=p4 lab=c}
+C {ipin.sym} 40 -60 1 0 {name=p1 lab=IN}
+C {opin.sym} 40 60 1 0 {name=p2 lab=OUT}
+C {ipin.sym} -120 0 0 0 {name=p3 lab=CBAR}
+C {ipin.sym} 200 0 2 0 {name=p4 lab=C}
 C {iopin.sym} -30 -20 3 0 {name=p5 lab=VDD}
 C {iopin.sym} 90 30 1 0 {name=p6 lab=VSS}

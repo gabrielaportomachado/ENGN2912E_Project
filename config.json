@@ -1,0 +1,14 @@
+{
+  "DESIGN_NAME": "dbs",
+  "VERILOG_FILES": ["dir::rtl/dbs.v"],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 100,
+
+  "EXTRA_VERILOG_MODELS": ["dir::TGATE/TGATE.v"],
+  "EXTRA_LEFS": ["dir::TGATE/TGATE.lef"],
+  "EXTRA_GDS": ["dir::TGATE/TGATE.gds"],
+  "EXTRA_SPICE_MODELS": ["dir::TGATE/TGATE.spice"],
+
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": false,
+  "RSZ_DONT_TOUCH_RX": "vals|ipg|rec"
+}

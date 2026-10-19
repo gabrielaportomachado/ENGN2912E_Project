@@ -74,10 +74,9 @@ module dbs_ctrl #(
 
 endmodule
 
-`ifndef DBS_CTRL_ONLY  // defined by the LibreLane config: the layout flow only sees dbs_ctrl
 // --------------- Top level DBS module --------------- 
-// Digital control plus the analog transmission gates (simulation model only:
-// the cmos primitives are not synthesizable and are laid out by hand)
+// Digital control plus the analog transmission gates
+// Can be synthesized using the TGATE macro
 module dbs #(
     parameter N = 16
 )(
@@ -101,10 +100,8 @@ module dbs #(
     genvar j;
     generate
         for (j = 0; j < N; j = j + 1) begin : transmission_gates
-            // cmos inst_name (out, in, ctrl, ctrl_bar)
-            cmos rec_tg (rec[j], vals[j], sw_rec[j], sw_rec_b[j]);
-            cmos ipg_tg (ipg[j], vals[j], sw_ipg[j], sw_ipg_b[j]);
+            TGATE rec_tg (.OUT(rec[j]), .IN(vals[j]), .C(sw_rec[j]), .CBAR(sw_rec_b[j]));
+            TGATE ipg_tg (.OUT(ipg[j]), .IN(vals[j]), .C(sw_ipg[j]), .CBAR(sw_ipg_b[j]));
         end
     endgenerate
 endmodule
-`endif

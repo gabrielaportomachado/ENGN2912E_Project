@@ -1,8 +1,8 @@
 ** sch_path: /foss/designs/ENGN2912E_Project/TGATE/TGATE.sch
-.subckt TGATE out c cbar in VDD VSS
-*.PININFO in:I out:O cbar:I c:I VDD:B VSS:B
-XM1 out cbar in VDD pfet_05v0 L=0.6u W=1.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+.subckt TGATE OUT C CBAR IN VDD VSS
+*.PININFO IN:I OUT:O CBAR:I C:I VDD:B VSS:B
+XM1 OUT CBAR IN VDD pfet_05v0 L=0.6u W=1.22u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
-XM2 out c in VSS nfet_05v0 L=0.6u W=0.565u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
+XM2 OUT C IN VSS nfet_05v0 L=0.6u W=0.565u nf=1 ad='int((nf+1)/2) * W/nf * 0.18u' as='int((nf+2)/2) * W/nf * 0.18u' pd='2*int((nf+1)/2) * (W/nf + 0.18u)'
 + ps='2*int((nf+2)/2) * (W/nf + 0.18u)' nrd='0.18u / W' nrs='0.18u / W' sa=0 sb=0 sd=0
 .ends
