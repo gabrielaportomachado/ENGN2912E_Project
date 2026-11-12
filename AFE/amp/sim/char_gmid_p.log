@@ -1,0 +1,43 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Reset re-loads circuit * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Circuit: * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  2.64000e+00
+No. of Data Rows : 201
+Reset re-loads circuit * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Circuit: * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 201
+Reset re-loads circuit * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Circuit: * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  2.13500e+00
+No. of Data Rows : 201
+Reset re-loads circuit * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Circuit: * a1: pfet_03v3 gm/id vs id/(w/l), typical, 27c, |vds|=0.5 v (source at 3.3), vbs=0
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  2.10000e+00 Reference value :  2.42500e+00
+No. of Data Rows : 201
+ngspice-46 done

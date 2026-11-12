@@ -1,0 +1,21 @@
+* A1: nfet_03v3 gm/Id vs Id/(W/L), typical, 27C, Vds=0.5 V, Vbs=0
+.include ../spice/models_typical.spice
+.param LL=1u WW=20u
+Vd d 0 0.5
+Vg g 0 0.5
+Xn d g 0 0 nfet_03v3 W={WW} L={LL}
+.control
+foreach lv 0.5u 1u 2u 4u
+  alterparam LL=$lv
+  reset
+  save all @m.xn.m0[gm] @m.xn.m0[id] @m.xn.m0[vth]
+  dc Vg 0.2 1.2 0.005
+  let gmid = @m.xn.m0[gm]/abs(@m.xn.m0[id])
+  let idw  = abs(@m.xn.m0[id])/(20u/$lv)
+  let vov  = v(g)-@m.xn.m0[vth]
+  set fn = "../sim/char_gmid_n_L{$lv}.csv"
+  wrdata $fn v(g) gmid idw vov
+end
+quit
+.endc
+.end

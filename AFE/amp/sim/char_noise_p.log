@@ -1,0 +1,2077 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  2.10800e+00 Reference value :  3.19600e+00
+No. of Data Rows : 701
+vgt                 =  2.53104e+00
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 139
+
+No. of Data Rows : 1
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 701
+vgt                 =  2.43601e+00
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 139
+
+No. of Data Rows : 1
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+ Reference value :  1.82200e+00 Reference value :  2.36600e+00
+No. of Data Rows : 701
+vgt                 =  2.27992e+00
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 139
+
+No. of Data Rows : 1
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=    0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=2u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=10u cross=1 failed!
+
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Error: No internal deck available
+    Command 'alterparam' ignored
+Reset re-loads circuit * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Circuit: * a1: pfet_03v3 input-referred noise, typical, 27c. source/bulk 3.3 v, vds ~ 0.6 v.
+
+Error on line 1580 or its substitute:
+  m.xp.m0 d g s s pfet_03v3 w=    2.000000000000000e-04     l=    1.000000000000000e-06     as=    0.000000000000000e+00     ad=    0.000000000000000e+00     ps=    0.000000000000000e+00     pd=    0.000000000000000e+00     nrd=    0.000000000000000e+00     nrs=    0.000000000000000e+00     delvto=   -0.000000000000000e+00     mulu0=    1.000000000000000e+00     sa=    0.000000000000000e+00     sb=    0.000000000000000e+00     nf=    1.000000000000000e+00     sd=    0.000000000000000e+00     m=    1.000000000000000e+00   
+could not find a valid modelname
+Error: circuit not parsed.
+Error: measure limited to tran, dc, sp, or ac analysis
+Error: &vgt: no such variable.
+Error:  vgs equals what?.
+Error: no such device or model name vin
+Error: circuit not parsed.
+Error: circuit not parsed.
+ meas dc vgt find v(g) when i(vsd)=50u cross=1 failed!
+
+ngspice-46 done

@@ -1,0 +1,32 @@
+* A1: pfet_03v3 input-referred noise, typical, 27C. Single case; scripts/run_noise_sweep.sh
+* overrides the .param line below (MM LL FN, and the 'set idt' line) and collects the RESULT line.
+* Source/bulk 3.3 V, Vds = 0.6 V. Output = drain current through a 1-ohm CCVS, so
+* inoise = id_noise/gm (referred to the gate). inoise_total is rms V (unit checked in
+* char_noise_check_R.spice).
+.include ../spice/models_typical.spice
+.param MM=2 LL=1u FN=0   $ total W = MM*50u via m= (nf does not scale W in this model; bin max W is 100u)
+.param fnoicor=FN
+Vs s 0 3.3
+Vin g 0 dc 2.5 ac 1
+Vsd d 0 2.7
+Xp d g s s pfet_03v3 W=50u m={MM} L={LL}
+H1 out 0 Vsd 1
+.control
+set idt = 10u
+save all @m.xp.m0[gm] @m.xp.m0[cgg] @m.xp.m0[id]
+dc Vin 1.8 3.2 0.002
+meas dc vgt find v(g) when i(Vsd)=$idt cross=1
+set vgs = $&vgt
+let vsgv = 3.3 - vgt
+set vsg = $&vsgv
+alter Vin dc = $vgs
+op
+set gmv = $&@m.xp.m0[gm]
+set cggv = $&@m.xp.m0[cgg]
+noise v(out) Vin dec 50 0.5 300
+set vn = $&inoise_total
+echo RESULT $vsg $gmv $cggv $vn
+wrdata ../sim/char_noise_p_spectrum_tmp.csv inoise_spectrum
+quit
+.endc
+.end

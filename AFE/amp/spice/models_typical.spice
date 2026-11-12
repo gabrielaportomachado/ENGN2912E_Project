@@ -1,0 +1,3 @@
+* typical-corner models (A1). Relative include of PDK via absolute PDK path (PDK_ROOT).
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical

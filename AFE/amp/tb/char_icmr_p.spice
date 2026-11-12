@@ -1,0 +1,62 @@
+* A1: input common-mode range of a PMOS differential pair + PMOS tail source on 3.3 V.
+* 5T OTA wired as a unity-gain follower, sweep Vin 0..3.3. Tail is mirrored from an IDEAL
+* 20 uA current source (IDEAL), so the tail's own Vdsat headroom is included.
+* ICMR = Vin range where ALL of tail, pair and mirror devices are in saturation
+* (|Vds| > |Vdsat| + 50 mV margin) AND |vout - vin| < 5 mV; the follower error is also reported.
+.include ../spice/models_typical.spice
+.param LLP=2u LLN=2u KP=4 KT=2 KN=2
+Vdd vdd 0 3.3
+Iref bn 0 20u               $ IDEAL; diode-connected pfet below, pulls from vdd
+Xbias bn bn vdd vdd pfet_03v3 W=50u L={LLP} m={KT}
+Xtail tail bn vdd vdd pfet_03v3 W=50u L={LLP} m={KT}
+Xm1 d1 vin tail vdd pfet_03v3 W=50u L={LLP} m={KP}
+Xm2 out vout tail vdd pfet_03v3 W=50u L={LLP} m={KP}
+Xn1 d1 d1 0 0 nfet_03v3 W=50u L={LLN} m={KN}
+Xn2 out d1 0 0 nfet_03v3 W=50u L={LLN} m={KN}
+Vin vin 0 1.5
+Eb vout 0 out 0 1           $ ideal buffer of out -> inverting input (follower connection)
+.control
+save all @m.xtail.m0[vds] @m.xtail.m0[vdsat] @m.xm1.m0[vds] @m.xm1.m0[vdsat] @m.xn1.m0[vds] @m.xn1.m0[vdsat] @m.xn2.m0[vds] @m.xn2.m0[vdsat] @m.xtail.m0[id]
+dc Vin 0 3.3 0.01
+let mg = 0.05
+let s_t  = abs(@m.xtail.m0[vds]) - abs(@m.xtail.m0[vdsat]) - mg
+let s_m1 = abs(@m.xm1.m0[vds])   - abs(@m.xm1.m0[vdsat])   - mg
+let s_n1 = abs(@m.xn1.m0[vds])   - abs(@m.xn1.m0[vdsat])   - mg
+let s_n2 = abs(@m.xn2.m0[vds])   - abs(@m.xn2.m0[vdsat])   - mg
+let err = abs(v(out) - v(vin))
+let vlo = 99
+let vhi = -99
+let i = 0
+while i < length(err)
+  let w = s_t[i]
+  if s_m1[i] < w
+    let w = s_m1[i]
+  end
+  if s_n1[i] < w
+    let w = s_n1[i]
+  end
+  if s_n2[i] < w
+    let w = s_n2[i]
+  end
+  if 5m - err[i] < w
+    let w = 5m - err[i]
+  end
+  if w > 0
+    if v(vin)[i] < vlo
+      let vlo = v(vin)[i]
+    end
+    if v(vin)[i] > vhi
+      let vhi = v(vin)[i]
+    end
+  end
+  let i = i + 1
+end
+echo ICMR_lo_V $&vlo
+echo ICMR_hi_V $&vhi
+let itail = abs(@m.xtail.m0[id])
+meas dc itail_mid find itail at=1.0
+echo itail_at_vin_1V $&itail_mid
+wrdata ../sim/char_icmr_p.csv v(vin) v(out) itail s_t s_m1 s_n1 s_n2 err
+quit
+.endc
+.end

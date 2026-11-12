@@ -1,0 +1,24 @@
+* A1: whole-OTA input-referred noise check: PMOS-pair 5T OTA as unity follower (noise gain 1,
+* so v(out) noise = input-referred noise of pair + tail + NMOS mirror load; tail/bias are
+* noiseless-ish: tail noise is common-mode and mostly cancels; bias diode shares the mirror).
+* Single case; scripts/run_ota5t_sweep.sh overrides the .param line and 'set' line.
+.include ../spice/models_typical.spice
+.param LLP=2u LLN=4u KP=4 KT=2 KN=2 FN=0
+.param fnoicor=FN
+Vdd vdd 0 3.3
+Iref bn 0 20u
+Xbias bn bn vdd vdd pfet_03v3 W=50u L=4u m={KT}
+Xtail tail bn vdd vdd pfet_03v3 W=50u L=4u m={KT}
+Xm1 d1 vin tail vdd pfet_03v3 W=50u L={LLP} m={KP}
+Xm2 out vout tail vdd pfet_03v3 W=50u L={LLP} m={KP}
+Xn1 d1 d1 0 0 nfet_03v3 W=50u L={LLN} m={KN}
+Xn2 out d1 0 0 nfet_03v3 W=50u L={LLN} m={KN}
+Vin vin 0 dc 1.2 ac 1
+Eb vout 0 out 0 1
+.control
+noise v(out) Vin dec 50 0.5 300
+set vn = $&inoise_total
+echo RESULT $vn
+quit
+.endc
+.end

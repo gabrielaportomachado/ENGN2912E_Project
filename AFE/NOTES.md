@@ -127,6 +127,45 @@ Approved by the user after A0 (2026-11-12).
    the recovery-time cost (longer tau_HPF) alongside.
 3. A4 must include an output buffer or reservoir-cap option for the ADC drive.
 
+Approved by the user after A1 (2026-11-12).
+4. The 2 uV noise target applies at typical flicker (fnoicor=0, tt, 27 C). Always also report the
+   fnoicor=1 result as a risk (A1: about 3.4x worse). The chopper option stays open for after A3.
+5. A3 starts from the A1 table (AFE/amp/sim/a1_summary.txt) rows with PMOS pair 16x50u/2u and NMOS
+   load 1-2 x 50u / 16u (rows 10-11), not the 8u load. Subject to an .op headroom check of the load
+   Vgs versus the input pair at VCM_IN.
+6. A2 must find the HPF corner that keeps the in-band pseudo-resistor noise low enough that it plus
+   the OTA noise (1.39-1.46 uV) is <= 2 uV, and report the recovery-time cost (tau_HPF) of that corner.
+
+## A1 findings (typical corner, 27 C only; logs in AFE/amp/sim/, plots in AFE/amp/figs/)
+- ngspice facts: inoise_total / onoise_total are rms volts, in plot noise2 (spectra are in
+  noise1); checked on 1 Mohm: 2.207 uV vs hand 2.2 uV (sim/char_noise_check_R.log).
+  `nf=` does NOT scale W in these models (bin max W = 100u per device): use m= for wide
+  devices. Do not name a .param NF/LN/LP/MP... (clashes with subckt params / ln()). Plain
+  `alterparam` after `alter`/`noise` fails, so sweeps use scripts/run_*.sh (sed on .param).
+  Use `bash script.sh` (scripts are not executable here).
+- gm/Id (char_gmid_{n,p}, figs/gmid_{n,p}.png): peak 27.7 (n) / 26.8 (p), independent of L;
+  pfet at Id/(W/L)=1e-7 A: 16.6, at 1e-6 A: 7.1 (L=2u).
+- Single-device noise (sim/char_noise_{p,n}.csv, 0.5-300 Hz, rms input-referred, typ):
+  pfet 800u/2u 10 uA: 0.64 uV; nfet 800u/2u: 0.81 uV; fnoicor=1 is ~3.4x worse (pfet), same
+  trend nfet. Flicker dominates; noise ~ 1/sqrt(W*L).
+- ICMR (char_icmr_p, 5T follower, pair 4x50u/2u, tail 2x50u/2u, 20 uA IDEAL Iref, margin
+  50 mV, follower error < 5 mV): 0.12 V to 2.21 V (sim/char_icmr_p.log). VCM_IN of 1.0-1.65 V
+  is inside; the upper limit is the tail's headroom.
+- Whole-OTA noise (5T OTA as follower, real pair+tail+NMOS mirror load; sim/char_ota5t_*.csv,
+  sim/a1_summary.txt): the NMOS mirror load is as important as the pair, so it needs a long L
+  (low gm) and area. First recommendation: PMOS pair W=800u (16x50u) L=2u, 10 uA per side
+  (gm/Id about 20); NMOS load 4x50u/8u: 1.33 uV (OTA input), x1.21 for (Cin+Cf+Cgg)/Cin
+  with Cgg=4.0 pF and the ESTIMATED Cin=20 pF, Cf=0.2 pF -> 1.61 uV, area about 6400 um^2.
+  Superseded by Decision 5: A3 starts from load 1-2x50u/16u (1.20/1.15 uV OTA, 1.46/1.39 uV
+  with the Cgg factor, 4800/6400 um^2). A larger-L pair (4u, Cgg 7.8 pF) buys little.
+- WORST CASE NOT MET: with fnoicor=1 the 4x50u/8u sizing gives 4.44 uV (5.4 uV with the Cgg
+  factor); the 16u loads give 3.9/3.7 uV. Reaching 1.8 uV there needs roughly 10x the area
+  (ESTIMATE from 1/sqrt(WL)) or a chopper (Decision 4).
+- OTA 1.4-1.5 uV plus the ESTIMATED 1.4 uV pseudo-R kT/C noise (A0) is about 2.0-2.1 uV: A2
+  must settle this (Decision 6).
+- Not done in A1: other corners/temperatures; thermal-vs-flicker split of the pair; mismatch/offset;
+  only one tail current (20 uA) and one pair current (10 uA per side) for the OTA check.
+
 ## Open questions
 - Per-channel vs total sample rate; one muxed ADC vs 16 ADCs.
 - Is a teammate designing the ADC? (Avoid duplicate work.)
@@ -145,3 +184,4 @@ One row per phase. The user fills in Cost from the OpenRouter Activity page.
 | Date | Phase | Model / effort | Cost (USD) | Result (with path to log) |
 |------|-------|----------------|------------|---------------------------|
 | 2026-11-12 | A0 plan | Claude Opus 5.5 / — | | Plan only, no sim: AFE/amp/PLAN.md (layout, tb list, .meas per target, critique) |
+| 2026-11-12 | A1 device char | Claude Sonnet 5.5 / default | | gm/Id, noise, ICMR typ/27C only; see "A1 findings"; AFE/amp/sim/a1_summary.txt, sim/char_*.log/csv |

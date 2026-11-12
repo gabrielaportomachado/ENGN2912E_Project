@@ -1,0 +1,23 @@
+* A1: pfet_03v3 gm/Id vs Id/(W/L), typical, 27C, |Vds|=0.5 V (source at 3.3), Vbs=0
+.include ../spice/models_typical.spice
+.param LL=1u WW=20u
+Vs s 0 3.3
+Vd d 0 2.8
+Vg g 0 2.8
+Xp d g s s pfet_03v3 W={WW} L={LL}
+.control
+foreach lv 0.5u 1u 2u 4u
+  alterparam LL=$lv
+  reset
+  save all @m.xp.m0[gm] @m.xp.m0[id] @m.xp.m0[vth]
+  dc Vg 2.1 3.1 0.005
+  let gmid = @m.xp.m0[gm]/abs(@m.xp.m0[id])
+  let idw  = abs(@m.xp.m0[id])/(20u/$lv)
+  let vsg = 3.3-v(g)
+  let vov  = vsg-abs(@m.xp.m0[vth])
+  set fn = "../sim/char_gmid_p_L{$lv}.csv"
+  wrdata $fn vsg gmid idw vov
+end
+quit
+.endc
+.end

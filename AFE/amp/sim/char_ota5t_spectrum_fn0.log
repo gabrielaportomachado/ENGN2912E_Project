@@ -1,0 +1,14 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * a1: spectrum 0.1 hz-10 khz of the recommended 5t pair (pair 16x50u/2u, load 4x50u/8u). fn tag set by sed.
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 201
+
+No. of Data Rows : 1
+ngspice-46 done

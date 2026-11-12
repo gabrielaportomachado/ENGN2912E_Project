@@ -1,0 +1,12 @@
+* A1: unit check of inoise_total/onoise_total with a 1 Mohm resistor.
+* Expected (hand): sqrt(4kT R * (300-0.5)) = 2.2 uV rms
+V1 a 0 dc 0 ac 1
+R1 a b 1Meg
+R2 b 0 1T
+.control
+noise v(b) V1 dec 100 0.5 300
+setplot
+display
+print onoise_total inoise_total
+.endc
+.end
