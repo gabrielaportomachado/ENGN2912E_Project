@@ -1,0 +1,18 @@
+### ol2_ff_27
+RESULT a0_dB=57.42 f_p1_Hz=11.9545 gbw_Hz=8897.48 pm_beta1_deg=87.5972
+### ol2_ff_-40
+RESULT a0_dB=56.7902 f_p1_Hz=11.1421 gbw_Hz=7722.64 pm_beta1_deg=87.8877
+### ol2_ff_85
+RESULT a0_dB=57.6373 f_p1_Hz=12.7489 gbw_Hz=9738.7 pm_beta1_deg=87.4093
+### ol2_ss_27
+RESULT a0_dB=51.6703 f_p1_Hz=12.0376 gbw_Hz=4629.51 pm_beta1_deg=88.4401
+### ol2_ss_-40
+RESULT a0_dB=51.1054 f_p1_Hz=10.9701 gbw_Hz=3949.75 pm_beta1_deg=88.6616
+### ol2_ss_85
+RESULT a0_dB=51.7054 f_p1_Hz=13.1245 gbw_Hz=5063.14 pm_beta1_deg=88.3101
+### ol2_typical_27
+RESULT a0_dB=55.7698 f_p1_Hz=10.146 gbw_Hz=6248.95 pm_beta1_deg=88.0609
+### ol2_typical_-40
+RESULT a0_dB=55.2172 f_p1_Hz=9.3333 gbw_Hz=5400.03 pm_beta1_deg=88.3065
+### ol2_typical_85
+RESULT a0_dB=55.9145 f_p1_Hz=10.8858 gbw_Hz=6823.54 pm_beta1_deg=87.9045

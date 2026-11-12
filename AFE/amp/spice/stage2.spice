@@ -1,0 +1,18 @@
+* A4a stage 2: single-ended capacitive amplifier, gain CIN2/CF2 = 10 (inverting; stage 1 also inverts, so the channel is non-inverting), referenced to VOUT_CM.
+* Closed-loop bandwidth (the ~300 Hz low-pass) = beta * gm / (2 pi C(o2)), set by the low-gm OTA ota2 (its output is the follower, i.e. the buffered ADC drive).
+* Feedback: CF2 || pseudo_r_fg (gate vg) || fs_switch.  Stage-2 pseudo-R is in the AC path: its HPF (CF2 x R ~ 1.5 s) stacks with stage 1's.
+* RMODE2: 0 = simulated pseudo-R, 1 = IDEAL RESISTOR (noise) RFIX2.  Requires models, afe_params, ota2.spice, pseudoR.spice first.
+.param RMODE2=0 RFIX2=5.2e12 RNOISY2=1
+.subckt stage2 in out vdd vss vbn vcmo vg fs fsb params: BRK2V=0 BRK2I=0
+Vbrk vng2 vn2 dc 0 ac {BRK2V}
+Ibrk 0 vng2 dc 0 ac {BRK2I}
+Xota2 vcmo vng2 vbn out vdd vss ota2
+Xcin in vn2 cap_mim_2f0_m2m3_noshield c_length={LCIN2} c_width={LCIN2}
+Xcf vn2 out cap_mim_2f0_m2m3_noshield c_length={LCF2} c_width={LCF2}
+.if (RMODE2 == 0)
+Xr vn2 out vg pseudo_r_fg W={PRW} L={PRL}
+.else
+Rf vn2 out {RFIX2} noisy={RNOISY2}
+.endif
+Xsw vn2 out fs fsb vdd vss fs_switch
+.ends stage2

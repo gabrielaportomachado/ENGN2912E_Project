@@ -1,0 +1,74 @@
+A4a full channel (stage 1 + stage 2 + follower buffer + REAL bias_gen), typical/ff/ss x -40/27/85 C, VDD 3.3 V, VOUT_CM 1.65 V, VCM_IN 1.5 V.  Source: sim/a4a_*.log
+Models: MOS corner + mimcap corner + poly-resistor corner (res_<corner>: 3000/2250/3750 Ohm/sq).  Diffusion real (DIFF=1).  ADC load placeholder: 10 pF.
+
+== 1. .op: DC levels and bias (every transistor margin = |Vds|-|Vdsat| of the analog devices; criterion >= 0.05 V; start-up/ladder not listed)
+corner   T  vout_err_mV  vcmo_V  vn1-v1_mV  worst_margin_V(device)       IBIAS1_uA  Isupply_uA  follower_Id_uA  OTA2_tail_nA
+typical   -40       1.09   1.6494      11.1     0.312 (xs2.xota2.xm4     )    16.55      58.49        4.05          7.67
+typical    27       1.59   1.6494      13.9     0.323 (xs2.xota2.xm4     )    21.19      74.40        5.21         11.02
+typical    85       2.20   1.6494      16.1     0.326 (xs2.xota2.xm4     )    25.62      89.54        6.32         14.23
+ff        -40       1.41   1.6493      11.1     0.426 (xs2.xota2.xm4     )    21.67      76.71        5.30         10.04
+ff         27       1.88   1.6494      13.9     0.432 (xs2.xota2.xm4     )    27.89      98.07        6.85         14.45
+ff         85       2.25   1.6494      14.1     0.421 (xbias.xmn1        )    34.12     119.33        8.41         18.83
+ss        -40       0.73   1.6494      11.0     0.192 (xs2.xota2.xm4     )    13.27      46.85        3.26          6.15
+ss         27       1.38   1.6494      13.9     0.207 (xs2.xota2.xm4     )    17.07      59.87        4.21          8.89
+ss         85       2.06   1.6494      16.2     0.213 (xs2.xota2.xm4     )    20.64      72.08        5.10         11.49
+
+== 2. .ac, simulated pseudo-resistors, fast-settle OPEN.  Targets: gain 60 +-1 dB (T2), f_lo <= 0.5 Hz, f_hi >= 300 Hz (T3)
+corner   T  gain_12Hz_dB  stage1_dB  stage2_dB  peak_dB  f_lo_Hz  f_hi_Hz  gain@300Hz_dB  phase_deg
+typical   -40      59.980     39.985    19.995   59.981    0.248    483.4      58.572      0.02
+typical    27      59.990     39.985    20.005   59.990    0.193    559.7      58.898     -0.11
+typical    85      59.991     39.984    20.007   59.992    0.164    610.1      59.055     -0.18
+ff        -40      60.008     39.984    20.024   60.008    0.276    689.0      59.258      0.62
+ff         27      60.016     39.983    20.033   60.016    0.215    793.3      59.439      0.39
+ff         85      60.019     39.983    20.036   60.019    0.210    866.6      59.530      0.43
+ss        -40      59.877     39.986    19.891   59.879    0.224    359.1      57.587     -0.62
+ss         27      59.893     39.986    19.907   59.894    0.175    419.3      58.105     -0.64
+ss         85      59.892     39.985    19.907   59.893    0.147    459.0      58.354     -0.66
+
+== 3. .ac with the fast-settle transmission gates CLOSED (fs = 3.3 V): the amplifier must stay stable and the passband collapses to a DC reset (f_lo up to the MHz range)
+corner   T  gain_12Hz_dB  peak_dB  f_lo_Hz  f_hi_Hz
+typical   -40     -146.35   -21.05 4.333e+05       nan
+typical    27     -224.52   -31.53 6.901e+05       nan
+typical    85     -180.34    -8.49 8.484e+05       nan
+ff        -40     -151.85   -24.06 5.204e+05       nan
+ff         27     -222.10   -37.36 7.518e+05       nan
+ff         85     -156.04   -24.07 5.338e+05       nan
+ss        -40     -173.59    -4.35  8.68e+05       nan
+ss         27     -167.15    -9.70 4.873e+04 5.648e+04
+ss         85     -193.32   -38.08 7.445e+05       nan
+
+== 4. Stage-2 OTA open loop A(s) (DC servo, load CF2 + 10 pF): loop PM with beta = 1 is the worst case; closed-loop f_H = beta*GBW
+corner   T  A0_dB  f_p1_Hz  GBW_Hz  PM(beta=1)_deg
+typical   -40  55.22     9.33   5400.0    88.31
+typical    27  55.77    10.15   6248.9    88.06
+typical    85  55.91    10.89   6823.5    87.90
+ff        -40  56.79    11.14   7722.6    87.89
+ff         27  57.42    11.95   8897.5    87.60
+ff         85  57.64    12.75   9738.7    87.41
+ss        -40  51.11    10.97   3949.8    88.66
+ss         27  51.67    12.04   4629.5    88.44
+ss         85  51.71    13.12   5063.1    88.31
+
+== 5. Supply rejection (Decision 17b): |v(out)/v(vdd)| in V/V; ideal ratiometric tracking of the ADC mid-scale (VREF = VDD) is 0.5 V/V.  Input-referred: divide by 1000
+corner   T  dc     50Hz   60Hz   300Hz   1kHz   10kHz
+typical   -40  0.591  1.021  1.018  0.872  0.447  0.052
+typical    27  0.633  1.021  1.019  0.904  0.502  0.059
+typical    85  0.668  1.021  1.020  0.920  0.535  0.064
+ff        -40  0.578  1.030  1.029  0.947  0.587  0.072
+ff         27  0.616  1.030  1.030  0.966  0.642  0.083
+ff         85  0.624  1.031  1.030  0.975  0.677  0.090
+ss        -40  0.606  1.009  1.004  0.782  0.345  0.039
+ss         27  0.653  1.011  1.008  0.828  0.394  0.046
+ss         85  0.691  1.011  1.009  0.852  0.425  0.050
+
+== 6. Input-referred noise = integrated OUTPUT noise / midband gain.  IDEAL RESISTOR (noise) = R0 in both stages (Decision 8).  Target <= 2 uV (0.5-300 Hz, typical flicker fn0)
+corner   T  R0_TOhm  fn0_0.5-300Hz_uV  stage1_only_fn0_uV  fn1_0.5-300Hz_uV  (fn1/fn0)  fn0_0.5-2k_uV  fn0_0.5-1M_uV
+typical   -40    4.10          1.543              1.553            4.276      2.77         1.629         1.645
+typical    27    5.24          1.666              1.671            4.717      2.83         1.776         1.799
+typical    85    6.16          1.761              1.764            5.053      2.87         1.889         1.917
+ff        -40    4.10          1.565              1.573            4.176      2.67         1.668         1.692
+ff         27    5.23          1.682              1.685            4.598      2.73         1.810         1.844
+ff         85    5.45          1.803              1.805            4.924      2.73         1.946         1.988
+ss        -40    4.10          1.535              1.552            4.383      2.85         1.605         1.616
+ss         27    5.24          1.665              1.676            4.846      2.91         1.757         1.774
+ss         85    6.22          1.763              1.772            5.197      2.95         1.872         1.893

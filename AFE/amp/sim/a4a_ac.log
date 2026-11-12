@@ -1,0 +1,18 @@
+### ac_ff_27
+RESULT g_mid_dB=60.0164 g1_mid_dB=39.9834 g_pk_dB=60.0164 f_lo_Hz=0.215205 f_hi_Hz=793.341 ph_mid_deg=0.393881 g_300_dB=59.4392 g_0p5_dB=59.3756
+### ac_ff_-40
+RESULT g_mid_dB=60.0077 g1_mid_dB=39.9839 g_pk_dB=60.0077 f_lo_Hz=0.275853 f_hi_Hz=688.994 ph_mid_deg=0.623984 g_300_dB=59.2579 g_0p5_dB=58.9776
+### ac_ff_85
+RESULT g_mid_dB=60.0187 g1_mid_dB=39.9831 g_pk_dB=60.0187 f_lo_Hz=0.209822 f_hi_Hz=866.607 ph_mid_deg=0.434556 g_300_dB=59.5298 g_0p5_dB=59.4072
+### ac_ss_27
+RESULT g_mid_dB=59.8929 g1_mid_dB=39.9858 g_pk_dB=59.8942 f_lo_Hz=0.174723 f_hi_Hz=419.304 ph_mid_deg=-0.637452 g_300_dB=58.1053 g_0p5_dB=59.466
+### ac_ss_-40
+RESULT g_mid_dB=59.8774 g1_mid_dB=39.9861 g_pk_dB=59.8788 f_lo_Hz=0.224015 f_hi_Hz=359.05 ph_mid_deg=-0.620688 g_300_dB=57.5872 g_0p5_dB=59.1832
+### ac_ss_85
+RESULT g_mid_dB=59.892 g1_mid_dB=39.9853 g_pk_dB=59.8933 f_lo_Hz=0.147085 f_hi_Hz=459.01 ph_mid_deg=-0.659123 g_300_dB=58.3539 g_0p5_dB=59.5886
+### ac_typical_27
+RESULT g_mid_dB=59.99 g1_mid_dB=39.9848 g_pk_dB=59.9903 f_lo_Hz=0.193304 f_hi_Hz=559.652 ph_mid_deg=-0.106692 g_300_dB=58.8978 g_0p5_dB=59.4697
+### ac_typical_-40
+RESULT g_mid_dB=59.9805 g1_mid_dB=39.9851 g_pk_dB=59.9808 f_lo_Hz=0.247846 f_hi_Hz=483.388 ph_mid_deg=0.0236702 g_300_dB=58.5715 g_0p5_dB=59.1389
+### ac_typical_85
+RESULT g_mid_dB=59.9913 g1_mid_dB=39.9842 g_pk_dB=59.9917 f_lo_Hz=0.164192 f_hi_Hz=610.147 ph_mid_deg=-0.17705 g_300_dB=59.0551 g_0p5_dB=59.6128

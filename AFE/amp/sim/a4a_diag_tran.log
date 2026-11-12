@@ -1,0 +1,23 @@
+# tb_st1_tran (0.4 s), ota1 variants; A3 options = gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1/4=500 chgtol=1e-19
+# variants: zero = ad/as/pd/ps/nrd/nrs all 0 (A3); area = ad,as=W*0.18u; perim = pd,ps=2(W+0.18u); res = nrd,nrs=0.18u/W; area_perim = A4a real; full = all
+### zero_A3opt
+RESULT_REC dv_max_V=0.098973 vout_min_V=1.40103 vout_max_V=1.5 dc_shift_V=-0.0875456 settled=0 t_rec_10mV_s=0.00936057 t_rec_1mV_s=0.262409 t_end_s=0.4
+### area_A3opt
+RESULT_REC dv_max_V=0.0989825 vout_min_V=1.40102 vout_max_V=1.5 dc_shift_V=-0.0875456 settled=0 t_rec_10mV_s=0.0095342 t_rec_1mV_s=0.263113 t_end_s=0.4
+### perim_A3opt
+RESULT_REC dv_max_V=0.0989867 vout_min_V=1.40101 vout_max_V=1.5 dc_shift_V=-0.0875456 settled=0 t_rec_10mV_s=0.00943057 t_rec_1mV_s=0.262684 t_end_s=0.4
+### res_A3opt
+ Reference value :  2.44141e-10doAnalyses: TRAN:  Timestep too small; time = 2.44141e-10, timestep = 1.25e-14: trouble with node "b.xs1.xr2.bg#branch"
+RESULT_REC dv_max_V= vout_min_V=0 vout_max_V=0 dc_shift_V= settled=1 t_rec_10mV_s=0 t_rec_1mV_s=0 t_end_s=2.44141E-10
+### areaperim_A3opt
+RESULT_REC dv_max_V=0.099001 vout_min_V=1.401 vout_max_V=1.5 dc_shift_V=-0.0875455 settled=0 t_rec_10mV_s=0.00961814 t_rec_1mV_s=0.263418 t_end_s=0.4
+### full_A3opt
+ Reference value :  2.44141e-10doAnalyses: TRAN:  Timestep too small; time = 2.44141e-10, timestep = 1.25e-14: trouble with node "b.xs1.xr2.bg#branch"
+RESULT_REC dv_max_V= vout_min_V=0 vout_max_V=0 dc_shift_V= settled=1 t_rec_10mV_s=0 t_rec_1mV_s=0 t_end_s=2.44141E-10
+### full_defopt
+RESULT_REC dv_max_V=0.100901 vout_min_V=1.3991 vout_max_V=1.5 dc_shift_V=-0.0348769 settled=0 t_rec_10mV_s=0.224406 t_rec_1mV_s=0.284406 t_end_s=0.4
+### zero_defopt
+RESULT_REC dv_max_V=0.100634 vout_min_V=1.39937 vout_max_V=1.5 dc_shift_V=-0.0348898 settled=0 t_rec_10mV_s=0.224593 t_rec_1mV_s=0.284593 t_end_s=0.4
+### full_gmin1e-14
+ Reference value :  2.44141e-10doAnalyses: TRAN:  Timestep too small; time = 2.44141e-10, timestep = 1.25e-14: trouble with node "b.xs1.xr2.bg#branch"
+RESULT_REC dv_max_V= vout_min_V=0 vout_max_V=0 dc_shift_V= settled=1 t_rec_10mV_s=0 t_rec_1mV_s=0 t_end_s=2.44141E-10

@@ -14,7 +14,7 @@ def pin(x, y, lab, side):
 def mos(kind, name, x, y, W, L, M, d, g, s, b):
     sym = 'pfet_03v3' if kind == 'p' else 'nfet_03v3'
     attr = (f"name={name}\nL='{L}'\nW='{W}'\nnf=1\nm='{M}'\n"
-            f"ad=0\nas=0\npd=0\nps=0\nnrd=0\nnrs=0\nsa=0 sb=0 sd=0\nmodel={sym}\nspiceprefix=X")
+            f"ad='DIFF*{W}*0.18u'\nas='DIFF*{W}*0.18u'\npd='DIFF*2*({W}+0.18u)'\nps='DIFF*2*({W}+0.18u)'\nnrd=0\nnrs=0\nsa=0 sb=0 sd=0\nmodel={sym}\nspiceprefix=X")
     out.append(f'C {{symbols/{sym}.sym}} {x} {y} 0 0 {{{attr}}}')
     # pin positions (rot 0): pfet D(+20,+30) S(+20,-30); nfet D(+20,-30) S(+20,+30); G(-20,0); B(+20,0)
     top, bot = ((s, d) if kind == 'p' else (d, s))

@@ -9,6 +9,10 @@ tmp=$(mktemp /tmp/a3_XXXXXXXX.spice)
 sed -e "s#models_typical#models_${corner}#g" -e "s#^\.temp .*#.temp ${T}#" "$AMP/tb/$tb" > "$tmp"
 # OTA_NETLIST=<path relative to tb/> swaps the hand-written ota1.spice for another netlist (xschem equivalence check)
 [ -n "$OTA_NETLIST" ] && sed -i "s#\.\./spice/ota1\.spice#${OTA_NETLIST}#" "$tmp"
+# SWAPS="old=new old2=new2": replace include paths (xschem equivalence runs), e.g. ../spice/ota2.spice=../xschem/netlist/ota2_sub.spice
+# EXTRAOPT="reltol=1e-7 vntol=1e-9": extra .options tokens appended to the testbench options line (tight tolerances for the equivalence runs)
+[ -n "$EXTRAOPT" ] && sed -i "s#^\.options .*#& $EXTRAOPT#" "$tmp"
+for pr in $SWAPS; do sed -i "s#${pr%%=*}#${pr#*=}#g" "$tmp"; done
 for kv in "$@"; do
   n=${kv%%=*}; v=${kv#*=}
   if grep -q -E "^\.param ${n}=" "$tmp"; then

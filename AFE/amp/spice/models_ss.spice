@@ -2,3 +2,5 @@
 .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice ss
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_ss
+* A4a: poly-resistor corner (rsh 3000 / 2250 / 3750 Ohm/sq for typical / ff / ss) for the bias and ladder resistors.
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice res_ss

@@ -1,0 +1,23 @@
+A4a diffusion check (Decision 13): A3 netlist (ad/as/pd/ps = 0, sim/a3_*.log) vs real diffusion (ad=as=W*0.18u, pd=ps=2*(W+0.18u), nrd=nrs=0; sim/a4a_diff_*.log).
+Everything else is the A3 environment (IDEAL bias, IDEAL vt shifter).  Columns: typical 27 C old -> new, worst relative change over 9 PVT (abs change for margin/offset).
+
+== op
+  worst_margin_V   typical27 0.565156 -> 0.565156   worst change over 9 PVT 4e-06
+  offset_uV        typical27 15.2686 -> 15.5222   worst change over 9 PVT 16.86
+  Isupply_uA       typical27 60.0399 -> 60.0399   worst change over 9 PVT 0 %
+== ol
+  a0_dB            typical27 118.058 -> 118.058   worst change over 9 PVT 0 %
+  f_p1_Hz          typical27 39.3427 -> 39.3297   worst change over 9 PVT 0.03801 %
+  gbw_Hz           typical27 4.74724e+06 -> 4.59638e+06   worst change over 9 PVT 3.371 %
+  pm_beta1_deg     typical27 -47.1408 -> -45.0908   worst change over 9 PVT 4.502 %
+== loop
+  T_100Hz_dB       typical27 60.7914 -> 60.7904   worst change over 9 PVT 0.002331 %
+  fu_Hz            typical27 249630 -> 248933   worst change over 9 PVT 0.3676 %
+  pm_deg           typical27 73.3618 -> 72.7284   worst change over 9 PVT 1.006 %
+== cl
+  g_mid_dB         typical27 39.869 -> 39.869   worst change over 9 PVT 0 %
+  f_lo_Hz          typical27 0.143562 -> 0.143562   worst change over 9 PVT 0.0005957 %
+  f_hi_Hz          typical27 362298 -> 366016   worst change over 9 PVT 1.104 %
+== noise (IDEAL RESISTOR, R0 per corner; integrated output noise / midband gain, 0.5-300 Hz, uV)
+  fnoicor=0: typical27 1.6752 -> 1.6752 uV; new range over 9 PVT 1.523-1.838 uV; worst change 0.000 %
+  fnoicor=1: typical27 4.7535 -> 4.7535 uV; new range over 9 PVT 4.202-5.245 uV; worst change 0.000 %

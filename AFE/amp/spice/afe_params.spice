@@ -1,0 +1,38 @@
+* A4a one-channel parameters (stage 2, bias, ladders).  One parameter per line (scripts/ngrun.sh overrides by name).  Stage-1 sizing: ota1_params.spice.
+* Supply and references.  VOCM = VOUT_CM = 1.65 V (Decision 17: VREF = VDD, mid-scale VDD/2); VCM_IN = 1.5 V (A3-verified headroom).
+.param VDDN=3.3
+.param VCM_IN=1.5
+.param VOCM=1.65
+.param VTT=0.2
+.param ILAD=2u
+* Beta-multiplier master (bias_gen): poly resistor 1k/sq, width 2u, length RB_L (60 kOhm nominal at 120u).
+.param RB_L=120u
+* Per-channel mirror legs on vbn (unit = 16u/4u NMOS = the master Mn1): OTA1 sink x KS1, stage-2 follower sink x KSF.
+.param BM_KS1=24
+.param BM_KSF=6
+* MIM sizing (same PDK area+perimeter formula as stage1.spice, square side solved for the requested C, typical corner)
+.param CAPK_A=1.99e-3 CAPK_P=2.383e-10
+* Stage-2 OTA (NMOS pair, PMOS mirror load, NMOS follower).  Tail ~ 1/80 of the master, pair at the same current density.
+.param OTA2_WT=1u
+.param OTA2_LT=20u
+.param OTA2_WP=1u
+.param OTA2_LP=40u
+.param OTA2_WL=1u
+.param OTA2_LL=20u
+.param OTA2_WF=10u
+.param OTA2_LF=2u
+* Stage 2 capacitors: gain = CIN2/CF2 = 10; CC2 = dominant-pole cap on the OTA output node o2 (to vss).
+.param CIN2=3p
+.param CF2V=0.294p
+.param CC2=2.0p
+* Stage 1 feedback capacitor (CIN_RATIO x CF1V = Cin); A3 used 200f, the pseudo-R/switch parasitic is absorbed by trimming CF1V.
+.param CF1V=200f
+.param CIN_RATIO=100
+* MIM side lengths from the requested capacitances (square, typical formula C = A L^2 + 4 P L)
+.param LCC2='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CC2))/(2*CAPK_A)'
+.param LCIN2='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CIN2))/(2*CAPK_A)'
+.param LCF2='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CF2V))/(2*CAPK_A)'
+.param LCF1='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CF1V))/(2*CAPK_A)'
+.param LCIN1='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CIN_RATIO*CF1V))/(2*CAPK_A)'
+* Pseudo-resistor device size (A2: 1u/2u PMOS pair), used in both stages
+.param PRW=1u PRL=2u

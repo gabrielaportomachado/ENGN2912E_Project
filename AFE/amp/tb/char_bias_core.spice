@@ -1,0 +1,27 @@
+* A4a: self-biased beta-multiplier master (NMOS Mn1 / K x Mn2 with poly resistor Rb, PMOS mirror, diode-stack start-up): master current, vbn, gm.
+* CANDIDATE bias scheme (rule 10): scripts/run_a4a.sh biascore rewrites the models include, .temp and the .param line.
+.include ../spice/models_typical.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500
+.temp 27
+.param RLEN=60u VDDV=3.3
+Vdd vdd 0 {VDDV}
+Xmp2 a a vdd vdd pfet_03v3 W=40u L=4u nf=1
+Xmp1 vbn a vdd vdd pfet_03v3 W=40u L=4u nf=1
+Xmn1 vbn vbn 0 0 nfet_03v3 W=16u L=4u nf=1
+Xmn2 a vbn r1 0 nfet_03v3 W=16u L=4u nf=1 m=4
+Xrb r1 0 0 ppolyf_u_1k r_length={RLEN} r_width=2u
+* start-up: three stacked diode-connected PMOS vdd -> vbn (conduct only while vbn is near 0)
+Xs1 s1 s1 vdd vdd pfet_03v3 W=0.5u L=4u nf=1
+Xs2 s2 s2 s1 vdd pfet_03v3 W=0.5u L=4u nf=1
+Xs3 vbn vbn s2 vdd pfet_03v3 W=0.5u L=4u nf=1
+.control
+op
+let id1 = abs(@m.xmn1.m0[id])
+let id2 = abs(@m.xmn2.m0[id])
+let gm1 = @m.xmn1.m0[gm]
+let ist = abs(@m.xs3.m0[id])
+let vb = v(vbn)
+echo RESULT id1_A=$&id1 id2_A=$&id2 gm1_S=$&gm1 vbn_V=$&vb istart_A=$&ist
+quit
+.endc
+.end

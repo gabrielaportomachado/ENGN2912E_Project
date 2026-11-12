@@ -1,0 +1,46 @@
+* A4a: one channel (stage 1 + stage 2 + follower), REAL bias (bias_gen), .noise SPECTRUM of the channel output (V/sqrt(Hz)) for the D0 aliasing budget (Decision 22).  Feedback elements are IDEAL RESISTORS (noise, Decision 8) = R0 of the pseudo-R.
+* Parameters one per line (scripts/ngrun.sh overrides by name).  CL_ADC = PLACEHOLDER ADC input capacitance (not used in .op).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.include ../spice/stage1r.spice
+.include ../spice/stage2.spice
+.include ../spice/afe_ch.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param FN=0
+.param fnoicor=FN
+.param RMODE=1
+.param RMODE2=1
+.param RFIX=5.2e12
+.param RFIX2=5.2e12
+.param RNOISY=1
+.param RNOISY2=1
+.param VSUP=3.3
+.param CL_ADC=10p
+Vdd vdd 0 {VSUP}
+Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
+CADC out 0 {CL_ADC}                 $ PLACEHOLDER ADC load
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.5 v(vg1)=1.7 v(vcmo)=1.65 v(vg2)=1.85
+.nodeset v(xch.xs1.vn)=1.5 v(xch.xs1.vp)=1.5 v(xch.xs1.vng)=1.5 v(xch.v1)=1.5 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.5 v(xch.xs1.xr2.m)=1.5 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+noise v(out) Vd dec 40 0.1 10Meg
+setplot noise1
+wrdata NSPECFILE onoise_spectrum
+quit
+.endc
+.end

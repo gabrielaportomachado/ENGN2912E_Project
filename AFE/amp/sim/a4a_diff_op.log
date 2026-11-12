@@ -1,0 +1,90 @@
+### op_ff_27
+OPDEV xmb id_A=2E-05 vgs_V=0.86523 vds_V=0.86523 vdsat_V=0.179744 margin_V=0.685486 gm_over_id=8.09615
+OPDEV xmt id_A=1.99986E-05 vgs_V=0.86523 vds_V=0.854269 vdsat_V=0.179744 margin_V=0.674525 gm_over_id=8.09615
+OPDEV xm1 id_A=9.99931E-06 vgs_V=0.945714 vds_V=1.77734 vdsat_V=0.0570569 margin_V=1.72028 gm_over_id=21.4768
+OPDEV xm2 id_A=1.00029E-05 vgs_V=0.945731 vds_V=1.77765 vdsat_V=0.0570616 margin_V=1.72059 gm_over_id=21.4759
+OPDEV xm3 id_A=9.99935E-06 vgs_V=0.668394 vds_V=0.668394 vdsat_V=0.131294 margin_V=0.5371 gm_over_id=10.9834
+OPDEV xm4 id_A=9.99932E-06 vgs_V=0.668394 vds_V=0.668082 vdsat_V=0.131294 margin_V=0.536789 gm_over_id=10.9834
+OPDEV xm6 id_A=2.00888E-05 vgs_V=0.668082 vds_V=1.50002 vdsat_V=0.131103 margin_V=1.36891 gm_over_id=10.964
+OPDEV xm7 id_A=2.00888E-05 vgs_V=0.86523 vds_V=1.79998 vdsat_V=0.179744 margin_V=1.62024 gm_over_id=8.09318
+OPSUM vout_V=1.50002 offset_V=1.64951E-05 i_supply_A=6.00875E-05
+### op_ff_-40
+OPDEV xmb id_A=2E-05 vgs_V=0.907928 vds_V=0.907928 vdsat_V=0.15471 margin_V=0.753218 gm_over_id=9.3457
+OPDEV xmt id_A=1.99839E-05 vgs_V=0.907928 vds_V=0.792589 vdsat_V=0.15471 margin_V=0.63788 gm_over_id=9.34591
+OPDEV xm1 id_A=9.99957E-06 vgs_V=1.00742 vds_V=1.7914 vdsat_V=0.0465196 margin_V=1.74488 gm_over_id=26.7143
+OPDEV xm2 id_A=9.99775E-06 vgs_V=1.00741 vds_V=1.7917 vdsat_V=0.0465174 margin_V=1.74518 gm_over_id=26.7149
+OPDEV xm3 id_A=9.992E-06 vgs_V=0.716007 vds_V=0.716007 vdsat_V=0.10459 margin_V=0.611417 gm_over_id=13.322
+OPDEV xm4 id_A=9.99197E-06 vgs_V=0.716007 vds_V=0.715712 vdsat_V=0.10459 margin_V=0.611122 gm_over_id=13.3221
+OPDEV xm6 id_A=2.00884E-05 vgs_V=0.715712 vds_V=1.49999 vdsat_V=0.104415 margin_V=1.39558 gm_over_id=13.292
+OPDEV xm7 id_A=2.00884E-05 vgs_V=0.907928 vds_V=1.80001 vdsat_V=0.15471 margin_V=1.6453 gm_over_id=9.34122
+OPSUM vout_V=1.49999 offset_V=-6.9595E-06 i_supply_A=6.00724E-05
+### op_ff_85
+OPDEV xmb id_A=2E-05 vgs_V=0.825837 vds_V=0.825837 vdsat_V=0.199948 margin_V=0.625889 gm_over_id=7.29441
+OPDEV xmt id_A=2.00105E-05 vgs_V=0.825837 vds_V=0.908618 vdsat_V=0.199948 margin_V=0.70867 gm_over_id=7.29445
+OPDEV xm1 id_A=1.00053E-05 vgs_V=0.891373 vds_V=1.76342 vdsat_V=0.0661158 margin_V=1.69731 gm_over_id=18.3942
+OPDEV xm2 id_A=1.00069E-05 vgs_V=0.891382 vds_V=1.76376 vdsat_V=0.066118 margin_V=1.69764 gm_over_id=18.3939
+OPDEV xm3 id_A=1.00053E-05 vgs_V=0.627959 vds_V=0.627959 vdsat_V=0.15411 margin_V=0.473849 gm_over_id=9.64412
+OPDEV xm4 id_A=1.00053E-05 vgs_V=0.627959 vds_V=0.627621 vdsat_V=0.15411 margin_V=0.473512 gm_over_id=9.64413
+OPDEV xm6 id_A=2.00902E-05 vgs_V=0.627621 vds_V=1.50001 vdsat_V=0.153897 margin_V=1.34611 gm_over_id=9.63038
+OPDEV xm7 id_A=2.00902E-05 vgs_V=0.825837 vds_V=1.79999 vdsat_V=0.199948 margin_V=1.60004 gm_over_id=7.29235
+OPSUM vout_V=1.50001 offset_V=8.61663E-06 i_supply_A=6.01008E-05
+### op_ss_27
+OPDEV xmb id_A=2E-05 vgs_V=1.13144 vds_V=1.13144 vdsat_V=0.187872 margin_V=0.943564 gm_over_id=7.43209
+OPDEV xmt id_A=1.99347E-05 vgs_V=1.13144 vds_V=0.647536 vdsat_V=0.187872 margin_V=0.459664 gm_over_id=7.43163
+OPDEV xm1 id_A=9.96736E-06 vgs_V=1.15246 vds_V=1.75634 vdsat_V=0.056711 margin_V=1.69963 gm_over_id=20.5486
+OPDEV xm2 id_A=9.96738E-06 vgs_V=1.15246 vds_V=1.75627 vdsat_V=0.056711 margin_V=1.69955 gm_over_id=20.5486
+OPDEV xm3 id_A=9.96738E-06 vgs_V=0.896122 vds_V=0.896122 vdsat_V=0.135183 margin_V=0.760939 gm_over_id=10.3786
+OPDEV xm4 id_A=9.96739E-06 vgs_V=0.896122 vds_V=0.896199 vdsat_V=0.135183 margin_V=0.761015 gm_over_id=10.3786
+OPDEV xm6 id_A=2.00584E-05 vgs_V=0.896199 vds_V=1.5 vdsat_V=0.13523 margin_V=1.36477 gm_over_id=10.3541
+OPDEV xm7 id_A=2.00584E-05 vgs_V=1.13144 vds_V=1.8 vdsat_V=0.187872 margin_V=1.61213 gm_over_id=7.43009
+OPSUM vout_V=1.5 offset_V=1.54732E-07 i_supply_A=5.99932E-05
+### op_ss_-40
+OPDEV xmb id_A=2E-05 vgs_V=1.1713 vds_V=1.1713 vdsat_V=0.161728 margin_V=1.00957 gm_over_id=8.56511
+OPDEV xmt id_A=1.99154E-05 vgs_V=1.1713 vds_V=0.588645 vdsat_V=0.161728 margin_V=0.426917 gm_over_id=8.56506
+OPDEV xm1 id_A=9.9585E-06 vgs_V=1.21135 vds_V=1.77021 vdsat_V=0.0463624 margin_V=1.72385 gm_over_id=25.5318
+OPDEV xm2 id_A=9.9585E-06 vgs_V=1.21135 vds_V=1.77013 vdsat_V=0.0463624 margin_V=1.72377 gm_over_id=25.5318
+OPDEV xm3 id_A=9.95774E-06 vgs_V=0.941147 vds_V=0.941147 vdsat_V=0.107547 margin_V=0.8336 gm_over_id=12.6291
+OPDEV xm4 id_A=9.95775E-06 vgs_V=0.941147 vds_V=0.941225 vdsat_V=0.107547 margin_V=0.833678 gm_over_id=12.6291
+OPDEV xm6 id_A=2.00576E-05 vgs_V=0.941225 vds_V=1.5 vdsat_V=0.107592 margin_V=1.39241 gm_over_id=12.5943
+OPDEV xm7 id_A=2.00576E-05 vgs_V=1.1713 vds_V=1.8 vdsat_V=0.161728 margin_V=1.63827 gm_over_id=8.56226
+OPSUM vout_V=1.5 offset_V=5.11291E-08 i_supply_A=5.99731E-05
+### op_ss_85
+OPDEV xmb id_A=2E-05 vgs_V=1.09448 vds_V=1.09448 vdsat_V=0.209069 margin_V=0.885412 gm_over_id=6.70758
+OPDEV xmt id_A=1.99495E-05 vgs_V=1.09448 vds_V=0.699527 vdsat_V=0.209069 margin_V=0.490458 gm_over_id=6.70705
+OPDEV xm1 id_A=9.97474E-06 vgs_V=1.10047 vds_V=1.74252 vdsat_V=0.0655983 margin_V=1.67692 gm_over_id=17.6107
+OPDEV xm2 id_A=9.97474E-06 vgs_V=1.10047 vds_V=1.74246 vdsat_V=0.0655983 margin_V=1.67686 gm_over_id=17.6107
+OPDEV xm3 id_A=9.97478E-06 vgs_V=0.857956 vds_V=0.857956 vdsat_V=0.158923 margin_V=0.699033 gm_over_id=9.08468
+OPDEV xm4 id_A=9.97478E-06 vgs_V=0.857956 vds_V=0.858015 vdsat_V=0.158923 margin_V=0.699093 gm_over_id=9.08468
+OPDEV xm6 id_A=2.00599E-05 vgs_V=0.858015 vds_V=1.5 vdsat_V=0.15896 margin_V=1.34104 gm_over_id=9.06583
+OPDEV xm7 id_A=2.00599E-05 vgs_V=1.09448 vds_V=1.8 vdsat_V=0.209069 margin_V=1.59093 gm_over_id=6.70607
+OPSUM vout_V=1.5 offset_V=6.54932E-08 i_supply_A=6.00094E-05
+### op_typical_27
+OPDEV xmb id_A=2E-05 vgs_V=0.998249 vds_V=0.998249 vdsat_V=0.183915 margin_V=0.814335 gm_over_id=7.74866
+OPDEV xmt id_A=1.99673E-05 vgs_V=0.998249 vds_V=0.749071 vdsat_V=0.183915 margin_V=0.565156 gm_over_id=7.74865
+OPDEV xm1 id_A=9.98369E-06 vgs_V=1.05091 vds_V=1.76872 vdsat_V=0.0569211 margin_V=1.7118 gm_over_id=21.0001
+OPDEV xm2 id_A=9.98696E-06 vgs_V=1.05093 vds_V=1.76885 vdsat_V=0.0569256 margin_V=1.71193 gm_over_id=20.9993
+OPDEV xm3 id_A=9.98373E-06 vgs_V=0.782206 vds_V=0.782206 vdsat_V=0.133232 margin_V=0.648975 gm_over_id=10.6748
+OPDEV xm4 id_A=9.98372E-06 vgs_V=0.782206 vds_V=0.782078 vdsat_V=0.133232 margin_V=0.648846 gm_over_id=10.6748
+OPDEV xm6 id_A=2.00724E-05 vgs_V=0.782078 vds_V=1.50002 vdsat_V=0.133153 margin_V=1.36686 gm_over_id=10.6532
+OPDEV xm7 id_A=2.00724E-05 vgs_V=0.998249 vds_V=1.79998 vdsat_V=0.183915 margin_V=1.61607 gm_over_id=7.74615
+OPSUM vout_V=1.50002 offset_V=1.55222E-05 i_supply_A=6.00399E-05
+### op_typical_-40
+OPDEV xmb id_A=2E-05 vgs_V=1.03951 vds_V=1.03951 vdsat_V=0.158299 margin_V=0.881212 gm_over_id=8.93771
+OPDEV xmt id_A=1.99508E-05 vgs_V=1.03951 vds_V=0.688778 vdsat_V=0.158299 margin_V=0.530479 gm_over_id=8.93811
+OPDEV xm1 id_A=9.9754E-06 vgs_V=1.11122 vds_V=1.7827 vdsat_V=0.0464694 margin_V=1.73623 gm_over_id=26.1087
+OPDEV xm2 id_A=9.97539E-06 vgs_V=1.11122 vds_V=1.78282 vdsat_V=0.0464694 margin_V=1.73635 gm_over_id=26.1087
+OPDEV xm3 id_A=9.97544E-06 vgs_V=0.828522 vds_V=0.828522 vdsat_V=0.106056 margin_V=0.722466 gm_over_id=12.9703
+OPDEV xm4 id_A=9.97543E-06 vgs_V=0.828522 vds_V=0.828403 vdsat_V=0.106056 margin_V=0.722347 gm_over_id=12.9703
+OPDEV xm6 id_A=2.0072E-05 vgs_V=0.828403 vds_V=1.5 vdsat_V=0.105986 margin_V=1.39401 gm_over_id=12.9384
+OPDEV xm7 id_A=2.0072E-05 vgs_V=1.03951 vds_V=1.8 vdsat_V=0.158299 margin_V=1.6417 gm_over_id=8.93405
+OPSUM vout_V=1.5 offset_V=-1.17703E-07 i_supply_A=6.00229E-05
+### op_typical_85
+OPDEV xmb id_A=2E-05 vgs_V=0.960104 vds_V=0.960104 vdsat_V=0.204644 margin_V=0.75546 gm_over_id=6.98888
+OPDEV xmt id_A=1.99803E-05 vgs_V=0.960104 vds_V=0.802262 vdsat_V=0.204644 margin_V=0.597618 gm_over_id=6.98877
+OPDEV xm1 id_A=9.99018E-06 vgs_V=0.997731 vds_V=1.75482 vdsat_V=0.0658976 margin_V=1.68893 gm_over_id=17.9915
+OPDEV xm2 id_A=9.99144E-06 vgs_V=0.997738 vds_V=1.75497 vdsat_V=0.0658995 margin_V=1.68908 gm_over_id=17.9913
+OPDEV xm3 id_A=9.99022E-06 vgs_V=0.742913 vds_V=0.742913 vdsat_V=0.156519 margin_V=0.586395 gm_over_id=9.35753
+OPDEV xm4 id_A=9.99021E-06 vgs_V=0.742913 vds_V=0.742763 vdsat_V=0.156519 margin_V=0.586244 gm_over_id=9.35754
+OPDEV xm6 id_A=2.00736E-05 vgs_V=0.742763 vds_V=1.50001 vdsat_V=0.156424 margin_V=1.34358 gm_over_id=9.34148
+OPDEV xm7 id_A=2.00736E-05 vgs_V=0.960104 vds_V=1.79999 vdsat_V=0.204644 margin_V=1.59535 gm_over_id=6.98703
+OPSUM vout_V=1.50001 offset_V=6.93241E-06 i_supply_A=6.00541E-05

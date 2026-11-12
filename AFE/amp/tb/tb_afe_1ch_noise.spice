@@ -1,0 +1,73 @@
+* A4a: one channel (stage 1 + stage 2 + follower), REAL bias (bias_gen), .noise: input-referred, integrated 0.5-300 Hz / midband gain.  Feedback elements are IDEAL RESISTORS (noise, Decision 8) = R0 of the pseudo-R.
+* Parameters one per line (scripts/ngrun.sh overrides by name).  CL_ADC = PLACEHOLDER ADC input capacitance (not used in .op).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.include ../spice/stage1r.spice
+.include ../spice/stage2.spice
+.include ../spice/afe_ch.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param FN=0
+.param fnoicor=FN
+.param RMODE=1
+.param RMODE2=1
+.param RFIX=5.2e12
+.param RFIX2=5.2e12
+.param RNOISY=1
+.param RNOISY2=1
+.param VSUP=3.3
+.param CL_ADC=10p
+Vdd vdd 0 {VSUP}
+Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
+CADC out 0 {CL_ADC}                 $ PLACEHOLDER ADC load
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.5 v(vg1)=1.7 v(vcmo)=1.65 v(vg2)=1.85
+.nodeset v(xch.xs1.vn)=1.5 v(xch.xs1.vp)=1.5 v(xch.xs1.vng)=1.5 v(xch.v1)=1.5 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.5 v(xch.xs1.xr2.m)=1.5 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+ac dec 20 1e-3 1e6
+let gdb = vdb(out)
+let g1db = vdb(xch.v1)
+meas ac g_mid find gdb at=12.25
+meas ac g1_mid find g1db at=12.25
+let gmid = 10^(g_mid/20)
+let g1mid = 10^(g1_mid/20)
+set gmid_lin = $&gmid
+set g1mid_lin = $&g1mid
+noise v(out) Vd dec 100 0.5 300
+setplot noise2
+let vo_b = onoise_total
+let vi_b_mid = vo_b/$gmid_lin
+let vi_b_ng = inoise_total
+echo NOISE_B_0p5_300 vn_out_V=$&vo_b vn_in_mid_V=$&vi_b_mid vn_in_ngspice_V=$&vi_b_ng gmid_dB=$&g_mid
+noise v(xch.v1) Vd dec 100 0.5 300
+setplot noise4
+let vo_s1 = onoise_total
+let vi_s1 = vo_s1/$g1mid_lin
+echo NOISE_S1_0p5_300 vn_in_stage1_V=$&vi_s1
+noise v(out) Vd dec 50 0.5 2k
+setplot noise6
+let vo_c = onoise_total
+let vi_c = vo_c/$gmid_lin
+echo NOISE_C_0p5_2k vn_in_mid_V=$&vi_c
+noise v(out) Vd dec 20 0.5 1Meg
+setplot noise8
+let vo_d = onoise_total
+let vi_d = vo_d/$gmid_lin
+echo NOISE_D_0p5_1M vn_in_mid_V=$&vi_d
+quit
+.endc
+.end

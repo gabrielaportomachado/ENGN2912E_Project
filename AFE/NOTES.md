@@ -53,17 +53,17 @@ the "Results log" and "Open questions" sections below with verified numbers only
 ## Targets (simulation targets, not verified requirements)
 Amplifier: 3.3 V; gain 1000x (60 dB); passband 0.5–300 Hz; input-referred noise
 ≤ 2 uV rms integrated over 0.5–300 Hz; output biased for the ADC (VOUT_CM parameter,
-default 1.5 V, also check 1.65 V; ±500 uV x 1000 → 1.0–2.0 V around 1.5 V).
-ADC: 12-bit SAR, 3.3 V, serial output, 4 kS/s PER CHANNEL × 16 channels (ASSUMPTION:
-confirm with team; 4 kS/s total would be only 250 S/s per channel, below the 600 S/s
-that 300 Hz needs). Stretch goal: 14–16 bit.
+default 1.65 V = ADC mid-scale since VREF = VDD (Decision 17); ±500 uV x 1000 → 1.15–2.15 V).
+ADC: 12-bit SAR, 3.3 V, serial output, 4 kS/s PER CHANNEL × 16 channels (confirmed by the
+user, Decision 16), VREF = VDD = 3.3 V (input range 0–3.3 V, 1 LSB ≈ 0.806 mV).
+Stretch goal: 14–16 bit.
 Unspecified (parameterize, never claim tolerance): electrode DC offset, input
 common-mode range, stimulation artifact amplitude/duration, recovery time, power, area.
 
 ## ADS7953 (external benchmark only, not a GF180 macro)
-Product page only: 16-ch single-ended, 12-bit SAR, 1 MSPS, SPI, AVDD 2.7–5.25 V,
-ranges 0–VREF / 0–2xVREF. VREF limits, input capacitance and acquisition time are
-UNVERIFIED: read the datasheet before using them.
+The ADC is designed on chip in this project (Decision 15), so the ADS7953 is only a
+comparison point (its SPI framing inspired Decision 18). Product page only: 16-ch
+single-ended, 12-bit SAR, 1 MSPS, SPI. Its datasheet values are not needed.
 
 ## Rules for every session
 1. Write new files only under AFE/. Never edit rtl/, ROW/, TGATE/, FSM*/, MODE+FSM/,
@@ -81,6 +81,19 @@ UNVERIFIED: read the datasheet before using them.
 8. Xschem: author .sch files, netlist in batch (xschem -n -s -q ...), and confirm the
    xschem netlist simulates the same as the hand netlist.
 9. Stop at the end of each phase and wait for approval.
+10. Decision points: decide yourself, do not stop to ask. At every design choice, consider
+   2–3 options and pick one using these priorities in order:
+   (1) meets the targets and the recorded Decisions;
+   (2) least area;
+   (3) least power;
+   (4) least additional hardware and complexity: fewest extra blocks, bias lines, clocks,
+       control signals and pins; reuse what already exists.
+   Base the pick on simulated numbers where you have them, otherwise labelled ESTIMATEs. In
+   the phase summary, list each choice under "Choices I made": the options considered,
+   their numbers, what you picked and why, so the user can overrule it at review. If no
+   option meets a target, or the best option would change a recorded Decision, still pick
+   the closest one and continue, but flag it at the top of the summary under "Needs your
+   attention". Rule 9 still applies: stop at the end of each phase.
 
 ## Architecture hypotheses (to confirm or reject with simulation)
 Amp: stage 1 = AC-coupled capacitive-feedback amp, gain Cin/Cf ≈ 100, PMOS-input
@@ -121,8 +134,9 @@ From the 2026-11-12 planning session; the reasoning behind the hypotheses above.
   question. ngspice has no PSS/pnoise, so a chopper fallback needs transient noise.
 - Anti-aliasing: a 1st/2nd-order roll-off at 300 Hz gives only ~15/33 dB at a 2 kHz
   Nyquist frequency (4 kS/s), which is weak for 12 bits.
-- ADC: with VREF = 3.0 V and the 0–VREF range, mid-scale is 1.5 V (not 1.65 V). At
-  12 bits over 3 V, the LSB ≈ 0.73 mV.
+- (SUPERSEDED by Decision 17: VREF = VDD = 3.3 V, mid-scale 1.65 V, LSB ≈ 0.806 mV.)
+  ADC: with VREF = 3.0 V and the 0–VREF range, mid-scale is 1.5 V. At 12 bits over 3 V,
+  the LSB ≈ 0.73 mV.
 - Supply domains: the existing digital and TGATE are 5 V; the amp is 3.3 V. The REC node
   can see IPG (step-up) excursions and switch charge injection; the amp input
   protection is undefined.
@@ -164,6 +178,44 @@ Approved by the user after A3 (2026-11-12).
     the cause in the A3 files; the cause remains UNEXPLAINED). At minimum, rerun op/ac/noise with real diffusion parameters and report the change.
 14. A4 is split. A4a = stage 2 + output buffer + real vt-shift/bias + fast-settle switch circuit + diffusion fix, with op/ac/noise only. A4b = all transient
     tests (THD/swing, slew, power-up, offset/artifact recovery with and without fast-settle, TGATE, ADC load) and the corner table. Each sub-phase stops for approval.
+
+ADC decisions, set by the user (2026-11-12), before D0.
+15. The user designs the ADC in this project (the partner agreed): run the full D0–D6 in AFE/prompts/adc.md, files under AFE/adc/.
+16. Sample rate: 4 kS/s PER CHANNEL, 16 channels (64 kS/s aggregate if one ADC is shared).
+17. Reference: VREF = VDD = 3.3 V (no separate reference). Input range 0–3.3 V, 1 LSB ≈ 0.806 mV, mid-scale 1.65 V.
+    Consequences: (a) the amplifier's VOUT_CM default becomes 1.65 V (output 1.15–2.15 V for ±500 uV), and A4a/A4b use it;
+    (b) supply noise/ripple appears directly in every conversion, so D0 must budget VDD noise (in LSB) and the amplifier's
+    PSRR, and D4 must simulate with a noisy/rippled VDD as well as a clean one.
+18. Serial interface: SPI-style with an EXTERNAL master (an MCU drives CS and SCLK; the chip drives DOUT). Frame: 16 bits =
+    4-bit channel ID + 12-bit code, MSB first. D0 specifies the SPI mode, max SCLK, whether a DIN pin selects channels, and
+    whether SCLK also clocks the conversion (as the ADS7953 does) or a separate clock is needed.
+19. ADC count: D0 compares one SAR behind a 16:1 analog mux versus 16 SARs (area incl. cap DACs, power, mux and
+    buffer settling between channels, crosstalk) with numbers and CHOOSES one by rule 10; the user can overrule at D0 review.
+    OUTCOME (D0, 2026-11-12, by rule 10): ONE 12-bit SAR behind a 16:1 analog mux. ESTIMATE: 0.017 mm2 vs ~0.27 mm2 for 16 SARs (15x), equal ADC power (~17 uW, < 1 % of the 3.9 mW of the amplifiers). See AFE/adc/PLAN.md.
+
+Approved by the user after A4a (2026-11-12).
+20. The transmission-gate fast-settle switch (NMOS+PMOS, fs/fsb, one inverter per channel) is accepted. A4b must measure its charge injection and the residual offset it leaves
+    after release (output step and decay, versus switch pulse width).
+21. A4b must also: (a) ramp VDD from 0 V and show the beta-multiplier bias (bias_gen) reaches its intended current (master ~0.85 uA typ, OTA1 IBIAS ~21 uA), adding the smallest start-up
+    circuit if the existing diode-stack start-up is not enough (rule 10); (b) re-measure the stage-1 loop phase margin with the real stage-2 load (Cin2 = 3 pF through the real stage 2, not
+    the A3 CL_NEXT placeholder); (c) find the path that makes the supply-to-output gain ~1.0 V/V at 50-60 Hz instead of the ideal-ratiometric 0.5 V/V (A4a PSRR table) and fix it if a small
+    change does (then re-run the A4a PSRR/ac/noise at 9 PVT).
+22. The f_hi spread (359-867 Hz over 9 PVT, only ~15 dB / ~8 dB of first-order attenuation at the 2 kHz Nyquist frequency) and its weak anti-aliasing are handed to the ADC: D0 must address
+    them (oversampling + digital filtering, or a quantified aliasing budget). D0 runs BEFORE A4b so that A4b uses D0's ADC input model (R_ADC / C_ADC / acquisition window).
+    OUTCOME (D0, by rule 10): convert at 4 kS/s per channel with NO oversampling and no on-chip filter. Noise aliasing is negligible (SIMULATED: <= 0.144 uV, 0.63 % of the in-band power, +0.3 % on the total at ff 85 C).
+    Interferer aliasing is weak (1x: 13-20 dB at 3.7 kHz) and oversampling + sinc^3 only moves the worst alias band up 6 dB per octave (2x 19-27 dB, 4x 25-33 dB) because the analog roll-off is first order: the fix, if out-of-band
+    interference matters, is an analog second pole in the amplifier (no spec exists; PLAN.md 5.2 proposes 100 uV pk -> <= 0.5 uV). Resolved by Decision 23.
+
+Approved by the user after D0 (2026-11-12).
+23. No out-of-band interference requirement exists. Keep the first-order amplifier roll-off; the interferer attenuation of the 4 kS/s conversion (13-20 dB at 3.7 kHz, SIMULATED, D0) is a DOCUMENTED RISK, not a target.
+    No analog second pole is added for it. (Supersedes the D0 suggestion in PLAN.md 5.2, which stays as information.)
+24. SCLK must be >= 3.5 MHz (MCU-side requirement, no extra hardware). With the 15.625 us frame period (64 kS/s aggregate) the 16-clock frame is <= 4.57 us, so the acquisition window is T_ACQ >= 11.05 us
+    (arithmetic: 15.625 - 16/3.5 MHz). A4b verifies the follower settles to 1/2 LSB with the D0 ADC input model (C_s 17 pF, Ron 1 kOhm) at that T_ACQ (and may also report 12.4 us), for +-1 V steps
+    (D0: worst 7.68 us at ss -40 C, so expected met). Full-rail (+-3.3 V) step settling (D0: 8.6-20 us) is REPORT-ONLY, no pass claim. Sizing the follower sink is allowed only if the +-1 V check fails (rule 10).
+25. Before any DAC design, D2 must find the minimum MIM dimension (and spacing) in the GF180 PDK design rules. If 1.2 um units are illegal, redo the binary-vs-split DAC choice by rule 10 with legal units
+    (D0 assumed 1.2 x 1.2 um = 4.0 fF; total C and matching change with the unit).
+26. D2 builds its own per-unit MIM mismatch model (the PDK has none), labelled ASSUMPTION in the netlist and the log, and sweeps the matching constant A_C = 0.25-1 %*um (D0 assumed 0.5) to show the DNL/INL sensitivity.
+27. The ADC's ~27 pC MSB-trial charge draw from VDD (VREF = VDD, D0) is a board-decoupling and bond-wire risk: recorded under Open questions; D2/D4 report the supply droop with an L-C supply model.
 
 ## A1 findings (typical corner, 27 C only; logs in AFE/amp/sim/, plots in AFE/amp/figs/)
 - ngspice facts: inoise_total / onoise_total are rms volts, in plot noise2 (spectra are in
@@ -277,12 +329,64 @@ Approved by the user after A3 (2026-11-12).
 - Not done in A3: fs/sf corners; mismatch/offset/CMRR with cap mismatch (no Monte Carlo); real bias circuit and vt generator (both IDEAL, Decision 9: A4); large-signal swing/THD/slew,
   power-up, input protection, TGATE (A4); junction/diffusion parasitics (ad/as/pd/ps = 0) and layout/Cin bottom-plate parasitics; the xschem drawing was not viewed (no display).
 
+## A4a findings (stage 2 + follower buffer + real bias/vt/fast-settle + diffusion fix; op/ac/noise only; typical/ff/ss x -40/27/85 C; logs sim/a4a_*.log, tables sim/a4a_summary.txt + a4a_diff_summary.txt, plots figs/a4a_*.png, driver scripts/run_a4a.sh)
+- Design (spice/: afe_params, bias_gen, ota2, stage1r, stage2, afe_ch; xschem/: ota1, ota2, bias_gen). VOUT_CM = 1.65 V (Decision 17), VCM_IN = 1.5 V. REAL, no IDEAL source left except the electrode source, VDD and the fast-settle control `fs`:
+  * bias_gen: self-biased NMOS beta-multiplier (16u/4u, K=4, 60 kOhm poly, PMOS mirror, 3-diode start-up; master 0.85 uA typ) + two 2 uA ladders (3k/sq poly) giving vcm_in 1.5 V, vg1 = vcm_in+0.2 V
+    (stage-1 pseudo-R gate), vcm_out 1.65 V, vg2 = vcm_out+0.2 V. All taps scale with VDD (ratiometric to the ADC mid-scale). OTA1 IBIAS = mirror leg 24x16u/4u (21 uA typ, 13-34 uA over 9 PVT).
+  * Pseudo-R gate = fixed ladder tap (pseudo_r_fg), not the A2/A3 IDEAL tracking shifter. Fast-settle = transmission gate (NMOS+PMOS, fs/fsb, 0.5u|1u / 0.5u) across each of the 3 feedback elements + one inverter per channel.
+  * Stage 2: Cin2 3 pF / Cf2 0.294 pF (gain 10), NMOS pair 2 x 1u/40u at ~5.5 nA/side (gm ~100 nS), tail 1u/20u (11 nA typ, 1/77 of the master), PMOS mirror load 1u/20u, Cc2 2.0 pF on the o2 node,
+    NMOS follower 10u/2u + sink 6x unit (5.2 uA typ) INSIDE the stage-2 loop (Zout ~ 1/gm_f; its Vgs of ~1.25 V is absorbed by the loop, o2 sits at 2.90 V).
+  * MIM area (drawn side^2, ESTIMATE): Cin2 1490, Cc2 990, Cf2 142 um2 (stage 1 unchanged: Cin 2 x 10,000); stage-2 transistor gate area ~545 um2 (+ 1,540 for the OTA1 bias sink).
+- TARGETS over all 9 PVT (sim/a4a_summary.txt): gain @12.25 Hz 59.88-60.02 dB (stage 1 39.98-39.99, stage 2 19.89-20.04; target 60 +-1), f_lo 0.147-0.276 Hz (<= 0.5), f_hi 359-867 Hz (>= 300; slow corner
+  ss -40 C 359 Hz, fast ff 85 C 867 Hz), channel is non-inverting (phase -0.7..+0.6 deg). Noise 0.5-300 Hz (typical flicker, IDEAL R = R0 in both stages): 1.535-1.803 uV (<= 2 OK, worst ff 85 C);
+  stage 1 alone (measured at the stage-1 output) 1.552-1.805 uV: the channel total is within 0.02 uV of it and slightly BELOW it, because the stage-2 low-pass trims the band-edge noise by about as much as stage 2 adds; to 2 kHz 1.61-1.95 uV; to 1 MHz 1.62-1.99 uV (A3's 10.8-14.9 uV wideband is now filtered by stage 2).
+  fnoicor=1: 4.18-5.20 uV (2.7-2.95x), NOT met = the Decision-10 risk, unchanged. Output DC error vs VOUT_CM 0.7-2.3 mV. Supply current 46.9-119 uA (typ 74.4 uA; 245 uW). Saturation margin of every analog
+  transistor >= 0.19 V (criterion 0.05). OTA2 open loop: A0 51.1-57.6 dB, GBW 3.9-9.7 kHz, PM(beta=1) 87.4-88.7 deg (first-order loop; PM stays 87.7 deg with a 50 pF load). Supply sanity (typ 27 C, ladders fixed):
+  VDD 3.0/3.6 V gives VOUT_CM 1.50/1.80 V (tracks VDD/2), gain 59.90/60.02 dB, f_lo 0.17/0.20, f_hi 554/572 Hz.
+- Switch closed (acfs, AC only): gain at 12 Hz collapses to < -146 dB with no peaking (|H| max -4..-38 dB), i.e. the input is blanked; time-domain settling, charge injection, residual offset and loop stability with the
+  switch closed are A4b.
+- PSRR (Decision 17b, sim/a4a_psrr.log; |v(out)/v(vdd)|): DC 0.58-0.69, 50/60 Hz 1.00-1.03, 300 Hz 0.78-0.97, 1 kHz 0.35-0.68, 10 kHz 0.04-0.09 V/V; ideal ratiometric tracking of mid-scale (VREF = VDD) would be 0.5.
+  So a 1 mV ripple on VDD at 50-60 Hz appears as ~1 mV at the output (1 uV input-referred) and, after the ADC's own VREF = VDD scaling, a net code error of about (1.02-0.5)*1 mV/0.806 mV = 0.65 LSB (ESTIMATE from the V/V figures).
+- DECISION 13 ANSWER (diffusion / .tran failure; sim/a4a_diag_tran.log, sim/a4a_diff_summary.txt). It is NOT an NF clash and NOT ad/as/pd/ps: with the A3 options (gmin=1e-16 abstol=1e-20 chgtol=1e-19) the stage-1
+  .tran runs with ad/as only, pd/ps only, or both, and FAILS (t = 0.24 ns, "timestep too small") as soon as nrd/nrs != 0 (the xschem symbol default 0.18u/W gives mOhm-level BSIM4 internal resistances, which with
+  gmin=1e-16 break the solver); gmin=1e-14 does not help; default options (gmin=1e-12) run but give the wrong TOhm physics (dc_shift -35 mV vs -87.5 mV). FIX: .param DIFF in ota1/ota2/bias_gen (1 = ad=as=W*0.18u,
+  pd=ps=2*(W+0.18u), nrd=nrs=0). Effect on the A3 op/ol/loop/cl/noise at 9 PVT (A3 environment otherwise unchanged): noise identical to 4 digits (typ 1.6752 uV fn0, 4.7535 fn1), A0 and gain identical, loop PM
+  73.36 -> 72.73 deg (typ27; worst change 1.0 %), fu -0.4 %, GBW up to -3.4 %, f_hi +1.1 %, OTA output offset up to 16.5 uV (was <= 15.3). NOT yet exercised: a full-channel .tran with these options (A4b).
+- Real vt (fixed gate), sim/a4a_prfg.csv: R0 at vt = +0.2 V over 9 PVT = 4.10 / 5.24 / 6.16 TOhm (typ -40/27/85), ff 4.10 / 5.23 / 5.45, ss 4.10 / 5.24 / 6.22: identical to A2's IDEAL tracking shifter (<= 0.1 %), also at a node
+  DC of 1.65 V. vt = +0.1 V fails at ff 85 C (2.57 TOhm).
+- FAST-SETTLE SWITCH: in this PDK model every reverse-biased junction leaks ~1e-14 A (the A2 "floor"), not W-dependent. An NMOS-only switch (bulk vss) leaks ~1e-14 A out of the summing node: that is more than the
+  pseudo-R can supply (its current saturates near 1e-14 A), so stage 2's DC point railed (out 1.92 V, o2 3.23 V instead of 1.65 V) and stage 1 sat 41 mV off. A bulk-tied PMOS has no DC leak but a forward diode: R0 5.24 -> 1.70 TOhm.
+  The NMOS+PMOS transmission gate cancels the leak (i(+-100 mV) = +9.59e-15 / -9.65e-15 A as with no switch; R0 5.230 vs 5.236 TOhm typ 27; ff 85 and ss -40 also unchanged). Residual summing-node DC shift with it: 11-16 mV (stage 1, 9 PVT).
+  This ~1e-14 A leakage is a property of the PDK model (and is not W-dependent, A2); whether silicon behaves the same is UNVERIFIED (ESTIMATE: real junction leakage is smaller at 27 C but grows steeply with temperature, which this model does not show). The TG cancellation relies on matched NMOS/PMOS leaks, so treat it as a model-level result.
+- xschem (sim/a4a_equiv_xschem.log): ota1/ota2/bias_gen netlisted in batch, structure identical to the hand netlists (9/8/14 devices, pin order identical); op, ac (typ 27 and ss -40), OTA2 open loop and noise with the xschem
+  netlists swapped in agree to <= 0.05 % (device quantities; the only visible difference is a 0.12 mV shift of the stage-2 DC output at typ 27, a 0.9 % difference in the -0.1 deg mid-band phase). ota2/bias_gen .sch are written
+  by scripts/gen_a4a_sch.py from tables typed separately from the hand netlists; the drawings were not viewed (no display).
+- Not done in A4a (by Decision 14 or by choice): all transients (A4b); fs/sf corners; mismatch/offset/CMRR (no Monte Carlo); VOUT_CM = 1.5 V alternative (superseded by Decision 17); a startup transient of bias_gen (only the DC
+  solution, found without nodesets); a trim for f_hi (spread 359-867 Hz = 2.4x); PSRR improvement; xschem drawings of stage1r/stage2/afe_ch (these stay hand netlists, as stage1 did in A3).
+
+## D0 findings (ADC plan, no circuit files; AFE/adc/PLAN.md, hand estimates in AFE/adc/sim/d0_estimates.log, script AFE/adc/scripts/d0_estimates.py)
+- Numbers marked SIMULATED come from the A4a amplifier logs; everything else is a labelled ESTIMATE. LSB = 0.806 mV. Amplifier output noise = 1.91-2.23 LSB rms (SIMULATED), channel SNR at full +-500 uV input 46 dB (7.3 bit):
+  the amplifier limits the ENOB; 12 bits are headroom, the 14-16 bit stretch goal buys nothing. ADC budget <= 0.5 LSB rms (RSS allocation 0.43).
+- Architecture: one SAR + 16:1 mux (Decision 19 outcome); binary 12-bit cap DAC, unit 1.2 x 1.2 um MIM = 4.0 fF, C_total 16.4 pF (C_s ~ 17 pF), transmission-gate sampling switch with bottom-plate sampling, dynamic-latch comparator.
+- PDK limits found: no local MIM mismatch (mimcap_statistical is one global agauss(0,0.025,3) skew) and no active voltage-coefficient term in cap_mim_2f0 -> D2 must add its own per-unit mismatch model (ASSUMED A_C = 0.5 %*um); VCR-INL cannot be simulated.
+- Interface (Decision 18): SPI mode 0, SCLK clocks the conversion (CS falling = sample, 12 bit trials, 16-bit frame {4-bit ID, 12-bit code} of the PREVIOUS conversion), SCLK 0.1-5 MHz, no DIN (channel auto-increments), new pins CS/SCLK/DOUT; existing `clk` unused;
+  5 V -> 3.3 V crossings: rstn and the amplifier fast-settle control (down-shift with a 5 V-device inverter on VDD3); nothing from 3.3 V into the 5 V domain.
+- A4b ADC INPUT MODEL (use this): C_ADC = C_s = 17 pF behind R_ADC = 1 kOhm (TG), connected for T_ACQ then disconnected, starting at the previous channel's voltage (step +-1 V and +-3.3 V); T_ACQ = 11.05 us (Decision 24: SCLK = 3.5 MHz, the slowest allowed; 12.4 us at 5 MHz also reported),
+  7.8 / 4.6 / 3 us reported as stress; frame period 15.6 us; off-channel load 20 fF per amplifier output. SIMULATED A4a follower: sink 3.26-8.41 uA, 1/gm_f 11.6-17.5 kOhm -> a 1 V DOWNWARD step settles to 0.5 LSB in 3.7-7.7 us (3.3 V: 8.6-20 us):
+  met at 12.4 us, 0.12 us margin at 7.8 us (ss -40 C), not met at 4.6/3 us. A4b measures it with the real stage 2 and sizes the follower sink if needed (rule 10).
+- VDD noise (Decision 17b): code error = |A-0.5| x dVDD / 0.806 mV with A the A4a supply-to-output gain; in-band worst |A-0.5| = 0.53 -> 0.65 LSB per mV; allocation 0.2 LSB -> in-band VDD noise <= 0.31 mV rms (<= 1.6 mV if Decision 21(c) gets |A-0.5| <= 0.1).
+  The ADC's own MSB trial draws 27 pC from VDD: board decoupling / bond-wire inductance is a risk for D2/D4.
+
 ## Open questions
+- (D0, ANSWERED by Decision 23) No out-of-band interference requirement exists; the 13-20 dB interferer attenuation at 3.7 kHz is a documented risk. Reopen only if a requirement appears (cure: analog second pole, PLAN.md 5.2).
+- (Decision 27) The ADC's ~27 pC MSB-trial charge draw from VDD (VREF = VDD: 8.2 pF x 3.3 V; on-chip decoupling would need ~336 nF for 0.1 LSB) is a board decoupling and bond-wire inductance risk. Who owns the board decoupling and package, and what supply-pin L/C is realistic? D2/D4 report the supply droop at the decision instants.
+- (Decisions 25-26) Minimum legal MIM unit size/spacing in the GF180 design rules is unknown (D2 must find it); the MIM matching constant is an assumption (0.5 %*um) until a model or silicon data exists.
+- (D0) Is the external MCU 3.3 V (assumed)? Which supply pins and board decoupling will the 3.3 V ADC/amp rail have (VREF = VDD makes the ADC code depend on it)?
+- (A4a status) The fast-settle transmission gates exist in the netlists and their DC/AC behaviour is verified (A4a findings); settling time versus pulse width, charge injection and residual offset are A4b.
 - (A2) After each TREAT->REC switch the amp needs ~5 x tau_HPF (about 4-7 s at tau 0.8-1.5 s) to settle. A4 should evaluate a fast-settle switch (shorting the pseudo-resistors for a few ms, driven by REC_EN/READY): charge injection, residual offset, and the settling time versus switch duration.
 - (A2) Is the PDK-model junction floor (4-6 TOhm, T-independent) trustworthy? And a vt generator (+0.2 V gate shift) is needed in A3; PDK pfet noise in the pseudo-R is below 4kT/R: confirm the model with the instructor/PDK docs if the pseudo-R noise is to be claimed.
-- Per-channel vs total sample rate; one muxed ADC vs 16 ADCs.
-- Is a teammate designing the ADC? (Avoid duplicate work.)
-- ADC reference: external VREF (3.0 V?) or on chip?
+- One muxed ADC vs 16 ADCs: OPEN, decided after D0 (Decision 19). (Sample rate, ownership and
+  reference are settled: Decisions 15–17.)
 - 3.3 V amp input vs the 5 V TGATE REC node: input protection, charge injection when
   the switch toggles, IPG step-up excursions.
 - Anti-aliasing order vs ADC sample rate.
@@ -306,3 +410,5 @@ One row per phase. The user fills in Cost from the OpenRouter Activity page.
 | 2026-11-12 | A1 device char | Claude Sonnet 5.5 / default | | gm/Id, noise, ICMR typ/27C only; see "A1 findings"; AFE/amp/sim/a1_summary.txt, sim/char_*.log/csv |
 | 2026-11-12 | A2 pseudo-R | Claude Sonnet 5.5 / default | | R0 4-6 TOhm on a model junction-leak floor; HPF 0.11-0.21 Hz with Cf=200f and vt=+0.2 V passes noise at all PVT; see "A2 findings"; AFE/amp/sim/a2_summary.txt, sim/char_pseudoR*.csv, sim/hpf_*.csv |
 | 2026-11-12 | A3 stage-1 OTA | Claude Sonnet 5.5 / xhigh | | PMOS-input two-stage Miller OTA + closed loop; noise 1.52-1.84 uV (typ flicker, 9 PVT), fnoicor=1 4.2-5.2 uV, PM 70-76 deg, A0 118 dB, f_lo 0.11-0.2 Hz; R sweep and recovery; xschem == hand netlist; see "A3 findings"; AFE/amp/sim/a3_summary.txt, sim/a3_*.log |
+| 2026-11-12 | A4a stage 2 + real bias | Claude Sonnet 5.5 / default | | Stage 2 (gain 10, f_hi 359-867 Hz) + follower buffer + real bias/ladders + fixed-gate vt + transmission-gate fast-settle + real diffusion; gain 59.9-60.0 dB, f_lo 0.15-0.28 Hz, noise 1.54-1.80 uV (fnoicor=0), fnoicor=1 4.2-5.2 uV (risk), 47-119 uA; xschem == hand netlists; see "A4a findings"; AFE/amp/sim/a4a_summary.txt, sim/a4a_*.log |
+| 2026-11-12 | D0 ADC plan | Claude Sonnet 5.5 / default | | Plan only, no circuit files: 1 SAR + 16:1 mux (Decision 19 outcome), binary 4096 x 4 fF DAC, SPI mode 0 with SCLK-clocked conversion; aliasing quantified from the A4a spectra (noise aliasing <= 0.14 uV; interferer 13-20 dB at 3.7 kHz, +6 dB/octave of oversampling); A4b ADC input model C_s 17 pF / 1 kOhm / T_ACQ 12.4 us; see "D0 findings"; AFE/adc/PLAN.md, AFE/adc/sim/d0_estimates.log |

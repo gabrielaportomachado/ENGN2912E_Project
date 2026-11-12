@@ -18,3 +18,5 @@
 .param OTA_K6=4
 * Miller compensation: Cc is a MIM (cap_mim_2f0_m2m3_noshield), square, side OTA_LCC
 .param OTA_LCC=22u
+* Diffusion switch (A4a, Decision 13): 1 = real source/drain area+perimeter on every transistor, 0 = A3 netlist (all zero).
+.param DIFF=1

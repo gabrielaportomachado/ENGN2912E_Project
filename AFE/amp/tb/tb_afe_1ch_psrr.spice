@@ -1,0 +1,44 @@
+* A4a: one channel (stage 1 + stage 2 + follower), REAL bias (bias_gen), .ac with the AC source on VDD (Decision 17b): VDD -> out transfer.  Ideal ratiometric tracking of the ADC mid-scale would be 0.5 V/V.
+* Parameters one per line (scripts/ngrun.sh overrides by name).  CL_ADC = PLACEHOLDER ADC input capacitance (not used in .op).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.include ../spice/stage1r.spice
+.include ../spice/stage2.spice
+.include ../spice/afe_ch.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param VSUP=3.3
+.param CL_ADC=10p
+Vdd vdd 0 {VSUP} ac 1
+Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 0
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
+CADC out 0 {CL_ADC}                 $ PLACEHOLDER ADC load
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.5 v(vg1)=1.7 v(vcmo)=1.65 v(vg2)=1.85
+.nodeset v(xch.xs1.vn)=1.5 v(xch.xs1.vp)=1.5 v(xch.xs1.vng)=1.5 v(xch.v1)=1.5 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.5 v(xch.xs1.xr2.m)=1.5 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+ac dec 10 1e-2 1e5
+let a = mag(v(out))
+meas ac a_dc find a at=0.05
+meas ac a_50 find a at=50
+meas ac a_60 find a at=60
+meas ac a_300 find a at=300
+meas ac a_1k find a at=1k
+meas ac a_10k find a at=10k
+echo RESULT vdd2out_dc=$&a_dc vdd2out_50Hz=$&a_50 vdd2out_60Hz=$&a_60 vdd2out_300Hz=$&a_300 vdd2out_1k=$&a_1k vdd2out_10k=$&a_10k
+quit
+.endc
+.end

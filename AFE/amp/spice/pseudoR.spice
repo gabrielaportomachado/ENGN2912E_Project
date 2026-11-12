@@ -12,3 +12,31 @@ Xm2 m g b b pfet_03v3 W={W} L={L}
 * gate g = v(m)+v(vt)  (IDEAL level shifter; m is the drain/mid node)
 Bg g 0 V = V(m) + V(vt)
 .ends
+* ---- A4a ----
+* pseudo_r_fg: same two PMOS, but the shared gate g is a FIXED bias (REAL circuit: a tap of the bias ladder, spice/bias_gen.spice) instead
+* of the IDEAL B-source follower of pseudo_r_tune.  g = (node DC level) + VTT, VTT ~ +0.2 V: the devices sit at Vsg = -0.2 V (weak).
+.subckt pseudo_r_fg a b g W=1u L=2u
+Xm1 m g a a pfet_03v3 W={W} L={L} nf=1
+Xm2 m g b b pfet_03v3 W={W} L={L} nf=1
+.ends
+* FAST-SETTLE switch CANDIDATES across a feedback element (pins a b, control fs, 3.3 V logic, HIGH = closed).  Which one (or another scheme) is
+* used is a pending user decision (rule 10); numbers in sim/a4a_prfg.csv.
+* fs_switch_n: NMOS, bulk on vss, gate = fs.  Small-signal R0 unchanged, but the model gives ~10 fA of DC leakage into node a.
+.subckt fs_switch_n a b fs vss W=0.5u L=0.5u
+Xsw a fs b vss nfet_03v3 W={W} L={L} nf=1
+.ends
+* fs_switch_p: PMOS, bulk tied to node a (like the pseudo-resistor devices), minimal inverter makes the gate active-low.  The bulk tie forms a
+* forward diode a-well/b-diffusion for Vb > Va, so R0 drops (see sim/a4a_prfg.csv).
+.subckt fs_switch_p a b fs vdd vss W=0.5u L=0.5u
+Xswp a fsb b a pfet_03v3 W={W} L={L} nf=1
+Xinp fsb fs vdd vdd pfet_03v3 W=1u L=0.5u nf=1
+Xinn fsb fs vss vss nfet_03v3 W=0.5u L=0.5u nf=1
+.ends
+* fs_switch: FAST-SETTLE transmission gate (CHOSEN, A4a): NMOS (bulk vss, gate fs) + PMOS (bulk vdd, gate fsb) in parallel, HIGH fs = closed.  fsb = NOT fs
+* comes from one inverter per channel (afe_ch).  In this PDK model each reverse-biased junction leaks ~1e-14 A (the A2 "floor"): the NMOS junction takes ~+1e-14 A out
+* of the summing node, the PMOS well junction puts it back, so the pair adds ~0 DC leak and leaves R0 unchanged (sim/a4a_prfg.csv SW=3); the NMOS-only switch
+* (fs_switch_n) leaks ~1e-14 A, which exceeds what the pseudo-R can supply and pins the stage-2 DC point at the rail (sim/a4a_op_*.log), so it is REJECTED.
+.subckt fs_switch a b fs fsb vdd vss WN=0.5u WP=1u L=0.5u
+Xswn a fs b vss nfet_03v3 W={WN} L={L} nf=1
+Xswp a fsb b vdd pfet_03v3 W={WP} L={L} nf=1
+.ends

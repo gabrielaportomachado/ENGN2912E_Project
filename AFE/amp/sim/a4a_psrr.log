@@ -1,0 +1,18 @@
+### psrr_ff_27
+RESULT vdd2out_dc=0.615643 vdd2out_50Hz=1.03042 vdd2out_60Hz=1.0295 vdd2out_300Hz=0.965583 vdd2out_1k=0.642446 vdd2out_10k=0.0828427
+### psrr_ff_-40
+RESULT vdd2out_dc=0.577765 vdd2out_50Hz=1.03019 vdd2out_60Hz=1.02898 vdd2out_300Hz=0.946887 vdd2out_1k=0.586745 vdd2out_10k=0.0723532
+### psrr_ff_85
+RESULT vdd2out_dc=0.624012 vdd2out_50Hz=1.03056 vdd2out_60Hz=1.0298 vdd2out_300Hz=0.975357 vdd2out_1k=0.676853 vdd2out_10k=0.0902441
+### psrr_ss_27
+RESULT vdd2out_dc=0.652591 vdd2out_50Hz=1.01078 vdd2out_60Hz=1.00761 vdd2out_300Hz=0.828305 vdd2out_1k=0.394437 vdd2out_10k=0.0455492
+### psrr_ss_-40
+RESULT vdd2out_dc=0.605989 vdd2out_50Hz=1.00872 vdd2out_60Hz=1.00443 vdd2out_300Hz=0.782237 vdd2out_1k=0.344808 vdd2out_10k=0.0393112
+### psrr_ss_85
+RESULT vdd2out_dc=0.690705 vdd2out_50Hz=1.01136 vdd2out_60Hz=1.0087 vdd2out_300Hz=0.851887 vdd2out_1k=0.425277 vdd2out_10k=0.049575
+### psrr_typical_27
+RESULT vdd2out_dc=0.633459 vdd2out_50Hz=1.02125 vdd2out_60Hz=1.01943 vdd2out_300Hz=0.903685 vdd2out_1k=0.501556 vdd2out_10k=0.0594022
+### psrr_typical_-40
+RESULT vdd2out_dc=0.591258 vdd2out_50Hz=1.02053 vdd2out_60Hz=1.01811 vdd2out_300Hz=0.871858 vdd2out_1k=0.447207 vdd2out_10k=0.0515659
+### psrr_typical_85
+RESULT vdd2out_dc=0.668103 vdd2out_50Hz=1.02136 vdd2out_60Hz=1.01983 vdd2out_300Hz=0.919613 vdd2out_1k=0.534637 vdd2out_10k=0.0644138

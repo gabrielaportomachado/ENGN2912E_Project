@@ -1,0 +1,24 @@
+* A4a stage 1 with the REAL vt gate bias (pseudo_r_fg, gate vg from bias_gen) and the fast-settle switches (fs_switch across each feedback element).
+* Same Harrison topology and MIM sizing as stage1.spice.  Requires models, ota1_params, afe_params, ota1.spice, pseudoR.spice first.
+* RMODE: 0 = simulated pseudo_r_fg devices; 1 = IDEAL RESISTOR (noise) RFIX (Decision 8; the open fs_switch stays in parallel).  RNOISY=0 makes it noiseless.
+.param RMODE=0 RFIX=5.2e12 RNOISY=1
+.subckt stage1r rec ref vout vdd vss ibias vcm vg fs fsb params: BRKV=0 BRKI=0
+Vbrk vng vn dc 0 ac {BRKV}
+Ibrk 0 vng dc 0 ac {BRKI}
+Xota vp vng ibias vout vdd vss ota1
+Xcin1 rec vn cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}
+Xcin2 ref vp cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}
+Xcf1 vn vout cap_mim_2f0_m2m3_noshield c_length={LCF1} c_width={LCF1}
+Xcf2 vp vcm cap_mim_2f0_m2m3_noshield c_length={LCF1} c_width={LCF1}
+.if (RMODE == 0)
+Xr1 vn vout vg pseudo_r_fg W={PRW} L={PRL}
+Xr2 vp vcm vg pseudo_r_fg W={PRW} L={PRL}
+.else
+* IDEAL RESISTOR (noise)
+Rf1 vn vout {RFIX} noisy={RNOISY}
+Rf2 vp vcm {RFIX} noisy={RNOISY}
+.endif
+* fast-settle switches (open when fs = 0)
+Xsw1 vn vout fs fsb vdd vss fs_switch
+Xsw2 vp vcm fs fsb vdd vss fs_switch
+.ends stage1r

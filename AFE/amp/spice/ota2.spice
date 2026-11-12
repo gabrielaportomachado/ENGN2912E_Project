@@ -1,0 +1,16 @@
+* A4a stage-2 OTA: NMOS pair + PMOS mirror load (high-impedance node o2 loaded by CC2) + NMOS source FOLLOWER (buffer, inside the stage-2 loop).
+* Pin order = the order xschem emits (inputs, outputs, inouts): inp inn vbn out vdd vss.
+* Pins: inp (non-inverting = gate of M1, the DIODE side of the mirror: I1 up -> o2 up; = VOUT_CM), inn (inverting = gate of M2, output side; feedback node), out (buffered), vdd vss, vbn (NMOS mirror gate bias from bias_gen).
+* Tail = mirror leg of the master (W/L = 1/20 vs master 4: ~1/80), pair at the same current density (W/L = 1/40 each), follower sink = KSF x master.
+* Diffusion: same DIFF scheme as ota1.spice (nrd = nrs = 0).  Dominant pole: CC2 (MIM, o2 to vss).
+.subckt ota2 inp inn vbn out vdd vss
+Xmt tail vbn vss vss nfet_03v3 L={OTA2_LT} W={OTA2_WT} nf=1 ad={DIFF*OTA2_WT*0.18u} as={DIFF*OTA2_WT*0.18u} pd={DIFF*2*(OTA2_WT+0.18u)} ps={DIFF*2*(OTA2_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm1 d1 inp tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm2 o2 inn tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm3 d1 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm4 o2 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+* follower (drain on vdd, gate o2, source out) and its sink (master unit 16u/4u x BM_KSF)
+Xmf vdd o2 out vss nfet_03v3 L={OTA2_LF} W={OTA2_WF} nf=1 ad={DIFF*OTA2_WF*0.18u} as={DIFF*OTA2_WF*0.18u} pd={DIFF*2*(OTA2_WF+0.18u)} ps={DIFF*2*(OTA2_WF+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xms out vbn vss vss nfet_03v3 L=4u W=16u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={BM_KSF}
+Xcc o2 vss cap_mim_2f0_m2m3_noshield c_length={LCC2} c_width={LCC2}
+.ends ota2

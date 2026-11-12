@@ -1,0 +1,40 @@
+* A4a: fixed-gate pseudo-resistor (REAL gate bias, VG = VCM + VTT) with and without the fast-settle switch (open): R0 and +/-100 mV chord.
+* a = b = VCM = 1.5 V nominal (the stage-1 / stage-2 summing-node DC level).  SW=1: fs_switch_p (PMOS), SW=2: fs_switch_n (NMOS), both open (fs = 0 V), in parallel.
+* scripts/run_a4a.sh rewrites the include line, .temp and the .param line.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param WW=1u LL=2u VTT=0.2 SW=0 VCM=1.5 PWTG=1u
+Vg g 0 {VCM+VTT}
+Vfs fs 0 0
+Vb b 0 {VCM}
+Va a 0 {VCM}
+Xr a b g pseudo_r_fg W={WW} L={LL}
+Vdd vdd 0 3.3
+.if (SW == 1)
+Xsw a b fs vdd 0 fs_switch_p
+.endif
+.if (SW == 3)
+* transmission-gate candidate: NMOS (bulk vss, gate fs) + PMOS (bulk vdd, gate fsb) in parallel, both open
+Vfsb fsb 0 3.3
+Xswn a fs b 0 nfet_03v3 W=0.5u L=0.5u nf=1
+Xswp a fsb b vdd pfet_03v3 W={PWTG} L=0.5u nf=1
+.endif
+.if (SW == 2)
+Xsw a b fs 0 fs_switch_n
+.endif
+.nodeset v(xr.m)={VCM}
+.control
+dc Va SWEEPLO SWEEPHI 0.002
+let iv = -i(Va)
+let g0 = (iv[55]-iv[45])/(v(a)[55]-v(a)[45])
+let r0 = 1/g0
+let r100 = (v(a)[100]-v(a)[50])/(iv[100]-iv[50])
+let rm100 = (v(a)[50]-v(a)[0])/(iv[50]-iv[0])
+let ip = iv[100]
+let im = iv[0]
+echo RESULT $&r0 $&r100 $&rm100 $&ip $&im
+quit
+.endc
+.end

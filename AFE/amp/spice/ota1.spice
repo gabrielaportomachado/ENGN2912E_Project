@@ -1,23 +1,24 @@
-* A3 stage-1 OTA: two-stage Miller, PMOS input pair, NMOS mirror load, NMOS common-source 2nd stage.
-* Instance parameters nf/ad/as/pd/ps/nrd/nrs/sa/sb/sd are the ones the PDK xschem symbols pass, set EXPLICITLY to 0 (nf=1): junction areas/
-* perimeters and diffusion resistances are NOT modelled (A3 limitation).  Nonzero ad/as/pd/ps make the ngspice transient fail
-* ('timestep too small' at ~1 us, UNEXPLAINED), so the xschem symbols are overridden with 0 as well.  Requires spice/ota1_params.spice and a model file included first.
+* A3/A4a stage-1 OTA: two-stage Miller, PMOS input pair, NMOS mirror load, NMOS common-source 2nd stage.
+* Diffusion (A4a, Decision 13): ad/as/pd/ps are the xschem-symbol layout formulas for nf=1 (ad=as=W*0.18u, pd=ps=2*(W+0.18u)), switched by
+* .param DIFF (1 = real areas/perimeters, A4a; 0 = areas 0, the A3 netlist).  nrd=nrs=0 on purpose: the symbol's nrd=nrs=0.18u/W turns on BSIM4 internal
+* source/drain resistances of a few mOhm, and with the gmin=1e-16 needed for TOhm nodes that alone makes .tran fail ("timestep too small", isolated in A4a:
+* area-only OK, perimeter-only OK, nrd/nrs-only FAIL; not an NF parameter clash).  Requires spice/ota1_params.spice and a model file included first.
 * Pin order = the order xschem emits (inputs, outputs, inouts): inp inn ibias out vdd vss.
 * Pins: inn = gate of M1 (diode side; INVERTING input, since stage 2 inverts), inp = gate of M2 (NON-inverting).
 *       ibias = input of the PMOS bias diode: the testbench sinks IBIAS from it to ground (IDEAL in A3; real bias in A4).
 .subckt ota1 inp inn ibias out vdd vss
 * bias diode and tail (PMOS)
-Xmb ibias ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KB}
-Xmt tail ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KT}
+Xmb ibias ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad={DIFF*OTA_WT*0.18u} as={DIFF*OTA_WT*0.18u} pd={DIFF*2*(OTA_WT+0.18u)} ps={DIFF*2*(OTA_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KB}
+Xmt tail ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad={DIFF*OTA_WT*0.18u} as={DIFF*OTA_WT*0.18u} pd={DIFF*2*(OTA_WT+0.18u)} ps={DIFF*2*(OTA_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KT}
 * input pair
-Xm1 d1 inn tail vdd pfet_03v3 L={OTA_LP} W={OTA_WP} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KP}
-Xm2 o1 inp tail vdd pfet_03v3 L={OTA_LP} W={OTA_WP} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KP}
+Xm1 d1 inn tail vdd pfet_03v3 L={OTA_LP} W={OTA_WP} nf=1 ad={DIFF*OTA_WP*0.18u} as={DIFF*OTA_WP*0.18u} pd={DIFF*2*(OTA_WP+0.18u)} ps={DIFF*2*(OTA_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KP}
+Xm2 o1 inp tail vdd pfet_03v3 L={OTA_LP} W={OTA_WP} nf=1 ad={DIFF*OTA_WP*0.18u} as={DIFF*OTA_WP*0.18u} pd={DIFF*2*(OTA_WP+0.18u)} ps={DIFF*2*(OTA_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KP}
 * NMOS mirror load (M3 diode, M4 output side)
-Xm3 d1 d1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KN}
-Xm4 o1 d1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KN}
+Xm3 d1 d1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad={DIFF*OTA_WN*0.18u} as={DIFF*OTA_WN*0.18u} pd={DIFF*2*(OTA_WN+0.18u)} ps={DIFF*2*(OTA_WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KN}
+Xm4 o1 d1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad={DIFF*OTA_WN*0.18u} as={DIFF*OTA_WN*0.18u} pd={DIFF*2*(OTA_WN+0.18u)} ps={DIFF*2*(OTA_WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_KN}
 * second stage: NMOS common source + PMOS current source (mirror of the bias diode)
-Xm6 out o1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_K6}
-Xm7 out ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad=0 as=0 pd=0 ps=0 nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_K7}
+Xm6 out o1 vss vss nfet_03v3 L={OTA_LN} W={OTA_WN} nf=1 ad={DIFF*OTA_WN*0.18u} as={DIFF*OTA_WN*0.18u} pd={DIFF*2*(OTA_WN+0.18u)} ps={DIFF*2*(OTA_WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_K6}
+Xm7 out ibias vdd vdd pfet_03v3 L={OTA_LT} W={OTA_WT} nf=1 ad={DIFF*OTA_WT*0.18u} as={DIFF*OTA_WT*0.18u} pd={DIFF*2*(OTA_WT+0.18u)} ps={DIFF*2*(OTA_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={OTA_K7}
 * Miller compensation, o1 -> out
 Xcc o1 out cap_mim_2f0_m2m3_noshield c_length={OTA_LCC} c_width={OTA_LCC}
 .ends ota1

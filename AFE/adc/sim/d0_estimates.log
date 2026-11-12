@@ -1,0 +1,133 @@
+D0 estimates (ADC).  VDD = VREF = 3.3 V, 12 bit: LSB = 0.8057 mV, full scale 4096 codes.  kT = 4.142e-21 J (300 K).
+
+== 1. What the ADC sees (SIMULATED, amp/sim/a4a_summary.txt): amplifier output noise = input-referred 1.54-1.80 uV x 1000 gain
+   input-referred 1.54 uV  ->  1.54 mV rms at the ADC input = 1.91 LSB rms
+   input-referred 1.80 uV  ->  1.80 mV rms at the ADC input = 2.23 LSB rms
+   => the amplifier noise (~1.9-2.2 LSB rms) already sets the ENOB; the ADC itself should add <= 0.5 LSB rms (RSS +3 % at 2.1 LSB: sqrt(2.1^2+0.5^2)=2.16)
+   quantisation noise alone = LSB/sqrt(12) = 0.289 LSB rms
+
+== 2. ADC error budget (ESTIMATE; allocation in LSB rms, input-referred, RSS target <= 0.5 LSB rms excluding the 0.29 LSB quantisation)
+   kT/C of the sampling cap (C_s = 16.4 pF binary DAC)                                  0.020
+   comparator input-referred noise (allocation, D1)                                     0.250
+   comparator offset (removed by offset in code / not a noise; INL-neutral, allocation 2 LSB max) 0.000
+   DAC mismatch (random DNL/INL, D2; allocation)                                        0.250
+   VDD noise / ripple at the decision instants (allocation, D4)                         0.200
+   sampling-switch distortion + charge injection (allocation, D2)                       0.150
+   RSS of the allocations = 0.43 LSB rms (limit 0.5)
+
+== 3. Cap DAC (ESTIMATE).  The PDK gives NO local MIM mismatch (mimcap_statistical = one global skew, agauss(0,0.025,3); no VCR term is active in cap_mim_2f0), so the unit-cap mismatch is an ASSUMPTION:
+   ASSUMPTION  sigma(dC/C) = A_C/sqrt(area), A_C = 0.5 %*um  (typical MIM; confirm / sweep in D2 with a per-unit agauss model)
+   unit 1.0x1.0 um: Cu = 2.94 fF, sigma_u = 0.50 %, MSB-carry DNL sigma = 0.32 LSB, total 4096 Cu = 12.1 pF, array area ~ 6554 um2 (x1.6 spacing/dummies)
+   unit 1.2x1.2 um: Cu = 4.01 fF, sigma_u = 0.42 %, MSB-carry DNL sigma = 0.27 LSB, total 4096 Cu = 16.4 pF, array area ~ 9437 um2 (x1.6 spacing/dummies)
+   unit 1.5x1.5 um: Cu = 5.91 fF, sigma_u = 0.33 %, MSB-carry DNL sigma = 0.21 LSB, total 4096 Cu = 24.2 pF, array area ~ 14746 um2 (x1.6 spacing/dummies)
+   unit 2.0x2.0 um: Cu = 9.87 fF, sigma_u = 0.25 %, MSB-carry DNL sigma = 0.16 LSB, total 4096 Cu = 40.4 pF, array area ~ 26214 um2 (x1.6 spacing/dummies)
+   => choose unit 1.2 x 1.2 um (Cu ~4.0 fF): sigma_u 0.42 %, DNL(MSB carry) sigma 0.27 LSB (3 sigma = 0.8 LSB), binary-weighted, C_total = 16.4 pF (+ ~1 pF parasitics = C_s ~ 17 pF), array ~ 9,400 um2
+   split (6+6, bridge) needs 64x larger units for the same MSB-array accuracy (sigma(MSB carry) = 512 sigma_u LSB) -> same total C, more parasitic sensitivity: no gain, not chosen
+   kT/C of 17 pF = 15.6 uV = 0.019 LSB: negligible.  Needed for kT/C <= 0.1 LSB would be only 638.1 fF.
+
+== 4. Decision 19: one SAR + 16:1 analog mux vs 16 SARs (ESTIMATE)
+   per-ADC area: DAC 9400 + comparator 2000 + SAR/control logic 3075 (25 flops x 75 + 80 gates x 15 um2, ESTIMATE) + switches/drivers 1500 = 15975 um2
+   (a) 1 SAR + mux: 15975 + mux (16 TG pairs + decoder ~1360) = 17335 um2 = 0.017 mm2
+   (b) 16 SARs   : 16 x 15975 = 255600 um2 = 0.256 mm2  (14.7x larger); needs its own conversion clock + 16 x 12-bit result storage for the SPI side (192 flops ~ 14400 um2 extra)
+   DAC switching energy 232 pJ/conversion -> 14.8 uW at 64 kS/s aggregate (same for (a) and (b): conversions per second are equal); comparator+logic ~ 1.3 uW
+   DAC switching energy 232 pJ/conversion -> 29.7 uW at 128 kS/s aggregate (same for (a) and (b): conversions per second are equal); comparator+logic ~ 2.7 uW
+   DAC switching energy 232 pJ/conversion -> 59.4 uW at 256 kS/s aggregate (same for (a) and (b): conversions per second are equal); comparator+logic ~ 5.4 uW
+   amplifiers for reference: 16 x 245 uW = 3.9 mW (A4a) -> ADC power is < 1 % either way; power does not discriminate, area does (15x).
+   mux acquisition: amp follower Zout ~ 1/gm_f ~ 10 kOhm (A4a: gm_f 69 uS at 5 uA, so ~14 kOhm; 10 kOhm used) + TG Ron ~ 1.0 kOhm (ESTIMATE: 3.3 V TG, W/L 10/0.5, 1.15-2.15 V)
+   tau = (R_out+Ron)*C_s = 187 ns; settle to 0.1 LSB after a 3.3 V step: t_acq >= 10.6 tau = 1.99 us; after a 1 V step: 9.4 tau = 1.76 us
+   follower sink limit: it sinks only its bias (3.3-8.4 uA, A4a): slew into C_s = 0.3 V/us at 5 uA -> a 3.3 V downward step needs 11.22 us (adds to t_acq); source side is not limited
+   crosstalk (mux memory): residual after t_acq = step * exp(-t_acq/tau); for t_acq = 3 us: 1.08e-07 of the step = 0.000 LSB for a 1 V step, 0.000 LSB for a 3.3 V step
+   16 off TG leakage on the shared node (ESTIMATE, silicon-like 1 pA each at 85 C, model gives ~0): 16 pA x 8 us / 17 pF = 7.5 uV = 0.009 LSB
+
+== 5. Frame timing (ADS7953-style: SCLK clocks the conversion) (ESTIMATE)
+   frame = 16 SCLK cycles: CS falling = sample/hold instant; SCLK 1-12 = 12 bit trials MSB first; SCLK 1-16 shift out the PREVIOUS conversion [4-bit channel ID | 12-bit code] MSB first; CS rising = start of acquisition of the next mux channel
+   per-conversion time = 16/f_SCLK + t_acq (CS high). Aggregate rate = 16 channels x per-channel rate.
+   1x oversampling: 4 kS/s/ch, 64 kS/s aggregate: period 15.62 us; SCLK 2.048 MHz -> frame 7.81 us, t_acq = 7.81 us (OK, >= 3 us)
+   1x oversampling: 4 kS/s/ch, 64 kS/s aggregate: period 15.62 us; SCLK 5.000 MHz -> frame 3.20 us, t_acq = 12.43 us (OK, >= 3 us)
+   2x oversampling: 8 kS/s/ch, 128 kS/s aggregate: period 7.81 us; SCLK 2.048 MHz -> frame 7.81 us, t_acq = 0.00 us (IMPOSSIBLE)
+   2x oversampling: 8 kS/s/ch, 128 kS/s aggregate: period 7.81 us; SCLK 5.000 MHz -> frame 3.20 us, t_acq = 4.61 us (OK, >= 3 us)
+   4x oversampling: 16 kS/s/ch, 256 kS/s aggregate: period 3.91 us; SCLK 2.048 MHz -> frame 7.81 us, t_acq = -3.91 us (IMPOSSIBLE)
+   4x oversampling: 16 kS/s/ch, 256 kS/s aggregate: period 3.91 us; SCLK 5.000 MHz -> frame 3.20 us, t_acq = 0.71 us (too short for the 17 pF input at 10 kOhm)
+   SAR bit-trial: 100-200 ns per SCLK cycle at 5-2.5 MHz; MSB switch drives 8.2 pF: needs Ron <= 0.1 us/(9*8.2 pF) = 1355 Ohm... (9 tau to 0.5 LSB in half a cycle at 5 MHz): W/L ~ 5-10 (ESTIMATE); comparator decision < 20 ns
+   VREF = VDD: MSB trial draws Q = 8.2 pF x 3.3 V = 27 pC from the local supply; on-chip decoupling cannot supply it at 0.1 LSB (needs 336 nF): rely on board decoupling + low-inductance bond wires; the DAC supply must settle to <0.1 LSB (0.08 mV) before each decision (RISK, D2/D4: ringing of L=2 nH + board C)
+   rate of VDD droop error if VDD is NOT ratiometric to Vin: 0.62 LSB per mV at mid-scale (code x dVDD/VDD)
+
+== 5b. ADC INPUT MODEL for A4b and what it asks of the amplifier output stage
+   model (ESTIMATE): sampling cap C_s = 17 pF (16.4 pF binary DAC + ~0.6 pF parasitics) behind a transmission gate Ron = 1 kOhm; 16 mux inputs, off-channel load on each amp output ~ 20 fF;
+   the cap is connected for t_acq, then disconnected (CS falling) and its charge is not returned to the amp.  C_s starts at the PREVIOUS channel voltage: step = V_new - V_prev.
+   SIMULATED A4a follower (sim/a4a_op.log): sink current Id and 1/gm_f per corner; DOWNWARD step into C_s = slew C*dV/Id then RC settling n*tau, n = ln(dV/0.5 LSB), tau = (1/gm_f + Ron) C_s (class-A follower: upward steps are source-driven and fast):
+   corner       Id[uA]  1/gm_f[kOhm]  tau[ns]   t_settle(1 V down)[us]   t_settle(3.3 V down)[us]
+   ss_-40         3.26        17.5       315            7.68                   20.05
+   typical_-40    4.05        14.5       264            6.26                   16.21
+   ss_27          4.21        17.4       314            6.49                   16.16
+   ss_85          5.10        17.4       312            5.77                   13.81
+   typical_27     5.21        14.6       265            5.33                   13.15
+   ff_-40         5.30        11.6       215            4.89                   12.53
+   typical_85     6.32        14.6       266            4.77                   11.27
+   ff_27          6.85        11.8       217            4.18                   10.14
+   ff_85          8.41        11.8       217            3.72                    8.63
+   WORST over 9 PVT: 1 V down 7.68 us, 3.3 V down 20.05 us.  Available windows: t_acq = 3.0 / 4.6 / 7.8 / 12.4 us  (SCLK 2.048 MHz at 1x -> 7.8 us; SCLK 5 MHz at 1x -> 12.4 us; 2x oversampling at 5 MHz -> 4.6 us)
+   => 1 V steps: met with 12.4 us (margin 4.7 us), only just met at 7.8 us (margin 0.12 us at the slowest corner), NOT met at 4.6 us / 3 us.  3.3 V (full-rail artifact) steps: not met at any window below 20.0 us.
+   sink needed to settle a 1 V down step at the worst-case tau (314 ns) inside t_acq (slew budget = t_acq - n*tau):
+      t_acq =  3.0 us: 1 V: 31.4 uA      3.3 V: 337.8 uA
+      t_acq =  4.6 us: 1 V: 7.9 uA       3.3 V: 31.8 uA
+      t_acq =  7.8 us: 1 V: 3.2 uA       3.3 V: 11.3 uA
+      t_acq = 12.4 us: 1 V: 1.7 uA       3.3 V: 5.9 uA
+
+== 6. Decision 22: aliasing budget from the SIMULATED amplifier (amp/sim/a4a_nspec_*.csv, a4a_bode_*.csv).  f_out = 4 kS/s per channel is the delivered rate
+
+   corner ff 85 C: midband gain 60.02 dB; in-band noise 0.5-300 Hz = 1.807 uV input-referred
+      1x (4 kS/s/ch, no digital filter)  aliased noise (input-referred) 0.1438 uV  = 0.633 % of the in-band power;  total with in-band 1.813 uV
+      2x (8 kS/s/ch) + sinc^3 by 2       aliased noise (input-referred) 0.0718 uV  = 0.158 % of the in-band power;  total with in-band 1.809 uV
+      4x (16 kS/s/ch) + sinc^3 by 4      aliased noise (input-referred) 0.0369 uV  = 0.042 % of the in-band power;  total with in-band 1.808 uV
+      4x (16 kS/s/ch) + sinc^4 by 4      aliased noise (input-referred) 0.0368 uV  = 0.041 % of the in-band power;  total with in-band 1.808 uV
+      8x (32 kS/s/ch) + sinc^3 by 8      aliased noise (input-referred) 0.0198 uV  = 0.012 % of the in-band power;  total with in-band 1.808 uV
+      interferer attenuation (amp response + digital filter) in dB at the frequency shown (alias lands in-band):
+          3700 Hz: amp alone 12.8 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 13 | 69 | 76 | 97 | 78 dB
+          4300 Hz: amp alone 14.1 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 14 | 70 | 81 | 103 | 83 dB
+          7700 Hz: amp alone 19.0 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 19 | 19 | 93 | 118 | 101 dB
+          8300 Hz: amp alone 19.7 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 20 | 20 | 94 | 118 | 103 dB
+         15700 Hz: amp alone 25.2 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 25 | 25 | 25 | 25 | 117 dB
+         16300 Hz: amp alone 25.5 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 26 | 26 | 26 | 26 | 118 dB
+         31700 Hz: amp alone 31.3 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 31 | 32 | 32 | 32 | 32 dB
+      worst alias attenuation near the band edge (1x (4 kS/s/ch, no digital filter)): 12.8 dB -> a 100 uV pk interferer at the amp input aliases to 22.84 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (2x (8 kS/s/ch) + sinc^3 by 2): 19.2 dB -> a 100 uV pk interferer at the amp input aliases to 10.97 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (4x (16 kS/s/ch) + sinc^3 by 4): 25.4 dB -> a 100 uV pk interferer at the amp input aliases to 5.37 uV (target <= 0.5 uV = 46 dB)
+
+   corner typical 27 C: midband gain 59.99 dB; in-band noise 0.5-300 Hz = 1.670 uV input-referred
+      1x (4 kS/s/ch, no digital filter)  aliased noise (input-referred) 0.1021 uV  = 0.374 % of the in-band power;  total with in-band 1.673 uV
+      2x (8 kS/s/ch) + sinc^3 by 2       aliased noise (input-referred) 0.0518 uV  = 0.096 % of the in-band power;  total with in-band 1.671 uV
+      4x (16 kS/s/ch) + sinc^3 by 4      aliased noise (input-referred) 0.0274 uV  = 0.027 % of the in-band power;  total with in-band 1.670 uV
+      4x (16 kS/s/ch) + sinc^4 by 4      aliased noise (input-referred) 0.0273 uV  = 0.027 % of the in-band power;  total with in-band 1.670 uV
+      8x (32 kS/s/ch) + sinc^3 by 8      aliased noise (input-referred) 0.0153 uV  = 0.008 % of the in-band power;  total with in-band 1.670 uV
+      interferer attenuation (amp response + digital filter) in dB at the frequency shown (alias lands in-band):
+          3700 Hz: amp alone 16.5 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 16 | 72 | 80 | 101 | 82 dB
+          4300 Hz: amp alone 17.8 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 18 | 74 | 84 | 106 | 87 dB
+          7700 Hz: amp alone 22.8 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 23 | 23 | 97 | 121 | 105 dB
+          8300 Hz: amp alone 23.4 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 23 | 24 | 97 | 122 | 107 dB
+         15700 Hz: amp alone 29.0 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 29 | 29 | 29 | 29 | 121 dB
+         16300 Hz: amp alone 29.3 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 29 | 29 | 30 | 30 | 121 dB
+         31700 Hz: amp alone 35.2 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 35 | 35 | 35 | 36 | 35 dB
+      worst alias attenuation near the band edge (1x (4 kS/s/ch, no digital filter)): 16.5 dB -> a 100 uV pk interferer at the amp input aliases to 14.98 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (2x (8 kS/s/ch) + sinc^3 by 2): 23.0 dB -> a 100 uV pk interferer at the amp input aliases to 7.11 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (4x (16 kS/s/ch) + sinc^3 by 4): 29.2 dB -> a 100 uV pk interferer at the amp input aliases to 3.46 uV (target <= 0.5 uV = 46 dB)
+
+   corner ss -40 C: midband gain 59.88 dB; in-band noise 0.5-300 Hz = 1.538 uV input-referred
+      1x (4 kS/s/ch, no digital filter)  aliased noise (input-referred) 0.0699 uV  = 0.206 % of the in-band power;  total with in-band 1.540 uV
+      2x (8 kS/s/ch) + sinc^3 by 2       aliased noise (input-referred) 0.0365 uV  = 0.056 % of the in-band power;  total with in-band 1.539 uV
+      4x (16 kS/s/ch) + sinc^3 by 4      aliased noise (input-referred) 0.0202 uV  = 0.017 % of the in-band power;  total with in-band 1.538 uV
+      4x (16 kS/s/ch) + sinc^4 by 4      aliased noise (input-referred) 0.0202 uV  = 0.017 % of the in-band power;  total with in-band 1.538 uV
+      8x (32 kS/s/ch) + sinc^3 by 8      aliased noise (input-referred) 0.0119 uV  = 0.006 % of the in-band power;  total with in-band 1.538 uV
+      interferer attenuation (amp response + digital filter) in dB at the frequency shown (alias lands in-band):
+          3700 Hz: amp alone 20.3 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 20 | 76 | 84 | 105 | 85 dB
+          4300 Hz: amp alone 21.6 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 22 | 77 | 88 | 110 | 90 dB
+          7700 Hz: amp alone 26.6 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 27 | 27 | 101 | 125 | 109 dB
+          8300 Hz: amp alone 27.3 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 27 | 27 | 101 | 126 | 111 dB
+         15700 Hz: amp alone 32.9 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 33 | 33 | 33 | 33 | 125 dB
+         16300 Hz: amp alone 33.2 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 33 | 33 | 33 | 33 | 125 dB
+         31700 Hz: amp alone 39.1 dB;  total by option [1x | 2x s3 | 4x s3 | 4x s4 | 8x s3] = 39 | 39 | 39 | 39 | 39 dB
+      worst alias attenuation near the band edge (1x (4 kS/s/ch, no digital filter)): 20.3 dB -> a 100 uV pk interferer at the amp input aliases to 9.67 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (2x (8 kS/s/ch) + sinc^3 by 2): 26.8 dB -> a 100 uV pk interferer at the amp input aliases to 4.56 uV (target <= 0.5 uV = 46 dB)
+      worst alias attenuation near the band edge (4x (16 kS/s/ch) + sinc^3 by 4): 33.1 dB -> a 100 uV pk interferer at the amp input aliases to 2.22 uV (target <= 0.5 uV = 46 dB)
+
+   in-band droop of the digital filter at 300 Hz (fout = 4 kS/s): 2x (8 kS/s/ch) + sinc^3 by 2 -0.18 dB, 4x (16 kS/s/ch) + sinc^3 by 4 -0.23 dB, 4x (16 kS/s/ch) + sinc^4 by 4 -0.30 dB, 8x (32 kS/s/ch) + sinc^3 by 8 -0.24 dB

@@ -1,0 +1,35 @@
+* A4a: stage-2 OTA (with follower) open-loop .ac: A0, dominant pole, GBW, phase margin of A(s) alone (feedback factor 1 = worst-case bound).  An IDEAL DC servo (huge L from out
+* to the inverting input, huge C to ground) sets the operating point with unity feedback at DC and no feedback at AC.  Load = CF2 + the PLACEHOLDER ADC capacitance CL_ADC.
+* The loop gain with the real feedback factor is beta*A(s), beta = CF2/(CIN2+CF2+Cgg2) (a Tian break at this TOhm/capacitive summing node was tried and returned a degenerate T = -1 at every frequency, so it is not used).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param CL_ADC=10p
+Vdd vdd 0 {VDDN}
+Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
+Vin inp 0 dc {VOCM} ac 1
+Xota inp inn vbn out vdd 0 ota2
+Lservo out inn 1e9
+Cservo inn 0 1
+Xcfl out inn cap_mim_2f0_m2m3_noshield c_length={LCF2} c_width={LCF2}
+CL out 0 {CL_ADC}                 $ PLACEHOLDER ADC load
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(out)=1.65 v(inn)=1.65 v(xota.o2)=2.9 v(xota.d1)=2.47 v(xota.tail)=0.75
+.control
+ac dec 20 1e-3 1e8
+let gdb = vdb(out)
+let gph = cph(out)*180/pi
+meas ac a0 find gdb at=0.01
+let tgt = a0 - 3
+meas ac f_p1 when gdb=tgt fall=1
+meas ac gbw when gdb=0 fall=1
+meas ac ph_u find gph at=$&gbw
+let pm = 180 + ph_u
+echo RESULT a0_dB=$&a0 f_p1_Hz=$&f_p1 gbw_Hz=$&gbw pm_beta1_deg=$&pm
+quit
+.endc
+.end

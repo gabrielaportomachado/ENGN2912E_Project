@@ -1,0 +1,34 @@
+### acfs_ff_27
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-222.103 g1_mid_dB=-102.629 g_pk_dB=-37.3629 f_lo_Hz=751801 f_hi_Hz= ph_mid_deg=0.103501 g_300_dB=-166.548 g_0p5_dB=-277.82
+### acfs_ff_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-151.849 g1_mid_dB=-42.1379 g_pk_dB=-24.0618 f_lo_Hz=520424 f_hi_Hz= ph_mid_deg=178.965 g_300_dB=-97.243 g_0p5_dB=-207.507
+### acfs_ff_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-156.04 g1_mid_dB=-45.7839 g_pk_dB=-24.0656 f_lo_Hz=533779 f_hi_Hz= ph_mid_deg=179.426 g_300_dB=-100.893 g_0p5_dB=-211.713
+### acfs_ss_27
+RESULT g_mid_dB=-167.151 g1_mid_dB=-64.8406 g_pk_dB=-9.70215 f_lo_Hz=48728.3 f_hi_Hz=56482.6 ph_mid_deg=-0.00907934 g_300_dB=-111.601 g_0p5_dB=-222.767
+### acfs_ss_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-173.593 g1_mid_dB=-65.5078 g_pk_dB=-4.34843 f_lo_Hz=868027 f_hi_Hz= ph_mid_deg=179.594 g_300_dB=-118.046 g_0p5_dB=-229.14
+### acfs_ss_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-193.323 g1_mid_dB=-77.9504 g_pk_dB=-38.0787 f_lo_Hz=744531 f_hi_Hz= ph_mid_deg=-0.00629455 g_300_dB=-137.774 g_0p5_dB=-248.99
+### acfs_typical_27
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-224.522 g1_mid_dB=-109.928 g_pk_dB=-31.5254 f_lo_Hz=690088 f_hi_Hz= ph_mid_deg=-0.108416 g_300_dB=-168.954 g_0p5_dB=-280.198
+### acfs_typical_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-146.352 g1_mid_dB=-39.8202 g_pk_dB=-21.0532 f_lo_Hz=433276 f_hi_Hz= ph_mid_deg=178.745 g_300_dB=-92.0126 g_0p5_dB=-201.983
+### acfs_typical_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-180.339 g1_mid_dB=-69.8918 g_pk_dB=-8.49173 f_lo_Hz=848388 f_hi_Hz= ph_mid_deg=179.762 g_300_dB=-124.789 g_0p5_dB=-235.887
