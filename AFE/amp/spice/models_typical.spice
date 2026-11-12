@@ -1,3 +1,4 @@
-* typical-corner models (A1). Relative include of PDK via absolute PDK path (PDK_ROOT).
+* typical-corner models (A2): MOS corner + MIM corner (mimcap_typical).
 .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
 .lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical

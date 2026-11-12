@@ -1,0 +1,56 @@
+* A2: stage-1 feedback network with an IDEAL op-amp (IDEAL: VCVS, gain 1e7, no noise, infinite BW).
+* Harrison topology, both sides: REC -> Cin -> vn, Cf || Rpseudo from vn to vout;
+*                                 REF -> Cin -> vp, Cf || Rpseudo from vp to VCM_IN (IDEAL 1.65 V).
+* Source: ONE independent source VD (AC 1); IDEAL E-sources give +VD/2 / -VD/2 around the 1.65 V
+* tissue node, each through Rs 1k + (Cdl 300n || Rct 50k).  Gain is inverting, |gain| = Cin/Cf = 100.
+* scripts/run_hpf_cf.sh rewrites the include, .temp, the .param line and RMODE/NOISY lines.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param CFF=200f GAIN=100 VTT=0 PW=1u PL=2u RFIX=5e12 VOSD=0
+.param CIN='CFF*GAIN'
+.param LCIN='sqrt(CIN/2e-3)' LCF='sqrt(CFF/2e-3)'
+Vd vd 0 dc 0 ac 1
+Vtis tis 0 1.65
+Vcm vcm 0 1.65
+Vos vos 0 {VOSD}
+E1 s1 tis vd 0 0.5
+E2 s2 tis vd 0 -0.5
+* REC (s1) carries an extra electrode DC offset VOSD (IDEAL), REF has none
+Vo1 s1b s1 {VOSD}
+Rs1 s1b e1 1k
+Cdl1 e1 p1 300n
+Rct1 e1 p1 50k
+Rs2 s2 e2 1k
+Cdl2 e2 p2 300n
+Rct2 e2 p2 50k
+Xcin1 p1 vn cap_mim_2f0_m2m3_noshield c_length={LCIN} c_width={LCIN}
+Xcin2 p2 vp cap_mim_2f0_m2m3_noshield c_length={LCIN} c_width={LCIN}
+Xcf1 vn vout cap_mim_2f0_m2m3_noshield c_length={LCF} c_width={LCF}
+Xcf2 vp vcm cap_mim_2f0_m2m3_noshield c_length={LCF} c_width={LCF}
+*RMODE
+Xr1 vn vout vt pseudo_r_tune W={PW} L={PL}
+Xr2 vp vcm vt pseudo_r_tune W={PW} L={PL}
+Vt vt 0 {VTT}
+*ENDRMODE
+Eop vout 0 vp vn 1e7
+.nodeset v(vn)=1.65 v(vp)=1.65 v(vout)=1.65 v(xr1.m)=1.65 v(xr2.m)=1.65
+.control
+ac dec 20 1e-3 1e5
+let gdb = vdb(vout)
+meas ac g_mid find gdb at=12.25
+meas ac g_pk max gdb
+let tgt = g_pk - 3
+meas ac f_lo when gdb=tgt rise=1
+echo RESULT $&g_mid $&f_lo
+noise v(vout) Vd dec 50 0.5 300
+echo NOISE_B_0p5_300 $&onoise_total $&inoise_total
+noise v(vout) Vd dec 20 1e-3 1e6
+echo NOISE_B_wide $&onoise_total
+op
+let dcv = v(vout) - 1.65
+echo DCOUT $&dcv
+quit
+.endc
+.end

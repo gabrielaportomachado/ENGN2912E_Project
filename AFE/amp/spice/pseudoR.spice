@@ -1,0 +1,14 @@
+* A2 pseudo-resistors (pfet_03v3). Terminals a b (and vt for the tunable one).
+* pseudo_r: two diode-connected PMOS back to back (gate=drain=mid node m), bulk=source.
+.subckt pseudo_r a b W=1u L=2u
+Xm1 m m a a pfet_03v3 W={W} L={L}
+Xm2 m m b b pfet_03v3 W={W} L={L}
+.ends
+* pseudo_r_tune: same, but the shared gate node is shifted by vt relative to m with an
+* IDEAL voltage source (vt>0 raises the gate -> weaker conduction -> larger R).
+.subckt pseudo_r_tune a b vt W=1u L=2u
+Xm1 m g a a pfet_03v3 W={W} L={L}
+Xm2 m g b b pfet_03v3 W={W} L={L}
+* gate g = v(m)+v(vt)  (IDEAL level shifter; m is the drain/mid node)
+Bg g 0 V = V(m) + V(vt)
+.ends

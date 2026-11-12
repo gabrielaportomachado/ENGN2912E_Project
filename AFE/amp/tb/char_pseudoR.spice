@@ -1,0 +1,29 @@
+* A2: pseudo-resistor I-V and small-signal R (typ/ff/ss x temp x geometry x tuning).
+* scripts/run_pseudoR.sh rewrites the include line, the .param line and the .temp line.
+* PLAIN variant = VTT 0 with the tunable cell (identical to pseudo_r; checked in run script).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param WW=1u LL=2u VTT=0
+Vt vt 0 {VTT}
+Vb b 0 1.65
+Va a 0 1.65
+Xr a b vt pseudo_r_tune W={WW} L={LL}
+.nodeset v(xr.m)=1.65
+.control
+dc Va 1.55 1.75 0.002
+let iv = -i(Va)
+let n = length(iv)
+* iv index: 0..100 ; 1.65 V is index 50 ; +/-10 mV = index 45 and 55 ; +/-100 mV = 0 and 100
+let g0 = (iv[55]-iv[45])/(v(a)[55]-v(a)[45])
+let r0 = 1/g0
+let r100 = (v(a)[100]-v(a)[50])/(iv[100]-iv[50])
+let rm100 = (v(a)[50]-v(a)[0])/(iv[50]-iv[0])
+let ip = iv[100]
+let im = iv[0]
+echo RESULT $&r0 $&r100 $&rm100 $&ip $&im
+wrdata ../sim/char_pseudoR_iv_tmp.csv iv
+quit
+.endc
+.end
