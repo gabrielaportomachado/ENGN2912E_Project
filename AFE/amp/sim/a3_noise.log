@@ -1,0 +1,72 @@
+### noise_ff_27_fn0
+NOISE_B_0p5_300 vn_out_V=0.000170083 vn_in_mid_V=1.70244E-06 vn_in_ngspice_V=1.71837E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=1.9949E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.36652E-05
+### noise_ff_27_fn1
+NOISE_B_0p5_300 vn_out_V=0.000464174 vn_in_mid_V=4.64613E-06 vn_in_ngspice_V=4.67182E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=5.20503E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.48668E-05
+### noise_ff_-40_fn0
+NOISE_B_0p5_300 vn_out_V=0.000157376 vn_in_mid_V=1.57531E-06 vn_in_ngspice_V=1.60028E-06 gmid_dB=39.9915
+NOISE_C_0p5_2k vn_in_mid_V=1.80388E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.19918E-05
+### noise_ff_-40_fn1
+NOISE_B_0p5_300 vn_out_V=0.00041976 vn_in_mid_V=4.20173E-06 vn_in_ngspice_V=4.23933E-06 gmid_dB=39.9915
+NOISE_C_0p5_2k vn_in_mid_V=4.69614E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.3119E-05
+### noise_ff_85_fn0
+NOISE_B_0p5_300 vn_out_V=0.000183622 vn_in_mid_V=1.83797E-06 vn_in_ngspice_V=1.8537E-06 gmid_dB=39.9917
+NOISE_C_0p5_2k vn_in_mid_V=2.18373E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.49311E-05
+### noise_ff_85_fn1
+NOISE_B_0p5_300 vn_out_V=0.000499905 vn_in_mid_V=5.00381E-06 vn_in_ngspice_V=5.02934E-06 gmid_dB=39.9917
+NOISE_C_0p5_2k vn_in_mid_V=5.61679E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.61953E-05
+### noise_ss_27_fn0
+NOISE_B_0p5_300 vn_out_V=0.000166169 vn_in_mid_V=1.66325E-06 vn_in_ngspice_V=1.67222E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=1.9768E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.23138E-05
+### noise_ss_27_fn1
+NOISE_B_0p5_300 vn_out_V=0.000486315 vn_in_mid_V=4.86773E-06 vn_in_ngspice_V=4.88517E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=5.45815E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.3761E-05
+### noise_ss_-40_fn0
+NOISE_B_0p5_300 vn_out_V=0.000152108 vn_in_mid_V=1.52254E-06 vn_in_ngspice_V=1.53662E-06 gmid_dB=39.9917
+NOISE_C_0p5_2k vn_in_mid_V=1.76921E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.07989E-05
+### noise_ss_-40_fn1
+NOISE_B_0p5_300 vn_out_V=0.000437497 vn_in_mid_V=4.37916E-06 vn_in_ngspice_V=4.40465E-06 gmid_dB=39.9917
+NOISE_C_0p5_2k vn_in_mid_V=4.90025E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.21459E-05
+### noise_ss_85_fn0
+NOISE_B_0p5_300 vn_out_V=0.000177272 vn_in_mid_V=1.77439E-06 vn_in_ngspice_V=1.7809E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=2.14691E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.34553E-05
+### noise_ss_85_fn1
+NOISE_B_0p5_300 vn_out_V=0.000524011 vn_in_mid_V=5.24504E-06 vn_in_ngspice_V=5.25836E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=5.89144E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.49817E-05
+### noise_typical_27_fn0
+NOISE_B_0p5_300 vn_out_V=0.00016736 vn_in_mid_V=1.67517E-06 vn_in_ngspice_V=1.68691E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=1.97918E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29265E-05
+### noise_typical_27_fn1
+NOISE_B_0p5_300 vn_out_V=0.000474906 vn_in_mid_V=4.75352E-06 vn_in_ngspice_V=4.7744E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=5.3287E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42507E-05
+### noise_typical_-40_fn0
+NOISE_B_0p5_300 vn_out_V=0.000153883 vn_in_mid_V=1.54031E-06 vn_in_ngspice_V=1.55877E-06 gmid_dB=39.9916
+NOISE_C_0p5_2k vn_in_mid_V=1.77802E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.13334E-05
+### noise_typical_-40_fn1
+NOISE_B_0p5_300 vn_out_V=0.000427848 vn_in_mid_V=4.28261E-06 vn_in_ngspice_V=4.31317E-06 gmid_dB=39.9916
+NOISE_C_0p5_2k vn_in_mid_V=4.78966E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.25679E-05
+### noise_typical_85_fn0
+NOISE_B_0p5_300 vn_out_V=0.000178068 vn_in_mid_V=1.78234E-06 vn_in_ngspice_V=1.79105E-06 gmid_dB=39.9919
+NOISE_C_0p5_2k vn_in_mid_V=2.14392E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.4117E-05
+### noise_typical_85_fn1
+NOISE_B_0p5_300 vn_out_V=0.000510837 vn_in_mid_V=5.11314E-06 vn_in_ngspice_V=5.12939E-06 gmid_dB=39.9919
+NOISE_C_0p5_2k vn_in_mid_V=5.74233E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.55101E-05

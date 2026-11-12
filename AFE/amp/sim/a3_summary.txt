@@ -1,0 +1,126 @@
+A3 summary (typical flicker, fnoicor=0 unless stated).  Source logs: sim/a3_*.log.  OTA sizing: sim/../spice/ota1_params.spice
+
+== 1. .op at VCM_IN = 1.5 V (unity follower).  margin = |Vds|-|Vdsat| of the WORST transistor [V]; criterion >= 0.05 V
+corner   T   worst_margin_V  worst_dev  gm/Id_pair  gm/Id_load  offset_uV  Isupply_uA
+typical   -40     0.530      xmt        26.1       13.0        -0.1     60.02
+typical    27     0.565      xmt        21.0       10.7        15.3     60.04
+typical    85     0.586      xm4        18.0        9.4        10.0     60.05
+ff        -40     0.611      xm4        26.7       13.3        -7.0     60.07
+ff         27     0.537      xm4        21.5       11.0        -0.4     60.09
+ff         85     0.474      xm4        18.4        9.6        10.5     60.10
+ss        -40     0.427      xmt        25.5       12.6         0.1     59.97
+ss         27     0.460      xmt        20.5       10.4         0.2     59.99
+ss         85     0.490      xmt        17.6        9.1         5.5     60.01
+OTA follower range with every transistor >= 50 mV in saturation and |err| < 5 mV (typ 27C): 0.19 to 2.21 V
+
+== 2. Open loop (A(s), DC servo, load = Cf + CL_NEXT 2 pF PLACEHOLDER) and the REAL loop (Tian, real Cf/Cin/Randles)
+corner   T   A0_dB  f_p1_Hz  GBW_MHz  PM(beta=1)_deg | T(100Hz)_dB  fu_kHz  PM_deg   [target (derived): A0 >= 70 dB, PM >= 60 deg]
+typical   -40   118.8    45.1    5.81     -49.1      |   61.3         308     73.2
+typical    27   118.1    39.3    4.75     -47.1      |   60.8         250     73.4
+typical    85   117.5    35.9    4.12     -45.7      |   60.4         217     73.5
+ff        -40   118.8    50.9    5.97     -50.4      |   61.5         339     70.4
+ff         27   118.1    44.4    4.87     -48.3      |   61.0         276     70.6
+ff         85   117.6    40.5    4.24     -46.8      |   60.7         239     70.9
+ss        -40   118.7    40.5    5.65     -48.0      |   61.1         280     75.5
+ss         27   117.9    35.5    4.62     -46.1      |   60.5         227     75.5
+ss         85   117.4    32.5    4.00     -44.7      |   60.1         197     75.7
+
+== 3. Closed loop, REAL pseudo-resistor devices (vt=+0.2 V IDEAL shifter, 1u/2u), Randles source, stage 1 only
+corner   T   gain_mid_dB  f_lo_Hz  f_hi_kHz  vout_err_uV  Isupply_uA   [stage-1 nominal gain 40 dB; f_lo target <= 0.5 Hz]
+typical   -40    39.865      0.185      448       -0.12      60.02
+typical    27    39.869      0.144      362       -0.14      60.04
+typical    85    39.873      0.122      313       -0.17      60.05
+ff        -40    39.854      0.205      522       -0.31      60.07
+ff         27    39.858      0.159      425       -0.35      60.09
+ff         85    39.868      0.158      365       -0.40      60.10
+ss        -40    39.873      0.168      386       -0.81      59.97
+ss         27    39.877      0.131      313        0.10      59.99
+ss         85    39.881      0.110      270        0.09      60.01
+
+== 4. Input-referred noise 0.5-300 Hz = integrated output noise / midband gain.  IDEAL RESISTOR (noise) of value R0 (Decision 8).
+corner   T   R0_TOhm   fn0_uV   fn1_uV   (fn1/fn0)   fn0 0.5-2k_uV   fn0 0.5-1M_uV   [target <= 2 uV at fn0; fn1 is a risk, Decision 4]
+typical   -40     4.10    1.540    4.283     2.78         1.778           11.33
+typical    27     5.24    1.675    4.754     2.84         1.979           12.93
+typical    85     6.16    1.782    5.113     2.87         2.144           14.12
+ff        -40     4.10    1.575    4.202     2.67         1.804           11.99
+ff         27     5.23    1.702    4.646     2.73         1.995           13.67
+ff         85     5.45    1.838    5.004     2.72         2.184           14.93
+ss        -40     4.10    1.523    4.379     2.88         1.769           10.80
+ss         27     5.24    1.663    4.868     2.93         1.977           12.31
+ss         85     6.22    1.774    5.245     2.96         2.147           13.46
+
+== 5. Feedback-resistance sweep (Decision 7): IDEAL resistor R (both sides), typical 27C, Cf = 200 fF, Cin = 20 pF, real OTA
+R_TOhm  f_lo_Hz  tau=1/(2pi f_lo)_s | noise_fn0_uV  noise_fn1_uV  noise_Rnoiseless_uV  R-only_uV | rec(1mV step): t10mV_s t1mV_s dc_shift_mV | rec(10mV): t10mV_s t1mV_s dc_shift_mV
+  0.50    1.595     0.10      |   2.238        4.563         1.274          1.840   |     0.23    0.46   -0.011      |     0.46    0.69   -0.096   
+  1.00    0.797     0.20      |   2.117        4.708         1.346          1.634   |     0.45    0.92   -0.020      |     0.91    1.38   -0.191   
+  1.60    0.498     0.32      |   1.995        4.763         1.384          1.437   |     0.74    1.47   -0.032      |     1.47    2.21   -0.305   
+  2.50    0.319     0.50      |   1.864        4.776         1.407          1.222   |     1.15    2.30   -0.049      |     2.30    3.45   -0.477   
+  5.00    0.160     1.00      |   1.685        4.755         1.424          0.901   |     2.30    4.58   -0.110      |     4.58    6.77   -1.088   
+ 10.00    0.080     1.99      |   1.567        4.728         1.428          0.645   |     4.58    9.15   -0.204      |     9.17   13.54   -2.028   
+ 20.00    0.040     3.98      |   1.501        4.709         1.429          0.457   |     9.14   18.29   -0.393      |    18.30   27.05   -3.915   
+ 50.00    0.016     9.88      |   1.457        4.692         1.428          0.289   |    22.66   45.43   -0.956      |    45.43   67.30   -9.543   
+-> total noise (fn0) crosses 2.00 uV at R ~ 1.57 TOhm (log interpolation), i.e. f_lo ~ 0.51 Hz (from 1/(2 pi R Cf), Cf = 200 fF)
+
+== 6. Recovery with the REAL pseudo-resistor device (nonlinear), REC electrode offset step; stage-1 output time to settle to FINAL value
+corner   T  step_mV  excursion_V  vout_min_V  dc_shift_mV  t_to_10mV_s  t_to_1mV_s  settled
+typical   -40     1m      0.099      1.401      -0.082        3.25        5.33     1
+typical   -40     5m      0.492      1.008      -0.412       14.11       16.19     1
+typical   -40    10m      0.982      0.518      -0.827       17.29       19.37     1
+typical    27     1m      0.099      1.401      -0.106        3.67        6.31     1
+typical    27     5m      0.493      1.007      -0.528       11.72       14.36     1
+typical    27    10m      0.983      0.517      -1.059       12.00       14.68     1
+typical    85     1m      0.099      1.401      -0.124        3.93        7.01     1
+typical    85     5m      0.494      1.006      -0.619        7.37       10.49     1
+typical    85    10m      0.984      0.516      -1.240        7.44       10.56     1
+ff         27     1m      0.099      1.401      -0.105        3.29        5.69     1
+ff         27     5m      0.495      1.005      -0.527        7.85       10.25     1
+ff         27    10m      0.984      0.516      -1.060        6.58        9.02     1
+ff         85     1m      0.099      1.401      -0.106        2.59        4.95     1
+ff         85     5m      0.495      1.005      -0.529        3.59        5.95     1
+ff         85    10m      0.984      0.516      -1.059        3.61        5.97     1
+ss        -40     1m      0.099      1.401      -0.175        3.57        5.85     1
+ss        -40     5m      0.492      1.008      -0.505       15.56       17.84     1
+ss        -40    10m      0.983      0.517      -0.920       22.53       24.85     1
+ss         27     1m      0.099      1.401      -0.105        4.04        6.92     1
+ss         27     5m      0.493      1.007      -0.528       15.30       18.22     1
+ss         27    10m      0.984      0.516      -1.059       16.73       19.69     1
+
+== 7. Sensitivity to the stage-2 input capacitance placeholder CL_NEXT (typical 27C)
+CL_NEXT   fu_kHz  PM_deg  f_hi_kHz  gain_mid_dB
+0.5p         256    79.1      324    39.869
+1p           254    77.1      338    39.869
+2p           250    73.4      362    39.869
+5p           234    64.1      386    39.869
+10p          208    54.0      328    39.869
+
+== 8. Decision-5 load rows (typical 27C, R0 = 5.24 TOhm ideal): NMOS load m x 50u/16u, second stage NMOS m = 2 x load m
+load_m  noise_fn0_uV  noise_fn1_uV  PM_deg  fu_kHz  A0_dB  GBW_MHz  worst_margin_V  gate_area_um2
+   1       1.728         4.960       77.1     258   118.2    5.70      0.565        6000
+   2       1.675         4.754       73.4     250   118.1    4.75      0.565        9200
+
+== 9. xschem equivalence (scripts/equiv_xschem.sh, sim/a3_equiv_xschem.log) and Tian loop-break validation (sim/a3_tian_check.log)
+.subckt ota1 inp inn ibias out vdd vss
+EQUIV structure: 9 hand devices, 9 xschem devices, differing: none -> PASS
+EQUIV op: 51 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV ol: 5 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV loop: 4 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV ac: 9 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV noise: 6 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV opff: 51 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+CHECK candidate_A(+iret/(1-iret)): dB_err_max=1.13687E-13 dB_err_min=-1.13687E-13
+CHECK candidate_B(-iret/(1-iret)): dB_err_max=78.5734 dB_err_min=3.52926
+CHECK at 1 kHz: Tv=19.8894 dB T_formulaA=18.3011 dB T_analytic=18.3011 dB
+### gain_split_rec (E1=1 E2=0)
+RESULT g_mid_dB=39.869 g_pk_dB=39.91 f_lo_Hz=0.143562 f_hi_Hz=362457 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_split_ref (E1=0 E2=-1)
+RESULT g_mid_dB=39.869 g_pk_dB=39.9101 f_lo_Hz=0.143562 f_hi_Hz=362139 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_split_cm (E1=1 E2=1)
+RESULT g_mid_dB=-69.5319 g_pk_dB=-21.1401 f_lo_Hz=548247 f_hi_Hz=2.86498E+06 ph_mid_deg=0.739018 g_300_dB=-69.4976
+### gain_split_diff (E1=0.5 E2=-0.5)
+RESULT g_mid_dB=39.869 g_pk_dB=39.9101 f_lo_Hz=0.143562 f_hi_Hz=362298 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_idealR_5.24T (pseudo-R devices replaced, RMODE=1)
+RESULT g_mid_dB=39.9918 g_pk_dB=39.9923 f_lo_Hz=0.152671 f_hi_Hz=358120 ph_mid_deg=-179.293 g_300_dB=39.9923
+### loop_T_normal
+RESULT T_100Hz_dB=60.7914 fu_Hz=249630 pm_deg=73.3618 fu_Vinj_only_Hz=274490
+### loop_T_vp_ac_grounded
+RESULT T_100Hz_dB=68.0664 fu_Hz=263406 pm_deg=72.2586 fu_Vinj_only_Hz=288838

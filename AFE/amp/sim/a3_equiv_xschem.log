@@ -1,0 +1,8 @@
+.subckt ota1 inp inn ibias out vdd vss
+EQUIV structure: 9 hand devices, 9 xschem devices, differing: none -> PASS
+EQUIV op: 51 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV ol: 5 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV loop: 4 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV ac: 9 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV noise: 6 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)
+EQUIV opff: 51 values compared, worst relative difference 0 % -> PASS (limit 0.1 %)

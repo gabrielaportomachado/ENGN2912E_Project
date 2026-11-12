@@ -1,0 +1,152 @@
+### ac_R0.5e12
+RESULT g_mid_dB=39.9194 g_pk_dB=39.9923 f_lo_Hz=1.59497 f_hi_Hz=358173 ph_mid_deg=-172.591 g_300_dB=39.9922
+OPSUM vout_V=1.5 vout_err_V=-1.37684E-07 i_supply_A=6.00396E-05
+### ac_R1.6e12
+RESULT g_mid_dB=39.9853 g_pk_dB=39.9923 f_lo_Hz=0.498499 f_hi_Hz=358153 ph_mid_deg=-177.676 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.38784E-07 i_supply_A=6.00393E-05
+### ac_R1e12
+RESULT g_mid_dB=39.9741 g_pk_dB=39.9923 f_lo_Hz=0.797349 f_hi_Hz=358163 ph_mid_deg=-176.282 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.38184E-07 i_supply_A=6.00394E-05
+### ac_R1e13
+RESULT g_mid_dB=39.9923 g_pk_dB=39.9924 f_lo_Hz=0.079882 f_hi_Hz=358128 ph_mid_deg=-179.632 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.47172E-07 i_supply_A=6.00371E-05
+### ac_R2.5e12
+RESULT g_mid_dB=39.9896 g_pk_dB=39.9923 f_lo_Hz=0.319203 f_hi_Hz=358140 ph_mid_deg=-178.514 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.39684E-07 i_supply_A=6.0039E-05
+### ac_R2e13
+RESULT g_mid_dB=39.9925 g_pk_dB=39.9925 f_lo_Hz=0.0400127 f_hi_Hz=358258 ph_mid_deg=-179.818 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.57125E-07 i_supply_A=6.00351E-05
+### ac_R5e12
+RESULT g_mid_dB=39.9918 g_pk_dB=39.9923 f_lo_Hz=0.159642 f_hi_Hz=358120 ph_mid_deg=-179.259 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.42182E-07 i_supply_A=6.00383E-05
+### ac_R5e13
+RESULT g_mid_dB=39.9925 g_pk_dB=39.9927 f_lo_Hz=0.0161082 f_hi_Hz=358903 ph_mid_deg=-179.93 g_300_dB=39.9923
+OPSUM vout_V=1.5 vout_err_V=-1.86767E-07 i_supply_A=6.00316E-05
+### n0_R0.5e12
+NOISE_B_0p5_300 vn_out_V=0.000221718 vn_in_mid_V=2.23784E-06 vn_in_ngspice_V=3.20993E-06 gmid_dB=39.9194
+NOISE_C_0p5_2k vn_in_mid_V=2.47951E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.31132E-05
+### n0_R1.6e12
+NOISE_B_0p5_300 vn_out_V=0.000199159 vn_in_mid_V=1.99496E-06 vn_in_ngspice_V=2.15641E-06 gmid_dB=39.9853
+NOISE_C_0p5_2k vn_in_mid_V=2.25713E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29782E-05
+### n0_R1e12
+NOISE_B_0p5_300 vn_out_V=0.000211042 vn_in_mid_V=2.11671E-06 vn_in_ngspice_V=2.48941E-06 gmid_dB=39.9741
+NOISE_C_0p5_2k vn_in_mid_V=2.36649E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.30133E-05
+### n0_R1e13
+NOISE_B_0p5_300 vn_out_V=0.000156588 vn_in_mid_V=1.56726E-06 vn_in_ngspice_V=1.56984E-06 gmid_dB=39.9923
+NOISE_C_0p5_2k vn_in_mid_V=1.88861E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29158E-05
+### n0_R2.5e12
+NOISE_B_0p5_300 vn_out_V=0.000186182 vn_in_mid_V=1.86405E-06 vn_in_ngspice_V=1.92798E-06 gmid_dB=39.9896
+NOISE_C_0p5_2k vn_in_mid_V=2.14178E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29533E-05
+### n0_R2e13
+NOISE_B_0p5_300 vn_out_V=0.00014994 vn_in_mid_V=1.5007E-06 vn_in_ngspice_V=1.50123E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=1.83367E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.2913E-05
+### n0_R5e12
+NOISE_B_0p5_300 vn_out_V=0.000168336 vn_in_mid_V=1.68495E-06 vn_in_ngspice_V=1.69802E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=1.98748E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29277E-05
+### n0_R5e13
+NOISE_B_0p5_300 vn_out_V=0.000145623 vn_in_mid_V=1.45748E-06 vn_in_ngspice_V=1.45754E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=1.79812E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29163E-05
+### n1_R0.5e12
+NOISE_B_0p5_300 vn_out_V=0.000452067 vn_in_mid_V=4.5628E-06 vn_in_ngspice_V=5.49217E-06 gmid_dB=39.9194
+NOISE_C_0p5_2k vn_in_mid_V=5.16978E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42912E-05
+### n1_R1.6e12
+NOISE_B_0p5_300 vn_out_V=0.000475447 vn_in_mid_V=4.76251E-06 vn_in_ngspice_V=4.95771E-06 gmid_dB=39.9853
+NOISE_C_0p5_2k vn_in_mid_V=5.33778E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42603E-05
+### n1_R1e12
+NOISE_B_0p5_300 vn_out_V=0.000469426 vn_in_mid_V=4.70826E-06 vn_in_ngspice_V=5.10908E-06 gmid_dB=39.9741
+NOISE_C_0p5_2k vn_in_mid_V=5.29105E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42582E-05
+### n1_R1e13
+NOISE_B_0p5_300 vn_out_V=0.000472407 vn_in_mid_V=4.72824E-06 vn_in_ngspice_V=4.73386E-06 gmid_dB=39.9923
+NOISE_C_0p5_2k vn_in_mid_V=5.30594E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42447E-05
+### n1_R2.5e12
+NOISE_B_0p5_300 vn_out_V=0.000476979 vn_in_mid_V=4.77552E-06 vn_in_ngspice_V=4.86409E-06 gmid_dB=39.9896
+NOISE_C_0p5_2k vn_in_mid_V=5.34874E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42593E-05
+### n1_R2e13
+NOISE_B_0p5_300 vn_out_V=0.000470462 vn_in_mid_V=4.70869E-06 vn_in_ngspice_V=4.71005E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=5.28816E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42425E-05
+### n1_R5e12
+NOISE_B_0p5_300 vn_out_V=0.000475094 vn_in_mid_V=4.75544E-06 vn_in_ngspice_V=4.77834E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=5.33042E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42513E-05
+### n1_R5e13
+NOISE_B_0p5_300 vn_out_V=0.000468811 vn_in_mid_V=4.69213E-06 vn_in_ngspice_V=4.69232E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=5.27233E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.42433E-05
+### nr0_R0.5e12
+NOISE_B_0p5_300 vn_out_V=0.000126212 vn_in_mid_V=1.27388E-06 vn_in_ngspice_V=1.42699E-06 gmid_dB=39.9194
+NOISE_C_0p5_2k vn_in_mid_V=1.65853E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.2983E-05
+### nr0_R1.6e12
+NOISE_B_0p5_300 vn_out_V=0.000138167 vn_in_mid_V=1.384E-06 vn_in_ngspice_V=1.42944E-06 gmid_dB=39.9853
+NOISE_C_0p5_2k vn_in_mid_V=1.73971E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.28983E-05
+### nr0_R1e12
+NOISE_B_0p5_300 vn_out_V=0.000134185 vn_in_mid_V=1.34585E-06 vn_in_ngspice_V=1.4286E-06 gmid_dB=39.9741
+NOISE_C_0p5_2k vn_in_mid_V=1.71032E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29101E-05
+### nr0_R1e13
+NOISE_B_0p5_300 vn_out_V=0.000142724 vn_in_mid_V=1.4285E-06 vn_in_ngspice_V=1.43016E-06 gmid_dB=39.9923
+NOISE_C_0p5_2k vn_in_mid_V=1.77498E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.28996E-05
+### nr0_R2.5e12
+NOISE_B_0p5_300 vn_out_V=0.000140572 vn_in_mid_V=1.40741E-06 vn_in_ngspice_V=1.42995E-06 gmid_dB=39.9896
+NOISE_C_0p5_2k vn_in_mid_V=1.75811E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.28954E-05
+### nr0_R2e13
+NOISE_B_0p5_300 vn_out_V=0.000142808 vn_in_mid_V=1.42932E-06 vn_in_ngspice_V=1.42973E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=1.77564E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29049E-05
+### nr0_R5e12
+NOISE_B_0p5_300 vn_out_V=0.00014225 vn_in_mid_V=1.42385E-06 vn_in_ngspice_V=1.43025E-06 gmid_dB=39.9918
+NOISE_C_0p5_2k vn_in_mid_V=1.7712E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.28962E-05
+### nr0_R5e13
+NOISE_B_0p5_300 vn_out_V=0.000142721 vn_in_mid_V=1.42844E-06 vn_in_ngspice_V=1.4285E-06 gmid_dB=39.9925
+NOISE_C_0p5_2k vn_in_mid_V=1.77463E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.29131E-05
+### rec10_R0.5e12
+RESULT_REC dv_max_V=0.999079 vout_min_V=0.500922 vout_max_V=1.5 dc_shift_V=-9.62398E-05 settled=1 t_rec_10mV_s=0.457385 t_rec_1mV_s=0.689385 t_end_s=8
+### rec10_R1.6e12
+RESULT_REC dv_max_V=0.999098 vout_min_V=0.500903 vout_max_V=1.5 dc_shift_V=-0.00030543 settled=1 t_rec_10mV_s=1.47402 t_rec_1mV_s=2.21002 t_end_s=8
+### rec10_R1e12
+RESULT_REC dv_max_V=0.999093 vout_min_V=0.500908 vout_max_V=1.5 dc_shift_V=-0.000191337 settled=1 t_rec_10mV_s=0.913678 t_rec_1mV_s=1.37768 t_end_s=8
+### rec10_R1e13
+RESULT_REC dv_max_V=0.999107 vout_min_V=0.500895 vout_max_V=1.5 dc_shift_V=-0.00202837 settled=1 t_rec_10mV_s=9.16871 t_rec_1mV_s=13.5427 t_end_s=18
+### rec10_R2.5e12
+RESULT_REC dv_max_V=0.999101 vout_min_V=0.500899 vout_max_V=1.5 dc_shift_V=-0.000476661 settled=1 t_rec_10mV_s=2.29855 t_rec_1mV_s=3.45055 t_end_s=8
+### rec10_R2e13
+RESULT_REC dv_max_V=0.999108 vout_min_V=0.500893 vout_max_V=1.5 dc_shift_V=-0.00391505 settled=1 t_rec_10mV_s=18.2975 t_rec_1mV_s=27.0455 t_end_s=36
+### rec10_R5e12
+RESULT_REC dv_max_V=0.999105 vout_min_V=0.500896 vout_max_V=1.5 dc_shift_V=-0.00108757 settled=1 t_rec_10mV_s=4.58402 t_rec_1mV_s=6.77102 t_end_s=9
+### rec10_R5e13
+RESULT_REC dv_max_V=0.999111 vout_min_V=0.500891 vout_max_V=1.5 dc_shift_V=-0.00954302 settled=1 t_rec_10mV_s=45.4316 t_rec_1mV_s=67.3016 t_end_s=90
+### rec1_R0.5e12
+RESULT_REC dv_max_V=0.0999136 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-1.0634E-05 settled=1 t_rec_10mV_s=0.227518 t_rec_1mV_s=0.459518 t_end_s=8
+### rec1_R1.6e12
+RESULT_REC dv_max_V=0.0999146 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-3.15504E-05 settled=1 t_rec_10mV_s=0.735949 t_rec_1mV_s=1.47195 t_end_s=8
+### rec1_R1e12
+RESULT_REC dv_max_V=0.0999142 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-2.01432E-05 settled=1 t_rec_10mV_s=0.453599 t_rec_1mV_s=0.917599 t_end_s=8
+### rec1_R1e13
+RESULT_REC dv_max_V=0.099915 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-0.000203857 settled=1 t_rec_10mV_s=4.58188 t_rec_1mV_s=9.15388 t_end_s=18
+### rec1_R2.5e12
+RESULT_REC dv_max_V=0.0999144 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-4.86723E-05 settled=1 t_rec_10mV_s=1.14636 t_rec_1mV_s=2.29836 t_end_s=8
+### rec1_R2e13
+RESULT_REC dv_max_V=0.0999144 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-0.000392546 settled=1 t_rec_10mV_s=9.14218 t_rec_1mV_s=18.2862 t_end_s=36
+### rec1_R5e12
+RESULT_REC dv_max_V=0.0999149 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-0.000109792 settled=1 t_rec_10mV_s=2.29839 t_rec_1mV_s=4.58439 t_end_s=9
+### rec1_R5e13
+RESULT_REC dv_max_V=0.0999142 vout_min_V=1.40009 vout_max_V=1.5 dc_shift_V=-0.000956265 settled=1 t_rec_10mV_s=22.6598 t_rec_1mV_s=45.4298 t_end_s=90

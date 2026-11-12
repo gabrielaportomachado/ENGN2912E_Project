@@ -1,0 +1,16 @@
+* A3 differential electrode source: ONE independent source (vd, AC 1 / SIN) -> two IDEAL E-sources giving
+* +vd/2 and -vd/2 around the tissue node tis (IDEAL, 1.65 V in the testbenches), each through the Randles network
+* Rs 1k + (Cdl 300n || Rct 50k) (ENGN 1600 report Fig. 4).  Electrode DC offsets vosr/vosf are IDEAL voltage inputs
+* (node voltages, usually 0 V) added in series with each electrode.
+.subckt src_randles vd tis rec ref vosr vosf
+E1 s1 tis vd 0 0.5
+E2 s2 tis vd 0 -0.5
+Eo1 s1b s1 vosr 0 1
+Eo2 s2b s2 vosf 0 1
+Rs1 s1b e1 1k
+Cdl1 e1 rec 300n
+Rct1 e1 rec 50k
+Rs2 s2b e2 1k
+Cdl2 e2 ref 300n
+Rct2 e2 ref 50k
+.ends src_randles

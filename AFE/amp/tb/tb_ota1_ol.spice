@@ -1,0 +1,39 @@
+* A3: stage-1 OTA open-loop .ac.  DC operating point is set by an IDEAL DC servo (huge L from out to the
+* inverting input, huge C from there to ground): unity feedback at DC, completely open at AC.
+* Output load = the real closed-loop load: the feedback capacitor Cf (its far end is the AC-grounded virtual
+* ground here) in parallel with CL_NEXT (PLACEHOLDER: stage-2 input capacitance).
+* Reports A0, the dominant pole, unity-gain frequency (GBW) and the phase margin of A(s) alone (feedback factor 1,
+* a worst-case bound; the PM with the real feedback factor is in tb_ota1_loop).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.include ../spice/stage1.spice
+.temp 27
+.param VCM_IN=1.5
+.param IBIAS=20u
+.param CL_NEXT=2p
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}                $ IDEAL bias current
+Vcm inp 0 dc {VCM_IN} ac 1        $ IDEAL
+Xota inp inn ibias out vdd 0 ota1
+Lservo out inn 1e9
+Cservo inn 0 1
+Xcfl out inn cap_mim_2f0_m2m3_noshield c_length={LCF} c_width={LCF}
+CL2 out 0 {CL_NEXT}               $ PLACEHOLDER
+.control
+ac dec 20 1e-3 1e9
+let gdb = vdb(out)
+let gph = cph(out)*180/pi
+meas ac a0 find gdb at=0.1
+let tgt = a0 - 3
+meas ac f_p1 when gdb=tgt fall=1
+meas ac gbw when gdb=0 fall=1
+meas ac ph_u find gph at=$&gbw
+let pm = 180 + ph_u
+meas ac ph_a0 find gph at=0.1
+echo RESULT a0_dB=$&a0 f_p1_Hz=$&f_p1 gbw_Hz=$&gbw pm_beta1_deg=$&pm ph_lowf_deg=$&ph_a0
+wrdata ../sim/a3_ota1_ol_bode.csv gdb gph
+quit
+.endc
+.end

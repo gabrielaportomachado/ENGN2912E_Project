@@ -1,0 +1,14 @@
+### gain_split_rec (E1=1 E2=0)
+RESULT g_mid_dB=39.869 g_pk_dB=39.91 f_lo_Hz=0.143562 f_hi_Hz=362457 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_split_ref (E1=0 E2=-1)
+RESULT g_mid_dB=39.869 g_pk_dB=39.9101 f_lo_Hz=0.143562 f_hi_Hz=362139 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_split_cm (E1=1 E2=1)
+RESULT g_mid_dB=-69.5319 g_pk_dB=-21.1401 f_lo_Hz=548247 f_hi_Hz=2.86498E+06 ph_mid_deg=0.739018 g_300_dB=-69.4976
+### gain_split_diff (E1=0.5 E2=-0.5)
+RESULT g_mid_dB=39.869 g_pk_dB=39.9101 f_lo_Hz=0.143562 f_hi_Hz=362298 ph_mid_deg=-179.319 g_300_dB=39.9018
+### gain_idealR_5.24T (pseudo-R devices replaced, RMODE=1)
+RESULT g_mid_dB=39.9918 g_pk_dB=39.9923 f_lo_Hz=0.152671 f_hi_Hz=358120 ph_mid_deg=-179.293 g_300_dB=39.9923
+### loop_T_normal
+RESULT T_100Hz_dB=60.7914 fu_Hz=249630 pm_deg=73.3618 fu_Vinj_only_Hz=274490
+### loop_T_vp_ac_grounded
+RESULT T_100Hz_dB=68.0664 fu_Hz=263406 pm_deg=72.2586 fu_Vinj_only_Hz=288838

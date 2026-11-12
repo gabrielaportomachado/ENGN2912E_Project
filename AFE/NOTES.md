@@ -22,6 +22,15 @@ the "Results log" and "Open questions" sections below with verified numbers only
 - design.ngspice defaults: sw_stat_global=0, sw_stat_mismatch=0, fnoicor=0.
   Use fnoicor=1 for a worst-case flicker-noise run.
 
+- xschem batch (A3): it HANGS if DISPLAY points at an unreachable X server (DISPLAY=:20 here). Use
+  `(unset DISPLAY; cd AFE/amp/xschem && xschem --rcfile xschemrc --tcl 'set top_is_subckt 1' -n -s -q --no_x -o netlist ota1.sch </dev/null)`.
+  Headless SVG/PNG export draws nothing. PDK symbols are referenced as `symbols/pfet_03v3.sym`; the MIM symbol's default model name
+  (cap_mim_2f0fF) is overridden with model=cap_mim_2f0_m2m3_noshield.
+- ngspice (A3): nonzero ad/as/pd/ps on the PDK MOSFETs make `.tran` fail ("timestep too small" at ~1 us, UNEXPLAINED): set them to 0 explicitly
+  (the xschem symbols pass them by default). Vectors: `@m.xota.xm1.m0[vds]`, `v.xs1.vbrk#branch`; `.dc` sweeps need explicit `save` of device
+  parameters; `meas` results and `.param` names are not visible after `setplot` / inside `.control` (carry them with `set v = $&x`); use `cph()`
+  for unwrapped phase. A failed `.tran` prints one enormous line: always pipe ngspice output through `cut -c1-200 | head`.
+
 ## PDK facts (verified)
 - 3.3 V devices: nfet_03v3 / pfet_03v3 (default L=0.28u). Xschem symbols
   pfet_03v3.sym / nfet_03v3.sym; netlist format `X... d g s b pfet_03v3 L= W= nf= m=`.
@@ -144,6 +153,18 @@ Approved by the user after A2 (2026-11-12).
    the PDK pfet noise is ~3x below 4kT/R). Label it IDEAL RESISTOR (noise) in the netlist.
 9. The vt = +0.2 V gate shift may stay IDEAL in A3. A4 must replace it with a real bias circuit and report it.
 
+Approved by the user after A3 (2026-11-12).
+10. fnoicor=1 noise (4.2-5.2 uV, A3) is accepted as a documented risk. Keep the continuous-time architecture through A5; a chopper version is
+    optional follow-up work after A5.
+11. Keep the m=2 NMOS load (50u/16u, gate area 9200 um^2; the m=1 load is not used).
+12. A4 constraints: stage-2 input capacitance <= 5 pF (A3: PM 64 deg at 5 pF, 54 deg at 10 pF); the fast-settle switch is REQUIRED, not optional; the vt
+    shift and the bias (IBIAS, VCM_IN) must be real circuits.
+13. The zeroed ad/as/pd/ps (A3 workaround) must be fixed in A4. First check whether the transient failure is caused by a .param NF clash with the PDK's nf
+    (A3 status, verified by grep: no .param named NF/nf exists in AFE/amp/spice or tb; nf=1 appears only as an instance parameter, so a clash there is not
+    the cause in the A3 files; the cause remains UNEXPLAINED). At minimum, rerun op/ac/noise with real diffusion parameters and report the change.
+14. A4 is split. A4a = stage 2 + output buffer + real vt-shift/bias + fast-settle switch circuit + diffusion fix, with op/ac/noise only. A4b = all transient
+    tests (THD/swing, slew, power-up, offset/artifact recovery with and without fast-settle, TGATE, ADC load) and the corner table. Each sub-phase stops for approval.
+
 ## A1 findings (typical corner, 27 C only; logs in AFE/amp/sim/, plots in AFE/amp/figs/)
 - ngspice facts: inoise_total / onoise_total are rms volts, in plot noise2 (spectra are in
   noise1); checked on 1 Mohm: 2.207 uV vs hand 2.2 uV (sim/char_noise_check_R.log).
@@ -224,6 +245,38 @@ Approved by the user after A2 (2026-11-12).
 - Not done in A2: xschem cell, mismatch (pseudo-R pair), tuning-voltage generator, a real op-amp (noise with the OTA is only
   quadrature-added from A1), fnoicor=1 (the pseudo-R model has no flicker term that matters here), L other than 2u/4u, W other than 1u.
 
+## A3 findings (stage-1 OTA + closed loop; typical/ff/ss x -40/27/85 C; logs sim/a3_*.log, tables sim/a3_summary.txt, plots figs/a3_*.png)
+- Design (spice/ota1.spice + ota1_params.spice + xschem/ota1.sch/.sym; xschem == hand netlist: 9 devices identical, 51+ simulated values equal,
+  sim/a3_equiv_xschem.log): PMOS pair 16x50u/2u (10 uA/side), tail/bias/M7 PMOS 50u/4u m=2 each (IBIAS 20 uA IDEAL), NMOS mirror load m=2 x 50u/16u
+  (Decision 5 row 11), 2nd stage NMOS m=4 x 50u/16u (same L/Vgs as the load; |output offset| <= 15 uV at all 9 PVT), Miller Cc ~1 pF MIM (22x22 um, hand calc), VCM_IN = 1.5 V
+  (IDEAL), Cf = 200 fF, Cin = 20 pF (MIM sized from the PDK area+perimeter formula, so the ratio is exactly 100). 60 uA from 3.3 V. Gate area 9200 um^2
+  (load m=1: 6000 um^2, noise +3 %: 1.728 vs 1.675 uV, PM 77 vs 73 deg). The pair bulk is on VDD (Vsg 1.05 V at VCM_IN 1.5 V; a pair in its own n-well was not tried).
+- .op / headroom (Decision 5): at VCM_IN 1.5 V load Vgs = 0.782 V, pair Vsd 1.77 V vs Vdsat 0.057 V. Every transistor has |Vds|-|Vdsat| >= 0.427 V at all 9
+  PVT points (criterion 0.05 V). Follower range with all margins >= 50 mV: 0.19-2.21 V; low end set by M6 (output), high end by the tail; pair/load never limit.
+- Open loop A(s) (DC servo, load Cf + 2 pF PLACEHOLDER stage-2 input C): A0 117.4-118.8 dB (>= 70 OK), dominant pole 32-51 Hz, GBW 4.0-6.0 MHz. A(s) alone is NOT
+  unity-gain stable (PM -45..-50 deg at feedback factor 1): never use this OTA as a unity buffer.
+- Real loop (Tian two-injection, validated against an analytic loop to 1e-13 dB, sim/a3_tian_check.log): PM 70.4-75.7 deg at all 9 PVT (>= 60 OK), fu 197-339 kHz,
+  T(100 Hz) 60.1-61.5 dB. T is flat at ~62 dB below 100 Hz, not A0-42 = 76 dB: M2's Cgd feeds the high-gain o1 node back onto the REF-side gate (anchored only by Cin2)
+  and divides the forward gain (CONFIRMED: with vp AC-grounded by an IDEAL 1 F, T(100 Hz) = 68.07 dB vs 60.79 dB, PM 72.3 vs 73.4 deg; sim/a3_diag.log).
+  Harmless (0.1 % gain error) but it means the REF-side network impedance matters. Stage-2 input C (CL_NEXT): PM 79 / 73 / 64 / 54 deg at
+  0.5 / 2 / 5 / 10 pF, so keep it <= ~5 pF.
+- Closed loop with the simulated pseudo-R devices (vt = +0.2 V IDEAL, Decision 9): gain 39.85-39.88 dB, f_lo 0.110-0.205 Hz (<= 0.5 OK), f_hi 270-522 kHz (stage 1 does not set
+  the 300 Hz LPF). The ideal-R bench gives 39.992 dB, so the 0.12 dB deficit is the pseudo-R devices' parasitic C added to Cf (~2.9 fF per side, derived from 39.992 vs 39.869 dB; sim/a3_diag.log): size Cf ~ 197 fF.
+  REC-only and REF-only gains are identical (39.869 dB); common-mode gain -69.5 dB at 12 Hz (sim/a3_diag.log) (ideal matched caps: CMRR 109 dB; MIM mismatch NOT modelled).
+- Noise 0.5-300 Hz, input-referred = integrated output / midband gain, IDEAL RESISTOR (noise) = R0 per corner (Decisions 4, 8): typical flicker 1.52-1.84 uV at all 9 PVT
+  points (<= 2 OK; worst ff 85 C 1.838 uV, typ 27 C 1.675 uV). fnoicor=1: 4.20-5.25 uV (2.7-3.0x), NOT met (Decision 4 risk). Noise to 2 kHz: 1.77-2.18 uV (> 2 at 85 C);
+  to 1 MHz: 10.8-14.9 uV (stage-1 wideband; the stage-2 LPF / anti-alias must handle it, see 4.4).
+- Feedback-R sweep, ideal R, typ 27 C, Cf 200 fF (Decision 7; sim/a3_summary.txt section 5): R = 0.5 / 1 / 1.6 / 2.5 / 5 / 10 / 20 / 50 TOhm -> f_lo 1.60 / 0.80 / 0.50 / 0.32 / 0.16 /
+  0.080 / 0.040 / 0.016 Hz; total noise 2.24 / 2.12 / 1.995 / 1.86 / 1.69 / 1.57 / 1.50 / 1.46 uV (OTA+electrodes floor 1.27-1.43 uV, R alone 1.84 -> 0.29 uV); fnoicor=1 total
+  4.56-4.78 uV for every R. Noise 2 uV and f_lo 0.5 Hz are the same limit: R >= ~1.6 TOhm. Recovery (time to within 10 mV of the final value at the stage-1 output after a 1 mV REC offset
+  step = 100 mV excursion; ~2.3 R*Cf): 0.23 / 0.45 / 0.74 / 1.15 / 2.30 / 4.58 / 9.14 / 22.7 s, to 1 mV 0.46 ... 45.4 s. MIM r_leak leaves a DC shift of 0.011 / 0.020 / 0.032 / 0.049 / 0.11 / 0.20 / 0.39 / 0.96
+  mV per mV of step (R/r_leak; at 50 TOhm the DC path is nearly 1:1).
+- Recovery with the simulated pseudo-R device (typical 27 C): 1 mV step 3.7 s to 10 mV (6.3 s to 1 mV); 5 mV / 10 mV steps (0.5 / 1 V excursion, no clipping, vout_min 0.50 V) 11.7 / 12.0 s; worst
+  ss -40 C 10 mV: 22.5 s; fastest ff 85 C: 2.6-3.6 s. Larger steps are SLOWER than an ideal 5.2 TOhm (4.6 s): the device current saturates near 10 fA (A2 floor), a ~0.05 V/s discharge rate
+  at 200 fF (ESTIMATE; depends on the unverified model floor).
+- Not done in A3: fs/sf corners; mismatch/offset/CMRR with cap mismatch (no Monte Carlo); real bias circuit and vt generator (both IDEAL, Decision 9: A4); large-signal swing/THD/slew,
+  power-up, input protection, TGATE (A4); junction/diffusion parasitics (ad/as/pd/ps = 0) and layout/Cin bottom-plate parasitics; the xschem drawing was not viewed (no display).
+
 ## Open questions
 - (A2) After each TREAT->REC switch the amp needs ~5 x tau_HPF (about 4-7 s at tau 0.8-1.5 s) to settle. A4 should evaluate a fast-settle switch (shorting the pseudo-resistors for a few ms, driven by REC_EN/READY): charge injection, residual offset, and the settling time versus switch duration.
 - (A2) Is the PDK-model junction floor (4-6 TOhm, T-independent) trustworthy? And a vt generator (+0.2 V gate shift) is needed in A3; PDK pfet noise in the pseudo-R is below 4kT/R: confirm the model with the instructor/PDK docs if the pseudo-R noise is to be claimed.
@@ -239,6 +292,12 @@ Approved by the user after A2 (2026-11-12).
   or a reservoir cap. Needs the ADC input model from the ADC side.
 - (A0) Gain/passband tolerances are not given; A0 proposes ±1 dB and f_lo ≤ 0.5, f_hi ≥ 300.
 
+- (A3, settled by Decision 10) fnoicor=1 is 4.2-5.2 uV: accepted as a documented risk; chopper (transient noise sim) or ~10x input-pair area only as optional work after A5. Typical flicker meets 2 uV with 8-24 % margin (1.52-1.84 uV).
+- (A3) HPF choice: R >= ~1.6 TOhm meets both f_lo <= 0.5 Hz and 2 uV; R0 of the device (4.1-6.2 TOhm) gives 0.11-0.2 Hz and ~1.7 uV but 2.6-4.0 s recovery (to 10 mV) for a 1 mV step and up to 22 s for 5-10 mV
+  steps. A4a (Decisions 12, 14): fast-settle switch circuit (required) and a real vt generator; consider Cf ~197 fF to absorb the pseudo-R parasitic C. A4b: recovery with and without fast-settle.
+- (A3, Decision 12) Stage-2 input capacitance must stay <= 5 pF for PM >= 60 deg (placeholder CL_NEXT = 2 pF); stage-1 wideband noise 10.8-14.9 uV (0.5 Hz-1 MHz) must be filtered by stage 2.
+- (A3) The OTA is over-designed on gain (A0 118 dB vs 70 needed) and bandwidth (fu ~250 kHz): current/area could be traded for noise, but only the noise (pair/load area) is a binding target.
+
 ## Results log
 One row per phase. The user fills in Cost from the OpenRouter Activity page.
 | Date | Phase | Model / effort | Cost (USD) | Result (with path to log) |
@@ -246,3 +305,4 @@ One row per phase. The user fills in Cost from the OpenRouter Activity page.
 | 2026-11-12 | A0 plan | Claude Opus 5.5 / — | | Plan only, no sim: AFE/amp/PLAN.md (layout, tb list, .meas per target, critique) |
 | 2026-11-12 | A1 device char | Claude Sonnet 5.5 / default | | gm/Id, noise, ICMR typ/27C only; see "A1 findings"; AFE/amp/sim/a1_summary.txt, sim/char_*.log/csv |
 | 2026-11-12 | A2 pseudo-R | Claude Sonnet 5.5 / default | | R0 4-6 TOhm on a model junction-leak floor; HPF 0.11-0.21 Hz with Cf=200f and vt=+0.2 V passes noise at all PVT; see "A2 findings"; AFE/amp/sim/a2_summary.txt, sim/char_pseudoR*.csv, sim/hpf_*.csv |
+| 2026-11-12 | A3 stage-1 OTA | Claude Sonnet 5.5 / xhigh | | PMOS-input two-stage Miller OTA + closed loop; noise 1.52-1.84 uV (typ flicker, 9 PVT), fnoicor=1 4.2-5.2 uV, PM 70-76 deg, A0 118 dB, f_lo 0.11-0.2 Hz; R sweep and recovery; xschem == hand netlist; see "A3 findings"; AFE/amp/sim/a3_summary.txt, sim/a3_*.log |

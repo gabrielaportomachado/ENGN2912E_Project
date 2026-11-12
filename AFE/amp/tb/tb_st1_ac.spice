@@ -1,0 +1,49 @@
+* A3: stage-1 closed loop with the Randles source: .ac gain, -3 dB corners; .op output DC and supply current.
+* Parameters are one per line so scripts can override them with sed (scripts/ngrun.sh).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.include ../spice/stage1.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param VCM_IN=1.5
+.param IBIAS=20u
+.param VTT=0.2
+.param VOSR=0
+.param CL_NEXT=2p
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}                $ IDEAL bias current
+Vcm vcm 0 {VCM_IN}                $ IDEAL gate bias VCM_IN
+Vt vt 0 {VTT}                     $ IDEAL pseudo-resistor gate shift (Decision 9)
+Vtis tis 0 1.65                   $ IDEAL tissue node
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 {VOSR}
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xs1 rec ref vout vdd 0 ibias vcm vt stage1
+CL2 vout 0 {CL_NEXT}              $ PLACEHOLDER: stage-2 input capacitance
+.nodeset v(xs1.vn)=1.5 v(xs1.vp)=1.5 v(xs1.vng)=1.5 v(vout)=1.5 v(xs1.xota.o1)=0.78 v(xs1.xota.d1)=0.78 v(xs1.xota.tail)=2.55
+.nodeset v(xs1.xr1.m)=1.5 v(xs1.xr2.m)=1.5
+.control
+ac dec 20 1e-3 1e7
+let gdb = vdb(vout)
+let gph = ph(vout)*180/pi
+meas ac g_mid find gdb at=12.25
+meas ac g_pk max gdb
+let tgt = g_pk - 3
+meas ac f_lo when gdb=tgt rise=1
+meas ac f_hi when gdb=tgt fall=1
+meas ac ph_mid find gph at=12.25
+meas ac g_300 find gdb at=300
+echo RESULT g_mid_dB=$&g_mid g_pk_dB=$&g_pk f_lo_Hz=$&f_lo f_hi_Hz=$&f_hi ph_mid_deg=$&ph_mid g_300_dB=$&g_300
+wrdata ../sim/a3_cl_bode.csv gdb gph
+op
+let vo_err = v(vout) - v(vcm)
+let itot = -i(Vdd)
+let vo = v(vout)
+echo OPSUM vout_V=$&vo vout_err_V=$&vo_err i_supply_A=$&itot
+quit
+.endc
+.end

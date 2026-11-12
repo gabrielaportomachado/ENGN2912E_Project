@@ -1,0 +1,29 @@
+* A3 stage 1: Harrison-type capacitive-feedback amplifier, both sides (REC via Cin -> vn, REF via Cin -> vp),
+* around ota1.  Requires models, ota1_params.spice, ota1.spice, pseudoR.spice first.
+* Cin = CIN_RATIO x Cf; MIM geometry is solved from the PDK formula C = 1.99e-3*L*W + 2.383e-10*2*(L+W) (typical corner),
+* so the ACTUAL ratio is CIN_RATIO (a plain 100x geometry ratio gives 39.6 dB because of the perimeter term, A2).
+* Feedback element, RMODE: 0 = pseudo_r_tune devices (as simulated, gate shift vt, IDEAL level shifter);
+*                          1 = IDEAL RESISTOR (noise): ideal resistor RFIX replaces the pseudo-resistor.  Used for every .noise run.
+.param CAPK_A=1.99e-3 CAPK_P=2.383e-10
+.param CFV=200f CIN_RATIO=100 RFIX=5.2e12 RMODE=0 PRW=1u PRL=2u RNOISY=1
+.param LCF='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CFV))/(2*CAPK_A)'
+.param LCIN='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CIN_RATIO*CFV))/(2*CAPK_A)'
+.subckt stage1 rec ref vout vdd vss ibias vcm vt params: BRKV=0 BRKI=0
+* loop-break for Tian loop-gain runs (tb_ota1_loop): series 0 V source (AC amplitude BRKV) + shunt current source
+* (AC amplitude BRKI) at the inverting gate.  Inert (0 V / 0 A) in every other testbench.
+Vbrk vng vn dc 0 ac {BRKV}
+Ibrk 0 vng dc 0 ac {BRKI}
+Xota vp vng ibias vout vdd vss ota1
+Xcin1 rec vn cap_mim_2f0_m2m3_noshield c_length={LCIN} c_width={LCIN}
+Xcin2 ref vp cap_mim_2f0_m2m3_noshield c_length={LCIN} c_width={LCIN}
+Xcf1 vn vout cap_mim_2f0_m2m3_noshield c_length={LCF} c_width={LCF}
+Xcf2 vp vcm cap_mim_2f0_m2m3_noshield c_length={LCF} c_width={LCF}
+.if (RMODE == 0)
+Xr1 vn vout vt pseudo_r_tune W={PRW} L={PRL}
+Xr2 vp vcm vt pseudo_r_tune W={PRW} L={PRL}
+.else
+* IDEAL RESISTOR (noise): same value as the simulated pseudo-resistor R0, noisy (4kT/R)
+Rf1 vn vout {RFIX} noisy={RNOISY}
+Rf2 vp vcm {RFIX} noisy={RNOISY}
+.endif
+.ends stage1

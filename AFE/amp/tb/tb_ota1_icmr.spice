@@ -1,0 +1,66 @@
+* A3: usable common-mode / output range of the real two-stage OTA, unity follower, Vin swept 0..3.3 V.
+* Valid where ALL transistors (the diode-connected bias device Xmb is always saturated and not indexed) keep |Vds|-|Vdsat| >= 50 mV and |out - in| < 5 mV.  Also reports which VCM_IN
+* values give the pair, load (M3/M4) and output devices their margin (Decision 5: load Vgs vs the pair at VCM_IN).
+.include ../spice/models_typical.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.temp 27
+.param IBIAS=20u
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}         $ IDEAL
+Vin inp 0 1.5
+Xota inp out ibias out vdd 0 ota1
+.control
+save all @m.xota.xmt.m0[vds] @m.xota.xmt.m0[vdsat] @m.xota.xm1.m0[vds] @m.xota.xm1.m0[vdsat] @m.xota.xm2.m0[vds] @m.xota.xm2.m0[vdsat] @m.xota.xm3.m0[vds] @m.xota.xm3.m0[vdsat] @m.xota.xm4.m0[vds] @m.xota.xm4.m0[vdsat] @m.xota.xm6.m0[vds] @m.xota.xm6.m0[vdsat] @m.xota.xm7.m0[vds] @m.xota.xm7.m0[vdsat]
+dc Vin 0 3.3 0.01
+let mg = 0.05
+let s_mt = abs(@m.xota.xmt.m0[vds]) - abs(@m.xota.xmt.m0[vdsat]) - mg
+let s_m1 = abs(@m.xota.xm1.m0[vds]) - abs(@m.xota.xm1.m0[vdsat]) - mg
+let s_m2 = abs(@m.xota.xm2.m0[vds]) - abs(@m.xota.xm2.m0[vdsat]) - mg
+let s_m3 = abs(@m.xota.xm3.m0[vds]) - abs(@m.xota.xm3.m0[vdsat]) - mg
+let s_m4 = abs(@m.xota.xm4.m0[vds]) - abs(@m.xota.xm4.m0[vdsat]) - mg
+let s_m6 = abs(@m.xota.xm6.m0[vds]) - abs(@m.xota.xm6.m0[vdsat]) - mg
+let s_m7 = abs(@m.xota.xm7.m0[vds]) - abs(@m.xota.xm7.m0[vdsat]) - mg
+let err = abs(v(out) - v(inp))
+let vlo = 99
+let vhi = -99
+let wmin = 99
+let i = 0
+while i < length(err)
+  let w = s_mt[i]
+  if s_m1[i] < w
+    let w = s_m1[i]
+  end
+  if s_m2[i] < w
+    let w = s_m2[i]
+  end
+  if s_m3[i] < w
+    let w = s_m3[i]
+  end
+  if s_m4[i] < w
+    let w = s_m4[i]
+  end
+  if s_m6[i] < w
+    let w = s_m6[i]
+  end
+  if s_m7[i] < w
+    let w = s_m7[i]
+  end
+  if 5m - err[i] < w
+    let w = 5m - err[i]
+  end
+  if w > 0
+    if v(inp)[i] < vlo
+      let vlo = v(inp)[i]
+    end
+    if v(inp)[i] > vhi
+      let vhi = v(inp)[i]
+    end
+  end
+  let i = i + 1
+end
+echo ICMR_lo_V=$&vlo ICMR_hi_V=$&vhi
+wrdata ../sim/a3_icmr.csv v(inp) v(out) s_mt s_m1 s_m3 s_m6 s_m7 err
+quit
+.endc
+.end

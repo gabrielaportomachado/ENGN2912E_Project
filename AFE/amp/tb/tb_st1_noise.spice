@@ -1,0 +1,62 @@
+* A3: stage-1 closed-loop .noise with the Randles source (both electrodes noisy), real OTA.
+* DECISION 8: the feedback element in EVERY noise run is an IDEAL RESISTOR (noise) of the same value R0 as the
+* simulated pseudo-resistor (the PDK pfet noise is ~3x below 4kT/R, A2), so RMODE=1 here and RFIX = R0.
+* Definition (Decision 1): vn_in_mid = integrated OUTPUT noise 0.5-300 Hz / midband gain (gain at 12.25 Hz);
+* ngspice's own inoise_total (gain-weighted, larger near the band edges) is also reported.
+* FN=1 turns on the worst-case flicker correlation (fnoicor=1, Decision 4).  RNOISY=0 makes the resistors noiseless
+* (splits OTA+electrodes from the feedback resistor).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.include ../spice/stage1.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FN=0
+.param fnoicor=FN
+.param VCM_IN=1.5
+.param IBIAS=20u
+.param RMODE=1                    $ IDEAL RESISTOR (noise)
+.param RFIX=5.2e12
+.param RNOISY=1
+.param VTT=0.2
+.param CL_NEXT=2p
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}                $ IDEAL
+Vcm vcm 0 {VCM_IN}                $ IDEAL
+Vt vt 0 {VTT}                     $ IDEAL (unused when RMODE=1)
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xs1 rec ref vout vdd 0 ibias vcm vt stage1
+CL2 vout 0 {CL_NEXT}              $ PLACEHOLDER
+.nodeset v(xs1.vn)=1.5 v(xs1.vp)=1.5 v(xs1.vng)=1.5 v(vout)=1.5 v(xs1.xota.o1)=0.78 v(xs1.xota.d1)=0.78 v(xs1.xota.tail)=2.55
+.control
+ac dec 20 1e-3 1e7
+let gdb = vdb(vout)
+meas ac g_mid find gdb at=12.25
+let gmid = 10^(g_mid/20)
+set gmid_lin = $&gmid
+set gmid_db = $&g_mid
+noise v(vout) Vd dec 100 0.5 300
+setplot noise2
+let vo_b = onoise_total
+let vi_b_mid = vo_b/$gmid_lin
+let vi_b_ng = inoise_total
+echo NOISE_B_0p5_300 vn_out_V=$&vo_b vn_in_mid_V=$&vi_b_mid vn_in_ngspice_V=$&vi_b_ng gmid_dB=$gmid_db
+noise v(vout) Vd dec 50 0.5 2k
+setplot noise4
+let vo_c = onoise_total
+let vi_c_mid = vo_c/$gmid_lin
+echo NOISE_C_0p5_2k vn_in_mid_V=$&vi_c_mid
+noise v(vout) Vd dec 20 0.5 1Meg
+setplot noise6
+let vo_d = onoise_total
+let vi_d_mid = vo_d/$gmid_lin
+echo NOISE_D_0p5_1M vn_in_mid_V=$&vi_d_mid
+quit
+.endc
+.end

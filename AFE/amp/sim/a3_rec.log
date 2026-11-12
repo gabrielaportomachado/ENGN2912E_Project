@@ -1,0 +1,42 @@
+### rec_ff_27_10m
+RESULT_REC dv_max_V=0.984206 vout_min_V=0.515793 vout_max_V=1.5 dc_shift_V=-0.0010605 settled=1 t_rec_10mV_s=6.58076 t_rec_1mV_s=9.02076 t_end_s=40
+### rec_ff_27_1m
+RESULT_REC dv_max_V=0.0992508 vout_min_V=1.40075 vout_max_V=1.5 dc_shift_V=-0.000104592 settled=1 t_rec_10mV_s=3.28593 t_rec_1mV_s=5.68593 t_end_s=40
+### rec_ff_27_5m
+RESULT_REC dv_max_V=0.494666 vout_min_V=1.00533 vout_max_V=1.5 dc_shift_V=-0.000526872 settled=1 t_rec_10mV_s=7.84905 t_rec_1mV_s=10.2491 t_end_s=40
+### rec_ff_85_10m
+RESULT_REC dv_max_V=0.983719 vout_min_V=0.516281 vout_max_V=1.5 dc_shift_V=-0.00105942 settled=1 t_rec_10mV_s=3.61056 t_rec_1mV_s=5.97056 t_end_s=40
+### rec_ff_85_1m
+RESULT_REC dv_max_V=0.0992104 vout_min_V=1.40079 vout_max_V=1.5 dc_shift_V=-0.000106031 settled=1 t_rec_10mV_s=2.59215 t_rec_1mV_s=4.95215 t_end_s=40
+### rec_ff_85_5m
+RESULT_REC dv_max_V=0.495092 vout_min_V=1.00491 vout_max_V=1.5 dc_shift_V=-0.000529408 settled=1 t_rec_10mV_s=3.59207 t_rec_1mV_s=5.95207 t_end_s=40
+### rec_ss_27_10m
+RESULT_REC dv_max_V=0.984168 vout_min_V=0.515832 vout_max_V=1.5 dc_shift_V=-0.00105905 settled=1 t_rec_10mV_s=16.7299 t_rec_1mV_s=19.6899 t_end_s=40
+### rec_ss_27_1m
+RESULT_REC dv_max_V=0.0990263 vout_min_V=1.40097 vout_max_V=1.5 dc_shift_V=-0.000105297 settled=1 t_rec_10mV_s=4.042 t_rec_1mV_s=6.922 t_end_s=40
+### rec_ss_27_5m
+RESULT_REC dv_max_V=0.493124 vout_min_V=1.00688 vout_max_V=1.5 dc_shift_V=-0.000528022 settled=1 t_rec_10mV_s=15.3001 t_rec_1mV_s=18.2201 t_end_s=40
+### rec_ss_-40_10m
+RESULT_REC dv_max_V=0.983102 vout_min_V=0.516991 vout_max_V=1.50009 dc_shift_V=-0.000919599 settled=1 t_rec_10mV_s=22.5296 t_rec_1mV_s=24.8496 t_end_s=40
+### rec_ss_-40_1m
+RESULT_REC dv_max_V=0.0990106 vout_min_V=1.40108 vout_max_V=1.50009 dc_shift_V=-0.000175165 settled=1 t_rec_10mV_s=3.56742 t_rec_1mV_s=5.84742 t_end_s=40
+### rec_ss_-40_5m
+RESULT_REC dv_max_V=0.49223 vout_min_V=1.00786 vout_max_V=1.50009 dc_shift_V=-0.000505101 settled=1 t_rec_10mV_s=15.5646 t_rec_1mV_s=17.8446 t_end_s=40
+### rec_typical_27_10m
+RESULT_REC dv_max_V=0.983274 vout_min_V=0.516726 vout_max_V=1.5 dc_shift_V=-0.00105919 settled=1 t_rec_10mV_s=12.0048 t_rec_1mV_s=14.6848 t_end_s=40
+### rec_typical_27_1m
+RESULT_REC dv_max_V=0.098973 vout_min_V=1.40103 vout_max_V=1.5 dc_shift_V=-0.000105534 settled=1 t_rec_10mV_s=3.66967 t_rec_1mV_s=6.30967 t_end_s=40
+### rec_typical_27_5m
+RESULT_REC dv_max_V=0.493037 vout_min_V=1.00696 vout_max_V=1.5 dc_shift_V=-0.000528223 settled=1 t_rec_10mV_s=11.722 t_rec_1mV_s=14.362 t_end_s=40
+### rec_typical_-40_10m
+RESULT_REC dv_max_V=0.982261 vout_min_V=0.517739 vout_max_V=1.5 dc_shift_V=-0.000826766 settled=1 t_rec_10mV_s=17.2899 t_rec_1mV_s=19.3699 t_end_s=40
+### rec_typical_-40_1m
+RESULT_REC dv_max_V=0.0989586 vout_min_V=1.40104 vout_max_V=1.5 dc_shift_V=-8.23485E-05 settled=1 t_rec_10mV_s=3.25334 t_rec_1mV_s=5.33334 t_end_s=40
+### rec_typical_-40_5m
+RESULT_REC dv_max_V=0.492063 vout_min_V=1.00794 vout_max_V=1.5 dc_shift_V=-0.000412276 settled=1 t_rec_10mV_s=14.1132 t_rec_1mV_s=16.1932 t_end_s=40
+### rec_typical_85_10m
+RESULT_REC dv_max_V=0.983521 vout_min_V=0.516479 vout_max_V=1.5 dc_shift_V=-0.00124003 settled=1 t_rec_10mV_s=7.43612 t_rec_1mV_s=10.5561 t_end_s=40
+### rec_typical_85_1m
+RESULT_REC dv_max_V=0.0989806 vout_min_V=1.40102 vout_max_V=1.5 dc_shift_V=-0.000123622 settled=1 t_rec_10mV_s=3.92512 t_rec_1mV_s=7.00512 t_end_s=40
+### rec_typical_85_5m
+RESULT_REC dv_max_V=0.493726 vout_min_V=1.00627 vout_max_V=1.5 dc_shift_V=-0.000618558 settled=1 t_rec_10mV_s=7.37043 t_rec_1mV_s=10.4904 t_end_s=40

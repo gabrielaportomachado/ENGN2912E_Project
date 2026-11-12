@@ -1,0 +1,18 @@
+### loop_ff_27
+RESULT T_100Hz_dB=61.0357 fu_Hz=276487 pm_deg=70.5862 fu_Vinj_only_Hz=303997
+### loop_ff_-40
+RESULT T_100Hz_dB=61.4643 fu_Hz=338699 pm_deg=70.3565 fu_Vinj_only_Hz=373347
+### loop_ff_85
+RESULT T_100Hz_dB=60.6831 fu_Hz=238780 pm_deg=70.9203 fu_Vinj_only_Hz=261933
+### loop_ss_27
+RESULT T_100Hz_dB=60.503 fu_Hz=227242 pm_deg=75.5293 fu_Vinj_only_Hz=249261
+### loop_ss_-40
+RESULT T_100Hz_dB=61.0536 fu_Hz=279615 pm_deg=75.4545 fu_Vinj_only_Hz=307923
+### loop_ss_85
+RESULT T_100Hz_dB=60.0673 fu_Hz=196534 pm_deg=75.6538 fu_Vinj_only_Hz=215311
+### loop_typical_27
+RESULT T_100Hz_dB=60.7914 fu_Hz=249630 pm_deg=73.3618 fu_Vinj_only_Hz=274490
+### loop_typical_-40
+RESULT T_100Hz_dB=61.2842 fu_Hz=307671 pm_deg=73.1582 fu_Vinj_only_Hz=339149
+### loop_typical_85
+RESULT T_100Hz_dB=60.4075 fu_Hz=216519 pm_deg=73.5193 fu_Vinj_only_Hz=237449

@@ -1,0 +1,61 @@
+* A3: loop gain T of the real stage-1 closed loop (REC side, Randles source, real feedback network) by the
+* Middlebrook/Tian two-injection method (Tian et al. 2001): break the loop at the inverting gate, run
+* (V) a series voltage injection and (I) a shunt current injection, combine
+*     T = (Tv*Ti - 1) / (Tv + Ti + 2).
+* Both runs live in one netlist as two identical copies of the closed loop (instance parameters BRKV/BRKI).
+* The break is validated against an analytic loop (tb_tian_check.spice, sim/a3_tian_check.log).
+* Feedback R is an IDEAL RESISTOR (AC only: irrelevant above ~1 Hz) so the DC point is easy.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.include ../spice/stage1.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param VCM_IN=1.5
+.param IBIAS=20u
+.param RMODE=1
+.param RFIX=5.2e12
+.param CL_NEXT=2p
+.param VTT=0.2
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}                $ IDEAL
+Ib2 ibias2 0 {IBIAS}              $ IDEAL (second copy)
+Vcm vcm 0 {VCM_IN}                $ IDEAL
+Vt vt 0 {VTT}                     $ IDEAL
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 0
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc1 vd tis rec1 ref1 vosr vosf src_randles
+Xsrc2 vd tis rec2 ref2 vosr vosf src_randles
+XsV rec1 ref1 vout1 vdd 0 ibias vcm vt stage1 BRKV=1 BRKI=0
+XsI rec2 ref2 vout2 vdd 0 ibias2 vcm vt stage1 BRKV=0 BRKI=1
+CL2a vout1 0 {CL_NEXT}           $ PLACEHOLDER
+CL2b vout2 0 {CL_NEXT}           $ PLACEHOLDER
+.nodeset v(xsv.vn)=1.5 v(xsv.vp)=1.5 v(xsv.vng)=1.5 v(vout1)=1.5 v(xsv.xota.o1)=0.78 v(xsv.xota.d1)=0.78 v(xsv.xota.tail)=2.55
+.nodeset v(xsi.vn)=1.5 v(xsi.vp)=1.5 v(xsi.vng)=1.5 v(vout2)=1.5 v(xsi.xota.o1)=0.78 v(xsi.xota.d1)=0.78 v(xsi.xota.tail)=2.55
+.control
+ac dec 20 1e-2 1e9
+* V injection: Vbrk (AC 1) between vng (gate) and vn (network)
+let tv = -v(xsv.vn)/v(xsv.vng)
+* I injection: Ibrk (AC 1) into vng; the current returned into the network is the current through Vbrk (vng -> vn).
+* Formula validated in tb_tian_check (exact against the analytic loop, sim/a3_tian_check.log).
+let iret = v.xsi.vbrk#branch
+let ti = iret/(1 - iret)
+let t = (tv*ti - 1)/(tv + ti + 2)
+let tdb = vdb(t)
+let tph = cph(t)*180/pi
+meas ac t_lf find tdb at=100
+meas ac t_max max tdb
+meas ac fu when tdb=0 fall=1
+meas ac ph_fu find tph at=$&fu
+let pm = 180 + ph_fu
+let tvdb = vdb(tv)
+meas ac fu_v when tvdb=0 fall=1
+echo RESULT T_100Hz_dB=$&t_lf fu_Hz=$&fu pm_deg=$&pm fu_Vinj_only_Hz=$&fu_v
+wrdata ../sim/a3_loop_bode.csv tdb tph
+quit
+.endc
+.end

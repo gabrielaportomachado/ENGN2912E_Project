@@ -1,0 +1,53 @@
+* A3 validation of the Tian loop-break used in tb_ota1_loop: an analytic capacitive-feedback loop.
+* Op-amp = IDEAL VCVS with one pole (A0=1e4, fp=100 Hz) driving the output, gate = capacitor Cx to ground (the
+* input-pair Cgg).  Analytic loop gain:  T(s) = A(s) * Cf / (Cf + Cin + Cx).   Source impedance zero.
+.param A0=1e4 FP=100 CIN=20p CF=200f CX=4p
+Vsrc in 0 0
+* copy V: series voltage injection at the gate side
+Cin1 in n1 {CIN}
+Cf1 n1 o1 {CF}
+Cx1 g1 0 {CX}
+Vb1 g1 n1 dc 0 ac 1
+Gi1 0 e1 g1 0 {A0}
+Re1 e1 0 1
+Ce1 e1 0 {1/(2*3.14159265358979*FP)}
+Eo1 o1 0 e1 0 -1
+* copy I: shunt current injection at the gate
+Cin2 in n2 {CIN}
+Cf2 n2 o2 {CF}
+Cx2 g2 0 {CX}
+Vb2 g2 n2 dc 0
+Ib2 0 g2 dc 0 ac 1
+Gi2 0 e2 g2 0 {A0}
+Re2 e2 0 1
+Ce2 e2 0 {1/(2*3.14159265358979*FP)}
+Eo2 o2 0 e2 0 -1
+.control
+ac dec 10 1 1e8
+let tv = -v(n1)/v(g1)
+let iret = vb2#branch
+let tia = iret/(1 - iret)
+let tib = -iret/(1 - iret)
+let tc1 = (tv*tia - 1)/(tv + tia + 2)
+let tc2 = (tv*tib - 1)/(tv + tib + 2)
+* analytic
+let s = 2*3.14159265358979*frequency*j(1)
+let tan = (10000/(1 + s/(2*3.14159265358979*100))) * 200f/(200f + 20p + 4p)
+let e1m = vdb(tc1) - vdb(tan)
+let e2m = vdb(tc2) - vdb(tan)
+let ph1 = ph(tc1)*180/pi - ph(tan)*180/pi
+let ph2 = ph(tc2)*180/pi - ph(tan)*180/pi
+meas ac e1_max max e1m
+meas ac e1_min min e1m
+meas ac e2_max max e2m
+meas ac e2_min min e2m
+echo CHECK candidate_A(+iret/(1-iret)): dB_err_max=$&e1_max dB_err_min=$&e1_min
+echo CHECK candidate_B(-iret/(1-iret)): dB_err_max=$&e2_max dB_err_min=$&e2_min
+let tvdb = vdb(tv)
+meas ac tv1k find tvdb at=1k
+meas ac tan1k find vdb(tan) at=1k
+meas ac tc1k find vdb(tc1) at=1k
+echo CHECK at 1 kHz: Tv=$&tv1k dB  T_formulaA=$&tc1k dB  T_analytic=$&tan1k dB
+quit
+.endc
+.end

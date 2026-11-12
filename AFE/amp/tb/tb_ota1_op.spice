@@ -1,0 +1,79 @@
+* A3: .op of the stage-1 OTA as a unity follower (inn = out) at VCM_IN: every transistor's region and headroom.
+* Criterion (derived, not a target): saturation margin |Vds| - |Vdsat| >= 50 mV for every transistor.
+* Also prints gm/Id (inversion level), the output offset (out - VCM_IN) and the supply current.
+.include ../spice/models_typical.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.temp 27
+.param VCM_IN=1.5
+.param IBIAS=20u
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}         $ IDEAL bias current (sink)
+Vcm inp 0 {VCM_IN}         $ IDEAL
+Xota inp out ibias out vdd 0 ota1
+.control
+save all
+op
+let id_xmb = abs(@m.xota.xmb.m0[id])
+let vgs_xmb = abs(@m.xota.xmb.m0[vgs])
+let vds_xmb = abs(@m.xota.xmb.m0[vds])
+let vdsat_xmb = abs(@m.xota.xmb.m0[vdsat])
+let sat_xmb = vds_xmb - vdsat_xmb
+let gmid_xmb = @m.xota.xmb.m0[gm]/id_xmb
+echo OPDEV xmb id_A=$&id_xmb vgs_V=$&vgs_xmb vds_V=$&vds_xmb vdsat_V=$&vdsat_xmb margin_V=$&sat_xmb gm_over_id=$&gmid_xmb
+let id_xmt = abs(@m.xota.xmt.m0[id])
+let vgs_xmt = abs(@m.xota.xmt.m0[vgs])
+let vds_xmt = abs(@m.xota.xmt.m0[vds])
+let vdsat_xmt = abs(@m.xota.xmt.m0[vdsat])
+let sat_xmt = vds_xmt - vdsat_xmt
+let gmid_xmt = @m.xota.xmt.m0[gm]/id_xmt
+echo OPDEV xmt id_A=$&id_xmt vgs_V=$&vgs_xmt vds_V=$&vds_xmt vdsat_V=$&vdsat_xmt margin_V=$&sat_xmt gm_over_id=$&gmid_xmt
+let id_xm1 = abs(@m.xota.xm1.m0[id])
+let vgs_xm1 = abs(@m.xota.xm1.m0[vgs])
+let vds_xm1 = abs(@m.xota.xm1.m0[vds])
+let vdsat_xm1 = abs(@m.xota.xm1.m0[vdsat])
+let sat_xm1 = vds_xm1 - vdsat_xm1
+let gmid_xm1 = @m.xota.xm1.m0[gm]/id_xm1
+echo OPDEV xm1 id_A=$&id_xm1 vgs_V=$&vgs_xm1 vds_V=$&vds_xm1 vdsat_V=$&vdsat_xm1 margin_V=$&sat_xm1 gm_over_id=$&gmid_xm1
+let id_xm2 = abs(@m.xota.xm2.m0[id])
+let vgs_xm2 = abs(@m.xota.xm2.m0[vgs])
+let vds_xm2 = abs(@m.xota.xm2.m0[vds])
+let vdsat_xm2 = abs(@m.xota.xm2.m0[vdsat])
+let sat_xm2 = vds_xm2 - vdsat_xm2
+let gmid_xm2 = @m.xota.xm2.m0[gm]/id_xm2
+echo OPDEV xm2 id_A=$&id_xm2 vgs_V=$&vgs_xm2 vds_V=$&vds_xm2 vdsat_V=$&vdsat_xm2 margin_V=$&sat_xm2 gm_over_id=$&gmid_xm2
+let id_xm3 = abs(@m.xota.xm3.m0[id])
+let vgs_xm3 = abs(@m.xota.xm3.m0[vgs])
+let vds_xm3 = abs(@m.xota.xm3.m0[vds])
+let vdsat_xm3 = abs(@m.xota.xm3.m0[vdsat])
+let sat_xm3 = vds_xm3 - vdsat_xm3
+let gmid_xm3 = @m.xota.xm3.m0[gm]/id_xm3
+echo OPDEV xm3 id_A=$&id_xm3 vgs_V=$&vgs_xm3 vds_V=$&vds_xm3 vdsat_V=$&vdsat_xm3 margin_V=$&sat_xm3 gm_over_id=$&gmid_xm3
+let id_xm4 = abs(@m.xota.xm4.m0[id])
+let vgs_xm4 = abs(@m.xota.xm4.m0[vgs])
+let vds_xm4 = abs(@m.xota.xm4.m0[vds])
+let vdsat_xm4 = abs(@m.xota.xm4.m0[vdsat])
+let sat_xm4 = vds_xm4 - vdsat_xm4
+let gmid_xm4 = @m.xota.xm4.m0[gm]/id_xm4
+echo OPDEV xm4 id_A=$&id_xm4 vgs_V=$&vgs_xm4 vds_V=$&vds_xm4 vdsat_V=$&vdsat_xm4 margin_V=$&sat_xm4 gm_over_id=$&gmid_xm4
+let id_xm6 = abs(@m.xota.xm6.m0[id])
+let vgs_xm6 = abs(@m.xota.xm6.m0[vgs])
+let vds_xm6 = abs(@m.xota.xm6.m0[vds])
+let vdsat_xm6 = abs(@m.xota.xm6.m0[vdsat])
+let sat_xm6 = vds_xm6 - vdsat_xm6
+let gmid_xm6 = @m.xota.xm6.m0[gm]/id_xm6
+echo OPDEV xm6 id_A=$&id_xm6 vgs_V=$&vgs_xm6 vds_V=$&vds_xm6 vdsat_V=$&vdsat_xm6 margin_V=$&sat_xm6 gm_over_id=$&gmid_xm6
+let id_xm7 = abs(@m.xota.xm7.m0[id])
+let vgs_xm7 = abs(@m.xota.xm7.m0[vgs])
+let vds_xm7 = abs(@m.xota.xm7.m0[vds])
+let vdsat_xm7 = abs(@m.xota.xm7.m0[vdsat])
+let sat_xm7 = vds_xm7 - vdsat_xm7
+let gmid_xm7 = @m.xota.xm7.m0[gm]/id_xm7
+echo OPDEV xm7 id_A=$&id_xm7 vgs_V=$&vgs_xm7 vds_V=$&vds_xm7 vdsat_V=$&vdsat_xm7 margin_V=$&sat_xm7 gm_over_id=$&gmid_xm7
+let vo = v(out)
+let voff = v(out) - v(inp)
+let itot = -i(Vdd)
+echo OPSUM vout_V=$&vo offset_V=$&voff i_supply_A=$&itot
+quit
+.endc
+.end

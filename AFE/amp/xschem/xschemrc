@@ -1,0 +1,8 @@
+# AFE/amp xschem project rc: relative paths only.  Run xschem from AFE/amp/xschem (or pass --rcfile xschemrc).
+# The PDK rc (symbols for gf180mcuD) is found through the PDK_ROOT / PDK environment variables.
+set PDK_RC $env(PDK_ROOT)/$env(PDK)/libs.tech/xschem/xschemrc
+if {[file exists $PDK_RC]} { source $PDK_RC }
+# this folder first, so ota1.sym / ota1.sch resolve without absolute paths
+set _here [file dirname [file normalize [info script]]]
+set XSCHEM_LIBRARY_PATH ${_here}:$XSCHEM_LIBRARY_PATH
+set netlist_dir ${_here}/netlist

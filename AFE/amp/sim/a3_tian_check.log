@@ -1,0 +1,4 @@
+CHECK candidate_A(+iret/(1-iret)): dB_err_max=1.13687E-13 dB_err_min=-1.13687E-13
+CHECK candidate_B(-iret/(1-iret)): dB_err_max=78.5734 dB_err_min=3.52926
+CHECK at 1 kHz: Tv=19.8894 dB T_formulaA=18.3011 dB T_analytic=18.3011 dB
+ngspice-46 done

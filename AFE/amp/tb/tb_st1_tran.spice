@@ -1,0 +1,84 @@
+* A3: stage-1 recovery after an electrode DC-offset step on REC (IDEAL step VSTEP at t = 0.1 s, 1 us edge).
+* Gain is inverting, so a positive step drives vout down by ~100*VSTEP and the HPF feedback brings it back.
+* Metrics (stage-1 output): peak excursion dv_max from the pre-step value; the DC shift dc_shift = final - pre-step value
+* (MIM r_leak of Cin vs the feedback R leaves a residual offset); and the LAST time v(vout) is more than 10 mV / 1 mV from
+* its FINAL value, minus the step time.  settled = 1 only if the last 3 % of the run moved < 0.2 mV.  RMODE=0: simulated pseudo_r_tune (nonlinear: large steps recover faster);
+* RMODE=1: IDEAL resistor RFIX (linear, tau = R*Cf).  Not a pass/fail test: the artifact/offset size is unspecified.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/ota1.spice
+.include ../spice/stage1.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500 chgtol=1e-19
+.temp 27
+.param VCM_IN=1.5
+.param IBIAS=20u
+.param RMODE=0
+.param RFIX=5.2e12
+.param RNOISY=1
+.param VTT=0.2
+.param CL_NEXT=2p
+.param VSTEP=1m
+.param TSTOP=8
+.param TMAXS=0.02
+Vdd vdd 0 3.3
+Ib ibias 0 {IBIAS}                $ IDEAL
+Vcm vcm 0 {VCM_IN}                $ IDEAL
+Vt vt 0 {VTT}                     $ IDEAL (Decision 9)
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 0
+Vosr vosr 0 PWL(0 0 0.1 0 '0.1+1u' {VSTEP})
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xs1 rec ref vout vdd 0 ibias vcm vt stage1
+CL2 vout 0 {CL_NEXT}              $ PLACEHOLDER
+.nodeset v(xs1.vn)=1.5 v(xs1.vp)=1.5 v(xs1.vng)=1.5 v(vout)=1.5 v(xs1.xota.o1)=0.78 v(xs1.xota.d1)=0.78 v(xs1.xota.tail)=2.55
+.nodeset v(xs1.xr1.m)=1.5 v(xs1.xr2.m)=1.5
+.tran 100u {TSTOP} 0 {TMAXS}
+.control
+run
+meas tran vbase find v(vout) at=0.05
+let vb = vbase
+let nn = length(time)
+let tend = time[nn-1]
+let vfin = v(vout)[nn-1]
+let tlate = 0.97*tend
+meas tran vlate find v(vout) at=$&tlate
+let settled = 0
+if abs(vfin - vlate) < 0.2m
+  let settled = 1
+end
+let dv = abs(v(vout) - vfin)
+let dvb = abs(v(vout) - vb)
+meas tran dv_max max dvb from=0.1 to=1e6
+meas tran vout_min min v(vout) from=0.1 to=1e6
+meas tran vout_max max v(vout) from=0.1 to=1e6
+let dcshift = vfin - vb
+* last time |v - vfin| exceeds 10 mV / 1 mV (explicit scan: robust when the threshold is never crossed)
+let tl10 = 0.1
+let tl1 = 0.1
+let i = nn - 1
+while i > 0
+  if dv[i] > 10m
+    let tl10 = time[i]
+    let i = 0
+  else
+    let i = i - 1
+  end
+end
+let i = nn - 1
+while i > 0
+  if dv[i] > 1m
+    let tl1 = time[i]
+    let i = 0
+  else
+    let i = i - 1
+  end
+end
+let tr10 = tl10 - 0.1
+let tr1 = tl1 - 0.1
+echo RESULT_REC dv_max_V=$&dv_max vout_min_V=$&vout_min vout_max_V=$&vout_max dc_shift_V=$&dcshift settled=$&settled t_rec_10mV_s=$&tr10 t_rec_1mV_s=$&tr1 t_end_s=$&tend
+quit
+.endc
+.end

@@ -1,0 +1,25 @@
+### ac_CL0.5p
+RESULT g_mid_dB=39.869 g_pk_dB=39.91 f_lo_Hz=0.143559 f_hi_Hz=324276 ph_mid_deg=-179.319 g_300_dB=39.9018
+OPSUM vout_V=1.5 vout_err_V=-1.40194E-07 i_supply_A=6.00382E-05
+### ac_CL10p
+RESULT g_mid_dB=39.869 g_pk_dB=40.8247 f_lo_Hz=0.183184 f_hi_Hz=327885 ph_mid_deg=-179.32 g_300_dB=39.9018
+OPSUM vout_V=1.5 vout_err_V=-1.40194E-07 i_supply_A=6.00382E-05
+### ac_CL1p
+RESULT g_mid_dB=39.869 g_pk_dB=39.91 f_lo_Hz=0.14356 f_hi_Hz=337825 ph_mid_deg=-179.319 g_300_dB=39.9018
+OPSUM vout_V=1.5 vout_err_V=-1.40194E-07 i_supply_A=6.00382E-05
+### ac_CL2p
+RESULT g_mid_dB=39.869 g_pk_dB=39.9101 f_lo_Hz=0.143562 f_hi_Hz=362298 ph_mid_deg=-179.319 g_300_dB=39.9018
+OPSUM vout_V=1.5 vout_err_V=-1.40194E-07 i_supply_A=6.00382E-05
+### ac_CL5p
+RESULT g_mid_dB=39.869 g_pk_dB=39.9144 f_lo_Hz=0.143721 f_hi_Hz=386091 ph_mid_deg=-179.319 g_300_dB=39.9018
+OPSUM vout_V=1.5 vout_err_V=-1.40194E-07 i_supply_A=6.00382E-05
+### loop_CL0.5p
+RESULT T_100Hz_dB=60.8037 fu_Hz=255806 pm_deg=79.0592 fu_Vinj_only_Hz=286253
+### loop_CL10p
+RESULT T_100Hz_dB=60.7251 fu_Hz=207899 pm_deg=54.0099 fu_Vinj_only_Hz=216888
+### loop_CL1p
+RESULT T_100Hz_dB=60.7996 fu_Hz=253945 pm_deg=77.0861 fu_Vinj_only_Hz=282292
+### loop_CL2p
+RESULT T_100Hz_dB=60.7914 fu_Hz=249630 pm_deg=73.3618 fu_Vinj_only_Hz=274490
+### loop_CL5p
+RESULT T_100Hz_dB=60.7668 fu_Hz=234081 pm_deg=64.1118 fu_Vinj_only_Hz=250030

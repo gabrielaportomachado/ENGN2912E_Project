@@ -1,0 +1,20 @@
+* A3 stage-1 OTA sizing: ONE source of truth, included by the hand netlist (spice/ota1.spice)
+* testbenches AND by the xschem-netlisted ota1 (xschem/ota1.sch uses m={OTA_*}, W={OTA_W*}, L={OTA_L*}).
+* One parameter per line so scripts/ngrun.sh can override them (a later .param wins in ngspice).
+* Input pair (PMOS, pair unit 50u/2u, A1 Decision 5): 16 x 50u/2u = 800u/2u, 10 uA per side.
+.param OTA_KP=16
+.param OTA_WP=50u
+.param OTA_LP=2u
+* Bias diode, tail and 2nd-stage PMOS current source (PMOS unit 50u/4u, m=2 per 20 uA).
+.param OTA_KB=2
+.param OTA_KT=2
+.param OTA_K7=2
+.param OTA_WT=50u
+.param OTA_LT=4u
+* NMOS mirror load (Decision 5: 1-2 x 50u/16u) and 2nd-stage NMOS (same L so Vgs6 = Vgs of the load).
+.param OTA_KN=2
+.param OTA_WN=50u
+.param OTA_LN=16u
+.param OTA_K6=4
+* Miller compensation: Cc is a MIM (cap_mim_2f0_m2m3_noshield), square, side OTA_LCC
+.param OTA_LCC=22u
