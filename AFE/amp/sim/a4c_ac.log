@@ -1,0 +1,6 @@
+### ac typical 27
+RESULT g_mid_dB=60.0559 g1_mid_dB=39.9906 g_pk_dB=60.056 f_lo_Hz=0.202294 f_hi_Hz=653.461 ph_mid_deg=0.125918 g_300_dB=59.2288 g_0p5_dB=59.4826
+### ac ff 85
+RESULT g_mid_dB=60.0605 g1_mid_dB=39.9895 g_pk_dB=60.0606 f_lo_Hz=0.225241 f_hi_Hz=997.572 ph_mid_deg=0.616427 g_300_dB=59.6866 g_0p5_dB=59.3379
+### ac ss -40
+RESULT g_mid_dB=60.0411 g1_mid_dB=39.9907 g_pk_dB=60.0417 f_lo_Hz=0.237315 f_hi_Hz=422.021 ph_mid_deg=-0.257779 g_300_dB=58.2721 g_0p5_dB=59.2671

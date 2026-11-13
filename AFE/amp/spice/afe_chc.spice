@@ -1,0 +1,18 @@
+* A4c one channel: stage 1 -> stage 2 + follower, with the GATE-SWITCHED pseudo-resistor reset (item A) and the REC PARK switch (item B).  Shared references from bias_genc.
+* Reset (fs = 1): per stage, the pseudo-R gate node (gm1 / gm2) is switched from its normal ladder tap (vg1 / vg2) to the reset level vrs: one PMOS (gate fs, normal path) + one NMOS (gate fs, reset path)
+* per stage = 4 small devices per channel, NO inverter (the old fsb inverter and the 3 transmission gates, 7 x 2 devices, are gone).  Cf stays in the loop, no unity-gain follower state.
+* Park (item B): transmission gate rec <-> vcm tied to VCM_IN while the routing switch is open: NMOS gate pkc (= the routing switch's CBAR net, HIGH = routing switch open = park ON), PMOS gate pkcb (= the routing switch's C net).
+* Pins: rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb.
+.subckt afe_chc rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb params: BRKV=0 BRKI=0
+Xsink1 ibias1 vbn vss vss nfet_03v3 W=16u L=4u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 m={BM_KS1}
+* gate muxes: normal path = PMOS (gate fs, conducts when fs = 0), reset path = NMOS (gate fs, conducts when fs = 1)
+Xmp1 gm1 fs vg1 vdd pfet_03v3 W={MXW} L={MXL} nf=1 ad={DIFF*MXW*0.18u} as={DIFF*MXW*0.18u} pd={DIFF*2*(MXW+0.18u)} ps={DIFF*2*(MXW+0.18u)} nrd=0 nrs=0
+Xmn1 gm1 fs vrs vss nfet_03v3 W={MXW} L={MXL} nf=1 ad={DIFF*MXW*0.18u} as={DIFF*MXW*0.18u} pd={DIFF*2*(MXW+0.18u)} ps={DIFF*2*(MXW+0.18u)} nrd=0 nrs=0
+Xmp2 gm2 fs vg2 vdd pfet_03v3 W={MXW} L={MXL} nf=1 ad={DIFF*MXW*0.18u} as={DIFF*MXW*0.18u} pd={DIFF*2*(MXW+0.18u)} ps={DIFF*2*(MXW+0.18u)} nrd=0 nrs=0
+Xmn2 gm2 fs vrs vss nfet_03v3 W={MXW} L={MXL} nf=1 ad={DIFF*MXW*0.18u} as={DIFF*MXW*0.18u} pd={DIFF*2*(MXW+0.18u)} ps={DIFF*2*(MXW+0.18u)} nrd=0 nrs=0
+* REC park transmission gate (rec <-> vcm)
+Xpkn rec pkc vcm vss nfet_03v3 W={PKWN} L={PKL} nf=1 ad={DIFF*PKWN*0.18u} as={DIFF*PKWN*0.18u} pd={DIFF*2*(PKWN+0.18u)} ps={DIFF*2*(PKWN+0.18u)} nrd=0 nrs=0
+Xpkp rec pkcb vcm vdd pfet_03v3 W={PKWP} L={PKL} nf=1 ad={DIFF*PKWP*0.18u} as={DIFF*PKWP*0.18u} pd={DIFF*2*(PKWP+0.18u)} ps={DIFF*2*(PKWP+0.18u)} nrd=0 nrs=0
+Xs1 rec ref v1 vdd vss ibias1 vcm gm1 stage1c BRKV={BRKV} BRKI={BRKI}
+Xs2 v1 out vdd vss vbn vcmo gm2 stage2c
+.ends afe_chc

@@ -1,0 +1,36 @@
+### noise typical 27 FN=0 RFIX=5.23534E+12 (stage 1, VTT 0.2) RFIX2=5.23572E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.0016787 vn_in_mid_V=1.66753E-06 vn_in_ngspice_V=1.69365E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.67017E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.79647E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.82648E-06
+### noise typical 27 FN=1 RFIX=5.23534E+12 (stage 1, VTT 0.2) RFIX2=5.23572E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00475114 vn_in_mid_V=4.71952E-06 vn_in_ngspice_V=4.77837E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.73822E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.9806E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.00323E-06
+### noise ff 85 FN=0 RFIX=4.68481E+12 (stage 1, VTT 0.2) RFIX2=6.22437E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00186041 vn_in_mid_V=1.84693E-06 vn_in_ngspice_V=1.87915E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.84729E-06
+NOISE_C_0p5_2k vn_in_mid_V=2.00323E-06
+NOISE_D_0p5_1M vn_in_mid_V=2.0547E-06
+### noise ff 85 FN=1 RFIX=4.68481E+12 (stage 1, VTT 0.2) RFIX2=6.22437E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00496945 vn_in_mid_V=4.93343E-06 vn_in_ngspice_V=4.99E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.93761E-06
+NOISE_C_0p5_2k vn_in_mid_V=5.28175E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.32641E-06
+### noise ss -40 FN=0 RFIX=4.0999E+12 (stage 1, VTT 0.2) RFIX2=4.0999E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00154739 vn_in_mid_V=1.53982E-06 vn_in_ngspice_V=1.57986E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.55098E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.62546E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.64096E-06
+### noise ss -40 FN=1 RFIX=4.0999E+12 (stage 1, VTT 0.2) RFIX2=4.0999E+12 (stage 2, VTT 0.9): IDEAL RESISTOR (noise) = R0 of the A4c pseudo-R (0.22u/0.5u, sim/a4c_prsize.csv) at this corner
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.0044148 vn_in_mid_V=4.39318E-06 vn_in_ngspice_V=4.48969E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.4422E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.5599E-06
+NOISE_D_0p5_1M vn_in_mid_V=4.57041E-06

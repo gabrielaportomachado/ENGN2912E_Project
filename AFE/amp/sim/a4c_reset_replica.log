@@ -1,0 +1,10 @@
+# A4c reset-level replica (tb/tb_a4c_bias.spice): corner T vrs_V vcm_in_V I_master_A I_ref_A R0_reset_ohm (pseudo-R pair 0.22u/0.5u, gate at vrs, both nodes at vcm_in)
+typical -40 vrs=0.929467 vcm=1.64861 Imaster=6.54267E-07 Iref=1.55166E-09 R0=3.01457E+07
+typical 27 vrs=1.02771 vcm=1.64842 Imaster=8.46588E-07 Iref=2.21272E-09 R0=2.57039E+07
+typical 85 vrs=1.11139 vcm=1.64826 Imaster=1.03005E-06 Iref=2.85086E-09 R0=2.30273E+07
+ff -40 vrs=1.04386 vcm=1.64859 Imaster=8.53284E-07 Iref=2.06506E-09 R0=2.27439E+07
+ff 27 vrs=1.14011 vcm=1.6484 Imaster=1.11164E-06 Iref=2.95082E-09 R0=1.94275E+07
+ff 85 vrs=1.22173 vcm=1.64823 Imaster=1.36961E-06 Iref=3.83584E-09 R0=1.73001E+07
+ss -40 vrs=0.813879 vcm=1.64864 Imaster=5.27286E-07 Iref=1.21583E-09 R0=3.85482E+07
+ss 27 vrs=0.913448 vcm=1.64845 Imaster=6.84556E-07 Iref=1.7435E-09 R0=3.25753E+07
+ss 85 vrs=0.998332 vcm=1.64828 Imaster=8.32443E-07 Iref=2.24778E-09 R0=2.91E+07

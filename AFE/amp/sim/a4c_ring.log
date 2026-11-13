@@ -1,0 +1,7 @@
+# A4c ring check (scripts/run_a4c.sh ring, scripts/a4c_ring.py): reset held ON (fs rises at 20 us), 1 mV REC step at 200 us (= ~90 mV at v1), final netlist (pseudo-R 0.22u/0.5u, replica sink 0.28u/40u): v1 response; ONE sign change of dv/dt = monotone decay, no ringing
+ff_-40.csv v0 1.6486 peak |dv| 90.6 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.558 1.649
+ff_85.csv v0 1.6482 peak |dv| 87.3 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.561 1.648
+ss_-40.csv v0 1.6487 peak |dv| 91.6 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.557 1.649
+ss_85.csv v0 1.6483 peak |dv| 88.4 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.560 1.648
+typical_27.csv v0 1.6484 peak |dv| 89.4 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.559 1.648
+typical_85.csv v0 1.6483 peak |dv| 88.1 mV dv(399us) -0.0 mV sign changes of dv/dt 1 v1 min/max 1.560 1.648

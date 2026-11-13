@@ -1,0 +1,20 @@
+* A4c fast-settle ONE-SHOT (replaces the A4b RC one-shot): a CURRENT-STARVED timer.  trig = the C net of the routing switch (HIGH = routing switch closes = record mode begins).
+* Before the edge (trig = 0): PMOS Xpu holds timer node t at VDD, fs = 0.  After the edge: Xpu is off, t is discharged by a mirror leg of the master (W/L = 0.28u/40u x RTM = ~I_REF ~ nA, the SAME current that sets the
+* pseudo-resistor reset resistance R_reset ~ 2 Ut / I_REF), so the pulse width  T_FS ~ C_T (VDD - Vth)/I_T  scales with 1/I like the time the reset needs (slow/cold corner: smaller current, longer pulse).
+* fs = trig AND t  (NAND + inverter).  C_T = MIM (MOS cap avoided: gate leakage would compete with nA).  Pins: trig fs vbn vdd vss.   Diffusion parameters: DIFF scheme of ota1.spice.
+.param CT=4p RTM=1
+.param LCT='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CT))/(2*CAPK_A)'
+.subckt fs_oneshot_c trig fs vbn vdd vss
+Xpu t trig vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xlt t vbn vss vss nfet_03v3 W=0.28u L=40u nf=1 ad={DIFF*0.28u*0.18u} as={DIFF*0.28u*0.18u} pd={DIFF*2*(0.28u+0.18u)} ps={DIFF*2*(0.28u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={RTM}
+Xct t vss cap_mim_2f0_m2m3_noshield c_length={LCT} c_width={LCT}
+Xnp1 nd trig vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnp2 nd t vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnn1 nd trig mm vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnn2 mm t vss vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xop fs nd vdd vdd pfet_03v3 W=2u L=0.5u nf=1 ad={DIFF*2u*0.18u} as={DIFF*2u*0.18u} pd={DIFF*2*(2u+0.18u)} ps={DIFF*2*(2u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xon fs nd vss vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+* 10 TOhm resistors only give the floating nodes (timer node before the first edge, NAND stack node) a defined DC state
+Rt t vss 1e13
+Rmm mm vss 1e13
+.ends fs_oneshot_c

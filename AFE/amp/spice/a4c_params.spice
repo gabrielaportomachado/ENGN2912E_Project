@@ -1,0 +1,12 @@
+* A4c parameters (included AFTER afe_params.spice).  Fast-settle redesign (Decision 36): gate-switched pseudo-resistor reset + REC park switch.
+* vrs = reset gate level (replica diode in bias_genc): pseudo-R gate of BOTH stages is switched from its normal tap (vg1 / vg2) to vrs while fs = 1.
+* PR1W/PR1L, PR2W/PR2L = pseudo-resistor device size of stage 1 / stage 2 (A2: 1u/2u; A4c: 0.22u/0.5u, sim/a4c_prsize.csv: R0 identical on the floor; in the normal state R0 sits on the PDK junction floor, independent of W and L, so the size mainly sets R_reset and the channel charge).
+* Reset-level replica (bias_genc): sink leg RSW/RSL x RSM of the master's 16u/4u mirror -> I_REF ~ 0.85 uA x (RSW/RSL x RSM)/4 (typ); C_VRS holds the node.
+.param RSW=0.28u RSL=40u RSM=1
+.param C_VRS=5p
+.param LCVRS='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*C_VRS))/(2*CAPK_A)'
+.param PR1W=0.22u PR1L=0.5u
+.param PR2W=0.22u PR2L=0.5u
+* gate-mux switches (normal-path PMOS, reset-path NMOS) and park TG sizes
+.param MXW=0.5u MXL=0.5u
+.param PKWN=1u PKWP=2u PKL=0.5u

@@ -1,0 +1,26 @@
+* A4c: the current-starved one-shot (spice/fs_oneshot_c.spice) simulated alone with a real bias_genc (vbn) and the load it sees in the channel (4 gate-mux devices, ~5 fF ESTIMATE).
+* trig rises at T_TRIG (record mode begins) and falls at T_END.  Output v(fs); pulse width = 50 % crossings.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/bias_genc.spice
+.include ../spice/fs_oneshot_c.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param T_TRIG=1m T_END=40m TSTOP=45m
+Vdd vdd 0 3.3
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+Vtrg trg 0 PWL(0 0 {T_TRIG} 0 {T_TRIG+10n} 3.3 {T_END} 3.3 {T_END+10n} 0)
+Xfso trg fs vbn vdd 0 fs_oneshot_c
+Cl fs 0 5f
+.nodeset v(vrs)=0.99 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55 v(xfso.t)=3.3
+.tran 1u {TSTOP} 0 20u
+.control
+save v(fs) v(xfso.t) i(Vdd)
+run
+wrdata @OUT@ v(fs) v(xfso.t) i(Vdd)
+quit
+.endc
+.end

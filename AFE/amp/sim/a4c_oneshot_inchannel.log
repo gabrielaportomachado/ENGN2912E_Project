@@ -1,0 +1,11 @@
+# A4c: the REAL one-shot IN the channel netlist (FS_SRC=3, no TGATE; trigger = PWL edge at 0.09999 s; typical 27 C; 100 mV REC step at 0.1 s; TSTEP 3u TMAXS 0.9m (TSTEP 1u / TMAXS 1m aborted at 0.4 us, random 'timestep too small', same retry rule as scripts/run_a4c.sh)). out/v1 relative to the value at 0.05 s.
+rest {'out': np.float64(1.65018), 'v1': np.float64(1.64842), 'vn1': np.float64(1.64856), 'vn2': np.float64(1.65016)} tmax 3.0 npts 4034
+t=0.1001    out-rest   100.969 mV  v1 -1641.986 mV  vn1    39.003 mV  vn2   132.916 mV  fs 3.30 vrs 1.028 gm1 1.028
+t=0.101     out-rest  -102.670 mV  v1    -0.036 mV  vn1    -2.439 mV  vn2   -46.228 mV  fs 3.30 vrs 1.028 gm1 1.028
+t=0.103     out-rest    -0.014 mV  v1    -0.003 mV  vn1    -0.233 mV  vn2     0.003 mV  fs 3.30 vrs 1.028 gm1 1.028
+t=0.1036    out-rest    -0.234 mV  v1    -0.036 mV  vn1    -0.167 mV  vn2     0.095 mV  fs 0.00 vrs 1.027 gm1 1.850
+t=0.104     out-rest    -1.075 mV  v1    -0.044 mV  vn1    -0.167 mV  vn2     0.015 mV  fs 0.00 vrs 1.028 gm1 1.850
+t=0.11      out-rest     0.959 mV  v1    -0.269 mV  vn1    -0.167 mV  vn2    -0.008 mV  fs -0.00 vrs 1.028 gm1 1.850
+t=0.2       out-rest    11.810 mV  v1    -1.384 mV  vn1    -0.167 mV  vn2    -0.014 mV  fs -0.00 vrs 1.028 gm1 1.850
+t=1         out-rest    43.404 mV  v1    -5.936 mV  vn1    -0.166 mV  vn2    -0.046 mV  fs 0.00 vrs 1.028 gm1 1.850
+t=3         out-rest    32.593 mV  v1    -9.330 mV  vn1    -0.163 mV  vn2    -0.034 mV  fs -0.00 vrs 1.028 gm1 1.850

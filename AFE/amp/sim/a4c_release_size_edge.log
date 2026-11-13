@@ -1,0 +1,19 @@
+# A4c: release charge injection versus pseudo-R device size (both stages, same size in the replica) and versus release edge time.  typical 27 C, 100 mV REC step at 0.1 s, ideal reset pulse 10 ms (TSTOP 2 s). Columns as sim/a4c_rec.log (rel = out/v1 step in the 20 us after release; +1 ms/+10 ms/+100 ms = out - rest).
+## size 1u/2u, edge 100 ns
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -1.400 mV v1  -0.529 mV | out-rest at +1ms  -18.380 +10ms  -16.289 +100ms   -6.392 mV | final(end)   34.459 mV
+## size 0.5u/1u, edge 100 ns
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -0.386 mV v1  -0.138 mV | out-rest at +1ms   -5.015 +10ms   -2.759 +100ms    6.698 mV | final(end)   42.114 mV
+## size 0.22u/1u, edge 100 ns
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -0.167 mV v1  -0.066 mV | out-rest at +1ms   -2.086 +10ms    0.208 +100ms    9.557 mV | final(end)   43.871 mV
+## size 0.22u/0.5u, edge 100 ns
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -0.085 mV v1  -0.047 mV | out-rest at +1ms   -1.047 +10ms    1.260 +100ms   10.566 mV | final(end)   44.470 mV
+## size 0.22u/0.28u, edge 100 ns
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -0.055 mV v1  -0.042 mV | out-rest at +1ms   -0.620 +10ms    1.690 +100ms   10.972 mV | final(end)   44.678 mV
+## size 1u/2u, edge 100n
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -1.400 mV v1  -0.529 mV | out-rest at +1ms  -18.380 +10ms  -16.289 +100ms   -6.392 mV | final(end)   34.459 mV
+## size 1u/2u, edge 10u
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out  -0.393 mV v1  -0.451 mV | out-rest at +1ms  -22.761 +10ms  -20.710 +100ms  -10.218 mV | final(end)   34.917 mV
+## size 1u/2u, edge 100u
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out   0.000 mV v1  -0.000 mV | out-rest at +1ms  -23.109 +10ms  -21.359 +100ms  -10.782 mV | final(end)   34.933 mV
+## size 1u/2u, edge 1m
+typical_27_os100m_w10m             os  100.0 mV pulse  10.000 ms | release step out   0.000 mV v1   0.000 mV | out-rest at +1ms   -0.022 +10ms  -21.799 +100ms  -11.123 mV | final(end)   35.074 mV

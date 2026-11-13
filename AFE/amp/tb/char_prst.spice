@@ -1,0 +1,25 @@
+* A4c: small-signal resistance of the pseudo-resistor pair (pseudo_r_fg 1u/2u) versus gate level G (reset level), nodes at VCM = 1.65 V.
+* R_RST(G) = dV/dI over +-10 mV.  Corner/temp rewritten by the driver; G is swept in a loop.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param VCM=1.65
+Vg g 0 1
+Vb b 0 {VCM}
+Va a 0 {VCM}
+Xr a b g pseudo_r_fg W=1u L=2u
+.nodeset v(xr.m)={VCM}
+.control
+let gv = 1.65
+while gv > -0.01
+  alter Vg dc = $&gv
+  dc Va 1.64 1.66 0.01
+  let iv = -i(Va)
+  let rr = 0.02/(iv[2] - iv[0])
+  echo RESULT $&gv $&rr
+  let gv = gv - 0.05
+end
+quit
+.endc
+.end

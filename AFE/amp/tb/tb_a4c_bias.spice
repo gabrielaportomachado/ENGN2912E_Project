@@ -1,0 +1,29 @@
+* A4c: bias_genc DC: master / reset-replica current, vrs, and R0 of a pseudo_r_fg pair (1u/2u) with its gate at vrs and both nodes at vcm_in.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/bias_genc.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+Vdd vdd 0 3.3
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+Va a 0 1.65
+Vb b 0 1.65
+Xr a b vrs pseudo_r_fg W={PR1W} L={PR1L}
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55 v(vrs)=1.1 v(xr.m)=1.65
+.control
+save all @m.xbias.xmn1.m0[id] @m.xbias.xsr.m0[id]
+dc Va 1.64 1.66 0.01
+let iv = -i(Va)
+let rr = 0.02/(iv[2]-iv[0])
+let r0 = rr
+let vv = v(vrs)[1]
+let vc = v(vcm)[1]
+let im = @m.xbias.xmn1.m0[id][1]
+let ir = @m.xbias.xsr.m0[id][1]
+echo RESULT vrs=$&vv vcm=$&vc Imaster=$&im Iref=$&ir R0=$&r0
+quit
+.endc
+.end

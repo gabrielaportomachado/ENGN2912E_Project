@@ -1,0 +1,32 @@
+### loop corner=typical T=27 VRS=0 PR1=1u/2u 
+RESULT T_100Hz_dB=109.536 fu_Hz=962120 pm_deg=-20.4044
+### loop corner=typical T=27 VRS=0.3 PR1=1u/2u 
+RESULT T_100Hz_dB=109.523 fu_Hz=850055 pm_deg=-15.4173
+### loop corner=typical T=27 VRS=0.6 PR1=1u/2u 
+RESULT T_100Hz_dB=109.479 fu_Hz=658914 pm_deg=-4.0399
+### loop corner=typical T=27 VRS=0.8 PR1=1u/2u 
+RESULT T_100Hz_dB=109.299 fu_Hz=430994 pm_deg=18.8943
+### loop corner=typical T=27 VRS=1.0 PR1=1u/2u 
+RESULT T_100Hz_dB=104.674 fu_Hz=268360 pm_deg=72.6973
+### loop corner=ff T=85 VRS=0 PR1=1u/2u 
+RESULT T_100Hz_dB=112.099 fu_Hz=1.23646E+06 pm_deg=-22.8042
+### loop corner=ff T=85 VRS=0.3 PR1=1u/2u 
+RESULT T_100Hz_dB=53.6949 fu_Hz=221740 pm_deg=17.7536
+### loop corner=ff T=85 VRS=0.6 PR1=1u/2u 
+Error: measure  fu  when(WHEN) : out of interval
+Error: &fu: no such variable.
+Error: RHS "" invalid
+### loop corner=ff T=85 VRS=0.8 PR1=1u/2u 
+RESULT T_100Hz_dB=113.54 fu_Hz=904636 pm_deg=-7.9782
+### loop corner=ff T=85 VRS=1.0 PR1=1u/2u 
+RESULT T_100Hz_dB=108.334 fu_Hz=541505 pm_deg=24.2761
+### loop corner=ss T=-40 VRS=0 PR1=1u/2u 
+RESULT T_100Hz_dB=107.128 fu_Hz=784968 pm_deg=-18.4595
+### loop corner=ss T=-40 VRS=0.3 PR1=1u/2u 
+RESULT T_100Hz_dB=107.109 fu_Hz=654699 pm_deg=-11.5286
+### loop corner=ss T=-40 VRS=0.6 PR1=1u/2u 
+RESULT T_100Hz_dB=106.97 fu_Hz=378481 pm_deg=13.1568
+### loop corner=ss T=-40 VRS=0.8 PR1=1u/2u 
+RESULT T_100Hz_dB=100.496 fu_Hz=199051 pm_deg=76.3108
+### loop corner=ss T=-40 VRS=1.0 PR1=1u/2u 
+RESULT T_100Hz_dB=60.5734 fu_Hz=199408 pm_deg=81.0585

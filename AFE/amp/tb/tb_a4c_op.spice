@@ -1,0 +1,187 @@
+* A4c: derived from tb_afe_1ch_op.spice (A4a/A4b) for the gate-switched reset netlist (afe_chc, bias_genc); reset OFF (fs = FSV = 0), park switch OFF.
+* A4a: one channel (stage 1 + stage 2 + follower), REAL bias (bias_gen), .op: DC levels, supply current, region of every transistor.
+* Parameters one per line (scripts/ngrun.sh overrides by name).  CL_ADC = PLACEHOLDER ADC input capacitance (not used in .op).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_genc.spice
+.include ../spice/stage1c.spice
+.include ../spice/stage2c.spice
+.include ../spice/afe_chc.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param VSUP=3.3
+.param CL_ADC=20f
+Vdd vdd 0 {VSUP}
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Vpkc pkc 0 0
+Vpkcb pkcb 0 {VSUP}
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb afe_chc
+CADC out 0 {CL_ADC}                 $ D0 off-channel mux load 20 fF (A4b; A4a used a 10 pF placeholder)
+.nodeset v(vrs)=0.99 v(xch.gm1)=1.85 v(xch.gm2)=2.55 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+save all
+op
+let id_xbias_xmp1 = abs(@m.xbias.xmp1.m0[id])
+let vds_xbias_xmp1 = abs(@m.xbias.xmp1.m0[vds])
+let vdsat_xbias_xmp1 = abs(@m.xbias.xmp1.m0[vdsat])
+let vgs_xbias_xmp1 = abs(@m.xbias.xmp1.m0[vgs])
+let mg_xbias_xmp1 = vds_xbias_xmp1 - vdsat_xbias_xmp1
+let gmid_xbias_xmp1 = @m.xbias.xmp1.m0[gm]/id_xbias_xmp1
+echo OPDEV xbias.xmp1 id_A=$&id_xbias_xmp1 vgs_V=$&vgs_xbias_xmp1 vds_V=$&vds_xbias_xmp1 vdsat_V=$&vdsat_xbias_xmp1 margin_V=$&mg_xbias_xmp1 gm_over_id=$&gmid_xbias_xmp1
+let id_xbias_xmp2 = abs(@m.xbias.xmp2.m0[id])
+let vds_xbias_xmp2 = abs(@m.xbias.xmp2.m0[vds])
+let vdsat_xbias_xmp2 = abs(@m.xbias.xmp2.m0[vdsat])
+let vgs_xbias_xmp2 = abs(@m.xbias.xmp2.m0[vgs])
+let mg_xbias_xmp2 = vds_xbias_xmp2 - vdsat_xbias_xmp2
+let gmid_xbias_xmp2 = @m.xbias.xmp2.m0[gm]/id_xbias_xmp2
+echo OPDEV xbias.xmp2 id_A=$&id_xbias_xmp2 vgs_V=$&vgs_xbias_xmp2 vds_V=$&vds_xbias_xmp2 vdsat_V=$&vdsat_xbias_xmp2 margin_V=$&mg_xbias_xmp2 gm_over_id=$&gmid_xbias_xmp2
+let id_xbias_xmn1 = abs(@m.xbias.xmn1.m0[id])
+let vds_xbias_xmn1 = abs(@m.xbias.xmn1.m0[vds])
+let vdsat_xbias_xmn1 = abs(@m.xbias.xmn1.m0[vdsat])
+let vgs_xbias_xmn1 = abs(@m.xbias.xmn1.m0[vgs])
+let mg_xbias_xmn1 = vds_xbias_xmn1 - vdsat_xbias_xmn1
+let gmid_xbias_xmn1 = @m.xbias.xmn1.m0[gm]/id_xbias_xmn1
+echo OPDEV xbias.xmn1 id_A=$&id_xbias_xmn1 vgs_V=$&vgs_xbias_xmn1 vds_V=$&vds_xbias_xmn1 vdsat_V=$&vdsat_xbias_xmn1 margin_V=$&mg_xbias_xmn1 gm_over_id=$&gmid_xbias_xmn1
+let id_xbias_xmn2 = abs(@m.xbias.xmn2.m0[id])
+let vds_xbias_xmn2 = abs(@m.xbias.xmn2.m0[vds])
+let vdsat_xbias_xmn2 = abs(@m.xbias.xmn2.m0[vdsat])
+let vgs_xbias_xmn2 = abs(@m.xbias.xmn2.m0[vgs])
+let mg_xbias_xmn2 = vds_xbias_xmn2 - vdsat_xbias_xmn2
+let gmid_xbias_xmn2 = @m.xbias.xmn2.m0[gm]/id_xbias_xmn2
+echo OPDEV xbias.xmn2 id_A=$&id_xbias_xmn2 vgs_V=$&vgs_xbias_xmn2 vds_V=$&vds_xbias_xmn2 vdsat_V=$&vdsat_xbias_xmn2 margin_V=$&mg_xbias_xmn2 gm_over_id=$&gmid_xbias_xmn2
+let id_xch_xsink1 = abs(@m.xch.xsink1.m0[id])
+let vds_xch_xsink1 = abs(@m.xch.xsink1.m0[vds])
+let vdsat_xch_xsink1 = abs(@m.xch.xsink1.m0[vdsat])
+let vgs_xch_xsink1 = abs(@m.xch.xsink1.m0[vgs])
+let mg_xch_xsink1 = vds_xch_xsink1 - vdsat_xch_xsink1
+let gmid_xch_xsink1 = @m.xch.xsink1.m0[gm]/id_xch_xsink1
+echo OPDEV xch.xsink1 id_A=$&id_xch_xsink1 vgs_V=$&vgs_xch_xsink1 vds_V=$&vds_xch_xsink1 vdsat_V=$&vdsat_xch_xsink1 margin_V=$&mg_xch_xsink1 gm_over_id=$&gmid_xch_xsink1
+let id_xch_xs1_xota_xmb = abs(@m.xch.xs1.xota.xmb.m0[id])
+let vds_xch_xs1_xota_xmb = abs(@m.xch.xs1.xota.xmb.m0[vds])
+let vdsat_xch_xs1_xota_xmb = abs(@m.xch.xs1.xota.xmb.m0[vdsat])
+let vgs_xch_xs1_xota_xmb = abs(@m.xch.xs1.xota.xmb.m0[vgs])
+let mg_xch_xs1_xota_xmb = vds_xch_xs1_xota_xmb - vdsat_xch_xs1_xota_xmb
+let gmid_xch_xs1_xota_xmb = @m.xch.xs1.xota.xmb.m0[gm]/id_xch_xs1_xota_xmb
+echo OPDEV xch.xs1.xota.xmb id_A=$&id_xch_xs1_xota_xmb vgs_V=$&vgs_xch_xs1_xota_xmb vds_V=$&vds_xch_xs1_xota_xmb vdsat_V=$&vdsat_xch_xs1_xota_xmb margin_V=$&mg_xch_xs1_xota_xmb gm_over_id=$&gmid_xch_xs1_xota_xmb
+let id_xch_xs1_xota_xmt = abs(@m.xch.xs1.xota.xmt.m0[id])
+let vds_xch_xs1_xota_xmt = abs(@m.xch.xs1.xota.xmt.m0[vds])
+let vdsat_xch_xs1_xota_xmt = abs(@m.xch.xs1.xota.xmt.m0[vdsat])
+let vgs_xch_xs1_xota_xmt = abs(@m.xch.xs1.xota.xmt.m0[vgs])
+let mg_xch_xs1_xota_xmt = vds_xch_xs1_xota_xmt - vdsat_xch_xs1_xota_xmt
+let gmid_xch_xs1_xota_xmt = @m.xch.xs1.xota.xmt.m0[gm]/id_xch_xs1_xota_xmt
+echo OPDEV xch.xs1.xota.xmt id_A=$&id_xch_xs1_xota_xmt vgs_V=$&vgs_xch_xs1_xota_xmt vds_V=$&vds_xch_xs1_xota_xmt vdsat_V=$&vdsat_xch_xs1_xota_xmt margin_V=$&mg_xch_xs1_xota_xmt gm_over_id=$&gmid_xch_xs1_xota_xmt
+let id_xch_xs1_xota_xm1 = abs(@m.xch.xs1.xota.xm1.m0[id])
+let vds_xch_xs1_xota_xm1 = abs(@m.xch.xs1.xota.xm1.m0[vds])
+let vdsat_xch_xs1_xota_xm1 = abs(@m.xch.xs1.xota.xm1.m0[vdsat])
+let vgs_xch_xs1_xota_xm1 = abs(@m.xch.xs1.xota.xm1.m0[vgs])
+let mg_xch_xs1_xota_xm1 = vds_xch_xs1_xota_xm1 - vdsat_xch_xs1_xota_xm1
+let gmid_xch_xs1_xota_xm1 = @m.xch.xs1.xota.xm1.m0[gm]/id_xch_xs1_xota_xm1
+echo OPDEV xch.xs1.xota.xm1 id_A=$&id_xch_xs1_xota_xm1 vgs_V=$&vgs_xch_xs1_xota_xm1 vds_V=$&vds_xch_xs1_xota_xm1 vdsat_V=$&vdsat_xch_xs1_xota_xm1 margin_V=$&mg_xch_xs1_xota_xm1 gm_over_id=$&gmid_xch_xs1_xota_xm1
+let id_xch_xs1_xota_xm2 = abs(@m.xch.xs1.xota.xm2.m0[id])
+let vds_xch_xs1_xota_xm2 = abs(@m.xch.xs1.xota.xm2.m0[vds])
+let vdsat_xch_xs1_xota_xm2 = abs(@m.xch.xs1.xota.xm2.m0[vdsat])
+let vgs_xch_xs1_xota_xm2 = abs(@m.xch.xs1.xota.xm2.m0[vgs])
+let mg_xch_xs1_xota_xm2 = vds_xch_xs1_xota_xm2 - vdsat_xch_xs1_xota_xm2
+let gmid_xch_xs1_xota_xm2 = @m.xch.xs1.xota.xm2.m0[gm]/id_xch_xs1_xota_xm2
+echo OPDEV xch.xs1.xota.xm2 id_A=$&id_xch_xs1_xota_xm2 vgs_V=$&vgs_xch_xs1_xota_xm2 vds_V=$&vds_xch_xs1_xota_xm2 vdsat_V=$&vdsat_xch_xs1_xota_xm2 margin_V=$&mg_xch_xs1_xota_xm2 gm_over_id=$&gmid_xch_xs1_xota_xm2
+let id_xch_xs1_xota_xm3 = abs(@m.xch.xs1.xota.xm3.m0[id])
+let vds_xch_xs1_xota_xm3 = abs(@m.xch.xs1.xota.xm3.m0[vds])
+let vdsat_xch_xs1_xota_xm3 = abs(@m.xch.xs1.xota.xm3.m0[vdsat])
+let vgs_xch_xs1_xota_xm3 = abs(@m.xch.xs1.xota.xm3.m0[vgs])
+let mg_xch_xs1_xota_xm3 = vds_xch_xs1_xota_xm3 - vdsat_xch_xs1_xota_xm3
+let gmid_xch_xs1_xota_xm3 = @m.xch.xs1.xota.xm3.m0[gm]/id_xch_xs1_xota_xm3
+echo OPDEV xch.xs1.xota.xm3 id_A=$&id_xch_xs1_xota_xm3 vgs_V=$&vgs_xch_xs1_xota_xm3 vds_V=$&vds_xch_xs1_xota_xm3 vdsat_V=$&vdsat_xch_xs1_xota_xm3 margin_V=$&mg_xch_xs1_xota_xm3 gm_over_id=$&gmid_xch_xs1_xota_xm3
+let id_xch_xs1_xota_xm4 = abs(@m.xch.xs1.xota.xm4.m0[id])
+let vds_xch_xs1_xota_xm4 = abs(@m.xch.xs1.xota.xm4.m0[vds])
+let vdsat_xch_xs1_xota_xm4 = abs(@m.xch.xs1.xota.xm4.m0[vdsat])
+let vgs_xch_xs1_xota_xm4 = abs(@m.xch.xs1.xota.xm4.m0[vgs])
+let mg_xch_xs1_xota_xm4 = vds_xch_xs1_xota_xm4 - vdsat_xch_xs1_xota_xm4
+let gmid_xch_xs1_xota_xm4 = @m.xch.xs1.xota.xm4.m0[gm]/id_xch_xs1_xota_xm4
+echo OPDEV xch.xs1.xota.xm4 id_A=$&id_xch_xs1_xota_xm4 vgs_V=$&vgs_xch_xs1_xota_xm4 vds_V=$&vds_xch_xs1_xota_xm4 vdsat_V=$&vdsat_xch_xs1_xota_xm4 margin_V=$&mg_xch_xs1_xota_xm4 gm_over_id=$&gmid_xch_xs1_xota_xm4
+let id_xch_xs1_xota_xm6 = abs(@m.xch.xs1.xota.xm6.m0[id])
+let vds_xch_xs1_xota_xm6 = abs(@m.xch.xs1.xota.xm6.m0[vds])
+let vdsat_xch_xs1_xota_xm6 = abs(@m.xch.xs1.xota.xm6.m0[vdsat])
+let vgs_xch_xs1_xota_xm6 = abs(@m.xch.xs1.xota.xm6.m0[vgs])
+let mg_xch_xs1_xota_xm6 = vds_xch_xs1_xota_xm6 - vdsat_xch_xs1_xota_xm6
+let gmid_xch_xs1_xota_xm6 = @m.xch.xs1.xota.xm6.m0[gm]/id_xch_xs1_xota_xm6
+echo OPDEV xch.xs1.xota.xm6 id_A=$&id_xch_xs1_xota_xm6 vgs_V=$&vgs_xch_xs1_xota_xm6 vds_V=$&vds_xch_xs1_xota_xm6 vdsat_V=$&vdsat_xch_xs1_xota_xm6 margin_V=$&mg_xch_xs1_xota_xm6 gm_over_id=$&gmid_xch_xs1_xota_xm6
+let id_xch_xs1_xota_xm7 = abs(@m.xch.xs1.xota.xm7.m0[id])
+let vds_xch_xs1_xota_xm7 = abs(@m.xch.xs1.xota.xm7.m0[vds])
+let vdsat_xch_xs1_xota_xm7 = abs(@m.xch.xs1.xota.xm7.m0[vdsat])
+let vgs_xch_xs1_xota_xm7 = abs(@m.xch.xs1.xota.xm7.m0[vgs])
+let mg_xch_xs1_xota_xm7 = vds_xch_xs1_xota_xm7 - vdsat_xch_xs1_xota_xm7
+let gmid_xch_xs1_xota_xm7 = @m.xch.xs1.xota.xm7.m0[gm]/id_xch_xs1_xota_xm7
+echo OPDEV xch.xs1.xota.xm7 id_A=$&id_xch_xs1_xota_xm7 vgs_V=$&vgs_xch_xs1_xota_xm7 vds_V=$&vds_xch_xs1_xota_xm7 vdsat_V=$&vdsat_xch_xs1_xota_xm7 margin_V=$&mg_xch_xs1_xota_xm7 gm_over_id=$&gmid_xch_xs1_xota_xm7
+let id_xch_xs2_xota2_xmt = abs(@m.xch.xs2.xota2.xmt.m0[id])
+let vds_xch_xs2_xota2_xmt = abs(@m.xch.xs2.xota2.xmt.m0[vds])
+let vdsat_xch_xs2_xota2_xmt = abs(@m.xch.xs2.xota2.xmt.m0[vdsat])
+let vgs_xch_xs2_xota2_xmt = abs(@m.xch.xs2.xota2.xmt.m0[vgs])
+let mg_xch_xs2_xota2_xmt = vds_xch_xs2_xota2_xmt - vdsat_xch_xs2_xota2_xmt
+let gmid_xch_xs2_xota2_xmt = @m.xch.xs2.xota2.xmt.m0[gm]/id_xch_xs2_xota2_xmt
+echo OPDEV xch.xs2.xota2.xmt id_A=$&id_xch_xs2_xota2_xmt vgs_V=$&vgs_xch_xs2_xota2_xmt vds_V=$&vds_xch_xs2_xota2_xmt vdsat_V=$&vdsat_xch_xs2_xota2_xmt margin_V=$&mg_xch_xs2_xota2_xmt gm_over_id=$&gmid_xch_xs2_xota2_xmt
+let id_xch_xs2_xota2_xm1 = abs(@m.xch.xs2.xota2.xm1.m0[id])
+let vds_xch_xs2_xota2_xm1 = abs(@m.xch.xs2.xota2.xm1.m0[vds])
+let vdsat_xch_xs2_xota2_xm1 = abs(@m.xch.xs2.xota2.xm1.m0[vdsat])
+let vgs_xch_xs2_xota2_xm1 = abs(@m.xch.xs2.xota2.xm1.m0[vgs])
+let mg_xch_xs2_xota2_xm1 = vds_xch_xs2_xota2_xm1 - vdsat_xch_xs2_xota2_xm1
+let gmid_xch_xs2_xota2_xm1 = @m.xch.xs2.xota2.xm1.m0[gm]/id_xch_xs2_xota2_xm1
+echo OPDEV xch.xs2.xota2.xm1 id_A=$&id_xch_xs2_xota2_xm1 vgs_V=$&vgs_xch_xs2_xota2_xm1 vds_V=$&vds_xch_xs2_xota2_xm1 vdsat_V=$&vdsat_xch_xs2_xota2_xm1 margin_V=$&mg_xch_xs2_xota2_xm1 gm_over_id=$&gmid_xch_xs2_xota2_xm1
+let id_xch_xs2_xota2_xm2 = abs(@m.xch.xs2.xota2.xm2.m0[id])
+let vds_xch_xs2_xota2_xm2 = abs(@m.xch.xs2.xota2.xm2.m0[vds])
+let vdsat_xch_xs2_xota2_xm2 = abs(@m.xch.xs2.xota2.xm2.m0[vdsat])
+let vgs_xch_xs2_xota2_xm2 = abs(@m.xch.xs2.xota2.xm2.m0[vgs])
+let mg_xch_xs2_xota2_xm2 = vds_xch_xs2_xota2_xm2 - vdsat_xch_xs2_xota2_xm2
+let gmid_xch_xs2_xota2_xm2 = @m.xch.xs2.xota2.xm2.m0[gm]/id_xch_xs2_xota2_xm2
+echo OPDEV xch.xs2.xota2.xm2 id_A=$&id_xch_xs2_xota2_xm2 vgs_V=$&vgs_xch_xs2_xota2_xm2 vds_V=$&vds_xch_xs2_xota2_xm2 vdsat_V=$&vdsat_xch_xs2_xota2_xm2 margin_V=$&mg_xch_xs2_xota2_xm2 gm_over_id=$&gmid_xch_xs2_xota2_xm2
+let id_xch_xs2_xota2_xm3 = abs(@m.xch.xs2.xota2.xm3.m0[id])
+let vds_xch_xs2_xota2_xm3 = abs(@m.xch.xs2.xota2.xm3.m0[vds])
+let vdsat_xch_xs2_xota2_xm3 = abs(@m.xch.xs2.xota2.xm3.m0[vdsat])
+let vgs_xch_xs2_xota2_xm3 = abs(@m.xch.xs2.xota2.xm3.m0[vgs])
+let mg_xch_xs2_xota2_xm3 = vds_xch_xs2_xota2_xm3 - vdsat_xch_xs2_xota2_xm3
+let gmid_xch_xs2_xota2_xm3 = @m.xch.xs2.xota2.xm3.m0[gm]/id_xch_xs2_xota2_xm3
+echo OPDEV xch.xs2.xota2.xm3 id_A=$&id_xch_xs2_xota2_xm3 vgs_V=$&vgs_xch_xs2_xota2_xm3 vds_V=$&vds_xch_xs2_xota2_xm3 vdsat_V=$&vdsat_xch_xs2_xota2_xm3 margin_V=$&mg_xch_xs2_xota2_xm3 gm_over_id=$&gmid_xch_xs2_xota2_xm3
+let id_xch_xs2_xota2_xm4 = abs(@m.xch.xs2.xota2.xm4.m0[id])
+let vds_xch_xs2_xota2_xm4 = abs(@m.xch.xs2.xota2.xm4.m0[vds])
+let vdsat_xch_xs2_xota2_xm4 = abs(@m.xch.xs2.xota2.xm4.m0[vdsat])
+let vgs_xch_xs2_xota2_xm4 = abs(@m.xch.xs2.xota2.xm4.m0[vgs])
+let mg_xch_xs2_xota2_xm4 = vds_xch_xs2_xota2_xm4 - vdsat_xch_xs2_xota2_xm4
+let gmid_xch_xs2_xota2_xm4 = @m.xch.xs2.xota2.xm4.m0[gm]/id_xch_xs2_xota2_xm4
+echo OPDEV xch.xs2.xota2.xm4 id_A=$&id_xch_xs2_xota2_xm4 vgs_V=$&vgs_xch_xs2_xota2_xm4 vds_V=$&vds_xch_xs2_xota2_xm4 vdsat_V=$&vdsat_xch_xs2_xota2_xm4 margin_V=$&mg_xch_xs2_xota2_xm4 gm_over_id=$&gmid_xch_xs2_xota2_xm4
+let id_xch_xs2_xota2_xmf = abs(@m.xch.xs2.xota2.xmf.m0[id])
+let vds_xch_xs2_xota2_xmf = abs(@m.xch.xs2.xota2.xmf.m0[vds])
+let vdsat_xch_xs2_xota2_xmf = abs(@m.xch.xs2.xota2.xmf.m0[vdsat])
+let vgs_xch_xs2_xota2_xmf = abs(@m.xch.xs2.xota2.xmf.m0[vgs])
+let mg_xch_xs2_xota2_xmf = vds_xch_xs2_xota2_xmf - vdsat_xch_xs2_xota2_xmf
+let gmid_xch_xs2_xota2_xmf = @m.xch.xs2.xota2.xmf.m0[gm]/id_xch_xs2_xota2_xmf
+echo OPDEV xch.xs2.xota2.xmf id_A=$&id_xch_xs2_xota2_xmf vgs_V=$&vgs_xch_xs2_xota2_xmf vds_V=$&vds_xch_xs2_xota2_xmf vdsat_V=$&vdsat_xch_xs2_xota2_xmf margin_V=$&mg_xch_xs2_xota2_xmf gm_over_id=$&gmid_xch_xs2_xota2_xmf
+let id_xch_xs2_xota2_xms = abs(@m.xch.xs2.xota2.xms.m0[id])
+let vds_xch_xs2_xota2_xms = abs(@m.xch.xs2.xota2.xms.m0[vds])
+let vdsat_xch_xs2_xota2_xms = abs(@m.xch.xs2.xota2.xms.m0[vdsat])
+let vgs_xch_xs2_xota2_xms = abs(@m.xch.xs2.xota2.xms.m0[vgs])
+let mg_xch_xs2_xota2_xms = vds_xch_xs2_xota2_xms - vdsat_xch_xs2_xota2_xms
+let gmid_xch_xs2_xota2_xms = @m.xch.xs2.xota2.xms.m0[gm]/id_xch_xs2_xota2_xms
+echo OPDEV xch.xs2.xota2.xms id_A=$&id_xch_xs2_xota2_xms vgs_V=$&vgs_xch_xs2_xota2_xms vds_V=$&vds_xch_xs2_xota2_xms vdsat_V=$&vdsat_xch_xs2_xota2_xms margin_V=$&mg_xch_xs2_xota2_xms gm_over_id=$&gmid_xch_xs2_xota2_xms
+let vo = v(out)
+let itot = -i(Vdd)
+let ibia = abs(@m.xch.xsink1.m0[id])
+let verr = v(out) - v(vcmo)
+echo OPSUM vout_V=$&vo vout_err_V=$&verr vbn_V=$&v(vbn) vcm_V=$&v(vcm) vg1_V=$&v(vg1) vcmo_V=$&v(vcmo) vg2_V=$&v(vg2) i_supply_A=$&itot ibias1_A=$&ibia
+echo OPNODE v1_V=$&v(xch.v1) vn1_V=$&v(xch.xs1.vn) vp1_V=$&v(xch.xs1.vp) vn2_V=$&v(xch.xs2.vn2) o2_V=$&v(xch.xs2.xota2.o2)
+quit
+.endc
+.end

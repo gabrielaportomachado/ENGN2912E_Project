@@ -1,0 +1,48 @@
+### loop corner=typical T=27 RSL=10u PR1=1u/2u vrs_nodeset=0.926672 
+RESULT T_100Hz_dB=108.156 fu_Hz=284118 pm_deg=56.6533
+### loop corner=typical T=27 RSL=20u PR1=1u/2u vrs_nodeset=0.959554 
+RESULT T_100Hz_dB=107.124 fu_Hz=272833 pm_deg=65.5529
+### loop corner=typical T=27 RSL=40u PR1=1u/2u vrs_nodeset=0.990955 
+RESULT T_100Hz_dB=105.281 fu_Hz=268886 pm_deg=71.6405
+### loop corner=typical T=27 RSL=50u PR1=1u/2u vrs_nodeset=1.00079 
+RESULT T_100Hz_dB=112.78 fu_Hz=481844 pm_deg=12.8122
+### loop corner=ff T=85 RSL=10u PR1=1u/2u vrs_nodeset=1.09587 
+RESULT T_100Hz_dB=58.9452 fu_Hz=383479 pm_deg=77.0551
+### loop corner=ff T=85 RSL=20u PR1=1u/2u vrs_nodeset=1.13607 
+RESULT T_100Hz_dB=60.3037 fu_Hz=384230 pm_deg=76.9814
+### loop corner=ff T=85 RSL=40u PR1=1u/2u vrs_nodeset=1.17395 
+RESULT T_100Hz_dB=62.3484 fu_Hz=384630 pm_deg=76.905
+### loop corner=ff T=85 RSL=50u PR1=1u/2u vrs_nodeset=1.18576 
+RESULT T_100Hz_dB=62.5112 fu_Hz=384388 pm_deg=76.7604
+### loop corner=ss T=-40 RSL=10u PR1=1u/2u vrs_nodeset=0.739741 
+RESULT T_100Hz_dB=105.399 fu_Hz=208737 pm_deg=61.5162
+### loop corner=ss T=-40 RSL=20u PR1=1u/2u vrs_nodeset=0.764672 
+RESULT T_100Hz_dB=104.094 fu_Hz=201748 pm_deg=69.5341
+### loop corner=ss T=-40 RSL=40u PR1=1u/2u vrs_nodeset=0.788817 
+RESULT T_100Hz_dB=101.825 fu_Hz=199729 pm_deg=74.8033
+### loop corner=ss T=-40 RSL=50u PR1=1u/2u vrs_nodeset=0.796415 
+RESULT T_100Hz_dB=100.841 fu_Hz=199104 pm_deg=75.9745
+### loop corner=ff T=-40 RSL=10u PR1=1u/2u vrs_nodeset=0.966072 
+RESULT T_100Hz_dB=110.895 fu_Hz=389086 pm_deg=57.2128
+### loop corner=ff T=-40 RSL=20u PR1=1u/2u vrs_nodeset=0.991405 
+RESULT T_100Hz_dB=109.849 fu_Hz=376464 pm_deg=65.467
+### loop corner=ff T=-40 RSL=40u PR1=1u/2u vrs_nodeset=1.01562 
+RESULT T_100Hz_dB=107.984 fu_Hz=372045 pm_deg=70.9851
+### loop corner=ff T=-40 RSL=50u PR1=1u/2u vrs_nodeset=1.0232 
+RESULT T_100Hz_dB=107.153 fu_Hz=371640 pm_deg=72.2265
+### loop corner=typical T=85 RSL=10u PR1=1u/2u vrs_nodeset=0.988441 
+RESULT T_100Hz_dB=69.3301 fu_Hz=272156 pm_deg=78.4152
+### loop corner=typical T=85 RSL=20u PR1=1u/2u vrs_nodeset=1.02819 
+RESULT T_100Hz_dB=71.9305 fu_Hz=272347 pm_deg=77.8858
+### loop corner=typical T=85 RSL=40u PR1=1u/2u vrs_nodeset=1.06594 
+RESULT T_100Hz_dB=74.2826 fu_Hz=272515 pm_deg=77.2626
+### loop corner=typical T=85 RSL=50u PR1=1u/2u vrs_nodeset=1.07774 
+RESULT T_100Hz_dB=75.4352 fu_Hz=272609 pm_deg=76.8883
+### loop corner=ss T=85 RSL=10u PR1=1u/2u vrs_nodeset=0.877855 
+RESULT T_100Hz_dB=105.797 fu_Hz=219432 pm_deg=56.7468
+### loop corner=ss T=85 RSL=20u PR1=1u/2u vrs_nodeset=0.917384 
+RESULT T_100Hz_dB=88.5215 fu_Hz=220737 pm_deg=58.5594
+### loop corner=ss T=85 RSL=40u PR1=1u/2u vrs_nodeset=0.955157 
+RESULT T_100Hz_dB=89.3625 fu_Hz=222746 pm_deg=57.0738
+### loop corner=ss T=85 RSL=50u PR1=1u/2u vrs_nodeset=0.966994 
+RESULT T_100Hz_dB=102.017 fu_Hz=205173 pm_deg=73.8889

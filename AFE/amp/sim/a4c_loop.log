@@ -1,0 +1,6 @@
+### loop (normal state, FSV=0) typical 27
+RESULT T_100Hz_dB=60.8053 fu_Hz=268511 pm_deg=79.1698
+### loop (normal state, FSV=0) ff 85
+RESULT T_100Hz_dB=60.7543 fu_Hz=385704 pm_deg=76.3976
+### loop (normal state, FSV=0) ss -40
+RESULT T_100Hz_dB=60.2939 fu_Hz=199396 pm_deg=81.0838

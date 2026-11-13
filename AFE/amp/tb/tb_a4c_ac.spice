@@ -1,0 +1,70 @@
+* A4c: derived from tb_afe_1ch_ac.spice (A4a/A4b) for the gate-switched reset netlist (afe_chc, bias_genc); reset OFF (fs = FSV = 0), park switch OFF.
+* A4a: one channel (stage 1 + stage 2 + follower), REAL bias (bias_gen), .ac: gain, -3 dB corners, phase; FSV=1 closes the fast-settle switches.
+* Parameters one per line (scripts/ngrun.sh overrides by name).  CL_ADC = PLACEHOLDER ADC input capacitance (not used in .op).
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_genc.spice
+.include ../spice/stage1c.spice
+.include ../spice/stage2c.spice
+.include ../spice/afe_chc.spice
+.include ../spice/src_randles.spice
+.include ../../../TGATE/TGATE.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param VSUP=3.3
+.param CL_ADC=20f
+* record-path TGATE (existing TGATE.spice, read-only) at the 3.3 V supply with the real gate drive (C = VDD, CBAR = 0), or an IDEAL series resistor RTG (noise budget), or neither
+.param USE_TG=0
+.param RTG=0
+.param C_PAD=0
+Vdd vdd 0 {VSUP}
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 1
+Vosr vosr 0 0
+Vosf vosf 0 0
+.if (USE_TG == 1)
+Xsrc vd tis recs ref vosr vosf src_randles
+Vc_tg c_tg 0 {VSUP}
+Vcb_tg cb_tg 0 0
+Xtg rec c_tg cb_tg recs vdd 0 TGATE
+.elseif (RTG > 0)
+Xsrc vd tis recs ref vosr vosf src_randles
+Rtg recs rec {RTG}
+.else
+Xsrc vd tis rec ref vosr vosf src_randles
+.endif
+Cpad_r rec 0 {C_PAD}
+Vpkc pkc 0 0
+Vpkcb pkcb 0 {VSUP}
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb afe_chc
+CADC out 0 {CL_ADC}                 $ D0 off-channel mux load 20 fF (A4b; A4a used a 10 pF placeholder)
+.nodeset v(rec)=1.65 v(recs)=1.65
+.nodeset v(vrs)=0.99 v(xch.gm1)=1.85 v(xch.gm2)=2.55 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+ac dec 20 1e-3 1e6
+let gdb = vdb(out)
+let gph = ph(out)*180/pi
+let g1db = vdb(xch.v1)
+meas ac g_mid find gdb at=12.25
+meas ac g1_mid find g1db at=12.25
+meas ac g_pk max gdb
+let tgt = g_pk - 3
+meas ac f_lo when gdb=tgt rise=1
+meas ac f_hi when gdb=tgt fall=1
+meas ac ph_mid find gph at=12.25
+meas ac g_300 find gdb at=300
+meas ac g_0p5 find gdb at=0.5
+echo RESULT g_mid_dB=$&g_mid g1_mid_dB=$&g1_mid g_pk_dB=$&g_pk f_lo_Hz=$&f_lo f_hi_Hz=$&f_hi ph_mid_deg=$&ph_mid g_300_dB=$&g_300 g_0p5_dB=$&g_0p5
+quit
+.endc
+.end

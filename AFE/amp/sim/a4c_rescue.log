@@ -1,0 +1,15 @@
+# A4c rescue test (typical 27 C, tb_a4c_tran.spice USE_TG=1 PARK_EN=1 TG_TOFF=0.2 TG_TON=0.5 FS_EN=1 FS_T0=0.49999 FS_W=10m): record-path TGATE (3.3 V drive) CLOSED at t = 0 with no initialisation pulse: the DC operating point lands in the RAILED state of stage 1;
+# the TGATE opens at 0.2 s (park ON) and closes again at 0.5 s with an ideal 10 ms reset pulse.  absolute node voltages (V): 
+t=0.0005   out 1.6502 v1 1.6484 vn1(summing node) 1.6486 vn2 1.6502 fs 0.00
+t=0.01     out 1.6502 v1 1.6484 vn1(summing node) 1.6486 vn2 1.6502 fs 0.00
+t=0.1      out 1.6502 v1 1.6484 vn1(summing node) 1.6486 vn2 1.6502 fs 0.00
+t=0.19     out 1.6502 v1 1.6484 vn1(summing node) 1.6486 vn2 1.6502 fs 0.00
+t=0.3      out 0.7959 v1 1.8010 vn1(summing node) 1.6486 vn2 1.7106 fs 0.00
+t=0.4999   out 0.7982 v1 1.7911 vn1(summing node) 1.6486 vn2 1.7014 fs 0.00
+t=0.5      out 0.8191 v1 1.6549 vn1(summing node) 1.6486 vn2 1.5791 fs 3.30
+t=0.505    out 1.6502 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6502 fs 3.30
+t=0.51     out 1.6501 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6503 fs 0.00
+t=0.52     out 1.6489 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6502 fs 0.00
+t=0.6      out 1.6490 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6502 fs 0.00
+t=1        out 1.6492 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6502 fs 0.00
+t=2.9      out 1.6498 v1 1.6484 vn1(summing node) 1.6484 vn2 1.6502 fs 0.00

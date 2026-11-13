@@ -1,0 +1,26 @@
+* A4c stage 1: Harrison amplifier of stage1r.spice WITHOUT the Cf-shorting fast-settle switches.  The pseudo-resistor gate is the per-channel muxed node vg (afe_chc): normal tap vg1, or the reset level vrs while fs = 1.
+* RMODE 0 = simulated pseudo_r_fg devices; 1 = IDEAL RESISTOR (noise) RFIX (Decision 8).  Requires models, ota1_params, afe_params, a4c_params, ota1.spice, pseudoR.spice first.
+.param RMODE=0 RFIX=5.2e12 RNOISY=1
+.subckt stage1c rec ref vout vdd vss ibias vcm vg params: BRKV=0 BRKI=0
+.if (LOOPTEST == 1)
+Vbrk vng vn dc 0 ac {BRKV}
+Ibrk 0 vng dc 0 ac {BRKI}
+.elseif (LOOPTEST == 2)
+Vbrk vng vn dc 0
+.else
+Rbrk vng vn 100 noisy=0
+.endif
+Xota vp vng ibias vout vdd vss ota1
+Xcin1 rec vn cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}
+Xcin2 ref vp cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}
+Xcf1 vn vout cap_mim_2f0_m2m3_noshield c_length={LCF1} c_width={LCF1}
+Xcf2 vp vcm cap_mim_2f0_m2m3_noshield c_length={LCF1} c_width={LCF1}
+.if (RMODE == 0)
+Xr1 vn vout vg pseudo_r_fg W={PR1W} L={PR1L}
+Xr2 vp vcm vg pseudo_r_fg W={PR1W} L={PR1L}
+.else
+* IDEAL RESISTOR (noise)
+Rf1 vn vout {RFIX} noisy={RNOISY}
+Rf2 vp vcm {RFIX} noisy={RNOISY}
+.endif
+.ends stage1c

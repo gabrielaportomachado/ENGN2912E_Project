@@ -1,0 +1,20 @@
+* A4c stage 2: stage2.spice WITHOUT the Cf-shorting fast-settle switch; pseudo-R gate = per-channel muxed node vg (afe_chc).  RMODE2 0 = simulated pseudo-R, 1 = IDEAL RESISTOR (noise) RFIX2.
+.param RMODE2=0 RFIX2=5.2e12 RNOISY2=1
+.subckt stage2c in out vdd vss vbn vcmo vg params: BRK2V=0 BRK2I=0
+.if (LOOPTEST == 1)
+Vbrk vng2 vn2 dc 0 ac {BRK2V}
+Ibrk 0 vng2 dc 0 ac {BRK2I}
+.elseif (LOOPTEST == 2)
+Vbrk vng2 vn2 dc 0
+.else
+Rbrk vng2 vn2 100 noisy=0
+.endif
+Xota2 vcmo vng2 vbn out vdd vss ota2
+Xcin in vn2 cap_mim_2f0_m2m3_noshield c_length={LCIN2} c_width={LCIN2}
+Xcf vn2 out cap_mim_2f0_m2m3_noshield c_length={LCF2} c_width={LCF2}
+.if (RMODE2 == 0)
+Xr vn2 out vg pseudo_r_fg W={PR2W} L={PR2L}
+.else
+Rf vn2 out {RFIX2} noisy={RNOISY2}
+.endif
+.ends stage2c

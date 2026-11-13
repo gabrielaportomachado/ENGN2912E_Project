@@ -1,0 +1,14 @@
+### loop corner=typical T=27 RSL=40u PR1=0.22u/0.5u vrs_nodeset=1.02771 
+RESULT T_100Hz_dB=104.49 fu_Hz=269388 pm_deg=73.0055
+### loop corner=ff T=85 RSL=40u PR1=0.22u/0.5u vrs_nodeset=1.22173 
+Error: measure  fu  when(WHEN) : out of interval
+Error: &fu: no such variable.
+Error: RHS "" invalid
+### loop corner=ss T=-40 RSL=40u PR1=0.22u/0.5u vrs_nodeset=0.813879 
+RESULT T_100Hz_dB=100.711 fu_Hz=199692 pm_deg=76.1238
+### loop corner=ff T=-40 RSL=40u PR1=0.22u/0.5u vrs_nodeset=1.04386 
+RESULT T_100Hz_dB=107.192 fu_Hz=373366 pm_deg=72.1958
+### loop corner=typical T=85 RSL=40u PR1=0.22u/0.5u vrs_nodeset=1.11139 
+RESULT T_100Hz_dB=118.383 fu_Hz=792872 pm_deg=-12.5346
+### loop corner=ss T=85 RSL=40u PR1=0.22u/0.5u vrs_nodeset=0.998332 
+RESULT T_100Hz_dB=102.022 fu_Hz=205837 pm_deg=73.9117

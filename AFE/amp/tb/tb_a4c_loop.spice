@@ -1,0 +1,72 @@
+* A4c: loop gain of stage 1 with the gate-switched reset (FSV = 3.3: reset ON; VRS / PR1W / PR1L set R_reset).  Derived from tb_afe_1ch_loop.spice (A4b).
+* A4b (Decision 21b): loop gain T of the REAL stage-1 loop inside the full channel (stage 1 loaded by the real Cin2 = 3 pF -> stage 2 -> follower), Middlebrook/Tian two-injection (as tb_ota1_loop.spice,
+* validated in A3), both copies of the channel share one bias_gen.  Pseudo-resistors are the simulated devices.  Result: T at 100 Hz, unity-gain frequency, phase margin.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_genc.spice
+.include ../spice/stage1c.spice
+.include ../spice/stage2c.spice
+.include ../spice/afe_chc.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param LOOPTEST=1
+.param FSV=0
+.param PKC=0
+.param NSVRS=0.99
+.param VSUP=3.3
+Vdd vdd 0 {VSUP}
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+Vfs fs 0 {FSV}
+Vpkc pkc 0 {PKC}
+Vpkcb pkcb 0 {VSUP-PKC}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 0
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc1 vd tis rec1 ref1 vosr vosf src_randles
+Xsrc2 vd tis rec2 ref2 vosr vosf src_randles
+* each copy gets its own zero-impedance copy of the bias_gen outputs (IDEAL unity VCVS): the two injections must not talk to each other through the shared ladder taps (the real taps are ~0.75 MOhm nodes)
+Evbn1 vbn1 0 vbn 0 1
+Evcm1 vcm1 0 vcm 0 1
+Evg11 vg11 0 vg1 0 1
+Evcmo1 vcmo1 0 vcmo 0 1
+Evg21 vg21 0 vg2 0 1
+Evrs1 vrs1 0 vrs 0 1
+Evrs2 vrs2 0 vrs 0 1
+Evbn2 vbn2 0 vbn 0 1
+Evcm2 vcm2 0 vcm 0 1
+Evg12 vg12 0 vg1 0 1
+Evcmo2 vcmo2 0 vcmo 0 1
+Evg22 vg22 0 vg2 0 1
+Xch1 rec1 ref1 out1 vdd 0 vbn1 vcm1 vg11 vcmo1 vg21 vrs1 fs pkc pkcb afe_chc BRKV=1 BRKI=0
+Xch2 rec2 ref2 out2 vdd 0 vbn2 vcm2 vg12 vcmo2 vg22 vrs2 fs pkc pkcb afe_chc BRKV=0 BRKI=1
+Coff1 out1 0 20f
+Coff2 out2 0 20f
+.nodeset v(vrs)={NSVRS} v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55 v(out1)=1.65 v(out2)=1.65
+.nodeset v(xch1.xs1.vn)=1.65 v(xch1.xs1.vp)=1.65 v(xch1.xs1.vng)=1.65 v(xch1.v1)=1.65 v(xch1.xs1.xota.o1)=0.78 v(xch1.xs1.xota.d1)=0.78 v(xch1.xs1.xota.tail)=2.55 v(xch1.ibias1)=2.4
+.nodeset v(xch1.xs1.xr1.m)=1.65 v(xch1.xs1.xr2.m)=1.65 v(xch1.xs2.xr.m)=1.65 v(xch1.xs2.vn2)=1.65 v(xch1.xs2.vng2)=1.65 v(xch1.xs2.xota2.o2)=2.45 v(xch1.xs2.xota2.d1)=2.6 v(xch1.xs2.xota2.tail)=1.0
+.nodeset v(xch2.xs1.vn)=1.65 v(xch2.xs1.vp)=1.65 v(xch2.xs1.vng)=1.65 v(xch2.v1)=1.65 v(xch2.xs1.xota.o1)=0.78 v(xch2.xs1.xota.d1)=0.78 v(xch2.xs1.xota.tail)=2.55 v(xch2.ibias1)=2.4
+.nodeset v(xch2.xs1.xr1.m)=1.65 v(xch2.xs1.xr2.m)=1.65 v(xch2.xs2.xr.m)=1.65 v(xch2.xs2.vn2)=1.65 v(xch2.xs2.vng2)=1.65 v(xch2.xs2.xota2.o2)=2.45 v(xch2.xs2.xota2.d1)=2.6 v(xch2.xs2.xota2.tail)=1.0
+.control
+ac dec 20 1e-2 1e9
+let tv = -v(xch1.xs1.vn)/v(xch1.xs1.vng)
+let iret = v.xch2.xs1.vbrk#branch
+let ti = iret/(1 - iret)
+let t = (tv*ti - 1)/(tv + ti + 2)
+let tdb = vdb(t)
+let tph = cph(t)*180/pi
+meas ac t_lf find tdb at=100
+meas ac t_max max tdb
+meas ac fu when tdb=0 fall=1
+meas ac ph_fu find tph at=$&fu
+let pm = 180 + ph_fu
+echo RESULT T_100Hz_dB=$&t_lf fu_Hz=$&fu pm_deg=$&pm
+quit
+.endc
+.end

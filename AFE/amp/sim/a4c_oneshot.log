@@ -1,0 +1,4 @@
+# A4c one-shot (spice/fs_oneshot_c.spice, tb/tb_fsos_c.spice: alone, real bias_genc, C_T 4 pF, timer leg 0.28u/40u x1, load 5 fF): fs pulse width at 50 % (trigger edge at 1 ms)
+typical 27: fs pulse width 3.563 ms
+ff 85: fs pulse width 1.903 ms
+ss -40: fs pulse width 6.863 ms

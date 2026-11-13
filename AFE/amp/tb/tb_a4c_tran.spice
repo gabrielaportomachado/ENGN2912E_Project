@@ -1,0 +1,221 @@
+* A4c: A4b master transient testbench with the gate-switched pseudo-R reset (fs = HIGH -> pseudo-R gates at vrs) and the REC park switch (PARK_EN=1: park ON while the routing switch is open).
+*   TGATE (USE_TG=1) is driven with VTG = 3.3 V (Decision 30) instead of 5 V.  I_LEAK/C_PAD act on the REC node (and the E node with USE_TG).
+* A4b: one channel (stage 1 + stage 2 + follower, REAL bias_gen) -- master transient testbench.  Every A4b transient scenario is this file with different parameters
+* (scripts/run_a4b.sh).  Parameters one per line (scripts/ngrun.sh overrides by name; token @OUT@ is replaced by the CSV path).
+*   signal : VD (differential pk, V; default 0 = no signal) F_SIG TD_SIG       input = Vd SIN(0 VD F_SIG TD_SIG)     (IDEAL source through the Randles networks, tissue node 1.65 V)
+*   offsets: VOS_REC / VOS_REF step at T_OS (IDEAL, 1 us edge); artifact pulse ART_AMP for ART_DUR from ART_T0 on the REC electrode (IDEAL)
+*   fast-settle: FS_EN=1 -> fs pulse FS_W wide from FS_T0 with FS_TR edges (IDEAL control, 3.3 V); FS_SRC=1 -> fs from the REAL one-shot spice/fs_oneshot.spice IN the netlist (aborts at the start of .tran), FS_SRC=2 -> the same one-shot simulated alone and played back as a PWL source; triggered when the record-path
+*                TGATE closes (TG_TON; without USE_TG at FS_T0), FS_SEL = 0/1 selects the pulse width (~100 / ~300 ns)
+*   pads   : C_PAD (ESD capacitance, ASSUMPTION) and I_LEAK (leakage out of the pad node to ground, ASSUMPTION) on the REC node and, with USE_TG=1, on the E (electrode-side) node
+*   TGATE  : USE_TG=1 -> the existing TGATE.spice (5 V devices, read-only include) in series with REC; sw_rec = 5 V (closed) except TG_TOFF..TG_TON
+*   ADC    : ADC_EN=1 -> adc_load.spice at the output: precharge C_s to VOCM + DV_PREV, connect at ADC_T0 for T_ACQ
+*   supply : PU_T > 0 -> VDD ramps 0 -> VSUP in PU_T and the nodesets are not applied (power-up from the all-zero state)
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/a4c_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_genc.spice
+.include ../spice/stage1c.spice
+.include ../spice/stage2c.spice
+.include ../spice/afe_chc.spice
+.include ../spice/src_randles.spice
+.include ../spice/adc_load.spice
+.include ../spice/fs_oneshot.spice
+.include ../spice/fs_oneshot_c.spice
+.include ../../../TGATE/TGATE.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500 chgtol=1e-19 num_threads=1
+.temp 27
+.param VSUP=3.3
+.param PU_T=0
+.param VD=0
+.param F_SIG=12.25
+.param TD_SIG=0
+.param VOS_REC=0
+.param VOS_REF=0
+.param T_OS=0.5
+.param OS_TR=1u
+.param ART_AMP=0
+.param ART_DUR=1m
+.param ART_T0=0.5
+.param FS_EN=0
+.param FS_SRC=0
+.param FS_SEL=0
+.param C_PAD=0
+.param INIT_G=0
+.param UIC=0
+.param T_INIT=1m
+.param I_LEAK=0
+.param FS_T0=0.5
+.param FS_W=1m
+.param FS_TR=10n
+.param USE_TG=0
+.param VTG=3.3
+.param TG_TR=100n
+.param TG_OPEN0=0
+.param PARK_EN=0
+.param TG_TOFF=0.2
+.param TG_TON=0.5
+.param ADC_EN=0
+.param ADC_T0=1m
+.param T_ACQ=11.05u
+.param DV_PREV=1
+.param R_ADC=1k
+.param C_ADC=17p
+.param C_OFF=20f
+.param TSAVE=0
+.param FS_RAMP=0
+.param TSTOP=1
+.param TSTEP=1m
+.param TMAXS=1m
+.if (PU_T > 0)
+Vdd vdd 0 PWL(0 0 {PU_T} {VSUP})
+.else
+Vdd vdd 0 {VSUP}
+.endif
+Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc
+* fast-settle control (IDEAL): pulse of width FS_W (FS_EN=0: never)
+.if (FS_SRC == 3)
+* A4c REAL one-shot (spice/fs_oneshot_c.spice, current-starved timer on the master mirror): trig = the C net of the routing switch (USE_TG=1) or a PWL edge at FS_T0 (no TGATE)
+.if (USE_TG == 1)
+* gated with (time > TG_TOFF): in the testbench the routing switch is CLOSED at t = 0 (initial state), which would fire the one-shot at t = 0; in the system only the closing edge fires it
+Btrg trg 0 V = V(c_tg) * (time > {TG_TOFF})
+.else
+Vtrg trg 0 PWL(0 0 {FS_T0} 0 {FS_T0+10n} {VSUP})
+.endif
+Xfso trg fs_m vbn vdd 0 fs_oneshot_c
+.elseif (FS_SRC == 1)
+* REAL fast-settle source: one-shot (RC delay + NAND) triggered by the record-mode edge
+.if (USE_TG == 1)
+Vtrg trg 0 PWL(0 0 {TG_TON} 0 {TG_TON+10n} {VSUP})
+.else
+Vtrg trg 0 PWL(0 0 {FS_T0} 0 {FS_T0+10n} {VSUP})
+.endif
+Vsel fs_sel 0 {FS_SEL*VSUP}
+Xfso trg fs_sel fs_m vdd 0 fs_oneshot
+.elseif (FS_SRC == 2)
+* playback of the transistor-level one-shot waveform (tb/tb_fsos_gate.spice, scripts/fs_pwl.py); FSPWL is substituted by scripts/run_a4b.sh
+Vfs fs_m 0 PWL(FSPWL)
+.elseif (FS_RAMP == 1)
+* power-up variant: fs follows the supply ramp (a 3.3 V control that is derived from VDD cannot exceed it), released at FS_T0+FS_W
+Vfs fs_m 0 PWL(0 0 {PU_T} {VSUP} {FS_T0+FS_W} {VSUP} {FS_T0+FS_W+FS_TR} 0)
+.elseif (FS_EN == 1)
+Vfs fs_m 0 PWL(0 0 {FS_T0} 0 {FS_T0+FS_TR} {VSUP} {FS_T0+FS_TR+FS_W} {VSUP} {FS_T0+2*FS_TR+FS_W} 0)
+.else
+Vfs fs_m 0 0
+.endif
+* INIT_RST=1: an IDEAL initialisation reset pulse (1 ms .. 1 ms + INIT_W) is OR-ed with the fast-settle control.  Why: with the record-path TGATE in the netlist the DC operating point (and a uic start) of stage 1 lands in the
+* bistable RAILED state (A4b); a reset pulse takes it to the normal state (shown in sim/a4c_tg_*.log), which is what the system's reset at power-up / record start does.  The scenarios then start from the normal state.
+.param INIT_RST=0 INIT_W=30m
+.param TIS=1.65
+.param NSVRS=1.028
+.if (INIT_RST == 1)
+Vfsi fsi 0 PWL(0 0 1m 0 {1m+1u} {VSUP} {1m+INIT_W} {VSUP} {1m+INIT_W+1u} 0)
+Bfs fs 0 V = max(V(fs_m), V(fsi))
+.else
+Efs fs 0 fs_m 0 1
+.endif
+Vtis tis 0 {TIS}
+Vd vd 0 SIN(0 {VD} {F_SIG} {TD_SIG})
+.if (VOS_REC != 0)
+Vosr_s vosr_s 0 PWL(0 0 {T_OS} 0 {T_OS+OS_TR} {VOS_REC})
+.else
+Vosr_s vosr_s 0 0
+.endif
+.if (ART_AMP != 0)
+Vosr_a vosr_a 0 PWL(0 0 {ART_T0} 0 {ART_T0+1u} {ART_AMP} {ART_T0+ART_DUR} {ART_AMP} {ART_T0+ART_DUR+1u} 0)
+.else
+Vosr_a vosr_a 0 0
+.endif
+Bosr vosr 0 V = V(vosr_s) + V(vosr_a)
+.if (VOS_REF != 0)
+Vosf vosf 0 PWL(0 0 {T_OS} 0 {T_OS+OS_TR} {VOS_REF})
+.else
+Vosf vosf 0 0
+.endif
+.if (USE_TG == 1)
+Xsrc vd tis recs ref vosr vosf src_randles
+Vdd5 vdd5 0 {VTG}
+* TG_OPEN0 = 1: the routing switch is OPEN (park ON) from t = 0 until TG_TON (the treat / power-up state: the DC operating point is then benign); TG_OPEN0 = 0: closed at t = 0, open TG_TOFF..TG_TON
+.if (TG_OPEN0 == 1)
+Vswr c_tg 0 PWL(0 0 {TG_TON} 0 {TG_TON+TG_TR} {VTG})
+Vswrb cb_tg 0 PWL(0 {VTG} {TG_TON} {VTG} {TG_TON+TG_TR} 0)
+.else
+Vswr c_tg 0 PWL(0 {VTG} {TG_TOFF} {VTG} {TG_TOFF+TG_TR} 0 {TG_TON} 0 {TG_TON+TG_TR} {VTG})
+Vswrb cb_tg 0 PWL(0 0 {TG_TOFF} 0 {TG_TOFF+TG_TR} {VTG} {TG_TON} {VTG} {TG_TON+TG_TR} 0)
+.endif
+Xtg rec c_tg cb_tg recs vdd5 0 TGATE
+.else
+Xsrc vd tis rec ref vosr vosf src_randles
+.endif
+* park controls: PARK_EN=1 and USE_TG=1 -> pkc = CBAR net (HIGH while the routing switch is open), pkcb = C net; otherwise the park switch is off
+.if (PARK_EN * USE_TG == 1)
+* the park switch gates are the routing switch's own control nets: pkc = CBAR net (cb_tg), pkcb = C net (c_tg) (no extra source, no extra control)
+Rpkc pkc cb_tg 1m
+Rpkcb pkcb c_tg 1m
+.else
+Vpkc pkc 0 0
+Vpkcb pkcb 0 {VSUP}
+.endif
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb afe_chc
+* pad loading on the REC node (ASSUMPTION values): ESD capacitance and leakage to ground
+Cpad_r rec 0 {C_PAD}
+Ileak_r rec 0 {I_LEAK}
+.if (USE_TG == 1)
+Cpad_e recs 0 {C_PAD}
+Ileak_e recs 0 {I_LEAK}
+.endif
+.if (ADC_EN == 1)
+Vacq acq 0 PWL(0 0 {ADC_T0} 0 {ADC_T0+10n} 1 {ADC_T0+T_ACQ} 1 {ADC_T0+T_ACQ+10n} 0)
+Vpre pre 0 PWL(0 1 {ADC_T0-20n} 1 {ADC_T0-10n} 0)
+Vprev vprev 0 {VOCM+DV_PREV}
+Xadc out cs acq pre vprev adc_load
+.else
+Coff out 0 {C_OFF}
+Rcs cs 0 1e12                         $ dummy so v(cs) exists
+.endif
+.if (INIT_G > 0)
+* START-UP AID (IDEAL, scaffolding only): stage-1 / stage-2 summing nodes are tied to their references through INIT_G (1e-8 S = 100 MOhm, T_INIT = 50 ms = ~20 time constants) for t < T_INIT: the DC operating point
+* itself still lands in the railed state, the aid relaxes the 20 pF-coupled summing nodes back to the normal state before the first event (the tests start at 0.2 s).
+* Without it, with the record-path TGATE attached some corners (ff 85 C) land in the bistable RAILED state of stage 1 (vn1 1.79 V, v1 0.07 V) that the saturating pseudo-resistors can hold for tens of seconds.
+Binit1 xch.xs1.vn vcm I = (V(xch.xs1.vn) - V(vcm)) * {INIT_G} * (time < {T_INIT})
+Binit2 xch.xs1.vp vcm I = (V(xch.xs1.vp) - V(vcm)) * {INIT_G} * (time < {T_INIT})
+Binit3 xch.xs2.vn2 vcmo I = (V(xch.xs2.vn2) - V(vcmo)) * {INIT_G} * (time < {T_INIT})
+.endif
+* BKHACK=1: numerical aid only (A4c): a 0 V PWL source with a breakpoint every 20 us for the first 2 ms forces the time step to stay small while the start-up transient settles (ss -40 C with the TGATE: .tran aborts at ~150 ns otherwise with TMAXS = 1 ms)
+.param BKHACK=0
+.if (BKHACK == 1)
+Vbkh bkh 0 PWL(0 0 2e-05 0 4e-05 0 6e-05 0 8e-05 0 0.0001 0 0.00012 0 0.00014 0 0.00016 0 0.00018 0 0.0002 0 0.00022 0 0.00024 0 0.00026 0 0.00028 0 0.0003 0 0.00032 0 0.00034 0 0.00036 0 0.00038 0 0.0004 0 0.00042 0 0.00044 0 0.00046 0 0.00048 0 0.0005 0 0.00052 0 0.00054 0 0.00056 0 0.00058 0 0.0006 0 0.00062 0 0.00064 0 0.00066 0 0.00068 0 0.0007 0 0.00072 0 0.00074 0 0.00076 0 0.00078 0 0.0008 0 0.00082 0 0.00084 0 0.00086 0 0.00088 0 0.0009 0 0.00092 0 0.00094 0 0.00096 0 0.00098 0 0.001 0 0.00102 0 0.00104 0 0.00106 0 0.00108 0 0.0011 0 0.00112 0 0.00114 0 0.00116 0 0.00118 0 0.0012 0 0.00122 0 0.00124 0 0.00126 0 0.00128 0 0.0013 0 0.00132 0 0.00134 0 0.00136 0 0.00138 0 0.0014 0 0.00142 0 0.00144 0 0.00146 0 0.00148 0 0.0015 0 0.00152 0 0.00154 0 0.00156 0 0.00158 0 0.0016 0 0.00162 0 0.00164 0 0.00166 0 0.00168 0 0.0017 0 0.00172 0 0.00174 0 0.00176 0 0.00178 0 0.0018 0 0.00182 0 0.00184 0 0.00186 0 0.00188 0 0.0019 0 0.00192 0 0.00194 0 0.00196 0 0.00198 0 0.002 0)
+Rbkh bkh 0 1k
+.endif
+.if (PU_T == 0)
+.if (UIC == 1)
+.ic v(xfso.t)=3.3 v(vrs)={NSVRS} v(xch.gm1)=1.85 v(xch.gm2)=2.55 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.ic v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.ic v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.ic v(rec)=1.65 v(recs)=1.65 v(xsrc.e1)=1.65 v(xsrc.e2)=1.65 v(xsrc.s1)=1.65 v(xsrc.s2)=1.65 v(xsrc.s1b)=1.65 v(xsrc.s2b)=1.65 v(tis)=1.65 v(vdd)=3.3 v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65
+.else
+.nodeset v(xfso.t)=3.3 v(vrs)={NSVRS} v(xch.gm1)=1.85 v(xch.gm2)=2.55 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.endif
+.endif
+.if (UIC == 1)
+.tran {TSTEP} {TSTOP} {TSAVE} {TMAXS} uic
+.else
+.tran {TSTEP} {TSTOP} {TSAVE} {TMAXS}
+.endif
+.control
+set wr_singlescale
+set wr_vecnames
+save all @m.xbias.xmn1.m0[id] @m.xch.xsink1.m0[id]
+run
+let isup = -i(Vdd)
+let idm = @m.xbias.xmn1.m0[id]
+let idb1 = @m.xch.xsink1.m0[id]
+wrdata @OUT@ v(out) v(xch.v1) v(xch.xs1.vn) v(xch.xs2.vn2) v(xch.xs2.xota2.o2) v(rec) v(vbn) isup v(cs) idm idb1 v(fs) v(vrs) v(xch.gm1) v(xch.gm2)
+quit
+.endc
+.end
