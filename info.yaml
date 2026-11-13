@@ -6,7 +6,7 @@
 
 project:
   title: "8-channel DBS analog front end with SAR ADC"
-  team: "TODO team name"
+  team: "GAJT"
   discord: ""
   description: "8-channel electrode routing + 0.5-300 Hz LFP amplifier (60 dB) + 12-bit SAR ADC with SPI, GF180MCU 3.3 V"
   lvs_config: "lvs_config.json"
