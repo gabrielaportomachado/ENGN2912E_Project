@@ -8,7 +8,7 @@ project:
   title: "8-channel DBS analog front end with SAR ADC"
   team: "GAJT"
   discord: ""
-  description: "8-channel electrode routing + 0.5-300 Hz LFP amplifier (60 dB) + 12-bit SAR ADC with SPI, GF180MCU 3.3 V"
+  description: "8-channel electrode routing + per-channel LFP amplifier (60 dB) + per-channel 12-bit SAR ADC with SPI, raw recording pins, GF180MCU 3.3 V"
   lvs_config: "lvs_config.json"
   gf_def_ready: false
   ws_def_ready: false
@@ -52,11 +52,25 @@ pins:
     io_type: analog
   - name: IPG[7]
     io_type: analog
+  - name: REC[0]
+    io_type: analog
+  - name: REC[1]
+    io_type: analog
+  - name: REC[2]
+    io_type: analog
+  - name: REC[3]
+    io_type: analog
+  - name: REC[4]
+    io_type: analog
+  - name: REC[5]
+    io_type: analog
+  - name: REC[6]
+    io_type: analog
+  - name: REC[7]
+    io_type: analog
   - name: CS
     io_type: input_cmos
   - name: DIN
-    io_type: input_cmos
-  - name: READY
     io_type: input_cmos
   - name: SCLK
     io_type: input_schmitt

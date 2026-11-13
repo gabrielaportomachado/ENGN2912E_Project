@@ -38,6 +38,13 @@ Write AFE/adc/PLAN.md (same structure as AFE/amp/PLAN.md) covering:
 6. Assumptions and anything you think is wrong in NOTES.md.
 Stop.
 
+## D0b: Re-plan for one ADC per channel (Decision 34; run before D1)
+Read AFE/NOTES.md (Decisions 29-35), AFE/TAPEOUT.md, AFE/adc/PLAN.md. The architecture changed: ONE 12-bit SAR PER CHANNEL (N = 8), no analog mux, each ADC samples its own amplifier output,
+simultaneous sampling, 4 kS/s per channel, single 3.3 V DVDD, VREF = VDD. Update AFE/adc/PLAN.md (and write findings to AFE/adc/NOTES.md, not AFE/NOTES.md): per-channel area/power with a
+per-ADC cell (hand estimates labelled ESTIMATE), the serial interface for 8 converters on ONE DOUT (CS falling = simultaneous sample, 12 SCLK trials, then shift out 8 x 16-bit frames or another scheme: choose by rule 10;
+the master clock budget; config write through DIN: MODE + EN[7:0] 9-bit shift register in a new wrapper, plus the pins list in TAPEOUT.md), the new acquisition window (frame period 250 us per channel, so T_ACQ can be far longer than 11 us),
+whether the ADC should skip the reset to 1.65 V (sample from the previous own value: step <= ~0.24 V at 300 Hz full scale) or reset (step = the signal), and what that does to the amplifier follower load. Write no circuit files. Stop.
+
 ## D1: Comparator
 Design a dynamic comparator (preamp + latch) on 3.3 V for the D0 clock rate. Measure: decision
 time vs input difference, input-referred offset (Monte Carlo with sw_stat_mismatch=1, ≥ 100

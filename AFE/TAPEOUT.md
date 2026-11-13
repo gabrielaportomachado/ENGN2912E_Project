@@ -124,3 +124,13 @@ Option C (RECOMMENDED, needs user approval; reverses Decision 18's "no DIN"): se
 29 (revised). N = 8 channels (supersedes N = 4); 30. single 3.3 V DVDD; 31. 2235 um core planning frame.
 32. Option C: serial configuration on the SPI port. New DIN pin; MODE + EN[7:0] loaded through a 9-bit shift register in a NEW wrapper under AFE/ (rtl/ untouched), framed by CS.
     Reverses Decision 18's "no DIN" (user approved). Pad count 24: analog E[7:0], IPG[7:0]; CS, SCLK, RSTN, DIN, READY (input), DOUT (bidirectional); VDD, VSS. L0 specifies the write-frame format.
+
+## REVISION 2026-11-12 (user, from group): per-channel ADC; raw recording pins on all 8 channels simultaneously; READY tied high
+34. ONE 12-bit SAR ADC PER CHANNEL (N = 8), no analog mux: supersedes Decision 19's outcome (one SAR + mux). Each channel = amplifier + ADC; simultaneous sampling; 4 kS/s per channel; frame period 250 us per channel.
+    ESTIMATE (scaled from D0: 0.017 mm2 per muxed ADC, ~0.27 mm2 for 16): ~0.13 mm2 for 8 ADCs, total block ~0.5-0.65 mm2 (a bit over 700 x 700 um, report ~750 x 750). ADC power ~ unchanged (D0 ~17 uW total).
+    Interface needs a rework (8 converters on one DOUT): D0b in prompts/adc.md. The ADC-kick check in A4b is NOT removed: the acquisition window gets much longer (T_ACQ up to ~245 us) and the step is smaller if the ADC skips the 1.65 V reset,
+    but A4b data still showed 0.4-2 mV (0.5-2.4 LSB) output displacement at 240 us at some ss/ff corners, so the follower-sink choice stays relevant at lower priority.
+35. READY is tied to VDD inside the macro (rtl/dbs.v only uses it to gate the switch controls): no READY pad. REC[7:0] (the node after the routing switch, before the amplifier) are analog pads, all 8 simultaneously.
+    Caution for L0: a REC pad adds ESD leakage/capacitance; with the routing switch open the REC node floats, so leakage can drift it and create an offset step to recover from.
+Final pad list (31 pads; ~2 over a third of the budget; no spare for extra supply pairs: ask the organizer. Fallback if forced: REC on 4 channels = 27 pads):
+ analog (24): E[7:0], IPG[7:0], REC[7:0]; input_cmos (2): CS, DIN; input_schmitt (2): SCLK, RSTN; bidirectional (1): DOUT; power VDD; ground VSS.
