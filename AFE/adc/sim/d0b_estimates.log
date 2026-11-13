@@ -1,0 +1,82 @@
+D0b estimates.  N = 8 ADCs (one per channel), VDD = VREF = 3.3 V, LSB = 0.8057 mV, C_total = 16.42 pF (4096 + 1 dummy units of 4.01 fF).  ALL numbers ESTIMATE unless marked SIMULATED.
+
+== 1. Frame and clock budget (ESTIMATE, arithmetic).  Period per channel T = 250 us (4 kS/s, Decision 16/34).
+   frame = 160 SCLK = 32 conversion window (words 0-1: DIN carries the config word in word 0; conversions end after clock 19 = 12 trials + 7 stagger clocks) + 128 readout (8 x 16-bit words {4-bit ID, 12-bit code}) = 10 x 16-bit words
+   tracking of ADC i resumes right after ITS last trial (clock 12+i), NOT at CS rising: T_ACQ = T - (19)/f_SCLK, the readout does not shorten it.  Alternative (track only after CS rising) would give T - 160/f_SCLK.
+   f_SCLK[MHz]  frame[us]  quiet(CS high)[us]  T_ACQ(resume after trials)[us]  T_ACQ(resume at CS rising)[us]  hold time during conversion[us]
+       0.64       250.0                0.0                         220.3                            0.0                      29.7
+       1.00       160.0               90.0                         231.0                           90.0                      19.0
+       2.00        80.0              170.0                         240.5                          170.0                       9.5
+       3.50        45.7              204.3                         244.6                          204.3                       5.4
+       5.00        32.0              218.0                         246.2                          218.0                       3.8
+   minimum SCLK (frame must fit in 250 us): 0.640 MHz; with >= 100 us of digital silence before the next CS falling: 1.07 MHz.  Maximum 5 MHz (D0; D1/D2 confirm: 200 ns per bit trial).
+   Sampling-instant jitter: full-scale 300 Hz sine slope = 2 pi 300 x 0.5 V = 942 V/s -> 1 LSB = 855 ns; 0.1 LSB = 85 ns rms: the MCU must generate CS from a hardware timer (software-polled CS jitter of microseconds would cost SNR).
+   Inter-channel skew of the sample instant = CS-buffer-tree skew (< ~1 ns ESTIMATE) -> 0.1 LSB limit of 85 ns is met by a factor ~80; "simultaneous sampling" holds.
+   hold droop during conversion at the slowest SCLK (0.64 MHz, 30 us), silicon-like 8 x 1 pA ESTIMATE: 14.0 uV = 0.017 LSB (this PDK model: ~10 fA per junction, 100x less).
+
+== 2. Charge drawn from VDD by one ADC per bit trial (ESTIMATE, ideal charge-conservation model, bottom-plate sampling, top plate reset to VCM = VDD/2, conventional switching, random Vin uniform in 0..VDD, 20000 draws)
+   trial j (bit 11-j):      11     10      9      8      7      6      5      4      3      2      1      0
+   mean charge [pC]:     13.55  10.16   5.93   3.18   1.64   0.83   0.42   0.21   0.11   0.05   0.03   0.01
+   max  charge [pC]:     13.55  10.16   5.93   3.18   1.64   0.83   0.42   0.21   0.11   0.05   0.03   0.01
+   per conversion: mean 36.1 pC, max 36.1 pC  (x VDD = 119 pJ mean from VDD; D0 used 1.3 C V^2 = 233 pJ, conservative)
+   MSB trial analytic check: C_msb x VDD/2 = 13.55 pC (independent of Vin).  D0/Decision 27 used C_msb x VDD = 27.1 pC: that is an UPPER BOUND, the floating top plate halves it.
+   FINDING: the supply charge per trial is independent of Vin (a bit that fails its trial returns its charge to GND, not to VDD), so the first-order supply bounce is the SAME every frame (an offset/INL term), not inter-channel crosstalk; the data-dependent part is second order (finite Ron, parasitics: D2/D4).
+   charge per SCLK cycle, all 8 ADCs together [pC]:
+     mean simultaneous: peak 108.4 pC (cycle 1).  staggered by one SCLK per channel: peak 35.9 pC (cycle 8)  -> 3.0x lower
+     max  simultaneous: peak 108.4 pC (cycle 1).  staggered by one SCLK per channel: peak 35.9 pC (cycle 8)  -> 3.0x lower
+
+== 3. VDD disturbance at the decision instant (ESTIMATE; series R-L from board decap to chip, on-chip decap C; the charge Q of one SCLK cycle is drawn in ~1 ns, then the supply rings down)
+   ASSUMPTIONS (nothing is known about package/board): L = 2 nH (bond wire + pad + trace to the board capacitor), R = series resistance of that path; underdamped envelope  dV(T) = (Q/C) exp(-T/tau), tau = 2L/R (needs R < 2 sqrt(L/C)).
+   Criterion (conservative, error factor 1 on dVDD): dV <= 0.1 LSB = 81 uV at the decision instant T = half an SCLK period (100 ns at 5 MHz, 143 ns at 3.5 MHz, 500 ns at 1 MHz).
+   on-chip decap  scheme         Q[pC]  R[ohm]  Z0[ohm]  peak Q/C[mV]  residual at 100 ns [LSB]  at 143 ns  at 500 ns
+    0.25 nF  simultaneous    108.4   0.10    2.83         433.6              44.2       15.1    0.00201
+    0.25 nF  simultaneous    108.4   0.25    2.83         433.6              1.04     0.0707   1.44e-11
+    0.25 nF  simultaneous    108.4   0.50    2.83         433.6           0.00201   9.29e-06   3.87e-25
+    0.25 nF  staggered        35.9   0.10    2.83         143.7              14.6          5   0.000665
+    0.25 nF  staggered        35.9   0.25    2.83         143.7             0.344     0.0234   4.78e-12
+    0.25 nF  staggered        35.9   0.50    2.83         143.7          0.000665   3.08e-06   1.28e-25
+    1.00 nF  simultaneous    108.4   0.10    1.41         108.4                11       3.77   0.000501
+    1.00 nF  simultaneous    108.4   0.25    1.41         108.4              0.26     0.0177   3.61e-12
+    1.00 nF  simultaneous    108.4   0.50    1.41         108.4          0.000501   2.32e-06   9.67e-26
+    1.00 nF  staggered        35.9   0.10    1.41          35.9              3.66       1.25   0.000166
+    1.00 nF  staggered        35.9   0.25    1.41          35.9            0.0861    0.00586    1.2e-12
+    1.00 nF  staggered        35.9   0.50    1.41          35.9          0.000166    7.7e-07    3.2e-26
+    2.00 nF  simultaneous    108.4   0.10    1.00          54.2              5.52       1.88   0.000251
+    2.00 nF  simultaneous    108.4   0.25    1.00          54.2              0.13    0.00884    1.8e-12
+    2.00 nF  simultaneous    108.4   0.50    1.00          54.2          0.000251   1.16e-06   4.84e-26
+    2.00 nF  staggered        35.9   0.10    1.00          18.0              1.83      0.625   8.31e-05
+    2.00 nF  staggered        35.9   0.25    1.00          18.0             0.043    0.00293   5.98e-13
+    2.00 nF  staggered        35.9   0.50    1.00          18.0          8.31e-05   3.85e-07    1.6e-26
+   Peak droop without ringing = Q/C: to keep it <= 50 mV (so logic and comparator stay functional, ESTIMATE) the on-chip decap must be C >= Q/50 mV:  simultaneous 2.17 nF, staggered 0.72 nF.
+   MOS gate decap density ~4.6 fF/um2 (ESTIMATE, see code comment): 2.17 nF = 0.47 mm2 (simultaneous), 0.72 nF = 0.16 mm2 (staggered).  Slot ~1.23 mm2; ADCs themselves 0.136 mm2.  MIM decap (2 fF/um2) is ~2.3x worse per area unless overlaid on circuits.
+   => the supply is the biggest ADC risk of this architecture; staggering divides the peak charge (and the decap area) by ~3.0 for 7 flops and 7 extra clocks.  The ring-down needs R >~ 0.2-0.5 ohm of series damping (not known): D2/D4 simulate with an L-C-R supply model (Decision 27).
+
+== 4. Area (ESTIMATE; D0 per-ADC cell numbers, PLAN.md section 2: DAC 9,400 + comparator 2,000 + SAR logic 25 flops x 75 + 80 gates x 15 + switches/drivers 1,500)
+   per ADC: DAC 9400 + comparator 2000 + SAR logic 3075 + switches 1500 + 12 chain mux2 x 25 um2 = 300  = 16275 um2
+   shared digital (frame counter 8 + ID counter 3 + stagger token chain 7 + config shift 9 + config hold 9 + control 3 = 39 flops x 75, ~150 gates x 15, + 1,000 clock/buffers) = 6175 um2
+   8 ADCs 130200 um2 + shared 6175 = 136375 um2 = 0.136 mm2   (TAPEOUT.md estimate ~0.13 mm2: confirmed).  Decap is NOT included: 0.16 mm2 (staggered) to 0.47 mm2 (simultaneous) of MOS decap if the 50 mV peak criterion is kept (section 3).
+   alternatives not chosen: 96 separate capture flops + 96 load/shift mux2 = ~9600 um2 extra (vs 2400 for reusing the SAR result registers as the chain); ID-less 96-bit stream saves 3 flops, but breaks the Decision 18 word.
+
+== 5. Power (ESTIMATE) at 8 x 4 kS/s = 32 kS/s total, 3.3 V
+   DAC switching 233 pJ x 32 kS/s = 7.4 uW;  comparator + SAR logic (D0 formula) 0.67 uW;  readout chain 128 clocks x 96 flops x 0.2 pJ x 4 kHz = 9.8 uW;  clock tree 1.5 pF x 160 clocks x 4 kHz = 10.5 uW
+   total ADC + interface 28 uW (8.6 uA at 3.3 V) = 1.4 % of the 8 amplifiers (8 x 245 uW = 1.96 mW, SIMULATED A4a typical); the digital readout and the clock tree, not the DAC, dominate (D0 assumed ~17 uW).
+
+== 6. Acquisition: reset to 1.65 V or not (ESTIMATE + SIMULATED A4b data)
+   f_SCLK 1.0 MHz: ADC i reconnects to its amplifier 19.0 us after the sample instant; the output moves at most 942 V/s x that = 17.9 mV = 22.2 LSB, plus the code residual (<= ~2 LSB, D1/D2) -> step at reconnect ~19.5 mV
+   f_SCLK 3.5 MHz: ADC i reconnects to its amplifier 5.4 us after the sample instant; the output moves at most 942 V/s x that = 5.1 mV = 6.4 LSB, plus the code residual (<= ~2 LSB, D1/D2) -> step at reconnect ~6.7 mV
+   f_SCLK 5.0 MHz: ADC i reconnects to its amplifier 3.8 us after the sample instant; the output moves at most 942 V/s x that = 3.6 mV = 4.4 LSB, plus the code residual (<= ~2 LSB, D1/D2) -> step at reconnect ~5.2 mV
+   A4b SIMULATED (sim/a4b_adc245.log, no reset, C_s 17 pF behind 1 kOhm, step +-0.24 V = the sample-to-sample step of a 300 Hz full-scale sine): |err| at 245 us <= 0.26 LSB (0.21 uV input-referred) typ/ff 85/ss -40; <= 0.48 LSB even at 11 us.
+   The reconnect step is ~47x smaller than the 0.24 V tested, so the A4b run is a conservative bound (error scales ~linearly with the step: ESTIMATE <= 0.006 LSB).
+   Reset to 1.65 V (A4b SIMULATED, sim/a4b_adc.log): -0.74..-2.25 LSB at 11 us and 0.4-2 mV left 240 us later; needs one more switch per ADC and a 1.65 V source -> REJECTED (also in Decision 28).
+   Large steps (power-up: C_s at 0 V, or an artifact): worst-corner follower sink 3.26 uA, tau 315 ns (D0, SIMULATED A4a): 1.65 V down = 11.2 us to 0.5 LSB, well inside T_ACQ; the stage-2 loop kick (error ~ step^2, A4b) is ESTIMATED at (1.65/0.5)^2 x (0.4-2 mV) = 4-22 mV at 240 us for a 1.65 V step, decaying with the 0.3-0.5 ms loop constant -> discard the first ~10 frames (2.5 ms) after reset.
+
+== 7. VDD and crosstalk budget in LSB, with the SIMULATED amplifier supply gain (sim/a4b_vddbudget.log: dVDD_max for 0.2 LSB = 2.29 mV @50 Hz, 3.46 mV @300 Hz, 10.35 mV @DC, 0.58 mV @1 kHz, 0.35 mV @10 kHz)
+   kT/C (C_s 16.4 pF)                                                                                   0.020
+   comparator noise (D1)                                                                                0.250
+   DAC mismatch (D2)                                                                                    0.250
+   external VDD noise/ripple (0.2 LSB at the 2.3 mV rms in-band limit above; supply gain A4b)           0.200
+   sampling switch distortion + injection (D2)                                                          0.150
+   NEW: inter-channel crosstalk: second-order data-dependent part of the on-chip supply bounce (8 ADCs; the first-order charge per trial is data-independent, section 2) 0.070
+   NEW: shared vcm tap / digital activity at the decision instants (D1/D4)                              0.050
+   RSS = 0.44 LSB rms (limit 0.5 excluding quantisation 0.29)
+   On-chip generated supply noise is synchronous with the conversions (4 kHz repetition) and ADC-code dependent: it shows up as offset/INL and cross-channel leakage, not as band noise; external supply noise at 1-10 kHz aliases (no anti-alias filter, Decision 23).

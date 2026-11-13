@@ -150,3 +150,10 @@ Add routing block + TGATEs + DIN shift register + serializer + shared bias ~0.02
 If the organizer's slot is smaller, levers (in order): overlay MIM caps above circuits, trade Cin (noise vs gain), cut to N = 4 (~0.35-0.45 mm2, ~600 x 600 um).
 Power (ESTIMATE): amplifiers ~8 x 245 uW = 2 mW typical; ADCs ~17-20 uW total (D0, ADC power ~independent of mux vs per-channel at the same total sample rate).
 Pads: 31 (24 analog E/IPG/REC, 2 input_cmos CS/DIN, 2 input_schmitt SCLK/RSTN, 1 bidirectional DOUT, VDD, VSS). With one more supply pair (VDD+VSS x 2, advisable for mixed-signal noise) 33.
+
+## RE-ESTIMATE 2 (after D0b, 2026-11-13): the supply decap changes the block size. ESTIMATES.
+D0b (AFE/adc/PLAN.md section D0b): 8 ADCs + shared digital = 0.136 mm2 (agrees with the 0.13 mm2 above); on-chip supply decap for staggered conversions 0.72 nF = ~0.16 mm2 (simultaneous: 0.47 mm2);
+the decap density 4.6 fF/um2 is NOT checked in the PDK, the 2 nH package inductance is ASSUMED. Block total with decap: ~0.8-1.0 mm2 (0.65-0.85 above + 0.16) -> report ~1000 x 1000 um (range 900-1150) against a ~1110 x 1110 um slot (1.23 mm2): TIGHT.
+Levers for L0 (in order of cost): (1) place the MOS decap UNDER the MIM capacitors (the MIM sits in upper metal; ~0.16 mm2 of Cin MIM exists), check the GF180 MIM/decap stacking rules and the noise coupling; (2) monotonic / energy-saving DAC switching
+(2-4x less supply charge, ESTIMATE from the literature, evaluate first in D2); (3) N = 4 (~0.45-0.6 mm2, ~700 x 700 um); (4) a bigger slot from the organizer.
+Frame/pin consequences from D0b: DIN carries config in word 0 of a 160-SCLK frame; DOUT carries 8 x 16-bit words; dbs is clocked by SCLK (no CLK pad), SCLK 1-5 MHz recommended (0.64 MHz minimum); CS from an MCU hardware timer (jitter <= 85 ns rms). Pad list unchanged (31).
