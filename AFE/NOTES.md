@@ -240,6 +240,10 @@ Approved by the user for the Chipathon tapeout (2026-11-12; full text, pin list 
     (A4b still showed 0.4-2 mV output displacement at 240 us at some corners). D0b (prompts/adc.md) re-plans the interface for 8 converters on one DOUT.
 35. READY tied to VDD inside the macro (no pad). REC[7:0] (after the routing switch, before the amplifier) are analog pads, all 8 simultaneously. Final list: 31 pads (see AFE/TAPEOUT.md); Decision 32's list is amended accordingly.
 
+36. Approved by the user after A4b (2026-11-13): fast-settle redesign = (A) gate-switched pseudo-resistor reset that keeps Cf in the loop (no unity-gain follower; the A4b Cf-shorting switch oscillates and rails stage 1) plus
+    (B) a REC park switch tying the REC node to VCM_IN while the routing switch is open (no floating node). Executed as phase A4c (prompts/amp.md). Keep the follower sink at BM_KSF 6 (per-channel ADC with no reset, Decision 34, passes the ADC-kick check);
+    the ff 85 C swing miss stays accepted (Decision 28). Fallback if A4c fails twice: ship the <= 300 ns short pulse and document the slow recovery.
+
 ## A1 findings (typical corner, 27 C only; logs in AFE/amp/sim/, plots in AFE/amp/figs/)
 - ngspice facts: inoise_total / onoise_total are rms volts, in plot noise2 (spectra are in
   noise1); checked on 1 Mohm: 2.207 uV vs hand 2.2 uV (sim/char_noise_check_R.log).

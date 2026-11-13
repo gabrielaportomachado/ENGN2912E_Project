@@ -50,3 +50,20 @@ Plots in AFE/amp/figs/. Update NOTES.md. Stop.
 
 ## A5: Report (SHORT, low effort)
 Write AFE/amp/README.md, at most one page: how to run, a results table (target, measured, corner, pass/fail, log path), what is IDEAL, open items. Do not re-run anything. Stop.
+
+## A4c: Fast-settle redesign (gate-switched pseudo-R reset) + REC park switch (Decision 36)
+Context (NOTES.md "A4b findings", Decision 36): closing the fast-settle TG shorts Cf and makes OTA1 an unstable unity-gain follower (oscillation, stage 1 rails; only <= 300 ns pulses are clean). Recovery without fast-settle
+is far too slow (1 mV: 10-13 s, 10 mV latches, 100 mV: 265-500 s; power-up ~20 s). The REC node floats when the routing switch is open, so ~10 fA of leakage rails the amplifier, and with the real TGATE attached stage 1
+can sit in a bistable railed DC state. Do these, in order, at typical 27 C, ff 85 C and ss -40 C only (all 9 only if a result is within 10 % of its limit):
+1. (A) Replace the Cf-shorting fast-settle with a RESET THAT KEEPS Cf IN THE LOOP: switch the gate bias of the stage-1 (and, if needed, stage-2) pseudo-resistors to a low-resistance level for the pulse, using an existing bias tap plus
+   one small switch if possible (rule 10: least hardware). Sweep the reset gate level so R_reset spans ~1 MOhm-1 GOhm; for each report loop phase margin in the reset state (Tian, keep the 100 Ohm noiseless loop-break from A4b),
+   recovery time to within 1 mV (1.2 LSB) after 1, 10 and 100 mV REC offset steps, pulse width needed (try 10 us, 100 us, 1 ms, 10 ms), and the release step (charge injection of the gate switch) and settling after release.
+   Pick the setting by rule 10 and say why. Target: the output within 1 mV after a 100 mV offset step in <= 100 ms (state what you achieve if not met), no oscillation, release step <= 1 mV at the output.
+2. (B) Add a REC PARK switch: a small transmission gate per channel tying the REC node (after the routing switch, before Cin) to VCM_IN (1.65 V) while the routing switch is open, driven by the existing sw_rec_b control (no new control
+   signal; say if it needs one). Re-run the TGATE-attached scenario that was INVALID in A4b: treat (routing switch open, park ON, REC leak I_LEAK 0/1/10 pA and C_PAD 0/2/10 pF as ASSUMPTIONS) -> record (park off, routing switch closes,
+   reset pulse from item 1). Report: does stage 1 stay out of the bistable railed state; charge injection at park release and routing-switch close; recovery time; added noise (park switch off-state, must keep total <= 2 uV, typical flicker).
+3. Power-up with the new reset: VDD ramp 0 -> 3.3 V, reset asserted from the VDD-derived control; time to within 10 mV and 1 mV of 1.65 V.
+4. Fast-settle control: keep the real one-shot circuit idea from A4b but re-size its widths to the pulse found in item 1; verify with the real gate in the channel netlist if the transient aborts allow it, otherwise PWL playback and say so.
+5. Re-run the key A4b tables at the three corners that the changes can affect: ac gain/f_lo/f_hi, noise, THD at +-0.5 mV, loop PM, supply current. Report any change versus a4b_corner_table.txt.
+Rules: new logs use tag a4c; do not modify a4b results; results from saved logs only; cap yourself: if a step fails the same way twice, stop and report instead of trying a third fix. Update xschem only for cells whose structure
+changed and only if cheap (else label the hand netlist as the source of truth). Write findings under "A4c findings" in NOTES.md, update the Results log, keep Decisions 34-36 untouched, and finish with "Choices I made" and "Needs your attention". Stop.
