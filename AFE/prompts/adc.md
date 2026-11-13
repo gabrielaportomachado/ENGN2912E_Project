@@ -4,10 +4,12 @@ The user designs the ADC (Decision 15). Settled: 12-bit SAR, 3.3 V, 4 kS/s per c
 (Decision 16), VREF = VDD = 3.3 V (Decision 17), SPI with an external master and a 16-bit
 frame (Decision 18). D0 chooses one muxed ADC vs 16 ADCs itself (Decision 19, rule 10).
 
-Run ADC sessions one at a time, never at the same time as an amplifier session: both write
-AFE/NOTES.md. D0–D4 do not depend on the amplifier results; D5 needs A4b.
+ADC sessions write findings to AFE/adc/NOTES.md and never edit AFE/NOTES.md, so they may run
+alongside an amplifier session (but only one ADC session at a time, and mind the shared CPU).
+D0–D4 do not depend on the amplifier results; D5 needs A4b.
 Start each session with:
-"Read AFE/NOTES.md, then do phase D<n> from AFE/prompts/adc.md."
+"Read AFE/NOTES.md, AFE/TAPEOUT.md and AFE/adc/NOTES.md, then do phase D<n> from AFE/prompts/adc.md."
+(TAPEOUT.md changes the ADC to an 8:1 mux, a DIN config frame, and a single 3.3 V supply.)
 Review the result and /clear between phases.
 
 ---

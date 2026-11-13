@@ -1,0 +1,70 @@
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
+# Chipathon 2026: Project configuration
+# DRAFT 2026-11-12: top cell name, team name, ready flags and pad list are provisional
+# (waiting on the organizer: macro name/DEF, supply-pad count). See AFE/TAPEOUT.md.
+# ----- ------ ----- ----- ------ ----- ----- ------ -----
+
+project:
+  title: "8-channel DBS analog front end with SAR ADC"
+  team: "TODO team name"
+  discord: ""
+  description: "8-channel electrode routing + 0.5-300 Hz LFP amplifier (60 dB) + 12-bit SAR ADC with SPI, GF180MCU 3.3 V"
+  lvs_config: "lvs_config.json"
+  gf_def_ready: false
+  ws_def_ready: false
+  drc_ready: false
+  lvs_ready: false
+  export_control: "documents/Export_Control_GF_Rev8.2.docx"
+
+# Pad types: analog = ASIG5V pad; DOUT is bidirectional because there is no output-only type
+# (tie DOUT_OE=1, DOUT_IE=0, _PD=_PU=0 and set _CS/_SL/_PDRV inside the macro wrapper).
+# Every pad control pin must be driven by the top cell (see the template comments).
+pins:
+  - name: E[0]
+    io_type: analog
+  - name: E[1]
+    io_type: analog
+  - name: E[2]
+    io_type: analog
+  - name: E[3]
+    io_type: analog
+  - name: E[4]
+    io_type: analog
+  - name: E[5]
+    io_type: analog
+  - name: E[6]
+    io_type: analog
+  - name: E[7]
+    io_type: analog
+  - name: IPG[0]
+    io_type: analog
+  - name: IPG[1]
+    io_type: analog
+  - name: IPG[2]
+    io_type: analog
+  - name: IPG[3]
+    io_type: analog
+  - name: IPG[4]
+    io_type: analog
+  - name: IPG[5]
+    io_type: analog
+  - name: IPG[6]
+    io_type: analog
+  - name: IPG[7]
+    io_type: analog
+  - name: CS
+    io_type: input_cmos
+  - name: DIN
+    io_type: input_cmos
+  - name: READY
+    io_type: input_cmos
+  - name: SCLK
+    io_type: input_schmitt
+  - name: RSTN
+    io_type: input_schmitt
+  - name: DOUT
+    io_type: bidirectional
+  - name: VDD
+    io_type: power
+  - name: VSS
+    io_type: ground
