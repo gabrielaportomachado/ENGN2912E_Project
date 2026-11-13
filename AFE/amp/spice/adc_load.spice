@@ -1,0 +1,12 @@
+* A4b ADC INPUT MODEL (IDEAL, from NOTES.md "D0 findings" / AFE/adc/PLAN.md 5.3): amplifier output -> mux transmission gate (Ron = R_ADC = 1 kOhm, IDEAL) -> sampling capacitor
+* C_s = C_ADC = 17 pF, which starts at the PREVIOUS channel's voltage (a precharge path of 1 Ohm from a source at VOCM + dV), is connected for T_ACQ and then disconnected.
+* C_OFF = 20 fF is the off-channel mux load that every amplifier output carries permanently (D0 ESTIMATE).  The two switches are IDEAL behavioural conductances
+* (G = control/R, control = 0..1 V smooth ramp, no charge injection, zero leakage when off; the first version used ngspice S switches, which made .tran abort at the connect instant at some corners).
+* The real sampling switch belongs to the ADC design (D2).  Pins: out (amplifier output), cs (sampling node), acq (control 0/1 V = connect), pre (control 0/1 V = precharge), vprev (precharge level).
+.subckt adc_load out cs acq pre vprev
+Bacq out cs I = (V(out) - V(cs)) * V(acq) / {R_ADC}
+Bpre vprev cs I = (V(vprev) - V(cs)) * V(pre) / 1
+Cs cs 0 {C_ADC}
+Rleak cs 0 1e13                      $ 0.2 pA at 1.65 V: only gives the DC operating point a defined cs node
+Coff out 0 {C_OFF}
+.ends adc_load

@@ -1,0 +1,5 @@
+# A4b power-up with a SHORT fast-settle pulse: VDD ramps 0 -> 3.3 V in 1 ms, IDEAL fs pulse of 300 ns at t = 2 ms (after the ramp), 40 s window (scripts/run_a4b.sh pwrfs)
+# final = out - 1.65 V at the end of the window; t_x = last time |out - 1.65 V| > x; compare a4b_pwrup.log (no fs: within 10 mV after 9.5-17 s, within 1 mV after 17.5-20.8 s)
+ff_85_pu1m_fs300n        end 40 s  final   -508.7 mV   t_<10mV never   t_<1mV never   peak 1.609 V
+ss_-40_pu1m_fs300n       end 40 s  final  +1282.0 mV   t_<10mV never   t_<1mV never   peak 1.421 V
+typical_27_pu1m_fs300n   end 40 s  final   -868.0 mV   t_<10mV never   t_<1mV never   peak 1.509 V

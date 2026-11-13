@@ -15,7 +15,7 @@
 .temp 27
 .param FSV=0
 .param VSUP=3.3
-.param CL_ADC=10p
+.param CL_ADC=20f
 Vdd vdd 0 {VSUP}
 Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
 Vfs fs 0 {FSV}
@@ -25,10 +25,10 @@ Vosr vosr 0 0
 Vosf vosf 0 0
 Xsrc vd tis rec ref vosr vosf src_randles
 Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
-CADC out 0 {CL_ADC}                 $ PLACEHOLDER ADC load
-.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.5 v(vg1)=1.7 v(vcmo)=1.65 v(vg2)=1.85
-.nodeset v(xch.xs1.vn)=1.5 v(xch.xs1.vp)=1.5 v(xch.xs1.vng)=1.5 v(xch.v1)=1.5 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
-.nodeset v(xch.xs1.xr1.m)=1.5 v(xch.xs1.xr2.m)=1.5 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+CADC out 0 {CL_ADC}                 $ D0 off-channel mux load 20 fF (A4b; A4a used a 10 pF placeholder)
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
 .control
 save all
 op

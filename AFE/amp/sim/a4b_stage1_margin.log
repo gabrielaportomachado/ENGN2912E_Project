@@ -1,0 +1,12 @@
+# A4b (d): stage-1 OTA saturation margins |Vds| - |Vdsat| at VCM_IN = 1.65 V (criterion >= 0.05 V), 9 PVT, DC operating point (sim/a4b_op.log)
+device                    min margin [V]  at corner             max margin [V]   Id range [uA]
+xch.xs1.xota.xm1             1.763      op_ff_85                1.857        6.6..17.1
+xch.xs1.xota.xm2             1.763      op_ff_85                1.857        6.6..17.1
+xch.xs1.xota.xm3             0.495      op_ff_85                0.820        6.6..17.1
+xch.xs1.xota.xm4             0.495      op_ff_85                0.820        6.6..17.1
+xch.xs1.xota.xm6             1.455      op_ff_85                1.559        13.3..34.3
+xch.xs1.xota.xm7             1.395      op_ff_85                1.517        13.3..34.3
+xch.xs1.xota.xmb             0.653      op_ff_85                0.994        13.3..34.2
+xch.xs1.xota.xmt             0.359      op_ss_-40               0.521        13.2..34.1
+xch.xsink1                   2.124      op_ss_85                2.332        13.3..34.1
+stage-1 minimum over devices and corners: 0.359 V

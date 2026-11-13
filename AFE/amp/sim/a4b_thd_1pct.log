@@ -1,0 +1,19 @@
+# A4b: THD at the +-0.5 mV full-scale input and the first tested amplitude (0.25/0.5/0.6/0.8/1.0 mV) with THD > 1 %, from sim/a4b_thd.log (baseline: native-Vt follower, VCM_IN 1.65, VTT2 0.9)
+ff        -40  12.25 Hz: THD@0.5mV 0.070%, first amplitude with THD>1%: 0.80 mV (5.34%)
+ff        -40 300.00 Hz: THD@0.5mV 0.052%, first amplitude with THD>1%: 1.00 mV (7.08%)
+ff         27  12.25 Hz: THD@0.5mV 0.247%, first amplitude with THD>1%: 0.60 mV (2.96%)
+ff         27 300.00 Hz: THD@0.5mV 0.034%, first amplitude with THD>1%: 0.80 mV (5.80%)
+ff         85  12.25 Hz: THD@0.5mV 2.425%, first amplitude with THD>1%: 0.50 mV (2.42%)
+ff         85 300.00 Hz: THD@0.5mV 0.154%, first amplitude with THD>1%: 0.60 mV (2.51%)
+ss        -40  12.25 Hz: THD@0.5mV 0.053%, first amplitude with THD>1%: >1.0 mV
+ss        -40 300.00 Hz: THD@0.5mV 0.165%, first amplitude with THD>1%: >1.0 mV
+ss         27  12.25 Hz: THD@0.5mV 0.050%, first amplitude with THD>1%: >1.0 mV
+ss         27 300.00 Hz: THD@0.5mV 0.080%, first amplitude with THD>1%: >1.0 mV
+ss         85  12.25 Hz: THD@0.5mV 0.030%, first amplitude with THD>1%: >1.0 mV
+ss         85 300.00 Hz: THD@0.5mV 0.047%, first amplitude with THD>1%: >1.0 mV
+typical   -40  12.25 Hz: THD@0.5mV 0.064%, first amplitude with THD>1%: >1.0 mV
+typical   -40 300.00 Hz: THD@0.5mV 0.094%, first amplitude with THD>1%: >1.0 mV
+typical    27  12.25 Hz: THD@0.5mV 0.044%, first amplitude with THD>1%: 1.00 mV (4.16%)
+typical    27 300.00 Hz: THD@0.5mV 0.044%, first amplitude with THD>1%: >1.0 mV
+typical    85  12.25 Hz: THD@0.5mV 0.040%, first amplitude with THD>1%: 0.80 mV (1.18%)
+typical    85 300.00 Hz: THD@0.5mV 0.025%, first amplitude with THD>1%: 1.00 mV (2.32%)

@@ -4,8 +4,15 @@
 * RMODE2: 0 = simulated pseudo-R, 1 = IDEAL RESISTOR (noise) RFIX2.  Requires models, afe_params, ota2.spice, pseudoR.spice first.
 .param RMODE2=0 RFIX2=5.2e12 RNOISY2=1
 .subckt stage2 in out vdd vss vbn vcmo vg fs fsb params: BRK2V=0 BRK2I=0
+.if (LOOPTEST == 1)
 Vbrk vng2 vn2 dc 0 ac {BRK2V}
 Ibrk 0 vng2 dc 0 ac {BRK2I}
+.elseif (LOOPTEST == 2)
+* LOOPTEST = 2: plain 0 V source (no AC) = the A4a/A3 netlist; needed for the runs with the record-path TGATE, whose DC operating point only lands in the normal state this way
+Vbrk vng2 vn2 dc 0
+.else
+Rbrk vng2 vn2 100 noisy=0
+.endif
 Xota2 vcmo vng2 vbn out vdd vss ota2
 Xcin in vn2 cap_mim_2f0_m2m3_noshield c_length={LCIN2} c_width={LCIN2}
 Xcf vn2 out cap_mim_2f0_m2m3_noshield c_length={LCF2} c_width={LCF2}

@@ -1,19 +1,20 @@
 #!/bin/bash
+# A4a driver (A4b: TAG=a4b makes it write sim/a4b_<case>.log and use /tmp/a4brun; extra NAME=VALUE overrides via EXTRA="VCM_IN=1.65").
 # A4a driver.  usage: bash scripts/run_a4a.sh <case>      (logs/CSV in sim/a4a_*)
 #   prfg      fixed-gate pseudo-resistor R0 (REAL gate bias) at 9 PVT, with/without the fast-settle switch candidates -> sim/a4a_prfg.csv
 #   biascore  beta-multiplier master over 9 PVT, VDD 3.0/3.3/3.6 and two Rb values                                  -> sim/a4a_biascore.csv
 #   diagtran  Decision 13: which diffusion parameter breaks .tran (stage-1 recovery tb, 0.4 s)                          -> sim/a4a_diag_tran.log
 #   op ac acfs ol2 psrr noise   full channel (afe_ch + bias_gen) at 9 PVT -> sim/a4a_<case>.log (acfs = fast-settle switches closed)
 #   diffcheck Decision 13: A3 op/ol/loop/cl/noise rerun at 9 PVT with real diffusion (DIFF=1)                         -> sim/a4a_diff_<case>.log
-AMP="$(cd "$(dirname "$0")/.." && pwd)"; RUN=/tmp/a4arun; mkdir -p "$RUN"
+AMP="$(cd "$(dirname "$0")/.." && pwd)"; RUN=/tmp/${TAG:-a4a}run; mkdir -p "$RUN"
 COMBOS="typical:-40 typical:27 typical:85 ff:-40 ff:27 ff:85 ss:-40 ss:27 ss:85"
 KEYS='^(RESULT|OPDEV|OPSUM|OPNODE|NOISE|ICMR|CHECK)|[Ee]rror|[Ff]atal|singular'
-par() { xargs -P 8 -I{} bash -c "{}"; }
+par() { parallel -j 8 'taskset -c $(( {%} - 1 )) bash -c {}'; }   # A4b: one core per job (ngspice starts 8 OpenMP threads per process that only burn CPU)
 r0fg() { awk -v c=$1 -v T=$2 '$1==c && $2==T && $3==1.5 && $4==0.2 && $5==0 {print $6}' "$AMP/sim/a4a_prfg.csv"; }
 r0() { awk -v c=$1 -v T=$2 '$1==c && $2==T && $4=="2u" && ($5+0)==0.2 {print $6}' "$AMP/sim/char_pseudoR.csv"; }
 job() { local cs=$1 label=$2; shift 2; mkdir -p "$RUN/$cs"
   { echo "### $label"; bash "$AMP/scripts/ngrun.sh" "$@" 2>&1 | grep -E "$KEYS" | head -40; } > "$RUN/$cs/$label.txt"; }
-fin() { cat "$RUN/$1"/*.txt > "$AMP/sim/a4a_$1.log"; echo "wrote sim/a4a_$1.log ($(grep -c '^###' "$AMP/sim/a4a_$1.log") jobs)"; }
+fin() { cat "$RUN/$1"/*.txt > "$AMP/sim/${TAG:-a4a}_$1.log"; echo "wrote sim/${TAG:-a4a}_$1.log ($(grep -c '^###' "$AMP/sim/${TAG:-a4a}_$1.log") jobs)"; }
 export -f job r0 r0fg; export AMP RUN KEYS
 case $1 in
 prfg)  # one job: corner T VCM VTT SW

@@ -1,0 +1,23 @@
+# A4b priority 1: fast-settle pulse alone (typical 27 C, no offset, no signal), t0 = 10 ms, 12 s window.  Diagnosis: with the switch closed the stage-1 loop is OTA1 as a unity-gain follower (A3: PM -45 deg at beta = 1) and oscillates;
+# osc_pp = peak-peak of v(stage-1 output) during the second half of the pulse (> 10 mV = oscillating); at the release the summing node is wherever the oscillation left it, the loop (beta = 0.01) cannot pull it back and the output goes to a rail.
+# dout/dv1@10us = change of the channel / stage-1 output between 1 us before and 10 us after the release; "ok" = |out - pre| < 1 mV at +1 s and at the end of the window.
+variant           W_s     TR_s    osc_pp_mV  vn1_pp_mV  dout@10us  dv1@10us  out-pre@1ms  @100ms   @1s   @end_mV   t_<1mV_s  t_<10mV_s  v1_end_V  v1 verdict            ok
+ccx_30u           0.0001    1e-08     1416.5     851.3      80.67   -978.06     1509.11  1174.01 1078.88   835.64      never     never    0.006  STUCK at rail        NO
+ccx_45u           0.0001    1e-08     1279.1     739.4      17.12  -1742.06     1509.11  1174.29 1078.92   835.72      never     never    0.006  STUCK at rail        NO
+ccx_64u           0.0001    1e-08      905.2     532.5      31.52  -1601.56     1509.11  1173.87 1078.87   835.67      never     never    0.006  STUCK at rail        NO
+edge_tr100n        1e-05    1e-07     2272.4     962.0       8.65  -1605.61     1509.11  1175.81 1079.10   835.76      never     never    0.006  STUCK at rail        NO
+edge_tr3u          1e-05    3e-06     3016.4     977.8      25.93  -3279.75     1509.11  1175.68 1079.09   835.72      never     never    0.006  STUCK at rail        NO
+ff_short_w100n     1e-07    1e-08        2.4       0.5       0.21     -0.63        3.93     3.13   -0.69    -0.01      3.349         0    1.649  settled              ok
+ff_short_w300n     3e-07    1e-08        2.4       0.5      -0.37      0.41       -6.43    -5.70   -1.70     0.00      1.344         0    1.649  settled              NO
+ff_short_w1u       1e-06    1e-08        2.4       0.5       4.50     -8.34       82.81    71.86   10.18    -0.08      7.779     1.004    1.649  settled              NO
+rfs_1M           INCOMPLETE (ends 4.1e-07 s)
+rfs_10M          INCOMPLETE (ends 1.53e-07 s)
+rfs_30M          INCOMPLETE (ends 3.75e-07 s)
+rfs_100M         INCOMPLETE (ends 2.41e-07 s)
+short_w100n        1e-07    1e-08        1.9       0.4       0.27     -0.98        7.28     6.09   -0.29    -0.10      4.188         0    1.649  settled              ok
+short_w300n        3e-07    1e-08        1.9       0.4      -0.35      0.70       -9.77    -8.70   -2.16    -0.09      1.369         0    1.649  settled              NO
+short_w1u          1e-06    1e-08        1.9       0.4      -2.01      5.22      -55.99   -49.49   -8.34    -0.05      6.658    0.9357    1.649  settled              NO
+short_w3u          3e-06    1e-08       17.1       6.4     -45.29    419.62     -870.06  -869.82 -868.26    47.35      never     never    1.650  settled              NO
+ss_short_w100n   INCOMPLETE (ends 7.06e-06 s)
+ss_short_w300n   INCOMPLETE (ends 7.06e-06 s)
+ss_short_w1u     INCOMPLETE (ends 7.06e-06 s)

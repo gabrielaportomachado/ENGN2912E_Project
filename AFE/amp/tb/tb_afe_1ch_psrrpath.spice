@@ -1,0 +1,63 @@
+* A4b (Decision 21c): where does the supply-to-output gain come from?  Series AC sources (0 V DC) in the wire of every reference between bias_gen and the channel (vbn, vcm, vg1, vcmo, vg2).
+* ACV_<x> = AC amplitude of the series source in wire <x>; ACVDD = AC amplitude on VDD.  Run 1: ACVDD=1, all ACV=0 (total, as tb_afe_1ch_psrr).  Runs 2-6: ACVDD=0, one ACV_<x>=1: T_x = v(out)/1 V.
+* The reference ripple r_x = v(<x>_b)/v(vdd) is read in run 1.  Prediction sum(T_x r_x) vs the total gives the direct supply path.
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.include ../spice/stage1r.spice
+.include ../spice/stage2.spice
+.include ../spice/afe_ch.spice
+.include ../spice/src_randles.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param FSV=0
+.param VSUP=3.3
+.param ACVDD=1
+.param ACV_VBN=0
+.param ACV_VCM=0
+.param ACV_VG1=0
+.param ACV_VCMO=0
+.param ACV_VG2=0
+Vdd vdd 0 dc {VSUP} ac {ACVDD}
+Xbias vbn_b vcm_b vg1_b vcmo_b vg2_b vdd 0 bias_gen
+Vs1 vbn vbn_b dc 0 ac {ACV_VBN}
+Vs2 vcm vcm_b dc 0 ac {ACV_VCM}
+Vs3 vg1 vg1_b dc 0 ac {ACV_VG1}
+Vs4 vcmo vcmo_b dc 0 ac {ACV_VCMO}
+Vs5 vg2 vg2_b dc 0 ac {ACV_VG2}
+Vfs fs 0 {FSV}
+Vtis tis 0 1.65
+Vd vd 0 dc 0 ac 0
+Vosr vosr 0 0
+Vosf vosf 0 0
+Xsrc vd tis rec ref vosr vosf src_randles
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
+Coff out 0 20f
+.nodeset v(vbn_b)=0.65 v(xbias.a)=2.4 v(vcm_b)=1.5 v(vg1_b)=1.7 v(vcmo_b)=1.65 v(vg2_b)=1.85 v(vbn)=0.65 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.control
+ac dec 10 1 1k
+let a = mag(v(out))
+meas ac a_12 find a at=12.25
+meas ac a_50 find a at=50
+meas ac a_60 find a at=60
+meas ac a_300 find a at=300
+let rvbn = mag(v(vbn_b))
+let rvcm = mag(v(vcm_b))
+let rvg1 = mag(v(vg1_b))
+let rvcmo = mag(v(vcmo_b))
+let rvg2 = mag(v(vg2_b))
+meas ac r_vbn find rvbn at=50
+meas ac r_vcm find rvcm at=50
+meas ac r_vg1 find rvg1 at=50
+meas ac r_vcmo find rvcmo at=50
+meas ac r_vg2 find rvg2 at=50
+echo RESULT out_12=$&a_12 out_50=$&a_50 out_60=$&a_60 out_300=$&a_300 r_vbn=$&r_vbn r_vcm=$&r_vcm r_vg1=$&r_vg1 r_vcmo=$&r_vcmo r_vg2=$&r_vg2
+quit
+.endc
+.end

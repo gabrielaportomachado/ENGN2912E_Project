@@ -1,0 +1,30 @@
+# A4b ADC load (Decision 28): C_s = 17 pF behind R_ADC = 1 kOhm (IDEAL conductance), C_OFF 20 fF.  RESET runs: C_s is reset to VOUT_CM = 1.65 V and the amplifier holds 1.65 +- 0.5 V (REC offset step +-0.5 mV, 5 ms earlier); step = v(out)_rest - 1.65 V.
+# NORESET rows (reference): C_s keeps the previous channel level 1.65 +- 1 V (the D0 model, IDEAL precharge source), sine off.  err(T) = v(C_s)(t0+T) - v(out) just before the connect [LSB, 0.806 mV];
+# xtalk = the same error referred to the amplifier input (error / 1000) [uV].  Criterion (Decision 24): |err| <= 0.5 LSB at T_ACQ = 11.05 us (SCLK 3.5 MHz); T_ACQ = 15.625 us - 16/f_SCLK: 12.4 us at 5 MHz, 13.6 at 8, 14.6 at 16 MHz.
+corner    T   case          step_V   err@3us  err@4.6us  err@7.8us  err@11.05us  err@12.4us  err@13.6us  err@14.6us   xtalk@11.05_uV  kick_peak_mV
+typical  -40  s+0.5m          0.500      0.141     0.152     0.152     0.151     0.150     0.149     0.148        0.121         331.3
+typical  -40  s-0.5m         -0.500     -1.473    -2.070    -2.136    -2.115    -2.105    -2.096    -2.088       -1.704         483.6
+typical   27  noreset+1       0.000     87.448    -6.698    -7.126    -7.056    -7.018    -6.985    -6.958       -5.685         971.3
+typical   27  noreset-1       0.000      0.275     0.292     0.293     0.290     0.289     0.288     0.287        0.234         632.0
+typical   27  s+0.5m          0.502      0.189     0.200     0.201     0.198     0.197     0.196     0.195        0.160         351.0
+typical   27  s-0.5m         -0.501     -1.661    -1.906    -1.937    -1.913    -1.902    -1.893    -1.885       -1.541         482.6
+typical   85  s+0.5m          0.502      0.224     0.237     0.236     0.233     0.232     0.230     0.229        0.188         363.2
+typical   85  s-0.5m         -0.501     -1.561    -1.732    -1.746    -1.722    -1.711    -1.702    -1.695       -1.387         481.2
+ff       -40  s+0.5m          0.501      0.140     0.145     0.143     0.141     0.140     0.139     0.139        0.114         291.0
+ff       -40  s-0.5m         -0.500     -2.129    -2.292    -2.291    -2.254    -2.238    -2.224    -2.213       -1.816         482.0
+ff        27  s-0.5m         -0.493     -1.737    -1.821    -1.792    -1.745    -1.726    -1.709    -1.695       -1.406         473.0
+ff        85  s-0.5m         -0.437     -0.957    -0.960    -0.887    -0.813    -0.783    -0.758    -0.738       -0.655         415.8
+ss       -40  noreset+1      -0.000    491.497   121.299    -6.949    -7.063    -7.047    -7.029    -7.012       -5.690         973.5
+ss       -40  noreset-1      -0.000      0.181     0.212     0.220     0.221     0.220     0.220     0.220        0.178         654.6
+ss       -40  s+0.5m          0.498      0.135     0.156     0.160     0.158     0.157     0.156     0.156        0.128         363.0
+ss       -40  s-0.5m         -0.498      6.887    -1.774    -1.959    -1.954    -1.947    -1.941    -1.936       -1.574         482.4
+ss        27  s+0.5m          0.500      0.188     0.214     0.218     0.216     0.215     0.214     0.213        0.174         382.8
+ss        27  s-0.5m         -0.501     -0.448    -1.702    -1.805    -1.793    -1.786    -1.779    -1.774       -1.445         483.0
+ss        85  s+0.5m          0.501      0.229     0.257     0.262     0.259     0.258     0.257     0.256        0.209         394.7
+ss        85  s-0.5m         -0.501     -1.051    -1.577    -1.644    -1.630    -1.623    -1.616    -1.611       -1.313         482.3
+
+== SUMMARY (worst over the corners that ran); pass = |err| <= 0.5 LSB
+s+0.5m     : worst |err| @3us 0.229  @4.6us 0.257  @7.8us 0.262  @11.05us 0.259  @12.4us 0.258  @13.6us 0.257  @14.6us 0.256  -> @11.05 us PASS (worst at ss_85); xtalk 0.21 uV input-referred; corners: 7
+s-0.5m     : worst |err| @3us 6.887  @4.6us 2.292  @7.8us 2.291  @11.05us 2.254  @12.4us 2.238  @13.6us 2.224  @14.6us 2.213  -> @11.05 us FAIL (worst at ff_-40); xtalk 1.82 uV input-referred; corners: 9
+noreset+1  : worst |err| @3us 491.497  @4.6us 121.299  @7.8us 7.126  @11.05us 7.063  @12.4us 7.047  @13.6us 7.029  @14.6us 7.012  -> @11.05 us FAIL (worst at ss_-40); xtalk 5.69 uV input-referred; corners: 2
+noreset-1  : worst |err| @3us 0.275  @4.6us 0.292  @7.8us 0.293  @11.05us 0.290  @12.4us 0.289  @13.6us 0.288  @14.6us 0.287  -> @11.05 us PASS (worst at typical_27); xtalk 0.23 uV input-referred; corners: 2

@@ -1,0 +1,42 @@
+### VCM_IN=1.5  (VTT2 = 0.9, native-Vt follower; typical 27 C; VDD ripple 50 Hz unless noted)
+# ACVDD=1
+RESULT out_12=1.02161 out_50=1.01885 out_60=1.01751 out_300=0.928386 r_vbn=0.00289376 r_vcm=0.454408 r_vg1=0.515323 r_vcmo=0.499811 r_vg2=0.772607
+# ACVDD=0 ACV_VCM=1
+RESULT out_12=10.0635 out_50=10.0362 out_60=10.023 out_300=9.1439 r_vbn=4.86431E-06 r_vcm=2.62786E-05 r_vg1=2.30869E-05 r_vcmo=4.38232E-06 r_vg2=6.77281E-06
+# ACVDD=0 ACV_VCMO=1
+RESULT out_12=11.2094 out_50=11.179 out_60=11.1643 out_300=10.185 r_vbn=5.42331E-06 r_vcm=1.55002E-11 r_vg1=1.42679E-11 r_vcmo=6.23709E-07 r_vg2=5.94341E-06
+# ACVDD=0 ACV_VBN=1
+RESULT out_12=0.038037 out_50=0.0840431 out_60=0.0983796 out_300=0.423336 r_vbn=0.000162737 r_vcm=2.46791E-06 r_vg1=2.21499E-06 r_vcmo=4.31967E-06 r_vg2=1.95386E-06
+# ACVDD=0 ACV_VG1=1
+RESULT out_12=3.67971E-06 out_50=1.47161E-05 out_60=1.76248E-05 out_300=8.00068E-05 r_vbn=7.13602E-12 r_vcm=1.46947E-06 r_vg1=1.81164E-06 r_vcmo=6.42892E-12 r_vg2=9.93579E-12
+# ACVDD=0 ACV_VG2=1
+RESULT out_12=0.0239104 out_50=0.0238135 out_60=0.0237703 out_300=0.0215594 r_vbn=1.15418E-08 r_vcm=2.84469E-14 r_vg1=2.55233E-14 r_vcmo=8.84999E-07 r_vg2=1.36807E-06
+### VCM_IN=1.65  (VTT2 = 0.9, native-Vt follower; typical 27 C; VDD ripple 50 Hz unless noted)
+# ACVDD=1
+RESULT out_12=0.565217 out_50=0.563686 out_60=0.562951 out_300=0.51376 r_vbn=0.00289374 r_vcm=0.499811 r_vg1=0.560727 r_vcmo=0.499811 r_vg2=0.772607
+# ACVDD=0 ACV_VCM=1
+RESULT out_12=10.0636 out_50=10.0363 out_60=10.0231 out_300=9.14386 r_vbn=4.8657E-06 r_vcm=2.65107E-05 r_vg1=2.30292E-05 r_vcmo=4.39423E-06 r_vg2=6.79118E-06
+# ACVDD=0 ACV_VCMO=1
+RESULT out_12=11.2095 out_50=11.1791 out_60=11.1644 out_300=10.185 r_vbn=5.42486E-06 r_vcm=1.54293E-11 r_vg1=1.40376E-11 r_vcmo=6.31224E-07 r_vg2=5.96342E-06
+# ACVDD=0 ACV_VBN=1
+RESULT out_12=0.0345749 out_50=0.0825458 out_60=0.0970996 out_300=0.42312 r_vbn=0.000162739 r_vcm=2.45979E-06 r_vg1=2.18269E-06 r_vcmo=4.32144E-06 r_vg2=1.95661E-06
+# ACVDD=0 ACV_VG1=1
+RESULT out_12=3.71081E-06 out_50=1.47208E-05 out_60=1.76239E-05 out_300=7.97843E-05 r_vbn=7.14028E-12 r_vcm=1.46896E-06 r_vg1=1.7921E-06 r_vcmo=6.4484E-12 r_vg2=9.96585E-12
+# ACVDD=0 ACV_VG2=1
+RESULT out_12=0.023891 out_50=0.0237971 out_60=0.023755 out_300=0.0215569 r_vbn=1.15371E-08 r_vcm=2.83431E-14 r_vg1=2.51424E-14 r_vcmo=8.85884E-07 r_vg2=1.36943E-06
+
+PATHS VCM_IN=1.5  (VTT2 = 0.9, nativ: total |out/vdd| @50 Hz = 1.0189 V/V
+   via vcm(stage-1 ref)  : T =   10.0362 V/V  x  ripple r = 0.4544  ->   4.5605 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vcmo(stage-2 ref) : T =   11.1790 V/V  x  ripple r = 0.4998  ->   5.5874 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vbn               : T =    0.0840 V/V  x  ripple r = 0.0029  ->   0.0002 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vg1               : T =    0.0000 V/V  x  ripple r = 0.5153  ->   0.0000 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vg2               : T =    0.0238 V/V  x  ripple r = 0.7726  ->   0.0184 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   |T_vcmo r_vcmo - T_vcm r_vcm| = 1.0269  vs total 1.0189 (residual = direct supply path + vbn/vg1/vg2)
+
+PATHS VCM_IN=1.65  (VTT2 = 0.9, nati: total |out/vdd| @50 Hz = 0.5637 V/V
+   via vcm(stage-1 ref)  : T =   10.0363 V/V  x  ripple r = 0.4998  ->   5.0163 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vcmo(stage-2 ref) : T =   11.1791 V/V  x  ripple r = 0.4998  ->   5.5874 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vbn               : T =    0.0825 V/V  x  ripple r = 0.0029  ->   0.0002 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vg1               : T =    0.0000 V/V  x  ripple r = 0.5607  ->   0.0000 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   via vg2               : T =    0.0238 V/V  x  ripple r = 0.7726  ->   0.0184 V/V (magnitude; stage-1 ref and stage-2 ref enter with opposite sign)
+   |T_vcmo r_vcmo - T_vcm r_vcm| = 0.5712  vs total 0.5637 (residual = direct supply path + vbn/vg1/vg2)

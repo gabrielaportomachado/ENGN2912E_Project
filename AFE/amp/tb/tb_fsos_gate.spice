@@ -1,0 +1,22 @@
+* A4b item 3: the REAL one-shot (spice/fs_oneshot.spice: poly RC delay + NAND + inverter, 3.3 V gates) simulated alone with the load it sees in the channel (3 transmission-gate gates + the fsb inverter, ESTIMATE 10 fF).
+* The combined channel + one-shot netlist aborts at the start of .tran for numerical reasons (the channel alone and the channel with an ideal buffer in place of the one-shot run), so the channel runs play this
+* waveform back as a PWL source (scripts/fs_pwl.py): FS_SRC = 2.  trigger edge at 100 ns, sel = SELV (0 or 1).
+.include ../spice/models_typical.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/fs_oneshot.spice
+.options gmin=1e-14 abstol=1e-14 reltol=1e-4 itl1=500 itl4=500
+.temp 27
+.param SELV=0
+Vdd vdd 0 3.3
+Vtrg trg 0 PWL(0 0 100n 0 110n 3.3)
+Vsel sel 0 {SELV*3.3}
+Xfso trg sel fs vdd 0 fs_oneshot
+Cl fs 0 10f
+.tran 0.1n 2u 0 1n
+.control
+run
+wrdata @OUT@ v(fs)
+quit
+.endc
+.end

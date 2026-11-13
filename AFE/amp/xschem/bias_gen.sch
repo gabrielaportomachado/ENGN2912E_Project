@@ -169,7 +169,7 @@ C {lab_pin.sym} 240 130 1 0 {name=p40 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 220 100 0 0 {name=p41 sig_type=std_logic lab=vss}
 C {symbols/ppolyf_u_3k.sym} 360 100 0 0 {name=rb1
 W='1u'
-L='(VDDN-VOCM-VTT)/ILAD/3000*1u'
+L='(VDDN-VOCM-VTT2)/ILAD/3000*1u'
 model=ppolyf_u_3k
 spiceprefix=X
 m=1}
@@ -178,7 +178,7 @@ C {lab_pin.sym} 360 130 1 0 {name=p43 sig_type=std_logic lab=vg2}
 C {lab_pin.sym} 340 100 0 0 {name=p44 sig_type=std_logic lab=vss}
 C {symbols/ppolyf_u_3k.sym} 480 100 0 0 {name=rb2
 W='1u'
-L='VTT/ILAD/3000*1u'
+L='VTT2/ILAD/3000*1u'
 model=ppolyf_u_3k
 spiceprefix=X
 m=1}

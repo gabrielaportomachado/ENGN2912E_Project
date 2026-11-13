@@ -1,0 +1,108 @@
+### noise_ff_27_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00169411 vn_in_mid_V=1.68236E-06 vn_in_ngspice_V=1.70974E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.6842E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.82648E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.87025E-06
+### noise_ff_27_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00462786 vn_in_mid_V=4.59574E-06 vn_in_ngspice_V=4.64725E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.60423E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.91086E-06
+NOISE_D_0p5_1M vn_in_mid_V=4.94799E-06
+### noise_ff_-40_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00157492 vn_in_mid_V=1.56562E-06 vn_in_ngspice_V=1.60638E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.57171E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.68393E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.71549E-06
+### noise_ff_-40_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00419994 vn_in_mid_V=4.17514E-06 vn_in_ngspice_V=4.2461E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.19118E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.44209E-06
+NOISE_D_0p5_1M vn_in_mid_V=4.46936E-06
+### noise_ff_85_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00181597 vn_in_mid_V=1.80275E-06 vn_in_ngspice_V=1.82959E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.80424E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.96251E-06
+NOISE_D_0p5_1M vn_in_mid_V=2.01502E-06
+### noise_ff_85_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00495774 vn_in_mid_V=4.92167E-06 vn_in_ngspice_V=4.97171E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.92845E-06
+NOISE_C_0p5_2k vn_in_mid_V=5.27069E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.31545E-06
+### noise_ss_27_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00167901 vn_in_mid_V=1.66855E-06 vn_in_ngspice_V=1.69866E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.67563E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.77956E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.80142E-06
+### noise_ss_27_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00488425 vn_in_mid_V=4.85382E-06 vn_in_ngspice_V=4.92968E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.89083E-06
+NOISE_C_0p5_2k vn_in_mid_V=5.06524E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.0801E-06
+### noise_ss_-40_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00154741 vn_in_mid_V=1.53984E-06 vn_in_ngspice_V=1.57989E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.551E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.62546E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.64096E-06
+### noise_ss_-40_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00441486 vn_in_mid_V=4.39324E-06 vn_in_ngspice_V=4.48979E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.44228E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.55992E-06
+NOISE_D_0p5_1M vn_in_mid_V=4.57043E-06
+### noise_ss_85_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00177843 vn_in_mid_V=1.76621E-06 vn_in_ngspice_V=1.7916E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.77114E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.89523E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.92201E-06
+### noise_ss_85_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00523922 vn_in_mid_V=5.20321E-06 vn_in_ngspice_V=5.26898E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=5.23403E-06
+NOISE_C_0p5_2k vn_in_mid_V=5.44583E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.46402E-06
+### noise_typical_27_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00167871 vn_in_mid_V=1.66754E-06 vn_in_ngspice_V=1.69368E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.67019E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.79647E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.82647E-06
+### noise_typical_27_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00475122 vn_in_mid_V=4.71959E-06 vn_in_ngspice_V=4.77846E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.73831E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.98063E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.00325E-06
+### noise_typical_-40_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00155396 vn_in_mid_V=1.54552E-06 vn_in_ngspice_V=1.58251E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.55193E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.64805E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.66942E-06
+### noise_typical_-40_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00430356 vn_in_mid_V=4.28019E-06 vn_in_ngspice_V=4.35802E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=4.30788E-06
+NOISE_C_0p5_2k vn_in_mid_V=4.49383E-06
+NOISE_D_0p5_1M vn_in_mid_V=4.5101E-06
+### noise_typical_85_fn0
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00177498 vn_in_mid_V=1.76215E-06 vn_in_ngspice_V=1.78334E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=1.76287E-06
+NOISE_C_0p5_2k vn_in_mid_V=1.90966E-06
+NOISE_D_0p5_1M vn_in_mid_V=1.94632E-06
+### noise_typical_85_fn1
+Error: &g_mid: no such variable.
+NOISE_B_0p5_300 vn_out_V=0.00509114 vn_in_mid_V=5.05434E-06 vn_in_ngspice_V=5.10419E-06 gmid_dB=
+NOISE_S1_0p5_300 vn_in_stage1_V=5.06835E-06
+NOISE_C_0p5_2k vn_in_mid_V=5.34847E-06
+NOISE_D_0p5_1M vn_in_mid_V=5.37596E-06

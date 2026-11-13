@@ -1,10 +1,11 @@
 * A4a one channel: stage 1 (A3 OTA, real gate bias, fast-settle) -> stage 2 (low-gm OTA + follower buffer).  Shared references come from bias_gen.
+* A4b: BRKV/BRKI pass through to the stage-1 loop-break sources (Tian two-injection, tb_afe_1ch_loop.spice).
 * The OTA1 bias sink (Xsink1: mirror leg of the master, 24 x 16u/4u ~ 20 uA) is per channel.  Pins: rec ref out vdd vss vbn vcm vg1 vcmo vg2 fs.
-.subckt afe_ch rec ref out vdd vss vbn vcm vg1 vcmo vg2 fs
+.subckt afe_ch rec ref out vdd vss vbn vcm vg1 vcmo vg2 fs params: BRKV=0 BRKI=0
 Xsink1 ibias1 vbn vss vss nfet_03v3 W=16u L=4u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 m={BM_KS1}
 * fsb = NOT fs (one minimal inverter per channel, drives the 3 fast-settle transmission gates)
 Xinvp fsb fs vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0
 Xinvn fsb fs vss vss nfet_03v3 W=0.5u L=0.5u nf=1 ad={DIFF*0.5u*0.18u} as={DIFF*0.5u*0.18u} pd={DIFF*2*(0.5u+0.18u)} ps={DIFF*2*(0.5u+0.18u)} nrd=0 nrs=0
-Xs1 rec ref v1 vdd vss ibias1 vcm vg1 fs fsb stage1r
+Xs1 rec ref v1 vdd vss ibias1 vcm vg1 fs fsb stage1r BRKV={BRKV} BRKI={BRKI}
 Xs2 v1 out vdd vss vbn vcmo vg2 fs fsb stage2
 .ends afe_ch

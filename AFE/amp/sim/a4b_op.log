@@ -1,0 +1,207 @@
+### op_ff_27
+OPDEV xbias.xmp1 id_A=1.10451E-06 vgs_V=0.695178 vds_V=2.74824 vdsat_V=0.0786583 margin_V=2.66959 gm_over_id=16.3117
+OPDEV xbias.xmp2 id_A=1.09136E-06 vgs_V=0.695178 vds_V=0.695178 vdsat_V=0.0786583 margin_V=0.61652 gm_over_id=16.3481
+OPDEV xbias.xmn1 id_A=1.11164E-06 vgs_V=0.551755 vds_V=0.551755 vdsat_V=0.0698382 margin_V=0.481917 gm_over_id=18.0799
+OPDEV xbias.xmn2 id_A=1.08758E-06 vgs_V=0.498774 vds_V=2.55184 vdsat_V=0.0489078 margin_V=2.50293 gm_over_id=21.9084
+OPDEV xch.xsink1 id_A=2.78882E-05 vgs_V=0.551755 vds_V=2.39012 vdsat_V=0.0698382 margin_V=2.32028 gm_over_id=17.8585
+OPDEV xch.xs1.xota.xmb id_A=2.79312E-05 vgs_V=0.909878 vds_V=0.909878 vdsat_V=0.209603 margin_V=0.700275 gm_over_id=6.90594
+OPDEV xch.xs1.xota.xmt id_A=2.7896E-05 vgs_V=0.909878 vds_V=0.730213 vdsat_V=0.209603 margin_V=0.52061 gm_over_id=6.90546
+OPDEV xch.xs1.xota.xm1 id_A=1.3948E-05 vgs_V=0.920372 vds_V=1.86919 vdsat_V=0.0611821 margin_V=1.80801 gm_over_id=20.5937
+OPDEV xch.xs1.xota.xm2 id_A=1.3948E-05 vgs_V=0.920372 vds_V=1.86952 vdsat_V=0.061182 margin_V=1.80833 gm_over_id=20.5937
+OPDEV xch.xs1.xota.xm3 id_A=1.3948E-05 vgs_V=0.700596 vds_V=0.700596 vdsat_V=0.151504 margin_V=0.549091 gm_over_id=9.70451
+OPDEV xch.xs1.xota.xm4 id_A=1.3948E-05 vgs_V=0.700596 vds_V=0.700272 vdsat_V=0.151504 margin_V=0.548767 gm_over_id=9.70452
+OPDEV xch.xs1.xota.xm6 id_A=2.8029E-05 vgs_V=0.700272 vds_V=1.64935 vdsat_V=0.151296 margin_V=1.49806 gm_over_id=9.68684
+OPDEV xch.xs1.xota.xm7 id_A=2.8029E-05 vgs_V=0.909878 vds_V=1.65065 vdsat_V=0.209603 margin_V=1.44104 gm_over_id=6.90471
+OPDEV xch.xs2.xota2.xmt id_A=1.44539E-08 vgs_V=0.551755 vds_V=0.831467 vdsat_V=0.0708911 margin_V=0.760576 gm_over_id=17.1317
+OPDEV xch.xs2.xota2.xm1 id_A=7.2164E-09 vgs_V=0.817886 vds_V=1.75363 vdsat_V=0.0761347 margin_V=1.6775 gm_over_id=17.3156
+OPDEV xch.xs2.xota2.xm2 id_A=7.23752E-09 vgs_V=0.818963 vds_V=0.620753 vdsat_V=0.0765985 margin_V=0.544155 gm_over_id=17.3329
+OPDEV xch.xs2.xota2.xm3 id_A=7.21642E-09 vgs_V=0.714898 vds_V=0.714898 vdsat_V=0.0883168 margin_V=0.626581 gm_over_id=14.8344
+OPDEV xch.xs2.xota2.xm4 id_A=7.23753E-09 vgs_V=0.714898 vds_V=1.84778 vdsat_V=0.0883168 margin_V=1.75946 gm_over_id=14.8235
+OPDEV xch.xs2.xota2.xmf id_A=6.85415E-06 vgs_V=0.198221 vds_V=1.64956 vdsat_V=0.0736561 margin_V=1.5759 gm_over_id=21.2741
+OPDEV xch.xs2.xota2.xms id_A=6.85409E-06 vgs_V=0.551755 vds_V=1.65044 vdsat_V=0.0698382 margin_V=1.5806 gm_over_id=17.9459
+OPSUM vout_V=1.65044 vout_err_V=0.00108774 vbn_V=0.551755 vcm_V=1.64935 vg1_V=1.85041 vcmo_V=1.64935 vg2_V=2.54959 i_supply_A=9.80315E-05 ibias1_A=2.78882E-05
+OPNODE v1_V=1.64935 vn1_V=1.64941 vp1_V=1.64942 vn2_V=1.65043 o2_V=1.45222
+### op_ff_-40
+OPDEV xbias.xmp1 id_A=8.52454E-07 vgs_V=0.750709 vds_V=2.69364 vdsat_V=0.0604297 margin_V=2.63321 gm_over_id=21.0448
+OPDEV xbias.xmp2 id_A=8.41288E-07 vgs_V=0.750709 vds_V=0.750709 vdsat_V=0.0604297 margin_V=0.69028 gm_over_id=21.1035
+OPDEV xbias.xmn1 id_A=8.53284E-07 vgs_V=0.606361 vds_V=0.606361 vdsat_V=0.0509752 margin_V=0.555385 gm_over_id=22.0552
+OPDEV xbias.xmn2 id_A=8.38762E-07 vgs_V=0.562444 vds_V=2.50537 vdsat_V=0.0366037 margin_V=2.46877 gm_over_id=26.6789
+OPDEV xch.xsink1 id_A=2.16683E-05 vgs_V=0.606361 vds_V=2.38316 vdsat_V=0.0509752 margin_V=2.33218 gm_over_id=21.7237
+OPDEV xch.xs1.xota.xmb id_A=2.17036E-05 vgs_V=0.916842 vds_V=0.916842 vdsat_V=0.160647 margin_V=0.756195 gm_over_id=8.98606
+OPDEV xch.xs1.xota.xmt id_A=2.16648E-05 vgs_V=0.916842 vds_V=0.678472 vdsat_V=0.160647 margin_V=0.517825 gm_over_id=8.98603
+OPDEV xch.xs1.xota.xm1 id_A=1.08324E-05 vgs_V=0.972138 vds_V=1.89938 vdsat_V=0.0469249 margin_V=1.85246 gm_over_id=26.4094
+OPDEV xch.xs1.xota.xm2 id_A=1.08324E-05 vgs_V=0.972137 vds_V=1.89976 vdsat_V=0.0469247 margin_V=1.85284 gm_over_id=26.4094
+OPDEV xch.xs1.xota.xm3 id_A=1.08324E-05 vgs_V=0.722146 vds_V=0.722146 vdsat_V=0.108258 margin_V=0.613889 gm_over_id=12.9661
+OPDEV xch.xs1.xota.xm4 id_A=1.08324E-05 vgs_V=0.722146 vds_V=0.721766 vdsat_V=0.108258 margin_V=0.613508 gm_over_id=12.9661
+OPDEV xch.xs1.xota.xm6 id_A=2.17843E-05 vgs_V=0.721766 vds_V=1.64934 vdsat_V=0.108029 margin_V=1.54131 gm_over_id=12.9347
+OPDEV xch.xs1.xota.xm7 id_A=2.17844E-05 vgs_V=0.916842 vds_V=1.65066 vdsat_V=0.160647 margin_V=1.49001 gm_over_id=8.98287
+OPDEV xch.xs2.xota2.xmt id_A=1.00372E-08 vgs_V=0.606361 vds_V=0.789677 vdsat_V=0.050095 margin_V=0.739582 gm_over_id=21.3555
+OPDEV xch.xs2.xota2.xm1 id_A=5.01024E-09 vgs_V=0.859663 vds_V=1.74911 vdsat_V=0.0536414 margin_V=1.69547 gm_over_id=21.5332
+OPDEV xch.xs2.xota2.xm2 id_A=5.02698E-09 vgs_V=0.860761 vds_V=0.706976 vdsat_V=0.0540253 margin_V=0.652951 gm_over_id=21.5755
+OPDEV xch.xs2.xota2.xm3 id_A=5.01025E-09 vgs_V=0.761215 vds_V=0.761215 vdsat_V=0.0649701 margin_V=0.696245 gm_over_id=19.7582
+OPDEV xch.xs2.xota2.xm4 id_A=5.02698E-09 vgs_V=0.761215 vds_V=1.80335 vdsat_V=0.0649701 margin_V=1.73838 gm_over_id=19.74
+OPDEV xch.xs2.xota2.xmf id_A=5.29689E-06 vgs_V=0.153795 vds_V=1.64955 vdsat_V=0.0516514 margin_V=1.5979 gm_over_id=27.9867
+OPDEV xch.xs2.xota2.xms id_A=5.29683E-06 vgs_V=0.606361 vds_V=1.65045 vdsat_V=0.0509752 margin_V=1.59947 gm_over_id=21.8565
+OPSUM vout_V=1.65045 vout_err_V=0.00110835 vbn_V=0.606361 vcm_V=1.64934 vg1_V=1.85042 vcmo_V=1.64934 vg2_V=2.54958 i_supply_A=7.66783E-05 ibias1_A=2.16683E-05
+OPNODE v1_V=1.64934 vn1_V=1.64939 vp1_V=1.64939 vn2_V=1.65044 o2_V=1.49665
+### op_ff_85
+OPDEV xbias.xmp1 id_A=1.34934E-06 vgs_V=0.648826 vds_V=2.79111 vdsat_V=0.0952844 margin_V=2.69583 gm_over_id=13.5715
+OPDEV xbias.xmp2 id_A=1.33413E-06 vgs_V=0.648826 vds_V=0.648826 vdsat_V=0.0952844 margin_V=0.553541 gm_over_id=13.5972
+OPDEV xbias.xmn1 id_A=1.36961E-06 vgs_V=0.508889 vds_V=0.508889 vdsat_V=0.0879288 margin_V=0.42096 gm_over_id=15.4274
+OPDEV xbias.xmn2 id_A=1.32898E-06 vgs_V=0.447124 vds_V=2.58941 vdsat_V=0.0602743 margin_V=2.52914 gm_over_id=18.8133
+OPDEV xch.xsink1 id_A=3.4118E-05 vgs_V=0.508889 vds_V=2.39087 vdsat_V=0.0879288 margin_V=2.30294 gm_over_id=15.266
+OPDEV xch.xs1.xota.xmb id_A=3.41663E-05 vgs_V=0.909135 vds_V=0.909135 vdsat_V=0.255875 margin_V=0.65326 gm_over_id=5.66218
+OPDEV xch.xs1.xota.xmt id_A=3.41351E-05 vgs_V=0.909135 vds_V=0.773636 vdsat_V=0.255875 margin_V=0.517761 gm_over_id=5.66163
+OPDEV xch.xs1.xota.xm1 id_A=1.70676E-05 vgs_V=0.876937 vds_V=1.83688 vdsat_V=0.0742454 margin_V=1.76263 gm_over_id=17.2319
+OPDEV xch.xs1.xota.xm2 id_A=1.70676E-05 vgs_V=0.876937 vds_V=1.83715 vdsat_V=0.0742453 margin_V=1.76291 gm_over_id=17.2319
+OPDEV xch.xs1.xota.xm3 id_A=1.70676E-05 vgs_V=0.689488 vds_V=0.689488 vdsat_V=0.194277 margin_V=0.495211 gm_over_id=7.79479
+OPDEV xch.xs1.xota.xm4 id_A=1.70676E-05 vgs_V=0.689488 vds_V=0.689209 vdsat_V=0.194277 margin_V=0.494932 gm_over_id=7.79479
+OPDEV xch.xs1.xota.xm6 id_A=3.42812E-05 vgs_V=0.689209 vds_V=1.64936 vdsat_V=0.194089 margin_V=1.45527 gm_over_id=7.78319
+OPDEV xch.xs1.xota.xm7 id_A=3.42812E-05 vgs_V=0.909135 vds_V=1.65064 vdsat_V=0.255875 margin_V=1.39476 gm_over_id=5.66192
+OPDEV xch.xs2.xota2.xmt id_A=1.8827E-08 vgs_V=0.508889 vds_V=0.86397 vdsat_V=0.0910975 margin_V=0.772872 gm_over_id=14.4058
+OPDEV xch.xs2.xota2.xm1 id_A=9.40073E-09 vgs_V=0.785393 vds_V=1.75862 vdsat_V=0.0981461 margin_V=1.66048 gm_over_id=14.5815
+OPDEV xch.xs2.xota2.xm2 id_A=9.4263E-09 vgs_V=0.786478 vds_V=0.552507 vdsat_V=0.0986793 margin_V=0.453828 gm_over_id=14.5889
+OPDEV xch.xs2.xota2.xm3 id_A=9.40075E-09 vgs_V=0.677405 vds_V=0.677405 vdsat_V=0.110038 margin_V=0.567367 gm_over_id=12.0723
+OPDEV xch.xs2.xota2.xm4 id_A=9.4263E-09 vgs_V=0.677405 vds_V=1.88352 vdsat_V=0.110038 margin_V=1.77348 gm_over_id=12.0649
+OPDEV xch.xs2.xota2.xmf id_A=8.41189E-06 vgs_V=0.233986 vds_V=1.64954 vdsat_V=0.0950098 margin_V=1.55453 gm_over_id=17.5294
+OPDEV xch.xs2.xota2.xms id_A=8.41183E-06 vgs_V=0.508889 vds_V=1.65046 vdsat_V=0.0879288 margin_V=1.56253 gm_over_id=15.3288
+OPSUM vout_V=1.65046 vout_err_V=0.00110001 vbn_V=0.508889 vcm_V=1.64936 vg1_V=1.85041 vcmo_V=1.64936 vg2_V=2.54959 i_supply_A=0.000119287 ibias1_A=3.4118E-05
+OPNODE v1_V=1.64936 vn1_V=1.64943 vp1_V=1.64943 vn2_V=1.65045 o2_V=1.41648
+### op_ss_27
+OPDEV xbias.xmp1 id_A=6.8453E-07 vgs_V=0.919195 vds_V=2.55306 vdsat_V=0.0682121 margin_V=2.48485 gm_over_id=17.1569
+OPDEV xbias.xmp2 id_A=6.77739E-07 vgs_V=0.919195 vds_V=0.919195 vdsat_V=0.0682121 margin_V=0.850983 gm_over_id=17.1895
+OPDEV xbias.xmn1 id_A=6.84556E-07 vgs_V=0.746941 vds_V=0.746941 vdsat_V=0.061335 margin_V=0.685606 gm_over_id=18.9361
+OPDEV xbias.xmn2 id_A=6.76861E-07 vgs_V=0.69751 vds_V=2.33137 vdsat_V=0.0452007 margin_V=2.28617 gm_over_id=22.1419
+OPDEV xch.xsink1 id_A=1.70674E-05 vgs_V=0.746941 vds_V=2.18904 vdsat_V=0.061335 margin_V=2.12771 gm_over_id=18.7532
+OPDEV xch.xs1.xota.xmb id_A=1.7077E-05 vgs_V=1.11096 vds_V=1.11096 vdsat_V=0.174756 margin_V=0.936201 gm_over_id=7.99886
+OPDEV xch.xs1.xota.xmt id_A=1.70051E-05 vgs_V=1.11096 vds_V=0.545855 vdsat_V=0.174756 margin_V=0.371099 gm_over_id=7.99765
+OPDEV xch.xs1.xota.xm1 id_A=8.50256E-06 vgs_V=1.1047 vds_V=1.87289 vdsat_V=0.0539239 margin_V=1.81897 gm_over_id=20.8743
+OPDEV xch.xs1.xota.xm2 id_A=8.50256E-06 vgs_V=1.1047 vds_V=1.87294 vdsat_V=0.0539239 margin_V=1.81902 gm_over_id=20.8743
+OPDEV xch.xs1.xota.xm3 id_A=8.50256E-06 vgs_V=0.881253 vds_V=0.881253 vdsat_V=0.126306 margin_V=0.754947 gm_over_id=10.9897
+OPDEV xch.xs1.xota.xm4 id_A=8.50256E-06 vgs_V=0.881253 vds_V=0.881202 vdsat_V=0.126306 margin_V=0.754896 gm_over_id=10.9897
+OPDEV xch.xs1.xota.xm6 id_A=1.71195E-05 vgs_V=0.881202 vds_V=1.64939 vdsat_V=0.126276 margin_V=1.52311 gm_over_id=10.9613
+OPDEV xch.xs1.xota.xm7 id_A=1.71196E-05 vgs_V=1.11096 vds_V=1.65061 vdsat_V=0.174756 margin_V=1.47586 gm_over_id=7.99697
+OPDEV xch.xs2.xota2.xmt id_A=8.88964E-09 vgs_V=0.746941 vds_V=0.661528 vdsat_V=0.0618917 margin_V=0.599636 gm_over_id=18.0615
+OPDEV xch.xs2.xota2.xm1 id_A=4.44198E-09 vgs_V=0.987861 vds_V=1.70026 vdsat_V=0.0662355 margin_V=1.63402 gm_over_id=18.2237
+OPDEV xch.xs2.xota2.xm2 id_A=4.44766E-09 vgs_V=0.988322 vds_V=1.24646 vdsat_V=0.066403 margin_V=1.18006 gm_over_id=18.2331
+OPDEV xch.xs2.xota2.xm3 id_A=4.44198E-09 vgs_V=0.938213 vds_V=0.938213 vdsat_V=0.0758432 margin_V=0.86237 gm_over_id=15.8272
+OPDEV xch.xs2.xota2.xm4 id_A=4.44767E-09 vgs_V=0.938213 vds_V=1.39201 vdsat_V=0.0758432 margin_V=1.31617 gm_over_id=15.8221
+OPDEV xch.xs2.xota2.xmf id_A=4.20848E-06 vgs_V=0.258134 vds_V=1.65014 vdsat_V=0.111995 margin_V=1.53815 gm_over_id=17.2843
+OPDEV xch.xs2.xota2.xms id_A=4.20844E-06 vgs_V=0.746941 vds_V=1.64986 vdsat_V=0.061335 margin_V=1.58852 gm_over_id=18.8203
+OPSUM vout_V=1.64986 vout_err_V=0.000467642 vbn_V=0.746941 vcm_V=1.64939 vg1_V=1.85039 vcmo_V=1.64939 vg2_V=2.54961 i_supply_A=5.98438E-05 ibias1_A=1.70674E-05
+OPNODE v1_V=1.64939 vn1_V=1.64944 vp1_V=1.64944 vn2_V=1.64985 o2_V=1.90799
+### op_ss_-40
+OPDEV xbias.xmp1 id_A=5.27273E-07 vgs_V=0.979022 vds_V=2.49514 vdsat_V=0.0523704 margin_V=2.44277 gm_over_id=22.1009
+OPDEV xbias.xmp2 id_A=5.2156E-07 vgs_V=0.979022 vds_V=0.979022 vdsat_V=0.0523704 margin_V=0.926652 gm_over_id=22.1519
+OPDEV xbias.xmn1 id_A=5.27286E-07 vgs_V=0.804863 vds_V=0.804863 vdsat_V=0.0450365 margin_V=0.759826 gm_over_id=23.0175
+OPDEV xbias.xmn2 id_A=5.21008E-07 vgs_V=0.763982 vds_V=2.2801 vdsat_V=0.0340305 margin_V=2.24607 gm_over_id=27.1972
+OPDEV xch.xsink1 id_A=1.32705E-05 vgs_V=0.804863 vds_V=2.17214 vdsat_V=0.0450365 margin_V=2.1271 gm_over_id=22.7552
+OPDEV xch.xs1.xota.xmb id_A=1.32779E-05 vgs_V=1.12786 vds_V=1.12786 vdsat_V=0.13401 margin_V=0.993855 gm_over_id=10.3843
+OPDEV xch.xs1.xota.xmt id_A=1.32094E-05 vgs_V=1.12786 vds_V=0.493137 vdsat_V=0.13401 margin_V=0.359127 gm_over_id=10.3848
+OPDEV xch.xs1.xota.xm1 id_A=6.60471E-06 vgs_V=1.15744 vds_V=1.8961 vdsat_V=0.0413407 margin_V=1.85476 gm_over_id=26.7456
+OPDEV xch.xs1.xota.xm2 id_A=6.6047E-06 vgs_V=1.15744 vds_V=1.89622 vdsat_V=0.0413407 margin_V=1.85487 gm_over_id=26.7456
+OPDEV xch.xs1.xota.xm3 id_A=6.60471E-06 vgs_V=0.910765 vds_V=0.910765 vdsat_V=0.0903798 margin_V=0.820385 gm_over_id=14.4146
+OPDEV xch.xs1.xota.xm4 id_A=6.6047E-06 vgs_V=0.910765 vds_V=0.910648 vdsat_V=0.0903798 margin_V=0.820268 gm_over_id=14.4146
+OPDEV xch.xs1.xota.xm6 id_A=1.33128E-05 vgs_V=0.910648 vds_V=1.64938 vdsat_V=0.0903164 margin_V=1.55906 gm_over_id=14.3693
+OPDEV xch.xs1.xota.xm7 id_A=1.33128E-05 vgs_V=1.12786 vds_V=1.65062 vdsat_V=0.13401 margin_V=1.51661 gm_over_id=10.3807
+OPDEV xch.xs2.xota2.xmt id_A=6.14968E-09 vgs_V=0.804863 vds_V=0.618367 vdsat_V=0.0440324 margin_V=0.574334 gm_over_id=22.3496
+OPDEV xch.xs2.xota2.xm1 id_A=3.07286E-09 vgs_V=1.03101 vds_V=1.69222 vdsat_V=0.0469681 margin_V=1.64525 gm_over_id=22.4311
+OPDEV xch.xs2.xota2.xm2 id_A=3.07682E-09 vgs_V=1.03143 vds_V=1.32694 vdsat_V=0.0470877 margin_V=1.27985 gm_over_id=22.4459
+OPDEV xch.xs2.xota2.xm3 id_A=3.07286E-09 vgs_V=0.989418 vds_V=0.989418 vdsat_V=0.0558238 margin_V=0.933595 gm_over_id=20.9634
+OPDEV xch.xs2.xota2.xm4 id_A=3.07683E-09 vgs_V=0.989418 vds_V=1.35469 vdsat_V=0.0558238 margin_V=1.29887 gm_over_id=20.9561
+OPDEV xch.xs2.xota2.xmf id_A=3.25965E-06 vgs_V=0.295508 vds_V=1.6502 vdsat_V=0.0772335 margin_V=1.57297 gm_over_id=22.1325
+OPDEV xch.xs2.xota2.xms id_A=3.25961E-06 vgs_V=0.804863 vds_V=1.6498 vdsat_V=0.0450365 margin_V=1.60476 gm_over_id=22.8528
+OPSUM vout_V=1.6498 vout_err_V=0.000418832 vbn_V=0.804863 vcm_V=1.64938 vg1_V=1.85039 vcmo_V=1.64938 vg2_V=2.54961 i_supply_A=4.68294E-05 ibias1_A=1.32705E-05
+OPNODE v1_V=1.64938 vn1_V=1.64943 vp1_V=1.64943 vn2_V=1.6498 o2_V=1.94531
+### op_ss_85
+OPDEV xbias.xmp1 id_A=8.32347E-07 vgs_V=0.86879 vds_V=2.59967 vdsat_V=0.082498 margin_V=2.51717 gm_over_id=14.3195
+OPDEV xbias.xmp2 id_A=8.2449E-07 vgs_V=0.86879 vds_V=0.86879 vdsat_V=0.082498 margin_V=0.786292 gm_over_id=14.3433
+OPDEV xbias.xmn1 id_A=8.32443E-07 vgs_V=0.700328 vds_V=0.700328 vdsat_V=0.0766426 margin_V=0.623685 gm_over_id=16.2333
+OPDEV xbias.xmn2 id_A=8.23241E-07 vgs_V=0.642962 vds_V=2.37384 vdsat_V=0.0553971 margin_V=2.31845 gm_over_id=18.952
+OPDEV xch.xsink1 id_A=2.06415E-05 vgs_V=0.700328 vds_V=2.2007 vdsat_V=0.0766426 margin_V=2.12406 gm_over_id=16.0949
+OPDEV xch.xs1.xota.xmb id_A=2.06529E-05 vgs_V=1.0993 vds_V=1.0993 vdsat_V=0.212168 margin_V=0.887135 gm_over_id=6.6088
+OPDEV xch.xs1.xota.xmt id_A=2.05789E-05 vgs_V=1.0993 vds_V=0.590702 vdsat_V=0.212168 margin_V=0.378535 gm_over_id=6.60701
+OPDEV xch.xs1.xota.xm1 id_A=1.02894E-05 vgs_V=1.05984 vds_V=1.84791 vdsat_V=0.0652506 margin_V=1.78265 gm_over_id=17.513
+OPDEV xch.xs1.xota.xm2 id_A=1.02895E-05 vgs_V=1.05984 vds_V=1.84791 vdsat_V=0.0652506 margin_V=1.78266 gm_over_id=17.513
+OPDEV xch.xs1.xota.xm3 id_A=1.02894E-05 vgs_V=0.861392 vds_V=0.861392 vdsat_V=0.161064 margin_V=0.700329 gm_over_id=8.9764
+OPDEV xch.xs1.xota.xm4 id_A=1.02894E-05 vgs_V=0.861392 vds_V=0.861392 vdsat_V=0.161064 margin_V=0.700328 gm_over_id=8.9764
+OPDEV xch.xs1.xota.xm6 id_A=2.07027E-05 vgs_V=0.861392 vds_V=1.64939 vdsat_V=0.161063 margin_V=1.48833 gm_over_id=8.95603
+OPDEV xch.xs1.xota.xm7 id_A=2.07027E-05 vgs_V=1.0993 vds_V=1.65061 vdsat_V=0.212168 margin_V=1.43844 gm_over_id=6.60775
+OPDEV xch.xs2.xota2.xmt id_A=1.14871E-08 vgs_V=0.700328 vds_V=0.696117 vdsat_V=0.0789483 margin_V=0.617168 gm_over_id=15.2988
+OPDEV xch.xs2.xota2.xm1 id_A=5.73987E-09 vgs_V=0.953278 vds_V=1.7082 vdsat_V=0.0847486 margin_V=1.62345 gm_over_id=15.486
+OPDEV xch.xs2.xota2.xm2 id_A=5.74725E-09 vgs_V=0.953781 vds_V=1.1817 vdsat_V=0.0849589 margin_V=1.09674 gm_over_id=15.4922
+OPDEV xch.xs2.xota2.xm3 id_A=5.73989E-09 vgs_V=0.895681 vds_V=0.895681 vdsat_V=0.0941252 margin_V=0.801556 gm_over_id=12.971
+OPDEV xch.xs2.xota2.xm4 id_A=5.74726E-09 vgs_V=0.895681 vds_V=1.42219 vdsat_V=0.0941252 margin_V=1.32806 gm_over_id=12.9672
+OPDEV xch.xs2.xota2.xmf id_A=5.10128E-06 vgs_V=0.227907 vds_V=1.65009 vdsat_V=0.144699 margin_V=1.5054 gm_over_id=14.3256
+OPDEV xch.xs2.xota2.xms id_A=5.10124E-06 vgs_V=0.700328 vds_V=1.64991 vdsat_V=0.0766426 margin_V=1.57326 gm_over_id=16.145
+OPSUM vout_V=1.64991 vout_err_V=0.000511247 vbn_V=0.700328 vcm_V=1.64939 vg1_V=1.85039 vcmo_V=1.64939 vg2_V=2.54961 i_supply_A=7.20462E-05 ibias1_A=2.06415E-05
+OPNODE v1_V=1.64939 vn1_V=1.64946 vp1_V=1.64946 vn2_V=1.6499 o2_V=1.87781
+### op_typical_27
+OPDEV xbias.xmp1 id_A=8.4633E-07 vgs_V=0.805604 vds_V=2.65232 vdsat_V=0.0725446 margin_V=2.57977 gm_over_id=16.8542
+OPDEV xbias.xmp2 id_A=8.37058E-07 vgs_V=0.805604 vds_V=0.805604 vdsat_V=0.0725446 margin_V=0.733059 gm_over_id=16.8896
+OPDEV xbias.xmn1 id_A=8.46588E-07 vgs_V=0.647681 vds_V=0.647681 vdsat_V=0.0647957 margin_V=0.582885 gm_over_id=18.6274
+OPDEV xbias.xmn2 id_A=8.35228E-07 vgs_V=0.596838 vds_V=2.44355 vdsat_V=0.0467571 margin_V=2.3968 gm_over_id=22.0916
+OPDEV xch.xsink1 id_A=2.11875E-05 vgs_V=0.647681 vds_V=2.29408 vdsat_V=0.0647957 margin_V=2.22929 gm_over_id=18.4219
+OPDEV xch.xs1.xota.xmb id_A=2.12082E-05 vgs_V=1.00592 vds_V=1.00592 vdsat_V=0.188931 margin_V=0.816987 gm_over_id=7.53806
+OPDEV xch.xs1.xota.xmt id_A=2.11526E-05 vgs_V=1.00592 vds_V=0.637344 vdsat_V=0.188931 margin_V=0.448414 gm_over_id=7.53735
+OPDEV xch.xs1.xota.xm1 id_A=1.05763E-05 vgs_V=1.01322 vds_V=1.875 vdsat_V=0.0570214 margin_V=1.81797 gm_over_id=20.8237
+OPDEV xch.xs1.xota.xm2 id_A=1.05763E-05 vgs_V=1.01322 vds_V=1.8752 vdsat_V=0.0570213 margin_V=1.81818 gm_over_id=20.8237
+OPDEV xch.xs1.xota.xm3 id_A=1.05763E-05 vgs_V=0.78766 vds_V=0.78766 vdsat_V=0.136563 margin_V=0.651097 gm_over_id=10.4527
+OPDEV xch.xs1.xota.xm4 id_A=1.05763E-05 vgs_V=0.78766 vds_V=0.787457 vdsat_V=0.136563 margin_V=0.650894 gm_over_id=10.4527
+OPDEV xch.xs1.xota.xm6 id_A=2.12716E-05 vgs_V=0.787457 vds_V=1.64938 vdsat_V=0.136439 margin_V=1.51294 gm_over_id=10.4297
+OPDEV xch.xs1.xota.xm7 id_A=2.12716E-05 vgs_V=1.00592 vds_V=1.65062 vdsat_V=0.188931 margin_V=1.46169 gm_over_id=7.53629
+OPDEV xch.xs2.xota2.xmt id_A=1.10226E-08 vgs_V=0.647681 vds_V=0.746513 vdsat_V=0.0655818 margin_V=0.680931 gm_over_id=17.7096
+OPDEV xch.xs2.xota2.xm1 id_A=5.50541E-09 vgs_V=0.902863 vds_V=1.7288 vdsat_V=0.0703723 margin_V=1.65843 gm_over_id=17.8773
+OPDEV xch.xs2.xota2.xm2 id_A=5.51724E-09 vgs_V=0.903645 vds_V=0.934106 vdsat_V=0.0706789 margin_V=0.863427 gm_over_id=17.8919
+OPDEV xch.xs2.xota2.xm3 id_A=5.50542E-09 vgs_V=0.824684 vds_V=0.824684 vdsat_V=0.0809693 margin_V=0.743714 gm_over_id=15.4632
+OPDEV xch.xs2.xota2.xm4 id_A=5.51724E-09 vgs_V=0.824684 vds_V=1.61938 vdsat_V=0.0809693 margin_V=1.53841 gm_over_id=15.4548
+OPDEV xch.xs2.xota2.xmf id_A=5.21401E-06 vgs_V=0.0303573 vds_V=1.64974 vdsat_V=0.0922236 margin_V=1.55751 gm_over_id=19.2503
+OPDEV xch.xs2.xota2.xms id_A=5.21396E-06 vgs_V=0.647681 vds_V=1.65026 vdsat_V=0.0647957 margin_V=1.58547 gm_over_id=18.5006
+OPSUM vout_V=1.65026 vout_err_V=0.00088611 vbn_V=0.647681 vcm_V=1.64938 vg1_V=1.8504 vcmo_V=1.64938 vg2_V=2.5496 i_supply_A=7.4369E-05 ibias1_A=2.11875E-05
+OPNODE v1_V=1.64938 vn1_V=1.64943 vp1_V=1.64943 vn2_V=1.65016 o2_V=1.68062
+### op_typical_-40
+OPDEV xbias.xmp1 id_A=6.54231E-07 vgs_V=0.863696 vds_V=2.59554 vdsat_V=0.0557619 margin_V=2.53978 gm_over_id=21.7215
+OPDEV xbias.xmp2 id_A=6.46356E-07 vgs_V=0.863696 vds_V=0.863696 vdsat_V=0.0557619 margin_V=0.807934 gm_over_id=21.7774
+OPDEV xbias.xmn1 id_A=6.54267E-07 vgs_V=0.704459 vds_V=0.704459 vdsat_V=0.047522 margin_V=0.656937 gm_over_id=22.6416
+OPDEV xbias.xmn2 id_A=6.45167E-07 vgs_V=0.662258 vds_V=2.3941 vdsat_V=0.0351297 margin_V=2.35897 gm_over_id=27.024
+OPDEV xch.xsink1 id_A=1.65528E-05 vgs_V=0.704459 vds_V=2.28061 vdsat_V=0.047522 margin_V=2.23309 gm_over_id=22.3413
+OPDEV xch.xs1.xota.xmb id_A=1.65693E-05 vgs_V=1.01939 vds_V=1.01939 vdsat_V=0.145182 margin_V=0.874203 gm_over_id=9.77267
+OPDEV xch.xs1.xota.xmt id_A=1.65138E-05 vgs_V=1.01939 vds_V=0.584702 vdsat_V=0.145182 margin_V=0.43952 gm_over_id=9.77304
+OPDEV xch.xs1.xota.xm1 id_A=8.25691E-06 vgs_V=1.06589 vds_V=1.90089 vdsat_V=0.043781 margin_V=1.85711 gm_over_id=26.6753
+OPDEV xch.xs1.xota.xm2 id_A=8.25688E-06 vgs_V=1.06589 vds_V=1.90116 vdsat_V=0.0437809 margin_V=1.85738 gm_over_id=26.6753
+OPDEV xch.xs1.xota.xm3 id_A=8.25691E-06 vgs_V=0.814404 vds_V=0.814404 vdsat_V=0.09787 margin_V=0.716534 gm_over_id=13.7987
+OPDEV xch.xs1.xota.xm4 id_A=8.25688E-06 vgs_V=0.814404 vds_V=0.814142 vdsat_V=0.09787 margin_V=0.716272 gm_over_id=13.7988
+OPDEV xch.xs1.xota.xm6 id_A=1.66218E-05 vgs_V=0.814142 vds_V=1.64937 vdsat_V=0.097721 margin_V=1.55164 gm_over_id=13.7603
+OPDEV xch.xs1.xota.xm7 id_A=1.66219E-05 vgs_V=1.01939 vds_V=1.65063 vdsat_V=0.145182 margin_V=1.50545 gm_over_id=9.76901
+OPDEV xch.xs2.xota2.xmt id_A=7.67215E-09 vgs_V=0.704459 vds_V=0.703601 vdsat_V=0.0465809 margin_V=0.65702 gm_over_id=21.9506
+OPDEV xch.xs2.xota2.xm1 id_A=3.83152E-09 vgs_V=0.945764 vds_V=1.72234 vdsat_V=0.0498298 margin_V=1.67251 gm_over_id=22.0663
+OPDEV xch.xs2.xota2.xm2 id_A=3.84063E-09 vgs_V=0.946537 vds_V=1.01755 vdsat_V=0.0500733 margin_V=0.967476 gm_over_id=22.0953
+OPDEV xch.xs2.xota2.xm3 id_A=3.83153E-09 vgs_V=0.874058 vds_V=0.874058 vdsat_V=0.0596781 margin_V=0.814379 gm_over_id=20.5102
+OPDEV xch.xs2.xota2.xm4 id_A=3.84064E-09 vgs_V=0.874058 vds_V=1.57885 vdsat_V=0.0596781 margin_V=1.51917 gm_over_id=20.4969
+OPDEV xch.xs2.xota2.xmf id_A=4.05457E-06 vgs_V=0.0710037 vds_V=1.64985 vdsat_V=0.0636492 margin_V=1.5862 gm_over_id=24.7869
+OPDEV xch.xs2.xota2.xms id_A=4.05453E-06 vgs_V=0.704459 vds_V=1.65015 vdsat_V=0.047522 margin_V=1.60262 gm_over_id=22.458
+OPSUM vout_V=1.65015 vout_err_V=0.000780897 vbn_V=0.704459 vcm_V=1.64937 vg1_V=1.8504 vcmo_V=1.64937 vg2_V=2.5496 i_supply_A=5.84609E-05 ibias1_A=1.65528E-05
+OPNODE v1_V=1.64937 vn1_V=1.64941 vp1_V=1.64941 vn2_V=1.65014 o2_V=1.72115
+### op_typical_85
+OPDEV xbias.xmp1 id_A=1.02846E-06 vgs_V=0.756729 vds_V=2.69771 vdsat_V=0.0877172 margin_V=2.61 gm_over_id=14.05
+OPDEV xbias.xmp2 id_A=1.01778E-06 vgs_V=0.756729 vds_V=0.756729 vdsat_V=0.0877172 margin_V=0.669011 gm_over_id=14.0754
+OPDEV xbias.xmn1 id_A=1.03005E-06 vgs_V=0.602285 vds_V=0.602285 vdsat_V=0.081094 margin_V=0.521192 gm_over_id=15.9595
+OPDEV xbias.xmn2 id_A=1.01524E-06 vgs_V=0.543321 vds_V=2.48431 vdsat_V=0.0574084 margin_V=2.4269 gm_over_id=18.941
+OPDEV xch.xsink1 id_A=2.56176E-05 vgs_V=0.602285 vds_V=2.30224 vdsat_V=0.081094 margin_V=2.22115 gm_over_id=15.8062
+OPDEV xch.xs1.xota.xmb id_A=2.56416E-05 vgs_V=0.997755 vds_V=0.997755 vdsat_V=0.229358 margin_V=0.768397 gm_over_id=6.22335
+OPDEV xch.xs1.xota.xmt id_A=2.55869E-05 vgs_V=0.997755 vds_V=0.681972 vdsat_V=0.229358 margin_V=0.452614 gm_over_id=6.22232
+OPDEV xch.xs1.xota.xm1 id_A=1.27935E-05 vgs_V=0.968579 vds_V=1.8474 vdsat_V=0.0689849 margin_V=1.77842 gm_over_id=17.4627
+OPDEV xch.xs1.xota.xm2 id_A=1.27935E-05 vgs_V=0.968579 vds_V=1.84756 vdsat_V=0.0689848 margin_V=1.77858 gm_over_id=17.4627
+OPDEV xch.xs1.xota.xm3 id_A=1.27935E-05 vgs_V=0.770627 vds_V=0.770627 vdsat_V=0.174156 margin_V=0.596471 gm_over_id=8.49485
+OPDEV xch.xs1.xota.xm4 id_A=1.27935E-05 vgs_V=0.770627 vds_V=0.770468 vdsat_V=0.174156 margin_V=0.596311 gm_over_id=8.49485
+OPDEV xch.xs1.xota.xm6 id_A=2.57155E-05 vgs_V=0.770468 vds_V=1.64938 vdsat_V=0.174053 margin_V=1.47533 gm_over_id=8.47909
+OPDEV xch.xs1.xota.xm7 id_A=2.57155E-05 vgs_V=0.997755 vds_V=1.65062 vdsat_V=0.229358 margin_V=1.42126 gm_over_id=6.22251
+OPDEV xch.xs2.xota2.xmt id_A=1.42266E-08 vgs_V=0.602285 vds_V=0.780602 vdsat_V=0.08379 margin_V=0.696812 gm_over_id=14.9756
+OPDEV xch.xs2.xota2.xm1 id_A=7.10609E-09 vgs_V=0.868781 vds_V=1.73553 vdsat_V=0.0901883 margin_V=1.64534 gm_over_id=15.1563
+OPDEV xch.xs2.xota2.xm2 id_A=7.12056E-09 vgs_V=0.869586 vds_V=0.866807 vdsat_V=0.09055 margin_V=0.776257 gm_over_id=15.1644
+OPDEV xch.xs2.xota2.xm3 id_A=7.1061E-09 vgs_V=0.78387 vds_V=0.78387 vdsat_V=0.100478 margin_V=0.683392 gm_over_id=12.6464
+OPDEV xch.xs2.xota2.xm4 id_A=7.12057E-09 vgs_V=0.78387 vds_V=1.65259 vdsat_V=0.100478 margin_V=1.55211 gm_over_id=12.6404
+OPDEV xch.xs2.xota2.xmf id_A=6.32136E-06 vgs_V=0.0027918 vds_V=1.6498 vdsat_V=0.11937 margin_V=1.53043 gm_over_id=16.0009
+OPDEV xch.xs2.xota2.xms id_A=6.32131E-06 vgs_V=0.602285 vds_V=1.6502 vdsat_V=0.081094 margin_V=1.56911 gm_over_id=15.8642
+OPSUM vout_V=1.6502 vout_err_V=0.000817635 vbn_V=0.602285 vcm_V=1.64938 vg1_V=1.85039 vcmo_V=1.64938 vg2_V=2.54961 i_supply_A=8.95049E-05 ibias1_A=2.56176E-05
+OPNODE v1_V=1.64938 vn1_V=1.64945 vp1_V=1.64945 vn2_V=1.65019 o2_V=1.64741

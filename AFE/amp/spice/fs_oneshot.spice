@@ -1,0 +1,23 @@
+* A4b: INTERNAL fast-settle control source built from REAL gates (replaces the IDEAL pulse source `fs`).  trig rises when the routing FSM enters record mode for this channel
+* (same edge that closes the record-path TGATE).  fs = trig AND NOT(trig delayed by an RC): a pulse of width ~0.69 R C.  sel = 0: C = CA only (target ~100 ns); sel = 1: CA + CB
+* (target ~300 ns): programmable width.  Why such short pulses: the closed fast-settle switch makes OTA1 a unity-gain follower, which is NOT stable (it oscillates from ~1.5 us after the
+* switch closes, sim/a4b_fsfix.log), so the pulse must end before the oscillation grows.  The output drives only the 3 transmission gates of one channel (+ the fsb inverter), ~10 fF.
+* Pins: trig sel fs vdd vss.  The delay resistor is a poly resistor (ppolyf_u_1k, 1 kOhm/sq), the delay capacitors are MIM.  Diffusion parameters follow the DIFF scheme of ota1.spice (zero diffusion made .tran abort in the first 100 ns, A4b).
+.param FSO_RL=145u FSO_CA=21u FSO_CB=31u
+.subckt fs_oneshot trig sel fs vdd vss
+Xrd trig d1 vss ppolyf_u_1k r_length={FSO_RL} r_width=1u
+Xca d1 vss cap_mim_2f0_m2m3_noshield c_length={FSO_CA} c_width={FSO_CA}
+Xcb cb vss cap_mim_2f0_m2m3_noshield c_length={FSO_CB} c_width={FSO_CB}
+Xsw d1 sel cb vss nfet_03v3 W=2u L=0.5u nf=1 ad={DIFF*2u*0.18u} as={DIFF*2u*0.18u} pd={DIFF*2*(2u+0.18u)} ps={DIFF*2*(2u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xi1p dn d1 vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xi1n dn d1 vss vss nfet_03v3 W=0.5u L=0.5u nf=1 ad={DIFF*0.5u*0.18u} as={DIFF*0.5u*0.18u} pd={DIFF*2*(0.5u+0.18u)} ps={DIFF*2*(0.5u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnp1 nd trig vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnp2 nd dn vdd vdd pfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnn1 nd trig mm vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xnn2 mm dn vss vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xop fs nd vdd vdd pfet_03v3 W=2u L=0.5u nf=1 ad={DIFF*2u*0.18u} as={DIFF*2u*0.18u} pd={DIFF*2*(2u+0.18u)} ps={DIFF*2*(2u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+Xon fs nd vss vss nfet_03v3 W=1u L=0.5u nf=1 ad={DIFF*1u*0.18u} as={DIFF*1u*0.18u} pd={DIFF*2*(1u+0.18u)} ps={DIFF*2*(1u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
+* 10 TOhm leakage-like resistors only give the floating nodes (switched capacitor node, NAND stack node) a defined DC state (the transient otherwise aborts in the first 100 ns)
+Rcb cb vss 1e13
+Rmm mm vss 1e13
+.ends fs_oneshot

@@ -1,0 +1,27 @@
+* A4b item 1: on-resistance of the record-path TGATE (TGATE/TGATE.spice, read-only, 5 V devices nfet_05v0/pfet_05v0 L = 0.6u) at a 3.3 V supply with the real gate drive
+* (C = VDD, CBAR = 0 V), over the signal range 1.15..2.15 V (amplifier input node ~ 1.65 V +- 0.5 mV, but the stimulation / offset excursions are larger).  Ron = 10 mV / I with 10 mV across the switch.
+* VSW = supply of TGATE and of the gate drive (3.3 V; 5 V for reference).  One .dc per run; results through `wrdata` + RESULT line.
+.include ../spice/models_typical.spice
+.include ../../../TGATE/TGATE.spice
+.options gmin=1e-12
+.temp 27
+.param VSW=3.3
+Vdd vdd 0 {VSW}
+Vc c 0 {VSW}
+Vcb cb 0 0
+Vin in 0 1.65
+Bo out 0 V = V(in) - 0.01
+Xtg out c cb in vdd 0 TGATE
+.control
+dc Vin 0.0 VSWMAX 0.05
+let ron = 0.01/abs(i(Vin))
+let vs = v(in)
+meas dc r_1p15 find ron when vs=1.15
+meas dc r_1p65 find ron when vs=1.65
+meas dc r_2p15 find ron when vs=2.15
+meas dc r_max_sig max ron from=1.15 to=2.15
+* (curve is printed by scripts/run_a4b_tgate.sh)
+echo RESULT Ron_1p15=$&r_1p15 Ron_1p65=$&r_1p65 Ron_2p15=$&r_2p15 Ron_max_1p15_2p15=$&r_max_sig
+quit
+.endc
+.end

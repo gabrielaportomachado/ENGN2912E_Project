@@ -1,0 +1,18 @@
+### loop_typical_-40
+RESULT T_100Hz_dB=60.9962 fu_Hz=267153 pm_deg=79.5584
+### loop_typical_27
+RESULT T_100Hz_dB=60.8063 fu_Hz=268588 pm_deg=79.1197
+### loop_typical_85
+RESULT T_100Hz_dB=60.5476 fu_Hz=272975 pm_deg=78.6812
+### loop_ff_-40
+RESULT T_100Hz_dB=61.5004 fu_Hz=372990 pm_deg=77.6289
+### loop_ff_27
+RESULT T_100Hz_dB=61.1639 fu_Hz=376428 pm_deg=76.9685
+### loop_ff_85
+RESULT T_100Hz_dB=60.7587 fu_Hz=385792 pm_deg=76.3337
+### loop_ss_-40
+RESULT T_100Hz_dB=60.2965 fu_Hz=199420 pm_deg=81.0444
+### loop_ss_27
+RESULT T_100Hz_dB=60.2121 fu_Hz=201488 pm_deg=80.7306
+### loop_ss_85
+RESULT T_100Hz_dB=60.05 fu_Hz=205160 pm_deg=80.39

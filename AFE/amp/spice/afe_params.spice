@@ -1,9 +1,12 @@
 * A4a one-channel parameters (stage 2, bias, ladders).  One parameter per line (scripts/ngrun.sh overrides by name).  Stage-1 sizing: ota1_params.spice.
-* Supply and references.  VOCM = VOUT_CM = 1.65 V (Decision 17: VREF = VDD, mid-scale VDD/2); VCM_IN = 1.5 V (A3-verified headroom).
+* Supply and references.  VOCM = VOUT_CM = 1.65 V (Decision 17: VREF = VDD, mid-scale VDD/2).  A4b: VCM_IN = 1.65 V = VOCM (was 1.5 V in A3/A4a): with both references at VDD/2 the
+* supply-to-output gain at 50-60 Hz drops from 1.02 to ~0.57 V/V (ideal ratiometric 0.5; Decision 21c, sim/a4b_psrrpath.log).  VTT2 = 0.9 V (was 0.2): see sim/a4b_thd_vtt*.log.
 .param VDDN=3.3
-.param VCM_IN=1.5
+.param VCM_IN=1.65
 .param VOCM=1.65
 .param VTT=0.2
+* A4b: stage-2 pseudo-R gate offset (ladder B tap vg2 = vcm_out + VTT2); stage 1 keeps VTT.
+.param VTT2=0.9
 .param ILAD=2u
 * Beta-multiplier master (bias_gen): poly resistor 1k/sq, width 2u, length RB_L (60 kOhm nominal at 120u).
 .param RB_L=120u
@@ -36,3 +39,5 @@
 .param LCIN1='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CIN_RATIO*CF1V))/(2*CAPK_A)'
 * Pseudo-resistor device size (A2: 1u/2u PMOS pair), used in both stages
 .param PRW=1u PRL=2u
+* loop-gain break sources in stage1r/stage2 only when LOOPTEST=1 (tb_afe_1ch_loop.spice); otherwise a 100 Ohm noiseless resistor (a 0 V source's ~1e-20 A branch current made .tran abort randomly)
+.param LOOPTEST=0

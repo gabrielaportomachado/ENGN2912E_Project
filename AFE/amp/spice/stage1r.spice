@@ -3,8 +3,17 @@
 * RMODE: 0 = simulated pseudo_r_fg devices; 1 = IDEAL RESISTOR (noise) RFIX (Decision 8; the open fs_switch stays in parallel).  RNOISY=0 makes it noiseless.
 .param RMODE=0 RFIX=5.2e12 RNOISY=1
 .subckt stage1r rec ref vout vdd vss ibias vcm vg fs fsb params: BRKV=0 BRKI=0
+* loop-gain break (Tian, tb_afe_1ch_loop.spice sets LOOPTEST=1): a 0 V source here puts a ~1e-20 A BRANCH CURRENT in the solution, which cannot meet abstol = 1e-20 and made .tran abort
+* randomly ("timestep too small, trouble with node v.xch.xs2.vbrk#branch", A4b); in every other run the break is a 100 Ohm noiseless resistor (no branch variable; 1 mOhm made .tran ~100x slower).
+.if (LOOPTEST == 1)
 Vbrk vng vn dc 0 ac {BRKV}
 Ibrk 0 vng dc 0 ac {BRKI}
+.elseif (LOOPTEST == 2)
+* LOOPTEST = 2: plain 0 V source (no AC) = the A4a/A3 netlist; needed for the runs with the record-path TGATE, whose DC operating point only lands in the normal state this way
+Vbrk vng vn dc 0
+.else
+Rbrk vng vn 100 noisy=0
+.endif
 Xota vp vng ibias vout vdd vss ota1
 Xcin1 rec vn cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}
 Xcin2 ref vp cap_mim_2f0_m2m3_noshield c_length={LCIN1} c_width={LCIN1}

@@ -1,0 +1,36 @@
+### acfs_ff_27
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-199.791 g1_mid_dB=-73.8132 g_pk_dB=-25.51 f_lo_Hz=859507 f_hi_Hz= ph_mid_deg=0.0368866 g_300_dB=-144.237 g_0p5_dB=-255.387
+### acfs_ff_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-155.009 g1_mid_dB=-42.2745 g_pk_dB=-23.21 f_lo_Hz=686154 f_hi_Hz= ph_mid_deg=178.886 g_300_dB=-100.365 g_0p5_dB=-210.569
+### acfs_ff_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-144.017 g1_mid_dB=-44.6533 g_pk_dB=-22.9667 f_lo_Hz=674879 f_hi_Hz= ph_mid_deg=176.043 g_300_dB=-94.329 g_0p5_dB=-199.543
+### acfs_ss_27
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-158.473 g1_mid_dB=-56.2189 g_pk_dB=-14.374 f_lo_Hz=533637 f_hi_Hz= ph_mid_deg=-174.364 g_300_dB=-105.817 g_0p5_dB=-214.036
+### acfs_ss_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-141.714 g1_mid_dB=-37.2448 g_pk_dB=-15.9732 f_lo_Hz=599070 f_hi_Hz= ph_mid_deg=178.221 g_300_dB=-88.1624 g_0p5_dB=-197.279
+### acfs_ss_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-200.5 g1_mid_dB=-105.928 g_pk_dB=-15.9265 f_lo_Hz=499246 f_hi_Hz= ph_mid_deg=-0.174749 g_300_dB=-144.926 g_0p5_dB=-256.157
+### acfs_typical_27
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-180.586 g1_mid_dB=-69.1378 g_pk_dB=-8.19859 f_lo_Hz=872110 f_hi_Hz= ph_mid_deg=179.783 g_300_dB=-125.038 g_0p5_dB=-236.134
+### acfs_typical_-40
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-147.634 g1_mid_dB=-40.8713 g_pk_dB=-16.9788 f_lo_Hz=629319 f_hi_Hz= ph_mid_deg=-167.904 g_300_dB=-105.176 g_0p5_dB=-203.033
+### acfs_typical_85
+Error: measure  f_hi  when(WHEN) : out of interval
+Error: &f_hi: no such variable.
+RESULT g_mid_dB=-148.012 g1_mid_dB=-41.2264 g_pk_dB=-18.1722 f_lo_Hz=631058 f_hi_Hz= ph_mid_deg=178.763 g_300_dB=-93.5082 g_0p5_dB=-203.546

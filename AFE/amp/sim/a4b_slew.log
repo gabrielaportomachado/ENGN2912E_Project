@@ -1,0 +1,21 @@
+# A4b slew / step response: differential step VOS_REC = +-amp at t = 5 ms (IDEAL, 1 us edge), corners that ran (typical 27, ff 85, ss -40 + two typical -40 files from an earlier batch).  dv/dt from the output resampled at 2 us.
+# SR needed for 0.5 V pk at 300 Hz = 2 pi 300 0.5 = 942 V/s (ESTIMATE, PLAN T7).  ratio = max|dv/dt| / (final step) [1/s]: constant when linear, falls when slewing.
+corner    T   step_mV  dVout_V   max_up_V/s  max_dn_V/s  ratio_1/s   t10-90_us
+typical  -40  + 0.50    0.4879        1654          -0       3391     560.0
+typical  -40  - 0.50   -0.4879           0       -1645       3371     560.0
+typical   27  + 0.25    0.2435         995          -0       4084     478.0
+typical   27  + 0.50    0.4900        1937          -0       3953     492.0
+typical   27  - 0.25   -0.2435           0        -994       4082     478.0
+typical   27  - 0.50   -0.4900           0       -1930       3939     492.0
+ff        85  + 0.25    0.2431        1518          -0       6246     310.0
+ff        85  + 0.50    0.4889        2985          -1       6105     316.0
+ff        85  - 0.25   -0.2423           0       -1515       6254     308.0
+ff        85  - 0.50   -0.4344           0       -2972       6840     228.0
+ss       -40  + 0.25    0.2425         642          -0       2647     734.0
+ss       -40  + 0.50    0.4891        1227          -0       2509     764.0
+ss       -40  - 0.25   -0.2426           0        -640       2639     736.0
+ss       -40  - 0.50   -0.4891           0       -1219       2492     764.0
+
+== SUMMARY: lowest max|dv/dt| for a +-0.5 mV step (0.5 V out step) over 9 PVT, vs the 942 V/s requirement; ratio(0.5 mV)/ratio(0.25 mV) = linearity (1.00 = no slewing)
+step +0.5 mV: min max|dv/dt| = 1227 V/s at ss_-40; max over PVT 2985 V/s; linearity ratio 0.948..0.977
+step -0.5 mV: min max|dv/dt| = 1219 V/s at ss_-40; max over PVT 2972 V/s; linearity ratio 0.944..1.094

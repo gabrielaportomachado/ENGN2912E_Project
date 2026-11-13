@@ -1,0 +1,16 @@
+# A4b follower / stage-2 resistor diagnosis.  12.25 Hz, 0.5 mV pk differential (= +-0.5 V full scale), 8 s, last 4 periods.  gain = fundamental / 0.5 mV
+# a4a   = A4a netlist: 3.3 V NMOS follower 10u/2u, VCM_IN 1.5 V, VTT2 0.2 V          nvt = native-Vt follower nfet_06v0_nvt 10u/2u, same bias
+# nvtidealR = nvt + IDEAL 4kT/R resistor (R0) in place of the stage-2 pseudo-R      final = A4b baseline (nvt, VCM_IN 1.65 V, VTT2 0.9 V)
+variant      corner   T   gain_dB   THD_%   mean_V  drift_mV  ymax_V  ymin_V   o2max  o2min
+a4a        ff851          60.006    0.103   1.3259   -324.1   1.826   0.825   2.976  1.725
+a4a        ss-401         55.804   30.962   1.6173    -32.7   1.834   1.235   3.281  2.529
+a4a        typical271     57.712   19.993   1.6494     -0.6   1.944   1.216   3.258  2.352
+nvt        ff851          56.514   27.535   1.4243   -225.7   1.826   1.183   1.605  0.913
+nvt        ss-401         60.006    0.103   1.7331     83.1   2.234   1.232   2.562  1.504
+nvt        typical271     60.022    0.040   1.5758    -74.2   2.078   1.074   2.136  1.066
+nvtidealR  ff851          59.725    4.474   1.6551      5.1   2.149   1.212   1.953  0.944
+nvtidealR  ss-401         60.017    0.085   1.6535      3.5   2.155   1.152   2.478  1.419
+nvtidealR  typical271     60.031    0.061   1.6545      4.5   2.157   1.152   2.221  1.149
+final      ff851          59.875    2.425   1.6874     37.4   2.185   1.220   1.992  0.953
+final      ss-401         60.007    0.053   1.6652     15.2   2.166   1.164   2.490  1.432
+final      typical271     60.021    0.044   1.6664     16.4   2.168   1.164   2.232  1.162

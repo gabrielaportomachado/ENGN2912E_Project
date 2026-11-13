@@ -1,0 +1,14 @@
+# A4b power-up: VDD ramps 0 -> 3.3 V in PU_T from the all-zero state (no nodesets); electrode source at the 1.65 V tissue node from t = 0; fs = control derived from VDD (follows the ramp), released at 1 ms + PU_T when "fs1".
+# idm = master Mn1 current, idb1 = OTA1 IBIAS sink, both read at the END of the run (last 1 s average) and compared with the DC operating point (case "op", same netlist, PU_T = 0) of the same corner.
+# t90 = time for idm to reach 90 % of its final value; t_<10mV = last time |out - 1.65 V| > 10 mV after the ramp; peak = max |out - 1.65 V| during the run.
+corner    T  PU_T   fs   idm_uA (op_uA)  idb1_uA (op_uA)  isup_uA  t90_idm_ms  out_final_mV  peak_V   t_<10mV_s  t_<1mV_s   window_s  settled
+typical   27  100u  0     0.847 ( 0.847)     21.19 ( 21.19)     74.5      0.546        -0.1    1.297     17.33    20.81       40   1
+typical   27  100u  1     0.847 ( 0.847)     21.19 ( 21.19)     74.5      0.545       322.2    1.638     never    never       40   0
+typical   27   10m  0     0.847 ( 0.847)     21.19 ( 21.19)     74.5      9.813        -0.0    0.530     17.04    20.53       40   1
+typical   27   10m  1     0.847 ( 0.847)     21.19 ( 21.19)     74.5      9.811        -0.0    0.518      16.7     20.2       40   1
+typical   27    1m  0     0.847 ( 0.847)     21.19 ( 21.19)     74.5      1.393        -0.0    1.298     17.25    20.73       40   1
+typical   27    1m  1     0.847 ( 0.847)     21.19 ( 21.19)     74.5      1.392       322.4    1.509     never    never       40   0
+ff        85    1m  0     1.370 ( 1.370)     34.12 ( 34.12)    119.4      0.746         0.5    0.261     9.472    17.51       40   1
+ff        85    1m  1     1.370 ( 1.370)     34.12 ( 34.12)    119.2      0.744      -508.5    1.613     never    never       40   1
+ss       -40    1m  0     0.527 ( 0.527)     13.27 ( 13.27)     46.9    611.409        -0.3    1.433     15.86     18.6       40   1
+ss       -40    1m  1     0.527 ( 0.527)     13.27 ( 13.27)     47.1    609.391      1282.0    1.419     never    never       40   1

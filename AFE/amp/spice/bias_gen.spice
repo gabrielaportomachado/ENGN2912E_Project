@@ -19,7 +19,7 @@ XrA1 vdd vg1 vss ppolyf_u_3k r_length={(VDDN-VCM_IN-VTT)/ILAD/3000*1u} r_width=1
 XrA2 vg1 vcm_in vss ppolyf_u_3k r_length={VTT/ILAD/3000*1u} r_width=1u
 XrA3 vcm_in vss vss ppolyf_u_3k r_length={VCM_IN/ILAD/3000*1u} r_width=1u
 * ladder B: vdd - RB1 - vg2 - RB2 - vcm_out - RB3 - vss
-XrB1 vdd vg2 vss ppolyf_u_3k r_length={(VDDN-VOCM-VTT)/ILAD/3000*1u} r_width=1u
-XrB2 vg2 vcm_out vss ppolyf_u_3k r_length={VTT/ILAD/3000*1u} r_width=1u
+XrB1 vdd vg2 vss ppolyf_u_3k r_length={(VDDN-VOCM-VTT2)/ILAD/3000*1u} r_width=1u
+XrB2 vg2 vcm_out vss ppolyf_u_3k r_length={VTT2/ILAD/3000*1u} r_width=1u
 XrB3 vcm_out vss vss ppolyf_u_3k r_length={VOCM/ILAD/3000*1u} r_width=1u
 .ends bias_gen

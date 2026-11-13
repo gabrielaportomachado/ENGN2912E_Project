@@ -12,6 +12,7 @@ sed -e "s#models_typical#models_${corner}#g" -e "s#^\.temp .*#.temp ${T}#" "$AMP
 # SWAPS="old=new old2=new2": replace include paths (xschem equivalence runs), e.g. ../spice/ota2.spice=../xschem/netlist/ota2_sub.spice
 # EXTRAOPT="reltol=1e-7 vntol=1e-9": extra .options tokens appended to the testbench options line (tight tolerances for the equivalence runs)
 [ -n "$EXTRAOPT" ] && sed -i "s#^\.options .*#& $EXTRAOPT#" "$tmp"
+[ -n "$OUT" ] && sed -i "s#@OUT@#${OUT}#g" "$tmp"   # OUT=<csv path>: replaces the token @OUT@ (tran testbenches that wrdata)
 for pr in $SWAPS; do sed -i "s#${pr%%=*}#${pr#*=}#g" "$tmp"; done
 for kv in "$@"; do
   n=${kv%%=*}; v=${kv#*=}
@@ -21,5 +22,5 @@ for kv in "$@"; do
     sed -i -E "s#^(\.temp .*)\$#\1\n.param ${n}=${v}#" "$tmp"
   fi
 done
-cd "$AMP/tb" && timeout "${TMO:-300}" ngspice -b "$tmp" 2>&1
+cd "$AMP/tb" && timeout "${TMO:-900}" ngspice -b "$tmp" 2>&1
 rm -f "$tmp"

@@ -3,7 +3,7 @@
 # usage: bash scripts/equiv_xschem_a4a.sh   -> sim/a4a_equiv_xschem.log
 # NOTE: xschem hangs in batch mode if DISPLAY points at an unreachable X server; it is unset below.
 AMP="$(cd "$(dirname "$0")/.." && pwd)"
-LOG="$AMP/sim/a4a_equiv_xschem.log"; : > "$LOG"
+LOG="$AMP/sim/${TAG:-a4a}_equiv_xschem.log"; : > "$LOG"
 for c in ota1 ota2 bias_gen; do
   ( cd "$AMP/xschem" && mkdir -p netlist && unset DISPLAY && timeout 120 xschem --rcfile xschemrc --tcl 'set top_is_subckt 1' -n -s -q --no_x -o netlist $c.sch < /dev/null ) >> "$LOG" 2>&1
   [ -s "$AMP/xschem/netlist/$c.spice" ] || { echo "xschem netlist of $c failed" | tee -a "$LOG"; exit 1; }
@@ -12,7 +12,7 @@ done
 python3 - "$AMP" >> "$LOG" <<'PY'
 import re, sys
 amp = sys.argv[1]
-MODELS = ('pfet_03v3', 'nfet_03v3', 'cap_mim_2f0_m2m3_noshield', 'ppolyf_u_1k', 'ppolyf_u_3k')
+MODELS = ('pfet_03v3', 'nfet_03v3', 'nfet_06v0_nvt', 'cap_mim_2f0_m2m3_noshield', 'ppolyf_u_1k', 'ppolyf_u_3k')
 def norm(p):
     txt = re.sub(r'\n\+\s*', ' ', open(p).read())
     dev, sub = {}, None

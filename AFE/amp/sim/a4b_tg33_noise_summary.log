@@ -1,0 +1,17 @@
+# A4b items 1+2 (from sim/a4b_tg33_noise.log): input-referred noise 0.5-300 Hz [uV] = integrated output noise / mid-band gain (typical flicker, IDEAL R = R0 in both stages), Randles source in all runs.
+# none = no record-path switch; rtgNN = IDEAL series resistor NN (thermal noise included) in place of the switch; cpad = pad capacitance C_PAD on the REC node (ASSUMPTION).
+# realTG rows (TGATE devices in the noise netlist) are INVALID: with the TGATE attached the DC operating point of stage 1 lands in the bistable railed state (v1 0.3 V, vn1 1.79 V; sim/a4b_tg33_noise.log shows 9-170 uV); see NOTES.md.
+variant          typical 27 C ff 85 C      ss -40 C    
+none             1.668        1.803        1.540       
+rtg10k           1.681        1.818        1.551       
+rtg30k           1.708        1.849        1.572       
+rtg100k          1.800        1.953        1.644       
+rtg300k          2.038        2.224        1.834       
+rtg1M            2.712        2.984        2.382       
+none_cpad2p      1.668        1.803        1.540       
+none_cpad10p     1.668        1.803        1.540       
+
+# fit total^2 = base^2 + k R (R in ohm): maximum series resistance for total <= 2 uV
+typical_27 : base 1.668 uV, k = 4.577e-06 uV^2/ohm, R_max(2 uV) = 266 kOhm
+ff_85      : base 1.803 uV, k = 5.651e-06 uV^2/ohm, R_max(2 uV) = 133 kOhm
+ss_-40     : base 1.540 uV, k = 3.305e-06 uV^2/ohm, R_max(2 uV) = 493 kOhm

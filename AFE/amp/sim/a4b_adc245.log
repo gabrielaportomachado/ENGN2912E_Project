@@ -1,0 +1,9 @@
+# A4b item 4 (Decision 34: one ADC per channel, T_ACQ ~245 us): C_s = 17 pF behind 1 kOhm, NO reset: C_s keeps the previous sample, +-0.24 V away from the amplifier output (300 Hz full-scale sample-to-sample step at 4 kS/s), amplifier at rest.
+# err(T) = v(C_s)(t0 + T) - v(out) before the connect [LSB]; xtalk = err at 245 us referred to the amplifier input [uV] (err x 0.806 mV / 1000).  PROVISIONAL (Decisions 24 and 28 are provisional until D0b).
+corner    T   dV_V  err@11us err@50us err@100us err@150us err@200us err@245us   xtalk@245us_uV
+typical   27  +0.24     -0.470    -0.400    -0.325    -0.264    -0.215    -0.178      -0.144
+typical   27  -0.24      0.118     0.101     0.082     0.067     0.054     0.045       0.036
+ff        85  +0.24     -0.439    -0.344    -0.252    -0.184    -0.135    -0.102      -0.082
+ff        85  -0.24      0.120     0.094     0.069     0.050     0.037     0.028       0.022
+ss       -40  +0.24     -0.483    -0.436    -0.381    -0.334    -0.292    -0.260      -0.209
+ss       -40  -0.24      0.103     0.093     0.081     0.071     0.063     0.055       0.045

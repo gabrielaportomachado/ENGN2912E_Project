@@ -1,0 +1,22 @@
+# A4b fast-settle pulse alone (no offset, no input signal): fs high from t0 = 10 ms for W (edges 10 ns), IDEAL control.  pre = value just before the pulse; jump = output - pre at the given time after the falling edge ends.
+# dv1/dout@10us = change of the stage-1 / channel output between 1 us before and 10 us after the release; Q1 = Cf1 (200 fF) x dv1 (ESTIMATE of the charge injected into the stage-1 summing node).
+# settle = last time after release with |out - pre| > thr (never = still outside at the end of the 12 s window).  v1 verdict: stage-1 output stuck at a rail / still moving / settled at the end of the window.
+corner    T   W_s    during_mV  dout@10us dv1@10us_mV  Q1_fC   jump@1ms jump@100ms jump@1s jump@end_mV   peak_mV   t_<10mV   t_<1mV    v1_end_V  v1 verdict
+typical   27  100n      -0.05      0.25      -0.94   -0.19      7.28      6.09   -0.29     -0.10       7.38         0    4.188     1.649  settled
+typical   27  300n      -0.01     -0.36       0.71    0.14     -9.77     -8.70   -2.16     -0.09       9.92         0    1.369     1.649  settled
+typical   27   10u      28.72     12.46   -1540.71 -308.14   1509.11   1174.63 1078.95    835.50    1509.12     never    never     0.007  STUCK at rail
+typical   27  100u     -13.25    -37.96   -1790.21 -358.04   1509.12   1174.03 1078.89    835.64    1509.13     never    never     0.006  STUCK at rail
+typical   27    1m      59.97      6.99   -1402.67 -280.53   1509.11   1176.08 1079.13    835.82    1509.11     never    never     0.006  STUCK at rail
+typical   27   10m     -31.12    121.37   -1397.25 -279.45   1509.11   1173.08 1078.77    835.78    1509.12     never    never     0.006  STUCK at rail
+ff        85  100n      -0.03      0.20      -0.62   -0.12      3.93      3.13   -0.69     -0.01       3.93         0    3.349     1.649  settled
+ff        85  300n       0.00     -0.37       0.40    0.08     -6.43     -5.70   -1.70      0.00       6.44         0    1.344     1.649  settled
+ff        85   10u      46.77    -26.01   -1314.60 -262.92   -508.41   -508.40 -509.29   -509.66    1609.90     never    never     0.875  recovering
+ff        85  100u     -10.57    134.23   -2087.05 -417.41   -508.71   -508.71 -509.47   -509.65    1612.44     never    never     0.836  recovering
+ff        85    1m    -118.15     23.23   -1876.29 -375.26   -508.44   -508.45 -509.30   -509.65    1610.29     never    never     0.838  recovering
+ff        85   10m      13.77     14.04   -1752.61 -350.52   -508.40   -508.40 -509.28   -509.65    1610.13     never    never     0.839  recovering
+ss       -40  100n      -0.03      0.01      -0.15   -0.03      0.61      0.45   -0.34     -0.00       0.71         0        0     1.649  settled
+ss       -40  300n      -0.00     -0.07       0.19    0.04     -2.67     -2.47   -0.50      0.00       2.86         0   0.6466     1.649  settled
+ss       -40   10u      50.28    -42.37   -1244.24 -248.85   1282.22   1282.22 1282.22   1282.22    1282.23     never    never     0.003  STUCK at rail
+ss       -40  100u    -137.34    -11.83   -1434.11 -286.82   1282.22   1282.22 1282.22   1282.22    1282.23     never    never     0.003  STUCK at rail
+ss       -40    1m     -79.96     -5.51   -1763.52 -352.70   1282.22   1282.22 1282.22   1282.22    1283.18     never    never     0.003  STUCK at rail
+ss       -40   10m     -16.26     37.36   -1963.69 -392.74   1282.22   1282.22 1282.22   1282.22    1282.25     never    never     0.003  STUCK at rail

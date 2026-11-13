@@ -1,0 +1,8 @@
+* A4b: one thread per ngspice process (8 jobs run in parallel; OpenMP on this small netlist wastes CPU)
+set num_threads=1
+* assert BSIM compatibility mode with "nf" vs. "W"
+set ngbehavior=hsa
+* "nomodcheck" speeds up loading time
+set ng_nomodcheck
+* sky130A uses behaviour resistor in models, make sure they add noise
+set enable_noisy_r

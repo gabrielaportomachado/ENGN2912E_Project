@@ -9,8 +9,9 @@ Xm1 d1 inp tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18
 Xm2 o2 inn tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
 Xm3 d1 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
 Xm4 o2 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
-* follower (drain on vdd, gate o2, source out) and its sink (master unit 16u/4u x BM_KSF)
-Xmf vdd o2 out vss nfet_03v3 L={OTA2_LF} W={OTA2_WF} nf=1 ad={DIFF*OTA2_WF*0.18u} as={DIFF*OTA2_WF*0.18u} pd={DIFF*2*(OTA2_WF+0.18u)} ps={DIFF*2*(OTA2_WF+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+* follower (drain on vdd, gate o2, source out) and its sink (master unit 16u/4u x BM_KSF).  A4b: the follower is the PDK NATIVE-Vt 6 V NMOS nfet_06v0_nvt (vth0 -0.04 V typ),
+* NOT nfet_03v3: the 3.3 V device needs Vgs ~ 1.25 V with its body effect at out = 1.65 V, which clipped the output at ~1.94 V (A4b, sim/a4b_swing.log).  Min L of the model is 1.8u.
+Xmf vdd o2 out vss nfet_06v0_nvt L={OTA2_LF} W={OTA2_WF} nf=1 ad={DIFF*OTA2_WF*0.18u} as={DIFF*OTA2_WF*0.18u} pd={DIFF*2*(OTA2_WF+0.18u)} ps={DIFF*2*(OTA2_WF+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
 Xms out vbn vss vss nfet_03v3 L=4u W=16u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={BM_KSF}
 Xcc o2 vss cap_mim_2f0_m2m3_noshield c_length={LCC2} c_width={LCC2}
 .ends ota2

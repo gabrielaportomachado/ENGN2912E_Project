@@ -1,0 +1,9 @@
+# A4b item 3: the fast-settle control from the REAL one-shot (spice/fs_oneshot.spice: poly RC delay + NAND + inverter, 3.3 V gates), pulse alone (no offset, no signal), trigger edge at t0 = 10 ms.
+# width = fs 50 % crossings; sel = 0 -> C = CA, sel = 1 -> CA + CB.  Release behaviour as in a4b_fscharge.log (dout/dv1 = step 1 us before .. 10 us after the falling edge).
+corner    T  sel  width_ns  osc_pp_mV  dout@10us dv1@10us  out-pre@1ms  @1s    @end_mV   t_<1mV_s  t_<10mV_s  v1_end_V  v1 verdict   ok
+typical   27  0      82.4        1.2       0.08    -0.38        1.58   -0.71    -0.10       0.15         0    1.649  settled      ok
+typical   27  1     251.7        1.3       0.02    -0.32        0.60   -1.10    -0.10       2.49         0    1.649  settled      NO
+ff        85  0      57.1        2.2      -0.08    -0.04       -1.62   -1.03    -0.00      1.063         0    1.649  settled      NO
+ff        85  1     172.7        2.0       0.05    -0.36        1.15   -1.00    -0.01       2.48         0    1.649  settled      ok
+ss       -40  0     116.9        1.1      -0.05     0.12       -2.01   -0.37     0.00     0.4816         0    1.649  settled      ok
+ss       -40  1     359.2        1.1       0.01    -0.17        0.62   -0.37    -0.00   1.785e-09         0    1.649  settled      ok

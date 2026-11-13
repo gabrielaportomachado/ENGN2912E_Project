@@ -1,0 +1,159 @@
+* A4b: one channel (stage 1 + stage 2 + follower, REAL bias_gen) -- master transient testbench.  Every A4b transient scenario is this file with different parameters
+* (scripts/run_a4b.sh).  Parameters one per line (scripts/ngrun.sh overrides by name; token @OUT@ is replaced by the CSV path).
+*   signal : VD (differential pk, V; default 0 = no signal) F_SIG TD_SIG       input = Vd SIN(0 VD F_SIG TD_SIG)     (IDEAL source through the Randles networks, tissue node 1.65 V)
+*   offsets: VOS_REC / VOS_REF step at T_OS (IDEAL, 1 us edge); artifact pulse ART_AMP for ART_DUR from ART_T0 on the REC electrode (IDEAL)
+*   fast-settle: FS_EN=1 -> fs pulse FS_W wide from FS_T0 with FS_TR edges (IDEAL control, 3.3 V); FS_SRC=1 -> fs from the REAL one-shot spice/fs_oneshot.spice IN the netlist (aborts at the start of .tran), FS_SRC=2 -> the same one-shot simulated alone and played back as a PWL source; triggered when the record-path
+*                TGATE closes (TG_TON; without USE_TG at FS_T0), FS_SEL = 0/1 selects the pulse width (~100 / ~300 ns)
+*   pads   : C_PAD (ESD capacitance, ASSUMPTION) and I_LEAK (leakage out of the pad node to ground, ASSUMPTION) on the REC node and, with USE_TG=1, on the E (electrode-side) node
+*   TGATE  : USE_TG=1 -> the existing TGATE.spice (5 V devices, read-only include) in series with REC; sw_rec = 5 V (closed) except TG_TOFF..TG_TON
+*   ADC    : ADC_EN=1 -> adc_load.spice at the output: precharge C_s to VOCM + DV_PREV, connect at ADC_T0 for T_ACQ
+*   supply : PU_T > 0 -> VDD ramps 0 -> VSUP in PU_T and the nodesets are not applied (power-up from the all-zero state)
+.include ../spice/models_typical.spice
+.include ../spice/pseudoR.spice
+.include ../spice/ota1_params.spice
+.include ../spice/afe_params.spice
+.include ../spice/ota1.spice
+.include ../spice/ota2.spice
+.include ../spice/bias_gen.spice
+.include ../spice/stage1r.spice
+.include ../spice/stage2.spice
+.include ../spice/afe_ch.spice
+.include ../spice/src_randles.spice
+.include ../spice/adc_load.spice
+.include ../spice/fs_oneshot.spice
+.include ../../../TGATE/TGATE.spice
+.options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500 chgtol=1e-19 num_threads=1
+.temp 27
+.param VSUP=3.3
+.param PU_T=0
+.param VD=0
+.param F_SIG=12.25
+.param TD_SIG=0
+.param VOS_REC=0
+.param VOS_REF=0
+.param T_OS=0.5
+.param ART_AMP=0
+.param ART_DUR=1m
+.param ART_T0=0.5
+.param FS_EN=0
+.param FS_SRC=0
+.param FS_SEL=0
+.param C_PAD=0
+.param INIT_G=0
+.param T_INIT=1m
+.param I_LEAK=0
+.param FS_T0=0.5
+.param FS_W=1m
+.param FS_TR=10n
+.param USE_TG=0
+.param TG_TOFF=0.2
+.param TG_TON=0.5
+.param ADC_EN=0
+.param ADC_T0=1m
+.param T_ACQ=11.05u
+.param DV_PREV=1
+.param R_ADC=1k
+.param C_ADC=17p
+.param C_OFF=20f
+.param TSAVE=0
+.param FS_RAMP=0
+.param TSTOP=1
+.param TSTEP=1m
+.param TMAXS=1m
+.if (PU_T > 0)
+Vdd vdd 0 PWL(0 0 {PU_T} {VSUP})
+.else
+Vdd vdd 0 {VSUP}
+.endif
+Xbias vbn vcm vg1 vcmo vg2 vdd 0 bias_gen
+* fast-settle control (IDEAL): pulse of width FS_W (FS_EN=0: never)
+.if (FS_SRC == 1)
+* REAL fast-settle source: one-shot (RC delay + NAND) triggered by the record-mode edge
+.if (USE_TG == 1)
+Vtrg trg 0 PWL(0 0 {TG_TON} 0 {TG_TON+10n} {VSUP})
+.else
+Vtrg trg 0 PWL(0 0 {FS_T0} 0 {FS_T0+10n} {VSUP})
+.endif
+Vsel fs_sel 0 {FS_SEL*VSUP}
+Xfso trg fs_sel fs vdd 0 fs_oneshot
+.elseif (FS_SRC == 2)
+* playback of the transistor-level one-shot waveform (tb/tb_fsos_gate.spice, scripts/fs_pwl.py); FSPWL is substituted by scripts/run_a4b.sh
+Vfs fs 0 PWL(FSPWL)
+.elseif (FS_RAMP == 1)
+* power-up variant: fs follows the supply ramp (a 3.3 V control that is derived from VDD cannot exceed it), released at FS_T0+FS_W
+Vfs fs 0 PWL(0 0 {PU_T} {VSUP} {FS_T0+FS_W} {VSUP} {FS_T0+FS_W+FS_TR} 0)
+.elseif (FS_EN == 1)
+Vfs fs 0 PWL(0 0 {FS_T0} 0 {FS_T0+FS_TR} {VSUP} {FS_T0+FS_TR+FS_W} {VSUP} {FS_T0+2*FS_TR+FS_W} 0)
+.else
+Vfs fs 0 0
+.endif
+Vtis tis 0 1.65
+Vd vd 0 SIN(0 {VD} {F_SIG} {TD_SIG})
+.if (VOS_REC != 0)
+Vosr_s vosr_s 0 PWL(0 0 {T_OS} 0 {T_OS+1u} {VOS_REC})
+.else
+Vosr_s vosr_s 0 0
+.endif
+.if (ART_AMP != 0)
+Vosr_a vosr_a 0 PWL(0 0 {ART_T0} 0 {ART_T0+1u} {ART_AMP} {ART_T0+ART_DUR} {ART_AMP} {ART_T0+ART_DUR+1u} 0)
+.else
+Vosr_a vosr_a 0 0
+.endif
+Bosr vosr 0 V = V(vosr_s) + V(vosr_a)
+.if (VOS_REF != 0)
+Vosf vosf 0 PWL(0 0 {T_OS} 0 {T_OS+1u} {VOS_REF})
+.else
+Vosf vosf 0 0
+.endif
+.if (USE_TG == 1)
+Xsrc vd tis recs ref vosr vosf src_randles
+Vdd5 vdd5 0 5
+Vswr c_tg 0 PWL(0 5 {TG_TOFF} 5 {TG_TOFF+10n} 0 {TG_TON} 0 {TG_TON+10n} 5)
+Vswrb cb_tg 0 PWL(0 0 {TG_TOFF} 0 {TG_TOFF+10n} 5 {TG_TON} 5 {TG_TON+10n} 0)
+Xtg rec c_tg cb_tg recs vdd5 0 TGATE
+.else
+Xsrc vd tis rec ref vosr vosf src_randles
+.endif
+Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 fs afe_ch
+* pad loading on the REC node (ASSUMPTION values): ESD capacitance and leakage to ground
+Cpad_r rec 0 {C_PAD}
+Ileak_r rec 0 {I_LEAK}
+.if (USE_TG == 1)
+Cpad_e recs 0 {C_PAD}
+Ileak_e recs 0 {I_LEAK}
+.endif
+.if (ADC_EN == 1)
+Vacq acq 0 PWL(0 0 {ADC_T0} 0 {ADC_T0+10n} 1 {ADC_T0+T_ACQ} 1 {ADC_T0+T_ACQ+10n} 0)
+Vpre pre 0 PWL(0 1 {ADC_T0-20n} 1 {ADC_T0-10n} 0)
+Vprev vprev 0 {VOCM+DV_PREV}
+Xadc out cs acq pre vprev adc_load
+.else
+Coff out 0 {C_OFF}
+Rcs cs 0 1e12                         $ dummy so v(cs) exists
+.endif
+.if (INIT_G > 0)
+* START-UP AID (IDEAL, scaffolding only): stage-1 / stage-2 summing nodes are tied to their references through INIT_G (1e-8 S = 100 MOhm, T_INIT = 50 ms = ~20 time constants) for t < T_INIT: the DC operating point
+* itself still lands in the railed state, the aid relaxes the 20 pF-coupled summing nodes back to the normal state before the first event (the tests start at 0.2 s).
+* Without it, with the record-path TGATE attached some corners (ff 85 C) land in the bistable RAILED state of stage 1 (vn1 1.79 V, v1 0.07 V) that the saturating pseudo-resistors can hold for tens of seconds.
+Binit1 xch.xs1.vn vcm I = (V(xch.xs1.vn) - V(vcm)) * {INIT_G} * (time < {T_INIT})
+Binit2 xch.xs1.vp vcm I = (V(xch.xs1.vp) - V(vcm)) * {INIT_G} * (time < {T_INIT})
+Binit3 xch.xs2.vn2 vcmo I = (V(xch.xs2.vn2) - V(vcmo)) * {INIT_G} * (time < {T_INIT})
+.endif
+.if (PU_T == 0)
+.nodeset v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55
+.nodeset v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4
+.nodeset v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0
+.endif
+.tran {TSTEP} {TSTOP} {TSAVE} {TMAXS}
+.control
+set wr_singlescale
+set wr_vecnames
+save all @m.xbias.xmn1.m0[id] @m.xch.xsink1.m0[id]
+run
+let isup = -i(Vdd)
+let idm = @m.xbias.xmn1.m0[id]
+let idb1 = @m.xch.xsink1.m0[id]
+wrdata @OUT@ v(out) v(xch.v1) v(xch.xs1.vn) v(xch.xs2.vn2) v(xch.xs2.xota2.o2) v(rec) v(vbn) isup v(cs) idm idb1 v(fs)
+quit
+.endc
+.end

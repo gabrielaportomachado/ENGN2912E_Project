@@ -1,0 +1,9 @@
+EQUIV structure ota1: pins hand ['ota1', 'inp', 'inn', 'ibias', 'out', 'vdd', 'vss'] vs xschem ['ota1', 'inp', 'inn', 'ibias', 'out', 'vdd', 'vss']: same; 9 hand devices, 9 xschem devices, differing: none -> PASS
+EQUIV structure ota2: pins hand ['ota2', 'inp', 'inn', 'vbn', 'out', 'vdd', 'vss'] vs xschem ['ota2', 'inp', 'inn', 'vbn', 'out', 'vdd', 'vss']: same; 8 hand devices, 8 xschem devices, differing: none -> PASS
+EQUIV structure bias_gen: pins hand ['bias_gen', 'vbn', 'vcm_in', 'vg1', 'vcm_out', 'vg2', 'vdd', 'vss'] vs xschem ['bias_gen', 'vbn', 'vcm_in', 'vg1', 'vcm_out', 'vg2', 'vdd', 'vss']: same; 14 hand devices, 14 xschem devices, differing: none -> PASS
+EQUIV op_typ27: 134 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
+EQUIV op_ff85: 134 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
+EQUIV ac_typ27: 8 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
+EQUIV ac_ss40: 8 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
+EQUIV ol2: 4 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
+EQUIV noise: 6 values compared, worst relative difference 0 % (), worst absolute difference of the *_err/offset voltages 0 mV -> PASS (limits 1 %, 0.5 mV)
