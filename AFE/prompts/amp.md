@@ -48,7 +48,5 @@ recovery after an offset step and after an artifact pulse (report a sweep, no pa
 claims for unspecified values), supply current. Corners typical/ff/ss, -40/27/85 °C.
 Plots in AFE/amp/figs/. Update NOTES.md. Stop.
 
-## A5: Report
-Write AFE/amp/README.md: how to run every testbench; a results table (target, measured,
-corner, pass/fail, log path); what is IDEAL (bias, references); open items from
-NOTES.md. Do not scale to 16 channels. Stop.
+## A5: Report (SHORT, low effort)
+Write AFE/amp/README.md, at most one page: how to run, a results table (target, measured, corner, pass/fail, log path), what is IDEAL, open items. Do not re-run anything. Stop.

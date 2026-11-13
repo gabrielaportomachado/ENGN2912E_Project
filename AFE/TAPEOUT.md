@@ -134,3 +134,19 @@ Option C (RECOMMENDED, needs user approval; reverses Decision 18's "no DIN"): se
     Caution for L0: a REC pad adds ESD leakage/capacitance; with the routing switch open the REC node floats, so leakage can drift it and create an offset step to recover from.
 Final pad list (31 pads; ~2 over a third of the budget; no spare for extra supply pairs: ask the organizer. Fallback if forced: REC on 4 channels = 27 pads):
  analog (24): E[7:0], IPG[7:0], REC[7:0]; input_cmos (2): CS, DIN; input_schmitt (2): SCLK, RSTN; bidirectional (1): DOUT; power VDD; ground VSS.
+
+Group sketch (2026-11-12, confirms Decision 35): E[i] -> routing TGATE (record path) -> node REC[i] (analog pad) that also feeds amp[i] + ADC[i]; all channels' digital outputs go to one DOUT.
+Implement the shared DOUT as a digital serializer (daisy-chained capture/shift registers or a channel mux into one output flop), not a tri-state/wired bus. The IPG (stimulation) path is not drawn; it stays as in the routing block.
+
+Stimulation amplitude (group, 2026-11-12): the chip is simulation/bench only and does not handle real IPG signals, so the IPG test amplitude is free to choose. Planning value: keep IPG test signals within 0-3.3 V (<= VDD) so the 3.3 V
+routing switch passes them without body-diode conduction. Closes the "IPG amplitude" question under Decision 30; Decision 30 stands. State "not for real stimulation or connection to a person" in the README (NOTES.md already says this).
+
+## RE-ESTIMATE 2026-11-12/13 (N = 8, one ADC per channel, 31 pads). ALL AREA NUMBERS ARE ESTIMATES (not layout).
+Per amplifier channel (from NOTES.md A3/A4a drawn-area figures): MIM 2 x 10,000 (Cin1) + 1,490 (Cin2) + 990 (Cc2) + 142 (Cf2) + Cf1 ~ 22.8k um2 (MIM not overlaid on circuits);
+transistor gate area OTA1 ~12.4k (pair 2 x 1.6k, load 9.2k) + bias sink 1.5k + stage 2 0.5k + OTA1 stage-2/Cc1 ~1-2k = ~16k, x 1.5-2 layout overhead = 24-32k.  -> 47-55k um2 per amplifier channel.
+Per ADC (D0 estimate 0.017 mm2 for one SAR incl. 16.4 pF cap DAC, comparator, logic): ~15-20k um2.  Per channel (amp + ADC): ~62-75k um2.  x 8 = 0.50-0.60 mm2.
+Add routing block + TGATEs + DIN shift register + serializer + shared bias ~0.02-0.04 mm2, then guard rings, decoupling, routing channels, whitespace 25-40 % -> 0.65-0.85 mm2.
+=> report ~900 x 900 um (range 800-950 per side). The earlier "750 x 750" was optimistic: it undercounted the amplifier gate area and layout overhead. Fits a 1110 x 1110 um slot (1.23 mm2) at ~55-70 % utilization.
+If the organizer's slot is smaller, levers (in order): overlay MIM caps above circuits, trade Cin (noise vs gain), cut to N = 4 (~0.35-0.45 mm2, ~600 x 600 um).
+Power (ESTIMATE): amplifiers ~8 x 245 uW = 2 mW typical; ADCs ~17-20 uW total (D0, ADC power ~independent of mux vs per-channel at the same total sample rate).
+Pads: 31 (24 analog E/IPG/REC, 2 input_cmos CS/DIN, 2 input_schmitt SCLK/RSTN, 1 bidirectional DOUT, VDD, VSS). With one more supply pair (VDD+VSS x 2, advisable for mixed-signal noise) 33.
