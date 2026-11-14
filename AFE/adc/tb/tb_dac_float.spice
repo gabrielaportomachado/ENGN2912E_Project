@@ -1,0 +1,35 @@
+* D2 kickback check on the REAL split DAC (tb_cmp_float.spice with the 7 pF ideal cap replaced by the PDK-MIM netlist spice/dac_units.spice): the DAC-side input x is the floating plate T (63 units + series bridge/LSB array = 3.49 pF), M floating too, all bottoms held at 1.65 V (code does not step), pre-charged to 1.65 V + DVX through an IDEAL switch that opens before the first
+* decision (no charge injection from that switch: IDEAL, labelled); the other comparator input is an ideal 1.65 V source (Vref).  NPRE dummy cycles are clocked with the switch still closed (internal nodes in steady state), the switch opens in the reset phase before the first counted decision, then 12 decisions are clocked at the real SCLK (clk = SCLK, 50 % duty, evaluate = high).
+* The DAC does not step, so every decision repeats the same comparison: the drift of x is the accumulated comparator kickback (worst case, no returning charge).  @CELL@ / @OUT@ replaced by scripts/dgrun.sh.
+.include ../spice/models_typical_mim.spice
+.include ../spice/dac_units.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-12 reltol=1e-6 abstol=1e-15 vntol=1e-8 chgtol=1e-17 itl1=500 itl4=500
+.temp 27
+.param VSUP=3.3
+.param TB=1u
+.param DVX=0.4m
+.param NDEC=12
+.param NPRE=3
+.param VREFV=1.65
+.param TLEAD=40n
+Vdd vdd 0 {VSUP}
+Vclk clk 0 PULSE(0 {VSUP} {TLEAD} 200p 200p {TB/2-200p} {TB})
+Vref inn 0 {VREFV}
+Vpre pre 0 {VREFV+DVX}
+Vctl ctl 0 PULSE(1 0 {TLEAD+(NPRE-1+0.75)*TB} 1n 1n 1 2)
+S1 x pre ctl 0 SWM
+S2 m pre ctl 0 SWM
+.model SWM SW(Vt=0.5 Vh=0 Ron=1 Roff=1e15)
+Xd x m bb bb bb bb bb bb bb bb bb bb bb bb bb dac_units
+Vbb bb 0 {VREFV}
+Xc x inn clk outp outn vdd 0 @CELL@
+Cl1 outp 0 5f
+Cl2 outn 0 5f
+.tran 50p {TLEAD+(NPRE+NDEC)*TB+TB/2} 0 50p
+.control
+run
+wrdata @OUT@ v(x) v(clk) v(outp) v(outn)
+.endc
+.end

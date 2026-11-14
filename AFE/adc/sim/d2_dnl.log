@@ -1,0 +1,44 @@
+D2 DAC mismatch (ALGEBRA on the exact capacitor network; every unit is an independent Gaussian; A_C = matching constant in %*um, sigma_unit = A_C/sqrt(area_um2)).  LSB = 0.8057 mV.
+== 0. Nominal check: split 6+6, 5x5 um unit (54.52 fF typ), bridge 55.38 fF = 1.0159 units, total 6.979 pF (127 unit-caps + bridge); ideal DNL/INL max = 3.3e-13 / 5.5e-13 LSB
+   node T load (comparator plate) C_T = 63 units + series(bridge, LSB array 64 units) = 3.489 pF;  C on bottoms (input load) = 6.924 pF;  weights x4096: 1.0000 2.0000 4.0000 8.0000 16.0000 32.0000 64.0000 128.0000 256.0000 512.0000 1024.0000 2048.0000
+
+== 1. Monte Carlo, 50 runs per A_C (headline), split 6+6, 5x5 um units, no parasitics.  Worst transition is nearly always the MSB carry (code 2048) and the next carries (1024, 3072, ...)
+   A_C=0.25 %*um (sigma_u 0.050 %)    n=50    DNLmax: mean 0.27 sigma 0.12 max 0.67 | INLmax: mean 0.20 sigma 0.07 max 0.47 | runs with DNL<-1 (missing code): 0 | |DNL|>1: 0 | |INL|>1: 0 | |INL|>2: 0
+      worst-code histogram (code index of max |DNL|): 512:1, 640:1, 768:1, 1024:8, 1536:1, 1792:1, 2048:28, 2304:1, 2560:3, 3072:3, 3584:2
+   A_C=0.50 %*um (sigma_u 0.100 %)    n=50    DNLmax: mean 0.54 sigma 0.23 max 1.35 | INLmax: mean 0.41 sigma 0.15 max 0.95 | runs with DNL<-1 (missing code): 1 | |DNL|>1: 1 | |INL|>1: 0 | |INL|>2: 0
+      worst-code histogram (code index of max |DNL|): 512:1, 1024:8, 1536:3, 1664:1, 1792:2, 2048:28, 2560:2, 2816:1, 3072:3, 3584:1
+   A_C=1.00 %*um (sigma_u 0.200 %)    n=50    DNLmax: mean 1.07 sigma 0.46 max 2.70 | INLmax: mean 0.81 sigma 0.30 max 1.90 | runs with DNL<-1 (missing code): 12 | |DNL|>1: 26 | |INL|>1: 7 | |INL|>2: 0
+      worst-code histogram (code index of max |DNL|): 256:1, 512:1, 1024:7, 1152:1, 1536:3, 1792:1, 2048:28, 2560:2, 3072:4, 3328:1, 3584:1
+
+== 2. Same, 2000 runs (tail statistics; ALGEBRA, extra to the 30-50 run ngspice-weights check in d2_acweights.py)
+   A_C=0.25 %*um                      n=2000  DNLmax: mean 0.26 sigma 0.12 max 0.88 | INLmax: mean 0.19 sigma 0.07 max 0.50 | runs with DNL<-1 (missing code): 0 | |DNL|>1: 0 | |INL|>1: 0 | |INL|>2: 0
+      percentiles of DNLmax 50/90/99 %: 0.24 / 0.43 / 0.63   INLmax 50/90/99 %: 0.19 / 0.29 / 0.39 LSB
+   A_C=0.50 %*um                      n=2000  DNLmax: mean 0.52 sigma 0.25 max 1.76 | INLmax: mean 0.39 sigma 0.14 max 0.99 | runs with DNL<-1 (missing code): 34 | |DNL|>1: 81 | |INL|>1: 0 | |INL|>2: 0
+      percentiles of DNLmax 50/90/99 %: 0.48 / 0.86 / 1.27   INLmax 50/90/99 %: 0.38 / 0.57 / 0.78 LSB
+   A_C=1.00 %*um                      n=2000  DNLmax: mean 1.05 sigma 0.49 max 3.52 | INLmax: mean 0.77 sigma 0.28 max 1.99 | runs with DNL<-1 (missing code): 488 | |DNL|>1: 948 | |INL|>1: 377 | |INL|>2: 0
+      percentiles of DNLmax 50/90/99 %: 0.97 / 1.71 / 2.54   INLmax 50/90/99 %: 0.75 / 1.15 / 1.55 LSB
+
+== 3. Design alternatives for the same MC (A_C = 0.5 %*um, 2000 runs; unit side in um, split m MSB bits + l LSB bits); area = number of unit caps x side^2 (drawn, no dummies/routing)
+   option                      C_total  area um2          C_T | DNLmax mean/sigma/max          INLmax mean/sigma/max          P(|DNL|>1) P(|INL|>1)
+   6+6, 5x5 (chosen)            6.98 pF      3200      3.49 pF |  0.52 /  0.25 /  1.56               0.39 /  0.14 /  1.02              0.047      0.001   (n=2000)
+   7+5, 5x5 (fallback)          8.72 pF      4000      6.98 pF |  0.37 /  0.18 /  1.23               0.29 /  0.10 /  0.70              0.004      0.000   (n=2000)
+   8+4, 5x5                    14.83 pF      6800     13.96 pF |  0.27 /  0.13 /  0.82               0.20 /  0.07 /  0.46              0.000      0.000   (n=2000)
+   6+6, 8x8                    17.28 pF      8192      8.64 pF |  0.33 /  0.15 /  0.98               0.24 /  0.09 /  0.63              0.000      0.000   (n=2000)
+   7+5, 8x8                    21.60 pF     10240     17.28 pF |  0.23 /  0.11 /  0.77               0.18 /  0.06 /  0.43              0.000      0.000   (n=2000)
+   binary 12+0, 5x5 (D0b: rejected) 223.30 pF    102400    223.30 pF |  0.07 /  0.03 /  0.18               0.05 /  0.02 /  0.11              0.000      0.000   (n=300)
+
+== 4. Parasitic capacitance on the LSB-array node M (routing + switch junction), nominal unit caps; bridge uncompensated (ideal 64/63 unit) vs compensated (bridge re-sized so that LSB weights are exactly 1/64 of the MSB-array LSB)
+   Cp_M[fF]   uncompensated: DNLmax  INLmax  | compensated bridge [fF] (width at 5 um length [um])   DNLmax INLmax | residual if Cp_M is mis-estimated by +-1 fF after compensation: DNLmax / INLmax
+      0.0               0.000   0.000   |     55.381 ( 5.083)                        0.000  0.000 | 0.018 / 0.018
+      1.0               0.018   0.017   |     55.397 ( 5.085)                        0.000  0.000 | 0.018 / 0.018
+      2.0               0.036   0.035   |     55.413 ( 5.086)                        0.000  0.000 | 0.018 / 0.017
+      5.0               0.089   0.087   |     55.461 ( 5.091)                        0.000  0.000 | 0.018 / 0.017
+     10.0               0.177   0.175   |     55.540 ( 5.098)                        0.000  0.000 | 0.018 / 0.017
+     20.0               0.354   0.348   |     55.699 ( 5.113)                        0.000  0.000 | 0.018 / 0.017
+   (1 fF = 1.8 % of a unit; the uncompensated error is a pure gain error of the 6-bit LSB array: 1 LSB step at the carries = 64 * Cp_M/(C of the array) ... see the table.)
+
+== 5. Parasitic on the comparator node T (fF): attenuation only (gain, not DNL).  nominal caps: Cp_T = 0 / 100 / 190 / 300 fF
+   Cp_T    0 fF: DNLmax 3.31e-13 INLmax 5.51e-13 LSB; sum of weights (signal attenuation V_T per V_in) 1.0000
+   Cp_T  100 fF: DNLmax 1.32e-12 INLmax 1.10e-12 LSB; sum of weights (signal attenuation V_T per V_in) 0.9721
+   Cp_T  190 fF: DNLmax 8.82e-13 INLmax 1.10e-12 LSB; sum of weights (signal attenuation V_T per V_in) 0.9484
+   Cp_T  300 fF: DNLmax 8.82e-13 INLmax 1.10e-12 LSB; sum of weights (signal attenuation V_T per V_in) 0.9208

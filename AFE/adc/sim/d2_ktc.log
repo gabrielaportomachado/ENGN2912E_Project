@@ -1,0 +1,13 @@
+D2 kT/C at the comparator plate T (equilibrium .noise, ideal 5 kOhm reset resistors, bottoms at AC ground, 100 Hz-100 GHz); hand value sqrt(kT/C_T), C_T = 63 units + series(bridge, LSB array) + CCMP
+T=  27 C  M switch closed=1  C_cmp=70f    ngspice 34.120 uV rms = 0.0423 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 34.121 uV  (ratio 1.0000)
+T=  27 C  M switch closed=0  C_cmp=70f    ngspice 34.120 uV rms = 0.0423 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 34.121 uV  (ratio 1.0000)
+T=  27 C  M switch closed=0  C_cmp=190f   ngspice 33.558 uV rms = 0.0417 LSB | hand sqrt(kT/C_T) with C_T = 3.679 pF: 33.560 uV  (ratio 0.9999)
+T=  27 C  M switch closed=0  C_cmp=0      ngspice 34.460 uV rms = 0.0428 LSB | hand sqrt(kT/C_T) with C_T = 3.489 pF: 34.462 uV  (ratio 1.0000)
+T=  85 C  M switch closed=1  C_cmp=70f    ngspice 37.259 uV rms = 0.0462 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 37.273 uV  (ratio 0.9996)
+T=  85 C  M switch closed=0  C_cmp=70f    ngspice 37.259 uV rms = 0.0462 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 37.273 uV  (ratio 0.9996)
+T=  85 C  M switch closed=0  C_cmp=190f   ngspice 36.646 uV rms = 0.0455 LSB | hand sqrt(kT/C_T) with C_T = 3.679 pF: 36.660 uV  (ratio 0.9996)
+T=  85 C  M switch closed=0  C_cmp=0      ngspice 37.631 uV rms = 0.0467 LSB | hand sqrt(kT/C_T) with C_T = 3.489 pF: 37.645 uV  (ratio 0.9996)
+T= -40 C  M switch closed=1  C_cmp=70f    ngspice 30.089 uV rms = 0.0373 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 30.073 uV  (ratio 1.0005)
+T= -40 C  M switch closed=0  C_cmp=70f    ngspice 30.089 uV rms = 0.0373 LSB | hand sqrt(kT/C_T) with C_T = 3.559 pF: 30.073 uV  (ratio 1.0005)
+T= -40 C  M switch closed=0  C_cmp=190f   ngspice 29.594 uV rms = 0.0367 LSB | hand sqrt(kT/C_T) with C_T = 3.679 pF: 29.578 uV  (ratio 1.0005)
+T= -40 C  M switch closed=0  C_cmp=0      ngspice 30.390 uV rms = 0.0377 LSB | hand sqrt(kT/C_T) with C_T = 3.489 pF: 30.373 uV  (ratio 1.0006)

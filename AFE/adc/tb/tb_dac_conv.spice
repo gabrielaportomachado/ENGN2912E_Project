@@ -1,0 +1,20 @@
+* D2 transistor-level DAC: sampling + conversion with scripted bit patterns (the SAR logic is IDEAL: control waveforms from scripts/d2_conv.py in @CTRL@, 3.3 V, 100 ps edges).
+* Comparator is NOT attached (a fixed CCMP on T stands for its input capacitance: 70 fF reset / 190 fF evaluate, D1); the kick of cmp_p is tb_dac_float.spice.  @OUT@ = wrdata file.
+.include ../spice/models_typical_mim.spice
+.include ../spice/dac_units.spice
+.include ../spice/dac_sw.spice
+.options gmin=1e-12 reltol=@RELTOL@ abstol=1e-15 vntol=1e-7 chgtol=1e-17 itl1=500 itl4=500
+.temp 27
+.param VSUP=3.3
+.param CCMP=190f
+Vdd vdd 0 {VSUP}
+Vcm vcm 0 {VSUP/2}
+.include @CTRL@
+Xs vin t m vcm vdd 0 rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn dac_sw
+Cc t 0 {CCMP}
+.tran 20p @TEND@ 0 @TMAX@
+.control
+run
+wrdata @OUT@ v(t) v(m) i(Vdd) i(Vvin) v(xs.b11) v(xs.b5) v(xs.b0)
+.endc
+.end

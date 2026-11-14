@@ -1,0 +1,4 @@
+* D2: ff MOS + MIM corner (mimcap_ff).  sw_stat_* stay at the PDK defaults (0) unless a testbench overrides them AFTER this include.
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice ff
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_ff

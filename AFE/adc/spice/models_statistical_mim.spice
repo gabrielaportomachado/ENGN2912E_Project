@@ -1,0 +1,4 @@
+* D2: typical MOS + mimcap_statistical (PDK global MIM skew mc_c_cox = agauss(0, 0.025, 3) x cap_mc_skew x sw_stat_global).  The testbench sets sw_stat_global=1 after this include.
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_statistical

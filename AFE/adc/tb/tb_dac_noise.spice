@@ -1,0 +1,36 @@
+* D2 kT/C of the sampling network: equilibrium thermal noise of the reset switches (ideal Rt = 5k on T, Rm on M; MCLOSED = 1: M switch closed, 0: open), integrated at the comparator plate T, 100 Hz - 100 GHz.
+* The bottom plates are tied to AC ground (zero-impedance input): the sampled charge noise of the T plate is kT*C_T whatever resistors sit on the bottoms (equilibrium: charge covariance = kT*C), so V_T = Q_T/C_T has variance kT/C_T.
+* (A first version put 2 kOhm in series with every bottom plate: all nodes then float and the network's common mode, which does not change the T-plate charge, dominates the node-voltage noise: 231 uV, NOT a kT/C result.)
+* Comparator input capacitance CCMP (reset 70 fF / evaluate 190 fF, D1) on T.
+.include ../spice/models_typical_mim.spice
+.include ../spice/dac_units.spice
+.temp 27
+.param MCLOSED=1
+.param CCMP=70f
+Vcm vcm 0 1.65
+Rt t vcm 5k
+Rm m vcm {MCLOSED ? 5k : 1e15}
+Xd t m b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 bd dac_units
+Vin vin 0 1.65 ac 1
+Rb0 b0 vin 1m
+Rb1 b1 vin 1m
+Rb2 b2 vin 1m
+Rb3 b3 vin 1m
+Rb4 b4 vin 1m
+Rb5 b5 vin 1m
+Rb6 b6 vin 1m
+Rb7 b7 vin 1m
+Rb8 b8 vin 1m
+Rb9 b9 vin 1m
+Rb10 b10 vin 1m
+Rb11 b11 vin 1m
+Rbd bd vin 1m
+Cc t 0 {CCMP}
+.noise v(t) Vin dec 20 100 100G
+.control
+run
+setplot noise2
+print onoise_total
+quit
+.endc
+.end

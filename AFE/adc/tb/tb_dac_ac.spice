@@ -1,0 +1,37 @@
+* D2: bit weights of the split DAC from the PDK netlist (small-signal, 1 MHz): V_T / V_bj with the other bottoms AC-grounded.  T and M are tied to the 1.65 V reset level through 1 GOhm (DC path only; at 1 MHz the caps dominate).
+* @DACINC@ = DAC netlist, @OUT@ = result file, @ACSRC@ = name of the bit that gets the AC source (b0..b11 or bd).
+.include ../spice/models_typical_mim.spice
+.include @DACINC@
+.temp 27
+.param SWG=0
+.param sw_stat_global=0
+Vcm vcm 0 1.65
+Rt t vcm 1G
+Rm m vcm 1G
+Xd t m b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 bd dac_units
+V0 b0 0 1.65
+V1 b1 0 1.65
+V2 b2 0 1.65
+V3 b3 0 1.65
+V4 b4 0 1.65
+V5 b5 0 1.65
+V6 b6 0 1.65
+V7 b7 0 1.65
+V8 b8 0 1.65
+V9 b9 0 1.65
+V10 b10 0 1.65
+V11 b11 0 1.65
+Vd bd 0 1.65
+* absolute unit-cap probe (one more PDK unit, 5 x 5 um, to ground): C = |i|/(2 pi f) with 1 V AC
+Vp pr 0 1.65 ac 0
+Xpr pr 0 cap_mim_2f0_m2m3_noshield c_length=5u c_width=5u
+.control
+alter @SRC@ ac = 1
+alter Vp ac = 1
+ac lin 1 1meg 1meg
+let wt = mag(v(t))
+let cu = mag(i(Vp))/(2*pi*1meg)
+echo RESULT @SRC@ $&wt $&cu > @OUT@
+quit
+.endc
+.end

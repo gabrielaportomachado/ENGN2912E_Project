@@ -1,0 +1,5 @@
+D2 AC-weight check (nominal); ngspice weights from the PDK MIM netlist vs python network model.  LSB = 0.8057 mV
+  nominal    run 0   typical Cu(probe) 54.518 fF  sum(w)=1.00000  ngspice DNLmax 0.000 INLmax 0.000 | python DNLmax 0.000 INLmax 0.000 | max|DNL diff| 2.30e-05  max|INL diff| 2.40e-05 LSB | max rel diff of weights 2.6e-06
+  nominal    run 0   ff      Cu(probe) 49.066 fF  sum(w)=1.00000  ngspice DNLmax 0.000 INLmax 0.000 | python DNLmax 0.000 INLmax 0.000 | max|DNL diff| 2.20e-05  max|INL diff| 2.35e-05 LSB | max rel diff of weights 2.6e-06
+  nominal    run 0   ss      Cu(probe) 59.969 fF  sum(w)=1.00000  ngspice DNLmax 0.000 INLmax 0.000 | python DNLmax 0.000 INLmax 0.000 | max|DNL diff| 2.20e-05  max|INL diff| 2.35e-05 LSB | max rel diff of weights 2.6e-06
+SUMMARY nominal: n=3  ngspice DNLmax mean 0.000 sigma 0.000 max 0.000 | INLmax mean 0.000 sigma 0.000 max 0.000 | python-vs-ngspice max diff DNL 2.3e-05 INL 2.4e-05 LSB | unit-cap probe mean 54.518 fF sigma 4.451 fF (8.16 %)

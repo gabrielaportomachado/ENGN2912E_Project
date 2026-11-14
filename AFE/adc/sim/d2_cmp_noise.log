@@ -1,0 +1,10 @@
+NOISE ss -40C w40u gm_pair=868uS gm_Mc2=949uS gm_Mn2=679uS(at o2=1.65V)  mu=-5.7uV sigma=10.0uV (+-2.5) ncyc=300 span=+-0.80mV decisions1=151 CMP_WP=40u
+NOISE ss -40C w20u gm_pair=556uS gm_Mc2=925uS gm_Mn2=678uS(at o2=1.65V)  mu=5.9uV sigma=17.6uV (+-3.5) ncyc=300 span=+-0.80mV decisions1=149 CMP_WP=20u
+NOISE typical 27C w40u gm_pair=888uS gm_Mc2=848uS gm_Mn2=674uS(at o2=1.65V)  mu=-10.8uV sigma=18.7uV (+-3.5) ncyc=300 span=+-0.80mV decisions1=152 CMP_WP=40u
+NOISE ff 85C w40u gm_pair=944uS gm_Mc2=782uS gm_Mn2=682uS(at o2=1.65V)  mu=-13.7uV sigma=32.9uV (+-4.6) ncyc=300 span=+-0.80mV decisions1=152 CMP_WP=40u
+NOISE ff 85C w20u gm_pair=607uS gm_Mc2=737uS gm_Mn2=684uS(at o2=1.65V)  mu=-14.6uV sigma=53.0uV (+-5.9) ncyc=300 span=+-0.80mV decisions1=153 CMP_WP=20u
+NOISE typical 27C w20u gm_pair=572uS gm_Mc2=810uS gm_Mn2=674uS(at o2=1.65V)  mu=-13.7uV sigma=31.2uV (+-4.6) ncyc=300 span=+-0.80mV decisions1=153 CMP_WP=20u
+NOISE typical 27C w80u gm_pair=1280uS gm_Mc2=905uS gm_Mn2=662uS(at o2=1.65V)  mu=4.2uV sigma=22.1uV (+-3.9) ncyc=300 span=+-0.80mV decisions1=149 
+NOISE ff 85C w80u gm_pair=1363uS gm_Mc2=879uS gm_Mn2=668uS(at o2=1.65V)  mu=9.2uV sigma=29.8uV (+-4.5) ncyc=300 span=+-0.80mV decisions1=148 
+NOISE typical 27C w80u_d1proto gm_pair=1280uS gm_Mc2=905uS gm_Mn2=662uS(at o2=1.65V)  mu=-4.1uV sigma=21.6uV (+-2.3) ncyc=600 span=+-0.60mV decisions1=302 
+NOISE ff 85C w80u_d1proto gm_pair=1363uS gm_Mc2=879uS gm_Mn2=668uS(at o2=1.65V)  mu=8.9uV sigma=36.1uV (+-3.0) ncyc=600 span=+-0.60mV decisions1=296 
