@@ -86,4 +86,42 @@ Risk: ~12 days for ~25 h of agent work per NOTES.md plus 4-6 DRC/LVS fix loops; 
 4. The raw padring fork and example repos still have to be read once (not done in L0).
 5. Cap names: netlists for LVS use cap_mim_2f0_m4m5_noshield; the simulations used m2m3 (same capacitance numbers, different layers); confirm that the PEX netlist (extracted from Magic) uses the same model parameters.
 
+## 9. FINAL channel pin list (afe_ch) and digital/analog crossings (phase I0, 2026-11-14; source: AFE/top/dbs_afe_top.v, simulated in AFE/top/sim/i0_top.log)
+
+`afe_ch` = the cell L2 builds, replicated 8 times. Contents: record TGATE + IPG TGATE (5 V-device macro, TGATE/TGATE.v), REC park (inside afe_chc), amplifier afe_chc (stage 1, stage 2, follower, reset muxes), one-shot fs_oneshot_c (C_T 4 pF),
+2 std cells (OR2 for fs = one-shot OR RST_AMP, INV for samb), ADC analog dac_sw (split 6+6 DAC, plate/M reset switches, sampling TGs, 13 bottom drivers) and the comparator cmp_p.
+The 2 std cells are 7t5v0 cells and need VDD/VSS rails inside (or next to) the cell. Pin order below = the Verilog module port order.
+
+| Pin | Dir | Type | Connects to / meaning |
+|---|---|---|---|
+| e | inout | analog pad | E[i] pad, TGATE IN (both TGATEs) |
+| ipg | inout | analog pad | IPG[i] pad, IPG TGATE OUT |
+| rec | inout | analog pad | REC[i] pad = record TGATE OUT = afe_chc.rec (amplifier input, park node) |
+| sw_rec | in | digital 3.3 V | dbs_ctrl sw_rec[i]: record TGATE C, park PMOS gate (afe_chc.pkcb), one-shot trig |
+| sw_rec_b | in | digital | dbs_ctrl sw_rec_b[i]: record TGATE CBAR, park NMOS gate (afe_chc.pkc); HIGH = park ON |
+| sw_ipg, sw_ipg_b | in | digital | IPG TGATE C / CBAR |
+| rst_amp | in | digital | adc8_top rst_amp_o (config bit 9), same net to all 8 channels, ORed into fs |
+| rst_sw | in | digital | adc8_top rst_sw[i] -> dac_sw.rst AND dac_sw.rstm (D4 wiring) |
+| tg_on | in | digital | adc8_top tg_on[i] -> dac_sw.sam; local inverter -> dac_sw.samb |
+| cmp_clk | in | digital | adc8_top cmp_clk[i] -> cmp_p.clk |
+| dac_gdn | in | digital | adc8_top dac_gdn[i] -> dac_sw.gdn (dummy driver NMOS gate); dac_sw.gdp tied to VDD inside |
+| dac_gp[11:0], dac_gn[11:0] | in | digital | adc8_top dac_gp/gn[12i+11 : 12i] -> dac_sw.gp0..gp11 / gn0..gn11 |
+| cmp_q | out | digital | cmp_p.outp -> adc8_top cmp_q[i] (outn left open) |
+| vbn | in | analog bias | bias_genc.vbn -> afe_chc.vbn and fs_oneshot_c.vbn |
+| vcm | in | analog bias | bias_genc.vcm_in (1.6484 V) -> afe_chc.vcm AND afe_chc.ref (see mismatch 1) |
+| vg1, vg2, vrs | in | analog bias | bias_genc -> afe_chc |
+| vcmo | in | analog bias | bias_genc.vcm_out -> afe_chc.vcmo |
+| vcmd | in | analog bias | VDD/2 for the ADC: dac_sw.vcm (plate/M reset level) and cmp_p.inp (SOURCE NOT DESIGNED, mismatch 2) |
+| vdd, vss | inout | supply | afe_chc, one-shot, dac_sw, cmp_p, 2 std cells (ADC DAC drivers on the separate strap, section 5) |
+
+Internal (not pins): amp_out (afe_chc.out -> dac_sw.vin), t (DAC plate -> cmp_p.inn), m (DAC mid node), fs_os, fs, samb. One bias cell `bias_genc` (vbn vcm_in vg1 vcm_out vg2 vrs vdd vss) is shared by the 8 channels.
+Top ports (31 pads, info.yaml order): E[7:0] IPG[7:0] REC[7:0] CS DIN SCLK RSTN DOUT VDD VSS, plus pad-control outputs DOUT_OE (= dout_oe = ~CS), DOUT_IE/PD/PU/CS/SL/PDRV0/PDRV1 and {CS,DIN,SCLK,RSTN}_{PU,PD} (all tied 0; names and values NOT verified against the organizer template).
+
+### Every net that crosses digital <-> analog (N = 8)
+Digital -> analog, per channel (32): sw_rec, sw_rec_b, sw_ipg, sw_ipg_b (4), rst_sw, tg_on, dac_gdn, cmp_clk (4), dac_gp[11:0], dac_gn[11:0] (24).
+Analog -> digital, per channel (2): cmp_q (cmp_p.outp -> SAR capture flop D, clocked by tapw), fs_os (one-shot output -> OR2 inside the channel).
+Digital -> analog through the OR2: fs (1 per channel, OR2 output -> afe_chc.fs). Shared: rst_amp (1 net, fan-out 8 OR2 inputs).
+Total = 8 x (32 + 2 + 1) + 1 = 281 nets (280 per-channel + rst_amp). Constant: dac_gdp tied to VDD, no net. Digital -> analog nets with analog meaning that need care: rst_sw (plate reset, falls BEFORE tg_on, D4 race >= 0.8 ns), cmp_clk (staggered, STA-matched delay chain), tg_on / dac_gdn (opposite phase, sampling), sw_rec / sw_rec_b (also feed the park and the one-shot: C / CBAR skew is one inverter delay).
+Analog nets between blocks (not crossing): amp_out, t, m, the 7 bias nets (vbn, vcm, vg1, vg2, vrs, vcmo, vcmd). Pad nets: E, IPG, REC (24).
+
 Stop. No layout file was created.

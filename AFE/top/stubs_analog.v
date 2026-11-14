@@ -1,0 +1,79 @@
+`timescale 1ns/1ps
+// stubs_analog.v: BEHAVIOURAL stand-ins for the analog cells, with EXACTLY the pin names of the SPICE subckts (I0, 2026-11-14).  Simulation only, no analog accuracy.
+//   afe_chc       AFE/amp/spice/afe_chc.spice     : rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb
+//   fs_oneshot_c  AFE/amp/spice/fs_oneshot_c.spice: trig fs vbn vdd vss
+//   bias_genc     AFE/amp/spice/bias_genc.spice   : vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
+//   dac_sw        AFE/adc/spice/dac_sw.spice      : vin t m vcm vdd vss rst rstm sam samb gp0..gp11 gdp gn0..gn11 gdn
+//   cmp_p         AFE/adc/spice/comparator.spice  : inp inn clk outp outn vdd vss
+// Analog nets are 1-bit wires that only carry connectivity.  The signal VALUE travels on SIM-ONLY ports/regs (names sim_*, compiled in only with +define+SIM_STUBS; the real subckts have none):
+//   amp stub reg sim_vin[11:0] (written by the testbench) -> sim_out -> dac_sw sim_vin -> sim_vs, sim_dacv -> cmp_p.  The amplifier stub outputs 12'hAAA while fs = 1 (amplifier held in reset).
+module gf180mcu_fd_sc_mcu7t5v0__or2_1 (A1, A2, Z); input A1, A2; output Z; assign #0.2 Z = A1 | A2; endmodule   // ESTIMATE delay; the real cell is a std cell of the 7t5v0 library
+
+module bias_genc (vbn, vcm_in, vg1, vcm_out, vg2, vrs, vdd, vss);
+    output vbn, vcm_in, vg1, vcm_out, vg2, vrs; input vdd, vss;
+    assign vbn = 1'b1; assign vcm_in = 1'b1; assign vg1 = 1'b1; assign vcm_out = 1'b1; assign vg2 = 1'b1; assign vrs = 1'b1;   // connectivity only
+endmodule
+
+// one-shot: fs = trig AND t.  t is held high while trig = 0 (PMOS) and discharged by the master-current leg after trig rises: pulse width T_FS (typ 27 C 3.56 ms, ff 85 C 1.90 ms, ss -40 C 6.86 ms, sim/a4c_oneshot.log).
+module fs_oneshot_c #(parameter real T_FS = 3560000.0) (trig, fs, vbn, vdd, vss);
+    input trig, vbn, vdd, vss; output fs;
+    reg fs_r = 1'b0; integer gen = 0; integer exp_g = 0; integer n_pulses = 0; real t_rise = 0.0, w_last = 0.0;
+    assign fs = fs_r;
+    always @(posedge trig) begin gen = gen + 1; fs_r = 1'b1; n_pulses = n_pulses + 1; t_rise = $realtime; exp_g <= #(T_FS) gen; end   // transport-delayed timer expiry
+    always @(exp_g) if (exp_g == gen && trig && fs_r) begin fs_r = 1'b0; w_last = $realtime - t_rise; end
+    always @(negedge trig) begin gen = gen + 1; if (fs_r) w_last = $realtime - t_rise; fs_r = 1'b0; end   // timer recharged at once when trig falls
+endmodule
+
+// amplifier channel (stage 1 + stage 2 + follower + gate-switched reset + REC park)
+module afe_chc (rec, ref, out, vdd, vss, vbn, vcm, vg1, vcmo, vg2, vrs, fs, pkc, pkcb
+`ifdef SIM_STUBS
+    , sim_out
+`endif
+);
+    inout rec, ref, out; input vdd, vss, vbn, vcm, vg1, vcmo, vg2, vrs, fs, pkc, pkcb;
+    assign out = 1'b1;   // connectivity only
+    reg [11:0] sim_vin = 12'd0;                       // set by the testbench (hierarchical write)
+    integer n_fs = 0, e_park = 0, n_park_on = 0;
+    always @(posedge fs) n_fs = n_fs + 1;
+    always @(pkc or pkcb) begin #0.001; if (pkc === pkcb) e_park = e_park + 1; end      // park gates must always be complementary (C / CBAR of the routing switch)
+`ifdef SIM_STUBS
+    output [11:0] sim_out;
+    assign sim_out = fs ? 12'hAAA : sim_vin;
+`endif
+endmodule
+
+module dac_sw (vin, t, m, vcm, vdd, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn
+`ifdef SIM_STUBS
+    , sim_vin, sim_vs, sim_dacv
+`endif
+);
+    inout vin, t, m; input vcm, vdd, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn;
+    wire [11:0] gp = {gp11, gp10, gp9, gp8, gp7, gp6, gp5, gp4, gp3, gp2, gp1, gp0};
+    wire [11:0] gn = {gn11, gn10, gn9, gn8, gn7, gn6, gn5, gn4, gn3, gn2, gn1, gn0};
+    integer e_crowbar = 0, e_cont = 0, e_order = 0, e_samb = 0;
+`ifdef SIM_STUBS
+    input [11:0] sim_vin; output reg [11:0] sim_vs; output [11:0] sim_dacv;
+    initial sim_vs = 12'd0;
+    assign sim_dacv = ~gp & ~gn;                      // bits driven high
+    always @(negedge sam) begin sim_vs = sim_vin; if (rst) e_order = e_order + 1; end   // reset switches must open before the sampling TG
+`endif
+    always @(gp or gn) begin if (|(~gp & gn)) e_crowbar = e_crowbar + 1; if (sam && (|(~gp) || |gn)) e_cont = e_cont + 1; end
+    always @(sam or samb) begin #1.0; if (sam === samb) e_samb = e_samb + 1; end      // samb must be the complement of sam (the local inverter's 0.1 ns skew is allowed)
+    assign vin = 1'bz; assign t = 1'b1; assign m = 1'b1;
+endmodule
+
+module cmp_p (inp, inn, clk, outp, outn, vdd, vss
+`ifdef SIM_STUBS
+    , sim_vs, sim_dacv
+`endif
+);
+    input inp, inn, clk, vdd, vss; output reg outp, outn;
+`ifdef SIM_STUBS
+    input [11:0] sim_vs, sim_dacv;
+`endif
+    initial begin outp = 1'b1; outn = 1'b0; end
+`ifdef SIM_STUBS
+    always @(posedge clk) begin #1.5 outp = (sim_vs >= sim_dacv); outn = ~outp; end
+`endif
+    always @(negedge clk) begin #0.6 outp = 1'b1; outn = 1'b0; end
+endmodule

@@ -1,15 +1,16 @@
 `timescale 1ns/1ps
-// adc8_top: serial interface + SAR logic for the 8 per-channel 12-bit SAR ADCs (D0b frame, Decisions 32-35, D2 decisions).  3.3 V digital, SPI mode 0 slave, ONE DOUT.
+// adc8_top: serial interface + SAR logic for the 8 per-channel 12-bit SAR ADCs (D0b frame, Decisions 32-35, 38, D2 decisions).  3.3 V digital, SPI mode 0 slave, ONE DOUT.
 //
 // FRAME (CS low ... CS high, exactly 160 SCLK rising edges, 10 x 16-bit words, MSB first; edge number k = 1..160):
 //   CS falling edge          : all 8 ADCs sample at once (plate reset switches open at the buffered CS, sampling TGs open a few ns later); SCLK must be low and silent before it.
-//   k = 1..16  (word 0)      : DIN = {7 x 0, MODE, EN[7:0]} sampled on SCLK rising; DOUT = 0
+//   k = 1..16  (word 0)      : DIN = {6 x 0, RST_AMP, MODE, EN[7:0]} (I0, Decision 38) sampled on SCLK rising; DOUT = 0
 //   k = 1..20                : conversions, staggered one SCLK per channel: ADC i does trial t at edge t + i (t = 1..12); ADC i is done at edge 13 + i, tracking resumes at edge 14 + i
 //   k = 17..32 (word 1)      : idle, DIN ignored, DOUT = 0
-//   k = 33                   : the 9-bit config shift register is copied into the hold register (mode_o, en_o); frames with fewer than 33 edges change nothing
+//   k = 33                   : the 10-bit config shift register is copied into the hold register (rst_amp_o, mode_o, en_o); frames with fewer than 33 edges change nothing
 //   k = 33..160 (words 2..9) : DOUT = {0, ID[2:0], code[11:0]} of channel 0 .. 7 (ID = channel number), same-frame data; DOUT changes on SCLK FALLING edges
 //   edges beyond 160 : ignored, DOUT = 0.  CS rising (any time) asynchronously clears the frame counter, the ADC drivers (tri-state) and DOUT, and re-enables tracking.
-// dout_oe = ~cs_n (pad _OE).  RSTN (async) also clears mode_o and en_o (all routing switches open).
+// dout_oe = ~cs_n (pad _OE).  RSTN (async) also clears rst_amp_o, mode_o and en_o (all routing switches open, amplifier reset released).
+// rst_amp_o is a LEVEL held in the hold register between frames (SCLK stops while CS is high): the host sets it with one frame, waits >= 100 ms, clears it with another frame.
 module adc8_top (
     input          cs_n,
     input          sclk,
@@ -17,6 +18,7 @@ module adc8_top (
     input          rstn,
     output         dout,
     output         dout_oe,
+    output         rst_amp_o,  // amplifier reset hold, OR-ed into every channel's fs: 1 while the RST_AMP config bit is set
     output         mode_o,
     output [7:0]   en_o,
     // analog side, per ADC i (bit i of the 8-bit vectors, bits 12*i+11..12*i of the DAC vectors)
@@ -42,14 +44,15 @@ module adc8_top (
         assign tok[k] = (cnt == k);
     end endgenerate
 
-    // ---- config: 9-bit shift register on edges 1..16, hold register at edge 33 ----
-    reg [8:0] cfg_sr, cfg_hold;
+    // ---- config: 10-bit shift register {RST_AMP, MODE, EN[7:0]} on edges 1..16, hold register at edge 33 ----
+    reg [9:0] cfg_sr, cfg_hold;
     always @(posedge sclk or negedge rstn)
-        if (!rstn) begin cfg_sr <= 9'd0; cfg_hold <= 9'd0; end
+        if (!rstn) begin cfg_sr <= 10'd0; cfg_hold <= 10'd0; end
         else begin
-            if (cnt < 8'd16) cfg_sr <= {cfg_sr[7:0], din};
+            if (cnt < 8'd16) cfg_sr <= {cfg_sr[8:0], din};
             if (cnt == 8'd32) cfg_hold <= cfg_sr;
         end
+    assign rst_amp_o = cfg_hold[9];
     assign mode_o = cfg_hold[8];
     assign en_o   = cfg_hold[7:0];
 

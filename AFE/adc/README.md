@@ -11,7 +11,7 @@ amp[i] -> sampling TG -> split 6+6 MIM DAC (127 x 5x5 um units, plate 3.49 pF, b
                          SAR (12 code flops, shared one-hot token decode)
    adc_clkgen: one dont-touch std-cell delay chain, comparator clock of ADC i = T0 + i*Delta (staggered)
    8 code regs -> one 96-bit shift chain -> DOUT (negedge flop, driven only while CS low)
-   DIN -> 9-bit shift (MODE + EN[7:0]) -> hold register (commit at SCLK 33)      VREF = VDD = 3.3 V
+   DIN -> 10-bit shift (RST_AMP + MODE + EN[7:0]) -> hold register (commit at SCLK 33)      VREF = VDD = 3.3 V
 ```
 Comparator reference = VDD/2 tap, inn = plate. Supply: two straps from one pad pair (DAC drivers via ~10 ohm + local decap; comparators and logic on the main rail), about 0.23 nF total.
 
@@ -20,7 +20,7 @@ Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN`. Frame = 160 SCLK = 10 x 16-bit words.
 
 | SCLK | Content |
 |---|---|
-| 1-16 (word 0) | DIN = {7 x 0, MODE, EN[7:0]}; config commits at SCLK 33 (frames < 33 clocks change nothing) |
+| 1-16 (word 0) | DIN = {6 x 0, RST_AMP, MODE, EN[7:0]} (RST_AMP added in I0, Decision 38); config commits at SCLK 33 (frames < 33 clocks change nothing); RST_AMP is a level, held until the next config frame or RSTN |
 | 1-19 | the 8 conversions, ADC i runs trial k-i at SCLK k (CS falling = simultaneous sample) |
 | 33-160 (words 2-9) | channel 0..7, `{0, ID[2:0], code[11:0]}`, same-frame data |
 
