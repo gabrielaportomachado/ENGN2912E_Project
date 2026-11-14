@@ -1,0 +1,12 @@
+D5 INPUT-REFERRED NOISE 0.5-300 Hz (ESTIMATE: analytic combination, no transient-noise run). Amplifier numbers from sim/a4c_noise.log (NOISE_B/C/D, typical flicker, ideal pseudo-R noise); FN=1 (fnoicor = 1) is the Decision-10 risk case.
+  term (uV rms at the electrode)                                 typ 27     ff 85      ss -40
+  amplifier 0.5-300 Hz (A4c, FN=0)                                   1.668     1.847     1.540
+  amplifier noise above 2 kHz aliased into the band                  0.128     0.177     0.087
+  ADC quantisation LSB/sqrt(12) (white, 0-2 kHz)                     0.090     0.090     0.090
+  ADC kT/C (D2 34.1/37.3/30.1 uV on the plate)                       0.013     0.014     0.012
+  ADC comparator (pair + 50 uV latch ESTIMATE)                       0.111     0.130     0.106
+  TOTAL (FN=0)                                                       1.679     1.862     1.549
+  TOTAL with the fnoicor = 1 amplifier (4.72/4.93/4.39 uV)           4.723     4.939     4.396
+  comparator noise as code rms (noisy - noiseless) [LSB]                0.355     0.417     0.338
+  ADC share of the total power (FN=0)                                   0.7%      0.7%      0.8%
+  target 2 uV: typ 27 OK (1.679), ff 85 OK (1.862), ss -40 OK (1.549); with fnoicor = 1 every corner misses (4.72, 4.94, 4.40 uV)

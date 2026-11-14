@@ -1,0 +1,31 @@
+D5 END-TO-END SNDR, HYBRID (D4 SAR model + synthetic A4c amplifier output; NOT the transistor-level amplifier->ADC run). 20 chips, mean; coherent N 512, M 3.
+[typ 27] amplitude 450 mV pk at the output (450 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 61.7 dB THD -68.2 dBc
+    HYBRID (no amp noise)                   : SNDR 60.1 dB (min 58.5), THD -66.7 dBc, ENOB raw 9.69, ENOB FS 11.56
+    HYBRID + D4b top-of-range plate error   : SNDR 58.6 dB (min 57.0), THD -61.9 dBc, ENOB raw 9.43, ENOB FS 11.31
+    HYBRID + amp noise ESTIMATE             : SNDR 44.7 dB (min 44.2), THD -58.5 dBc, ENOB raw 7.13, ENOB FS 9.01
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 44.6 dB (min 44.0), THD -57.3 dBc, ENOB raw 7.12, ENOB FS 9.00
+[typ 27] amplitude 100 mV pk at the output (100 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 49.3 dB THD -61.2 dBc
+    HYBRID (no amp noise)                   : SNDR 48.0 dB (min 47.5), THD -59.6 dBc, ENOB raw 7.68, ENOB FS 11.73
+    HYBRID + D4b top-of-range plate error   : SNDR 48.0 dB (min 47.5), THD -59.6 dBc, ENOB raw 7.68, ENOB FS 11.73
+    HYBRID + amp noise ESTIMATE             : SNDR 31.6 dB (min 31.2), THD -45.8 dBc, ENOB raw 4.96, ENOB FS 9.01
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 31.6 dB (min 31.2), THD -45.8 dBc, ENOB raw 4.96, ENOB FS 9.01
+[ff 85] amplitude 450 mV pk at the output (450 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 31.9 dB THD -31.9 dBc
+    HYBRID (no amp noise)                   : SNDR 31.9 dB (min 31.8), THD -32.0 dBc, ENOB raw 5.01, ENOB FS 6.89
+    HYBRID + D4b top-of-range plate error   : SNDR 31.7 dB (min 31.6), THD -31.7 dBc, ENOB raw 4.97, ENOB FS 6.85
+    HYBRID + amp noise ESTIMATE             : SNDR 31.7 dB (min 31.4), THD -32.0 dBc, ENOB raw 4.97, ENOB FS 6.85
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 31.5 dB (min 31.2), THD -31.7 dBc, ENOB raw 4.93, ENOB FS 6.81
+[ff 85] amplitude 100 mV pk at the output (100 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 32.0 dB THD -32.0 dBc
+    HYBRID (no amp noise)                   : SNDR 31.9 dB (min 31.5), THD -32.0 dBc, ENOB raw 5.00, ENOB FS 9.04
+    HYBRID + D4b top-of-range plate error   : SNDR 31.8 dB (min 31.5), THD -32.0 dBc, ENOB raw 5.00, ENOB FS 9.04
+    HYBRID + amp noise ESTIMATE             : SNDR 28.2 dB (min 27.8), THD -31.7 dBc, ENOB raw 4.40, ENOB FS 8.44
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 28.2 dB (min 27.8), THD -31.8 dBc, ENOB raw 4.40, ENOB FS 8.44
+[ss -40] amplitude 450 mV pk at the output (450 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 60.8 dB THD -65.1 dBc
+    HYBRID (no amp noise)                   : SNDR 59.9 dB (min 58.0), THD -65.5 dBc, ENOB raw 9.65, ENOB FS 11.53
+    HYBRID + D4b top-of-range plate error   : SNDR 52.0 dB (min 51.4), THD -52.5 dBc, ENOB raw 8.35, ENOB FS 10.22
+    HYBRID + amp noise ESTIMATE             : SNDR 45.6 dB (min 45.0), THD -58.9 dBc, ENOB raw 7.28, ENOB FS 9.15
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 44.8 dB (min 44.4), THD -52.0 dBc, ENOB raw 7.15, ENOB FS 9.03
+[ss -40] amplitude 100 mV pk at the output (100 uV at the electrode): ideal 12-bit quantiser of the synthetic samples SNDR 49.3 dB THD -60.6 dBc
+    HYBRID (no amp noise)                   : SNDR 48.3 dB (min 47.8), THD -59.5 dBc, ENOB raw 7.72, ENOB FS 11.77
+    HYBRID + D4b top-of-range plate error   : SNDR 48.2 dB (min 47.9), THD -59.6 dBc, ENOB raw 7.72, ENOB FS 11.77
+    HYBRID + amp noise ESTIMATE             : SNDR 32.6 dB (min 32.0), THD -46.7 dBc, ENOB raw 5.12, ENOB FS 9.16
+    HYBRID + amp noise ESTIMATE + D4b       : SNDR 32.6 dB (min 32.0), THD -46.6 dBc, ENOB raw 5.12, ENOB FS 9.16

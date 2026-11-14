@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+"""D5 helpers: amp (A4c, transistor level, Randles source) -> real sampling TG + split 6+6 DAC + cmp_p (transistor level), SAR controls as scripted PWL at the D3 frame timing.
+Two copies of the amplifier in ONE netlist: L (loaded by the ADC) and U (unloaded, 20 fF), identical sources, shared time grid -> out_L - out_U is the error caused by the ADC (numerical noise cancels).
+Frame (D3, SCLK 2 MHz): CS falling = sample (top plate switches open, TG opens 3 ns later), conversion/readout window T_CONV = 19/f_SCLK = 9.5 us, drivers released 1 SCLK before the resume,
+reset switches close at resume, TG closes 3.4 ns later, tracking until the next CS falling (T_ACQ = 250 - 9.5 = 240.5 us).  The 12 SAR trials are NOT simulated (hybrid model): after the sample the plate is
+read with MSB high / rest low (D2 'samp' method), then the bottoms are driven to the final-code pattern (what the DAC drivers hold until released), which is what the next acquisition sees (kick).
+"""
+import os, sys, subprocess, tempfile, shutil, re, numpy as np
+H = os.path.dirname(os.path.abspath(__file__)); ADC = os.path.abspath(os.path.join(H, '..')); sys.path.insert(0, H)
+from d2lib import Dac, LSB as LSB33
+VSUP = 3.3; TR = 100e-12; NOV = 0.3e-9
+LSB = VSUP / 4096
+FSCLK = 2e6; TFRAME = 250e-6; TCONV = 19 / FSCLK; TACQ = TFRAME - TCONV
+NSVRS = {('typical', 27): 1.02771, ('ff', 85): 1.22173, ('ss', -40): 0.813879, ('typical', -40): 0.929467, ('typical', 85): 1.11139, ('ff', -40): 1.04386, ('ff', 27): 1.14011, ('ss', 27): 0.913448, ('ss', 85): 0.998332}
+CORN = [('typical', 27), ('ff', 85), ('ss', -40)]
+GP = [f'gp{j}' for j in range(12)]; GN = [f'gn{j}' for j in range(12)]
+NODES = ['sam', 'samb', 'rst', 'rstm'] + GP + ['gdp'] + GN + ['gdn']
+
+def pwl(name, ev, v0):
+    pts = [(0.0, v0)]; prev = v0
+    for t, v in ev:
+        if v == prev: continue
+        pts += [(t, prev), (t + TR, v)]; prev = v
+    return f'V{name} {name} 0 PWL(' + ' '.join(f'{t:.12e} {v:.4f}' for t, v in pts) + ')'
+
+def controls(frames, tclose_last=True):
+    """frames: list of (ts, code) -> (text, tread list).  code = final pattern driven after the hold read (bits at VDD)"""
+    ev = {k: [] for k in NODES}; tread = []
+    ini = {'sam': VSUP, 'samb': 0.0, 'rst': VSUP, 'rstm': VSUP, 'gdp': VSUP, 'gdn': 0.0}
+    for j in range(12): ini[f'gp{j}'] = VSUP; ini[f'gn{j}'] = 0.0
+    for ts, code in frames:
+        ev['rstm'].append((ts, 0.0)); ev['rst'].append((ts + 1e-9, 0.0)); tdrv = ts + 2e-9
+        ev['sam'].append((ts + 3e-9, 0.0)); ev['samb'].append((ts + 3e-9, VSUP))
+        for b in range(11): ev[f'gn{b}'].append((tdrv + NOV, VSUP))
+        ev['gp11'].append((tdrv, 0.0)); ev['gdn'].append((tdrv + NOV, VSUP))
+        tread.append(tdrv + 58e-9)
+        tp = tdrv + 60e-9
+        for b in range(12):
+            new = (code >> b) & 1; old = 1 if b == 11 else 0
+            if new == old: continue
+            if new: ev[f'gn{b}'].append((tp, 0.0)); ev[f'gp{b}'].append((tp + NOV, 0.0))
+            else: ev[f'gp{b}'].append((tp, VSUP)); ev[f'gn{b}'].append((tp + NOV, VSUP))
+        trel = ts + TCONV - 1 / FSCLK                          # drivers released one SCLK before the resume
+        for b in range(12):
+            new = (code >> b) & 1
+            ev[f'gp{b}'].append((trel, VSUP)); ev[f'gn{b}'].append((trel, 0.0))
+        ev['gdn'].append((trel, 0.0))
+        tc = ts + TCONV
+        ev['rst'].append((tc, VSUP)); ev['rstm'].append((tc, VSUP)); ev['sam'].append((tc + 3.4e-9, VSUP)); ev['samb'].append((tc + 3.4e-9, 0.0))
+    lines = []
+    for k in NODES:
+        e = sorted(ev[k], key=lambda x: x[0]); lines.append(pwl(k, e, ini[k]))
+    return '\n'.join(lines) + '\n', np.array(tread)
+
+def nodesets(s):
+    def rn(n):
+        if n.startswith('xch.'): return 'xch' + s + n[3:]
+        if n.startswith('xbias.'): return 'xbias' + s + n[5:]
+        return n + s
+    base = ('v(vrs)={NSVRS} v(xch.gm1)=1.85 v(xch.gm2)=2.55 v(vbn)=0.65 v(xbias.a)=2.4 v(vcm)=1.65 v(vg1)=1.85 v(vcmo)=1.65 v(vg2)=2.55',
+            'v(xch.xs1.vn)=1.65 v(xch.xs1.vp)=1.65 v(xch.xs1.vng)=1.65 v(xch.v1)=1.65 v(xch.xs1.xota.o1)=0.78 v(xch.xs1.xota.d1)=0.78 v(xch.xs1.xota.tail)=2.55 v(xch.ibias1)=2.4',
+            'v(xch.xs1.xr1.m)=1.65 v(xch.xs1.xr2.m)=1.65 v(xch.xs2.xr.m)=1.65 v(xch.xs2.vn2)=1.65 v(xch.xs2.vng2)=1.65 v(out)=1.65 v(xch.xs2.xota2.o2)=2.45 v(xch.xs2.xota2.d1)=2.6 v(xch.xs2.xota2.tail)=1.0')
+    out = []
+    for ln in base:
+        nt = []
+        for t in ln.split():
+            n, v = t.split('=', 1); nt.append(f'v({rn(n[2:-1])})={v}')
+        out.append('.nodeset ' + ' '.join(nt))
+    return '\n'.join(out)
+
+def amp_copy(s):
+    return f"""Xbias{s} vbn{s} vcm{s} vg1{s} vcmo{s} vg2{s} vrs{s} vdd 0 bias_genc
+Xsrc{s} vd tis rec{s} ref{s} vosr vosf src_randles
+Xch{s} rec{s} ref{s} out{s} vdd 0 vbn{s} vcm{s} vg1{s} vcmo{s} vg2{s} vrs{s} fs pkc pkcb afe_chc
+{nodesets(s)}
+"""
+
+TB = """* D5 testbench (generated by scripts/d5lib.py): A4c amplifier (loaded copy 'out', unloaded copy 'outu') + sampling TG + split 6+6 DAC + cmp_p.  Controls: @CTRL@ (PWL include).  @OUT@ = wrdata file.
+.include ../../amp/spice/models_typical.spice
+.include ../../amp/spice/pseudoR.spice
+.include ../../amp/spice/ota1_params.spice
+.include ../../amp/spice/afe_params.spice
+.include ../../amp/spice/a4c_params.spice
+.include ../../amp/spice/ota1.spice
+.include ../../amp/spice/ota2.spice
+.include ../../amp/spice/bias_genc.spice
+.include ../../amp/spice/stage1c.spice
+.include ../../amp/spice/stage2c.spice
+.include ../../amp/spice/afe_chc.spice
+.include ../../amp/spice/src_randles.spice
+.include ../spice/dac_units.spice
+.include ../spice/dac_sw.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-16 abstol=1e-15 reltol=@RELTOL@ vntol=1e-7 itl1=500 itl4=500 chgtol=1e-17 num_threads=1
+.temp 27
+.param VSUP=3.3
+.param NSVRS=1.028
+Vdd vdd 0 {VSUP}
+Vtis tis 0 1.65
+Vd vd 0 SIN(0 @VD@ @FSIG@ @TDSIG@ 0 @PHASE@)
+Vosr vosr 0 PWL(0 0 @TOS@ 0 @TOS1@ @VOS@)
+Vosf vosf 0 0
+Vfs fs 0 0
+Vpkc pkc 0 0
+Vpkcb pkcb 0 {VSUP}
+@AMP_L@
+@AMP_U@
+Coffu outu 0 20f
+Vcmd vcmd 0 {VSUP/2}
+.include @CTRL@
+Xs out t m vcmd vdd 0 rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn dac_sw
+Vck ck 0 0
+Xc vcmd t ck outp outn vdd 0 cmp_p
+Cl1 outp 0 5f
+Cl2 outn 0 5f
+.tran @TSTEP@ @TSTOP@ @TSAVE@ @TMAXS@
+.control
+set wr_singlescale
+set wr_vecnames
+run
+wrdata @OUT@ v(out) v(outu) v(t) v(m)
+quit
+.endc
+.end
+"""
+
+def build(vd=0.0, fsig=12.25, tdsig=0.0, phase=0.0, vos=0.0, tos=1.0, tstop=1e-2, tsave=0.0, tstep=100e-9, tmaxs=1e-6, reltol=1e-4, ctrl='c.inc'):
+    t = TB.replace('@AMP_L@', amp_copy('')).replace('@AMP_U@', amp_copy('u'))
+    rep = dict(VD=vd, FSIG=fsig, TDSIG=tdsig, PHASE=phase, VOS=vos, TOS=tos, TOS1=tos + 1e-6, TSTOP=tstop, TSAVE=tsave, TSTEP=tstep, TMAXS=tmaxs, RELTOL=reltol)
+    for k, v in rep.items(): t = t.replace(f'@{k}@', f'{v:.8g}' if isinstance(v, float) else str(v))
+    return t.replace('@CTRL@', ctrl)
+
+def run(tb_text, ctrl_text, corner, temp, tag='run', tmo=1700):
+    """returns (t, out_L, out_U, v_T, v_M) arrays or None.  Retries with a tighter / looser step on 'Timestep too small'."""
+    os.makedirs(f'{ADC}/sim/.ptmp', exist_ok=True)
+    tmp = tempfile.mkdtemp(prefix=f'd5_{tag}_', dir=f'{ADC}/sim/.ptmp')
+    try:
+        open(f'{tmp}/c.inc', 'w').write(ctrl_text)
+        for k, fac in enumerate((1.0, 0.7, 1.4)):
+            tbn = f'd5_{os.getpid()}_{tag}.spice'; open(f'{ADC}/tb/{tbn}', 'w').write(tb_text.replace('c.inc', f'{tmp}/c.inc'))
+            out = f'{tmp}/o.csv'
+            e = dict(os.environ, OUT=out, OMP_NUM_THREADS='1', TMO=str(tmo), SWAPS='', CELL='x')
+            r = subprocess.run(['bash', f'{ADC}/scripts/dgrun.sh', tbn, corner, str(temp), f'NSVRS={NSVRS[(corner, temp)]}'], capture_output=True, text=True, env=e)
+            os.remove(f'{ADC}/tb/{tbn}')
+            open(f'{ADC}/sim/.ptmp/last_{tag}.log', 'w').write(r.stdout[-200000:])
+            if os.path.exists(out) and os.path.getsize(out) > 1000:
+                a = np.loadtxt(out, skiprows=1)
+                if a[-1, 0] >= float(re.search(r'\.tran\s+\S+\s+(\S+)', tb_text).group(1)) * 0.999: return a[:, 0], a[:, 1], a[:, 2], a[:, 3], a[:, 4]
+            if 'imestep too small' not in r.stdout and 'aborted' not in r.stdout: break
+            tb_text = re.sub(r'(\.tran\s+\S+\s+\S+\s+\S+\s+)(\S+)', lambda m: m.group(1) + f'{float(m.group(2))*fac:.4g}', tb_text)
+        return None
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+_dac = None
+def plate_to_vin(vT, cpt=190e-15):
+    """invert the D2 sampling relation V_T = Vcm + w11*VDD - sum(w)*Vin (hold read with MSB high, rest low) -> effective sampled input"""
+    global _dac
+    if _dac is None:
+        _dac = Dac(cpt=cpt); w, wd = _dac.weights(); _dac.w11 = w[11]; _dac.ws = w.sum() + wd
+    return (VSUP / 2 + VSUP * _dac.w11 - vT) / _dac.ws
