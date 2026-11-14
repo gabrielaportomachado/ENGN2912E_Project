@@ -1,0 +1,23 @@
+* D1 comparator sizes (one parameter per line; scripts/dgrun.sh overrides by name).  Final D1 choice: pair 80u/0.5u, tail 4u/0.28u, 40 fF on each preamp node, control 8u/0.5u (sim/d1_sizing.log).
+.param CMP_WP=80u
+.param CMP_LP=0.5u
+.param CMP_WT=4u
+.param CMP_LT=0.28u
+.param CMP_WR=2u
+.param CMP_LR=0.28u
+.param CMP_WC=8u
+.param CMP_LC=0.5u
+.param CMP_WN=4u
+.param CMP_LN=0.28u
+.param CMP_WQ=4u
+.param CMP_LQ=0.28u
+.param CMP_WS=2u
+.param CMP_LS=0.28u
+.param CMP_WI=1u
+.param CMP_WB=2u
+.param CMP_CA=40f
+.param CMP_NA1=0
+.param CMP_NA2=0
+.param CMP_NT=50p
+.param CMPN_K=2
+.param CMPN_H=0.5

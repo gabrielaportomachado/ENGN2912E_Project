@@ -1,0 +1,6 @@
+CONV ff 85C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=0.81
+CONV ff 85C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.10
+CONV ss -40C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.02
+CONV ss -40C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.59
+CONV typical 27C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=0.91
+CONV typical 27C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.32

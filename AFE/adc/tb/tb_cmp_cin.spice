@@ -1,0 +1,20 @@
+* D1: comparator input capacitance (small signal, AC at 1 MHz) for clk LOW (reset, tail off) and clk HIGH (evaluate; preamp nodes saturated at the end) - gives the attenuation Cin/(Cs+Cin) of a 7 pF DAC.
+.include ../spice/models_typical.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-12 reltol=1e-6 abstol=1e-15 vntol=1e-8
+.temp 27
+.param CLKV=0
+.param CM=1.65
+Vdd vdd 0 3.3
+Vclk clk 0 {CLKV}
+Vp inp 0 dc {CM} ac 1
+Vn inn 0 dc {CM}
+Xc inp inn clk outp outn vdd 0 @CELL@
+.ac lin 1 1meg 1meg
+.control
+run
+let cin = -imag(i(Vp))/(2*3.14159265*1e6)
+print cin
+.endc
+.end

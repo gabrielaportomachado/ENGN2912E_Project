@@ -1,0 +1,39 @@
+== decision time (clk 50% -> |outp-outn| > VDD/2), ns, +d/-d, and energy per cycle (pJ, incl. clock inverter + buffers) ==
+ff 85C   cmp_p CM=0.6 V: 0.1mV:0.98/0.93ns:9.02pJ | 1mV:0.87/0.87ns:8.74pJ | 10mV:0.82/0.82ns:8.52pJ | 100mV:0.76/0.76ns:8.44pJ | 1000mV:0.63/0.63ns:8.91pJ | 2000mV:0.65/0.65ns:9.23pJ
+ff 85C   cmp_p CM=1.65 V: 0.1mV:1.30/1.21ns:7.00pJ | 1mV:1.15/1.15ns:6.73pJ | 10mV:1.10/1.09ns:6.53pJ | 100mV:0.98/0.98ns:6.48pJ | 1000mV:0.72/0.72ns:6.96pJ | 2000mV:0.66/0.66ns:6.55pJ
+ss -40C  cmp_p CM=0.6 V: 0.1mV:1.14/1.09ns:7.67pJ | 1mV:1.02/1.02ns:7.48pJ | 10mV:0.97/0.97ns:7.34pJ | 100mV:0.88/0.88ns:7.34pJ | 1000mV:0.70/0.70ns:7.80pJ | 2000mV:0.71/0.71ns:8.11pJ
+ss -40C  cmp_p CM=1.65 V: 0.1mV:1.80/1.70ns:5.76pJ | 1mV:1.64/1.64ns:5.58pJ | 10mV:1.58/1.58ns:5.46pJ | 100mV:1.31/1.31ns:5.49pJ | 1000mV:0.86/0.87ns:5.94pJ | 2000mV:0.75/0.75ns:4.93pJ
+typ 27C  cmp_n CM=1.65 V: 0.1mV:1.09/1.05ns:5.24pJ | 1mV:0.97/0.97ns:5.01pJ | 10mV:0.91/0.91ns:4.84pJ | 100mV:0.78/0.78ns:4.83pJ | 1000mV:0.59/0.59ns:5.09pJ | 2000mV:0.55/0.55ns:4.40pJ
+typ 27C  cmp_p CM=0.6 V: 0.1mV:1.08/1.02ns:8.29pJ | 1mV:0.96/0.96ns:8.06pJ | 10mV:0.90/0.90ns:7.88pJ | 100mV:0.83/0.83ns:7.85pJ | 1000mV:0.67/0.68ns:8.31pJ | 2000mV:0.69/0.69ns:8.62pJ
+typ 27C  cmp_p CM=1.65 V: 0.1mV:1.53/1.43ns:6.35pJ | 1mV:1.37/1.37ns:6.12pJ | 10mV:1.31/1.31ns:5.97pJ | 100mV:1.14/1.14ns:5.96pJ | 1000mV:0.80/0.80ns:6.43pJ | 2000mV:0.71/0.71ns:5.35pJ
+
+== input-referred offset (trip point), Monte Carlo sw_stat_mismatch=1, uV ==
+ff 85C   n=40 mean      68  sigma   1311 uV = 1.63 LSB   min/max -3250/2150   |max|/sigma 2.48
+ss -40C  n=40 mean      25  sigma   1230 uV = 1.53 LSB   min/max -3250/2150   |max|/sigma 2.64
+typ 27C  n=40 mean      52  sigma   1265 uV = 1.57 LSB   min/max -3250/2150   |max|/sigma 2.57
+
+== input-referred noise (injected thermal noise on the input pair, probit fit) ==
+NOISE ff 85C pair_only gm=1363.5uS NA1=5.19e-07 mu=-10.4uV sigma=167.7uV (+-6.5) ncyc=600 span=+-0.60mV dec1=305 
+NOISE ss -40C pair_only gm=1270.5uS NA1=4.04e-07 mu=14.0uV sigma=107.6uV (+-5.2) ncyc=600 span=+-0.60mV dec1=293 
+NOISE typical 27C pair_only gm=1283.6uS NA1=4.61e-07 mu=20.5uV sigma=118.1uV (+-5.4) ncyc=600 span=+-0.60mV dec1=291 
+
+== common-mode range of the comparator (symmetric +-d/2 around CM) vs demanded range ==
+cmp_p typ 27C  (37 CM points)  functional 0.00..2.50 V   | within 2 LSB of trip(1.65 V) 0.00..2.50 V   | within 0.5 LSB 0.00..2.50 V   (trip at 1.65 V = 50 uV)
+cmp_p ff 85C   (37 CM points)  functional 0.00..2.70 V   | within 2 LSB of trip(1.65 V) 0.00..2.70 V   | within 0.5 LSB 0.00..2.70 V   (trip at 1.65 V = -50 uV)
+cmp_p ss -40C  (37 CM points)  functional 0.00..2.20 V   | within 2 LSB of trip(1.65 V) 0.00..2.20 V   | within 0.5 LSB 0.00..2.20 V   (trip at 1.65 V = 50 uV)
+cmp_n typ 27C  (37 CM points)  functional 0.70..3.30 V   | within 2 LSB of trip(1.65 V) 0.70..3.30 V   | within 0.5 LSB 0.70..3.30 V   (trip at 1.65 V = 50 uV)
+cmp_n ff 85C   (37 CM points)  functional 0.50..3.30 V   | within 2 LSB of trip(1.65 V) 0.50..3.30 V   | within 0.5 LSB 0.50..3.30 V   (trip at 1.65 V = 50 uV)
+cmp_n ss -40C  (37 CM points)  functional 0.90..3.30 V   | within 2 LSB of trip(1.65 V) 0.90..3.30 V   | within 0.5 LSB 0.90..3.30 V   (trip at 1.65 V = 50 uV)
+
+== single-ended conventional test: Vref = 1.65 V fixed, Vx swept 0..3.3 V (sign must follow Vx - 1.65) ==
+CONV ff 85C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=0.81
+CONV ff 85C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.10
+CONV ss -40C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.02
+CONV ss -40C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.59
+CONV typical 27C cmp_n Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=0.91
+CONV typical 27C cmp_p Vx_0..3.3_vs_Vref1.65 wrong_at=[] max_delay_ns=1.32
+
+== kickback: charge drawn from the ideal input sources per clock cycle (fC) and dV on a 7 pF top plate (user decision: C_s = 7 pF) ==
+KICK ff 85C cmp_p Vref=1.65 1650.0mV+/same:Qp=-0.793fC,Qn=-5.477fC,Qvdd=1309fC,Qp_tail14=-1.730 1650.0mV-/opp:Qp=-6.080fC,Qn=-0.829fC,Qvdd=2624fC,Qp_tail14=-75.706 1650.0mV-/same:Qp=-6.974fC,Qn=-0.985fC,Qvdd=2625fC,Qp_tail14=-78.738 825.0mV+/same:Qp=-0.898fC,Qn=-5.518fC,Qvdd=1821fC,Qp_tail14=-2.075 825.0mV-/opp:Qp=-5.265fC,Qn=-0.827fC,Qvdd=2288fC,Qp_tail14=-24.972 825.0mV-/same:Qp=-6.173fC,Qn=-1.0
+KICK ss -40C cmp_p Vref=1.65 1650.0mV+/same:Qp=-0.638fC,Qn=-4.384fC,Qvdd=1094fC,Qp_tail14=-1.369 1650.0mV-/opp:Qp=-4.895fC,Qn=-0.710fC,Qvdd=2300fC,Qp_tail14=-64.066 1650.0mV-/same:Qp=-5.700fC,Qn=-0.843fC,Qvdd=2300fC,Qp_tail14=-64.383 825.0mV+/same:Qp=-0.723fC,Qn=-4.389fC,Qvdd=1101fC,Qp_tail14=-1.549 825.0mV-/opp:Qp=-4.213fC,Qn=-0.662fC,Qvdd=1981fC,Qp_tail14=-19.527 825.0mV-/same:Qp=-5.033fC,Qn=-0.
+KICK typical 27C cmp_p Vref=1.65 1650.0mV+/same:Qp=-0.740fC,Qn=-5.018fC,Qvdd=1198fC,Qp_tail14=-1.603 1650.0mV-/opp:Qp=-5.587fC,Qn=-0.793fC,Qvdd=2450fC,Qp_tail14=-69.638 1650.0mV-/same:Qp=-6.457fC,Qn=-0.942fC,Qvdd=2451fC,Qp_tail14=-70.721 825.0mV+/same:Qp=-0.846fC,Qn=-5.034fC,Qvdd=1404fC,Qp_tail14=-1.873 825.0mV-/opp:Qp=-4.857fC,Qn=-0.777fC,Qvdd=2125fC,Qp_tail14=-23.045 825.0mV-/same:Qp=-5.748fC,Qn

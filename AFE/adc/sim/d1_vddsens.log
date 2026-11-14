@@ -1,0 +1,6 @@
+VDDSENS ff /2track: shift 18.646/19.316/19.981 mV at VDD 3.25/3.30/3.35 -> 13.4 mV/V = 0.134 mV per 10 mV = 0.166 LSB per 10 mV
+VDDSENS ff fixref: shift 18.053/19.316/20.549 mV at VDD 3.25/3.30/3.35 -> 25.0 mV/V = 0.250 mV per 10 mV = 0.310 LSB per 10 mV
+VDDSENS ss /2track: shift 8.937/9.678/10.637 mV at VDD 3.25/3.30/3.35 -> 17.0 mV/V = 0.170 mV per 10 mV = 0.211 LSB per 10 mV
+VDDSENS ss fixref: shift 8.531/9.678/11.607 mV at VDD 3.25/3.30/3.35 -> 30.8 mV/V = 0.308 mV per 10 mV = 0.382 LSB per 10 mV
+VDDSENS typical /2track: shift 14.009/14.782/15.539 mV at VDD 3.25/3.30/3.35 -> 15.3 mV/V = 0.153 mV per 10 mV = 0.190 LSB per 10 mV
+VDDSENS typical fixref: shift 13.271/14.782/16.207 mV at VDD 3.25/3.30/3.35 -> 29.4 mV/V = 0.294 mV per 10 mV = 0.364 LSB per 10 mV

@@ -1,0 +1,61 @@
+# D1 sizing exploration (typical 27 C, pair-only injected noise, 300 cycles; scripts/d1_noise.py) - copied from the batch output
+NOISE typical 27C vCMP_WC_12u_CMP_CA_0f gm=1087.3uS NA1=4.25e-07 mu=38.2uV sigma=196.6uV (+-10.0) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=12u CMP_CA=0f
+NOISE typical 27C vCMP_WC_4u_CMP_CA_0f gm=1076.3uS NA1=4.22e-07 mu=27.7uV sigma=201.0uV (+-10.0) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=0f
+NOISE typical 27C vCMP_WC_4u_CMP_CA_40f_CMP_WP_100u gm=1417.9uS NA1=4.85e-07 mu=-24.5uV sigma=119.5uV (+-7.7) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=40f CMP_WP=100u
+NOISE typical 27C vCMP_WC_4u_CMP_CA_40f_CMP_WT_2u gm=789.1uS NA1=3.62e-07 mu=-39.7uV sigma=151.2uV (+-8.7) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=40f CMP_WT=2u
+NOISE typical 27C vCMP_WC_4u_CMP_CA_80f gm=1127.4uS NA1=4.32e-07 mu=11.2uV sigma=150.5uV (+-8.7) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=80f
+NOISE typical 27C vCMP_WC_4u_CMP_CA_40f_CMP_LP_0.28u_CMP_WP_100u gm=2315.9uS NA1=6.2e-07 mu=-4.2uV sigma=110.9uV (+-7.5) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=40f CMP_LP=0.28u CMP_WP=100u
+NOISE typical 27C vCMP_WC_4u_CMP_CA_40f_CMP_WT_8u gm=1456.3uS NA1=4.91e-07 mu=9.5uV sigma=225.3uV (+-10.6) ncyc=300 span=+-0.60mV CMP_WP=60u CMP_WT=4u CMP_WC=4u CMP_CA=40f CMP_WT=8u
+# baseline try1: WP=60u WT=4u CA=40f: sigma=145.9 uV (+-8.5)
+# offset Monte Carlo (12 seeds each, typical 27 C, WP=80u, trip point of a staircase, uV sigma): CMP_WC=4u/0.28u 1784; WC=8u/0.5u 1545; +latch 8u/0.5u 1561; WC=16u/0.5u+WN 8u 1531 (raw lines: /tmp/mc1.txt copy below)
+OFFSET typical 27C cmp_p seed=7 trip_uV=-2650.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=6 trip_uV=-1450.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=5 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=3 trip_uV=1850.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=2 trip_uV=-1950.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=1 trip_uV=-1750.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=4 trip_uV=1750.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=8 trip_uV=1850.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=9 trip_uV=-3150.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=11 trip_uV=-350.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=12 trip_uV=-2350.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=2 trip_uV=-1750.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=10 trip_uV=-1050.0 nflips=1 undecided=0 V=CMP_WC=4u
+OFFSET typical 27C cmp_p seed=1 trip_uV=-1550.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=3 trip_uV=1250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=4 trip_uV=2150.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=5 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=6 trip_uV=-50.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=8 trip_uV=1950.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=7 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=9 trip_uV=-2250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=10 trip_uV=-550.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=11 trip_uV=-250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=12 trip_uV=-2150.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u
+OFFSET typical 27C cmp_p seed=1 trip_uV=-1550.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=3 trip_uV=1250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=2 trip_uV=-1750.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=4 trip_uV=2250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=5 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=6 trip_uV=-50.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=7 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=8 trip_uV=1950.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=9 trip_uV=-2250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=10 trip_uV=-650.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=11 trip_uV=-250.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=12 trip_uV=-2150.0 nflips=1 undecided=0 V=CMP_WC=8u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u_CMP_WQ=8u_CMP_LQ=0.5u
+OFFSET typical 27C cmp_p seed=1 trip_uV=-1450.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=2 trip_uV=-1750.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=3 trip_uV=1150.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=4 trip_uV=2250.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=5 trip_uV=-1350.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=6 trip_uV=150.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=8 trip_uV=2050.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=7 trip_uV=-1050.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=9 trip_uV=-2150.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=10 trip_uV=-450.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=11 trip_uV=-250.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+OFFSET typical 27C cmp_p seed=12 trip_uV=-2050.0 nflips=1 undecided=0 V=CMP_WC=16u_CMP_LC=0.5u_CMP_WN=8u_CMP_LN=0.5u
+# decision-energy artifact: i(Vdd) plateau of 25 uA vanishes with reltol<=1e-5 / abstol 1e-14 or method=gear (trapezoidal ringing); all later runs use reltol 1e-5/1e-6
+# REJECTED method (unphysical): latch noise injected as a constant-gm (3 mS) parallel current source across the latch NMOS for the whole evaluate phase (also while the device is off): ff 85C sigma = 646 uV; the source acts even before Mc turns on, so this overstates the latch noise; replaced by the gate-referred estimate below
+NOISE ff 85C with_latch_gm3mS gm=1363.5uS NA1=5.19e-07 mu=-18.2uV sigma=646.1uV (+-18.7) ncyc=600 span=+-0.60mV decisions1=306 

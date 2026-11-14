@@ -1,0 +1,24 @@
+* D1: transconductance of the input pair during the evaluate phase (input to the noise injection, per corner / temperature).  3 cycles, Vd = +0.1 mV.
+.include ../spice/models_typical.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-12 reltol=1e-6 abstol=1e-12 vntol=1e-8 chgtol=1e-17 itl1=500 itl4=500
+.temp 27
+.param VSUP=3.3
+.param TCYC=30n
+.param CM=1.65
+.param DVG=0.1m
+Vdd vdd 0 {VSUP}
+Vclk clk 0 PULSE(0 {VSUP} 5n 100p 100p {TCYC/2-100p} {TCYC})
+* DVG > 0: inp > inn, so o2 falls (Mc2 / Mn2 conduct)
+Vp inp 0 {CM+DVG/2}
+Vn inn 0 {CM-DVG/2}
+Xc inp inn clk outp outn vdd 0 @CELL@
+Cl1 outp 0 5f
+Cl2 outn 0 5f
+.control
+save all @m.xc.xm1.m0[gm] @m.xc.xm1.m0[id] @m.xc.xmt1.m0[id] @m.xc.xmc1.m0[gm] @m.xc.xmc2.m0[gm] @m.xc.xmn2.m0[gm]
+tran 20p 95n 0 20p
+wrdata @OUT@ v(clk) v(xc.a1) v(xc.a2) @m.xc.xm1.m0[gm] @m.xc.xm1.m0[id] @m.xc.xmt1.m0[id] v(outp) v(outn) @m.xc.xmc1.m0[gm] @m.xc.xmc2.m0[gm] @m.xc.xmn2.m0[gm] v(xc.o1) v(xc.o2)
+.endc
+.end

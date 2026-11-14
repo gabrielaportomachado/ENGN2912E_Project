@@ -1,0 +1,26 @@
+* D1 first look: PMOS-input comparator, a few decisions, polarity + speed + current.  models_typical is swapped by scripts/dgrun.sh.
+.include ../spice/models_typical.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-12 reltol=1e-6 abstol=1e-15 vntol=1e-8 chgtol=1e-17 itl1=500 itl4=500
+.temp 27
+.param VSUP=3.3
+.param CM=1.65
+.param TCYC=40n
+.param DV=2m
+Vdd vdd 0 {VSUP}
+Vclk clk 0 PULSE(0 {VSUP} 5n 100p 100p {TCYC/2-100p} {TCYC})
+.include pwl_basic_p.inc
+.include pwl_basic_n.inc
+Xc inp inn clk outp outn vdd 0 @CELL@
+Cl1 outp 0 5f
+Cl2 outn 0 5f
+.control
+tran 20p 290n
+meas tran idd_avg avg i(Vdd) from=45n to=205n
+meas tran tdelay1 trig v(clk) val=1.65 rise=2 targ v(outp) val=1.65 cross=1 
+print idd_avg
+let k = 0
+wrdata @OUT@ v(clk) v(inp) v(inn) v(outp) v(outn) v(xc.o1) v(xc.o2) v(xc.a1) v(xc.a2) i(Vdd)
+.endc
+.end

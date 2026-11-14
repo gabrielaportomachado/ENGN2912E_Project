@@ -1,0 +1,8 @@
+** sch_path: /foss/designs/ENGN2912E_Project/AFE/adc/xschem/cmp_inv.sch
+.subckt cmp_inv i o vdd vss
+*.PININFO i:I o:O vdd:B vss:B
+Xn o i vss vss nfet_03v3 L='0.28u' W='WN' nf=1 ad='WN*0.18u' as='WN*0.18u' pd='2*(WN+0.18u)' ps='2*(WN+0.18u)' nrd=0 nrs=0 sa=0 sb=0
++ sd=0
+Xp o i vdd vdd pfet_03v3 L='0.28u' W='WP' nf=1 ad='WP*0.18u' as='WP*0.18u' pd='2*(WP+0.18u)' ps='2*(WP+0.18u)' nrd=0 nrs=0 sa=0 sb=0
++ sd=0
+.ends

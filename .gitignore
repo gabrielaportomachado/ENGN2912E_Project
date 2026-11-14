@@ -6,3 +6,4 @@ RDY/READY_sweep/*.raw
 RDY/READY_sweep/*.txt
 *sim.out
 runs/
+AFE/adc/sim/.ptmp/
