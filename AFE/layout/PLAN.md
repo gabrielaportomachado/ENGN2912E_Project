@@ -89,7 +89,7 @@ Risk: ~12 days for ~25 h of agent work per NOTES.md plus 4-6 DRC/LVS fix loops; 
 ## 9. FINAL channel pin list (afe_ch) and digital/analog crossings (phase I0, 2026-11-14; source: AFE/top/dbs_afe_top.v, simulated in AFE/top/sim/i0_top.log)
 
 `afe_ch` = the cell L2 builds, replicated 8 times. (I1 update, Decision 41: REF pad, per-ADC vhalf cell.) Contents: record TGATE + IPG TGATE (5 V-device macro, TGATE/TGATE.v), REC park (inside afe_chc), amplifier afe_chc (stage 1, stage 2, follower, reset muxes), one-shot fs_oneshot_c (C_T 4 pF),
-2 std cells (OR2 for fs = one-shot OR RST_AMP, INV for samb), the VDD/2 cell `vhalf` (two poly resistors + MIM decap, AFE/adc/spice/vhalf.spice), ADC analog dac_sw (split 6+6 DAC, plate/M reset switches, sampling TGs, 13 bottom drivers) and the comparator cmp_p.
+2 std cells (OR2 for fs = one-shot OR RST_AMP, INV for samb), the VDD/2 cell `vhalf` (two poly resistors + 1 pF MIM, AFE/adc/spice/vhalf.spice) and the sampled comparator reference `vrefs` (TG + Cref 7 pF MIM, I2: gates tg_on / samb, no new net), ADC analog dac_sw (split 6+6 DAC, plate/M reset switches, sampling TGs, 13 bottom drivers) and the comparator cmp_p.
 The 2 std cells are 7t5v0 cells and need VDD/VSS rails inside (or next to) the cell. Pin order below = the Verilog module port order.
 
 | Pin | Dir | Type | Connects to / meaning |
@@ -114,7 +114,7 @@ The 2 std cells are 7t5v0 cells and need VDD/VSS rails inside (or next to) the c
 | vcmo | in | analog bias | bias_genc.vcm_out -> afe_chc.vcmo |
 | vdd, vss | inout | supply | afe_chc, one-shot, dac_sw, cmp_p, 2 std cells (ADC DAC drivers on the separate strap, section 5) |
 
-Internal (not pins): vcmd (vhalf.out -> dac_sw.vcm and cmp_p.inp), amp_out (afe_chc.out -> dac_sw.vin), t (DAC plate -> cmp_p.inn), m (DAC mid node), fs_os, fs, samb. One bias cell `bias_genc` (vbn vcm_in vg1 vcm_out vg2 vrs vdd vss) is shared by the 8 channels.
+Internal (not pins): vcmd (vhalf.out -> dac_sw.vcm and vrefs.in), vref (vrefs.out -> cmp_p.inp, floating while tg_on = 0; keep it short and shielded: it holds the sampled reference for ~10 us), amp_out (afe_chc.out -> dac_sw.vin), t (DAC plate -> cmp_p.inn), m (DAC mid node), fs_os, fs, samb. One bias cell `bias_genc` (vbn vcm_in vg1 vcm_out vg2 vrs vdd vss) is shared by the 8 channels.
 Top ports (32 pads, info.yaml order): E[7:0] IPG[7:0] REC[7:0] REF CS DIN SCLK RSTN DOUT VDD VSS, plus pad-control outputs DOUT_OE (= dout_oe = ~CS), DOUT_IE/PD/PU/CS/SL/PDRV0/PDRV1 and {CS,DIN,SCLK,RSTN}_{PU,PD} (all tied 0 except RSTN_PD = 1; names and values NOT verified against the organizer template, to be checked in L4).
 
 ### Every net that crosses digital <-> analog (N = 8)

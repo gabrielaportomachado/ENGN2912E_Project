@@ -6,12 +6,16 @@
 //   dac_sw        AFE/adc/spice/dac_sw.spice      : vin t m vcm vdd vss rst rstm sam samb gp0..gp11 gdp gn0..gn11 gdn
 //   cmp_p         AFE/adc/spice/comparator.spice  : inp inn clk outp outn vdd vss
 //   vhalf         AFE/adc/spice/vhalf.spice       : out vdd vss
+//   vrefs         AFE/adc/spice/vhalf.spice       : in out c cb vdd vss
 // Analog nets are 1-bit wires that only carry connectivity.  The signal VALUE travels on SIM-ONLY ports/regs (names sim_*, compiled in only with +define+SIM_STUBS; the real subckts have none):
 //   amp stub reg sim_vin[11:0] (written by the testbench) -> sim_out -> dac_sw sim_vin -> sim_vs, sim_dacv -> cmp_p.  The amplifier stub outputs 12'hAAA while fs = 1 (amplifier held in reset).
 module gf180mcu_fd_sc_mcu7t5v0__or2_1 (A1, A2, Z); input A1, A2; output Z; assign #0.2 Z = A1 | A2; endmodule   // ESTIMATE delay; the real cell is a std cell of the 7t5v0 library
 
 // vhalf (AFE/adc/spice/vhalf.spice): VDD/2 from two equal poly resistors + MIM decap, one per ADC
 module vhalf (out, vdd, vss); output out; input vdd, vss; assign out = 1'b1; endmodule
+
+// vrefs (AFE/adc/spice/vhalf.spice, I2): TG + Cref on the comparator reference node
+module vrefs (in, out, c, cb, vdd, vss); input in, c, cb, vdd, vss; output out; assign out = in; endmodule
 
 module bias_genc (vbn, vcm_in, vg1, vcm_out, vg2, vrs, vdd, vss);
     output vbn, vcm_in, vg1, vcm_out, vg2, vrs; input vdd, vss;

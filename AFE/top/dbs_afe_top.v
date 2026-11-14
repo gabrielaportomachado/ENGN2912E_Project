@@ -100,7 +100,10 @@ module afe_ch (
 `endif
     );
     wire cmp_qn;
-    cmp_p u_cmp (.inp(vcmd), .inn(t), .clk(cmp_clk), .outp(cmp_q), .outn(cmp_qn), .vdd(vdd), .vss(vss)
+    // sampled floating comparator reference (I2): Cref behind a TG closed while tg_on = 1, open during the conversion
+    wire vref;
+    vrefs u_vr (.in(vcmd), .out(vref), .c(tg_on), .cb(samb), .vdd(vdd), .vss(vss));
+    cmp_p u_cmp (.inp(vref), .inn(t), .clk(cmp_clk), .outp(cmp_q), .outn(cmp_qn), .vdd(vdd), .vss(vss)
 `ifdef SIM_STUBS
                  , .sim_vs(sim_vs), .sim_dacv(sim_dacv)
 `endif
