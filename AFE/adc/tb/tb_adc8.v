@@ -37,12 +37,13 @@ module tb_adc8;
     always @(cs_n or dout_oe) #1 if (dout_oe !== ~cs_n) errs = errs + 1;
 
     // ---- SPI master ----
-    reg [159:0] rx;           // rx[159 - (k-1)] = bit sampled at edge k
+    reg [159:0] rx;
+    reg [9:0] pre_cfg = 10'd0;   // held config at the start of the frame = what word 1 must read back (I1)           // rx[159 - (k-1)] = bit sampled at edge k
     integer kk;
     task frame(input integer nclk, input [15:0] w0, input integer ncs_hold);
         integer k;
         begin
-            rx = 0;
+            rx = 0; pre_cfg = {rst_amp_o, mode_o, en_o};
             #(PER);            // CS high setup
             cs_n = 0;
             #(100.0);          // CS falling -> first SCLK >= 100 ns (sampling instant is the CS edge)
@@ -77,7 +78,7 @@ module tb_adc8;
         integer c2;
         begin
             bad = 0;
-            if (expect_word(0) !== 16'd0 || expect_word(1) !== 16'd0) bad = bad + 1;
+            if (expect_word(0) !== 16'd0 || expect_word(1) !== {6'd0, pre_cfg}) begin bad = bad + 1; if (errs < 40) $display("  ERR word1 got %h exp %h", expect_word(1), {6'd0, pre_cfg}); end
             for (c2 = 0; c2 < 8; c2 = c2 + 1) begin
                 ww = expect_word(2 + c2);
                 if (ww !== {1'b0, c2[2:0], vin_all[12*c2 +: 12]}) begin

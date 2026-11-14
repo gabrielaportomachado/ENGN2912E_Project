@@ -68,6 +68,8 @@ pins:
     io_type: analog
   - name: REC[7]
     io_type: analog
+  - name: REF
+    io_type: analog
   - name: CS
     io_type: input_cmos
   - name: DIN

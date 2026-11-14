@@ -5,7 +5,7 @@
 //   CS falling edge          : all 8 ADCs sample at once (plate reset switches open at the buffered CS, sampling TGs open a few ns later); SCLK must be low and silent before it.
 //   k = 1..16  (word 0)      : DIN = {6 x 0, RST_AMP, MODE, EN[7:0]} (I0, Decision 38) sampled on SCLK rising; DOUT = 0
 //   k = 1..20                : conversions, staggered one SCLK per channel: ADC i does trial t at edge t + i (t = 1..12); ADC i is done at edge 13 + i, tracking resumes at edge 14 + i
-//   k = 17..32 (word 1)      : idle, DIN ignored, DOUT = 0
+//   k = 17..32 (word 1)      : DIN ignored, DOUT = the HELD config {6 x 0, RST_AMP, MODE, EN[7:0]} as committed at SCLK 33 of the PREVIOUS frame (I1, Decision 41; readback, 0 after RSTN)
 //   k = 33                   : the 10-bit config shift register is copied into the hold register (rst_amp_o, mode_o, en_o); frames with fewer than 33 edges change nothing
 //   k = 33..160 (words 2..9) : DOUT = {0, ID[2:0], code[11:0]} of channel 0 .. 7 (ID = channel number), same-frame data; DOUT changes on SCLK FALLING edges
 //   edges beyond 160 : ignored, DOUT = 0.  CS rising (any time) asynchronously clears the frame counter, the ADC drivers (tri-state) and DOUT, and re-enables tracking.
@@ -60,6 +60,7 @@ module adc8_top (
     wire [3:0] w = cnt[7:4];
     wire [3:0] p = cnt[3:0];
     wire       in_words = (w >= 4'd2) && (w <= 4'd9);
+    wire       in_w1    = (w == 4'd1);                      // word 1: config readback, MSB first: p = 6..15 -> cfg_hold[9..0], p < 6 -> 0
     wire       shift    = in_words && (p >= 4'd4);        // consumed a code bit of the head channel: all channels shift
     wire [3:0] ch4      = w - 4'd2;
     wire [11:0] code [0:7];
@@ -67,6 +68,7 @@ module adc8_top (
     reg  dbit;
     always @(*) begin
         dbit = 1'b0;
+        if (in_w1 && p >= 4'd6) dbit = cfg_hold[15 - p];
         if (in_words) begin
             case (p)
                 4'd0: dbit = 1'b0;

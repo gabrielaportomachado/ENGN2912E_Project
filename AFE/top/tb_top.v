@@ -10,7 +10,8 @@ module tb_top;
     wire [7:0] E, IPG, REC;
     assign E = eval;
     wire dout, dout_oe, d_ie, d_pd, d_pu, d_cs, d_sl, d_p0, d_p1, cs_pu, cs_pd, din_pu, din_pd, sclk_pu, sclk_pd, rstn_pu, rstn_pd;
-    dbs_afe_top dut (.E(E), .IPG(IPG), .REC(REC), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT(dout),
+    wire refw; assign refw = 1'b1;
+    dbs_afe_top dut (.E(E), .IPG(IPG), .REC(REC), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT(dout),
                      .DOUT_OE(dout_oe), .DOUT_IE(d_ie), .DOUT_PD(d_pd), .DOUT_PU(d_pu), .DOUT_CS(d_cs), .DOUT_SL(d_sl), .DOUT_PDRV0(d_p0), .DOUT_PDRV1(d_p1),
                      .CS_PU(cs_pu), .CS_PD(cs_pd), .DIN_PU(din_pu), .DIN_PD(din_pd), .SCLK_PU(sclk_pu), .SCLK_PD(sclk_pd), .RSTN_PU(rstn_pu), .RSTN_PD(rstn_pd),
                      .VDD(vdd_n), .VSS(vss_n));
@@ -53,11 +54,12 @@ module tb_top;
     real PER = 500.0;
     reg [159:0] rx;
     reg [7:0] fs_at_cs;
+    reg [9:0] pre_cfg;
     task frame(input [15:0] w0);
         integer k;
         begin
             rx = 0;
-            fs_at_cs = fs_v;                 // state of the amplifier reset at the sampling instant (CS falling)
+            fs_at_cs = fs_v; pre_cfg = {dut.rst_amp_o, dut.mode_o, dut.en_o};   // word 1 reads back the config held before this frame                 // state of the amplifier reset at the sampling instant (CS falling)
             cs = 0; #100.0;
             for (k = 1; k <= 160; k = k + 1) begin
                 din = (k <= 16) ? w0[16 - k] : $random;
@@ -83,7 +85,7 @@ module tb_top;
                 wd = word(2 + c);
                 if (wd !== {1'b0, c[2:0], ex}) begin nbad_data = nbad_data + 1; if (verbose) $display("  ERR frame %0d ch %0d got %h exp %h", nfr, c, wd, {1'b0, c[2:0], ex}); end
             end
-            if (word(0) !== 16'd0 || word(1) !== 16'd0) begin nbad_data = nbad_data + 1; if (verbose) $display("  ERR words 0/1 not zero"); end
+            if (word(0) !== 16'd0 || word(1) !== {6'd0, pre_cfg}) begin nbad_data = nbad_data + 1; if (verbose) $display("  ERR word 0 not zero or word 1 %h != held config %h", word(1), {6'd0, pre_cfg}); end
             nfr = nfr + 1; if (fs_at_cs != 8'd0) nfs_frames = nfs_frames + 1;
         end
     endtask
@@ -161,7 +163,7 @@ module tb_top;
         for (c = 0; c < 8; c = c + 1) chk(edac[c] === 0, "DAC stub: no crowbar / contention / samb error");
         chk(DOUT_OE_ok == 1, "DOUT_OE = ~CS at every change");
         chk(e_dout == 0, "DOUT changes only on SCLK falling edges");
-        chk(d_ie === 1'b0 && cs_pu === 1'b0 && rstn_pd === 1'b0, "pad control ties");
+        chk(d_ie === 1'b0 && cs_pu === 1'b0 && rstn_pd === 1'b1, "pad control ties");
         $display("e_ref %0d  e_dout %0d  DOUT_OE_ok %0d", e_ref, e_dout, DOUT_OE_ok);
         $display("RESULT %0s errors %0d", errs == 0 ? "PASS" : "FAIL", errs);
         $finish;

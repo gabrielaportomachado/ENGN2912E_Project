@@ -157,3 +157,10 @@ the decap density 4.6 fF/um2 is NOT checked in the PDK, the 2 nH package inducta
 Levers for L0 (in order of cost): (1) place the MOS decap UNDER the MIM capacitors (the MIM sits in upper metal; ~0.16 mm2 of Cin MIM exists), check the GF180 MIM/decap stacking rules and the noise coupling; (2) monotonic / energy-saving DAC switching
 (2-4x less supply charge, ESTIMATE from the literature, evaluate first in D2); (3) N = 4 (~0.45-0.6 mm2, ~700 x 700 um); (4) a bigger slot from the organizer.
 Frame/pin consequences from D0b: DIN carries config in word 0 of a 160-SCLK frame; DOUT carries 8 x 16-bit words; dbs is clocked by SCLK (no CLK pad), SCLK 1-5 MHz recommended (0.64 MHz minimum); CS from an MCU hardware timer (jitter <= 85 ns rms). Pad list unchanged (31).
+
+## UPDATE 2026-11-14 (phase I1, Decision 41): 32 pads
+One shared analog pad REF (reference electrode) is added and wired to the `ref` input of all 8 amplifier channels (afe_chc.ref). Final list: analog (25): E[7:0], IPG[7:0], REC[7:0], REF; input_cmos (2): CS, DIN; input_schmitt (2): SCLK, RSTN;
+bidirectional (1): DOUT; power VDD; ground VSS = 32 pads. 32 EXCEEDS the ~29 planning share (one third of 88) by 3; it is subject to the organizer's pad allocation (still unanswered: macro name/DEF, whether power pads count).
+FALLBACK if the organizer cannot give 32: drop REF and tie every afe_ch `ref` to vcm (the shared VCM_IN tap): single-ended recording, no reference-electrode common-mode rejection (A3: REC-only gain identical, 39.869 dB), documented as such;
+the second fallback of the earlier plan (REC pads on 4 channels only) is unchanged. RSTN pad: pull-down enabled (pad-control tie RSTN_PD = 1) so the chip stays in reset until the host drives RSTN.
+

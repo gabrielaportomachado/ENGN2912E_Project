@@ -22,6 +22,7 @@ Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN`. Frame = 160 SCLK = 10 x 16-bit words.
 |---|---|
 | 1-16 (word 0) | DIN = {6 x 0, RST_AMP, MODE, EN[7:0]} (RST_AMP added in I0, Decision 38); config commits at SCLK 33 (frames < 33 clocks change nothing); RST_AMP is a level, held until the next config frame or RSTN |
 | 1-19 | the 8 conversions, ADC i runs trial k-i at SCLK k (CS falling = simultaneous sample) |
+| 17-32 (word 1) | DOUT = held config {6 x 0, RST_AMP, MODE, EN[7:0]} of the PREVIOUS frame (committed at its SCLK 33; 0 after RSTN); DIN ignored |
 | 33-160 (words 2-9) | channel 0..7, `{0, ID[2:0], code[11:0]}`, same-frame data |
 
 SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input range claimed 1.15-2.15 V.
@@ -41,6 +42,13 @@ SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input range cl
 | D4b replay | `python3 scripts/d4_replay.py <corner> <T> <VDD> <dt_c ns> <W ns> <slew ns> <vins> [T_ns]` -> `sim/d4_replay.log` |
 | D5 settling | `bash scripts/run_d5_settle.sh` -> `sim/d5_settle.log` |
 | D5 SNDR / noise | `python3 scripts/d5_hybrid_amp.py` (hybrid SNDR, `sim/d5_sndr.log`); `python3 scripts/d5_noise.py` (`sim/d5_noise.log`); transistor-level `bash scripts/run_d5_sndr.sh` ABORTS (see open items) |
+
+## Host power-up sequence and test plan (Decisions 38, 41)
+1. Hold RSTN LOW while VDD ramps (the chip has no power-on reset: config and routing flops are cleared only by RSTN; the RSTN pad has its pull-down enabled, so an undriven RSTN also means "in reset"). All routing switches stay open, every REC node is parked at VCM_IN.
+2. Release RSTN. Wait >= 1 s after VDD is stable (the amplifier master bias needs up to ~0.6 s at ss -40 C).
+3. Write a config frame with RST_AMP = 1 (word 0 = 0x0200, MODE = 0, EN = 0); keep it set for >= 100 ms (>= 30 ms needed); write a config frame with RST_AMP = 0.
+4. Write the working config (word 0 = {RST_AMP 0, MODE, EN}); read it back in word 1 of the NEXT frame. After a record start each enabled channel takes a reset pulse (about 3.6 ms typ, up to 7 ms) and the amplifier then needs 0.13-0.27 s (1 mV step) to 9 s (100 mV step) to settle: discard those frames.
+Pad controls: DOUT drives only while CS is low; RSTN pull-down on; other pad-control names/values are placeholders until checked against the organizer template (L4).
 
 ## Results
 Corners are typ 27 / ff 85 / ss -40 C unless noted. Types: SIM = transistor/ngspice or Icarus/OpenSTA, HYBRID = Python model fed with SIM numbers, ESTIMATE = hand/analytic.

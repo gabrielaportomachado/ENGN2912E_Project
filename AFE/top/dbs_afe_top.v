@@ -5,10 +5,12 @@
 // WHY dbs_ctrl + TGATE and not the dbs module: dbs wraps dbs_ctrl + the 2N TGATEs but does not bring sw_rec / sw_rec_b out, and the amplifier reset trigger and the REC park need exactly those two nets.
 // The TGATEs therefore sit inside afe_ch; the wiring is the same as dbs.v lines 99-106 (rec_tg: C = sw_rec, CBAR = sw_rec_b; ipg_tg: C = sw_ipg, CBAR = sw_ipg_b).  tb_top.v compares REC / IPG against a real `dbs #(8)` instance.
 //
-// Pads (31, as AFE/TAPEOUT.md / info.yaml): analog E[7:0] IPG[7:0] REC[7:0]; input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT; power VDD; ground VSS.
+// Pads (32, Decision 41): analog E[7:0] IPG[7:0] REC[7:0] REF; input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT; power VDD; ground VSS.  REF = shared reference electrode, wired to afe_chc.ref of all 8 channels.
+// Fallback (organizer pad share): drop the REF pad and tie every afe_ch `ref` to vcm (single-ended).
 // The pad control pins below (DOUT_*, *_PU, *_PD) follow the NAMING in info.yaml's header comment; the exact names / polarities come from the organizer's template and are NOT verified (template not re-read in this phase).
 module dbs_afe_top (
     inout  [7:0] E, IPG, REC,
+    inout        REF,
     input        CS, DIN, SCLK, RSTN,
     output       DOUT,
     output       DOUT_OE, DOUT_IE, DOUT_PD, DOUT_PU, DOUT_CS, DOUT_SL, DOUT_PDRV0, DOUT_PDRV1,
@@ -19,7 +21,7 @@ module dbs_afe_top (
     wire dout_oe;
     assign DOUT_OE = dout_oe;                       // tri-state while CS is high (the MCU may share the MISO line); info.yaml draft said OE = 1: see NOTES I0 finding
     assign DOUT_IE = 1'b0; assign DOUT_PD = 1'b0; assign DOUT_PU = 1'b0; assign DOUT_CS = 1'b0; assign DOUT_SL = 1'b0; assign DOUT_PDRV0 = 1'b0; assign DOUT_PDRV1 = 1'b0;   // values: PLACEHOLDERS
-    assign CS_PU = 1'b0; assign CS_PD = 1'b0; assign DIN_PU = 1'b0; assign DIN_PD = 1'b0; assign SCLK_PU = 1'b0; assign SCLK_PD = 1'b0; assign RSTN_PU = 1'b0; assign RSTN_PD = 1'b0;
+    assign CS_PU = 1'b0; assign CS_PD = 1'b0; assign DIN_PU = 1'b0; assign DIN_PD = 1'b0; assign SCLK_PU = 1'b0; assign SCLK_PD = 1'b0; assign RSTN_PU = 1'b0; assign RSTN_PD = 1'b1;   // RSTN pull-down ON (Decision 41, mismatch 9): the chip comes up in reset if the host does not drive RSTN
 
     // ---- serial interface, config word, 8 SARs ----
     wire        mode_o, rst_amp_o;
@@ -34,10 +36,9 @@ module dbs_afe_top (
     dbs_ctrl #(.N(8)) u_dbs (.clk(SCLK), .rstn(RSTN), .mode(mode_o), .en(en_o), .ready(1'b1),
                              .sw_rec(sw_rec), .sw_rec_b(sw_rec_b), .sw_ipg(sw_ipg), .sw_ipg_b(sw_ipg_b));
 
-    // ---- shared bias (one per chip): vcmd = ADC DAC reset level + comparator reference (VDD/2) ----
-    wire vbn, vcm, vg1, vcmo, vg2, vrs, vcmd;
+    // ---- shared bias (one per chip) ----
+    wire vbn, vcm, vg1, vcmo, vg2, vrs;
     bias_genc u_bias (.vbn(vbn), .vcm_in(vcm), .vg1(vg1), .vcm_out(vcmo), .vg2(vg2), .vrs(vrs), .vdd(VDD), .vss(VSS));
-    assign vcmd = vcmo;     // PLACEHOLDER (I0 finding): no VDD/2 tap for the ADC exists in bias_genc; every ADC sim used an IDEAL source.  Same net as vcm_out only until L2 decides.
 
     // ---- 8 channels ----
     genvar i;
@@ -47,19 +48,20 @@ module dbs_afe_top (
                   .rst_amp(rst_amp_o),
                   .rst_sw(rst_sw[i]), .tg_on(tg_on[i]), .cmp_clk(cmp_clk[i]), .dac_gdn(dac_gdn[i]),
                   .dac_gp(dac_gp[12*i +: 12]), .dac_gn(dac_gn[12*i +: 12]), .cmp_q(cmp_q[i]),
-                  .vbn(vbn), .vcm(vcm), .vg1(vg1), .vcmo(vcmo), .vg2(vg2), .vrs(vrs), .vcmd(vcmd), .vdd(VDD), .vss(VSS));
+                  .vbn(vbn), .vcm(vcm), .vg1(vg1), .vcmo(vcmo), .vg2(vg2), .vrs(vrs), .ref(REF), .vdd(VDD), .vss(VSS));
     end endgenerate
 endmodule
 
 // afe_ch: ONE channel = the cell L2 lays out (amplifier + park + routing TGATEs + one-shot + ADC analog).  Pin list: AFE/layout/PLAN.md section 9.
 module afe_ch (
     inout        e, ipg, rec,                       // electrode pad, IPG pad, REC pad (= amplifier input node)
+    inout        ref,                               // REF pad: shared reference electrode (afe_chc.ref)
     input        sw_rec, sw_rec_b, sw_ipg, sw_ipg_b,// routing switch controls from dbs_ctrl (C / CBAR of the two TGATEs)
     input        rst_amp,                           // RST_AMP config bit level (adc8_top rst_amp_o), common to all channels
     input        rst_sw, tg_on, cmp_clk, dac_gdn,   // adc8_top bit i
     input  [11:0] dac_gp, dac_gn,                   // adc8_top bits 12*i+11 .. 12*i
     output       cmp_q,
-    input        vbn, vcm, vg1, vcmo, vg2, vrs, vcmd, vdd, vss
+    input        vbn, vcm, vg1, vcmo, vg2, vrs, vdd, vss
 );
     // routing switches (5 V-device TGATE macro, TGATE/TGATE.v; dbs.v wiring)
     TGATE rec_tg (.OUT(rec), .IN(e), .C(sw_rec), .CBAR(sw_rec_b));
@@ -72,11 +74,10 @@ module afe_ch (
 
     // amplifier with REC park (pkc = CBAR = HIGH while the record switch is open = park ON; pkcb = C)
     wire amp_out;
-    // ref: the amplifier's second input has NO pad (I0 finding); tied to the shared vcm_in tap
 `ifdef SIM_STUBS
     wire [11:0] sim_amp_out, sim_vs, sim_dacv;
 `endif
-    afe_chc u_amp (.rec(rec), .ref(vcm), .out(amp_out), .vdd(vdd), .vss(vss), .vbn(vbn), .vcm(vcm), .vg1(vg1), .vcmo(vcmo), .vg2(vg2), .vrs(vrs),
+    afe_chc u_amp (.rec(rec), .ref(ref), .out(amp_out), .vdd(vdd), .vss(vss), .vbn(vbn), .vcm(vcm), .vg1(vg1), .vcmo(vcmo), .vg2(vg2), .vrs(vrs),
                    .fs(fs), .pkc(sw_rec_b), .pkcb(sw_rec)
 `ifdef SIM_STUBS
                    , .sim_out(sim_amp_out)
@@ -84,6 +85,9 @@ module afe_ch (
     );
 
     // ADC analog: split-cap DAC + switches, comparator.  rstm = rst = rst_sw (D4 wiring); samb = ~tg_on (local inverter); gdp tied high (Decision 37 / D4)
+    // VDD/2 for this ADC: own resistive divider + MIM decap (cell vhalf, Decision 41)
+    wire vcmd;
+    vhalf u_vh (.out(vcmd), .vdd(vdd), .vss(vss));
     wire samb, t, m;
     (* keep *) gf180mcu_fd_sc_mcu7t5v0__inv_1 u_samb (.I(tg_on), .ZN(samb));
     dac_sw u_dac (.vin(amp_out), .t(t), .m(m), .vcm(vcmd), .vdd(vdd), .vss(vss), .rst(rst_sw), .rstm(rst_sw), .sam(tg_on), .samb(samb),
