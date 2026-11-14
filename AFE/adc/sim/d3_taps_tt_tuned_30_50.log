@@ -1,0 +1,71 @@
+Comparator clock taps from OpenSTA on the LibreLane netlist + nom SPEF (no CTS, ideal SCLK edge at the port).  rise = cmp_clk[i] rising (window start), fall = window end, W = fall - rise,
+cap = capture-flop clock arrival (tapw).  Delta = rise[i+1]-rise[i].  All in ns.
+
+== corner tt_025C_3v30    per-cell delays in the chain: {'dlyd': 3.396, 'dlyc': 2.401, 'dlya': 0.794}
+ADC  rise   fall    W     cap   Delta
+0    30.20   36.05  5.85   35.47      -
+1    79.94   85.81  5.88   85.24  49.73
+2   129.79  135.64  5.85  135.06  49.85
+3   179.50  185.35  5.85  184.77  49.71
+4   229.10  234.95  5.85  234.36  49.60
+5   278.70  284.54  5.83  283.99  49.60
+6   328.33  334.23  5.90  333.63  49.63
+7   377.85  383.77  5.92  383.22  49.52
+
+== corner ss_125C_3v00    per-cell delays in the chain: {'dlyd': 7.115, 'dlyc': 5.019, 'dlya': 1.557}
+ADC  rise   fall    W     cap   Delta
+0    63.20   75.41 12.20   74.25      -
+1   167.27  179.53 12.26  178.39 104.06
+2   271.58  283.80 12.21  282.64 104.32
+3   375.62  387.82 12.20  386.67 104.04
+4   479.44  491.65 12.21  490.46 103.82
+5   583.25  595.43 12.18  594.35 103.81
+6   687.13  699.43 12.31  698.23 103.87
+7   790.80  803.14 12.34  802.05 103.67
+
+== corner ss_n40C_3v00    per-cell delays in the chain: {'dlyd': 4.86, 'dlyc': 3.436, 'dlya': 1.121}
+ADC  rise   fall    W     cap   Delta
+0    43.17   51.58  8.41   50.73      -
+1   114.33  122.78  8.45  121.94  71.15
+2   185.66  194.08  8.42  193.23  71.34
+3   256.80  265.20  8.41  264.36  71.13
+4   327.77  336.18  8.41  335.31  70.97
+5   398.74  407.14  8.39  406.34  70.98
+6   469.76  478.24  8.48  477.36  71.02
+7   540.63  549.13  8.50  548.33  70.87
+
+== corner ff_n40C_3v60    per-cell delays in the chain: {'dlyd': 1.831, 'dlyc': 1.301, 'dlya': 0.464}
+ADC  rise   fall    W     cap   Delta
+0    16.32   19.49  3.17   19.16      -
+1    43.19   46.38  3.19   46.05  26.87
+2    70.13   73.30  3.17   72.96  26.94
+3    96.99  100.16  3.17   99.82  26.86
+4   123.78  126.95  3.17  126.60  26.79
+5   150.57  153.73  3.16  153.41  26.80
+6   177.38  180.58  3.20  180.23  26.80
+7   204.11  207.33  3.21  207.01  26.74
+
+== corner ff_125C_3v60    per-cell delays in the chain: {'dlyd': 2.71, 'dlyc': 1.92, 'dlya': 0.64}
+ADC  rise   fall    W     cap   Delta
+0    24.15   28.78  4.63   28.32      -
+1    63.85   68.50  4.66   68.05  39.70
+2   103.64  108.27  4.63  107.82  39.80
+3   143.33  147.96  4.63  147.50  39.69
+4   182.92  187.56  4.63  187.09  39.60
+5   222.53  227.14  4.61  226.71  39.60
+6   262.14  266.82  4.67  266.34  39.62
+7   301.67  306.36  4.69  305.93  39.53
+
+Ratios (rise of ADC 0 / ADC 7 window end):
+  tt_025C_3v30   T0 30.20  last end 383.77  ratio to ff_n40: T0 1.85  last 1.85
+  ss_125C_3v00   T0 63.20  last end 803.14  ratio to ff_n40: T0 3.87  last 3.87
+  ss_n40C_3v00   T0 43.17  last end 549.13  ratio to ff_n40: T0 2.65  last 2.65
+  ff_n40C_3v60   T0 16.32  last end 207.33  ratio to ff_n40: T0 1.00  last 1.00
+  ff_125C_3v60   T0 24.15  last end 306.36  ratio to ff_n40: T0 1.48  last 1.48
+
+Check 1 (direct): last window end + 5 ns margin < T at 3 MHz (333.3 ns) and 2 MHz (500 ns); Check 2: T0 >= 24 ns (D2 DAC settling), per corner
+  tt_025C_3v30   T0  30.20 (>=24: ok)  last end  383.77  margin@3MHz  -50.43 (FAIL)  margin@2MHz  116.23 (ok)  STA slack cap->code @333.3: -54.994  @500: 111.673
+  ss_125C_3v00   T0  63.20 (>=24: ok)  last end  803.14  margin@3MHz -469.81 (FAIL)  margin@2MHz -303.14 (FAIL)  STA slack cap->code @333.3: -478.963  @500: -312.296
+  ss_n40C_3v00   T0  43.17 (>=24: ok)  last end  549.13  margin@3MHz -215.79 (FAIL)  margin@2MHz  -49.13 (FAIL)  STA slack cap->code @333.3: -222.189  @500: -55.522
+  ff_n40C_3v60   T0  16.32 (>=24: FAIL)  last end  207.33  margin@3MHz  126.01 (ok)  margin@2MHz  292.67 (ok)  STA slack cap->code @333.3: 123.408  @500: 290.075
+  ff_125C_3v60   T0  24.15 (>=24: ok)  last end  306.36  margin@3MHz   26.97 (ok)  margin@2MHz  193.64 (ok)  STA slack cap->code @333.3: 23.122  @500: 189.789

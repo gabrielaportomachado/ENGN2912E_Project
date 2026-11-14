@@ -1,0 +1,16 @@
+== edge PER 500 CORNER_TT (2 MHz)
+TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
+BADCH 0 0 0 0 0 0 0 0
+RESULT PASS PER 500.00 frames 0 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 1429
+== edge PER 333.333 CORNER_TT (3 MHz)
+TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
+BADCH 0 0 0 0 0 0 0 0
+RESULT PASS PER 333.33 frames 0 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 1429
+== edge PER 1562.5 CORNER_SS125 (0.64 MHz)
+TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
+BADCH 0 0 0 0 0 0 0 0
+RESULT PASS PER 1562.50 frames 0 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 1429
+== edge PER 200 CORNER_FFN40 (5 MHz)
+TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
+BADCH 0 0 0 0 0 0 0 0
+RESULT PASS PER 200.00 frames 0 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 1429

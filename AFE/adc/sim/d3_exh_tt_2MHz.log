@@ -1,0 +1,4 @@
+TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
+BADCH 0 0 0 0 0 0 0 0
+RESULT PASS PER 500.00 frames 4096 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 393216
+tb/tb_adc8.v:167: $finish called at 331366500000 (1ps)
