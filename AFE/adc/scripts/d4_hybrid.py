@@ -64,7 +64,38 @@ def enob_run(rng, corner, vdd_noise=False, latch=50e-6, N=1024, M=127, amp=0.49,
     ps = P[M]; pn = P[1:].sum() - ps; sndr = 10 * np.log10(ps / pn); enob = (sndr - 1.76) / 6.02
     fs = (sndr - 1.76 + 20 * np.log10(3.3 / (2 * amp))) / 6.02
     return sndr, enob, fs
-if __name__ == '__main__':
+
+def track_run(rng, corner, ripa, A, mr, wnr=1e-3, N=1024, M=127, amp=0.49, latch=50e-6):
+    """D4b: VDD ripple with the amplifier output ALSO moving with VDD: tone ripa (V pk) at bin mr, amplifier supply gain A (A4b table at that frequency) adds A*dVDD to the ADC input at the sampling instant;
+    white noise wnr (rms, per decision, broadband) is too fast for the amplifier (A = 0).  Same chip and noise draws with and without the ripple -> code error rms [LSB] and input-referred [uV] (/1000)."""
+    d, lv, S, sup = chip(rng, corner, True); c = CORN[corner]; n = np.arange(N); vin = 1.65 + amp * np.sin(2 * np.pi * M * n / N)
+    nz = rng.normal(0, np.sqrt(c['npair'] ** 2 + latch ** 2), (N, 12)); kt = rng.normal(0, c['ktc'], N); wn = rng.normal(0, wnr, (N, 13)); ph = rng.uniform(0, 6.28)
+    def conv(on):
+        rip = (ripa * np.sin(2 * np.pi * mr * n / N + ph) if on else np.zeros(N))[:, None]; d0 = rip[:, 0] + (wn[:, 0] if on else 0); dk = np.zeros((N, 12)) + rip + (wn[:, 1:] if on else 0)
+        vi = vin + kt + A * rip[:, 0] if on else vin + kt; code = np.zeros(N, int)
+        for k in range(12):
+            j = 11 - k; tr = code | (1 << j); lvl = lv[tr] * (1 + dk[:, k] / 3.3) + (d0 - dk[:, k]) / 2 + S + sup[k] + nz[:, k]; code = np.where(vi >= lvl, tr, code)
+        return code
+    c1, c0 = conv(True), conv(False)
+    def sndr(code):
+        x = code - code.mean(); P = np.abs(np.fft.rfft(x)) ** 2; return 10 * np.log10(P[M] / (P[1:].sum() - P[M]))
+    e = (c1 - c0).astype(float); e -= e.mean()
+    return sndr(c1), sndr(c0), e.std(), (c1 - c0).mean()
+if __name__ == '__main__' and sys.argv[1] == 'track':
+    out = []; P_ = lambda s='': (print(s, flush=True), out.append(s))
+    P_('D4b NOISY VDD WITH THE AMPLIFIER OUTPUT TRACKING (A4b supply gain A(f), sim/a4b_*: DC 0.507-0.516, 50/60 Hz 0.557-0.570, 300 Hz 0.459-0.547, 1 kHz 0.22-0.40, 10 kHz 0.035-0.063; the 0.57 quoted is the 50/60 Hz value). Tone 10 mV pk + 1 mV rms broadband (A = 0 for the broadband part). 20 chips, mean; 0.49 V pk signal.')
+    P_('  input-referred = code-error rms * 0.806 uV/LSB (amplifier gain 1000); "no ripple" SNDR is the same chip and noise without VDD ripple (typ corner, latch 50 uV ESTIMATE)')
+    for corner in ('typical', 'ff', 'ss'):
+        for lab, A, mr in (('60 Hz (bin 15), A 0.57', 0.57, 15), ('200 Hz (bin 51), A 0.55', 0.55, 51), ('1 kHz (bin 256), A 0.40', 0.40, 256), ('10 kHz alias (bin 480), A 0.06', 0.06, 480), ('no tracking, A 0 (D4 case)', 0.0, 51)):
+            rng = np.random.default_rng(7); a = np.array([track_run(rng, corner, 10e-3, A, mr) for _ in range(20)])
+            P_(f'  {corner:8s} tone {lab:32s}: SNDR {a[:,0].mean():.1f} dB (no ripple {a[:,1].mean():.1f}), ENOB raw {(a[:,0].mean()-1.76)/6.02:.2f} (no ripple {(a[:,1].mean()-1.76)/6.02:.2f}), code error rms {a[:,2].mean():.2f} LSB = {a[:,2].mean()*0.806:.2f} uV input-referred')
+    # ripple requirement for 0.5 LSB rms (analytic: error per mV = |A - Vin/VDD| / 0.806 LSB at the sampling instant, amplifier following; broadband above its bandwidth = DAC-scaling term 0.5*Vin/VDD-independent 0.62 LSB/mV)
+    P_('  REQUIREMENT for <= 0.5 LSB (0.4 mV at the ADC input, 0.4 uV referred to the electrode) of code error: dVDD_rms <= 0.5*0.806 mV / |A - Vin/VDD|, Vin/VDD = 0.5 (mid-scale) or 0.35 (Vin 1.15 V, worst of the 1.15-2.15 V range):')
+    for lab, Alo, Ahi in (('0.5-300 Hz, 50/60 Hz A 0.557-0.570', 0.557, 0.570), ('300 Hz A 0.459-0.547', 0.459, 0.547), ('1 kHz A 0.22-0.40', 0.22, 0.40), ('10 kHz A 0.035-0.063', 0.035, 0.063), ('>= 100 kHz (amplifier does not follow, A = 0)', 0.0, 0.0)):
+        for x, xl in ((0.5, 'mid-scale'), (0.35, 'Vin 1.15 V')):
+            ew = max(abs(Alo - x), abs(Ahi - x)); P_(f'    {lab:48s} {xl:10s}: worst |A - {x}| = {ew:.3f} -> dVDD <= {0.5*0.806/ew:.1f} mV rms')
+    open(f'{ADC}/sim/d4_hybrid_track.log', 'w').write('\n'.join(out) + '\n')
+if __name__ == '__main__' and sys.argv[1] != 'track':
     out = []; P_ = lambda s='': (print(s, flush=True), out.append(s)); mode = sys.argv[1]
     if mode == 'dnl':
         P_('D4 HYBRID DNL/INL (python SAR, D2 DAC network, A_C 0.5 %*um, comparator shift+offset, supply per-trial error from d4_supply_3MHz.log); 32 inputs per LSB ramp, transitions = first input giving each code')

@@ -1,0 +1,23 @@
+* D4b replay: transistor-level DAC (dac_sw, scripted SAR controls from scripts/d2_conv.py control()) + the real cmp_p, comparator clock pulses @CK@ at the STA-derived instants.  @OUT@ = wrdata file.
+.include ../spice/models_typical_mim.spice
+.include ../spice/dac_units.spice
+.include ../spice/dac_sw.spice
+.include ../spice/comparator_params.spice
+.include ../spice/comparator.spice
+.options gmin=1e-12 reltol=1e-4 abstol=1e-15 vntol=1e-7 chgtol=1e-17 itl1=500 itl4=500
+.temp 27
+.param VSUP=3.3
+Vdd vdd 0 {VSUP}
+Vcm vcm 0 {VSUP/2}
+.include @CTRL@
+.include @CK@
+Xs vin t m vcm vdd 0 rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn dac_sw
+Xc vcm t ck outp outn vdd 0 cmp_p
+Cl1 outp 0 5f
+Cl2 outn 0 5f
+.tran 20p @TEND@ 0 @TMAX@
+.control
+run
+wrdata @OUT@ v(t) v(outp) v(m)
+.endc
+.end

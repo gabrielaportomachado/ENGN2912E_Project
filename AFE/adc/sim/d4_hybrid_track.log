@@ -1,0 +1,28 @@
+D4b NOISY VDD WITH THE AMPLIFIER OUTPUT TRACKING (A4b supply gain A(f), sim/a4b_*: DC 0.507-0.516, 50/60 Hz 0.557-0.570, 300 Hz 0.459-0.547, 1 kHz 0.22-0.40, 10 kHz 0.035-0.063; the 0.57 quoted is the 50/60 Hz value). Tone 10 mV pk + 1 mV rms broadband (A = 0 for the broadband part). 20 chips, mean; 0.49 V pk signal.
+  input-referred = code-error rms * 0.806 uV/LSB (amplifier gain 1000); "no ripple" SNDR is the same chip and noise without VDD ripple (typ corner, latch 50 uV ESTIMATE)
+  typical  tone 60 Hz (bin 15), A 0.57          : SNDR 50.2 dB (no ripple 61.4), ENOB raw 8.04 (no ripple 9.91), code error rms 1.36 LSB = 1.10 uV input-referred
+  typical  tone 200 Hz (bin 51), A 0.55         : SNDR 50.6 dB (no ripple 61.4), ENOB raw 8.12 (no ripple 9.91), code error rms 1.29 LSB = 1.04 uV input-referred
+  typical  tone 1 kHz (bin 256), A 0.40         : SNDR 49.5 dB (no ripple 61.4), ENOB raw 7.92 (no ripple 9.91), code error rms 1.47 LSB = 1.19 uV input-referred
+  typical  tone 10 kHz alias (bin 480), A 0.06  : SNDR 40.6 dB (no ripple 61.4), ENOB raw 6.45 (no ripple 9.91), code error rms 4.02 LSB = 3.24 uV input-referred
+  typical  tone no tracking, A 0 (D4 case)      : SNDR 39.6 dB (no ripple 61.4), ENOB raw 6.28 (no ripple 9.91), code error rms 4.52 LSB = 3.64 uV input-referred
+  ff       tone 60 Hz (bin 15), A 0.57          : SNDR 50.1 dB (no ripple 60.6), ENOB raw 8.03 (no ripple 9.77), code error rms 1.37 LSB = 1.11 uV input-referred
+  ff       tone 200 Hz (bin 51), A 0.55         : SNDR 50.6 dB (no ripple 60.6), ENOB raw 8.11 (no ripple 9.77), code error rms 1.30 LSB = 1.05 uV input-referred
+  ff       tone 1 kHz (bin 256), A 0.40         : SNDR 49.4 dB (no ripple 60.6), ENOB raw 7.92 (no ripple 9.77), code error rms 1.48 LSB = 1.19 uV input-referred
+  ff       tone 10 kHz alias (bin 480), A 0.06  : SNDR 40.6 dB (no ripple 60.6), ENOB raw 6.45 (no ripple 9.77), code error rms 4.03 LSB = 3.24 uV input-referred
+  ff       tone no tracking, A 0 (D4 case)      : SNDR 39.6 dB (no ripple 60.6), ENOB raw 6.28 (no ripple 9.77), code error rms 4.52 LSB = 3.64 uV input-referred
+  ss       tone 60 Hz (bin 15), A 0.57          : SNDR 50.2 dB (no ripple 61.7), ENOB raw 8.04 (no ripple 9.96), code error rms 1.35 LSB = 1.09 uV input-referred
+  ss       tone 200 Hz (bin 51), A 0.55         : SNDR 50.7 dB (no ripple 61.7), ENOB raw 8.13 (no ripple 9.96), code error rms 1.28 LSB = 1.03 uV input-referred
+  ss       tone 1 kHz (bin 256), A 0.40         : SNDR 49.5 dB (no ripple 61.7), ENOB raw 7.93 (no ripple 9.96), code error rms 1.47 LSB = 1.19 uV input-referred
+  ss       tone 10 kHz alias (bin 480), A 0.06  : SNDR 40.6 dB (no ripple 61.7), ENOB raw 6.45 (no ripple 9.96), code error rms 4.03 LSB = 3.25 uV input-referred
+  ss       tone no tracking, A 0 (D4 case)      : SNDR 39.6 dB (no ripple 61.7), ENOB raw 6.28 (no ripple 9.96), code error rms 4.52 LSB = 3.64 uV input-referred
+  REQUIREMENT for <= 0.5 LSB (0.4 mV at the ADC input, 0.4 uV referred to the electrode) of code error: dVDD_rms <= 0.5*0.806 mV / |A - Vin/VDD|, Vin/VDD = 0.5 (mid-scale) or 0.35 (Vin 1.15 V, worst of the 1.15-2.15 V range):
+    0.5-300 Hz, 50/60 Hz A 0.557-0.570               mid-scale : worst |A - 0.5| = 0.070 -> dVDD <= 5.8 mV rms
+    0.5-300 Hz, 50/60 Hz A 0.557-0.570               Vin 1.15 V: worst |A - 0.35| = 0.220 -> dVDD <= 1.8 mV rms
+    300 Hz A 0.459-0.547                             mid-scale : worst |A - 0.5| = 0.047 -> dVDD <= 8.6 mV rms
+    300 Hz A 0.459-0.547                             Vin 1.15 V: worst |A - 0.35| = 0.197 -> dVDD <= 2.0 mV rms
+    1 kHz A 0.22-0.40                                mid-scale : worst |A - 0.5| = 0.280 -> dVDD <= 1.4 mV rms
+    1 kHz A 0.22-0.40                                Vin 1.15 V: worst |A - 0.35| = 0.130 -> dVDD <= 3.1 mV rms
+    10 kHz A 0.035-0.063                             mid-scale : worst |A - 0.5| = 0.465 -> dVDD <= 0.9 mV rms
+    10 kHz A 0.035-0.063                             Vin 1.15 V: worst |A - 0.35| = 0.315 -> dVDD <= 1.3 mV rms
+    >= 100 kHz (amplifier does not follow, A = 0)    mid-scale : worst |A - 0.5| = 0.500 -> dVDD <= 0.8 mV rms
+    >= 100 kHz (amplifier does not follow, A = 0)    Vin 1.15 V: worst |A - 0.35| = 0.350 -> dVDD <= 1.2 mV rms
