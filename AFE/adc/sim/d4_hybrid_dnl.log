@@ -1,0 +1,13 @@
+D4 HYBRID DNL/INL (python SAR, D2 DAC network, A_C 0.5 %*um, comparator shift+offset, supply per-trial error from d4_supply_3MHz.log); 32 inputs per LSB ramp, transitions = first input giving each code
+  typical: ideal DAC, no comparator error: max|DNL| 0.000 max|INL| 0.000 LSB, missing 0
+  typical MC 100 chips no supply error: max|DNL| median 0.48 worst 1.31 (10 % of chips > 1 LSB), max|INL| median 0.39 worst 0.89 (0 % > 1 LSB), chips with a missing code 5 %
+  typical MC 100 chips with supply error: max|DNL| median 0.53 worst 1.50 (2 % of chips > 1 LSB), max|INL| median 0.52 worst 0.86 (0 % > 1 LSB), chips with a missing code 2 %
+  typical: supply table used (|error| per trial, LSB): 0.08 0.08 0.08 0.09 0.09 0.09 0.09 0.09 0.09 0.09 0.08 0.08
+  ff: ideal DAC, no comparator error: max|DNL| 0.000 max|INL| 0.000 LSB, missing 0
+  ff MC 100 chips no supply error: max|DNL| median 0.48 worst 1.31 (10 % of chips > 1 LSB), max|INL| median 0.39 worst 0.87 (0 % > 1 LSB), chips with a missing code 5 %
+  ff MC 100 chips with supply error: max|DNL| median 0.56 worst 1.50 (3 % of chips > 1 LSB), max|INL| median 0.61 worst 0.95 (0 % > 1 LSB), chips with a missing code 5 %
+  ff: supply table used (|error| per trial, LSB): 0.15 0.14 0.14 0.14 0.14 0.14 0.14 0.14 0.14 0.14 0.14 0.14
+  ss: ideal DAC, no comparator error: max|DNL| 0.000 max|INL| 0.000 LSB, missing 0
+  ss MC 100 chips no supply error: max|DNL| median 0.48 worst 1.31 (10 % of chips > 1 LSB), max|INL| median 0.39 worst 0.89 (0 % > 1 LSB), chips with a missing code 5 %
+  ss MC 100 chips with supply error: max|DNL| median 0.47 worst 1.53 (1 % of chips > 1 LSB), max|INL| median 0.42 worst 0.80 (0 % > 1 LSB), chips with a missing code 1 %
+  ss: supply table used (|error| per trial, LSB): 0.02 0.02 0.02 0.02 0.02 0.03 0.03 0.03 0.03 0.03 0.03 0.03

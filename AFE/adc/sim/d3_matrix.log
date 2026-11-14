@@ -1,80 +1,80 @@
 == CORNER_TT SCLK 1 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_TT SCLK 2 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_TT SCLK 3 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_TT SCLK 4 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SS125 SCLK 1 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SS125 SCLK 2 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SS125 SCLK 3 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SS125 SCLK 4 MHz
 TMINCH 0 0 0 0 0 64 768 0  CHGCH 0 0 0 0 0 768 0 0
 BADCH 0 0 0 0 0 63 0 0
-RESULT FAIL PER 250.00 frames 64 bad 63 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 832 dac-change-in-window 768 order 0 Zbit 0 decisions 6208
+RESULT FAIL PER 250.00 frames 64 bad 63 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 832 dac-change-in-window 768 order 0 Zbit 0 decisions 6208 dummy-driver errors 0
 == CORNER_SSN40 SCLK 1 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SSN40 SCLK 2 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SSN40 SCLK 3 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_SSN40 SCLK 4 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FFN40 SCLK 1 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FFN40 SCLK 2 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FFN40 SCLK 3 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FFN40 SCLK 4 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FF125 SCLK 1 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 1000.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FF125 SCLK 2 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 500.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FF125 SCLK 3 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 333.33 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0
 == CORNER_FF125 SCLK 4 MHz
 TMINCH 0 0 0 0 0 0 0 0  CHGCH 0 0 0 0 0 0 0 0
 BADCH 0 0 0 0 0 0 0 0
-RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144
+RESULT PASS PER 250.00 frames 64 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 6144 dummy-driver errors 0

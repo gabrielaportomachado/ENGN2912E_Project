@@ -25,7 +25,8 @@ module adc8_top (
     output [7:0]   rst_sw,     // 1 = plate and LSB-node reset switches closed (tracking); falls first at CS falling
     output [7:0]   tg_on,      // 1 = sampling transmission gate on; the delayed copy of rst_sw (opens AFTER the reset switches, closes after the drivers are released)
     output [95:0]  dac_gp,     // tri-state inverter PMOS gates, 12 per ADC
-    output [95:0]  dac_gn      // tri-state inverter NMOS gates, 12 per ADC
+    output [95:0]  dac_gn,     // tri-state inverter NMOS gates, 12 per ADC
+    output [7:0]   dac_gdn     // dummy-unit bottom driver NMOS gate (D4): 1 = dummy bottom grounded; = ~tg_on, so it is grounded exactly while the sampling TG is off (its PMOS gate is tied high, no pin)
 );
     wire frame_rn = rstn & ~cs_n;
 
@@ -93,6 +94,7 @@ module adc8_top (
         assign rst_sw[i] = trk;
         // sampling TG: delayed copy of trk (opens after the reset switches; closes after the drivers have released, drv_en clears asynchronously on CS rising)
         (* keep *) gf180mcu_fd_sc_mcu7t5v0__dlyd_1 utg (.I(trk), .Z(tg_on[i]));
+        assign dac_gdn[i] = ~tg_on[i];
     end endgenerate
     generate for (i = 0; i < 7; i = i + 1) begin : cn
         assign code_next[i] = code[i + 1][11];

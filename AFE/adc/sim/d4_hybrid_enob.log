@@ -1,0 +1,13 @@
+D4 HYBRID SNDR/ENOB: coherent sine N 1024, M 127, 0.49 V pk around 1.65 V (the claimed 1.15-2.15 V range); ENOB(raw) = (SNDR-1.76)/6.02 for the 0.98 Vpp signal, ENOB(FS) adds 20log(3.3/0.98) = 10.5 dB (referred to the 3.3 V full scale). 20 chips per case, noise + mismatch redrawn.
+  typical  no latch noise, ideal supply                        : SNDR 61.7 dB (min 59.3), ENOB raw 9.96 (min 9.56), ENOB FS 11.71 (min 11.31)
+  typical  latch 50 uV ESTIMATE + supply error                 : SNDR 61.3 dB (min 59.4), ENOB raw 9.89 (min 9.57), ENOB FS 11.65 (min 11.32)
+  typical  + VDD noise (10 mV tone bin 51 + 1 mV rms white)    : SNDR 39.6 dB (min 39.5), ENOB raw 6.28 (min 6.27), ENOB FS 8.03 (min 8.02)
+  ff       no latch noise, ideal supply                        : SNDR 61.0 dB (min 59.1), ENOB raw 9.83 (min 9.52), ENOB FS 11.59 (min 11.27)
+  ff       latch 50 uV ESTIMATE + supply error                 : SNDR 60.5 dB (min 59.2), ENOB raw 9.75 (min 9.54), ENOB FS 11.50 (min 11.29)
+  ff       + VDD noise (10 mV tone bin 51 + 1 mV rms white)    : SNDR 39.6 dB (min 39.5), ENOB raw 6.28 (min 6.27), ENOB FS 8.03 (min 8.02)
+  ss       no latch noise, ideal supply                        : SNDR 61.9 dB (min 59.5), ENOB raw 9.98 (min 9.59), ENOB FS 11.74 (min 11.34)
+  ss       latch 50 uV ESTIMATE + supply error                 : SNDR 61.5 dB (min 59.5), ENOB raw 9.93 (min 9.59), ENOB FS 11.68 (min 11.34)
+  ss       + VDD noise (10 mV tone bin 51 + 1 mV rms white)    : SNDR 39.6 dB (min 39.5), ENOB raw 6.28 (min 6.27), ENOB FS 8.03 (min 8.02)
+  typical  VDD tone only 10 mV                                 : SNDR 39.6 dB, ENOB raw 6.29, ENOB FS 8.05
+  typical  VDD white noise only 1 mV rms                       : SNDR 55.4 dB, ENOB raw 8.91, ENOB FS 10.66
+  typical  VDD tone 1 mV pk                                    : SNDR 57.4 dB, ENOB raw 9.25, ENOB FS 11.00

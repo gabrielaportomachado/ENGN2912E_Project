@@ -4,7 +4,13 @@
 module tb_adc8;
     reg cs_n = 1, sclk = 0, din = 0, rstn = 0;
     wire dout, dout_oe, mode_o;
-    wire [7:0] en_o, cmp_clk, rst_sw, tg_on;
+    wire [7:0] en_o, cmp_clk, rst_sw, tg_on, gdn;
+    integer egd = 0;
+    // D4: the dummy-unit bottom must be grounded whenever the sampling TG is off and floating-free (gdn = ~tg_on) at every instant
+    always @(gdn or tg_on) #0.001 if (gdn !== ~tg_on) begin egd = egd + 1; end
+    genvar gq; generate for (gq = 0; gq < 8; gq = gq + 1) begin : gdchk
+        always @(posedge cmp_clk[gq]) if (gdn[gq] !== 1'b1 || tg_on[gq] !== 1'b0) egd = egd + 1;   // dummy bottom grounded and TG off at every comparator evaluation
+    end endgenerate
     wire [95:0] gp, gn;
     wire [7:0] cmp_q;
     reg [95:0] vin_all = 0;
@@ -14,7 +20,7 @@ module tb_adc8;
     integer errs = 0, nfr = 0;
 
     adc8_top dut (.cs_n(cs_n), .sclk(sclk), .din(din), .rstn(rstn), .dout(dout), .dout_oe(dout_oe), .mode_o(mode_o), .en_o(en_o),
-                  .cmp_q(cmp_q), .cmp_clk(cmp_clk), .rst_sw(rst_sw), .tg_on(tg_on), .dac_gp(gp), .dac_gn(gn));
+                  .cmp_q(cmp_q), .cmp_clk(cmp_clk), .rst_sw(rst_sw), .tg_on(tg_on), .dac_gp(gp), .dac_gn(gn), .dac_gdn(gdn));
 
     wire [31:0] ecb [0:7], eco [0:7], etm [0:7], ech [0:7], eor [0:7], ez [0:7], nd [0:7];
     wire [11:0] vs [0:7];
@@ -158,12 +164,12 @@ module tb_adc8;
         end
         $display("TMINCH %0d %0d %0d %0d %0d %0d %0d %0d  CHGCH %0d %0d %0d %0d %0d %0d %0d %0d", etm[0], etm[1], etm[2], etm[3], etm[4], etm[5], etm[6], etm[7], ech[0], ech[1], ech[2], ech[3], ech[4], ech[5], ech[6], ech[7]);
         $display("BADCH %0d %0d %0d %0d %0d %0d %0d %0d", badch[0], badch[1], badch[2], badch[3], badch[4], badch[5], badch[6], badch[7]);
-        $display("RESULT %0s PER %0.2f frames %0d bad %0d e_dout %0d  crowbar %0d contention %0d dac->cmp<TMIN %0d dac-change-in-window %0d order %0d Zbit %0d decisions %0d",
-                 (errs == 0 && e_dout == 0 && (ecb[0]+ecb[1]+ecb[2]+ecb[3]+ecb[4]+ecb[5]+ecb[6]+ecb[7]+eco[0]+eco[1]+eco[2]+eco[3]+eco[4]+eco[5]+eco[6]+eco[7]+etm[0]+etm[1]+etm[2]+etm[3]+etm[4]+etm[5]+etm[6]+etm[7]+ech[0]+ech[1]+ech[2]+ech[3]+ech[4]+ech[5]+ech[6]+ech[7]+eor[0]+eor[1]+eor[2]+eor[3]+eor[4]+eor[5]+eor[6]+eor[7]+ez[0]+ez[1]+ez[2]+ez[3]+ez[4]+ez[5]+ez[6]+ez[7]) == 0) ? "PASS" : "FAIL", PER, nfr, errs, e_dout,
+        $display("RESULT %0s PER %0.2f frames %0d bad %0d e_dout %0d  crowbar %0d contention %0d dac->cmp<TMIN %0d dac-change-in-window %0d order %0d Zbit %0d decisions %0d dummy-driver errors %0d",
+                 (errs == 0 && egd == 0 && e_dout == 0 && (ecb[0]+ecb[1]+ecb[2]+ecb[3]+ecb[4]+ecb[5]+ecb[6]+ecb[7]+eco[0]+eco[1]+eco[2]+eco[3]+eco[4]+eco[5]+eco[6]+eco[7]+etm[0]+etm[1]+etm[2]+etm[3]+etm[4]+etm[5]+etm[6]+etm[7]+ech[0]+ech[1]+ech[2]+ech[3]+ech[4]+ech[5]+ech[6]+ech[7]+eor[0]+eor[1]+eor[2]+eor[3]+eor[4]+eor[5]+eor[6]+eor[7]+ez[0]+ez[1]+ez[2]+ez[3]+ez[4]+ez[5]+ez[6]+ez[7]) == 0) ? "PASS" : "FAIL", PER, nfr, errs, e_dout,
                  ecb[0]+ecb[1]+ecb[2]+ecb[3]+ecb[4]+ecb[5]+ecb[6]+ecb[7], eco[0]+eco[1]+eco[2]+eco[3]+eco[4]+eco[5]+eco[6]+eco[7],
                  etm[0]+etm[1]+etm[2]+etm[3]+etm[4]+etm[5]+etm[6]+etm[7], ech[0]+ech[1]+ech[2]+ech[3]+ech[4]+ech[5]+ech[6]+ech[7],
                  eor[0]+eor[1]+eor[2]+eor[3]+eor[4]+eor[5]+eor[6]+eor[7], ez[0]+ez[1]+ez[2]+ez[3]+ez[4]+ez[5]+ez[6]+ez[7],
-                 nd[0]+nd[1]+nd[2]+nd[3]+nd[4]+nd[5]+nd[6]+nd[7]);
+                 nd[0]+nd[1]+nd[2]+nd[3]+nd[4]+nd[5]+nd[6]+nd[7], egd);
         $finish;
     end
 endmodule
