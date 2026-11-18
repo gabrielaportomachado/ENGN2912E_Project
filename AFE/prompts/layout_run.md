@@ -6,12 +6,13 @@ These replace the short phase text in layout.md for running; layout.md stays the
 ## How to use
 - Environment: IIC-OSIC-TOOLS image 2026.04, PDK gf180mcuD at /foss/pdks, repo at /foss/designs/ENGN2912E_Project.
 - One fresh Claude Code session per phase, started in the repo root. `git pull` before starting, push after the phase commit.
-- Model: Sonnet 5.5 at default effort for every phase. If a phase stops on "the same failure twice", start a new session at HIGH effort only for that fix.
+- Model: Sonnet 5.5; HIGH effort for L2a, L1a, L1d, L3a (layout/CTS, error-prone), default for the rest (budget $500, $129 used on 2026-11-19). If a phase stops on "the same failure twice", start a new session at HIGH effort only for that fix.
 - Order and target dates (target ready 2026-11-25):
   | Phase | What | Target | Can run in parallel with |
   |---|---|---|---|
   | L2a | amplifier channel: flow-first, then DRC + LVS | 11-19 | L1a (different person) |
-  | L1a | ADC analog cell + digital macro: DRC + LVS | 11-20 | L2a |
+  | L1a | ADC analog cell: DRC + LVS | 11-20 | L2a, L1d |
+  | L1d | digital macro afe_dig (dbs_ctrl N=8 + adc8_top), CTS fix | 11-20 | L2a, L1a |
   | L2b | amplifier PEX + post-layout sims | 11-21 | L1b |
   | L1b | ADC PEX + post-layout sims | 11-21 | L2b |
   | L3a | top assembly, full-chip DRC + LVS | 11-23 | - |
@@ -48,9 +49,19 @@ Step 2, full channel: floorplan with Cin as the dominant block (each 20 pF Cin f
 Follow AFE/prompts/layout_run.md common rules. Do phase L1a. Use AFE/layout/FLOW.md from L2a if it exists; if L2a has not finished, do its Step-1 flow check yourself on one MIM unit + one transistor first and write FLOW.md.
 
 Scope, analog (one adc_ch cell, replicated 8x): split 6+6 capacitor DAC with 5x5 um MIM units (Decisions 39/40: bridge cap 64/63 unit, dummy units, common-centroid or interdigitated, top plate ~3.49 pF), the bottom-plate drivers + reset switches dac_sw (rst and rstm tied, I0 mismatch 4), the sampling TGATE, cmp_p (PMOS double-tail, 80u/0.5u pair, symmetric layout), vhalf (2 x 250 kOhm ppolyf_u_3k + 1 pF) and the floating reference Cref 7 pF (128 units) with its TGATE (Decision 42). Netlists in AFE/adc/spice (dac_units.spice, dac_sw.spice, comparator.spice, vhalf.spice) and the afe_ch wiring in AFE/top/dbs_afe_top.v / PLAN.md section 9.
-Scope, digital: harden adc8_top (AFE/adc/rtl, script AFE/adc/scripts/run_d3_synth.sh) with LibreLane INCLUDING CTS. Known blocker DPL-0036: the adc_dlychain taps are treated as clocks; fix by keeping the delay-chain outputs out of CTS (set_dont_touch / exclude them as clock sources, or generate them as data signals) without changing their delays beyond the D3 limits (T0/Delta in AFE/adc/NOTES.md "D3"). Time box this fix to 1.5 h; if not solved, report the options and continue with the analog cell.
+The digital part (adc8_top + dbs_ctrl) is hardened in L1d, not here; take its control-pin positions from L1d if available.
 Keep the DAC top plate and the Cref node away from digital lines (no routing above them except their own plate); two supply straps per Decision 40(e) (DAC drivers vs comparator+logic).
-Reach 0 DRC errors and LVS match for adc_ch; report W x H, area per block vs PLAN.md, and the LibreLane macro size/STA (5 corners). Stop after DRC + LVS (PEX is L1b).
+Reach 0 DRC errors and LVS match for adc_ch; report W x H, area per block vs PLAN.md. Stop after DRC + LVS (PEX is L1b).
+```
+
+## L1d: digital macro afe_dig (replaces re-hardening the old dbs macro)
+```
+Follow AFE/prompts/layout_run.md common rules. Do phase L1d: harden the chip's digital macro.
+
+Do NOT edit rtl/dbs.v or the existing config.json (dbs macro). Create AFE/dig/afe_dig.v: a wrapper with exactly the digital part of AFE/top/dbs_afe_top.v = dbs_ctrl #(.N(8)) (clk = SCLK, ready = 1'b1, mode/en from adc8_top mode_o/en_o) + adc8_top. Macro pins: CS, SCLK, DIN, RSTN, DOUT, DOUT_OE, rst_amp_o, sw_rec[7:0], sw_rec_b[7:0], sw_ipg[7:0], sw_ipg_b[7:0], and all adc8_top analog-control pins (cmp_q in; cmp_clk, rst_sw, tg_on, dac_gp, dac_gn, dac_gdn out). No TGATEs inside (they go into afe_ch). Generate sw_rec_b from the same driver as sw_rec or buffer both so their skew is minimal (I0 mismatch 8); report the skew from STA.
+Check equivalence first: re-run AFE/top/run_top_sim.sh with afe_dig in place of the two instances (must stay PASS, 0 errors, REC/IPG == dbs).
+LibreLane config AFE/dig/config.json: DESIGN_NAME afe_dig, CLOCK_PORT SCLK, 7t5v0 library at 3.3 V corners as in AFE/adc/scripts/run_d3_synth.sh, INCLUDING CTS. Fix DPL-0036 (adc_dlychain taps seen as clocks): keep the delay-chain cells and taps out of CTS (dont_touch, or exclude them as clock sources) while keeping T0/Delta inside the D3 limits (AFE/adc/NOTES.md "D3"); verify the tap delays at 5 corners after P&R. Time box the CTS fix to 2 h; if it is not solved, stop and report the options.
+Report: area, W x H, pin placement (control pins toward the channels, SPI pins toward the pads), STA at 5 corners, the tap delays vs the D3 limits, DRC/LVS clean. Write "L1d findings", Results-log row, commit locally.
 ```
 
 ## L2b: amplifier PEX and post-layout simulations
@@ -70,9 +81,9 @@ Report a change table vs pre-layout with PASS/FAIL, and anything that needs a la
 ## L3a: top assembly, full-chip DRC + LVS
 ```
 Follow AFE/prompts/layout_run.md common rules. Do phase L3a.
-Assemble dbs_afe_top: 8 x afe_ch (amp from L2 + adc_ch from L1 + the 2 routing TGATEs from TGATE/TGATE.gds), bias_genc (lay it out here: AFE/amp/spice/bias_genc.spice), the hardened digital (dbs_ctrl from rtl/dbs.v via LibreLane, N = 8, clocked by SCLK, plus the adc8_top macro; dbs itself does not export sw_rec/sw_rec_b: harden dbs_ctrl or a wrapper as I0 mismatch 7 says), the vcm_in/vcm_out daisy chain, decap, the three supply straps and guard rings of PLAN.md section 5, pins on the edges per the organizer template (32 pads incl. REF, AFE/TAPEOUT.md / info.yaml). Netlist reference: AFE/top/dbs_afe_top.v.
+Assemble dbs_afe_top: 8 x afe_ch (amp from L2 + adc_ch from L1 + the 2 routing TGATEs from TGATE/TGATE.gds), bias_genc (lay it out here: AFE/amp/spice/bias_genc.spice), the hardened digital macro afe_dig from L1d (dbs_ctrl N = 8 + adc8_top, clocked by SCLK), the vcm_in/vcm_out daisy chain, decap, the three supply straps and guard rings of PLAN.md section 5, pins on the edges per the organizer template (32 pads incl. REF, AFE/TAPEOUT.md / info.yaml). Netlist reference: AFE/top/dbs_afe_top.v.
 First re-read the organizer padring template and example repos (TAPEOUT.md links) for macro name, DEF/abutment pins, pad-control tie names, core size (2235 vs 2051 open) and LVS config format; record what you find.
-Full-chip KLayout DRC = 0; hierarchical LVS match (digital by Verilog, analog by SPICE). Verify the routing TGATE (TGATE/TGATE.gds, 5 V devices) at the single 3.3 V supply (Decision 30): Ron over 0-3.3 V at typ/ff/ss, and state the allowed stimulation voltage range on E/IPG (signals must stay within VSS..VDD or the junctions clamp them); record it for the README. Check that sw_rec / sw_rec_b to the park, routing TGATE and one-shot trigger come from one driver or are buffered (I0 mismatch 8). Report final W x H vs the slot, pin list, total static power estimate. Stop.
+Full-chip KLayout DRC = 0; hierarchical LVS match (digital by Verilog, analog by SPICE). Verify the routing TGATE (TGATE/TGATE.gds, 5 V devices) at the single 3.3 V supply (Decision 30): Ron over 0-3.3 V at typ/ff/ss, and state the allowed stimulation voltage range on E/IPG (signals must stay within VSS..VDD or the junctions clamp them); record it for the README. Check the sw_rec / sw_rec_b skew at the channel cells after routing (L1d reported it at the macro pins; I0 mismatch 8). Report final W x H vs the slot, pin list, total static power estimate. Stop.
 ```
 
 ## L3b: critical-net PEX and end-to-end transient
