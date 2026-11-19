@@ -1,6 +1,6 @@
 # Pre-layout design audit (A-X), written 2026-11-20 by the monitoring session
 
-Run once, in a fresh Claude Code session in the repo root, after `git pull`. Model: the strongest available (Claude Fable 5.2, max effort, as X2). Expected wall time 4-6 h.
+Run once, in a fresh Claude Code session in the repo root, after `git pull`. Model: the strongest available (Claude Fable 5.2, max effort, as X2). No time box (expect several hours).
 Output: AFE/review/AUDIT.md (+ AFE/review/scripts, AFE/review/sim). No design file is changed.
 
 ```
@@ -19,7 +19,7 @@ RULES
 4. New simulations only where they settle an open question that no existing log answers, cheapest first (op points, short transients, digital sims). Do NOT repeat X2. Corners: typ 27 / ff 85 / ss -40 for the amplifier, typ 27 / ff -40 3.6 V / ss 125 3.0 V for the ADC timing and supply, unless a result is within 10 % of a limit.
 5. If the same step fails twice, record it as NOT VERIFIED with the reason and move on; do not stop the audit.
 6. Every number in the report carries its source: [log path], [file:line], [calc in AFE/review/scripts/<name>.py], or ESTIMATE. Mark ASSUMED inputs (pad L/R, slot size, organizer facts) as such.
-7. Time box: about 6 h. At 5 h, stop new work and write the report with what you have; unfinished items are listed as NOT DONE.
+7. No time box: work through every step completely. Only items that are genuinely impossible here are listed as NOT DONE, with the reason.
 
 WORK, STEP BY STEP (write each step's result into AFE/review/AUDIT.md as you go, so a crash loses nothing):
 
@@ -39,7 +39,7 @@ STEP 6. POWER. From op points per block per corner (re-run .op where no log has 
 
 STEP 7. FREQUENCY PLAN. Signal band (f_lo 0.20-0.24 Hz, f_hi 422-998 Hz over corners), sampling 4 kS/s per channel (Nyquist 2 kHz): aliasing of the amplifier noise and of interference above 2 kHz given the actual roll-off order of the amplifier (from the A4c AC logs), and whether the 998 Hz ff corner f_hi plus a first-order roll-off is acceptable; the SCLK range (nominal 2, max 3 MHz: what sets each limit, and the minimum SCLK that still gives 4 kS/s x 8); the delay-chain stagger vs SCLK; any internal frequency the digital creates (comparator clocks, one-shots) and where its harmonics land relative to the signal band; the fast-settle / HPF time constants vs the stimulation duty cycle in the original dbs FSM use.
 
-STEP 8. ROBUSTNESS GAPS AND RISK REGISTER. List everything never simulated or only ESTIMATED (Monte Carlo mismatch on DAC / comparator / Cref / pseudo-R, fs/sf corners, power-up of the bias and vhalf, latch-up / substrate coupling of the 3 MHz digital into the TOhm pseudo-R nodes, ESD/pad leakage on E/REF into the high-impedance inputs, the 5 V TGATE run at 3.3 V (Decision 30) incl. Ron over 0-3.3 V, PEX of the bridge cap, an 8-channel amplifier + ADC run, residual 1e-5 abort rate in L3 runs). For each: likelihood, impact on a working chip (not just a spec number), whether a cheap check exists now (then do it if it fits the time box), else which L-phase prompt must cover it (check that the prompt actually does; propose the exact sentence to add if not).
+STEP 8. ROBUSTNESS GAPS AND RISK REGISTER. List everything never simulated or only ESTIMATED (Monte Carlo mismatch on DAC / comparator / Cref / pseudo-R, fs/sf corners, power-up of the bias and vhalf, latch-up / substrate coupling of the 3 MHz digital into the TOhm pseudo-R nodes, ESD/pad leakage on E/REF into the high-impedance inputs, the 5 V TGATE run at 3.3 V (Decision 30) incl. Ron over 0-3.3 V, PEX of the bridge cap, an 8-channel amplifier + ADC run, residual 1e-5 abort rate in L3 runs). For each: likelihood, impact on a working chip (not just a spec number), whether a cheap check exists now (then do it), else which L-phase prompt must cover it (check that the prompt actually does; propose the exact sentence to add if not).
 
 STEP 9. LAYOUT READINESS. Is every input that L2a / L1a / L1d / L3a need frozen and unambiguous (cell list, pin names, MIM sizes, matching/common-centroid requirements of the split DAC and Cin, which nets need shielding, the three supply straps, guard rings)? Are the layout_run.md prompts consistent with Decisions 1-43 and with what you found? List every required edit to those prompts as exact replacement text.
 
