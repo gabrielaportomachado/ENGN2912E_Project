@@ -1,0 +1,1 @@
+RESULT S5 typ: aggressor kick spike on its own output up to 330 mV; on the victim output (A - B) peak 0.871 mV right after it; at the victim's next sampling instants |A - B| <= 17.7 uV = 0.0220 LSB = 0.0177 uV input-referred; victim code changes 0, trial-12 residue change <= 0.019 LSB | PASS (limit 0.5 LSB); wall 244 s

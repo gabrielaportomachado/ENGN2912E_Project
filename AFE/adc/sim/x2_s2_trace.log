@@ -1,0 +1,30 @@
+S2REPRO E5_instrumented_as_D5 typical 27C N=64 tpre=0.03 tmaxs=3e-06 TR=1e-10 extra="" variant="" threads=~/.spiceinit (4), cwd tb/ []: wall 50 s, exit 0, last progress t = 3.40090e-02 s (tstop 0.04605), rows 41 | doAnalyses: TRAN:  Timestep too small; time = 0.034009, timestep = 3.75e-18: trouble with node "vgn1#branch" || run simulation(s) aborted
+TRACE: 41 saved points from TSAVE; release edge of frame 16 starts at t0 = 34.009 ms (gp -> VDD, gn -> 0 in 100 ps)
+TRACE accepted time points, t - t0 [ps]: 0.0000 10.0000 30.0000 35.9640 41.2665 48.9221 58.4611 67.9427 73.4763 76.3570 78.8648 82.0882 83.7597 85.7431 87.8826 90.7327 93.6654 96.5680 98.2840 100.0000 100.0134 100.0403 100.0939 100.2012 100.4159 100.8452 101.7037 103.4209 106.8552 113.7238 127.4611 154.9356 186.7982 216.8090 245.3759 248.9310 256.0411 256.2633 256.7077 256.7215 256.7493
+TRACE accepted steps dt [ps]:             10 20 5.96 5.3 7.66 9.54 9.48 5.53 2.88 2.51 3.22 1.67 1.98 2.14 2.85 2.93 2.9 1.72 1.72 0.0134 0.0268 0.0537 0.107 0.215 0.429 0.859 1.72 3.43 6.87 13.7 27.5 31.9 30 28.6 3.56 7.11 0.222 0.444 0.0139 0.0278
+TRACE (a step shorter than half the previous one means Newton failed and ngspice divided the step by 8; the run ends when the step reaches delmin = 1e-11 x tmax = 3e-17 s: reported 3.75e-18)
+TRACE largest changes of any unknown over the last 3 accepted steps: xc.a2 2.09e-06, xc.s2 2.25e-07, t 1.63e-07, xs.b11 1.62e-07, xs.b10 1.61e-07, xs.b9 1.6e-07, xs.b8 1.57e-07, xs.b7 1.52e-07
+TRACE gn1            last 8 points: 0 0 0 0 0 0 0 0
+TRACE gp11           last 8 points: 3.3 3.3 3.3 3.3 3.3 3.3 3.3 3.3
+TRACE xs.b1          last 8 points: 3.369383 3.369377 3.369376 3.369375 3.369375 3.369375 3.369375 3.369375
+TRACE xs.b0          last 8 points: 3.393352 3.393346 3.393345 3.393344 3.393344 3.393344 3.393344 3.393344
+TRACE xs.b11         last 8 points: 3.342949 3.342936 3.342934 3.342932 3.342932 3.342932 3.342932 3.342932
+TRACE xs.b5          last 8 points: 0.03725727 0.03725047 0.03724979 0.0372485 0.03724846 0.03724839 0.03724838 0.03724838
+TRACE xs.bd          last 8 points: 0.001335842 0.001329815 0.001329218 0.001328072 0.001328038 0.00132797 0.001327967 0.001327963
+TRACE t              last 8 points: 1.721282 1.721269 1.721268 1.721265 1.721265 1.721265 1.721265 1.721265
+TRACE m              last 8 points: 0.3417375 0.3417307 0.34173 0.3417287 0.3417287 0.3417286 0.3417286 0.3417286
+TRACE out            last 8 points: 1.938215 1.938215 1.938215 1.938215 1.938215 1.938215 1.938215 1.938215
+TRACE xc.a1          last 8 points: -4.234347e-07 -1.984717e-07 -1.778168e-07 -1.389703e-07 -1.378379e-07 -1.355823e-07 -1.355121e-07 -1.353717e-07
+TRACE xc.a2          last 8 points: 0.0005807506 0.0004119307 0.0003952031 0.0003631063 0.0003621483 0.0003602373 0.0003601777 0.0003600586
+TRACE xc.tl          last 8 points: 1.742373 1.742372 1.742372 1.742372 1.742372 1.742372 1.742372 1.742372
+TRACE xc.o1          last 8 points: 3.299998 3.299998 3.299998 3.299999 3.299999 3.299999 3.299999 3.299999
+TRACE xc.o2          last 8 points: 3.3 3.3 3.3 3.3 3.3 3.3 3.3 3.3
+TRACE outp           last 8 points: 3.3 3.3 3.3 3.3 3.3 3.3 3.3 3.3
+TRACE outn           last 8 points: 3.3 3.3 3.3 3.3 3.3 3.3 3.3 3.3
+TRACE vgn1#branch    last 8 points: -3.15958e-11 -2.24086e-11 -2.149943e-11 -1.975343e-11 -1.970133e-11 -1.959738e-11 -1.959418e-11 -1.958777e-11
+TRACE vck#branch     last 8 points: 6.641828e-10 3.757251e-10 4.606735e-10 4.32126e-10 4.312401e-10 4.294663e-10 4.294109e-10 4.293004e-10
+TRACE vsamb#branch   last 8 points: -1.457378e-09 -1.032397e-09 -9.903173e-10 -9.095539e-10 -9.062364e-10 -9.024212e-10 -9.050491e-10 -9.047393e-10
+TRACE vgp11#branch   last 8 points: -1.744403e-10 -1.237111e-10 -1.18693e-10 -1.090528e-10 -1.087652e-10 -1.081913e-10 -1.081741e-10 -1.081379e-10
+TRACE vfs#branch     last 8 points: 3.217786e-13 1.669407e-13 1.688577e-13 1.556283e-13 4.177066e-13 1.395433e-13 -1.325638e-12 -1.323545e-12
+TRACE vpkc#branch    last 8 points: 7.399762e-15 -2.662481e-15 -4.718917e-15 -2.016025e-15 2.79024e-13 -2.325178e-14 -1.669398e-12 -1.667561e-12
+TRACE convergence test of the failing unknown vgn1#branch (current of the source that drives only the gate of the bit-1 NMOS driver): |i| = 1.96e-11 A, tolerance reltol*|i| + abstol = 2.96e-15 A; i = C dV/dt with C ~ 0.3 fF (gate-drain overlap) and dt = 2.78e-14 s (last accepted step): the drain-side node must repeat within 2.74e-13 V between two Newton iterations; with abstol 1e-12: 9.28e-11 V

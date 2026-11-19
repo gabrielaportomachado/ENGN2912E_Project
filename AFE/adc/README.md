@@ -41,6 +41,7 @@ SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input range cl
 | D4 hybrid | `python3 scripts/d4_hybrid.py dnl` / `enob` / `track` |
 | D4b replay | `python3 scripts/d4_replay.py <corner> <T> <VDD> <dt_c ns> <W ns> <slew ns> <vins> [T_ns]` -> `sim/d4_replay.log` |
 | D5 settling | `bash scripts/run_d5_settle.sh` -> `sim/d5_settle.log` |
+| X2 (2026-11-19) | closed-loop PWL replay, one ngspice thread: `python3 scripts/x2_adc.py <corner> <n>` (ADC alone); `python3 scripts/x2_s1.py <typ\|ff85\|ss-40> <TPRE ms> all` then `python3 scripts/x2_s1_report.py`; `python3 scripts/x2_s3.py <corner> <N> <M> <TPRE ms>`; `python3 scripts/x2_s4.py <ff-40\|typ\|ss125> all 3`, `python3 scripts/x2_s4_sweep.py <corner> <case>`; `python3 scripts/x2_s5.py typ`; abort study `bash scripts/run_x2_s2_stats.sh`, `python3 scripts/x2_s2_trace.py`; what-ifs `bash scripts/run_x2_whatif*.sh` |
 | D5 SNDR / noise | `python3 scripts/d5_hybrid_amp.py` (hybrid SNDR, `sim/d5_sndr.log`); `python3 scripts/d5_noise.py` (`sim/d5_noise.log`); transistor-level `bash scripts/run_d5_sndr.sh` ABORTS (see open items) |
 
 ## Host power-up sequence and test plan (Decisions 38, 41)
@@ -58,7 +59,7 @@ Corners are typ 27 / ff 85 / ss -40 C unless noted. Types: SIM = transistor/ngsp
 | Comparator decision time (0.1 mV) | < half cycle | 1.5 / 1.3 / 1.8 ns | typ / ff / ss | PASS | SIM | `sim/d1_delay.log` |
 | Comparator offset sigma | <= 2 LSB | 1.27 / 1.31 / 1.23 mV = 1.57 / 1.63 / 1.53 LSB | typ / ff / ss | PASS (code shift) | SIM | `sim/d1_offset.log` |
 | Comparator noise (pair) | 0.25 LSB | 118 / 168 / 108 uV = 0.15 / 0.21 / 0.13 LSB | typ / ff / ss | PASS (latch open) | SIM | `sim/d1_noise.log` |
-| Fixed evaluate shift | code shift only | 11.4 / 13.8 / 9.5 LSB (D1 fit 12.7-24.4 LSB, upper bound) | typ / ff / ss | ACCEPTED | SIM | `sim/d2_float.log` |
+| Fixed evaluate shift | code shift only | 11.4 / 13.8 / 9.5 LSB (D1 fit 12.7-24.4 LSB, upper bound). X2 closed loop: the CODE OFFSET of the converter is -30 / -40 / -22 LSB (typ / ff 85 / ss -40) and the threshold is code dependent (steps -1.1 / +1.3 LSB at codes 1536 / 2048), see NOTES "X2 findings" S1 | typ / ff / ss | ACCEPTED | SIM | `sim/d2_float.log` |
 | kT/C (plate 3.49 pF) | negligible | 34.1 / 37.3 / 30.1 uV = 0.042 / 0.046 / 0.037 LSB | 27 / 85 / -40 C | PASS | SIM | `sim/d2_ktc.log` |
 | DAC DNL / INL, A_C 0.5 %*um | \|DNL\| <= 1, INL <= 1 | \|DNL\| > 1 LSB in 4.05 % of chips (1.7 % missing code); INL max 0.99 (2000 runs). With real SAR + supply: 1-3 % / 0-0.95 LSB | typ | ACCEPTED (Decision 40a) | HYBRID | `sim/d2_dnl.log`, `sim/d4_hybrid_dnl.log` |
 | DAC settling to 1/2 LSB | < T/2 = 167 ns at 3 MHz | <= 24 ns (Vin <= 2.0 V); 98-103 ns tail at 2.1 V | typ/ff/ss | PASS (tail: see top of range) | SIM | `sim/d2_settle.log`, `sim/d4_settle.log` |
@@ -99,9 +100,9 @@ Note on end-to-end ENOB: NOTES gives raw ENOB 7.13 (typ); with the NOTES FS conv
 1. Re-synthesize the netlist with `dac_gdn` (RTL has it, `spice/dig/` netlists and SDF do not); then rerun `scripts/d4_sdf.tcl`, `d4_gen_dig.py`.
 2. LibreLane CTS fails (DPL-0036): keep the delay-chain taps out of CTS; SCLK tree must not run through the chain.
 3. XSPICE / ivlng unusable in this ngspice-46 build: use the replay method post-layout.
-4. Transistor-level amp -> ADC run aborts at t = 28.8 ms with the amplifier attached (4 configurations): try slower switch edges or a series R in the testbench.
-5. Crosstalk of the 0.2-0.36 V amplifier-output kick spike across 8 channels via shared vcm / bias / supply (not simulated).
-6. Full 8-ADC transistor-level supply run (D2/D4 superposition unconfirmed).
+4. Transistor-level amp -> ADC run aborts at t = 28.8 ms with the amplifier attached (4 configurations): try slower switch edges or a series R in the testbench. -> ANSWERED by X2 (NOTES "X2 findings" S2): a tolerance abort (abstol 1e-15 on gate-source branch currents) at a switching event; "28.8 ms" was a log artifact of `cut -c1-300`; use `.options abstol=1e-12` and one ngspice thread per job.
+5. Crosstalk of the 0.2-0.36 V amplifier-output kick spike across 8 channels via shared vcm / bias / supply (not simulated). -> X2 S5 (2 channels, typ): the neighbour output moves 0.87 mV for < 0.5 us (through vcm_out / vg2) and <= 0.022 LSB at its next sample.
+6. Full 8-ADC transistor-level supply run (D2/D4 superposition unconfirmed). -> X2 S4: done (8 ADC cells, pad L on VDD and VSS): <= 0.11 LSB at typ and ss 125 C, 0.33-0.50 LSB of plate error at ff -40 C 3.6 V (at the limit; an inductance item).
 7. Latch noise measurement.
 8. Top-of-range plate error (+4-5 LSB at 2.15 V) and bridge-cap / LSB-node parasitics (0.018 LSB DNL per fF; lengthen bridge 0.016 fF per fF) in PEX.
 9. Two supply straps: DAC drivers via about 10 ohm + local decap, comparators/logic on the main rail, about 0.23 nF total; about 3 ohm in series with each decap.

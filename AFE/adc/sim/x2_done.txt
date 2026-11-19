@@ -1,0 +1,24 @@
+2026-11-19 20:01:34 x2_s1 typ all done, wall 1577 s
+2026-11-19 22:03:36 x2_s5 typ done, wall 244 s
+2026-11-19 22:13:31 x2_s3 typ N=64 done, wall 949 s
+2026-11-19 22:14:51 x2_s2_stats done
+2026-11-19 22:24:06 x2_s1 ff85 all done, wall 1581 s
+2026-11-19 22:26:21 x2_s2_stats2 done
+2026-11-19 22:27:57 x2_s1 ss-40 all done, wall 1811 s
+2026-11-19 22:34:25 x2_s3 ff85 N=64 done, wall 1116 s
+2026-11-19 22:34:52 x2_s3 ss-40 N=64 done, wall 1144 s
+2026-11-19 22:40:09 x2_s4 ff-40 fs,mid,alt done, wall 2438 s
+2026-11-19 22:40:29 x2_s4 ss125 fs,mid,alt done, wall 2457 s
+2026-11-19 22:41:08 x2_s4 typ fs,mid,alt done, wall 2498 s
+2026-11-19 22:51:56 x2_s1 typ levels done, wall 453 s
+2026-11-19 23:00:16 x2_s4 ss125 fs,mid,alt done, wall 954 s
+2026-11-19 23:00:38 x2_s4 ff-40 fs done, wall 442 s
+2026-11-19 23:02:26 x2_s4 ff-40 fs done, wall 550 s
+2026-11-19 23:02:42 x2_whatif done
+2026-11-19 23:04:10 x2_s4 ff-40 fs done, wall 654 s
+2026-11-19 23:04:10 x2_whatif4 done
+2026-11-19 23:05:24 x2_s4 ff-40 fs,mid,alt done, wall 1263 s
+2026-11-19 23:06:52 x2_s4 typ fs,mid,alt done, wall 1352 s
+2026-11-19 23:07:42 x2_whatif3 done
+2026-11-19 23:11:29 x2_s3 typ N=256 done, wall 3342 s
+2026-11-19 23:21:43 x2_whatif2 done
