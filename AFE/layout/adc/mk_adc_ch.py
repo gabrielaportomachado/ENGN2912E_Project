@@ -336,3 +336,78 @@ for (n, lay, px, py) in PINS:
 bb = TOP.dbbox()
 print('wrote %s  %.2f x %.2f um' % (outgds, bb.width(), bb.height()))
 k.write(ly, outgds, 'adc_ch')
+
+# =====================================================================================================================================================================
+# facts that DRC / LVS do not test: DAC site map + centroids, block sizes, keep-out distances, wire lengths of the sensitive nets  -> dac_sites.log, adc_ch.build.json, keepout.log
+# =====================================================================================================================================================================
+LOG = []
+LOG.append('# dac_sites.log (mk_adc_ch.py, L1a): site of every DAC unit.  Coordinates: lower-left corner of the 5 x 5 um top plate (FuseTop / Metal5) in the adc_ch frame, um.')
+LOG.append('# half L = LSB array (node m), half M = MSB array (node t); row 0 = lowest of the 8 rows of a half, col = index inside the run order of that row (west -> east).')
+LOG.append('# unit  half  row  col  bit  top_plate  bottom_plate  x  y  w')
+cnt = {}
+unit_list = []
+rowcol = {}
+for i, (tag, nt, nb, x, y, w) in enumerate(D.sites):
+    if tag.startswith('dummy'):
+        LOG.append('dummy  -     -    -    %-4s %-9s %-12s %8.3f %8.3f  bar (plain Metal4 / Metal5, no FuseTop)  length %.3f' % ('-', nt, nb, x, y, w))
+        continue
+    half = 'L' if nt == 'm' and tag != 'br' else 'M'
+    if tag == 'br':
+        half = 'M'
+    rr = min(range(8), key=lambda r: abs(D.ys[r + 1] - y))
+    c = rowcol.get((half, rr), 0)
+    rowcol[(half, rr)] = c + 1
+    LOG.append('u%03d   %-5s %-4d %-4d %-4s %-9s %-12s %8.3f %8.3f  %.3f' % (len(unit_list), half, rr, c, tag, nt, nb, x, y, w))
+    unit_list.append((half, rr, tag, x, y, w))
+    cnt[tag] = cnt.get(tag, 0) + 1
+LOG.append('# units per bit: ' + ' '.join('%s=%d' % (b, cnt.get(b, 0)) for b in ['b11', 'b10', 'b9', 'b8', 'b7', 'b6', 'br', 'b5', 'b4', 'b3', 'b2', 'b1', 'b0', 'bd']) + '   total %d' % sum(cnt.values()))
+wl = D.xl1 - D.xl0
+wm = D.xm1 - D.xm0
+y_c = (D.ys[1] + D.ys[8] + DL.U) / 2.0
+LOG.append('# centroids relative to the centre of the half array (um; the units of a bit sit in point-symmetric pairs, a non-zero value is the odd unit):')
+for half, xc0 in (('L', D.xl0 + wl / 2.0), ('M', D.xm0 + wm / 2.0)):
+    for b in (['b11', 'b10', 'b9', 'b8', 'b7', 'b6', 'br'] if half == 'M' else ['b5', 'b4', 'b3', 'b2', 'b1', 'b0', 'bd']):
+        us = [(x + w / 2.0, y + DL.U / 2.0) for (h, r, t, x, y, w) in unit_list if h == half and t == b]
+        if us:
+            LOG.append('#   %-4s n=%-3d  dx = %+6.2f  dy = %+6.2f' % (b, len(us), sum(u[0] for u in us) / len(us) - xc0, sum(u[1] for u in us) / len(us) - y_c))
+open(os.path.join(outdir, 'dac_sites.log'), 'w').write('\n'.join(LOG) + '\n')
+
+# block sizes
+BLK = {}
+for (name, blk, dx, dy) in PLACED:
+    BLK[name] = [round(blk.bbox[0] + dx, 2), round(blk.bbox[1] + dy, 2), round(blk.bbox[2] + dx, 2), round(blk.bbox[3] + dy, 2)]
+BLK['dac'] = [round(D.xl0 - 5.6, 2), round(D.ys[0] - 0.6, 2), round(D.xp_t + 0.6, 2), round(D.top + 0.6, 2)]
+# keep-out distances (SPEC.md 3.3 rule 6, section 5 rule 1)
+plates = [(x, y, x + w, y + DL.U) for (tag, nt, nb, x, y, w) in D.sites if nt in ('t', 'm') or tag == 'br']
+plates += [(dxr, dyr, dxr + CREF_W, dyr + CREF_W), (vx - 0.5, vy - 0.5, vx + 0.5, dyr)]
+CTRL = ['cmp_clk', 'dac_gdn', 'rst_sw', 'tg_on'] + [gp(b) for b in BITS] + [gn(b) for b in BITS]
+KO = {}
+for n in CTRL:
+    best, where = 1e9, None
+    for path in rt.paths.get(n, []):
+        for (l, i, j) in path:
+            x, y = rt.xy(i, j)
+            for (a1, b1, a2, b2) in plates:
+                ddx = max(a1 - x, 0.0, x - a2)
+                ddy = max(b1 - y, 0.0, y - b2)
+                dd = math.hypot(ddx, ddy) - 0.25
+                if dd < best:
+                    best, where = dd, (round(x, 1), round(y, 1))
+    KO[n] = (round(best, 1), where)
+klog = ['# keepout.log (mk_adc_ch.py, L1a): smallest edge distance between a wire of the control nets and a DAC top plate (t / m / bridge) or the Cref plate / vref strap, um.  Limit 20 um (SPEC.md 3.3 rule 6),',
+        '# exception: the last 10 um of a net at the device it drives (cmp_clk at the comparator; rst_sw at the reset switches next to the trunks).']
+for n, (dd, wh) in sorted(KO.items(), key=lambda kv: kv[1][0]):
+    klog.append('%-12s %6.1f um  at %s  %s' % (n, dd, wh, 'OK' if dd >= 20.0 else 'BELOW 20 um'))
+open(os.path.join(outdir, 'keepout.log'), 'w').write('\n'.join(klog) + '\n')
+wire = {n: round(sum(len(p) for p in rt.paths.get(n, [])) * 1.0, 1) for n in rt.paths}
+info = dict(W=round(bb.width(), 3), H=round(bb.height(), 3), bbox=[round(v, 3) for v in (bb.left, bb.bottom, bb.right, bb.top)], slot=[220, 104], blocks=BLK, failed=bad, keepout={n: v[0] for n, v in KO.items()},
+            wire_um=wire, dac=dict(x0=D.xl0, y0=D.ys[0], rows_y=[round(v, 3) for v in D.ys], ych=D.ych, xT_t=D.xT_t, xT_m=D.xT_m, units=sum(cnt.values())), cref=[dxr, dyr, CREF_W],
+            comparator_xy=[XC, YC], cmp_failed=CMP.failed)
+info['comparator_wire_um'] = {n: round(sum(len(p) for p in CMP.rt.paths.get(n, [])) * 1.0, 1) for n in CMP.rt.paths}
+yx0 = term_xy('xr0', 't')[1]
+yx1 = term_xy('xr1', 'm')[1]
+info['t_metal5_um'] = round((D.tr_t[2] - min(yx0, ty)) + (tx - D.xT_t) + 8 * 3.0, 1)
+info['m_metal5_um'] = round((D.tr_m[2] - yx1) + 8 * 3.0, 1)
+info['vref_strap_um'] = round(dyr - (vy - 0.5), 1)
+json.dump(info, open(os.path.join(outdir, 'adc_ch.build.json'), 'w'), indent=1)
+print('keep-out: %d control nets, %d below 20 um: %s' % (len(KO), sum(1 for v in KO.values() if v[0] < 20.0), sorted([(n, v[0]) for n, v in KO.items() if v[0] < 20.0], key=lambda t: t[1])[:6]))
