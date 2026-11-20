@@ -1,30 +1,30 @@
 # keepout.log (mk_adc_ch.py, L1a): smallest edge distance between a wire of the control nets and a DAC top plate (t / m / bridge) or the Cref plate / vref strap, um.  Limit 20 um (SPEC.md 3.3 rule 6),
 # exception: the last 10 um of a net at the device it drives (cmp_clk at the comparator; rst_sw at the reset switches next to the trunks).
-tg_on           5.2 um  at (257.0, 56.0)  BELOW 20 um
-rst_sw         12.0 um  at (122.0, 43.0)  BELOW 20 um
-dac_gp[0]      26.0 um  at (23.0, 29.0)  OK
-dac_gp[1]      26.0 um  at (26.0, 29.0)  OK
-dac_gp[2]      26.0 um  at (30.0, 29.0)  OK
-dac_gp[3]      26.0 um  at (35.0, 29.0)  OK
-dac_gp[4]      26.0 um  at (38.0, 29.0)  OK
-dac_gp[5]      26.0 um  at (42.0, 29.0)  OK
-dac_gp[6]      26.0 um  at (47.0, 29.0)  OK
-dac_gp[7]      26.0 um  at (50.0, 29.0)  OK
-dac_gp[8]      26.0 um  at (54.0, 29.0)  OK
-dac_gp[9]      26.0 um  at (57.0, 29.0)  OK
-dac_gp[10]     26.0 um  at (62.0, 29.0)  OK
-dac_gp[11]     26.0 um  at (66.0, 29.0)  OK
-dac_gn[0]      43.0 um  at (25.0, 12.0)  OK
-dac_gn[1]      43.0 um  at (33.0, 12.0)  OK
-dac_gn[2]      43.0 um  at (41.0, 12.0)  OK
-dac_gn[3]      43.0 um  at (49.0, 12.0)  OK
-dac_gn[4]      43.0 um  at (57.0, 12.0)  OK
-dac_gn[5]      43.0 um  at (65.0, 12.0)  OK
-dac_gn[6]      43.0 um  at (70.0, 12.0)  OK
-dac_gn[7]      43.0 um  at (80.0, 12.0)  OK
-dac_gn[8]      43.0 um  at (89.0, 12.0)  OK
-dac_gn[9]      43.0 um  at (97.0, 12.0)  OK
-dac_gn[10]     43.0 um  at (104.0, 12.0)  OK
-dac_gn[11]     43.0 um  at (113.0, 12.0)  OK
-dac_gdn        43.2 um  at (17.0, 12.0)  OK
-cmp_clk        44.0 um  at (122.0, 11.0)  OK
+rst_sw          5.0 um  at (107.0, 39.0)  BELOW 20 um  (38 grid nodes of 1 um within 20 um of a plate)  box (5.0, 24.0, 107.0, 39.0)
+tg_on          14.8 um  at (146.0, 65.0)  BELOW 20 um  (48 grid nodes of 1 um within 20 um of a plate)  box (133.0, 34.0, 146.0, 68.0)
+dac_gp[0]      21.0 um  at (16.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[1]      21.0 um  at (17.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[2]      21.0 um  at (20.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[3]      21.0 um  at (23.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[4]      21.0 um  at (26.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[5]      21.0 um  at (29.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[6]      21.0 um  at (32.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[7]      21.0 um  at (35.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[8]      21.0 um  at (38.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[9]      21.0 um  at (41.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[10]     21.0 um  at (44.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gp[11]     21.0 um  at (47.0, 23.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+cmp_clk        29.8 um  at (164.0, 14.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gdn        35.0 um  at (13.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[0]      35.0 um  at (17.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[1]      35.0 um  at (24.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[2]      35.0 um  at (31.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[3]      35.0 um  at (38.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[4]      35.0 um  at (46.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[5]      35.0 um  at (52.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[6]      35.0 um  at (59.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[7]      35.0 um  at (64.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[8]      35.0 um  at (73.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[9]      35.0 um  at (79.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[10]     35.0 um  at (87.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)
+dac_gn[11]     35.0 um  at (94.0, 9.0)  OK  (0 grid nodes of 1 um within 20 um of a plate)

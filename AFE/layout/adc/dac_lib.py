@@ -49,7 +49,7 @@ class Dac:
     pass
 
 
-def build(cell, x0=0.0, y0=0.0, pad_x_w=None, pad_x_e=None):
+def build(cell, x0=0.0, y0=0.0, pad_x_w=None, pad_x_e=None, dummies=True):
     """draws the array into `cell` (a block cell) with its lower-left top plate corner at (x0, y0).  Returns a Dac object: sites, terminals (net, 'metal4', rect), fixed Metal4 shapes,
     keep-out boxes, plate polygons, Metal5 trunk positions."""
     D = Dac()
@@ -99,7 +99,10 @@ def build(cell, x0=0.0, y0=0.0, pad_x_w=None, pad_x_e=None):
     xa, xb = D.x_all
     nd = int((xb - xa + GAP_S) // PS)
     D.dummy = []
+    D.dummies = dummies
     for idx, r in ((0, 'S'), (9, 'N')):
+        if not dummies:                                                           # R5: no dummy bars (plain metal only, no matching value for the MIM): the rows are not drawn
+            continue
         y = D.ys[idx]
         xs = [xa + i * PS for i in range(nd)]
         # FINDING (L1a): a dummy MIM with both plates on vss is extracted by Magic as a shorted cap_mim device that netgen does not drop (the reference has none): the dummy
@@ -108,7 +111,8 @@ def build(cell, x0=0.0, y0=0.0, pad_x_w=None, pad_x_e=None):
         k.rect(cell, 'metal5', xs[0], y, xs[-1] + U, y + U)
         D.sites.append(('dummy' + r, 'vss', 'vss', round(xs[0], 3), round(y, 3), round(xs[-1] + U - xs[0], 3)))
         D.dummy.append((r, y, xs[0], xs[-1] + U))
-    D.top = D.ys[9] + U
+    D.top = (D.ys[9] if dummies else D.ys[8]) + U
+    D.ylo = D.ys[0] if dummies else D.ys[1]
     exits(cell, D)
     return D
 

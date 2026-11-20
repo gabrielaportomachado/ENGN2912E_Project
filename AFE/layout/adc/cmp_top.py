@@ -16,7 +16,7 @@ def renamer(side_no):
 
 def comparator(ly, name='cmp_blk'):
     S = CL.side_cell(ly)
-    xi = 9                                                              # |x| of the inner exposure pads of the halves
+    xi = 8                                                              # |x| of the inner exposure pads of the halves
     dx1 = xi - S.ext['tl'][0]
     ext1 = {n: (dx1 + x, y) for n, (x, y) in S.ext.items()}
     ext2 = {n: (-(x + dx1), y) for n, (x, y) in S.ext.items()}         # side 2 = mirror image about x = 0 (x -> -x)

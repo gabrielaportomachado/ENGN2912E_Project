@@ -133,12 +133,14 @@ Pins: rst_sw tg_on cmp_clk dac_gdn dac_gp[11..0] dac_gn[11..0] cmp_q vin vdd vdd
 | vdd_dac | inner edge | 140 .. 160 | Metal4, >= 5 um |
 | vss | inner edge and east edge | 170 .. 210 | Metal4 / Metal3, >= 5 um |
 | vin | outer edge | any | Metal3 |
-| vdd (analog strap: vhalf, Cref switch, samb inverter, sampling-TG n-wells) | east edge | - | Metal4, >= 2 um |
+| vdd (analog strap: vhalf, Cref switch, samb inverter, sampling-TG n-wells) | east edge (R5 as built: SOUTH edge, x 215 .. 221, Metal4, because the Cref plate fills the east edge; L3a wraps it to the spur corridor, ladder G-5) | - | Metal4, >= 2 um |
 
 These x values are the pin positions of the afe_dig pin group of the channel (floorplan.json `cells.afe_dig.pins`, group start 8 um + 3.0 um x index, the cell starts at 8 um): the 29 wires
 cross the strap corridor as straight Metal2 lines. A pin may be up to 1.5 um off; then L3a jogs it on Metal3 inside the corridor.
 
-Recommended arrangement (fits 220 x 102): driver row y 0 .. 14 (13 bottom-plate drivers, 13 sampling TGs, 2 reset switches, INV, all within x 10 .. 100); keep-out band y 14 .. 34 with only
+As built by R5 (219.5 x 103.67 um; AFE/layout/adc/FLOW_ADC.md section 6): drivers x 6 .. 112 / y 2.5 .. 26 (three rows), the keep-out band y 26 .. 44 with the vhalf serpentine (8 rows of 62.5 um) and the reset switches, the DAC array without dummy bars x 13 .. 118 / y 44 .. 102 above it, the comparator under Cref (x 111 .. 217 / y 5 .. 41.6, t on the west and vref on the east side), the vhalf capacitor + Cref switch + inverter in the column x 129 .. 157, Cref x 161 .. 220 / y 44 .. 103.
+
+Original recommendation of LP (fits 220 x 102, superseded): driver row y 0 .. 14 (13 bottom-plate drivers, 13 sampling TGs, 2 reset switches, INV, all within x 10 .. 100); keep-out band y 14 .. 34 with only
 bottom-plate wires, vin, the vhalf resistor pair and its 1 pF capacitor; above it, left to right: DAC unit array 16 x 8 sites on a 6.8 um pitch with one dummy ring (122.4 x 68 um), Cref
 (59.07 um plate), comparator column (pair 2 x 80u/0.5u mirrored about the column axis, the two 5 x 5 um preamp MIM units symmetric).
 
@@ -146,7 +148,7 @@ Matching rules:
 1. **DAC unit-to-bit map** (127 units 5 x 5 um + bridge 5.085 x 5 um; the reference says 5.082993). MSB array on the top-plate node `t`: b11 32 units, b10 16, b9 8, b8 4, b7 2, b6 1 (63).
    LSB array on node `m`: b5 32, b4 16, b3 8, b2 4, b1 2, b0 1, dummy `bd` 1 (64). Sites: MSB array = columns 0-7, LSB array = columns 8-15 of the 16 x 8 grid, each half filled common
    centroid about its own centre: place the units of a bit in point-symmetric pairs, largest bit first on the outermost free pairs, smallest in the centre; the one free site of the MSB half and
-   the bridge capacitor sit on the boundary between the halves; a ring of dummy units (both plates on vss) around all 128 sites. **Top plate (FuseTop / Metal5) = `t` (MSB half) or `m` (LSB half);
+   the bridge capacitor sit on the boundary between the halves; a ring of dummy units (both plates on vss) around all 128 sites (L1a / R5: impossible, netgen counts dummy MIM units; the first build had two plain-metal bars, R5 draws none). **Top plate (FuseTop / Metal5) = `t` (MSB half) or `m` (LSB half);
    bottom plates (Metal4) = the driver nets.** Units of one bit may share a bottom-plate polygon. Record the site of every unit in the generator log (L1b needs it for the bridge check).
 2. Bridge: top plate on `t`, bottom plate on `m`; the Metal5 / Metal4 of nodes `t` and `m` as short as possible, no wire of another net over or under the bridge node.
 3. Cref: ONE plate 59.07 x 59.07 um, top plate = the floating node `vref` (to cmp_p.inp, shorter than 30 um, Metal5, vss guard), bottom plate = vss. **Inside the Cref bottom-plate footprint

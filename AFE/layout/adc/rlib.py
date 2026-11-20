@@ -152,3 +152,41 @@ def mim_unit_block(ly, name, w, top, bot, yb=1, yt=4):
     B.px = px
     B.size = (px + 0.6 + 0.6, w + 1.2)
     return B
+
+
+def mim_bw_block(ly, name, w, top, bot, yb=1):
+    """R5: MIM piece w x w um, top plate lower-left corner at the origin, the bottom plate leaves through a Metal4 tab to the WEST and a 1.2 um pad centred (-3, yb) (pad >= 2.4 um from the top plate
+    edge: MIMTM.1).  The top plate has no pad of its own (the caller straps it explicitly on Metal5).  Terminal: the Metal4 pad."""
+    B = a.Block(ly, name)
+    a.mim_cap(B.cell, 0.0, 0.0, w, w, top, bot)
+    B.grow(-0.6, -0.6, w + 0.6, w + 0.6)
+    B.rect('metal4', -3.1, yb - 0.5, -0.5, yb + 0.5)
+    B.rect('metal4', -3.6, yb - 0.6, -2.4, yb + 0.6)
+    B.term(bot, 'metal4', (-3.6, yb - 0.6, -2.4, yb + 0.6))
+    B.fixed_shape(a.M4, (-3.1, yb - 0.5, -0.5, yb + 0.5), bot, 1.0)
+    B.fixed_shape(a.M4, (-3.6, yb - 0.6, -2.4, yb + 0.6), bot, 1.0)
+    B.mim = dict(w=w, plate=(-0.6, -0.6, w + 0.6, w + 0.6), top=(0.0, 0.0, w, w), bot=bot, topnet=top)
+    B.size = (w + 1.2 + 3.0, w + 1.2)
+    return B
+
+
+def mim_unit_block_w(ly, name, w, top, bot, yb=1, yt=4):
+    """R5: like mim_unit_block but both pads are WEST of the plate (pads centred at x = -3, bottom plate at y = yb, top plate (Metal5 strap + Via4) at y = yt)."""
+    B = a.Block(ly, name)
+    a.mim_cap(B.cell, 0.0, 0.0, w, w, top, bot)
+    B.grow(-0.6, -0.6, w + 0.6, w + 0.6)
+    px = -3.0
+    B.rect('metal4', px - 0.1, yb - 0.5, -0.5, yb + 0.5)
+    B.rect('metal4', px - 0.6, yb - 0.6, px + 0.6, yb + 0.6)
+    B.term(bot, 'metal4', (px - 0.6, yb - 0.6, px + 0.6, yb + 0.6))
+    B.fixed_shape(a.M4, (px - 0.1, yb - 0.5, -0.5, yb + 0.5), bot, 1.0)
+    B.fixed_shape(a.M4, (px - 0.6, yb - 0.6, px + 0.6, yb + 0.6), bot, 1.0)
+    B.rect('metal5', px - 0.6, yt - 0.5, 0.01, yt + 0.5)
+    B.rect('metal4', px - 0.6, yt - 0.6, px + 0.6, yt + 0.6)
+    a.cuts(B.cell, 'via4', px - 0.6, yt - 0.6, px + 0.6, yt + 0.6, inset=0.3)
+    B.rect('metal5', px - 0.6, yt - 0.6, px + 0.6, yt + 0.6)
+    B.term(top, 'metal4', (px - 0.6, yt - 0.6, px + 0.6, yt + 0.6))
+    B.fixed_shape(a.M4, (px - 0.6, yt - 0.6, px + 0.6, yt + 0.6), top, 0.0)
+    B.mim = dict(w=w, plate=(-0.6, -0.6, w + 0.6, w + 0.6), top=(0.0, 0.0, w, w), bot=bot, topnet=top)
+    B.size = (w + 3.6 + 0.6, w + 1.2)
+    return B

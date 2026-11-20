@@ -36,6 +36,7 @@ class Router:
         self.fixed = []                                # (layer index, rect, net)
         self.paths = {}                                # net -> list of paths (each: list of (l, i, j))
         self.failed = []
+        self.banned = {}                               # net id -> bool array (R5): nodes this net may not use (keep-out zones of control nets)
 
     # ---------------------------------------------------------------- bookkeeping
     def nid(self, net):
@@ -94,6 +95,15 @@ class Router:
         a[a == 0] = nid
         a[(a != 0) & (a != nid)] = -1
 
+    def ban(self, nets, rect, layers=(0, 1, 2)):
+        """R5: the nets may not use the nodes inside rect (keep-out of control wires around the sensitive plates); other nets are not affected"""
+        i1, i2, j1, j2 = self.ij_range(rect, 0.0)
+        for net in nets:
+            n = self.nid(net)
+            a = self.banned.setdefault(n, np.zeros((3, self.nx, self.ny), dtype=bool))
+            for l in layers:
+                a[l, max(i1, 0):i2 + 1, max(j1, 0):j2 + 1] = True
+
     def block_all(self, rect, layers=(0, 1, 2), extra=0.0):
         for l in layers:
             self.obstacle(l, rect, None, extra)
@@ -108,6 +118,8 @@ class Router:
         """halo is SOFT by default: a node inside the clearance of a sensitive net costs HALO_COST extra (see astar) but stays usable; halo=True makes it a hard obstacle"""
         h = self.hard[l, i, j]
         if h != 0 and h != n:
+            return False
+        if self.banned and n in self.banned and self.banned[n][l, i, j]:
             return False
         h = self.halo[l, i, j]
         if halo and h != 0 and h != n:

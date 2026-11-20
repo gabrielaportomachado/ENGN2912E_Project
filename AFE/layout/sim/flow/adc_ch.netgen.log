@@ -1,7 +1,7 @@
 Netgen 1.5.318 compiled on Thu Apr 16 09:08:04 PM CEST 2026
 Warning: netgen command 'format' use fully-qualified name '::netgen::format'
 Warning: netgen command 'global' use fully-qualified name '::netgen::global'
-Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.spice adc_ch
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/sim/flow/adc_ch.lvs.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/sim/flow/adc_ch.lvs.spice adc_ch
 Call to undefined subcircuit pfet_03v3
 Creating placeholder cell definition.
 Call to undefined subcircuit cap_mim_2f0_m4m5_noshield
@@ -14,7 +14,7 @@ Call to undefined subcircuit pfet_05v0
 Creating placeholder cell definition.
 Call to undefined subcircuit nfet_05v0
 Creating placeholder cell definition.
-Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/lvs/adc_ch.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/lvs/adc_ch.spice adc_ch
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/lvs/adc_ch.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/lvs/adc_ch.spice adc_ch
 Call to undefined subcircuit cap_mim_2f0_m4m5_noshield
 Creating placeholder cell definition.
 Call to undefined subcircuit nfet_03v3
@@ -170,8 +170,8 @@ No property $X found for device pfet_05v0
 No property $Y found for device pfet_05v0
 No property par1 found for device cap_mim_2f0_m4m5_noshield
 No property par1 found for device cap_mim_2f0_m4m5_noshield
-Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out" enabled
+Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/sim/flow/adc_ch.lvs.out
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/sim/flow/adc_ch.lvs.out" enabled
 Circuit cap_mim_2f0_m4m5_noshield contains no devices.
 Circuit nfet_03v3 contains no devices.
 Circuit pfet_03v3 contains no devices.
@@ -180,14 +180,14 @@ Circuit pfet_05v0 contains no devices.
 Circuit nfet_05v0 contains no devices.
 
 Contents of circuit 1:  Circuit: 'adc_ch'
-Circuit adc_ch contains 239 device instances.
+Circuit adc_ch contains 229 device instances.
   Class: pfet_05v0             instances:   1
   Class: cap_mim_2f0_m4m5_noshield instances: 132
   Class: nfet_03v3             instances:  40
   Class: nfet_05v0             instances:   1
-  Class: ppolyf_u_1k           instances:  20
-  Class: pfet_03v3             instances:  45
-Circuit contains 81 nets.
+  Class: ppolyf_u_1k           instances:   8
+  Class: pfet_03v3             instances:  47
+Circuit contains 69 nets.
 Contents of circuit 2:  Circuit: 'adc_ch'
 Circuit adc_ch contains 215 device instances.
   Class: pfet_05v0             instances:   1
@@ -227,5 +227,5 @@ Circuit 1 contains 63 nets,    Circuit 2 contains 63 nets.
 Final result: 
 Circuits match uniquely.
 .
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out" disabled
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/r5-adc-repack/AFE/layout/sim/flow/adc_ch.lvs.out" disabled
 LVS Done.
