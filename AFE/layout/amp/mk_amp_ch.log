@@ -1,0 +1,5 @@
+(22, 0)
+placed: W = 220.0  H = 376.0  rows tops [29.5, 63.5, 128.5, 195.3, 195.3]
+routing: 34 nets, 0 failed: []
+router shapes: 20944 wires, 421 vias
+wrote amp_ch.gds  220.50 x 374.25 um

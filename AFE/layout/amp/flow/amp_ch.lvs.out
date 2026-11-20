@@ -1,0 +1,222 @@
+
+Circuit 1 cell pfet_03v3 and Circuit 2 cell pfet_03v3 are black boxes.
+Warning: Equate pins:  cell pfet_03v3 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell pfet_03v3 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: pfet_03v3                       |Circuit 2: pfet_03v3                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pfet_03v3 and pfet_03v3 are equivalent.
+
+Circuit 1 cell nfet_03v3 and Circuit 2 cell nfet_03v3 are black boxes.
+Warning: Equate pins:  cell nfet_03v3 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell nfet_03v3 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: nfet_03v3                       |Circuit 2: nfet_03v3                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_03v3 and nfet_03v3 are equivalent.
+
+Circuit 1 cell cap_mim_2f0_m4m5_noshield and Circuit 2 cell cap_mim_2f0_m4m5_noshield are black boxes.
+Warning: Equate pins:  cell cap_mim_2f0_m4m5_noshield is a placeholder, treated as a black box.
+Warning: Equate pins:  cell cap_mim_2f0_m4m5_noshield is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: cap_mim_2f0_m4m5_noshield       |Circuit 2: cap_mim_2f0_m4m5_noshield       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cap_mim_2f0_m4m5_noshield and cap_mim_2f0_m4m5_noshield are equivalent.
+
+Circuit 1 cell pfet_05v0 and Circuit 2 cell pfet_05v0 are black boxes.
+Warning: Equate pins:  cell pfet_05v0 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell pfet_05v0 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: pfet_05v0                       |Circuit 2: pfet_05v0                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pfet_05v0 and pfet_05v0 are equivalent.
+
+Circuit 1 cell nfet_05v0 and Circuit 2 cell nfet_05v0 are black boxes.
+Warning: Equate pins:  cell nfet_05v0 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell nfet_05v0 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: nfet_05v0                       |Circuit 2: nfet_05v0                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_05v0 and nfet_05v0 are equivalent.
+
+Circuit 1 cell nfet_06v0_nvt and Circuit 2 cell nfet_06v0_nvt are black boxes.
+Warning: Equate pins:  cell nfet_06v0_nvt is a placeholder, treated as a black box.
+Warning: Equate pins:  cell nfet_06v0_nvt is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: nfet_06v0_nvt                   |Circuit 2: nfet_06v0_nvt                   
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_06v0_nvt and nfet_06v0_nvt are equivalent.
+
+Subcircuit summary:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1  
+-------------------------------------------|-------------------------------------------
+pfet_05v0 (3)                              |pfet_05v0 (3)                              
+nfet_05v0 (3)                              |nfet_05v0 (3)                              
+Number of devices: 6                       |Number of devices: 6                       
+Number of nets: 9                          |Number of nets: 9                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1  
+-------------------------------------------|-------------------------------------------
+a_47_93#                                   |VSS **Mismatch**                           
+VSUBS                                      |VPW **Mismatch**                           
+w_n86_352#                                 |VNW **Mismatch**                           
+a_135_48#                                  |A1 **Mismatch**                            
+a_359_48#                                  |A2 **Mismatch**                            
+a_731_472#                                 |Z **Mismatch**                             
+a_459_603#                                 |VDD **Mismatch**                           
+---------------------------------------------------------------------------------------
+Cell pin lists for gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1 altered to match.
+Device classes gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1 are equivalent.
+Flattening unmatched subcell cin2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__19 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sink1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__4 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell or2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell ct in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__22 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cin_blk in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__23 in circuit amp_ch (0)(4 instances)
+Flattening unmatched subcell cc1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__17 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cf1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__18 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pr3 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell xms in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__5 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell fol in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet_06v0_nvt__10 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pr1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell s2p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__9 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell ota_p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_a2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell tail_m7 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_b2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_a1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell tail_mb in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_b1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell tail_mt in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell xm6 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__3 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cf1p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__18 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cf2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__21 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cc2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__20 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell s2pair in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__6 in circuit amp_ch (0)(4 instances)
+Flattening unmatched subcell s2tail in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__7 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__8 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sp in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__15 in circuit amp_ch (0)(3 instances)
+Flattening unmatched subcell pfet__13 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell pfet__14 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell pr2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell mir in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m4a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m3b in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m4b in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m3a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sn in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__11 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell nfet__12 in circuit amp_ch (0)(4 instances)
+Flattening unmatched subcell fs_oneshot_c in circuit amp_ch (1)(1 instance)
+Flattening unmatched subcell afe_chc in circuit amp_ch (1)(1 instance)
+
+Class amp_ch (0):  Merged 70 parallel devices.
+Class amp_ch (1):  Merged 2 parallel devices.
+Subcircuit summary:
+Circuit 1: amp_ch                          |Circuit 2: amp_ch                          
+-------------------------------------------|-------------------------------------------
+cap_mim_2f0_m4m5_noshield (11->9)          |cap_mim_2f0_m4m5_noshield (11->9)          
+nfet_03v3 (50->15)                         |nfet_03v3 (48->15)                         
+gf180mcu_fd_sc_mcu7t5v0__or2_1 (1)         |gf180mcu_fd_sc_mcu7t5v0__or2_1 (1)         
+pfet_03v3 (53->20)                         |pfet_03v3 (53->20)                         
+nfet_06v0_nvt (1)                          |nfet_06v0_nvt (1)                          
+Number of devices: 46                      |Number of devices: 46                      
+Number of nets: 35                         |Number of nets: 35                         
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: amp_ch                          |Circuit 2: amp_ch                          
+-------------------------------------------|-------------------------------------------
+vrs                                        |vrs                                        
+rst_amp                                    |rst_amp                                    
+ref                                        |ref                                        
+vg1                                        |vg1                                        
+vcmo                                       |vcmo                                       
+vg2                                        |vg2                                        
+sw_rec_b                                   |sw_rec_b                                   
+rec                                        |rec                                        
+vdd                                        |vdd                                        
+sw_rec                                     |sw_rec                                     
+vbn                                        |vbn                                        
+vss                                        |vss                                        
+out                                        |out                                        
+vcm                                        |vcm                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes amp_ch and amp_ch are equivalent.
+
+Final result: Circuits match uniquely.
+.

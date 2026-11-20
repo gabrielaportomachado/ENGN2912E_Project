@@ -1,0 +1,26 @@
+* NGSPICE file created from lp_flow.ext - technology: gf180mcuD
+
+.subckt cap_mim m4_n120_n120# m4_0_0#
+X0 m4_0_0# m4_n120_n120# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+.ends
+
+.subckt nfet_06v0_nvt__2 a_22_n122# a_422_0# a_n92_0# VSUBS
+X0 a_422_0# a_22_n122# a_n92_0# VSUBS nfet_06v0_nvt ad=5.7p pd=21.14u as=5.7p ps=21.14u w=10u l=2u
+.ends
+
+.subckt nfet__3 a_238_0# a_38_n60# a_n84_0# VSUBS
+X0 a_238_0# a_38_n60# a_n84_0# VSUBS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=1u
+.ends
+
+.subckt pfet__0 w_n180_n104# a_n92_n16# a_138_0# a_38_n136#
+X0 a_138_0# a_38_n136# a_n92_n16# w_n180_n104# pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.5u
+.ends
+
+.subckt lp_flow S1 D1 G1 S2 D2 G2 ND NS NG VSS DD GS GG BOTNET TOPNET
+Xcap_mim_0 BOTNET TOPNET cap_mim
+Xnfet_06v0_nvt__2_0 NG NS ND VSS nfet_06v0_nvt__2
+Xnfet__3_0 GS GG DD VSS nfet__3
+Xpfet__0_0 S2 S2 D2 G2 pfet__0
+Xpfet__0_1 S1 S1 D1 G1 pfet__0
+.ends
+

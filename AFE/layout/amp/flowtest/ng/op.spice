@@ -1,0 +1,27 @@
+* L2a Step 1: the Magic PEX netlist of lp_flow (flow.py pex, MIM correction on) loads in ngspice and gives one .op
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.include ../flow/lp_flow.pex.spice
+Vs1 s1 0 1.65
+Vd1 d1 0 1.0
+Vg1 g1 0 0
+Vs2 s2 0 1.65
+Vd2 d2 0 1.0
+Vg2 g2 0 0
+Vtop top 0 1.0
+Vbot bot 0 0
+Vnd nd 0 3.3
+Vng ng 0 2.0
+Rns ns 0 1k
+Vdd dd 0 3.3
+Vgg gg 0 1.0
+Rgs gs 0 10k
+Xdut s1 d1 g1 s2 d2 g2 nd ns ng 0 dd gs gg bot top lp_flow
+.control
+op
+print i(Vd1) i(Vd2) v(ns) i(Vdd) v(gs) i(Vtop)
+echo DONE
+quit
+.endc
+.end

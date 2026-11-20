@@ -1,0 +1,4 @@
+* LVS reference of the L2a flow test cell lp_dummy (written by mk_flowtest.py)
+.subckt lp_dummy S D G VSS
+X1 D G S VSS nfet_03v3 w=2u l=1u m=2
+.ends

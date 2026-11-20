@@ -1,0 +1,37 @@
+{
+ "date": "2026-11-20 17:46",
+ "devices_layout": {
+  "nfet__4": 1
+ },
+ "extract_ok": true,
+ "final": "Circuits match uniquely.",
+ "gds": "AFE/layout/amp/flowtest/lp_dummy.gds",
+ "gds_sha1": "c245d5bd84deaa0445eacd2ce7d709ceaf1176db",
+ "layout_netlist": "AFE/layout/amp/flowtest/flow/lp_dummy.lvs.spice",
+ "match": true,
+ "maxrss_mb": 68,
+ "pin_mismatch": false,
+ "ports_layout": [
+  "S",
+  "D",
+  "G",
+  "VSS"
+ ],
+ "ports_ref": [
+  "S",
+  "D",
+  "G",
+  "VSS"
+ ],
+ "property_error_cells": [],
+ "property_errors": false,
+ "ran": true,
+ "ref": "AFE/layout/amp/flowtest/lp_dummy.ref.spice",
+ "refcell": "lp_dummy",
+ "report": "AFE/layout/amp/flowtest/flow/lp_dummy.lvs.out",
+ "setup": "../../../../../pdks/gf180mcuD/libs.tech/netgen/gf180mcuD_setup.tcl",
+ "timeout": false,
+ "tool": "magic + netgen",
+ "top": "lp_dummy",
+ "wall_s": 0.4
+}
