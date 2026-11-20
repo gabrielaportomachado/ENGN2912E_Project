@@ -76,7 +76,20 @@ def blocks(ly):
           dict(kind='nfet', w=1.0, l=0.5, x=21.0, y=0.0, s='mm', d='nd', g='sw_rec'),
           dict(kind='nfet', w=1.0, l=0.5, x=28.0, y=0.0, s=VSS, d='mm', g='t'),
           dict(kind='nfet', w=1.0, l=0.5, x=35.0, y=0.0, s=VSS, d=FSOS, g='nd')]
-    B['sn'] = a.group_block(ly, 'sn', nt, ring_kind='p', ring_net=VSS)
+    def shift(tl, y0=None, vert=False):
+        o = []
+        for i, t in enumerate(tl):
+            t = dict(t)
+            t['x'], t['y'] = (0.0, 7.0 * i) if vert else (7.0 * i, 0.0)
+            o.append(t)
+        return o
+    if a.KNOB.get('split', 0):
+        # lay=6 (R4 re-pack 2): the gate-mux + park tiles (sn_a / sp_a: tiles 0 .. 2) stay in the Cf1 strip under the Cin block, the one-shot tiles (sn_os / sp_os: tiles 3 ..) go to the east column next to C_T
+        vert = a.KNOB.get('osvert', 0)
+        B['sn_a'] = a.group_block(ly, 'sn_a', shift(nt[:3]), ring_kind='p', ring_net=VSS)
+        B['sn_os'] = a.group_block(ly, 'sn_os', shift(nt[3:], vert=vert), ring_kind='p', ring_net=VSS)
+    else:
+        B['sn'] = a.group_block(ly, 'sn', nt, ring_kind='p', ring_net=VSS)
     pt = [dict(kind='pfet', w=0.5, l=0.5, x=0.0, y=0.0, s='vg1', d=GM1, g=FS),
           dict(kind='pfet', w=0.5, l=0.5, x=7.0, y=0.0, s='vg2', d=GM2, g=FS),
           dict(kind='pfet', w=2.0, l=0.5, x=14.0, y=0.0, s='vcm', d='rec', g='sw_rec'),
@@ -84,7 +97,11 @@ def blocks(ly):
           dict(kind='pfet', w=1.0, l=0.5, x=28.0, y=0.0, s=VDD, d='nd', g='sw_rec'),
           dict(kind='pfet', w=1.0, l=0.5, x=35.0, y=0.0, s=VDD, d='nd', g='t'),
           dict(kind='pfet', w=2.0, l=0.5, x=42.0, y=0.0, s=VDD, d=FSOS, g='nd')]
-    B['sp'] = a.group_block(ly, 'sp', pt, ring_kind='n', ring_net=VDD)
+    if a.KNOB.get('split', 0):
+        B['sp_a'] = a.group_block(ly, 'sp_a', shift(pt[:3]), ring_kind='n', ring_net=VDD)
+        B['sp_os'] = a.group_block(ly, 'sp_os', shift(pt[3:], vert=vert), ring_kind='n', ring_net=VDD)
+    else:
+        B['sp'] = a.group_block(ly, 'sp', pt, ring_kind='n', ring_net=VDD)
     B['or2'] = a.or2_block(ly, 'or2', FSOS, 'rst_amp', FS, VDD, VSS)
     # ------------------------------------------------------------------ pseudo resistors
     B['pr1'] = a.pr_block(ly, 'pr1', VN, V1, M1R, GM1)

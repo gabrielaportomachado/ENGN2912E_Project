@@ -1,6 +1,6 @@
 (22, 0)
-placed: W = 221.0  H = 286.0  Y0 = 148  row top t5 = 122.3
+placed: W = 222.0  H = 275.0  Y0 = 138  row top t5 = 121.3
 routing: 34 nets, 0 failed: []
-clearance of the sensitive nets (edge to edge, same layer): {"xs1_vn": {"nodes": 67, "nodes_closer_than_2um": 28, "min_clearance_um": 0.5}, "xs1_vp": {"nodes": 104, "nodes_closer_than_2um": 10, "min_clearance_um": 1.5}, "xs2_vn2": {"nodes": 74, "nodes_closer_than_2um": 3, "min_clearance_um": 0.5}, "xs1_xr1_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs1_xr2_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs2_xr_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "rec": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}}
-router shapes: 14028 wires, 458 vias
-wrote amp_ch.gds  220.25 x 284.25 um
+clearance of the sensitive nets (edge to edge, same layer): {"xs1_vn": {"nodes": 56, "nodes_closer_than_2um": 28, "min_clearance_um": 0.5}, "xs1_vp": {"nodes": 97, "nodes_closer_than_2um": 10, "min_clearance_um": 1.5}, "xs2_vn2": {"nodes": 58, "nodes_closer_than_2um": 0, "min_clearance_um": 2.5}, "xs1_xr1_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs1_xr2_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs2_xr_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "rec": {"nodes": 14, "nodes_closer_than_2um": 0, "min_clearance_um": 2.5}}
+router shapes: 15265 wires, 452 vias
+wrote amp_ch.gds  220.75 x 273.25 um

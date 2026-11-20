@@ -19,11 +19,13 @@ plan = int(globals().get('plan', '0'))
 gdsname = globals().get('gds', 'amp_ch.gds')
 os.makedirs(out, exist_ok=True)
 
-LAY = int(globals().get('lay', '5'))             # 5 = R6 packing for Cin 15 pF (default); 1 = packing of the first L2a pass (commit 1b3076a), 2 = packing "A-3" (rework step 1), 3 = tail group merged + pair and xm6 in one row (rework step 2, default)
+LAY = int(globals().get('lay', '6'))             # 5 = R6 packing for Cin 15 pF (default); 1 = packing of the first L2a pass (commit 1b3076a), 2 = packing "A-3" (rework step 1), 3 = tail group merged + pair and xm6 in one row (rework step 2, default)
 _KD = dict(rg=2.5, gg=2.5, cg=3.0) if LAY == 1 else dict(rg=1.5, gg=1.5, cg=1.5)       # ring gaps (um) of dev_block / group_block / compose
 for _n in ('rg', 'gg', 'cg'):
     a.KNOB[_n] = float(globals().get(_n, _KD[_n]))
 a.KNOB['tm'] = int(globals().get('tm', '1' if LAY >= 3 else '0'))          # 1 = tail group xmb / xmt / xm7 as one 6-finger block (L2a rework step 2)
+a.KNOB['split'] = int(globals().get('split', '1' if LAY >= 6 else '0'))     # 1 = sn / sp split into the gate-mux + park groups (sn_a / sp_a) and the one-shot groups (sn_os / sp_os) (lay=6)
+a.KNOB['osvert'] = int(globals().get('osvert', '1' if LAY >= 6 else '0'))                       # 1 = one-shot tiles stacked vertically
 ly = k.new_layout()
 TOP = ly.create_cell('amp_ch')
 B = BA.blocks(ly)
@@ -140,7 +142,7 @@ def row(names, y, x0=WEST, gap=3.0):
 
 GX = float(globals().get('gx', '2.0' if LAY == 1 else '1.5'))          # gap between blocks of a row (um)
 GY = float(globals().get('gy', '2.0' if LAY == 1 else '1.0'))          # gap between rows
-CAP = float(globals().get('capt', '8.0' if LAY == 1 else ('1.0' if LAY == 5 else '2.0')))       # margin above the Cin block lanes (pins) up to the cell top
+CAP = float(globals().get('capt', '8.0' if LAY == 1 else ('1.0' if LAY == 5 else ('0.0' if LAY == 6 else '2.0'))))       # margin above the Cin block lanes (pins) up to the cell top
 if LAY == 1:
     GAP_Y = 3.0
     x, t1 = row(['sink1', 'xms', 'fol', 's2p'], 3.0, x0=8.0, gap=2.0)
@@ -216,6 +218,56 @@ elif LAY == 4:
     for n in ('cc2',):
         xe, ye = put(n, B[n], xc, yc)
         yc = ye + GY
+elif LAY == 6:
+    # ---- packing "R4 re-pack 2" (Cin 15 pF, target 222 x 274.04 um): like lay=5, but (i) the Cf1 strip under the Cin block holds only OR2, pseudo-R 1 / 2, the two Cf1 pieces and the gate-mux + park groups (sn_a / sp_a),
+    #      the one-shot tiles (sn_os / sp_os) stand beside C_T in the east column, (ii) the device rows start 1 um lower, (iii) the east column is re-ordered: s2tail, then Cin2 | s2pair ROTATED by 90 degrees (both
+    #      side by side: vn2 stays short), C_T | Cf2 + pseudo-R 3 + one-shot tiles, Cc2.
+    XR = float(globals().get('xr', '1.0'))
+    YB = float(globals().get('ybot', '2.0'))
+    B['s2pair_r'] = a.rotate_block(ly, B['s2pair'], 's2pair_r')
+    xm_, tmir = put('mir', B['mir'], XR, YB)
+    xc0 = xm_ + GX
+    x, top2 = xc0, YB
+    for n in ('xms', 'fol', 'cc1', 's2p'):
+        xe, ye = put(n, B[n], x, YB)
+        x = xe + GX
+        top2 = max(top2, ye)
+    xe, ye = put('sink1', B['sink1'], xc0, top2 + GY)
+    yt = max(ye, tmir) + GY
+    xo, tt = put('ota_p', B['ota_p'], XR, yt)
+    x6 = float(globals().get('x6', '146.5'))
+    y6 = ye + GY + float(globals().get('y6add', '0.0'))
+    xe6, t6 = put('xm6', B['xm6'], max(x6, xo + GX), y6)
+    t5 = max(tt, 0.0)
+    STRIP = float(globals().get('strip', '15.0'))
+    Y0 = math.ceil(t5 + GY + STRIP + 0.6)
+    X0 = float(globals().get('x0', '7.0'))
+    k.put(TOP, cin.cell, X0, Y0)
+    PLACED.append(('cin', cin, X0, Y0))
+    ys = Y0 - STRIP
+    put('or2', B['or2'], 9.0, ys + 3.0)
+    put('pr1', B['pr1'], X0 + XD1 - 13.0, ys + 3.0)
+    put('cf1', B['cf1'], X0 + XD1 + 4.0, ys)
+    xe, _ = put('sn_a', B['sn_a'], X0 + XD1 + 24.0, ys)
+    put('sp_a', B['sp_a'], xe + GX, ys)
+    put('cf1p', B['cf1p'], X0 + XD2 + 4.0, ys)
+    xe_pr2, _ = put('pr2', B['pr2'], X0 + XD2 + 20.0, ys + 3.0)
+    xl = X0 + cin.bbox[2] + float(globals().get('colgap', '2.0'))                    # west edge of the east column above the strip
+    xc = max(xl, xe_pr2 + float(globals().get('xgap', '3.0')))                       # s2tail row: clear of pseudo-R 2
+    yc = max(t6 + GY, float(globals().get('ycol', '0')))
+    xe, yc = put('s2tail', B['s2tail'], xc, yc)
+    yr2 = max(yc + GY, ys + 3.0 + 4.5 + 3.0 + 1.0)                                    # clear of pseudo-R 2 (x up to 154)
+    xe, ye = put('cin2', B['cin2'], xl, yr2)
+    xe2, ye2 = put('s2pair_r', B['s2pair_r'], xe + GX, yr2)
+    yc = max(ye, ye2) + GY
+    xe, ye = put('ct', B['ct'], xl, yc)
+    xs_ = xe + GX
+    xe2, ye2 = put('cf2', B['cf2'], xs_, yc)
+    xe3, ye3 = put('pr3', B['pr3'], xs_, ye2 + GY)
+    xe4, ye4 = put('sn_os', B['sn_os'], xs_, ye3 + GY)
+    xe5, ye5 = put('sp_os', B['sp_os'], xe4 + GX, ye3 + GY) if a.KNOB['osvert'] else put('sp_os', B['sp_os'], xs_, ye4 + GY)
+    yc = max(ye, ye5) + GY
+    xe, ye = put('cc2', B['cc2'], xl, yc)
 elif LAY == 5:
     # ---- packing "R6" (Cin 15 pF, Decision 50): like lay=3, but (i) xm6 stands as low as the bottom row allows (its bottom row neighbours are only 54.5 um tall), (ii) the east column starts right above xm6 and is compacted
     #      (Cf2 + pseudo-R 3 beside Cin2), (iii) the lanes above the Cin block are tighter (lx / ly / lt), (iv) the x positions of the Cf1 strip follow the descenders xd1 / xd2.
@@ -369,7 +421,7 @@ for i, n in enumerate(('vbn', 'vcm', 'vg1', 'vcmo', 'vg2', 'vrs')):
     PINS.append((n, 'metal3', 1.0 + i, ytop_pin))
 for i, n in enumerate(('sw_rec', 'sw_rec_b', 'rst_amp')):
     PINS.append((n, 'metal2', 1.0, H - 12.0 - 8.0 * i))
-if LAY in (3, 4, 5):
+if LAY in (3, 4, 5, 6):
     PINS.append(('vdd', 'metal4', W - 4.0, 14.0))                 # east edge, bottom (inner) half: free of blocks
     PINS.append(('vss', 'metal4', W - 4.0, 30.0))
 else:
@@ -476,7 +528,8 @@ for (n, lay, px, py) in PINS:
 
 bb = TOP.dbbox()
 info = dict(W=round(bb.width(), 3), H=round(bb.height(), 3), bbox=[round(v, 3) for v in (bb.left, bb.bottom, bb.right, bb.top)], slot=[220, 263], dbg=dbg,
-            blocks={n: [round(blk.bbox[2] - blk.bbox[0], 2), round(blk.bbox[3] - blk.bbox[1], 2), dx, dy] for (n, blk, dx, dy) in PLACED}, failed=bad, clearance=CLEAR, cin=dict(X0=X0, Y0=Y0, T=T, P=P), halo=dict(extra_um=HALO, end_nodes=HEND),
+            blocks={n: [round(blk.bbox[2] - blk.bbox[0], 2), round(blk.bbox[3] - blk.bbox[1], 2), dx, dy] for (n, blk, dx, dy) in PLACED},
+            bboxes={n: [round(blk.bbox[0] + dx, 2), round(blk.bbox[1] + dy, 2), round(blk.bbox[2] + dx, 2), round(blk.bbox[3] + dy, 2)] for (n, blk, dx, dy) in PLACED}, failed=bad, clearance=CLEAR, cin=dict(X0=X0, Y0=Y0, T=T, P=P), halo=dict(extra_um=HALO, end_nodes=HEND),
             wire_um={n: round(sum(len(p) for p in rt.paths.get(n, [])) * 1.0, 1) for n in rt.paths})
 json.dump(info, open(os.path.join(out, 'amp_ch.build.json' if not dbg else 'amp_ch_dbg.build.json'), 'w'), indent=1)
 k.write(ly, os.path.join(out, gdsname), 'amp_ch')

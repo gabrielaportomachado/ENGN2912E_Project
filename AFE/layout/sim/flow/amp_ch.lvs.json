@@ -1,5 +1,5 @@
 {
- "date": "2026-11-20 23:53",
+ "date": "2026-11-21 00:25",
  "devices_layout": {
   "cc1": 1,
   "cc2": 1,
@@ -17,21 +17,23 @@
   "pr2": 1,
   "pr3": 1,
   "s2p": 1,
-  "s2pair": 1,
+  "s2pair_r": 1,
   "s2tail": 1,
   "sink1": 1,
-  "sn": 1,
-  "sp": 1,
+  "sn_a": 1,
+  "sn_os": 1,
+  "sp_a": 1,
+  "sp_os": 1,
   "xm6": 1,
   "xms": 1
  },
  "extract_ok": true,
  "final": "Circuits match uniquely.",
  "gds": "AFE/layout/amp/amp_ch.gds",
- "gds_sha1": "ed967962c5c0ce52c88a94d29f48d8dc1a4df52a",
+ "gds_sha1": "2bb1643e489bbf16b13b4bd32ea71b36d5b12c9b",
  "layout_netlist": "AFE/layout/sim/flow/amp_ch.lvs.spice",
  "match": true,
- "maxrss_mb": 80,
+ "maxrss_mb": 83,
  "pin_mismatch": false,
  "ports_layout": [
   "rec",
@@ -75,5 +77,5 @@
  "timeout": false,
  "tool": "magic + netgen",
  "top": "amp_ch",
- "wall_s": 1.0
+ "wall_s": 1.4
 }

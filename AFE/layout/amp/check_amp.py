@@ -37,13 +37,16 @@ for li in ly.layer_indexes():
             pins.append(dict(name=s.text_string, layer='%d/%d' % (info.layer, info.datatype), x=round(s.text_pos.x * ly.dbu, 2), y=round(s.text_pos.y * ly.dbu, 2)))
 res['pins'] = sorted(pins, key=lambda p: p['name'])
 bl = b['blocks']
-area = lambda n: bl[n][0] * bl[n][1]
+area = lambda n: bl[n][0] * bl[n][1] if n in bl else 0.0
+bl = dict(bl)
+if 's2pair_r' in bl:      # lay=6: s2pair is stored rotated (the block table of the build holds the rotated size)
+    bl['s2pair'] = bl.pop('s2pair_r')
 cin_blk = bl['cin'][0] * bl['cin'][1]
 mim_col = sum(area(n) for n in ('ct', 'cin2', 'cc2', 'cf2', 'cc1', 'cf1', 'cf1p'))
 allb = sum(area(n) for n in bl)
 res['areas_um2'] = dict(cin_block=round(cin_blk), ota_p_group_pair_and_tail=round(area('ota_p')), stage1_n_mirror_xm6=round(area('mir') + area('xm6')),
                         stage2_and_sinks=round(sum(area(n) for n in ('sink1', 'xms', 'fol', 's2p', 's2pair', 's2tail'))),
-                        small_devices_pr_oneshot_or2=round(sum(area(n) for n in ('sn', 'sp', 'or2', 'pr1', 'pr2', 'pr3'))), mim_outside_cin=round(mim_col), sum_of_blocks=round(allb))
+                        small_devices_pr_oneshot_or2=round(sum(area(n) for n in ('sn', 'sp', 'sn_a', 'sp_a', 'sn_os', 'sp_os', 'or2', 'pr1', 'pr2', 'pr3'))), mim_outside_cin=round(mim_col), sum_of_blocks=round(allb))
 json.dump(res, open(g.get('outjson', 'check_amp.json'), 'w'), indent=1)
 print(json.dumps({k_: v for k_, v in res.items() if k_ != 'pins'}))
 print('pins:', ' '.join('%s@%s(%g,%g)' % (p['name'], p['layer'], p['x'], p['y']) for p in res['pins']))

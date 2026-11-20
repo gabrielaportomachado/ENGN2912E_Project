@@ -1,7 +1,7 @@
 {
- "W": 220.25,
- "H": 284.25,
- "area_um2": 62606.1,
+ "W": 220.75,
+ "H": 273.25,
+ "area_um2": 60319.9,
  "under_cin_plates_um2": {
   "A1": {},
   "B1": {},
@@ -20,78 +20,78 @@
    "name": "rec",
    "layer": "81/10",
    "x": 70.9,
-   "y": 285.0
+   "y": 274.0
   },
   {
    "name": "ref",
    "layer": "81/10",
    "x": 113.0,
-   "y": 285.0
+   "y": 274.0
   },
   {
    "name": "rst_amp",
    "layer": "36/10",
    "x": 1.0,
-   "y": 258.0
+   "y": 247.0
   },
   {
    "name": "sw_rec",
    "layer": "36/10",
    "x": 1.0,
-   "y": 274.0
+   "y": 263.0
   },
   {
    "name": "sw_rec_b",
    "layer": "36/10",
    "x": 1.0,
-   "y": 266.0
+   "y": 255.0
   },
   {
    "name": "vbn",
    "layer": "42/10",
    "x": 1.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vcm",
    "layer": "42/10",
    "x": 2.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vcmo",
    "layer": "42/10",
    "x": 4.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vdd",
    "layer": "46/10",
-   "x": 217.0,
+   "x": 218.0,
    "y": 14.0
   },
   {
    "name": "vg1",
    "layer": "42/10",
    "x": 3.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vg2",
    "layer": "42/10",
    "x": 5.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vrs",
    "layer": "42/10",
    "x": 6.0,
-   "y": 283.0
+   "y": 272.0
   },
   {
    "name": "vss",
    "layer": "46/10",
-   "x": 217.0,
+   "x": 218.0,
    "y": 30.0
   }
  ],
@@ -100,8 +100,8 @@
   "ota_p_group_pair_and_tail": 8499,
   "stage1_n_mirror_xm6": 9628,
   "stage2_and_sinks": 6589,
-  "small_devices_pr_oneshot_or2": 1185,
+  "small_devices_pr_oneshot_or2": 1168,
   "mim_outside_cin": 6336,
-  "sum_of_blocks": 52829
+  "sum_of_blocks": 52812
  }
 }
