@@ -47,7 +47,7 @@ older section that no longer holds as SUPERSEDED (the old text is kept as histor
   chipathon-2026-A44-SAR-ADC (analog). The comments at the end of info.yaml define the port names each pad type needs
   (for example <name>_OE, <name>_IE, <name>_PU for bidirectional): READ THEM before fixing top-level ports; drive every control pin.
 - Due Fri 2026-11-13: repo link, pin list (name + type) and total count, estimated block size (W x H, um).
-- Official deadline unconfirmed; aim to be ready before Thanksgiving (2026-11-26).
+- Official deadline: 2026-11-30 (organizer, told to the user 2026-11-20; Decision 49). Thanksgiving 2026-11-26 is in the middle: plan no human step for 11-26 / 11-27.
 
 ## Proposed Decision 29 (needs user approval): N = 4 channels
 **SUPERSEDED** (2026-11-12): N = 8 was approved (Decision 29); the mux, MODE / EN / CLK / READY pads and the 5 V domain below no longer exist. History only.

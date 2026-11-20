@@ -1,14 +1,10 @@
-gate.py L1a  (L1a)
+gate.py L1a  (L1a --no-findings)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 5f5e1fa
-INFO  no open REVIEW.md item for L1a or an earlier phase
-PASS  phase report AFE/layout/reports/L1a.md with all 10 sections
-PASS  "## L1a findings" section in AFE/NOTES.md
-PASS  Results-log row for L1a in AFE/NOTES.md
-PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
-PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit b766840
+FAIL  open REVIEW.md items for L1a or an earlier phase (R1 R5) are listed as handled in section 9 of a phase report
+      -> DO: apply R1 R5 BEFORE this phase's own work (redo and re-gate the earlier phase if the item is for it) and list them in section 9
 --- adc_ch layout: AFE/layout/adc/adc_ch.gds
 PASS  DRC report belongs to the current GDS (sha1)
 PASS  DRC ran with the official deck, variant D
@@ -19,6 +15,6 @@ PASS  LVS adc_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
 PASS  Cref plate found: 1 MIM top plate(s) of 59.07 x 59.07 um in adc_ch
 PASS  Cref keep-out: nothing below Metal4 inside the Cref bottom-plate footprint (L3a puts 4 decap units there)
-FAIL  floorplan.py check --gds adc_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/adc/adc_ch.gds: floorplan.py check: 16 PASS, 1 FAIL
-      -> DO: ACCEPT.md ladder A (area) or G-5 (pin side); failing lines: FAIL  5  as-built adc_ch 265.85 x 126.25 um fits its slot 220.00 x 104.00 um  see AFE/layout/ACCEPT.md ladder "area"
-GATE L1a: FAIL  (1 FAIL)
+FAIL  floorplan.py check --gds adc_ch=/foss/designs/ENGN2912E_Project/AFE/layout/adc/adc_ch.gds: floorplan.py check: 16 PASS, 1 FAIL
+      -> DO: ACCEPT.md ladder A (area) or G-5 (pin side); failing lines: FAIL  5  as-built adc_ch: /foss/designs/ENGN2912E_Project/AFE/layout/adc/adc_ch.gds could not be read  le "/usr/lib/python3.12/subprocess.py", line 1955, in _execute_child
+GATE L1a: FAIL  (2 FAIL)

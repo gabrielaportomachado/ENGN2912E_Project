@@ -12,14 +12,17 @@ the fact through the reports AFE/layout/reports/<phase>.md and answers through A
 - Run order and parallelism (8 GB RAM, at most 3 heavy jobs at a time machine-wide: the kit's job slots enforce it across sessions):
   | # | Phase | What | Needs | May run in parallel with | Target |
   |---|---|---|---|---|---|
-  | 1 | L2a | amplifier cell amp_ch: DRC + LVS | - | (running now) | 11-21 |
-  | 2 | L1a | ADC cell adc_ch: DRC + LVS | - | L1d | 11-21 |
-  | 3 | L1d | digital macro afe_dig: final hardening | - | L1a | 11-21 |
-  | 4 | L2b | amp_ch PEX + post-layout simulations | L2a | L1b | 11-22 |
-  | 5 | L1b | adc_ch PEX + post-layout simulations | L1a, L1d | L2b | 11-22 |
-  | 6 | L3a | top assembly (bias_genc, decap, straps, TGATEs), full-chip DRC + LVS | L1d, L2b, L1b | - | 11-23 |
-  | 7 | L3b | post-layout system checks (supply, crosstalk, 8-channel power-up, end-to-end) | L3a | - | 11-24 |
-  | 8 | L4 | submission package | L3b | - | 11-25 |
+  | 1 | L2a | amplifier cell amp_ch: DRC + LVS | - | - | DONE 11-20 |
+  | 2 | L1a | ADC cell adc_ch: DRC + LVS | - | - | DONE 11-20 |
+  | 3 | L1d | digital macro afe_dig: final hardening | - | - | DONE 11-20 (branch worktree-l1d-dig) |
+  | 3a | REVIEW R2 + R3 | tightened floorplan; afe_dig re-hardened at 820 x 80 um (Decision 48) | L1d | - | 11-21 |
+  | 3b | REVIEW R4 | Cin 15 pF: simulations first, then amp_ch re-layout <= 222 x 285 um | R2 | R5 | 11-22 |
+  | 3c | REVIEW R5 | adc_ch re-pack <= 222 x 104 um | R2 | R4 | 11-22 |
+  | 4 | L2b | amp_ch PEX + post-layout simulations (new cell) | R4 | L1b | 11-23 |
+  | 5 | L1b | adc_ch PEX + post-layout simulations (new cell) | R5, R3 | L2b | 11-24 |
+  | 6 | L3a | top assembly (bias_genc, decap, straps, TGATEs), full-chip DRC + LVS | L2b, L1b | - | 11-26 |
+  | 7 | L3b | post-layout system checks (supply, crosstalk, 8-channel power-up, end-to-end) | L3a | - | 11-28 |
+  | 8 | L4 | submission package | L3b | - | 11-29 (official deadline 11-30, Decision 49) |
   Two sessions at once = two terminals in the same repo; each commits only its own files (`git add <paths>`, never `git add -A`); `git pull --rebase` before each commit.
 - If a gate fails: the agent follows the decision ladder of AFE/layout/ACCEPT.md section 4 by itself and never waits for a human. Only if no entry applies it writes AFE/layout/BLOCKED.md, commits and pushes it and stops; you continue with a phase that does not depend on it (RUNBOOK.md "what blocks what"); the answer arrives through REVIEW.md.
 - If late, cut in this order (all pre-approved in ACCEPT.md): (1) L2b / L1b post-layout runs at typ only (`--corner typ`; compare.py then reports the other corners as missing: use `--allow-missing` and say so), (2) L3b items 3-4 at typ only, (3) N = 4 or N = 2 channels only by ladder A-6 / A-7.
