@@ -1,5 +1,5 @@
 * LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
-* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: (defaults)
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --cin 2,61.15,61.15
 * MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
 * File adc_ch.spice: the ADC analog part of one channel (L1).  Cells: dac_sw (split 6+6 MIM DAC, 13 drivers on vdd_dac, 13 sampling TGs, 2 reset switches), cmp_p (on vdd_cmp),
 * vhalf, vrefs (Cref switch + Cref), the INV standard cell (samb), and adc_ch = their wiring in module afe_ch of AFE/top/dbs_afe_top.v (vin = the net amp_out of afe_ch).

@@ -1,5 +1,5 @@
 * LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
-* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v --cin 2,61.15,61.15
 * MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
 * File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 8 x afe_ch + supply devices; the 15 pad-control constants are pins of afe_dig;
 * afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.
@@ -22,12 +22,12 @@ Xs1_xota_xm4 xs1_xota_o1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
 Xs1_xota_xm6 v1 xs1_xota_o1 vss vss nfet_03v3 w=50u l=16u m=4
 Xs1_xota_xm7 v1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
 Xs1_xota_xcc xs1_xota_o1 v1 cap_mim_2f0_m4m5_noshield c_length=22u c_width=22u
-Xs1_xcin1_1 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin1_2 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin2_1 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin2_2 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcf1 xs1_vn v1 cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
-Xs1_xcf2 xs1_vp vcm cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
+Xs1_xcin1_1 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin1_2 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin2_1 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin2_2 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcf1 xs1_vn v1 cap_mim_2f0_m4m5_noshield c_length=8.445791u c_width=8.445791u
+Xs1_xcf2 xs1_vp vcm cap_mim_2f0_m4m5_noshield c_length=8.445791u c_width=8.445791u
 Xs1_xr1_xm1 xs1_xr1_m gm1 xs1_vn xs1_vn pfet_03v3 w=0.22u l=0.5u
 Xs1_xr1_xm2 xs1_xr1_m gm1 v1 v1 pfet_03v3 w=0.22u l=0.5u
 Xs1_xr2_xm1 xs1_xr2_m gm1 xs1_vp xs1_vp pfet_03v3 w=0.22u l=0.5u
