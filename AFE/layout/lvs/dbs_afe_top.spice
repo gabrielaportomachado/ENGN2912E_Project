@@ -22,10 +22,10 @@ Xs1_xota_xm4 xs1_xota_o1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
 Xs1_xota_xm6 v1 xs1_xota_o1 vss vss nfet_03v3 w=50u l=16u m=4
 Xs1_xota_xm7 v1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
 Xs1_xota_xcc xs1_xota_o1 v1 cap_mim_2f0_m4m5_noshield c_length=22u c_width=22u
-Xs1_xcin1_1 rec xs1_vn cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin1_2 rec xs1_vn cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin2_1 ref xs1_vp cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
-Xs1_xcin2_2 ref xs1_vp cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin1_1 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin1_2 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin2_1 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin2_2 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
 Xs1_xcf1 xs1_vn v1 cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
 Xs1_xcf2 xs1_vp vcm cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
 Xs1_xr1_xm1 xs1_xr1_m gm1 xs1_vn xs1_vn pfet_03v3 w=0.22u l=0.5u
@@ -40,7 +40,7 @@ Xs2_xota2_xm4 xs2_xota2_o2 xs2_xota2_d1 vdd vdd pfet_03v3 w=1u l=20u
 Xs2_xota2_xmf vdd xs2_xota2_o2 out vss nfet_06v0_nvt w=10u l=2u
 Xs2_xota2_xms out vbn vss vss nfet_03v3 w=16u l=4u m=6
 Xs2_xota2_xcc xs2_xota2_o2 vss cap_mim_2f0_m4m5_noshield c_length=31.463538u c_width=31.463538u
-Xs2_xcin v1 xs2_vn2 cap_mim_2f0_m4m5_noshield c_length=38.588264u c_width=38.588264u
+Xs2_xcin xs2_vn2 v1 cap_mim_2f0_m4m5_noshield c_length=38.588264u c_width=38.588264u
 Xs2_xcf xs2_vn2 out cap_mim_2f0_m4m5_noshield c_length=11.917642u c_width=11.917642u
 Xs2_xr_xm1 xs2_xr_m gm2 xs2_vn2 xs2_vn2 pfet_03v3 w=0.22u l=0.5u
 Xs2_xr_xm2 xs2_xr_m gm2 out out pfet_03v3 w=0.22u l=0.5u

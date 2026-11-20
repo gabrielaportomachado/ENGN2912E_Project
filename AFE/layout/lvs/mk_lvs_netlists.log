@@ -22,8 +22,9 @@ ELEMENT RULES APPLIED (simulation netlist -> LVS reference)
   dac_sw        removed  Cpbd   bd vss {DSW_CPAR}  (ideal element, no layout device)
   cmp_p         replaced Cxa1 a1 vss {CMP_CA} (= 40.0 fF ideal)  by  XCxa1 a1 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u (54.52 fF, the smallest legal MIM)
   cmp_p         replaced Cxa2 a2 vss {CMP_CA} (= 40.0 fF ideal)  by  XCxa2 a2 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u (54.52 fF, the smallest legal MIM)
-  stage1c       split    Xcin1 rec vn: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on rec
-  stage1c       split    Xcin2 ref vp: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on ref
+  stage1c       split    Xcin1 rec vn: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on vn
+  stage1c       split    Xcin2 ref vp: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on vp
+  stage2c       swapped  the plates of Xcin: top plate on vn2 (--cin-top sum)
   every cell      cap_mim_2f0_m2m3_noshield -> cap_mim_2f0_m4m5_noshield (same model parameters; the 5-metal stack has the MIM between Metal4 and Metal5)
 
 DEVICE CENSUS per analog cell:  simulation netlist  ->  LVS reference
@@ -45,8 +46,8 @@ DEVICE CENSUS per analog cell:  simulation netlist  ->  LVS reference
                 LVS: nfet_05v0 x1, pfet_05v0 x1   (2 devices; pins: out c cbar in vdd vss)
 
 MIM CAPACITORS of the LVS reference (C from the netlists' formula C = 0.00199 W L + 2.383e-10 x 2 (W + L); rule check 25 um2 <= area <= 10,000 um2)
-  afe_chc         4 x  70.649028u x 70.649028u =    4991.3 um2    10000.00 fF each   ok  e.g. Xs1_xcin1_1 (top rec, bottom xs1_vn)
-  afe_chc         1 x  38.588264u x 38.588264u =    1489.1 um2     3000.00 fF each   ok  e.g. Xs2_xcin (top v1, bottom xs2_vn2)
+  afe_chc         4 x  70.649028u x 70.649028u =    4991.3 um2    10000.00 fF each   ok  e.g. Xs1_xcin1_1 (top xs1_vn, bottom rec)
+  afe_chc         1 x  38.588264u x 38.588264u =    1489.1 um2     3000.00 fF each   ok  e.g. Xs2_xcin (top xs2_vn2, bottom v1)
   afe_chc         1 x  31.463538u x 31.463538u =     990.0 um2     2000.00 fF each   ok  e.g. Xs2_xota2_xcc (top xs2_xota2_o2, bottom vss)
   afe_chc         1 x        22u x 22u       =     484.0 um2      984.13 fF each   ok  e.g. Xs1_xota_xcc (top xs1_xota_o1, bottom v1)
   afe_chc         1 x  11.917642u x 11.917642u =     142.0 um2      294.00 fF each   ok  e.g. Xs2_xcf (top xs2_vn2, bottom out)

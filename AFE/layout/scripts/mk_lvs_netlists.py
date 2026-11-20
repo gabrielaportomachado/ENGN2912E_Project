@@ -635,7 +635,7 @@ def main():
     ap = argparse.ArgumentParser(description='LVS reference netlists from the simulation netlists (AUDIT 4.9.3)')
     ap.add_argument('--out', default=os.path.join(LAY, 'lvs'))
     ap.add_argument('--cin', default='2', help='N or N,W_um,L_um: pieces of each stage-1 input capacitor (default 2 squares sized for C/N each)')
-    ap.add_argument('--cin-top', default='rec', choices=('rec', 'sum'), help='which net the TOP plate of the input capacitors (stage 1 Cin, stage 2 Cin2) is on: rec = as in the simulation netlists '
+    ap.add_argument('--cin-top', default='sum', choices=('rec', 'sum'), help='which net the TOP plate of the input capacitors (stage 1 Cin, stage 2 Cin2) is on: rec = as in the simulation netlists '
                     '(electrode / driven side on top, summing node on the bottom plate); sum = summing node on the top plate')
     ap.add_argument('--decap', default='20,20', help='W_um,L_um of ONE cap_nmos_03v3 decap unit (c_width, c_length)')
     ap.add_argument('--rstrap', default='rm3,2,222.2', help='MODEL,W_um,L_um of the 10 ohm strap resistor')
