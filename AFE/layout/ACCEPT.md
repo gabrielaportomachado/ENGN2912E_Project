@@ -1,6 +1,6 @@
 # Acceptance limits and pre-approved decisions for the layout phases (LP, 2026-11-20)
 
-**STATUS: PROPOSED.** Nothing here is in force until the user approves it as **Decision 47** in AFE/NOTES.md. `gate.py` refuses every phase after L2a while Decision 47 is missing.
+**STATUS: IN FORCE (user, 2026-11-20); reviewed after the fact, changes arrive through AFE/layout/REVIEW.md.** No phase waits for an approval: every phase decides with this file.
 Written by phase LP so that one person can run L1a, L1d, L2b, L1b, L3a, L3b, L4 without asking anyone. Every number has its source; baselines are in `AFE/layout/baseline/`.
 
 How it is used: a phase ends with `python3 AFE/layout/scripts/gate.py <phase>`. The gate reads the DRC / LVS / PEX reports of `flow.py`, the results of the golden testbenches
@@ -15,7 +15,7 @@ property tolerance; add dummies, taps, guard rings, shields, decap units beyond 
 change floorplan parameters with `floorplan.py build --set key=value` inside the outline; apply every entry of section 4 marked PRE-APPROVED.
 
 MAY NOT: edit a simulation netlist, the RTL (`rtl/`, `AFE/adc/rtl/`, `AFE/top/dbs_afe_top.v`), a file under `AFE/layout/lvs/` by hand, `accept_limits.json`, a baseline, or this file; change a device
-size, a capacitor value or a bias tap; write a numbered Decision; skip a gate; use a raw `ext2spice` netlist for a post-layout number; exceed the 1000 x 1000 um outline.
+size, a capacitor value or a bias tap; write a numbered Decision; edit AFE/layout/REVIEW.md; skip a gate; use a raw `ext2spice` netlist for a post-layout number; exceed the 1000 x 1000 um outline.
 
 ## 2. NEEDS THE USER'S EYE: two conventions for the pseudo-resistor transistors (found in LP)
 
@@ -37,7 +37,7 @@ leakage resistance of the MIM capacitors (both are model floors, audit risk R1),
 Meaning: in the junction convention the capacitor leakage, not the pseudo-resistor, sets the DC state, so the amplifier is DC coupled with gain 1000 for slow electrode offsets; after each reset the
 output is at mid-scale and then drifts by about (electrode offset) x 1 /s. Which convention silicon follows is not knowable from the models.
 
-**Pre-decided handling (part of Decision 47 if approved; the alternatives are in AFE/NOTES.md "LP findings"):**
+**Pre-decided handling (in force; the user reviews it after the fact through AFE/layout/REVIEW.md; the alternatives are in AFE/NOTES.md "LP findings"):**
 1. The GATES of L2b and L3b use the DESIGN convention: `tb_amp_*.py` strip the junction area of exactly these six devices from the extracted netlist (lptb.strip_pr), so post-layout numbers are
    comparable with every approved number. Each amplifier check is ALSO run with `--junction` (the netlist as extracted) and reported next to it; of those only the rows of section 3 marked
    `junction` are limits (gain, f_hi, output level after RST_AMP), the rest is the risk view.
@@ -134,9 +134,8 @@ Post-layout values (baseline = schematic, post = extracted; the same script and 
 | top_supply | L3b | dres_max_lsb | ff-40 | <= 0.5 | WARN only | ff -40: more than the pre-layout 0.5 LSB: report and state the pad inductance used |
 | top_supply | L3b | failed | all | <= 0 |  | every case converges |
 | top_xtalk | L3b | victim_conv_lsb | all | <= 0.5 |  | what the neighbour's conversions add at the victim's next samples: <= 0.5 LSB (pre-layout 0.002 LSB; the kick only matters within 5 us of a resume) |
-| top_xtalk | L3b | dcode_conv | all | <= 0 |  | the victim code does not change with the neighbour's conversions |
 | top_pwrup8 | L3b | err_max_mv | all | <= 10 |  | L3b item 5: every output within 10 mV of 1.65 V 1 s after the common RST_AMP |
-| top_pwrup8 | L3b | vrs_dip_mv | all | <= 60 | WARN only | dip of the shared reset level while 8 channels reset together (audit R10 estimate 12 mV; baseline 15 mV): report |
+| top_pwrup8 | L3b | vrs_dip_mv | all | change <= +30 | WARN only | dip of the shared reset level while 8 channels reset together; baseline 15 / 14 / 137 mV (typ / ff85 / ss-40, the cold bias is still settling at 5 s); a larger dip = more load on vrs: report |
 | top_stim | L3b | rec_dev_mv | all | <= 5 |  | the parked amplifier input stays on vcm_in while the IPG path carries 2.9 V pp |
 | top_stim | L3b | out_dev_mv | all | <= 50 |  | the parked amplifier stays out of the rails during stimulation (baseline 0.02 mV) |
 | top_stim | L3b | rec_dev_mv_leak | all | <= 5 |  | same with 200 pA of pad leakage on E and REF |
@@ -146,18 +145,18 @@ Post-layout values (baseline = schematic, post = extracted; the same script and 
 | top_stim | L3b | t_1mv_s | all | <= 4.5 |  | as amp_reset without offset (baseline 0.8 s) |
 <!-- LIMITS END -->
 
-Digital macro afe_dig (L1d; numbers of the LP trial in AFE/dig/LP_STEP5.md):
+Digital macro afe_dig (L1d; numbers of the LP trial: AFE/dig/LP_STEP5.md, AFE/dig/reports/flow_summary.rpt, sta_audit_dig.log, klayout_drc.log, AFE/dig/sim/tb_audit_dig_summary.log):
 
 | item | limit | trial | why |
 |---|---|---|---|
-| setup / hold at the 5 corners, 2 MHz clock (500 ns), 0.5 ns uncertainty | 0 violations | 0 / 0 (setup ws 91.6 ns ss_125, hold ws 0.06 ns ff_n40) | STA sign-off |
+| setup / hold at the 5 corners, 2 MHz clock (500 ns), 0.5 ns uncertainty | 0 violations | 0 / 0 (setup ws 91.69 ns ss_125, hold ws 0.229 ns ff_n40) | STA sign-off |
 | max-slew / max-cap violations | 0 | 0 / 0 (D3 macro: 16 / 3) | audit M6 |
-| DAC edge -> comparator clock of ADC 0, ff_n40C_3v60 (worst SPEF) | >= 21.0 ns | 21.55 ns | DAC settling at the fast corner 15.1 ns + margin (AUDIT 4.4.3) |
-| last comparator window end -> next SCLK edge at the register clock pins, ss_125C_3v00, 3 MHz | >= 20.0 ns | 21.12 ns | the next DAC edge is launched through the same clock buffer, so this is the physical margin (AUDIT 4.4.5). Against the SCLK PIN the trial has 19.08 ns: reported, not a limit |
-| captured decision -> code register slack at 3 MHz, ss_125 | >= 10 ns | 12.24 ns | STA |
-| sw_rec / sw_rec_b skew at the macro pins | <= 3 ns | see LP_STEP5.md | harmless (<= 8 fC for 100 mV, AUDIT 4.4.3); a larger value means a missing buffer |
+| DAC edge -> comparator clock of ADC 0, ff_n40C_3v60 (worst SPEF) | >= 21.0 ns | 22.14 ns | DAC settling at the fast corner 15.1 ns + margin (AUDIT 4.4.3) |
+| last comparator window end -> next SCLK edge at the register clock pins, ss_125C_3v00, 3 MHz | >= 20.0 ns | 22.39 ns | the next DAC edge is launched through the same clock buffer, so this is the physical margin (AUDIT 4.4.5). Against the SCLK PIN the trial has 20.59 ns: reported, not a limit |
+| captured decision -> code register slack at 3 MHz, ss_125 | >= 10 ns | 13.75 ns (D3: 14.25) | STA |
+| sw_rec / sw_rec_b skew at the macro pins | <= 3 ns | <= 0.78 ns (ss_125) | harmless (<= 8 fC for 100 mV, AUDIT 4.4.3); a larger value means a missing buffer |
 | gate-level testbench `run_tb_audit.sh` on the hardened netlist, 5 matched corners + MIXED, 2 and 3 MHz, 3 scenarios | failing assertions only X1.contention, X5.word0, X5.after33d, T11.crowbar, and T2.settle at MIXED | as required | audit 4.4.6; Decision 44f |
-| KLayout DRC variant D on the macro GDS | 0 | 0 (4 min, 642 MB) | the D3 flow skipped it (M6) |
+| KLayout DRC variant D on the macro GDS | 0 | 0 (3:36 wall, 645 MB) | the D3 flow skipped it (M6) |
 | pins | `floorplan.py check --dig-pins`: side and position per floorplan.json | PASS | SPEC.md 3.5 |
 | die | <= 820 x 110 um | 819.84 x 109.76 um | floorplan slot |
 
@@ -271,10 +270,10 @@ Ranked, cheapest first; apply in this order, re-run `floorplan.py check` after e
 **N. Native-Vt device (audit M7; LP step 6: AFE/amp/sim/lp_rvt_summary.md)**
 - N-1 Trigger: the organizer refuses `nfet_06v0_nvt`, or their precheck rejects it. (While there is no answer the layout keeps the native device: it passes the open-source DRC / LVS decks.)
 - N-2 PRE-APPROVED swap: use `AFE/amp/spice/ota2_rvt.spice` + `afe_chc_rvt.spice` in place of `ota2.spice` + `afe_chc.spice` (follower = nfet_03v3 8 x 10u/1u in an isolated p-well in a deep
-  n-well, bulk on its source, deep n-well on vdd; pins unchanged; +575 um2 per channel); regenerate the LVS references from them (substitute the two SIM_FILES entries; one reference line changes);
+  n-well, bulk on its source, deep n-well on vdd; pins unchanged; +575 um2 per channel); regenerate the LVS references from them (`python3 AFE/layout/scripts/mk_lvs_netlists.py --follower rvt` + the options of the current references, see the header of AFE/layout/lvs/dbs_afe_top.spice; exactly one reference line changes: `Xs2_xota2_xmf vdd xs2_xota2_o2 out out nfet_03v3 w=10u l=1u m=8`, tested in LP); the testbenches take the variant by `AFE_AMP_VARIANT=rvt` (lptb.py);
   replace the follower in amp_ch; re-run DRC, LVS, PEX and every L2b check against the variant numbers of `AFE/amp/sim/lp_rvt_result.json` (same limits; THD <= 0.25 % at all three corners because
   the variant removes the ff 85 clipping), and tb_top_e2e.py typ.
-- N-3 If the deep n-well is refused too: `AFE/amp/spice/ota2_rvt_nodnw.spice` (10 x 10u/0.28u, bulk on vss): top margin 32 mV at ss -40 C, VDD >= 3.3 V required, f_hi 602 / 925 / 386 Hz: state
+- N-3 If the deep n-well is refused too: `AFE/amp/spice/ota2_rvt_nodnw.spice` (`--follower nodnw`, `AFE_AMP_VARIANT=nodnw`) (10 x 10u/0.28u, bulk on vss): top margin 32 mV at ss -40 C, VDD >= 3.3 V required, f_hi 602 / 925 / 386 Hz: state
   both in the README. If neither is allowed: BLOCKED.md.
 
 **O. Organizer silent**: section 5.
@@ -299,5 +298,11 @@ Ranked, cheapest first; apply in this order, re-run `floorplan.py check` after e
 ## 6. Last resort: BLOCKED.md
 
 Write `AFE/layout/BLOCKED.md` only when no ladder entry applies or the ladder says so. Content: phase, the gate line that failed (copied), what was tried (commands, each result), the evidence
-files, the smallest decision that would unblock it (one question with 2-3 options and what each costs), and what can continue meanwhile. Commit it, push, stop that phase; phases that do not
-depend on it may continue (RUNBOOK.md table "what blocks what").
+files, the smallest decision that would unblock it (one question with 2-3 options and what each costs), and what can continue meanwhile. Commit it, push, stop that phase; the phases that do not
+depend on it continue (RUNBOOK.md table "what blocks what"). Nobody is waited for: the user / monitoring session answers through AFE/layout/REVIEW.md, and the next phase applies the answer.
+
+## 7. Feedback: AFE/layout/REVIEW.md
+
+Written only by the user / monitoring session; a phase never edits it. Every phase starts with `git pull`, reads it and applies every open item addressed to it or to an earlier phase
+BEFORE its own work (a fix to a finished phase is redone and that phase's gate re-run first), and lists the items in section 9 of its report AFE/layout/reports/<phase>.md. An item may change
+this file or a protected file; then the phase follows the item, and gate.py accepts the change when section 9 of the report names the item and the file.

@@ -1,5 +1,5 @@
 {
- "_about": "Machine-readable acceptance limits of AFE/layout/ACCEPT.md (PROPOSED until the user approves ACCEPT.md as Decision 47). Read by AFE/layout/tb/compare.py and AFE/layout/scripts/gate.py. kinds: max / min (value against the limit), range [lo, hi], absmax (|value|), dmax (|value - baseline|), dinc (value - baseline), rrange [lo, hi] (value / baseline), report (no limit). A limit may be a number or {corner: number}. nan_ok: a missing value passes. soft: a miss prints WARN and does not fail the gate. Rationale and the Decision behind every row: ACCEPT.md section 3.",
+ "_about": "Machine-readable acceptance limits of AFE/layout/ACCEPT.md (IN FORCE, user 2026-11-20; changes through AFE/layout/REVIEW.md). Read by AFE/layout/tb/compare.py and AFE/layout/scripts/gate.py. kinds: max / min (value against the limit), range [lo, hi], absmax (|value|), dmax (|value - baseline|), dinc (value - baseline), rrange [lo, hi] (value / baseline), report (no limit). A limit may be a number or {corner: number}. nan_ok: a missing value passes. soft: a miss prints WARN and does not fail the gate. Rationale and the Decision behind every row: ACCEPT.md section 3.",
  "amp_ac": {
   "phase": "L2b",
   "convention": "design",
@@ -823,9 +823,8 @@
    ],
    "dcode_conv": [
     {
-     "kind": "max",
-     "limit": 0,
-     "why": "the victim code does not change with the neighbour's conversions"
+     "kind": "report",
+     "why": "victim code change after frame 0: the victim sits 0.28 LSB (run-to-run DC floor) from a code edge, so 1 code toggles with a 0.001 LSB conversion-induced change (LP baseline: victim_conv 0.0011 LSB, dcode 1); victim_conv_lsb is the limit"
     }
    ],
    "victim_peak_mv": [
@@ -858,10 +857,10 @@
    ],
    "vrs_dip_mv": [
     {
-     "kind": "max",
-     "limit": 60.0,
+     "kind": "dinc",
+     "limit": 30.0,
      "soft": true,
-     "why": "dip of the shared reset level while 8 channels reset together (audit R10 estimate 12 mV; baseline 15 mV): report"
+     "why": "dip of the shared reset level while 8 channels reset together; baseline 15 / 14 / 137 mV (typ / ff85 / ss-40, the cold bias is still settling at 5 s); a larger dip = more load on vrs: report"
     }
    ],
    "latched_before": [

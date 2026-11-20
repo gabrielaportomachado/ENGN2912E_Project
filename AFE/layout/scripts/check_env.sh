@@ -20,9 +20,11 @@ jget(){ python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(eval(
 # ---- reference values of the LP machine (2026-11-20, AFE/layout/sim/check_env_ref.log)
 REF_IMAGE=2026.04
 declare -A REF=( [klayout]=0.30.8 [magic]=8.3.636 [netgen]=1.5.318 [ngspice]=46 [iverilog]=14.0 [yosys]=0.64 [openroad]=26Q2-254-g61932e897 [librelane]=3.0.2 [sta]=3.1.0 )
-# Disk / RAM minimum for ALL remaining phases (sources: AFE/dig/LP_STEP5.md for the LibreLane run; AFE/layout/sim/lp_fullchip_drc.log for the full-chip DRC of the floorplan mock;
-# the D1 phase once leaked 13 GB of simulation scratch, so the limit has margin and every phase deletes AFE/layout/.ptmp at its end):
-MIN_DISK_GB=10; WARN_DISK_GB=20; MIN_RAM_GB=7; MIN_AVAIL_GB=3
+# Disk / RAM minimum for ALL remaining phases. Measured on the LP machine: afe_dig LibreLane run directory 183 MB, peak 549 MB RSS (AFE/dig/reports/flow_summary.rpt); KLayout DRC of
+# the macro 645 MB RSS, 1 MB run directory (AFE/dig/reports/klayout_drc.log); kit smoke test (section B/C) < 200 MB of scratch. ESTIMATE for the full chip (not measured): GDS < 100 MB, flat
+# DRC < 3 GB RSS, PEX netlists < 1 GB.  The repository file system holds only committed outputs (MIN_REPO_GB); simulation / extraction scratch goes to $AFE_SCRATCH (MIN_DISK_GB; the D1
+# phase once leaked 13 GB of simulation scratch, so that limit has margin, and every phase deletes its scratch at the end).
+MIN_REPO_GB=3; MIN_DISK_GB=10; WARN_DISK_GB=20; MIN_RAM_GB=7; MIN_AVAIL_GB=3
 
 echo "check_env.sh  $(date '+%Y-%m-%d %H:%M')  host $(hostname)  $(uname -m)  repo $ROOT  commit $(git rev-parse --short HEAD 2>/dev/null)"
 echo "--- A. environment"
@@ -80,11 +82,13 @@ mkdir -p "$W/ng0"; cp "$W/ng/t.spice" "$W/ng0/"; (cd "$W/ng0" && ngspice -b t.sp
 echo "INFO  A5 without it this machine would use ${th0:-?} threads per job (5-35x slower for these netlists); SPICE_USERINIT_DIR=${SPICE_USERINIT_DIR:-unset}"
 if git lfs version >/dev/null 2>&1; then pass "A6 $(git lfs version | cut -d' ' -f1)"; else warn "A6 git-lfs not found" "FSM2/sim/** is stored with git-lfs; AFE/ does not use it, but install git-lfs before you push"; fi
 if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo "INFO  A6 branch $(git rev-parse --abbrev-ref HEAD), origin $(git remote get-url origin 2>/dev/null)"; else fail "A6 not a git work tree" "clone the repository and run from it"; fi
-fg=$(df -Pk "$ROOT" | awk 'NR==2{printf "%d", $4/1048576}')
-if [ "$fg" -ge "$WARN_DISK_GB" ]; then pass "A7 free disk on the repository file system: $fg GB (minimum $MIN_DISK_GB GB for all remaining phases)"
-elif [ "$fg" -ge "$MIN_DISK_GB" ]; then warn "A7 free disk $fg GB (minimum $MIN_DISK_GB, comfortable $WARN_DISK_GB)" "delete AFE/layout/.ptmp and old LibreLane run directories after every phase; or set AFE_SCRATCH to a larger disk"
-else fail "A7 free disk $fg GB, less than the $MIN_DISK_GB GB minimum" "free space, or export AFE_SCRATCH=<directory on a disk with >= $MIN_DISK_GB GB> (e.g. /tmp inside the container) before every phase"; fi
-sg=$(df -Pk "$AFE_SCRATCH" | awk 'NR==2{printf "%d", $4/1048576}'); echo "INFO  A7 scratch directory $AFE_SCRATCH: $sg GB free"
+fg=$(df -Pk "$ROOT" | awk 'NR==2{printf "%d", $4/1048576}'); sg=$(df -Pk "$AFE_SCRATCH" | awk 'NR==2{printf "%d", $4/1048576}')
+same=0; [ "$(df -P "$ROOT" | awk 'NR==2{print $1}')" = "$(df -P "$AFE_SCRATCH" | awk 'NR==2{print $1}')" ] && same=1
+if [ "$fg" -lt "$MIN_REPO_GB" ]; then fail "A7 free disk on the repository file system $fg GB, less than $MIN_REPO_GB GB" "free space on the disk of the repository"
+else pass "A7 free disk on the repository file system: $fg GB (minimum $MIN_REPO_GB GB for the committed outputs)"; fi
+if [ "$sg" -lt "$MIN_DISK_GB" ]; then fail "A7 scratch AFE_SCRATCH=$AFE_SCRATCH has $sg GB free, less than $MIN_DISK_GB GB" "export AFE_SCRATCH=<directory on a disk with >= $MIN_DISK_GB GB> (e.g. /tmp/afe_scratch inside the container) before every phase"
+elif [ "$sg" -lt "$WARN_DISK_GB" ]; then warn "A7 scratch $AFE_SCRATCH: $sg GB free (minimum $MIN_DISK_GB, comfortable $WARN_DISK_GB)" "delete the scratch and old LibreLane run directories after every phase"
+else pass "A7 scratch $AFE_SCRATCH: $sg GB free (minimum $MIN_DISK_GB GB)$([ $same = 1 ] && echo ', same file system as the repository')"; fi
 mt=$(awk '/MemTotal/{printf "%.1f", $2/1048576}' /proc/meminfo); ma=$(awk '/MemAvailable/{printf "%.1f", $2/1048576}' /proc/meminfo)
 if awk "BEGIN{exit !($mt >= $MIN_RAM_GB)}"; then pass "A8 RAM $mt GB total (minimum $MIN_RAM_GB), $(nproc) cores"; else fail "A8 RAM $mt GB total, minimum $MIN_RAM_GB GB" "give the container at least 8 GB (Docker Desktop: Settings > Resources)"; fi
 if awk "BEGIN{exit !($ma >= $MIN_AVAIL_GB)}"; then pass "A8 RAM available now $ma GB (need >= $MIN_AVAIL_GB)"; else warn "A8 only $ma GB of RAM available now" "close other programs; the slot wrapper limits heavy jobs to 3 (AFE_SLOTS=2 on a loaded machine)"; fi

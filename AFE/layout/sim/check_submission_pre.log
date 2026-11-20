@@ -1,0 +1,26 @@
+PASS    info.yaml project keys equal the template (title team discord description lvs_config gf_def_ready ws_def_ready drc_ready lvs_ready export_control)
+PASS    info.yaml: 24 pads, io_type one of the 7 template types
+PASS    info.yaml has 24 distinct pads (Decision 45)
+PASS    top ports of AFE/top/dbs_afe_top.v (41) = the ports the 24 pads need (41)
+PASS    export-control document documents/Export_Control_GF_Rev8.2.docx exists
+PASS    lvs_config lvs_config.json exists
+PENDING info.yaml ready flags {'gf_def_ready': 'false', 'ws_def_ready': 'false', 'drc_ready': 'false', 'lvs_ready': 'false'} (set to true when gate.py L4 passes)
+        -> produced by phase L4
+PASS    lvs_config.json keys equal the template
+PASS    TOP_SOURCE = dbs_afe_top (default name, ACCEPT.md section 5: rename here, in the GDS and in the SPICE top if the organizer assigns one)
+PENDING lvs_config file spice/dbs_afe_top.spice does not exist yet
+        -> produced by phase L4 (copies AFE/layout/lvs/dbs_afe_top.spice -> spice/, AFE/dig/final/afe_dig.pnl.v -> verilog/gl/afe_dig.v, the L3a GDS -> gds/)
+PENDING lvs_config file verilog/gl/afe_dig.v does not exist yet
+        -> produced by phase L4 (copies AFE/layout/lvs/dbs_afe_top.spice -> spice/, AFE/dig/final/afe_dig.pnl.v -> verilog/gl/afe_dig.v, the L3a GDS -> gds/)
+PASS    lvs_config file gds/dbs_afe_top.gds exists
+PASS    GDS has one top cell dbs_afe_top (['dbs_afe_top'])
+PASS    GDS inside the 1000 x 1000 um outline: bbox 1000.000 x 1000.000 um at (0.000, 0.000)
+PENDING flow.py drc report of gds/dbs_afe_top.gds (today the file is the PR-boundary GDS of Decision 45)
+        -> produced by phase L3a (DRC / LVS of the full chip), L4 (copies the GDS)
+PENDING flow.py lvs report of gds/dbs_afe_top.gds (today the file is the PR-boundary GDS of Decision 45)
+        -> produced by phase L3a (DRC / LVS of the full chip), L4 (copies the GDS)
+PASS    README.md has the sections Block diagram, Pins, Host rules, Board needs, Test plan
+PENDING README.md still has 4 `<L4: ...>` placeholders
+        -> produced by phase L4
+PASS    technical answers for the export-control form: documents/export_control_answers.md (the signer copies them into the .docx and signs)
+RESULT check_submission --pre: PASS  (13 PASS, 6 PENDING, 0 FAIL)

@@ -650,7 +650,13 @@ def main():
     ap.add_argument('--ties', default='dig', choices=('dig', 'resistor'), help='the 15 constant pad-control pins: dig = output pins of afe_dig driven by its tie cells (Decision 46e, default); '
                     'resistor = 0-ohm resistors to VDD / VSS in the top (the F1 form)')
     ap.add_argument('--dig-netlist', default=None, help='powered gate-level netlist of afe_dig (L1d): its port order is used for the black-box instance')
+    ap.add_argument('--follower', default='native', choices=('native', 'rvt', 'nodnw'), help='output follower of stage 2: native = nfet_06v0_nvt (design netlists, default); rvt / nodnw = '
+                    'the pre-approved fallbacks of ACCEPT.md ladder N (AFE/amp/spice/ota2_rvt.spice + afe_chc_rvt.spice, or ota2_rvt_nodnw.spice + afe_chc_rvt.spice; LP step 6)')
     opt = ap.parse_args()
+    if opt.follower != 'native':
+        sub = {'AFE/amp/spice/ota2.spice': 'AFE/amp/spice/ota2_rvt.spice' if opt.follower == 'rvt' else 'AFE/amp/spice/ota2_rvt_nodnw.spice',
+               'AFE/amp/spice/afe_chc.spice': 'AFE/amp/spice/afe_chc_rvt.spice'}
+        SIM_FILES[:] = [sub.get(f, f) for f in SIM_FILES]
     c = opt.cin.split(',')
     opt.cin_n, opt.cin_w, opt.cin_l = int(c[0]), (float(c[1]) if len(c) == 3 else None), (float(c[2]) if len(c) == 3 else None)
     dw, dl = [float(x) for x in opt.decap.split(',')]

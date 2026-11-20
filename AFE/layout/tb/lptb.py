@@ -298,6 +298,8 @@ def amp_x2_env(netlist, corner, log=None):
     for k in ('X2_AMP_INC', 'X2_AMP_SUBCKT', 'X2_AMP_NODESET'):
         os.environ.pop(k, None)
     if netlist == 'schematic':
+        if AMP_VARIANT != 'native':
+            os.environ['X2_AMP_INC'] = ':'.join(os.path.join(AMP, 'spice', amp_file(f) + '.spice') for f in ('ota1', 'ota2', 'stage1c', 'stage2c', 'afe_chc'))
         return None
     d = Dut('amp_ch', strip_pr(netlist, False), AMP_PINS, as_cell='afe_chc_pex', pinmap=AMP_MAP)
     d.sim_pins = AFE_CHC_PINS
@@ -348,10 +350,20 @@ def model_lines(corner, extra=()):
     return L
 
 
+AMP_VARIANT = os.environ.get('AFE_AMP_VARIANT', 'native')      # native | rvt | nodnw: the follower of ACCEPT.md ladder N (LP step 6); only the SCHEMATIC files change, a PEX netlist has its own devices
+VARIANT_FILES = {'native': {}, 'rvt': {'ota2': 'ota2_rvt', 'afe_chc': 'afe_chc_rvt'}, 'nodnw': {'ota2': 'ota2_rvt_nodnw', 'afe_chc': 'afe_chc_rvt'}}[AMP_VARIANT]
+if AMP_VARIANT != 'native':
+    os.environ['X2_AMP_INC'] = ':'.join(os.path.join(AMP, 'spice', VARIANT_FILES.get(f, f) + '.spice') for f in ('ota1', 'ota2', 'stage1c', 'stage2c', 'afe_chc'))
+
+
+def amp_file(f):
+    return VARIANT_FILES.get(f, f)
+
+
 def amp_includes(corner, dut, more=()):
-    files = ['pseudoR', 'ota1_params', 'afe_params', 'a4c_params', 'ota1', 'ota2', 'bias_genc', 'stage1c', 'stage2c', 'afe_chc', 'fs_oneshot_c', 'src_randles'] + list(more)
+    files = [amp_file(f) for f in ['pseudoR', 'ota1_params', 'afe_params', 'a4c_params', 'ota1', 'ota2', 'bias_genc', 'stage1c', 'stage2c', 'afe_chc', 'fs_oneshot_c', 'src_randles']] + list(more)
     if dut.pex:
-        files = [f for f in files if f not in ('afe_chc',)]
+        files = [f for f in files if f not in ('afe_chc', 'afe_chc_rvt')]
     L = model_lines(corner, dut.models) + ['.include %s/spice/%s.spice' % (AMP, f) for f in files]
     if getattr(dut, 'prdiff', False):
         L = [('.include ' + pseudo_r_with_diffusion()) if x.endswith('/pseudoR.spice') else x for x in L]

@@ -1,0 +1,19 @@
+PASS  1  floorplan.json is what floorplan.py builds from its stored params (not edited by hand)
+PASS  2a every block and corridor lies inside the 1000 x 1000 um outline
+PASS  2b no two blocks / corridors overlap (18 rectangles)
+PASS  2c the channel slot is exactly tiled by control corridor, adc_ch, amp_ch, TGATE zone and spur corridor
+PASS  3a every port bit of module dbs_afe_top is exactly one floorplan pin (41 bits, 41 pins)
+PASS  3b info.yaml: 24 pads; each pad has exactly the ports the organizer template asks for its io_type, and no port is left over
+PASS  3c every floorplan pin names the pad of info.yaml it belongs to
+PASS  3d every pin is on the outline edge it names
+PASS  3e no two pins of one edge touch (>= 0.5 um between pin shapes)
+PASS  3f the afe_dig contract lists every macro signal pin exactly once (286 pins + VDD / VSS)
+PASS  3g the last pin of the macro pin groups (x = 809 um) is on the macro (width 820 um)
+PASS  4a slot / estimate - 1: amp_ch +12 %, adc_ch +53 %, bias_genc +42 % (>= 10 % each; estimates: AFE/review/sim/f1_area.log)
+PASS  4b afe_dig: 37 % utilisation of 820 x 110 um with the estimated cell area (30-60 %)
+PASS  4c decap: ADC-main 117.9 pF in 74 units (>= 115), ADC-DAC 102.0 pF in 64 units (>= 95); 0.125 + 0.1 nF asked by Decision 44d
+PASS  4d one decap row of 34 units (24 um pitch) fits the 820 um strap corridor length and its 26 um height (unit 22.16 x 22.41 um)
+PASS  4e the west ring bank of 38 units (24 um pitch) fits between y = 40 and 960
+PASS  6  the hardened afe_dig pins (AFE/dig/trial/afe_dig_pins.json) are on the contract side, N / S pins within 1.5 um and W pins within 2.5 um of the contract position
+PASS  6  hardened afe_dig die 819.84 x 109.76 um <= the slot 820 x 110
+floorplan.py check: 18 PASS, 0 FAIL

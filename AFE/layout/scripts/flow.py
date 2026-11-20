@@ -86,6 +86,12 @@ def run(cmd, cwd, log, timeout=None, stdin=None, env=None):
 
 
 def wjson(path, d):
+    g = d.get('gds')
+    if g and 'gds_sha1' not in d:                        # gate.py checks that a report belongs to the GDS that is committed
+        gp = g if os.path.isabs(g) else os.path.join(REPO, g)
+        if os.path.exists(gp):
+            import hashlib
+            d['gds_sha1'] = hashlib.sha1(open(gp, 'rb').read()).hexdigest()
     with open(path, 'w') as f:
         json.dump(d, f, indent=1, sort_keys=True)
         f.write('\n')

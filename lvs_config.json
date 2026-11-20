@@ -24,7 +24,7 @@
 		"$UPRJ_ROOT/spice/$TOP_SOURCE.spice"
 	],
 	"LVS_VERILOG_FILES": [
-		"$UPRJ_ROOT/verilog/gl/$TOP_SOURCE.v"
+		"$UPRJ_ROOT/verilog/gl/afe_dig.v"
 	],
 	"LAYOUT_FILE": "$UPRJ_ROOT/gds/$TOP_LAYOUT.gds"
 }

@@ -164,7 +164,7 @@ Pins vbn vcm_in vg1 vcm_out vg2 vrs vdd vss, towards the east ring (the bias tru
   ratios, so matching inside each ladder is what counts. Rb (2 x 120 um) separate.
 - Reset-level replica (pfet 0.22u/0.5u, the same drawing as the pseudo-resistor transistors of amp_ch, same orientation) and C_VRS (49.885 um MIM, top plate = vrs) away from the east edge
   wiring; P+ guard ring around the cell; the cell is 20 um from the digital macro and its N-well ring.
-- The pseudo-resistor gate taps vg1 / vg2 are set by the ladder segment counts: if Decision 47 (or a later decision) changes VTT1 / VTT2 (ACCEPT.md section 2), only this cell changes.
+- The pseudo-resistor gate taps vg1 / vg2 are set by the ladder segment counts: if a REVIEW.md item (or a later decision) changes VTT1 / VTT2 (ACCEPT.md section 2), only this cell changes.
 
 ### 3.5 afe_dig (L1d), slot 820 x 110 um at (30, 445) (trial 819.84 x 109.76 um): see AFE/dig/LP_STEP5.md and floorplan.json `cells.afe_dig`
 

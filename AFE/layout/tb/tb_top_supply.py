@@ -2,7 +2,7 @@
 """tb_top_supply.py (L3b item 3): the X2 S4 run (AFE/adc/scripts/x2_s4.py): 8 ADC cells converting with the staggered comparator clocks at SCLK 3 MHz on the MODELLED supply: one VDD and one
 VSS pad (R + L each, 1 pF pad capacitance), main rail with its decap and ESR, DAC strap behind the strap resistor with its decap and ESR, digital charge of the macro as a current source.
 --model FILE (JSON, written by L3b from the extracted straps): {"Rp": ohm per pad, "Lp": H per pad, "Cm": F, "Cd": F, "Rs": ohm, "Rd": ohm, "qdig_pC_per_cycle": pC of afe_dig per SCLK cycle}.
-Default = the X2 S4 model (0.25 ohm, 2 nH ASSUMED; 0.125 nF, 0.1 nF, 10 ohm, 3 ohm) with the digital charge of the hardened macro (24 pC per cycle typ, 27 pC at ff -40 C 3.6 V; X2 used 12 pC).
+Default = the X2 S4 model (0.25 ohm, 2 nH ASSUMED; 0.125 nF, 0.1 nF, 10 ohm, 3 ohm) with the digital charge of the hardened macro afe_dig (33.7 pC per cycle typ, 38.4 pC at ff -40 C 3.6 V, 30.6 pC ss 125: AFE/dig/reports/power_dig.log; X2 used 12 pC, the baseline 24 / 27 pC of D3).
 Values (worst of the cases fs, mid, alt): dcode_max (code change against the same ADC alone on an ideal supply), dt_max_lsb (shift of the trial-12 transition level), dres_max_lsb (largest change of
 the plate residue at any decision instant), droop_dac_mv, droop_main_mv, failed.   Pre-layout X2: <= 0.11 LSB at typ / ss 125; ff -40 C 3.6 V: residue 0.33-0.50 LSB, transition shift <= 0.25 LSB.
 usage: python3 AFE/layout/tb/tb_top_supply.py [--netlist schematic|<adc_ch PEX>] [--corner typ|ff-40|ss125|all] [--model FILE] [--cases fs,mid,alt] [--out DIR]"""
@@ -10,7 +10,7 @@ import os, sys, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lptb import *
 
-QDIG = {'typ': 24.0, 'ff-40': 27.0, 'ss125': 24.0}         # pC per SCLK cycle of the digital macro (AUDIT m6: lg/runs/d3 power report; L1d restates it for afe_dig)
+QDIG = {'typ': 33.7, 'ff-40': 38.4, 'ss125': 30.6}         # pC per SCLK cycle of the hardened afe_dig (AFE/dig/reports/power_dig.log, LP trial; the baseline JSON was run with the D3 values 24 / 27 pC); L1d restates it
 
 
 def run(netlist, corner, a, log):

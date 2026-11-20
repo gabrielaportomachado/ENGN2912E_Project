@@ -41,7 +41,7 @@ def bench(corner, dut, ns, cx=0.0):
     L = ['* LP golden testbench: stage-1 loop gain [%s]' % corner]
     if dut.pex:
         path, sub = pex_break(dut)
-        L += model_lines(corner, dut.models) + ['.include %s/spice/%s.spice' % (AMP, f) for f in ('pseudoR', 'ota1_params', 'afe_params', 'a4c_params', 'ota1', 'ota2', 'bias_genc', 'stage1c', 'stage2c', 'fs_oneshot_c', 'src_randles')]
+        L += model_lines(corner, dut.models) + ['.include %s/spice/%s.spice' % (AMP, amp_file(f)) for f in ('pseudoR', 'ota1_params', 'afe_params', 'a4c_params', 'ota1', 'ota2', 'bias_genc', 'stage1c', 'stage2c', 'fs_oneshot_c', 'src_randles')]
         conn = dict((p.lower(), AMP_MAP[q]) for q in AMP_PINS for p in dut.ports if p.lower() == q.lower())
         L += ['.include %s' % path, '.subckt afe_chc %s params: BRKV=0 BRKI=0' % ' '.join(AFE_CHC_PINS), 'Xpex %s %s BRKV={BRKV} BRKI={BRKI}' % (' '.join(conn[p.lower()] for p in dut.ports), sub), '.ends afe_chc']
         if dut.vsubs:
