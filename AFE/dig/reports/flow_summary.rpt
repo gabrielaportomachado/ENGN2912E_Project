@@ -1,4 +1,4 @@
-afe_dig hardening summary (AFE/dig/scripts/collect_dig.py).  Run directory: /tmp/lp_dig/design/runs/trial
+afe_dig hardening summary (AFE/dig/scripts/collect_dig.py).  Run directory: /tmp/lp_dig/design/runs/final
 PINS: 286 signal pins as built, 286 planned (AFE/dig/pins_plan.json); not at the planned place: 0 []; not planned: 0  -> PASS
       N edge 132 pins on Metal2; S edge 132 pins on Metal2; W edge 22 pins on Metal3
       VDD: 21 shapes on Metal4, x = 36.16-37.76 153.76-155.36 271.36-272.96 388.96-390.56 506.56-508.16 624.16-625.76 741.76-743.36 um, y = 0.00 .. 109.76 um
@@ -14,7 +14,7 @@ STA after place and route (extracted nom SPEF, period 500 ns, clock uncertainty 
   nom_ss_125C_3v00       91.689     2.010          0         0      0     0       0
   worst corner: max-slew violations 0, max-cap violations 0 (D3 macro: 16 / 3); setup violations 0, hold violations 0
 POWER from the flow (default activity, NOT used; see reports/power_dig.log): 303.1 uW
-RUN wall time 1:02.00, peak RSS 549 MB, run directory 183 MB (LibreLane v3.0.2)
+RUN wall time 0:53.80, peak RSS 548 MB, run directory 184 MB (LibreLane v3.0.2)
 STRUCTURE of the hand-instantiated cells in final/nl/afe_dig.nl.v:
   OK   delay cells dlyd_1: 49 in the comparator chain (want 49), 8 utg (want 8); other dlyd_* cells: 0
   OK   delay cells dlyc_1 8 (want 8), dlya_1 2 (want 2) in the chain

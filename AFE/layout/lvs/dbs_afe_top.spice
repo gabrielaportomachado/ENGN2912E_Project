@@ -1,5 +1,5 @@
 * LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
-* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,64 --dig-netlist AFE/dig/trial/afe_dig.pnl.v
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v
 * MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
 * File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 8 x afe_ch + supply devices; the 15 pad-control constants are pins of afe_dig;
 * afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.
@@ -359,7 +359,7 @@ Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
 .ends bias_genc
 
 * ---------------- digital macro
-* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top).  Its definition is the powered gate-level netlist AFE/dig/trial/afe_dig.pnl.v (LVS_VERILOG_FILES);
+* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top).  Its definition is the powered gate-level netlist AFE/dig/final/afe_dig.pnl.v (LVS_VERILOG_FILES);
 * the instance below lists the nets in the port order of that file.
 
 * ---------------- top

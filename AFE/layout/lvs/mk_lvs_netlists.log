@@ -1,4 +1,4 @@
-mk_lvs_netlists.py  options: --decap-n 74,64 --dig-netlist AFE/dig/trial/afe_dig.pnl.v
+mk_lvs_netlists.py  options: --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v
 Sources: 17 simulation netlists + AFE/top/dbs_afe_top.v; rules of AFE/review/AUDIT.md 4.9.3.  Output: AFE/layout/lvs
 
 ELEMENT RULES APPLIED (simulation netlist -> LVS reference)
@@ -89,7 +89,7 @@ TOP dbs_afe_top from AFE/top/dbs_afe_top.v
   instances: 1 x afe_dig, 1 x bias_genc, 8 x afe_ch + 3 supply devices + 15 pad-control ties (output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
   pad pins that are plain nets of the macro: DOUT_OUT = afe_dig.DOUT, DOUT_OE = afe_dig.DOUT_OE;  top port without a connection inside: DOUT_IN (the pad input is not used, DOUT_IE = 0)
   net census: VDD on 16 channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on 8 channel pins + decap + strap
-  digital macro afe_dig: 288 pins, port order of AFE/dig/trial/afe_dig.pnl.v
+  digital macro afe_dig: 288 pins, port order of AFE/dig/final/afe_dig.pnl.v
     afe_dig pin -> net of the top: VDD -> VDD, VSS -> VSS, CS -> CS, SCLK -> SCLK, DIN -> DIN, RSTN -> RSTN, DOUT -> DOUT_OUT, DOUT_OE -> DOUT_OE, rst_amp_o -> rst_amp_o, sw_rec -> sw_rec[7:0], sw_rec_b -> sw_rec_b[7:0], sw_ipg -> sw_ipg[7:0], sw_ipg_b -> sw_ipg_b[7:0], cmp_q -> cmp_q[7:0], cmp_clk -> cmp_clk[7:0], rst_sw -> rst_sw[7:0], tg_on -> tg_on[7:0], dac_gp -> dac_gp[95:0], dac_gn -> dac_gn[95:0], dac_gdn -> dac_gdn[7:0]
 
 FILES written to AFE/layout/lvs
