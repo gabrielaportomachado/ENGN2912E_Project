@@ -74,4 +74,4 @@ None (REVIEW.md had no item when L2a ran and none when this conversion was writt
 
 ## 10. Files changed and commit
 AFE/layout/amp/ (mk_amp_ch.py, amplib.py, blocks_amp.py, router.py, amp_ch.gds, amp_ch.build.json, check_amp.py / .json / .log, mk_flowtest.py, mk_mimtest.py, drcsum.py, shapes_at.py, flow/, flowtest/, pex_feasibility/, gate_flow/, drc.log, lvs.log),
-AFE/layout/FLOW.md, AFE/layout/NOTES_L2.md. Commits 16fe280 (checkpoint) and 1b3076a (L2a final) on branch worktree-l2a-amp = main at the start of L1a. This report was written by L1a (commit hash in the L1a report, section 10).
+AFE/layout/FLOW.md, AFE/layout/NOTES_L2.md. Commits 16fe280 (checkpoint) and 1b3076a (L2a final) on branch worktree-l2a-amp = main at the start of L1a. This report was written by L1a (commit 36cb8d8 on branch worktree-l1a-adc).

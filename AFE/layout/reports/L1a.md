@@ -98,4 +98,4 @@ None (REVIEW.md: "(none yet)"; `git pull` brought nothing new).
 
 ## 10. Files changed and commit
 New: AFE/layout/adc/{mk_adc_ch.py, dac_lib.py, cmp_lib.py, cmp_top.py, vhalf_lib.py, rlib.py, adclib.py, router.py, adc_ch.gds, adc_ch.build.json, dac_sites.log, keepout.log, FLOW_ADC.md, l1a_findings.md, test/*.py}, AFE/layout/reports/{L1a.md, L2a.md}, AFE/layout/sim/flow/adc_ch.{drc,lvs}.json (+ .log / .out), AFE/layout/sim/gate_L1a.log.
-Changed: AFE/NOTES.md ("L2a findings" and "L1a findings" before "## Open questions", two Results-log rows). Commit: (written after the commit)
+Changed: AFE/NOTES.md ("L2a findings" and "L1a findings" before "## Open questions", two Results-log rows). Commit: 36cb8d8 on branch worktree-l1a-adc (pushed to origin/worktree-l1a-adc; main untouched). This report-hash line is the second commit.
