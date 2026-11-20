@@ -127,7 +127,7 @@ Earlier items (first run):
 - **R3** (re-harden afe_dig at 820 x 80 um): done as far as the circuit allows: 80 um fails routing (GRT-0116, also at 82.3 / 86.2 / 90.2 / 94.1 um); the clean height is 101.92 um. All L1d checks re-run: STA at 5 corners, tap limits (a) 21.99 / (b) 20.23 / (c) 22.05 ns, slew / cap 0, KLayout DRC variant D 0, `run_tb_audit.sh dig` (only the accepted assertions), LVS references A / B / C, LVS top regenerated with --dig-netlist. The merge of worktree-l1d-dig into main was already done (c18ea08).
 
 ## 10. Files changed and commit
-R3 changes: AFE/dig/{final/*, trial/{afe_dig.lef, afe_dig.pnl.v, afe_dig_pins.json}, config.json, afe_dig_template.def, pins_plan.json, reports/*, sim/tb_audit_dig_*.log}, AFE/layout/{floorplan.json (dig_h 101.92), SPEC.md, reports/L1d.md, sim/gate_L1d.log, lvs/check_*.log}, AFE/NOTES.md (L1d findings + Results-log row). Branch worktree-r3-dig; commit hash in the last line of this section.
+R3 changes: AFE/dig/{final/*, trial/{afe_dig.lef, afe_dig.pnl.v, afe_dig_pins.json}, config.json, afe_dig_template.def, pins_plan.json, reports/*, sim/tb_audit_dig_*.log}, AFE/layout/{floorplan.json (dig_h 101.92), SPEC.md, reports/L1d.md, sim/gate_L1d.log, lvs/check_*.log}, AFE/NOTES.md (L1d findings + Results-log row). Branch worktree-r3-dig; commit 4981e6b on branch worktree-r3-dig (pushed to origin/worktree-r3-dig; main untouched).
 
 First-run files:
 New: AFE/dig/final/{afe_dig.gds, afe_dig.pnl.v, afe_dig.lef, afe_dig_pins.json}, AFE/layout/reports/L1d.md, AFE/layout/sim/gate_L1d.log.
