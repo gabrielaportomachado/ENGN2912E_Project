@@ -1,3 +1,4 @@
-== amp_ac_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:39
+== amp_ac_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 22:16
+   job settle_schprdiff_ss-40: exit 0, 0 s
    job ac_schprdiff_ss-40: exit 0, 0 s
-RESULT amp_ac_junction ss-40: idd_ua=47.132  vout_v=1.64592  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=60.0356  g_pk_db=60.0397  f_lo_hz=nan  f_hi_hz=421.726  g_300_db=58.268  g_0p5_db=60.0396  v1_v=1.65078  g1_mid_db=39.9889  hf_1k=-8.18791  hf_3k=-17.1035  hf_10k=-27.5064  hf_30k=-37.2375  hf_100k=-49.3033  hf_300k=-60.992  hf_1M=-66.2895
+RESULT amp_ac_junction ss-40: idd_ua=47.1309  vout_v=1.63675  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=60.0324  g_pk_db=60.0364  f_lo_hz=nan  f_hi_hz=421.734  g_300_db=58.2649  g_0p5_db=60.0363  v1_v=1.65185  g1_mid_db=39.9857  hf_1k=-8.18795  hf_3k=-17.1036  hf_10k=-27.5074  hf_30k=-37.246  hf_100k=-49.3838  hf_300k=-61.318  hf_1M=-66.7225

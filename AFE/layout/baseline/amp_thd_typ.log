@@ -1,3 +1,3 @@
-== amp_thd  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 08:11
+== amp_thd  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 22:15
    job thd_sch_typ: exit 0, 1 s
-RESULT amp_thd typ: thd_pct=0.0350253  out_max_v=2.15123  out_min_v=1.14483  gain_db=60.0524  hd2_dbc=-83.0625  hd3_dbc=-69.3987  out_mean_v=1.64799
+RESULT amp_thd typ: thd_pct=0.0419881  out_max_v=2.15108  out_min_v=1.14491  gain_db=60.0494  hd2_dbc=-82.9624  hd3_dbc=-67.7465  out_mean_v=1.64796

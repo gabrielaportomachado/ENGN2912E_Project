@@ -16,7 +16,7 @@ Academic demonstrator: the stimulation path is a bench demonstration (tens of uA
 
 ## Block diagram
 ```
- E[k] ──┬── rec TGATE (sw_rec) ──> rec ─[Cin 20 pF]─ OTA1 ─ stage 2 ─ follower ─> out ─> sampling TG ─> split 6+6 MIM DAC ─> cmp_p ─> SAR ─┐
+ E[k] ──┬── rec TGATE (sw_rec) ──> rec ─[Cin 15 pF]─ OTA1 ─ stage 2 ─ follower ─> out ─> sampling TG ─> split 6+6 MIM DAC ─> cmp_p ─> SAR ─┐
         └── ipg TGATE (sw_ipg) ──> IPG[k]            (feedback Cf, pseudo-resistors, RST_AMP one-shot reset)      vhalf + Cref 7 pF  │   x 8 (k = 0..7)
  REF ───────────────────────────> ref (all 8 amplifiers)                                                                              │
  bias_genc (one, shared): vbn, vcm_in, vg1, vcm_out, vg2, vrs ──> all 8 channels                                                      │
@@ -52,15 +52,15 @@ Recording:
 7. After stimulation, wait >= 0.3 s before recording on that channel (the electrode recovers; `AFE/layout/baseline/top_stim.json`).
 Protocol:
 8. RSTN changes only while CS is high; every frame has exactly 160 SCLK; never raise CS early; let CS fall >= 100 ns before the first SCLK edge; CS from a hardware timer (jitter <= 85 ns rms).
-9. Discard the first frame after any pause. Low-pass the codes to 300 Hz for the 2 uV rms noise figure. There is no power-down.
+9. Discard the first frame after any pause. Low-pass the codes to 300 Hz for the noise figure (1.89 / 2.14 / 1.73 uV rms at 27 / 85 / -40 C, Cin 15 pF, Decision 50). There is no power-down.
 
 ## Board needs
 Dedicated 3.3 V LDO with <= about 1 mV rms ripple (the ADC is ratiometric, 0.6 LSB/mV); MCU with a hardware timer for CS and an SPI master (mode: data out on SCLK falling, sampled on rising); REF connected; E / IPG signals within 0..VDD; one bond wire per supply pad assumed (2 nH; two bond wires per supply pad if offered: ACCEPT.md ladder S-2 `<L4: say whether L3b needed it>`).
 
 ## Test plan (first silicon)
 1. Supply current at 3.3 V after power-up (expect 0.6 mA typ; `f1_power_total.log`); RSTN / CS / SCLK / DIN / DOUT frame read-back (word 1 = config).
-2. Short E[k] and REF to a mid-supply source: every channel near code 2018 (= 2048 + code offset -30 typ); noise of the codes in 0.5-300 Hz (expect <= 2 uV rms at the electrode).
-3. Gain and bandwidth: 0.45 mV pk sine from 0.1 Hz to 2 kHz on E[k]: 60 dB, high-pass corner (design 0.2 Hz), low-pass corner (0.42-1.0 kHz).
+2. Short E[k] and REF to a mid-supply source: every channel near code 2018 (= 2048 + code offset -30 typ); noise of the codes in 0.5-300 Hz (expect <= 2 uV rms at the electrode at 27 C and -40 C, 2.14 uV at 85 C: Cin = 15 pF, Decision 50).
+3. Gain and bandwidth: 0.45 mV pk sine from 0.1 Hz to 2 kHz on E[k]: 60 dB, high-pass corner (design 0.25-0.29 Hz at Cin 15 pF), low-pass corner (0.42-1.0 kHz).
 4. **Measure first on every channel**: the high-pass corner and the drift after RST_AMP with a known DC offset (10 mV and 100 mV) on E[k]: this decides between the two pseudo-resistor models of ACCEPT.md section 2 and the RST_AMP repeat interval of rule 6.
 5. ADC linearity with a slow ramp (amplifier output 1.15-2.0 V): INL <= 1 LSB beyond the fixed offset (Decision 43c); crosstalk: one channel driven to full scale, the neighbours quiet.
 6. Routing: stimulation mode with a bench IPG (tens of uA) on IPG[k]; record mode afterwards (rule 7).

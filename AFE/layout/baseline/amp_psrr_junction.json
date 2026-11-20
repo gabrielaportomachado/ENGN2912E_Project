@@ -2,42 +2,42 @@
  "check": "amp_psrr_junction",
  "corners": {
   "ff85": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_psrr_junction_ff85.log",
    "values": {
-    "supply_gain_1khz": 0.42324,
-    "supply_gain_300hz": 0.556652,
-    "supply_gain_50hz": 0.578501,
-    "supply_gain_60hz": 0.578209
+    "supply_gain_1khz": 0.424188,
+    "supply_gain_300hz": 0.557914,
+    "supply_gain_50hz": 0.579815,
+    "supply_gain_60hz": 0.579522
    }
   },
   "ss-40": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_psrr_junction_ss-40.log",
    "values": {
-    "supply_gain_1khz": 0.244054,
-    "supply_gain_300hz": 0.471935,
-    "supply_gain_50hz": 0.565642,
-    "supply_gain_60hz": 0.564056
+    "supply_gain_1khz": 0.244666,
+    "supply_gain_300hz": 0.473197,
+    "supply_gain_50hz": 0.56718,
+    "supply_gain_60hz": 0.565589
    }
   },
   "typ": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_psrr_junction_typ.log",
    "values": {
-    "supply_gain_1khz": 0.334195,
-    "supply_gain_300hz": 0.524615,
-    "supply_gain_50hz": 0.570912,
-    "supply_gain_60hz": 0.570243
+    "supply_gain_1khz": 0.334932,
+    "supply_gain_300hz": 0.525843,
+    "supply_gain_50hz": 0.57226,
+    "supply_gain_60hz": 0.571589
    }
   }
  },

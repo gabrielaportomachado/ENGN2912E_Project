@@ -1,3 +1,3 @@
-== amp_thd_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 08:11
-   job thd_schprdiff_ff85: exit 0, 2 s
-RESULT amp_thd_junction ff85: thd_pct=2.007  out_max_v=2.19918  out_min_v=1.22211  gain_db=59.9344  hd2_dbc=-37.9531  hd3_dbc=-39.5802  out_mean_v=1.69653
+== amp_thd_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 22:16
+   job thd_schprdiff_ff85: exit 0, 1 s
+RESULT amp_thd_junction ff85: thd_pct=1.58138  out_max_v=2.2088  out_min_v=1.22509  gain_db=59.9582  hd2_dbc=-40.1561  hd3_dbc=-41.7643  out_mean_v=1.70519

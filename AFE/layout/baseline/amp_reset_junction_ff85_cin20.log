@@ -1,0 +1,6 @@
+== amp_reset_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:40
+   job rs_schprdiff_ff85_0: exit 0, 6 s
+   job rs_schprdiff_ff85_1m: exit 0, 6 s
+   job rs_schprdiff_ff85_10m: exit 0, 13 s
+   job rs_schprdiff_ff85_100m: exit 0, 28 s
+RESULT amp_reset_junction ff85: t_fs_ms_os0=1.65898  peak_mv_os0=2.25702  rel_step_mv_os0=-0.931599  t_1mv_s_os0=0.124998  final_v_os0=1.64698  drift_mv_s_os0=0.159044  resid_end_mv_os0=0.019539  t_fs_ms_os1m=1.62929  peak_mv_os1m=1.87183  rel_step_mv_os1m=1.02674  t_1mv_s_os1m=1.62321  final_v_os1m=1.65309  drift_mv_s_os1m=0.19273  resid_end_mv_os1m=0.0226879  t_fs_ms_os10m=1.58109  peak_mv_os10m=24.4588  rel_step_mv_os10m=3.22706  t_1mv_s_os10m=9.43503  final_v_os10m=1.67703  drift_mv_s_os10m=2.24434  resid_end_mv_os10m=0.163888  t_fs_ms_os100m=1.56336  peak_mv_os100m=771.315  rel_step_mv_os100m=-470.12  t_1mv_s_os100m=nan  final_v_os100m=1.94961  drift_mv_s_os100m=80.8555  resid_end_mv_os100m=1.94345

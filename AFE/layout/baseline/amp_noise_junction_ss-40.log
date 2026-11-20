@@ -1,3 +1,3 @@
-== amp_noise_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:39
+== amp_noise_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 22:16
    job n_schprdiff_ss-40_real: exit 0, 0 s
-RESULT amp_noise_junction ss-40: noise_real_uv=1.33259  g_mid_db=60.0356
+RESULT amp_noise_junction ss-40: noise_real_uv=1.40353  g_mid_db=60.0324

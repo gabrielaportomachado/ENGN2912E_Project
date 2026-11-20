@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:39
+   job pu_schprdiff_typ: exit 0, 1 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.38661  vout_100ms_v=1.64904  vout_1s_v=1.64891  err_1s_mv=1.08712  codes_from_mid_1s=1.34935  vbn_end_v=0.647681  vrs_end_v=1.02916

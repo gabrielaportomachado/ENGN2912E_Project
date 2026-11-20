@@ -1,4 +1,4 @@
-== amp_reset_host_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:43
-   job rs_schprdiff_typ_10m: exit 0, 13 s
-   job rs_schprdiff_typ_100m: exit 0, 35 s
-RESULT amp_reset_host_junction typ: t_fs_ms_os10m=3.04288  peak_mv_os10m=109.915  rel_step_mv_os10m=-1.53114  t_1mv_s_os10m=nan  final_v_os10m=1.75898  drift_mv_s_os10m=9.50318  resid_end_mv_os10m=2.81868  t_fs_ms_os100m=2.95725  peak_mv_os100m=1089.59  rel_step_mv_os100m=-1.46663  t_1mv_s_os100m=12.8776  final_v_os100m=2.73874  drift_mv_s_os100m=95.1043  resid_end_mv_os100m=0.0183589
+== amp_reset_host_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 22:19
+   job rs_schprdiff_typ_10m: exit 0, 7 s
+   job rs_schprdiff_typ_100m: exit 0, 20 s
+RESULT amp_reset_host_junction typ: t_fs_ms_os10m=3.11287  peak_mv_os10m=110.29  rel_step_mv_os10m=-1.51992  t_1mv_s_os10m=nan  final_v_os10m=1.75937  drift_mv_s_os10m=9.53856  resid_end_mv_os10m=2.8273  t_fs_ms_os100m=2.96855  peak_mv_os100m=1089.36  rel_step_mv_os100m=-1.46062  t_1mv_s_os100m=12.8605  final_v_os100m=2.73852  drift_mv_s_os100m=94.9703  resid_end_mv_os100m=0.025169

@@ -1,0 +1,3 @@
+== amp_ac_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:39
+   job ac_schprdiff_typ: exit 0, 0 s
+RESULT amp_ac_junction typ: idd_ua=74.4307  vout_v=1.65799  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=60.0504  g_pk_db=60.0524  f_lo_hz=nan  f_hi_hz=653.243  g_300_db=59.2244  g_0p5_db=60.0523  v1_v=1.65001  g1_mid_db=39.9881  hf_1k=-5.22496  hf_3k=-13.4208  hf_10k=-23.7099  hf_30k=-33.3664  hf_100k=-45.0195  hf_300k=-57.826  hf_1M=-66.2667

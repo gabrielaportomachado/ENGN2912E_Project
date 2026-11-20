@@ -1,0 +1,42 @@
+{
+ "check": "amp_noise_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:39",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_noise_junction_ff85_cin20.log",
+   "values": {
+    "g_mid_db": 60.0551,
+    "noise_real_uv": 1.5963511639062737
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:39",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_noise_junction_ss-40_cin20.log",
+   "values": {
+    "g_mid_db": 60.0356,
+    "noise_real_uv": 1.3325870487075884
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:39",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_noise_junction_typ_cin20.log",
+   "values": {
+    "g_mid_db": 60.0504,
+    "noise_real_fn1_uv": 4.665400255459153,
+    "noise_real_uv": 1.4271448991910243
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_noise_junction.py"
+}

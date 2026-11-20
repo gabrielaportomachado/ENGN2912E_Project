@@ -1,0 +1,62 @@
+{
+ "check": "amp_loop",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_loop_ff85_cin20.log",
+   "values": {
+    "fu_hz": 385702.0,
+    "hfdev_cx10p_db": 10.130731900000015,
+    "hfdev_cx2p_db": 1.4103197000000023,
+    "hfdev_cx5p_db": 5.2430277186391265,
+    "pm_cx10p_deg": 46.1091,
+    "pm_cx2p_deg": 66.3827,
+    "pm_cx5p_deg": 55.9785,
+    "pm_deg": 76.3977,
+    "t_100hz_db": 60.7541
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_loop_ss-40_cin20.log",
+   "values": {
+    "fu_hz": 199394.0,
+    "hfdev_cx10p_db": 10.651864189999998,
+    "hfdev_cx2p_db": 2.2766391400000003,
+    "hfdev_cx5p_db": 6.093725890000002,
+    "pm_cx10p_deg": 58.2137,
+    "pm_cx2p_deg": 74.9991,
+    "pm_cx5p_deg": 67.3551,
+    "pm_deg": 81.0839,
+    "t_100hz_db": 60.2938
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_loop_typ_cin20.log",
+   "values": {
+    "fu_hz": 268536.0,
+    "hfdev_cx10p_db": 10.57051030000001,
+    "hfdev_cx2p_db": 2.016133288639111,
+    "hfdev_cx5p_db": 5.881407300000006,
+    "pm_cx10p_deg": 52.6483,
+    "pm_cx2p_deg": 71.4361,
+    "pm_cx5p_deg": 62.4032,
+    "pm_deg": 79.1694,
+    "t_100hz_db": 60.8025
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_loop.py"
+}
