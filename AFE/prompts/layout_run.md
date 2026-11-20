@@ -90,7 +90,7 @@ Steps:
 ```
 
 ## Rework round R2-R5 (Decision 48: keep 8 channels; items in AFE/layout/REVIEW.md) - run these NOW, before L2b
-Order: R2 first and alone (minutes). Then R3, R4 and R5; they may run side by side (common rule 4). L2b, L1b and L3a wait until R4 and R5 have passed their gates. One fresh session each (Sonnet 5.5, HIGH), `git pull` first.
+Order: R2 first and alone (minutes; R3 / R4 / R5 read the floorplan it writes). Then R3, R4 and R5 may run IN PARALLEL, each in its own git worktree / branch (as L2a / L1a / L1d did), with AFE/layout/scripts/slot.sh keeping at most 3 heavy jobs machine-wide (common rule 4). Merge conflicts to expect: AFE/NOTES.md (keep both findings) and AFE/layout/lvs/ (R3 regenerates it with --dig-netlist, R4 with --cin): whichever of R3 / R4 merges SECOND re-runs `python3 AFE/layout/scripts/mk_lvs_netlists.py` with BOTH options (and R4's --cin) on main, then check_lvs_netlists.py, then its gate again. L2b, L1b and L3a wait until R4 and R5 have passed their gates. One fresh session each (Sonnet 5.5, HIGH), `git pull` first.
 
 ### R2: tightened floorplan
 ```
