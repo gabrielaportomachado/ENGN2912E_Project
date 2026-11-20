@@ -279,6 +279,18 @@ class Block:
 M2, M3, M4 = 0, 1, 2
 
 
+def rotate_block(ly, B, name):
+    """the block B rotated by 90 degrees counter-clockwise ((x, y) -> (-y, x)) as a new block: terminals, fixed shapes and bbox are transformed (integer pad coordinates stay integer)"""
+    R = Block(ly, name)
+    k.put(R.cell, B.cell, 0, 0, rot=90)
+    tr = lambda r: (-r[3], r[0], -r[1], r[2])
+    R.terms = [(n, c, tr(r)) for (n, c, r) in B.terms]
+    R.fixed = [(l, tr(r), n, ex) for (l, r, n, ex) in B.fixed]
+    R.bbox = list(tr(B.bbox))
+    R.size = (B.size[1], B.size[0]) if hasattr(B, 'size') else None
+    return R
+
+
 def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=None, wide_ring=False, multi=False):
     if ring_gap is None:
         ring_gap = KNOB['rg']

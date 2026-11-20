@@ -23,7 +23,7 @@ LAY = int(globals().get('lay', '3'))             # 1 = packing of the first L2a 
 _KD = dict(rg=2.5, gg=2.5, cg=3.0) if LAY == 1 else dict(rg=1.5, gg=1.5, cg=1.5)       # ring gaps (um) of dev_block / group_block / compose
 for _n in ('rg', 'gg', 'cg'):
     a.KNOB[_n] = float(globals().get(_n, _KD[_n]))
-a.KNOB['tm'] = int(globals().get('tm', '1' if LAY == 3 else '0'))          # 1 = tail group xmb / xmt / xm7 as one 6-finger block (L2a rework step 2)
+a.KNOB['tm'] = int(globals().get('tm', '1' if LAY >= 3 else '0'))          # 1 = tail group xmb / xmt / xm7 as one 6-finger block (L2a rework step 2)
 ly = k.new_layout()
 TOP = ly.create_cell('amp_ch')
 B = BA.blocks(ly)
@@ -166,6 +166,50 @@ if LAY == 1:
         yc = ye + 3.0
     H = math.ceil(Y0 + cin.pins['ytop'] + 8.0)
     W = max(EAST, math.ceil(max(dx + blk.bbox[2] for (_, blk, dx, dy) in PLACED)) + 0.0)
+elif LAY == 4:
+    # ---- "A-3, step 3": like lay=3, but mir is ROTATED by 90 degrees and stands in the east column (it may reach 5 um under the Metal5 lanes of the Cin block: nothing but Metal5 / the Metal4 ref tab is there);
+    #      the capacitors C_T and Cin2 move to the bottom row, next to the column of xms / fol / Cc1 / s2p / sink1.
+    B['mir'] = a.rotate_block(ly, B['mir'], 'mir_r')
+    XR = float(globals().get('xr', '1.0'))
+    x, top2 = XR, 3.0
+    for n in ('xms', 'fol', 'cc1', 's2p'):
+        xe, ye = put(n, B[n], x, 3.0)
+        x = xe + GX
+        top2 = max(top2, ye)
+    xe, ye = put('sink1', B['sink1'], XR, top2 + GY)
+    xb_ = max(xe, x - GX) + GX
+    xe, y_ct = put('ct', B['ct'], xb_, 3.0)
+    xe, y_ci = put('cin2', B['cin2'], xe + GX, 3.0)
+    yt = max(ye, y_ct, y_ci) + GY
+    xo, tt = row(['ota_p', 'xm6'], yt, x0=XR, gap=GX)
+    t5 = tt
+    STRIP = float(globals().get('strip', '24.0'))
+    Y0 = math.ceil(t5 + GY + STRIP + 0.6)
+    X0 = float(globals().get('x0', '7.0'))
+    k.put(TOP, cin.cell, X0, Y0)
+    PLACED.append(('cin', cin, X0, Y0))
+    ys = Y0 - STRIP
+    put('or2', B['or2'], 9.0, ys + 3.0)
+    put('pr1', B['pr1'], X0 + 22.0, ys + 3.0)
+    put('cf1', B['cf1'], X0 + 39.0, ys)
+    xe, y1 = put('sp', B['sp'], X0 + 58.0, ys)
+    put('sn', B['sn'], X0 + 58.0, y1 + GY)
+    put('cf1p', B['cf1p'], X0 + 115.0, ys)
+    put('pr2', B['pr2'], X0 + 135.0, ys + 3.0)
+    xc = X0 + cin.bbox[2] + 2.0
+    xmr = float(globals().get('xmr', '160.0'))                     # west edge of the rotated mir
+    xe, yc = put('mir', B['mir'], xmr, ys)
+    yc += GY
+    xe, yc = put('s2tail', B['s2tail'], xc, yc)
+    yc += GY
+    xe, yc = put('s2pair', B['s2pair'], xc, yc)
+    yc += GY
+    xe, ye = put('cf2', B['cf2'], xc, yc)
+    put('pr3', B['pr3'], xe + GX, yc)
+    yc = ye + GY
+    for n in ('cc2',):
+        xe, ye = put(n, B[n], xc, yc)
+        yc = ye + GY
 elif LAY == 3:
     # ---- packing "A-3, step 2": tail group merged (tm=1) so that the input pair and xm6 share ONE row; bottom row = mirror + (sink1 over xms / fol / Cc1 / s2p);
     #      the Cf1 strip (taller) also holds the OR2, pseudo-R 1 / 2 and the sp / sn gate-mux stack; the east column starts with s2tail + s2pair
@@ -275,7 +319,7 @@ for i, n in enumerate(('vbn', 'vcm', 'vg1', 'vcmo', 'vg2', 'vrs')):
     PINS.append((n, 'metal3', 1.0 + i, ytop_pin))
 for i, n in enumerate(('sw_rec', 'sw_rec_b', 'rst_amp')):
     PINS.append((n, 'metal2', 1.0, H - 12.0 - 8.0 * i))
-if LAY == 3:
+if LAY in (3, 4):
     PINS.append(('vdd', 'metal4', W - 4.0, 14.0))                 # east edge, bottom (inner) half: free of blocks
     PINS.append(('vss', 'metal4', W - 4.0, 30.0))
 else:
