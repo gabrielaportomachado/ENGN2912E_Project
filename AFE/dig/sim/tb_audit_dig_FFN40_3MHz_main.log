@@ -10,15 +10,15 @@ ASSERT C1.hold PASS | fs still high after 100 ms without any clock (level held i
 ASSERT C1.clear PASS | RST_AMP cleared by the next config frame; reset lasted >= 100 ms
 --- C1 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -26,7 +26,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 3 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 3 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -34,26 +34,26 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
 --- F1 record start (MODE = 1, EN = FF), one-shot, 40 frames at the 250 us period ---
 ASSERT F1.commit PASS | record switches closed, park OFF after the config frame
 ASSERT F1.trig PASS | one-shot: fs rises within 2 ns after sw_rec
-        sw_rec rises 4.32 ns after SCLK edge 35; fs - sw_rec = 0.00 ns
+        sw_rec rises 4.24 ns after SCLK edge 35; fs - sw_rec = 0.00 ns
 ASSERT F1.pulse PASS | one-shot pulse ends (stub 3.56 ms): ~14 frames carry the reset code
 ASSERT F1.data PASS | every DOUT word of 41 frames correct (ID, code, word 1 readback)
         T_ACQ (sampling TG closed before the next sample) ADC0 245.399 us, ADC7 243.065 us; plate hold time (sample -> last decision) ADC7 6.347 us
 ASSERT F1.tacq PASS | T_ACQ >= 220 us for the last ADC at the 250 us frame period
 --- F1 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -61,7 +61,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 41 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 41 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -69,7 +69,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
         break-before-make gap min 100762002.3 ns; sw_rec / sw_rec_b overlap max 0.01 ns
 --- M1 record -> treat -> record on 4 channels -> hazard case (EN bit falls in the frame that changes MODE) ---
 ASSERT M1.rec PASS | REC follows E in record mode
@@ -81,15 +81,15 @@ ASSERT M1.bbm2 PASS | treat -> record: sw_ipg falls one SCLK period before sw_re
 ASSERT M1.os4 PASS | one-shot fired again on the newly closed channels only
 --- M1 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -97,7 +97,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 2 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 2 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -105,7 +105,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
         break-before-make gap min 333.7 ns; sw_rec / sw_rec_b overlap max 0.02 ns
 ASSERT M1.haz_state PASS | treat(0x0F) -> record(0xF0) in one config word ends in the right state
 ASSERT M1.haz_os PASS | no spurious one-shot on a channel whose EN falls while MODE rises
@@ -115,7 +115,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
         break-before-make gap min 334.1 ns; sw_rec / sw_rec_b overlap max 0.02 ns
 ASSERT M1.haz2_state PASS | record(0xF0) -> treat(0x0F) in one config word ends in the right state
 --- M1 hazard case 2 standing assertions (SCLK 3.000 MHz) ---
@@ -124,7 +124,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
         break-before-make gap min 1250334.1 ns; sw_rec / sw_rec_b overlap max 0.02 ns
 --- M2 short config frame (33 clocks): routing completes in the next frame ---
 --- M2 setup (SCLK 3.000 MHz) ---
@@ -133,7 +133,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
 ASSERT M2.commit PASS | 33-clock frame commits the config but the routing has not moved (dbs FSM has no clock)
 ASSERT M2.next PASS | the next frame finishes the mode change (at its SCLK edges 1-2) and its 8 codes are still correct
 ASSERT M2.note PASS | OBSERVATION (expected): in that case the routing switches toggle WHILE the ADCs convert (I0 mismatch 11): the only path to a routing edge near a decision
@@ -143,20 +143,20 @@ ASSERT X1.a5 PASS | abort after 5 clocks: drivers tri-state, tracking back
 ASSERT X1.a13 PASS | abort after 13 clocks: drivers tri-state, tracking back
 ASSERT X1.a20 PASS | abort after 20 clocks: drivers tri-state, tracking back
 ASSERT X1.a40 PASS | abort after 40 clocks: config (0x000) WAS committed at edge 33 (a short frame can change the routing)
-        driver / sampling-TG overlap on the aborted frames: 12 events, longest 2.19 ns (0 in a complete frame)
+        driver / sampling-TG overlap on the aborted frames: 12 events, longest 1.99 ns (0 in a complete frame)
 ASSERT X1.contention FAIL | EXPECTED FAIL with real delays: on an aborted frame the sampling TG closes before the drivers release (adc8_top comment says it cannot)
 ASSERT X1.recover PASS | clean frame after the aborted ones
 --- X1 standing assertions (clean frame) (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -164,7 +164,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 18 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 18 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -172,22 +172,22 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
         break-before-make gap min 5486401.7 ns; sw_rec / sw_rec_b overlap max 0.01 ns
 --- X2 SCLK stops after edge 6 for 1 ms (CS low), then continues ---
 ASSERT X2.digital PASS | digital sequence survives the pause: all 8 codes correct in the model (the analog hold is NOT modelled)
         plate hold time in that frame: ADC0 1004.0 us, ADC7 1006.3 us (normal: 6.8 us): a floating 3.49 pF plate droops 0.29 mV/ms per pA of leakage (ESTIMATE)
 --- X2 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -195,7 +195,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 1 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 1 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -203,22 +203,22 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
 --- X3 100 SCLK cycles while CS is high ---
 ASSERT X3.quiet PASS | analog controls, config and routing unchanged
 ASSERT X3.noclk PASS | no comparator clock while CS is high (the delay chain itself toggles: power only)
 ASSERT X3.next PASS | next frame correct (DIN shifted into the config shift register while CS was high is overwritten by word 0)
 --- X3 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -226,7 +226,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 1 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 1 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -234,21 +234,21 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
 --- X4 back-to-back frames ---
 ASSERT X4.data PASS | 6 back-to-back frames correct
         frame period 53.93 us = 18.5 kS/s per channel; T_ACQ ADC0 49.33 us, ADC7 47.00 us
 --- X4 standing assertions (SCLK 3.000 MHz) ---
 ASSERT S1.order PASS | plate reset switch (rst_sw) opens before the sampling TG / Cref TG (tg_on) at every sample
-        rst_sw -> tg_on min 1.95 ns; CS fall -> rst_sw 0.85 .. 1.01 ns; spread over the 8 channels 0.160 ns
+        rst_sw -> tg_on min 1.96 ns; CS fall -> rst_sw 0.85 .. 1.04 ns; spread over the 8 channels 0.186 ns
 ASSERT S2.simult PASS | all 8 channels sample within 1 ns of each other (simultaneous sampling, Decision 34)
 ASSERT S3.gdn PASS | dummy-unit driver gate dac_gdn = ~tg_on (within 3 ns)
 ASSERT T1.edge PASS | trial t of ADC i is evaluated between SCLK edges t+i and t+i+1 (no wrap into the next cycle)
 ASSERT T2.settle PASS | DAC edge -> comparator clock >= the analog settling time TSET of this corner
-        DAC edge -> comparator clock: min 21.78 ns (TSET 15.1 ns)
+        DAC edge -> comparator clock: min 21.63 ns (TSET 15.1 ns)
 ASSERT T3.stable PASS | no DAC driver edge while a comparator evaluates
 ASSERT T4.window PASS | every comparator window ends before the next SCLK rising edge
-        window end -> next SCLK edge: min 252.02 ns; window width min 3.30 ns (comparator decision TDEC 0.99 ns)
+        window end -> next SCLK edge: min 251.94 ns; window width min 3.29 ns (comparator decision TDEC 0.99 ns)
 ASSERT T5.width PASS | comparator window >= decision time of this corner
 ASSERT T6.open PASS | sampling TG, Cref TG and plate reset open and dummy grounded at every comparator clock
 ASSERT T7.driven PASS | all 12 bottoms driven (none tri-state) at every comparator clock
@@ -256,7 +256,7 @@ ASSERT T8.count PASS | exactly 12 comparator pulses per ADC in every complete fr
 ASSERT T9.release PASS | DAC drivers released at SCLK edge 13+i
 ASSERT T10.resume PASS | tracking resumes at SCLK edge 14+i
 ASSERT T11.crowbar FAIL | no crowbar (gp low and gn high on one bit) at the driver gates
-        crowbar overlaps (PMOS and NMOS gate of one bit both on): 6 events, longest 0.045 ns
+        crowbar overlaps (PMOS and NMOS gate of one bit both on): 6 events, longest 0.024 ns
 ASSERT T12.contention PASS | sampling TG never on while a bottom-plate driver is on
 ASSERT T13.idleclk PASS | no comparator clock while CS is high
 ASSERT R1.bbm PASS | record and IPG switch of a channel never on together
@@ -264,7 +264,7 @@ ASSERT R2.conv PASS | no routing-switch edge while any ADC is converting
 ASSERT R3.glitch PASS | no pulse shorter than one SCLK period on sw_rec / sw_ipg (one-shot trigger), no zero-width hazard on the RTL nets
 ASSERT D1.edge PASS | DOUT changes only while SCLK is low (after the falling edge)
 ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
-        DOUT: latest change 2.41 ns after the SCLK falling edge; setup to the host sampling edge min 164.26 ns
+        DOUT: latest change 2.50 ns after the SCLK falling edge; setup to the host sampling edge min 164.17 ns
 --- X5 RSTN pulse in the middle of a frame ---
 ASSERT X5.after33 PASS | RSTN pulse after edge 33, DIN idle low: config and routing cleared and stay cleared; park ON
 ASSERT X5.after33d FAIL | RSTN pulse after edge 33 with DATA on DIN during the rest of the frame: config must stay cleared
@@ -273,4 +273,4 @@ ASSERT X5.word0 FAIL | RSTN pulse during config word 0 (edges 8-9): the SAME fra
         committed by that frame: rst_amp 1 mode 1 en 01001100 (host sent 0x1FF = record, all channels) -> sw_rec 01001100 sw_ipg 00000000
 ASSERT X5.next PASS | the next complete frame restores the intended config and converts correctly
 SUMMARY main PER 333.33 ns: 202 assertions, 10 FAIL
-/foss/designs/ENGN2912E_Project/.claude/worktrees/l1d-dig/AFE/review/tb/tb_audit.v:444: $finish called at 126065577886 (1ps)
+/foss/designs/ENGN2912E_Project/.claude/worktrees/r3-dig/AFE/review/tb/tb_audit.v:444: $finish called at 126065577886 (1ps)

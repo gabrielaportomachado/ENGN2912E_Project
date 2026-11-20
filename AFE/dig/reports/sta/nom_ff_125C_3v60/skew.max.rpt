@@ -5,10 +5,10 @@ Clock Skew (Setup)
 ======================= nom_ff_125C_3v60 Corner ===================================
 
 Clock sclk
-118.750641 source latency _1420_/CLK ^
--0.943359 target latency _1419_/CLK ^
+118.843925 source latency _1420_/CLK ^
+-0.952017 target latency _1410_/CLK ^
 0.500000 clock uncertainty
 0.000000 CRPR
 --------------
-118.307289 setup skew
+118.391907 setup skew
 

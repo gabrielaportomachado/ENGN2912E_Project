@@ -14,34 +14,34 @@ Fanout         Cap        Slew       Delay        Time   Description
                                   0.000000    0.000000   clock sclk (rise edge)
                                   0.000000    0.000000   clock network delay (propagated)
                                 125.000000  125.000000 v input external delay
-    10    0.288025    1.000000    0.000000  125.000000 v CS (in)
+    10    0.279388    1.000000    0.000000  125.000000 v CS (in)
                                                          CS (net)
-                      1.063348    0.025906  125.025909 v _0661_/A1 (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
-    14    0.224077    9.692299    6.057974  131.083878 ^ _0661_/ZN (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
+                      1.063039    0.025778  125.025780 v _0661_/A1 (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
+     8    0.127337    5.628564    3.665562  128.691345 ^ _0661_/ZN (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
                                                          u_adc.ch[0].u.frame_rn (net)
-                      9.692487    0.024315  131.108200 ^ max_cap10/I (gf180mcu_fd_sc_mcu7t5v0__buf_8)
-    12    0.186422    1.151205    1.127788  132.235992 ^ max_cap10/Z (gf180mcu_fd_sc_mcu7t5v0__buf_8)
+                      5.628621    0.010175  128.701523 ^ max_cap10/I (gf180mcu_fd_sc_mcu7t5v0__buf_8)
+    18    0.249718    1.434827    1.401958  130.103470 ^ max_cap10/Z (gf180mcu_fd_sc_mcu7t5v0__buf_8)
                                                          net10 (net)
-                      1.152546    0.024016  132.260010 ^ _1428_/RN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-                                            132.260010   data arrival time
+                      1.435692    0.019284  130.122757 ^ _1428_/RN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
+                                            130.122757   data arrival time
 
                                 250.000000  250.000000   clock sclk (fall edge)
                                   0.000000  250.000000   clock source latency
-     1    0.093712    1.000000    0.000000  250.000000 v SCLK (in)
+     1    0.111442    1.000000    0.000000  250.000000 v SCLK (in)
                                                          SCLK (net)
-                      1.020423    0.008356  250.008362 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
-   160    0.989872    1.893300    1.986507  251.994873 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+                      1.029919    0.012250  250.012253 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+   160    0.987838    1.894744    1.994351  252.006607 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
                                                          sclk_i (net)
-                      1.909902    0.102744  252.097610 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-                                 -0.500000  251.597626   clock uncertainty
-                                  0.000000  251.597626   clock reconvergence pessimism
-                                  1.727332  253.324951   library recovery time
-                                            253.324951   data required time
+                      1.895697    0.024215  252.030823 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
+                                 -0.500000  251.530823   clock uncertainty
+                                  0.000000  251.530823   clock reconvergence pessimism
+                                  1.638294  253.169113   library recovery time
+                                            253.169113   data required time
 ---------------------------------------------------------------------------------------------
-                                            253.324951   data required time
-                                           -132.260010   data arrival time
+                                            253.169113   data required time
+                                           -130.122757   data arrival time
 ---------------------------------------------------------------------------------------------
-                                            121.064949   slack (MET)
+                                            123.046349   slack (MET)
 
 
 Startpoint: _1428_ (falling edge-triggered flip-flop clocked by sclk)
@@ -53,16 +53,16 @@ Fanout         Cap        Slew       Delay        Time   Description
 ---------------------------------------------------------------------------------------------
                                 250.000000  250.000000   clock sclk (fall edge)
                                   0.000000  250.000000   clock source latency
-     1    0.093712    1.000000    0.000000  250.000000 v SCLK (in)
+     1    0.111442    1.000000    0.000000  250.000000 v SCLK (in)
                                                          SCLK (net)
-                      1.020423    0.008356  250.008362 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
-   160    0.989872    1.893300    1.986507  251.994873 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+                      1.029919    0.012250  250.012253 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+   160    0.987838    1.894744    1.994351  252.006607 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
                                                          sclk_i (net)
-                      1.909902    0.102744  252.097610 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-     1    0.310472    3.485188    5.697729  257.795349 ^ _1428_/Q (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
+                      1.895697    0.024215  252.030823 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
+     1    0.365318    4.035321    6.014176  258.045013 ^ _1428_/Q (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
                                                          DOUT (net)
-                      3.485417    0.015945  257.811279 ^ DOUT (out)
-                                            257.811279   data arrival time
+                      4.037197    0.049170  258.094177 ^ DOUT (out)
+                                            258.094177   data arrival time
 
                                 500.000000  500.000000   clock sclk (rise edge)
                                   0.000000  500.000000   clock network delay (propagated)
@@ -72,9 +72,9 @@ Fanout         Cap        Slew       Delay        Time   Description
                                             349.500000   data required time
 ---------------------------------------------------------------------------------------------
                                             349.500000   data required time
-                                           -257.811279   data arrival time
+                                           -258.094177   data arrival time
 ---------------------------------------------------------------------------------------------
-                                             91.688721   slack (MET)
+                                             91.405838   slack (MET)
 
 
 

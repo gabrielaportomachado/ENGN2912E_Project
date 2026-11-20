@@ -2,8 +2,8 @@ gate.py L1d  (L1d)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 5f5e1fa
-INFO  no open REVIEW.md item for L1d or an earlier phase
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit a611164
+PASS  open REVIEW.md items for L1d or an earlier phase (R1 R3 R5) are listed as handled in section 9 of a phase report
 PASS  phase report AFE/layout/reports/L1d.md with all 10 sections
 PASS  "## L1d findings" section in AFE/NOTES.md
 PASS  Results-log row for L1d in AFE/NOTES.md
@@ -12,15 +12,15 @@ PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all
 --- afe_dig
 PASS  AFE/dig/final/ has afe_dig.gds, afe_dig.pnl.v, afe_dig.lef, afe_dig_pins.json
 PASS  AFE/dig/reports/flow_summary.rpt VERDICT all PASS
-PASS  die 819.84 x 109.76 um <= the slot 820 x 110 um
-PASS  KLayout DRC variant D of afe_dig PASS on the GDS in AFE/dig/final (1948280 bytes in the log, 1948280 committed)
-PASS  (a) DAC edge -> comparator clock of ADC 0 at ff_n40: 22.14 ns >= 21.0
-PASS  (c) last window end -> next SCLK edge at the flop clock pins, ss_125: 22.39 ns >= 20.0 (against the pin: 20.59 ns, reported)
-PASS  captured decision -> code register slack at 3 MHz, ss_125: 13.75 ns >= 10
-PASS  sw_rec / sw_ipg pair skew at the macro pins <= 3 ns: worst 0.775 ns
+PASS  die 819.84 x 101.92 um <= the slot 820 x 110 um
+PASS  KLayout DRC variant D of afe_dig PASS on the GDS in AFE/dig/final (1931994 bytes in the log, 1931994 committed)
+PASS  (a) DAC edge -> comparator clock of ADC 0 at ff_n40: 21.99 ns >= 21.0
+PASS  (c) last window end -> next SCLK edge at the flop clock pins, ss_125: 22.05 ns >= 20.0 (against the pin: 20.23 ns, reported)
+PASS  captured decision -> code register slack at 3 MHz, ss_125: 13.69 ns >= 10
+PASS  sw_rec / sw_ipg pair skew at the macro pins <= 3 ns: worst 0.776 ns
 PASS  gate-level testbench on the hardened netlist: only accepted assertion failures
 PASS  run_top_sim.sh dig: EQUIV PASS (afe_dig equals the two RTL instances + ties)
 PASS  check_lvs_netlists.py SUMMARY A, B, C PASS
 PASS  the LVS top was written from AFE/dig/final/afe_dig.pnl.v (header of AFE/layout/lvs/dbs_afe_top.spice)
-PASS  floorplan.py check --dig-pins /foss/designs/ENGN2912E_Project/.claude/worktrees/l1d-dig/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 18 PASS, 0 FAIL
+PASS  floorplan.py check --dig-pins /foss/designs/ENGN2912E_Project/.claude/worktrees/r3-dig/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 18 PASS, 0 FAIL
 GATE L1d: PASS  (0 FAIL)

@@ -3,536 +3,536 @@ DIVIDERCHAR "/" ;
 BUSBITCHARS "[]" ;
 DESIGN afe_dig ;
 UNITS DISTANCE MICRONS 2000 ;
-DIEAREA ( 0 0 ) ( 1639680 219520 ) ;
+DIEAREA ( 0 0 ) ( 1639680 203840 ) ;
 PINS 286 ;
     - sw_rec[0] + NET sw_rec[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 16240 219520 ) N ;
+        + PLACED ( 16240 203840 ) N ;
     - sw_rec_b[0] + NET sw_rec_b[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 21840 219520 ) N ;
+        + PLACED ( 21840 203840 ) N ;
     - sw_ipg[0] + NET sw_ipg[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 27440 219520 ) N ;
+        + PLACED ( 27440 203840 ) N ;
     - sw_ipg_b[0] + NET sw_ipg_b[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 34160 219520 ) N ;
+        + PLACED ( 34160 203840 ) N ;
     - rst_sw[0] + NET rst_sw[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 39760 219520 ) N ;
+        + PLACED ( 39760 203840 ) N ;
     - tg_on[0] + NET tg_on[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 46480 219520 ) N ;
+        + PLACED ( 46480 203840 ) N ;
     - dac_gdn[0] + NET dac_gdn[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 52080 219520 ) N ;
+        + PLACED ( 52080 203840 ) N ;
     - cmp_clk[0] + NET cmp_clk[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 57680 219520 ) N ;
+        + PLACED ( 57680 203840 ) N ;
     - cmp_q[0] + NET cmp_q[0] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 64400 219520 ) N ;
+        + PLACED ( 64400 203840 ) N ;
     - dac_gp[11] + NET dac_gp[11] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 70000 219520 ) N ;
+        + PLACED ( 70000 203840 ) N ;
     - dac_gn[11] + NET dac_gn[11] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 75600 219520 ) N ;
+        + PLACED ( 75600 203840 ) N ;
     - dac_gp[10] + NET dac_gp[10] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 82320 219520 ) N ;
+        + PLACED ( 82320 203840 ) N ;
     - dac_gn[10] + NET dac_gn[10] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 87920 219520 ) N ;
+        + PLACED ( 87920 203840 ) N ;
     - dac_gp[9] + NET dac_gp[9] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 93520 219520 ) N ;
+        + PLACED ( 93520 203840 ) N ;
     - dac_gn[9] + NET dac_gn[9] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 100240 219520 ) N ;
+        + PLACED ( 100240 203840 ) N ;
     - dac_gp[8] + NET dac_gp[8] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 105840 219520 ) N ;
+        + PLACED ( 105840 203840 ) N ;
     - dac_gn[8] + NET dac_gn[8] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 111440 219520 ) N ;
+        + PLACED ( 111440 203840 ) N ;
     - dac_gp[7] + NET dac_gp[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 118160 219520 ) N ;
+        + PLACED ( 118160 203840 ) N ;
     - dac_gn[7] + NET dac_gn[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 123760 219520 ) N ;
+        + PLACED ( 123760 203840 ) N ;
     - dac_gp[6] + NET dac_gp[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 130480 219520 ) N ;
+        + PLACED ( 130480 203840 ) N ;
     - dac_gn[6] + NET dac_gn[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 136080 219520 ) N ;
+        + PLACED ( 136080 203840 ) N ;
     - dac_gp[5] + NET dac_gp[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 141680 219520 ) N ;
+        + PLACED ( 141680 203840 ) N ;
     - dac_gn[5] + NET dac_gn[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 148400 219520 ) N ;
+        + PLACED ( 148400 203840 ) N ;
     - dac_gp[4] + NET dac_gp[4] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 154000 219520 ) N ;
+        + PLACED ( 154000 203840 ) N ;
     - dac_gn[4] + NET dac_gn[4] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 159600 219520 ) N ;
+        + PLACED ( 159600 203840 ) N ;
     - dac_gp[3] + NET dac_gp[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 166320 219520 ) N ;
+        + PLACED ( 166320 203840 ) N ;
     - dac_gn[3] + NET dac_gn[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 171920 219520 ) N ;
+        + PLACED ( 171920 203840 ) N ;
     - dac_gp[2] + NET dac_gp[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 177520 219520 ) N ;
+        + PLACED ( 177520 203840 ) N ;
     - dac_gn[2] + NET dac_gn[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 184240 219520 ) N ;
+        + PLACED ( 184240 203840 ) N ;
     - dac_gp[1] + NET dac_gp[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 189840 219520 ) N ;
+        + PLACED ( 189840 203840 ) N ;
     - dac_gn[1] + NET dac_gn[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 195440 219520 ) N ;
+        + PLACED ( 195440 203840 ) N ;
     - dac_gp[0] + NET dac_gp[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 202160 219520 ) N ;
+        + PLACED ( 202160 203840 ) N ;
     - dac_gn[0] + NET dac_gn[0] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 207760 219520 ) N ;
+        + PLACED ( 207760 203840 ) N ;
     - sw_rec[1] + NET sw_rec[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 485520 219520 ) N ;
+        + PLACED ( 490000 203840 ) N ;
     - sw_rec_b[1] + NET sw_rec_b[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 492240 219520 ) N ;
+        + PLACED ( 495600 203840 ) N ;
     - sw_ipg[1] + NET sw_ipg[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 497840 219520 ) N ;
+        + PLACED ( 502320 203840 ) N ;
     - sw_ipg_b[1] + NET sw_ipg_b[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 503440 219520 ) N ;
+        + PLACED ( 507920 203840 ) N ;
     - rst_sw[1] + NET rst_sw[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 510160 219520 ) N ;
+        + PLACED ( 513520 203840 ) N ;
     - tg_on[1] + NET tg_on[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 515760 219520 ) N ;
+        + PLACED ( 520240 203840 ) N ;
     - dac_gdn[1] + NET dac_gdn[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 522480 219520 ) N ;
+        + PLACED ( 525840 203840 ) N ;
     - cmp_clk[1] + NET cmp_clk[1] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 528080 219520 ) N ;
+        + PLACED ( 531440 203840 ) N ;
     - cmp_q[1] + NET cmp_q[1] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 533680 219520 ) N ;
+        + PLACED ( 538160 203840 ) N ;
     - dac_gp[23] + NET dac_gp[23] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 540400 219520 ) N ;
+        + PLACED ( 543760 203840 ) N ;
     - dac_gn[23] + NET dac_gn[23] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 546000 219520 ) N ;
+        + PLACED ( 550480 203840 ) N ;
     - dac_gp[22] + NET dac_gp[22] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 551600 219520 ) N ;
+        + PLACED ( 556080 203840 ) N ;
     - dac_gn[22] + NET dac_gn[22] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 558320 219520 ) N ;
+        + PLACED ( 561680 203840 ) N ;
     - dac_gp[21] + NET dac_gp[21] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 563920 219520 ) N ;
+        + PLACED ( 568400 203840 ) N ;
     - dac_gn[21] + NET dac_gn[21] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 569520 219520 ) N ;
+        + PLACED ( 574000 203840 ) N ;
     - dac_gp[20] + NET dac_gp[20] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 576240 219520 ) N ;
+        + PLACED ( 579600 203840 ) N ;
     - dac_gn[20] + NET dac_gn[20] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 581840 219520 ) N ;
+        + PLACED ( 586320 203840 ) N ;
     - dac_gp[19] + NET dac_gp[19] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 587440 219520 ) N ;
+        + PLACED ( 591920 203840 ) N ;
     - dac_gn[19] + NET dac_gn[19] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 594160 219520 ) N ;
+        + PLACED ( 597520 203840 ) N ;
     - dac_gp[18] + NET dac_gp[18] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 599760 219520 ) N ;
+        + PLACED ( 604240 203840 ) N ;
     - dac_gn[18] + NET dac_gn[18] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 606480 219520 ) N ;
+        + PLACED ( 609840 203840 ) N ;
     - dac_gp[17] + NET dac_gp[17] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 612080 219520 ) N ;
+        + PLACED ( 616560 203840 ) N ;
     - dac_gn[17] + NET dac_gn[17] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 617680 219520 ) N ;
+        + PLACED ( 622160 203840 ) N ;
     - dac_gp[16] + NET dac_gp[16] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 624400 219520 ) N ;
+        + PLACED ( 627760 203840 ) N ;
     - dac_gn[16] + NET dac_gn[16] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 630000 219520 ) N ;
+        + PLACED ( 634480 203840 ) N ;
     - dac_gp[15] + NET dac_gp[15] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 635600 219520 ) N ;
+        + PLACED ( 640080 203840 ) N ;
     - dac_gn[15] + NET dac_gn[15] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 642320 219520 ) N ;
+        + PLACED ( 645680 203840 ) N ;
     - dac_gp[14] + NET dac_gp[14] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 647920 219520 ) N ;
+        + PLACED ( 652400 203840 ) N ;
     - dac_gn[14] + NET dac_gn[14] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 653520 219520 ) N ;
+        + PLACED ( 658000 203840 ) N ;
     - dac_gp[13] + NET dac_gp[13] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 660240 219520 ) N ;
+        + PLACED ( 663600 203840 ) N ;
     - dac_gn[13] + NET dac_gn[13] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 665840 219520 ) N ;
+        + PLACED ( 670320 203840 ) N ;
     - dac_gp[12] + NET dac_gp[12] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 672560 219520 ) N ;
+        + PLACED ( 675920 203840 ) N ;
     - dac_gn[12] + NET dac_gn[12] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 678160 219520 ) N ;
+        + PLACED ( 681520 203840 ) N ;
     - sw_rec[2] + NET sw_rec[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 955920 219520 ) N ;
+        + PLACED ( 963760 203840 ) N ;
     - sw_rec_b[2] + NET sw_rec_b[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 961520 219520 ) N ;
+        + PLACED ( 970480 203840 ) N ;
     - sw_ipg[2] + NET sw_ipg[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 968240 219520 ) N ;
+        + PLACED ( 976080 203840 ) N ;
     - sw_ipg_b[2] + NET sw_ipg_b[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 973840 219520 ) N ;
+        + PLACED ( 981680 203840 ) N ;
     - rst_sw[2] + NET rst_sw[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 979440 219520 ) N ;
+        + PLACED ( 988400 203840 ) N ;
     - tg_on[2] + NET tg_on[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 986160 219520 ) N ;
+        + PLACED ( 994000 203840 ) N ;
     - dac_gdn[2] + NET dac_gdn[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 991760 219520 ) N ;
+        + PLACED ( 999600 203840 ) N ;
     - cmp_clk[2] + NET cmp_clk[2] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 998480 219520 ) N ;
+        + PLACED ( 1006320 203840 ) N ;
     - cmp_q[2] + NET cmp_q[2] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1004080 219520 ) N ;
+        + PLACED ( 1011920 203840 ) N ;
     - dac_gp[35] + NET dac_gp[35] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1009680 219520 ) N ;
+        + PLACED ( 1017520 203840 ) N ;
     - dac_gn[35] + NET dac_gn[35] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1016400 219520 ) N ;
+        + PLACED ( 1024240 203840 ) N ;
     - dac_gp[34] + NET dac_gp[34] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1022000 219520 ) N ;
+        + PLACED ( 1029840 203840 ) N ;
     - dac_gn[34] + NET dac_gn[34] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1027600 219520 ) N ;
+        + PLACED ( 1035440 203840 ) N ;
     - dac_gp[33] + NET dac_gp[33] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1034320 219520 ) N ;
+        + PLACED ( 1042160 203840 ) N ;
     - dac_gn[33] + NET dac_gn[33] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1039920 219520 ) N ;
+        + PLACED ( 1047760 203840 ) N ;
     - dac_gp[32] + NET dac_gp[32] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1045520 219520 ) N ;
+        + PLACED ( 1054480 203840 ) N ;
     - dac_gn[32] + NET dac_gn[32] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1052240 219520 ) N ;
+        + PLACED ( 1060080 203840 ) N ;
     - dac_gp[31] + NET dac_gp[31] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1057840 219520 ) N ;
+        + PLACED ( 1065680 203840 ) N ;
     - dac_gn[31] + NET dac_gn[31] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1064560 219520 ) N ;
+        + PLACED ( 1072400 203840 ) N ;
     - dac_gp[30] + NET dac_gp[30] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1070160 219520 ) N ;
+        + PLACED ( 1078000 203840 ) N ;
     - dac_gn[30] + NET dac_gn[30] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1075760 219520 ) N ;
+        + PLACED ( 1083600 203840 ) N ;
     - dac_gp[29] + NET dac_gp[29] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1082480 219520 ) N ;
+        + PLACED ( 1090320 203840 ) N ;
     - dac_gn[29] + NET dac_gn[29] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1088080 219520 ) N ;
+        + PLACED ( 1095920 203840 ) N ;
     - dac_gp[28] + NET dac_gp[28] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1093680 219520 ) N ;
+        + PLACED ( 1101520 203840 ) N ;
     - dac_gn[28] + NET dac_gn[28] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1100400 219520 ) N ;
+        + PLACED ( 1108240 203840 ) N ;
     - dac_gp[27] + NET dac_gp[27] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1106000 219520 ) N ;
+        + PLACED ( 1113840 203840 ) N ;
     - dac_gn[27] + NET dac_gn[27] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1111600 219520 ) N ;
+        + PLACED ( 1120560 203840 ) N ;
     - dac_gp[26] + NET dac_gp[26] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1118320 219520 ) N ;
+        + PLACED ( 1126160 203840 ) N ;
     - dac_gn[26] + NET dac_gn[26] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1123920 219520 ) N ;
+        + PLACED ( 1131760 203840 ) N ;
     - dac_gp[25] + NET dac_gp[25] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1129520 219520 ) N ;
+        + PLACED ( 1138480 203840 ) N ;
     - dac_gn[25] + NET dac_gn[25] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1136240 219520 ) N ;
+        + PLACED ( 1144080 203840 ) N ;
     - dac_gp[24] + NET dac_gp[24] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1141840 219520 ) N ;
+        + PLACED ( 1149680 203840 ) N ;
     - dac_gn[24] + NET dac_gn[24] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1147440 219520 ) N ;
+        + PLACED ( 1156400 203840 ) N ;
     - sw_rec[3] + NET sw_rec[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1426320 219520 ) N ;
+        + PLACED ( 1437520 203840 ) N ;
     - sw_rec_b[3] + NET sw_rec_b[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1431920 219520 ) N ;
+        + PLACED ( 1444240 203840 ) N ;
     - sw_ipg[3] + NET sw_ipg[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1437520 219520 ) N ;
+        + PLACED ( 1449840 203840 ) N ;
     - sw_ipg_b[3] + NET sw_ipg_b[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1444240 219520 ) N ;
+        + PLACED ( 1456560 203840 ) N ;
     - rst_sw[3] + NET rst_sw[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1449840 219520 ) N ;
+        + PLACED ( 1462160 203840 ) N ;
     - tg_on[3] + NET tg_on[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1456560 219520 ) N ;
+        + PLACED ( 1467760 203840 ) N ;
     - dac_gdn[3] + NET dac_gdn[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1462160 219520 ) N ;
+        + PLACED ( 1474480 203840 ) N ;
     - cmp_clk[3] + NET cmp_clk[3] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1467760 219520 ) N ;
+        + PLACED ( 1480080 203840 ) N ;
     - cmp_q[3] + NET cmp_q[3] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1474480 219520 ) N ;
+        + PLACED ( 1485680 203840 ) N ;
     - dac_gp[47] + NET dac_gp[47] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1480080 219520 ) N ;
+        + PLACED ( 1492400 203840 ) N ;
     - dac_gn[47] + NET dac_gn[47] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1485680 219520 ) N ;
+        + PLACED ( 1498000 203840 ) N ;
     - dac_gp[46] + NET dac_gp[46] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1492400 219520 ) N ;
+        + PLACED ( 1503600 203840 ) N ;
     - dac_gn[46] + NET dac_gn[46] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1498000 219520 ) N ;
+        + PLACED ( 1510320 203840 ) N ;
     - dac_gp[45] + NET dac_gp[45] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1503600 219520 ) N ;
+        + PLACED ( 1515920 203840 ) N ;
     - dac_gn[45] + NET dac_gn[45] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1510320 219520 ) N ;
+        + PLACED ( 1521520 203840 ) N ;
     - dac_gp[44] + NET dac_gp[44] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1515920 219520 ) N ;
+        + PLACED ( 1528240 203840 ) N ;
     - dac_gn[44] + NET dac_gn[44] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1521520 219520 ) N ;
+        + PLACED ( 1533840 203840 ) N ;
     - dac_gp[43] + NET dac_gp[43] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1528240 219520 ) N ;
+        + PLACED ( 1539440 203840 ) N ;
     - dac_gn[43] + NET dac_gn[43] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1533840 219520 ) N ;
+        + PLACED ( 1546160 203840 ) N ;
     - dac_gp[42] + NET dac_gp[42] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1539440 219520 ) N ;
+        + PLACED ( 1551760 203840 ) N ;
     - dac_gn[42] + NET dac_gn[42] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1546160 219520 ) N ;
+        + PLACED ( 1558480 203840 ) N ;
     - dac_gp[41] + NET dac_gp[41] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1551760 219520 ) N ;
+        + PLACED ( 1564080 203840 ) N ;
     - dac_gn[41] + NET dac_gn[41] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1558480 219520 ) N ;
+        + PLACED ( 1569680 203840 ) N ;
     - dac_gp[40] + NET dac_gp[40] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1564080 219520 ) N ;
+        + PLACED ( 1576400 203840 ) N ;
     - dac_gn[40] + NET dac_gn[40] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1569680 219520 ) N ;
+        + PLACED ( 1582000 203840 ) N ;
     - dac_gp[39] + NET dac_gp[39] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1576400 219520 ) N ;
+        + PLACED ( 1587600 203840 ) N ;
     - dac_gn[39] + NET dac_gn[39] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1582000 219520 ) N ;
+        + PLACED ( 1594320 203840 ) N ;
     - dac_gp[38] + NET dac_gp[38] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1587600 219520 ) N ;
+        + PLACED ( 1599920 203840 ) N ;
     - dac_gn[38] + NET dac_gn[38] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1594320 219520 ) N ;
+        + PLACED ( 1605520 203840 ) N ;
     - dac_gp[37] + NET dac_gp[37] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1599920 219520 ) N ;
+        + PLACED ( 1612240 203840 ) N ;
     - dac_gn[37] + NET dac_gn[37] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1605520 219520 ) N ;
+        + PLACED ( 1617840 203840 ) N ;
     - dac_gp[36] + NET dac_gp[36] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1612240 219520 ) N ;
+        + PLACED ( 1624560 203840 ) N ;
     - dac_gn[36] + NET dac_gn[36] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 -4000 ) ( 560 0 )
-        + PLACED ( 1617840 219520 ) N ;
+        + PLACED ( 1630160 203840 ) N ;
     - sw_rec[4] + NET sw_rec[4] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
@@ -668,486 +668,486 @@ PINS 286 ;
     - sw_rec[5] + NET sw_rec[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 485520 0 ) N ;
+        + PLACED ( 490000 0 ) N ;
     - sw_rec_b[5] + NET sw_rec_b[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 492240 0 ) N ;
+        + PLACED ( 495600 0 ) N ;
     - sw_ipg[5] + NET sw_ipg[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 497840 0 ) N ;
+        + PLACED ( 502320 0 ) N ;
     - sw_ipg_b[5] + NET sw_ipg_b[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 503440 0 ) N ;
+        + PLACED ( 507920 0 ) N ;
     - rst_sw[5] + NET rst_sw[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 510160 0 ) N ;
+        + PLACED ( 513520 0 ) N ;
     - tg_on[5] + NET tg_on[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 515760 0 ) N ;
+        + PLACED ( 520240 0 ) N ;
     - dac_gdn[5] + NET dac_gdn[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 522480 0 ) N ;
+        + PLACED ( 525840 0 ) N ;
     - cmp_clk[5] + NET cmp_clk[5] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 528080 0 ) N ;
+        + PLACED ( 531440 0 ) N ;
     - cmp_q[5] + NET cmp_q[5] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 533680 0 ) N ;
+        + PLACED ( 538160 0 ) N ;
     - dac_gp[71] + NET dac_gp[71] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 540400 0 ) N ;
+        + PLACED ( 543760 0 ) N ;
     - dac_gn[71] + NET dac_gn[71] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 546000 0 ) N ;
+        + PLACED ( 550480 0 ) N ;
     - dac_gp[70] + NET dac_gp[70] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 551600 0 ) N ;
+        + PLACED ( 556080 0 ) N ;
     - dac_gn[70] + NET dac_gn[70] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 558320 0 ) N ;
+        + PLACED ( 561680 0 ) N ;
     - dac_gp[69] + NET dac_gp[69] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 563920 0 ) N ;
+        + PLACED ( 568400 0 ) N ;
     - dac_gn[69] + NET dac_gn[69] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 569520 0 ) N ;
+        + PLACED ( 574000 0 ) N ;
     - dac_gp[68] + NET dac_gp[68] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 576240 0 ) N ;
+        + PLACED ( 579600 0 ) N ;
     - dac_gn[68] + NET dac_gn[68] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 581840 0 ) N ;
+        + PLACED ( 586320 0 ) N ;
     - dac_gp[67] + NET dac_gp[67] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 587440 0 ) N ;
+        + PLACED ( 591920 0 ) N ;
     - dac_gn[67] + NET dac_gn[67] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 594160 0 ) N ;
+        + PLACED ( 597520 0 ) N ;
     - dac_gp[66] + NET dac_gp[66] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 599760 0 ) N ;
+        + PLACED ( 604240 0 ) N ;
     - dac_gn[66] + NET dac_gn[66] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 606480 0 ) N ;
+        + PLACED ( 609840 0 ) N ;
     - dac_gp[65] + NET dac_gp[65] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 612080 0 ) N ;
+        + PLACED ( 616560 0 ) N ;
     - dac_gn[65] + NET dac_gn[65] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 617680 0 ) N ;
+        + PLACED ( 622160 0 ) N ;
     - dac_gp[64] + NET dac_gp[64] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 624400 0 ) N ;
+        + PLACED ( 627760 0 ) N ;
     - dac_gn[64] + NET dac_gn[64] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 630000 0 ) N ;
+        + PLACED ( 634480 0 ) N ;
     - dac_gp[63] + NET dac_gp[63] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 635600 0 ) N ;
+        + PLACED ( 640080 0 ) N ;
     - dac_gn[63] + NET dac_gn[63] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 642320 0 ) N ;
+        + PLACED ( 645680 0 ) N ;
     - dac_gp[62] + NET dac_gp[62] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 647920 0 ) N ;
+        + PLACED ( 652400 0 ) N ;
     - dac_gn[62] + NET dac_gn[62] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 653520 0 ) N ;
+        + PLACED ( 658000 0 ) N ;
     - dac_gp[61] + NET dac_gp[61] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 660240 0 ) N ;
+        + PLACED ( 663600 0 ) N ;
     - dac_gn[61] + NET dac_gn[61] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 665840 0 ) N ;
+        + PLACED ( 670320 0 ) N ;
     - dac_gp[60] + NET dac_gp[60] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 672560 0 ) N ;
+        + PLACED ( 675920 0 ) N ;
     - dac_gn[60] + NET dac_gn[60] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 678160 0 ) N ;
+        + PLACED ( 681520 0 ) N ;
     - sw_rec[6] + NET sw_rec[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 955920 0 ) N ;
+        + PLACED ( 963760 0 ) N ;
     - sw_rec_b[6] + NET sw_rec_b[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 961520 0 ) N ;
+        + PLACED ( 970480 0 ) N ;
     - sw_ipg[6] + NET sw_ipg[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 968240 0 ) N ;
+        + PLACED ( 976080 0 ) N ;
     - sw_ipg_b[6] + NET sw_ipg_b[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 973840 0 ) N ;
+        + PLACED ( 981680 0 ) N ;
     - rst_sw[6] + NET rst_sw[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 979440 0 ) N ;
+        + PLACED ( 988400 0 ) N ;
     - tg_on[6] + NET tg_on[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 986160 0 ) N ;
+        + PLACED ( 994000 0 ) N ;
     - dac_gdn[6] + NET dac_gdn[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 991760 0 ) N ;
+        + PLACED ( 999600 0 ) N ;
     - cmp_clk[6] + NET cmp_clk[6] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 998480 0 ) N ;
+        + PLACED ( 1006320 0 ) N ;
     - cmp_q[6] + NET cmp_q[6] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1004080 0 ) N ;
+        + PLACED ( 1011920 0 ) N ;
     - dac_gp[83] + NET dac_gp[83] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1009680 0 ) N ;
+        + PLACED ( 1017520 0 ) N ;
     - dac_gn[83] + NET dac_gn[83] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1016400 0 ) N ;
+        + PLACED ( 1024240 0 ) N ;
     - dac_gp[82] + NET dac_gp[82] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1022000 0 ) N ;
+        + PLACED ( 1029840 0 ) N ;
     - dac_gn[82] + NET dac_gn[82] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1027600 0 ) N ;
+        + PLACED ( 1035440 0 ) N ;
     - dac_gp[81] + NET dac_gp[81] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1034320 0 ) N ;
+        + PLACED ( 1042160 0 ) N ;
     - dac_gn[81] + NET dac_gn[81] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1039920 0 ) N ;
+        + PLACED ( 1047760 0 ) N ;
     - dac_gp[80] + NET dac_gp[80] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1045520 0 ) N ;
+        + PLACED ( 1054480 0 ) N ;
     - dac_gn[80] + NET dac_gn[80] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1052240 0 ) N ;
+        + PLACED ( 1060080 0 ) N ;
     - dac_gp[79] + NET dac_gp[79] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1057840 0 ) N ;
+        + PLACED ( 1065680 0 ) N ;
     - dac_gn[79] + NET dac_gn[79] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1064560 0 ) N ;
+        + PLACED ( 1072400 0 ) N ;
     - dac_gp[78] + NET dac_gp[78] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1070160 0 ) N ;
+        + PLACED ( 1078000 0 ) N ;
     - dac_gn[78] + NET dac_gn[78] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1075760 0 ) N ;
+        + PLACED ( 1083600 0 ) N ;
     - dac_gp[77] + NET dac_gp[77] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1082480 0 ) N ;
+        + PLACED ( 1090320 0 ) N ;
     - dac_gn[77] + NET dac_gn[77] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1088080 0 ) N ;
+        + PLACED ( 1095920 0 ) N ;
     - dac_gp[76] + NET dac_gp[76] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1093680 0 ) N ;
+        + PLACED ( 1101520 0 ) N ;
     - dac_gn[76] + NET dac_gn[76] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1100400 0 ) N ;
+        + PLACED ( 1108240 0 ) N ;
     - dac_gp[75] + NET dac_gp[75] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1106000 0 ) N ;
+        + PLACED ( 1113840 0 ) N ;
     - dac_gn[75] + NET dac_gn[75] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1111600 0 ) N ;
+        + PLACED ( 1120560 0 ) N ;
     - dac_gp[74] + NET dac_gp[74] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1118320 0 ) N ;
+        + PLACED ( 1126160 0 ) N ;
     - dac_gn[74] + NET dac_gn[74] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1123920 0 ) N ;
+        + PLACED ( 1131760 0 ) N ;
     - dac_gp[73] + NET dac_gp[73] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1129520 0 ) N ;
+        + PLACED ( 1138480 0 ) N ;
     - dac_gn[73] + NET dac_gn[73] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1136240 0 ) N ;
+        + PLACED ( 1144080 0 ) N ;
     - dac_gp[72] + NET dac_gp[72] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1141840 0 ) N ;
+        + PLACED ( 1149680 0 ) N ;
     - dac_gn[72] + NET dac_gn[72] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1147440 0 ) N ;
+        + PLACED ( 1156400 0 ) N ;
     - sw_rec[7] + NET sw_rec[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1426320 0 ) N ;
+        + PLACED ( 1437520 0 ) N ;
     - sw_rec_b[7] + NET sw_rec_b[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1431920 0 ) N ;
+        + PLACED ( 1444240 0 ) N ;
     - sw_ipg[7] + NET sw_ipg[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1437520 0 ) N ;
+        + PLACED ( 1449840 0 ) N ;
     - sw_ipg_b[7] + NET sw_ipg_b[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1444240 0 ) N ;
+        + PLACED ( 1456560 0 ) N ;
     - rst_sw[7] + NET rst_sw[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1449840 0 ) N ;
+        + PLACED ( 1462160 0 ) N ;
     - tg_on[7] + NET tg_on[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1456560 0 ) N ;
+        + PLACED ( 1467760 0 ) N ;
     - dac_gdn[7] + NET dac_gdn[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1462160 0 ) N ;
+        + PLACED ( 1474480 0 ) N ;
     - cmp_clk[7] + NET cmp_clk[7] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1467760 0 ) N ;
+        + PLACED ( 1480080 0 ) N ;
     - cmp_q[7] + NET cmp_q[7] + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1474480 0 ) N ;
+        + PLACED ( 1485680 0 ) N ;
     - dac_gp[95] + NET dac_gp[95] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1480080 0 ) N ;
+        + PLACED ( 1492400 0 ) N ;
     - dac_gn[95] + NET dac_gn[95] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1485680 0 ) N ;
+        + PLACED ( 1498000 0 ) N ;
     - dac_gp[94] + NET dac_gp[94] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1492400 0 ) N ;
+        + PLACED ( 1503600 0 ) N ;
     - dac_gn[94] + NET dac_gn[94] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1498000 0 ) N ;
+        + PLACED ( 1510320 0 ) N ;
     - dac_gp[93] + NET dac_gp[93] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1503600 0 ) N ;
+        + PLACED ( 1515920 0 ) N ;
     - dac_gn[93] + NET dac_gn[93] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1510320 0 ) N ;
+        + PLACED ( 1521520 0 ) N ;
     - dac_gp[92] + NET dac_gp[92] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1515920 0 ) N ;
+        + PLACED ( 1528240 0 ) N ;
     - dac_gn[92] + NET dac_gn[92] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1521520 0 ) N ;
+        + PLACED ( 1533840 0 ) N ;
     - dac_gp[91] + NET dac_gp[91] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1528240 0 ) N ;
+        + PLACED ( 1539440 0 ) N ;
     - dac_gn[91] + NET dac_gn[91] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1533840 0 ) N ;
+        + PLACED ( 1546160 0 ) N ;
     - dac_gp[90] + NET dac_gp[90] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1539440 0 ) N ;
+        + PLACED ( 1551760 0 ) N ;
     - dac_gn[90] + NET dac_gn[90] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1546160 0 ) N ;
+        + PLACED ( 1558480 0 ) N ;
     - dac_gp[89] + NET dac_gp[89] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1551760 0 ) N ;
+        + PLACED ( 1564080 0 ) N ;
     - dac_gn[89] + NET dac_gn[89] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1558480 0 ) N ;
+        + PLACED ( 1569680 0 ) N ;
     - dac_gp[88] + NET dac_gp[88] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1564080 0 ) N ;
+        + PLACED ( 1576400 0 ) N ;
     - dac_gn[88] + NET dac_gn[88] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1569680 0 ) N ;
+        + PLACED ( 1582000 0 ) N ;
     - dac_gp[87] + NET dac_gp[87] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1576400 0 ) N ;
+        + PLACED ( 1587600 0 ) N ;
     - dac_gn[87] + NET dac_gn[87] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1582000 0 ) N ;
+        + PLACED ( 1594320 0 ) N ;
     - dac_gp[86] + NET dac_gp[86] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1587600 0 ) N ;
+        + PLACED ( 1599920 0 ) N ;
     - dac_gn[86] + NET dac_gn[86] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1594320 0 ) N ;
+        + PLACED ( 1605520 0 ) N ;
     - dac_gp[85] + NET dac_gp[85] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1599920 0 ) N ;
+        + PLACED ( 1612240 0 ) N ;
     - dac_gn[85] + NET dac_gn[85] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1605520 0 ) N ;
+        + PLACED ( 1617840 0 ) N ;
     - dac_gp[84] + NET dac_gp[84] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1612240 0 ) N ;
+        + PLACED ( 1624560 0 ) N ;
     - dac_gn[84] + NET dac_gn[84] + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal2 ( -560 0 ) ( 560 4000 )
-        + PLACED ( 1617840 0 ) N ;
+        + PLACED ( 1630160 0 ) N ;
     - RSTN_PD + NET RSTN_PD + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 8400 ) N ;
+        + PLACED ( 0 6160 ) N ;
     - RSTN_PU + NET RSTN_PU + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 16240 ) N ;
+        + PLACED ( 0 12880 ) N ;
     - RSTN + NET RSTN + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 24080 ) N ;
+        + PLACED ( 0 19600 ) N ;
     - SCLK_PD + NET SCLK_PD + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 31920 ) N ;
+        + PLACED ( 0 27440 ) N ;
     - SCLK_PU + NET SCLK_PU + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 39760 ) N ;
+        + PLACED ( 0 34160 ) N ;
     - SCLK + NET SCLK + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 47600 ) N ;
+        + PLACED ( 0 40880 ) N ;
     - DIN_PD + NET DIN_PD + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 55440 ) N ;
+        + PLACED ( 0 47600 ) N ;
     - DIN_PU + NET DIN_PU + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 64400 ) N ;
+        + PLACED ( 0 55440 ) N ;
     - DIN + NET DIN + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 72240 ) N ;
+        + PLACED ( 0 62160 ) N ;
     - CS_PD + NET CS_PD + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 80080 ) N ;
+        + PLACED ( 0 68880 ) N ;
     - CS_PU + NET CS_PU + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 87920 ) N ;
+        + PLACED ( 0 75600 ) N ;
     - CS + NET CS + DIRECTION INPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 95760 ) N ;
+        + PLACED ( 0 83440 ) N ;
     - DOUT + NET DOUT + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 103600 ) N ;
+        + PLACED ( 0 90160 ) N ;
     - DOUT_OE + NET DOUT_OE + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 111440 ) N ;
+        + PLACED ( 0 96880 ) N ;
     - DOUT_IE + NET DOUT_IE + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 120400 ) N ;
+        + PLACED ( 0 103600 ) N ;
     - DOUT_PD + NET DOUT_PD + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 128240 ) N ;
+        + PLACED ( 0 111440 ) N ;
     - DOUT_PU + NET DOUT_PU + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 136080 ) N ;
+        + PLACED ( 0 118160 ) N ;
     - DOUT_CS + NET DOUT_CS + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 143920 ) N ;
+        + PLACED ( 0 124880 ) N ;
     - DOUT_SL + NET DOUT_SL + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 151760 ) N ;
+        + PLACED ( 0 131600 ) N ;
     - DOUT_PDRV0 + NET DOUT_PDRV0 + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 159600 ) N ;
+        + PLACED ( 0 139440 ) N ;
     - DOUT_PDRV1 + NET DOUT_PDRV1 + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 167440 ) N ;
+        + PLACED ( 0 146160 ) N ;
     - rst_amp_o + NET rst_amp_o + DIRECTION OUTPUT + USE SIGNAL
       + PORT
         + LAYER Metal3 ( 0 -560 ) ( 4000 560 )
-        + PLACED ( 0 176400 ) N ;
+        + PLACED ( 0 152880 ) N ;
 END PINS
 END DESIGN

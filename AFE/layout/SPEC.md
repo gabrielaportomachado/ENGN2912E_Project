@@ -1,4 +1,4 @@
-# Layout specification of dbs_afe_top (LP, 2026-11-20; numbers updated by REVIEW R2, Decision 48: tightened floorplan, ring 26 / bias_corr 12 / strap_corr 25 / dig_h 80 / ch_pitch 237 / adc_h 104)
+# Layout specification of dbs_afe_top (LP, 2026-11-20; numbers updated by REVIEW R2, Decision 48: tightened floorplan, ring 26 / bias_corr 12 / strap_corr 25 / dig_h 101.92 (R3) / ch_pitch 237 / adc_h 104)
 
 Single source of the numbers: `AFE/layout/floorplan.json` (built and checked by `AFE/layout/scripts/floorplan.py`). This file explains them. Where the two differ, floorplan.json wins.
 Every layout phase reads both before drawing and runs `python3 AFE/layout/scripts/floorplan.py check` (must print 0 FAIL) before it stops.
@@ -18,12 +18,12 @@ Units um; origin = SW corner of the outline; "inner" = towards the digital macro
  962 |  +-------------+-------------+-------------+--------------+  |
      |  | ch0         | ch1         | ch2         | ch3          |  |
      |W |  amp end    |  (R0)       |             |              | E|
-     |  |  TGATE zone / amp_ch 222 x 285 / adc_ch 222 x 104       |  |   REF
+     |  |  TGATE zone / amp_ch 222 x 274.04 / adc_ch 222 x 104       |  |   REF
      |  |  ADC end    |             |             |              |  |   pin
  565 |  +-------------+-------------+-------------+-----+--------+  |
      |  | strap corridor N (25): VDD(main) vdd_dac vss + decap row|bias|  |
  540 |  +--------------------------------------------------+ genc|  |
-     |  | afe_dig 820 x 80 (pins N: ch0-3, S: ch4-7, W: SPI)  |108 x|  |
+     |  | afe_dig 820 x 101.92 (pins N: ch0-3, S: ch4-7, W: SPI)  |108 x|  |
  460 |  +--------------------------------------------------+ 110 |  |
      |  | strap corridor S (25)                              |     |  |
  435 |  +-------------+-------------+-------------+-----+--------+  |
@@ -39,10 +39,10 @@ Units um; origin = SW corner of the outline; "inner" = towards the digital macro
 
 | block | x | y | W x H | orientation | source |
 |---|---|---|---|---|---|
-| ch0 .. ch3 (`afe_ch` slot) | 26 + 237 k | 565 | 237 x 397 | R0: ADC end at y = 565, amplifier end at y = 962 | floorplan.json placements |
-| ch4 .. ch7 | 26 + 237 (k - 4) | 38 | 237 x 397 | MX (mirrored about x): ADC end at y = 435, amplifier end at y = 38 | |
-| afe_dig | 26 | 460 | 820 x 80 | R0 | R3 re-hardens at 80 um (REVIEW R3); L1d / LP step 5 reference: 819.84 x 109.76 um (AFE/dig/LP_STEP5.md, AFE/dig/trial/afe_dig_pins.json) |
-| bias_genc region | 866 | 445 | <= 108 x 110 | R0, pins towards the east ring | 20 um from the macro, 10 um from the ADC ends of ch3 / ch7 |
+| ch0 .. ch3 (`afe_ch` slot) | 26 + 237 k | 575.96 | 237 x 386.04 | R0: ADC end at y = 575.96, amplifier end at y = 962 | floorplan.json placements |
+| ch4 .. ch7 | 26 + 237 (k - 4) | 38 | 237 x 386.04 | MX (mirrored about x): ADC end at y = 424.04, amplifier end at y = 38 | |
+| afe_dig | 26 | 449.04 | 820 x 101.92 | R0 | R3: 80 um does not route (GRT-0116 also at 82.3 / 86.2 / 90.2 / 94.1 um); 98.0 um routes but the antenna repair puts a diode on a delay-chain net (structure FAIL); 101.92 um is the smallest clean height: hardened 819.84 x 101.92 um; earlier L1d / LP step 5 reference: 819.84 x 109.76 um (AFE/dig/LP_STEP5.md, AFE/dig/trial/afe_dig_pins.json) |
+| bias_genc region | 866 | 434.04 | <= 108 x 131.92 | R0, pins towards the east ring | 20 um from the macro, 10 um from the ADC ends of ch3 / ch7 |
 
 Why this shape: every channel's 29 ADC control pins face the macro directly (no bus area, equal wire length for all channels, the DAC-edge and comparator-clock wires of one ADC travel together so
 their skew is unchanged); the amplifier inputs are at the far end, more than 100 um from any SCLK-rate wire; the bias lines never cross a digital wire; decap needs no area of its own (section 4).
@@ -51,10 +51,10 @@ their skew is unchanged); the amplifier inputs are at the far end, more than 100
 
 | cell | slot | estimate | slot / estimate - 1 |
 |---|---|---|---|
-| amp_ch | 222 x 285 = 63,270 um2 | 51,626 um2 (20 pF Cin; R4 reduces Cin to 15 pF) | **+23 %** |
+| amp_ch | 222 x 274.04 = 60,837 um2 | 51,626 um2 (20 pF Cin; R4 reduces Cin to 15 pF) | **+23 %** |
 | adc_ch | 222 x 104 = 23,088 um2 | 14,911 um2 | +55 % (the 20 um keep-out band between the driver row and the DAC array is inside) |
-| bias_genc | 108 x 110 = 11,880 um2 | 9,966 um2 | +19 % |
-| afe_dig | 820 x 80 = 65,600 um2 | 35,292 um2 of cells in the trial (estimate 33,661) | 51 % utilisation (estimate), 54 % with the trial cells |
+| bias_genc | 108 x 131.92 = 14,247 um2 | 9,966 um2 | +43 % |
+| afe_dig | 820 x 101.92 = 83,574 um2 | 35,292 um2 of cells in the trial (estimate 33,661) | 40 % utilisation (estimate), 42 % with the trial cells (46 % of the hardened core) |
 
 The outline allows a top-level factor of 1.62 on the F1 block sum without decap (618,660 um2); F1's pessimistic case needed 1.50 WITH the decap as its own block.
 The tight items are amp_ch (+23 %, as-built L2a cell 218.75 x 309.25 um = 67,650 um2: R4 reworks it) and adc_ch (as-built 265.85 x 126.25: R5 re-packs it). When L2a's real W x H is known: `floorplan.py check --gds amp_ch=<gds>`; if it does not fit, ACCEPT.md ladder "A (area)" applies (rotate, corridor / macro
@@ -79,21 +79,21 @@ Common to all cells: generated by a script (common rule 2) run through `bash AFE
 every coordinate a multiple of 5 nm; pins = labels on the label datatype of the pin metal, names exactly as the LVS reference; one substrate tap within 15 um of every 5 V / 6 V device and 20 um of
 every 3.3 V device (DRC DF.13 / DF.14); DRC / LVS / PEX only with `AFE/layout/scripts/flow.py`. LVS references: `AFE/layout/lvs/` (never edited by hand).
 
-### 3.1 afe_ch = one channel slot, 237 x 397 um (assembled by L3a; not a separately extracted cell unless L3a wants one)
+### 3.1 afe_ch = one channel slot, 237 x 386.04 um (assembled by L3a; not a separately extracted cell unless L3a wants one)
 
 Tiling of the slot (north-row orientation, y = 0 at the ADC end) [floorplan.json `cells.afe_ch.sub`]:
 
 | part | x | y | what |
 |---|---|---|---|
-| control corridor | 0 .. 8 | 0 .. 397 | sw_rec, sw_rec_b, sw_ipg, sw_ipg_b, rst_amp from the macro side to the amplifier end: 5 lines Metal2, 0.5 um wide, 1.4 um pitch, a vss line (Metal2) on the cell side. Quasi-static nets (they move only at a mode change). |
+| control corridor | 0 .. 8 | 0 .. 386.04 | sw_rec, sw_rec_b, sw_ipg, sw_ipg_b, rst_amp from the macro side to the amplifier end: 5 lines Metal2, 0.5 um wide, 1.4 um pitch, a vss line (Metal2) on the cell side. Quasi-static nets (they move only at a mode change). |
 | adc_ch | 8 .. 230 | 0 .. 104 | section 3.3 |
-| amp_ch | 8 .. 230 | 104 .. 389 | section 3.2 |
-| TGATE zone | 8 .. 230 | 389 .. 397 | rec_tg and ipg_tg (TGATE/TGATE.gds), EACH with one `gf180mcu_fd_sc_mcu7t5v0__filltie` abutted (well + substrate tap: without it the TGATE fails DRC DF.13_MV / DF.14_MV and its PMOS bulk floats; test cell lp_tgate_tap). Next to amp_ch's `rec` pin; the net `rec` (TGATE OUT to amp_ch.rec) shorter than 30 um, no other net within 2 um of it. TGATE VDD / VSS = analog strap. |
-| spur corridor | 230 .. 237 | 0 .. 397 | analog vdd (Metal4, 3 um) over vss (Metal3, 3 um) from the bias corridor to adc_ch.vdd; amp_ch may tap it |
+| amp_ch | 8 .. 230 | 104 .. 378.04 | section 3.2 |
+| TGATE zone | 8 .. 230 | 378.04 .. 386.04 | rec_tg and ipg_tg (TGATE/TGATE.gds), EACH with one `gf180mcu_fd_sc_mcu7t5v0__filltie` abutted (well + substrate tap: without it the TGATE fails DRC DF.13_MV / DF.14_MV and its PMOS bulk floats; test cell lp_tgate_tap). Next to amp_ch's `rec` pin; the net `rec` (TGATE OUT to amp_ch.rec) shorter than 30 um, no other net within 2 um of it. TGATE VDD / VSS = analog strap. |
+| spur corridor | 230 .. 237 | 0 .. 386.04 | analog vdd (Metal4, 3 um) over vss (Metal3, 3 um) from the bias corridor to adc_ch.vdd; amp_ch may tap it |
 
 Internal nets of afe_ch: `rec`, `amp_out` (amp_ch.out to adc_ch.vin: one Metal3 wire, shorter than 20 um, vss on both sides). Nothing of the top level crosses amp_ch or adc_ch.
 
-### 3.2 amp_ch (L2a / L2b), slot 222 x 285 um, reference `AFE/layout/lvs/afe_chc.spice` subckt amp_ch
+### 3.2 amp_ch (L2a / L2b), slot 222 x 274.04 um, reference `AFE/layout/lvs/afe_chc.spice` subckt amp_ch
 
 Pins: ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss. Rail: analog strap only.
 
@@ -156,7 +156,7 @@ Matching rules:
 6. Keep-outs: cmp_clk, dac_gp / dac_gn, dac_gdn, rst_sw, tg_on end at their devices in the driver row / comparator and never run within 20 um of the DAC top plates `t` / `m`, of `vref` or of
    Cref, except the last 10 um of cmp_clk at the comparator.
 
-### 3.4 bias_genc (L3a), region 108 x 110 um at (866, 445), reference `AFE/layout/lvs/bias_genc.spice`
+### 3.4 bias_genc (L3a), region 108 x 131.92 um at (866, 434.04), reference `AFE/layout/lvs/bias_genc.spice`
 
 Pins vbn vcm_in vg1 vcm_out vg2 vrs vdd vss, towards the east ring (the bias trunk runs in the east ring to both bias corridors). Rail: analog strap.
 - Ladders A (725 / 100 / 825 um) and B (375 / 450 / 825 um), 1 um wide ppolyf_u_1k: ONE serpentine block of unit segments of equal length (25 um suggested: 29 + 4 + 33 and 15 + 18 + 33
@@ -166,10 +166,10 @@ Pins vbn vcm_in vg1 vcm_out vg2 vrs vdd vss, towards the east ring (the bias tru
   wiring; P+ guard ring around the cell; the cell is 20 um from the digital macro and its N-well ring.
 - The pseudo-resistor gate taps vg1 / vg2 are set by the ladder segment counts: if a REVIEW.md item (or a later decision) changes VTT1 / VTT2 (ACCEPT.md section 2), only this cell changes.
 
-### 3.5 afe_dig (L1d / R3), slot 820 x 80 um at (26, 460) (L1d: 819.84 x 109.76 um): see AFE/dig/LP_STEP5.md and floorplan.json `cells.afe_dig`
+### 3.5 afe_dig (L1d / R3), slot 820 x 101.92 um at (26, 449.04) (L1d: 819.84 x 109.76 um): see AFE/dig/LP_STEP5.md and floorplan.json `cells.afe_dig`
 
 Pins: north edge = channels 0-3, south edge = channels 4-7, per channel 33 pins at 3.0 um pitch from x = 237 k' + 8 (order: sw_rec sw_rec_b sw_ipg sw_ipg_b rst_sw tg_on dac_gdn cmp_clk cmp_q,
-then dac_gp / dac_gn pairs from bit 11 down to bit 0); west edge, south to north at 3.5 um pitch from y = 3 um above the macro's south edge (22 pins, the last at 76.5 um of the 80 um height): RSTN_PD RSTN_PU RSTN SCLK_PD SCLK_PU SCLK DIN_PD DIN_PU DIN CS_PD CS_PU CS DOUT DOUT_OE DOUT_IE
+then dac_gp / dac_gn pairs from bit 11 down to bit 0); west edge, south to north at 3.5 um pitch from y = 3 um above the macro's south edge (22 pins, the last at 76.5 um of the 101.92 um height): RSTN_PD RSTN_PU RSTN SCLK_PD SCLK_PU SCLK DIN_PD DIN_PU DIN CS_PD CS_PU CS DOUT DOUT_OE DOUT_IE
 DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 rst_amp_o. Rail: ADC-main strap (net VDD) and vss. `floorplan.py check --dig-pins AFE/dig/final/afe_dig_pins.json` tests the hardened macro.
 Guard: P+ substrate ring (vss) and N-well ring (VDD) around the macro inside the strap corridors; >= 20 um to any analog device (the corridor is 25 um).
 

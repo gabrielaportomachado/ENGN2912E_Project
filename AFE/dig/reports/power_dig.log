@@ -1,10 +1,10 @@
 LP step 5: afe_dig supply charge per SCLK cycle (OpenSTA report_power of the sign-off STA; SCLK free-running, period 500 ns; default data activity; SDC output loads).
 corner               VDD |    seq uW   comb uW  clock uW  total uW |   pJ/cycle   pC/cycle | clock network share
-nom_tt_025C_3v30     3.3 |     101.9      10.4     109.9     222.3 |      111.1       33.7 | 49 %
-nom_ff_n40C_3v60     3.6 |     128.9      13.3     134.4     276.6 |      138.3       38.4 | 49 %
-nom_ff_125C_3v60     3.6 |     142.3      16.2     144.6     303.1 |      151.5       42.1 | 48 %
-nom_ss_n40C_3v00     3.0 |      77.8       7.8      85.7     171.3 |       85.7       28.6 | 50 %
-nom_ss_125C_3v00     3.0 |      83.7       8.7      91.5     183.8 |       91.9       30.6 | 50 %
-FOR L3b (x2_s4.py digital charge): 33.7 pC per SCLK cycle at tt 3.3 V, 38.4 pC at ff -40 C 3.6 V (the D3 macro: 24 / 27 pC; X2 S4 assumed 12 pC).
+nom_tt_025C_3v30     3.3 |     101.9      10.4     112.1     224.4 |      112.2       34.0 | 50 %
+nom_ff_n40C_3v60     3.6 |     128.9      13.2     137.1     279.2 |      139.6       38.8 | 49 %
+nom_ff_125C_3v60     3.6 |     142.4      16.1     147.1     305.6 |      152.8       42.5 | 48 %
+nom_ss_n40C_3v00     3.0 |      77.8       7.8      87.4     173.0 |       86.5       28.8 | 51 %
+nom_ss_125C_3v00     3.0 |      83.7       8.6      93.1     185.4 |       92.7       30.9 | 50 %
+FOR L3b (x2_s4.py digital charge): 34.0 pC per SCLK cycle at tt 3.3 V, 38.8 pC at ff -40 C 3.6 V (the D3 macro: 24 / 27 pC; X2 S4 assumed 12 pC).
 The increase over D3 is the clock buffer driving the 1 pF clock net (160 pins), 18 more flops (dbs_ctrl), and the output loads; it is drawn from the ADC-main strap.
-At 4 kS/s per channel a frame has 160 SCLK cycles: average digital power = pJ/cycle x 160 x 4000 = 71.1 uW at tt (+ the DOUT pad).
+At 4 kS/s per channel a frame has 160 SCLK cycles: average digital power = pJ/cycle x 160 x 4000 = 71.8 uW at tt (+ the DOUT pad).
