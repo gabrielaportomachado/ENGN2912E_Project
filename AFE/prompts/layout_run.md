@@ -117,6 +117,11 @@ Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R5 (
 Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R6 (read R1, R4 and Decision 50 first), which continues R4 at its step 2 (LVS reference) and step 3 (amp_ch re-layout <= 222 x 285 um). Update AFE/layout/reports/L2a.md (section 9 lists R1, R4, R6), run `python3 AFE/layout/scripts/gate.py L2a` until PASS, commit and push.
 ```
 
+### R7: close the 8-channel floorplan with the as-built cells (after R3, R5, R6)
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R7 (read R1 and the R3, R5, R6 reports first). Write AFE/layout/reports/R7.md (same 10 sections; section 9 lists R1, R7); finish with `python3 AFE/layout/scripts/floorplan.py check --gds amp_ch=AFE/layout/amp/amp_ch.gds adc_ch=AFE/layout/adc/adc_ch.gds afe_dig=AFE/dig/final/afe_dig.gds --dig-pins AFE/dig/final/afe_dig_pins.json` all PASS (and `gate.py L1d` PASS if the macro was re-hardened); commit and push.
+```
+
 If a cell misses its budget by more than 3 % after its first attempt, run the same prompt once more in a fresh session; if it still misses (or R4's simulations fail a target), the agent writes AFE/layout/BLOCKED.md: push it and tell Jojo.
 
 ## L2b: amplifier PEX and post-layout simulations
