@@ -22,7 +22,6 @@ def blocks(ly):
     pa = lambda nm, g, d: a.dev_block(ly, nm, 'pfet', 50.0, 2.0, 8, s_net=TAIL1, d_nets=d, g_net=g, bulk_net=VDD, ring=False)
     A1, B1, B2, A2 = pa('pair_a1', VN, D1), pa('pair_b1', VP, O1), pa('pair_b2', VP, O1), pa('pair_a2', VN, D1)
     tl = lambda nm, d: a.dev_block(ly, nm, 'pfet', 50.0, 4.0, 2, s_net=VDD, d_nets=d, g_net=IB1, bulk_net=VDD, ring=False)
-    T_mb, T_mt, T_m7 = tl('tail_mb', IB1), tl('tail_mt', TAIL1), tl('tail_m7', V1)
     parts = []
     x = 0
     for blk in (A1, B1, B2, A2):
@@ -30,11 +29,19 @@ def blocks(ly):
         parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
         x = x + w + 1.5
     x += 5
-    for blk in (T_mb, T_mt, T_m7):
-        w = blk.bbox[2] - blk.bbox[0]
-        parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
-        x = x + w + 1.5
-    B['ota_p'] = a.compose(ly, 'ota_p', parts, ring_kind='n', ring_net=VDD, gap=3.0, dummy_l=2.0, dummy_groups=[[0, 1, 2, 3], [4, 5, 6]])
+    if a.KNOB.get('tm', 0):
+        # tail-group merge (L2a rework): xmb / xmt / xm7 (2 fingers each, common gate ibias1 and source vdd) as ONE 6-finger array: strips S D S D S D S, drains ibias1 / tail1 / v1
+        T6 = a.dev_block(ly, 'tail6', 'pfet', 50.0, 4.0, 6, s_net=VDD, d_nets=[IB1, TAIL1, V1], g_net=IB1, bulk_net=VDD, ring=False, multi=True)
+        parts.append((T6, math.ceil(x - T6.bbox[0]), 0))
+        groups = [[0, 1, 2, 3], [4]]
+    else:
+        T_mb, T_mt, T_m7 = tl('tail_mb', IB1), tl('tail_mt', TAIL1), tl('tail_m7', V1)
+        for blk in (T_mb, T_mt, T_m7):
+            w = blk.bbox[2] - blk.bbox[0]
+            parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
+            x = x + w + 1.5
+        groups = [[0, 1, 2, 3], [4, 5, 6]]
+    B['ota_p'] = a.compose(ly, 'ota_p', parts, ring_kind='n', ring_net=VDD, dummy_l=2.0, dummy_groups=groups)
     # ------------------------------------------------------------------ stage 1 N side: mirror xm3 / xm4 (ABBA), xm6
     na = lambda nm, g, d, nf=1, w=50.0: a.dev_block(ly, nm, 'nfet', w, 16.0, nf, s_net=VSS, d_nets=d, g_net=g, bulk_net=VSS, ring=False)
     m3a, m4a, m4b, m3b = na('m3a', D1, D1), na('m4a', D1, O1), na('m4b', D1, O1), na('m3b', D1, D1)
@@ -44,7 +51,7 @@ def blocks(ly):
         w = blk.bbox[2] - blk.bbox[0]
         parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
         x = x + w + 1.5
-    B['mir'] = a.compose(ly, 'mir', parts, ring_kind='p', ring_net=VSS, gap=3.0, dummy_l=2.0)
+    B['mir'] = a.compose(ly, 'mir', parts, ring_kind='p', ring_net=VSS, dummy_l=2.0)
     B['xm6'] = a.dev_block(ly, 'xm6', 'nfet', 50.0, 16.0, 4, s_net=VSS, d_nets=V1, g_net=O1, bulk_net=VSS, ring=True)
     B['sink1'] = a.dev_block(ly, 'sink1', 'nfet', 16.0, 4.0, 24, s_net=VSS, d_nets=IB1, g_net='vbn', bulk_net=VSS, ring=True)
     B['xms'] = a.dev_block(ly, 'xms', 'nfet', 16.0, 4.0, 6, s_net=VSS, d_nets='out', g_net='vbn', bulk_net=VSS, ring=True)

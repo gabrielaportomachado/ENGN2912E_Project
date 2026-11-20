@@ -5,6 +5,42 @@ Flow notes: AFE/layout/FLOW.md. Everything lives in AFE/layout/amp/ (branch `wor
 
 ## L2a findings
 
+### Rework (A-3), 2026-11-20 (second pass, ACCEPT.md ladder A-3; user request; Sonnet 5.5 / high). Two steps: packing (commit f1472dd, 217.50 x 327.25 um) and tail-group merge (this commit, 218.75 x 309.25 um)
+**Top lines**
+- **gate.py L2a (`python3 AFE/layout/scripts/gate.py L2a --gds AFE/layout/amp/amp_ch.gds --run`, log `AFE/layout/amp/gate_L2a.log`): `GATE L2a: FAIL  (1 FAIL)`**: only `FAIL  5  as-built amp_ch 218.75 x 309.25 um fits its slot 220.00 x 263.00 um` (floorplan.py check 16 PASS, 1 FAIL); DRC 0, LVS match, findings and Results-log row PASS.
+- **amp_ch still does NOT fit: 218.75 x 309.25 um = 67,648 um2 (first pass 219.25 x 385.25 = 84,466, -20 %; step 1 71,177) against the slot 220 x 263 = 57,860 (+17 %) and F1's 51,626 (+31 %).** DRC (official deck, variant D) **0 violations**, LVS **"Circuits match uniquely."** against `AFE/layout/lvs/afe_chc.spice` (default `--cin-top sum`, nothing regenerated; no W / L / m change, same device and pin counts).
+  `check_amp.json`: `under_cin_clean: true` (nothing under the Cin plates).
+- Native-Vt follower, MIM terminal order, LVS reference: unchanged from the first pass (below): `nfet_06v0_nvt` passes DRC + LVS, organizer silent (ladder N); terminal 1 = TOP plate; reference = default `mk_lvs_netlists.py`.
+- **Packing alone cannot reach the slot: the sum of the blocks is 59,871 um2 (first pass 62,361), still above the slot area 57,860 at 100 % packing; the bbox has 11.5 % white space (first pass 26 %).** The slot this cell would need is about 220 x 310 um (+18 % in height).
+  **8 channels: amp_ch alone 8 x 67,648 = 0.541 mm2 = 54 % of the 1000 x 1000 um outline (first pass 0.676 mm2). A channel is 309 + 104 + 8 = 421 um tall against 375 (+46 um per row): floorplan height about 1000 + 2 x 46 = 1,092 um (ESTIMATE, all other items unchanged).**
+  Ladder A (ESTIMATE): A-2 (-14 um per row) and A-4 (-23 um, once) would take it to about 1,041 um: about 20 um per row are still missing. **The east-column rotation of mir was built and measured (`lay=4`, FLOW.md 7.2): 218.75 x 305.31 um, DRC 0 / LVS match, only -4 um (1.3 %) and a worse stage 2 (vn2 wire 290 um instead of 124, o2 479 instead of 337): NOT adopted, the committed GDS is `lay=3`.** A-6 / A-7 were NOT applied (instructions), `floorplan.json` not edited.
+
+**What changed** (generator only: `AFE/layout/amp/mk_amp_ch.py` placement section `lay=3`, `amplib.py` ring-gap knobs and `dev_block(multi=True)`, `blocks_amp.py` tail merge; commands, knobs and limits found in FLOW.md section 7 / 7.1; GDS sha1 6a348da57ba1a40ff7098f5fda5d26f669120eda)
+1. Step 1 (f1472dd): rows of 50 um devices under the Cin block, Cf1 strip 15 um, ONE column of stage-2 capacitors east of the Cin block (stage-2 nets short), ring gaps 2.5 / 2.5 / 3.0 -> 1.5 um, block gaps 2 -> 1.5 um, row gaps 3 -> 1 um, margin above the Cin lanes 8 -> 2 um: 217.50 x 327.25 um.
+2. **Step 2, tail-group merge (asked for after step 1)**: xmb / xmt / xm7 (2 fingers 50u/4u each, common gate ibias1 and source vdd) drawn as ONE 6-finger pfet array with three drain strips (ibias1 / tail1 / v1) instead of three blocks: `ota_p` 150.6 -> 142.6 um wide (8,976 -> 8,499 um2), so the input pair and xm6 now share one row and the 24 um bottom row of step 1 is gone.
+   Matching note: the three tail devices are now adjacent pairs of fingers in one diffusion row (same order mb, mt, m7 as before, shared source strips between them); not interleaved, as before.
+   The new placement: bottom row = mirror xm3 / xm4 + a column (xms / fol / Cc1 / s2p with the `out` pin, sink1 above it); then the `ota_p` + xm6 row directly under the Cin block; the strip (24 um) holds OR2, pseudo-R 1, Cf1, the sp / sn gate-mux stack, Cf1', pseudo-R 2; the east column starts with s2tail, s2pair.
+   vdd / vss pins moved to the east edge, Metal4 3 x 3 um at (W - 4, 14) and (W - 4, 30) (inner half, free of blocks); rec / ref (Metal5) and vbn vcm vg1 vcmo vg2 vrs (Metal3) on the top edge, sw_rec sw_rec_b rst_amp (Metal2) on the west edge within 60 um of the top, out (Metal3) at the bottom edge, as SPEC.md 3.2 (labels in `check_amp.json`). The Metal2 / Metal3 pins are still 0.5 um wide (L3a re-places them, ACCEPT.md G-5).
+3. **A trap found and written down**: with the strip at 22 or 23 um DRC and LVS were clean but the ring of the sn block lay under the 0.6 um margin of the Cin bottom plates (`check_amp.py`: `under_cin_clean: false`). Decision 46c is not a rule of the deck, so DRC / LVS cannot see it; the strip is 24 um. FLOW.md 7.1: run check_amp.py after every repack.
+4. Lever (1) of the prompt (25 um fingers) was NOT used: the area of a finger array does not shrink with finger width (ESTIMATE in FLOW.md section 7) and it would change the extracted `w` against the reference; not tried with netgen.
+
+**Area (W x H = 218.75 x 309.25 um; `check_amp.json`, `amp_ch.build.json`)**
+| block | first pass um2 | step 1 um2 | final um2 | F1 / PLAN estimate |
+|---|---|---|---|---|
+| Cin block incl. lanes and pad strip (164.7 x 167.3) | 27,554 | 27,554 | 27,554 (cannot shrink) | 2 x Cin drawn 20,005, footprint 21,036 |
+| input pair + tail group `ota_p` (142.6 x 59.6) | 9,705 | 8,976 | 8,499 | 9,601 |
+| xm3 / xm4 mirror + xm6 | 10,244 | 9,628 | 9,628 | 10,364 |
+| stage 2, follower, sink arrays | 7,018 | 6,589 | 6,589 | 3,780 + stage 2 |
+| MIM outside Cin (C_T, Cin2, Cc2, Cc1, Cf2, 2 x Cf1) | 6,416 | 6,416 | 6,416 | 5,912 |
+| small devices (muxes, park, one-shot, OR2, 3 pseudo-R pairs) | 1,423 | 1,185 | 1,185 | x 2.5 on 350 |
+| **sum of the blocks** | **62,361** | **60,348** | **59,871** | **51,626** |
+| **cell bbox** | **84,466 (219.25 x 385.25)** | **71,177 (217.50 x 327.25)** | **67,648 (218.75 x 309.25)** | slot 57,860 |
+Routed wire length of the sensitive nets (grid nodes x 1 um, ESTIMATE; first pass in brackets): vn 131 um (290), vp 157 (280), vn2 124 (550), **rec 21 (280)**, v1 401 (540), o1 320, o2 337, tail1 155. Achieved edge-to-edge clearance of the summing-node wires: vn 0.5 um minimum with **26 of 67 nodes closer than 2 um** (step 1: 4 of 65; first pass 2.5 um, 0 of 227; a larger halo 2.5 / 3.0 um did not change it),
+vp 1.5 um (10 of 99), vn2 2.5 um (0 of 69), rec has no interior node (21 um of wire). The Metal1 vss guard around the summing-node connections is still NOT drawn: **the vn clearance is the first suspect for L2b** (ACCEPT.md R-2, R-3, R-6, R-8).
+`AFE/layout/amp/pex_feasibility/` (PEX of the first-pass GDS) was NOT re-run: PEX is L2b's, on this GDS. The first-pass findings follow unchanged (their sizes and wire lengths are superseded by the numbers above; the plate order, rules and Step 1 results still hold).
+
+### First pass (commit 1b3076a)
+
 **Summary (top lines, as the prompt asks)**
 - **Native-Vt follower `nfet_06v0_nvt` (10u / 2u): status UNCONFIRMED by the organizer (Decision 44k, ACCEPT.md ladder N applies if they refuse).** It passes the open-source decks: Step 1 test cell lp_flow: DRC 0, netgen match
   (`AFE/layout/amp/flowtest/flow/lp_flow.drc.json`, `.lvs.json`); in amp_ch it sits inside its own P+ ring (device `fol`, PDK pcell with its native / dual-gate markers) and DRC / LVS are clean with it. The layout keeps the native device.
@@ -76,3 +112,4 @@ row 4 (60 um) and above the short blocks of row 2; (4) the stage-2 MIM column ne
 | Date | Phase | Model / effort | Cost (USD) | Result (with path to log) |
 |------|-------|----------------|------------|---------------------------|
 | 2026-11-20 | L2a amplifier layout amp_ch (DRC + LVS) | Claude Sonnet 5.5 / high | | amp_ch.gds: DRC variant D 0 violations, LVS "Circuits match uniquely." against AFE/layout/lvs/afe_chc.spice (46 devices, 14 pins, nothing regenerated); MIM terminal 1 = top plate (Step 1 test cell, flowtest); native-Vt follower passes DRC + LVS (organizer still silent, ladder N); Cin 2 x 2 checkerboard of four 70.65 um pieces, summing nodes on the top plates, nothing under the plates; input pair ABBA + poly dummies, rings, own wells for the 6 pseudo-resistors. NOT in the slot: 219.25 x 385.25 um = 84,466 um2 vs 57,860 (+46 %), blocks sum 62,361 vs F1 51,626: ladder A next (8 channels 0.68 mm2 of the 1.0 mm2 outline for amp_ch alone). Flow notes AFE/layout/FLOW.md; logs AFE/layout/amp/ (flow/, flowtest/, pex_feasibility/, check_amp.json, amp_ch.build.json) |
+| 2026-11-20 | L2a rework (ladder A-3: new packing + tail-group merge of amp_ch) | Claude Sonnet 5.5 / high | | amp_ch.gds 218.75 x 309.25 um = 67,648 um2 (first pass 84,466, -20 %; step 1 71,177), still NOT in the slot 220 x 263 = 57,860 (+17 %); DRC variant D 0 violations, LVS "Circuits match uniquely." against AFE/layout/lvs/afe_chc.spice (unchanged reference, no device change), nothing under the Cin plates; gate.py L2a: FAIL (1 FAIL: the slot); sum of blocks 59,871 um2 is already above the slot area, white space 26 % -> 11.5 %; wires vn / vp / vn2 / rec 131 / 157 / 124 / 21 um (were 290 / 280 / 550 / 280) but vn has 26 of 67 nodes closer than 2 um to other nets; a channel would be 421 um tall (floorplan height about 1,092 um, ESTIMATE; about 1,041 um with A-2 + A-4); A-6 / A-7 not applied. Flow notes AFE/layout/FLOW.md sections 7 / 7.1; logs AFE/layout/amp/ (flow/, check_amp.json, amp_ch.build.json, gate_L2a.log) |

@@ -1,7 +1,7 @@
 {
- "W": 219.25,
- "H": 385.25,
- "area_um2": 84466.1,
+ "W": 218.75,
+ "H": 309.25,
+ "area_um2": 67648.4,
  "under_cin_plates_um2": {
   "A1": {},
   "B1": {},
@@ -13,95 +13,95 @@
   {
    "name": "out",
    "layer": "42/10",
-   "x": 179.0,
+   "x": 148.0,
    "y": 2.0
   },
   {
    "name": "rec",
    "layer": "81/10",
-   "x": 82.4,
-   "y": 386.0
+   "x": 80.4,
+   "y": 310.0
   },
   {
    "name": "ref",
    "layer": "81/10",
-   "x": 134.0,
-   "y": 386.0
+   "x": 132.0,
+   "y": 310.0
   },
   {
    "name": "rst_amp",
    "layer": "36/10",
    "x": 1.0,
-   "y": 359.0
+   "y": 283.0
   },
   {
    "name": "sw_rec",
    "layer": "36/10",
    "x": 1.0,
-   "y": 375.0
+   "y": 299.0
   },
   {
    "name": "sw_rec_b",
    "layer": "36/10",
    "x": 1.0,
-   "y": 367.0
+   "y": 291.0
   },
   {
    "name": "vbn",
    "layer": "42/10",
    "x": 1.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vcm",
    "layer": "42/10",
    "x": 2.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vcmo",
    "layer": "42/10",
    "x": 4.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vdd",
    "layer": "46/10",
-   "x": 214.0,
-   "y": 381.0
+   "x": 216.0,
+   "y": 14.0
   },
   {
    "name": "vg1",
    "layer": "42/10",
    "x": 3.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vg2",
    "layer": "42/10",
    "x": 5.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vrs",
    "layer": "42/10",
    "x": 6.0,
-   "y": 384.0
+   "y": 308.0
   },
   {
    "name": "vss",
    "layer": "46/10",
-   "x": 214.0,
-   "y": 373.0
+   "x": 216.0,
+   "y": 30.0
   }
  ],
  "areas_um2": {
   "cin_block": 27554,
-  "ota_p_group_pair_and_tail": 9705,
-  "stage1_n_mirror_xm6": 10244,
-  "stage2_and_sinks": 7018,
-  "small_devices_pr_oneshot_or2": 1423,
+  "ota_p_group_pair_and_tail": 8499,
+  "stage1_n_mirror_xm6": 9628,
+  "stage2_and_sinks": 6589,
+  "small_devices_pr_oneshot_or2": 1185,
   "mim_outside_cin": 6416,
-  "sum_of_blocks": 62361
+  "sum_of_blocks": 59871
  }
 }

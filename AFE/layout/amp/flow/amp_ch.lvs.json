@@ -1,5 +1,5 @@
 {
- "date": "2026-11-20 18:26",
+ "date": "2026-11-20 19:33",
  "devices_layout": {
   "cc1": 1,
   "cc2": 1,
@@ -28,10 +28,10 @@
  "extract_ok": true,
  "final": "Circuits match uniquely.",
  "gds": "AFE/layout/amp/amp_ch.gds",
- "gds_sha1": "b9407198f235d12f32265702ff358816556814b0",
+ "gds_sha1": "6a348da57ba1a40ff7098f5fda5d26f669120eda",
  "layout_netlist": "AFE/layout/amp/flow/amp_ch.lvs.spice",
  "match": true,
- "maxrss_mb": 82,
+ "maxrss_mb": 80,
  "pin_mismatch": false,
  "ports_layout": [
   "rec",
@@ -75,5 +75,5 @@
  "timeout": false,
  "tool": "magic + netgen",
  "top": "amp_ch",
- "wall_s": 1.2
+ "wall_s": 1.0
 }
