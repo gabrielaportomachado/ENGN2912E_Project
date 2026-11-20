@@ -43,7 +43,7 @@ the fact through the reports AFE/layout/reports/<phase>.md and answers through A
 
 ---
 
-## L2a: amplifier channel layout up to DRC + LVS clean (run now)
+## L2a: amplifier channel layout up to DRC + LVS clean (DONE 11-20; rework = R4 below)
 ```
 Follow AFE/prompts/layout_run.md common rules. Do phase L2a. Write all outputs under AFE/layout/amp/ (scripts, GDS, logs), the flow notes in AFE/layout/FLOW.md, and your findings + Results-log row in AFE/layout/NOTES_L2.md (NOT AFE/NOTES.md: another machine edits it). Do not edit any other file.
 
@@ -88,6 +88,31 @@ Steps:
 7. Findings: die W x H, utilisation, STA table (5 corners), the tap limits, skew of the switch pairs, power (pC per cycle), DRC, test-bench result, the mk_lvs command. Results-log row.
 8. Gate: python3 AFE/layout/scripts/gate.py L1d. PASS -> report sections 5 and 10, commit, git push, stop (common rule 7).
 ```
+
+## Rework round R2-R5 (Decision 48: keep 8 channels; items in AFE/layout/REVIEW.md) - run these NOW, before L2b
+Order: R2 first and alone (minutes). Then R3, R4 and R5; they may run side by side (common rule 4). L2b, L1b and L3a wait until R4 and R5 have passed their gates. One fresh session each (Sonnet 5.5, HIGH), `git pull` first.
+
+### R2: tightened floorplan
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R2 (and read R1 first). Finish with `python3 AFE/layout/scripts/floorplan.py check` all PASS, list R1 and R2 in section 9 of AFE/layout/reports/R2.md (same 10 sections as a phase report), commit and push.
+```
+
+### R3: afe_dig re-hardened at 820 x 80 um
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R3 (read R1 first; merge worktree-l1d-dig into main first if needed). Update AFE/layout/reports/L1d.md (section 9 lists R1, R3), run `python3 AFE/layout/scripts/gate.py L1d` until PASS, commit and push.
+```
+
+### R4: Cin 15 pF (simulations first), then amp_ch <= 222 x 285 um
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R4 (read R1 and Decision 48 first). Simulations BEFORE layout; if a Decision 1 target fails, write BLOCKED.md and stop. Update AFE/layout/reports/L2a.md (section 9 lists R1, R4), run `python3 AFE/layout/scripts/gate.py L2a` until PASS, commit and push.
+```
+
+### R5: adc_ch re-pack <= 222 x 104 um
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R5 (read R1 first, and R3's report if it exists for the final adc_h). Update AFE/layout/reports/L1a.md (section 9 lists R1, R5), run `python3 AFE/layout/scripts/gate.py L1a` until PASS, commit and push.
+```
+
+If a cell misses its budget by more than 3 % after its first attempt, run the same prompt once more in a fresh session; if it still misses (or R4's simulations fail a target), the agent writes AFE/layout/BLOCKED.md: push it and tell Jojo.
 
 ## L2b: amplifier PEX and post-layout simulations
 ```

@@ -1,5 +1,8 @@
 # RUNBOOK: running the layout phases alone (Atharv)
 
+> **NOW (2026-11-20, Decision 48):** run the rework round R2 -> R3 / R4 / R5 in AFE/prompts/layout_run.md section "Rework round R2-R5" before L2b, L1b, L3a. Deadline 2026-11-30 (Decision 49).
+
+
 Plain-language guide to AFE/prompts/layout_run.md. Nobody has to answer you: AFE/layout/ACCEPT.md is IN FORCE (user, 2026-11-20) and tells the agent what to do when something fails.
 The user / monitoring session reads your reports afterwards and, if something must change, writes it into AFE/layout/REVIEW.md; the next phase you start picks it up by itself.
 
