@@ -33,4 +33,4 @@ ASSERT D2.oe PASS | DOUT_OE = ~CS, DOUT = 0 while CS is high
         DOUT: latest change 5.60 ns after the SCLK falling edge; setup to the host sampling edge min 244.40 ns
         break-before-make gap min 557555.2 ns; sw_rec / sw_rec_b overlap max 0.07 ns
 SUMMARY rstlate PER 500.00 ns: 26 assertions, 1 FAIL
-/foss/designs/ENGN2912E_Project/AFE/review/tb/tb_audit.v:444: $finish called at 6290200000 (1ps)
+/foss/designs/ENGN2912E_Project/.claude/worktrees/l1d-dig/AFE/review/tb/tb_audit.v:444: $finish called at 6290200000 (1ps)

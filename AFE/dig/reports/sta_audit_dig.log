@@ -1,4 +1,4 @@
-LP step 5 / L1d: OpenSTA (AFE/review/scripts/sta_audit.py --dig) on the hardened afe_dig netlist /tmp/lp_dig/design/runs/trial/final/nl/afe_dig.nl.v + extracted SPEF; SCLK propagated from the pin.
+LP step 5 / L1d: OpenSTA (AFE/review/scripts/sta_audit.py --dig) on the hardened afe_dig netlist /tmp/lp_dig/design/runs/final/final/nl/afe_dig.nl.v + extracted SPEF; SCLK propagated from the pin.
 All times in ns after the SCLK rising edge at the macro pin (or after the CS edge at the pin where stated).  nom SPEF unless stated; [min..max SPEF] in brackets.
 Options: output load none (pins unloaded, as in AFE/review/sim/sta_audit.log), input transition of SCLK / CS / RSTN ideal (0).  Not in this netlist: the pad cells, the wires from the macro pins to the analog cells.
 Compare with AFE/review/sim/sta_audit.log (the D3 macro adc8_top, no clock buffer) and the D3 table in AFE/adc/NOTES.md.

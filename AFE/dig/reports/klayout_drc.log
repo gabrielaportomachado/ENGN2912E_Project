@@ -1,7 +1,7 @@
-KLayout DRC of afe_dig, official gf180mcu deck (libs.tech/klayout/tech/drc/run_drc.py), variant D.  2026-11-20 08:03:07
-command: python3 /foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py --path=/tmp/lp_dig/design/runs/trial/final/gds/afe_dig.gds --variant=D --topcell=afe_dig --run_dir=/tmp/lp_dig/drc --run_mode=flat --mp=1
-GDS: /tmp/lp_dig/design/runs/trial/final/gds/afe_dig.gds (1948280 bytes)   klayout: KLayout 0.30.8
-exit code 0; wall 3:35.60; peak RSS 645 MB; run directory 1 MB
+KLayout DRC of afe_dig, official gf180mcu deck (libs.tech/klayout/tech/drc/run_drc.py), variant D.  2026-11-20 20:46:04
+command: python3 /foss/pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py --path=AFE/dig/final/afe_dig.gds --variant=D --topcell=afe_dig --run_dir=/tmp/lp_dig/drc --run_mode=flat --mp=1
+GDS: AFE/dig/final/afe_dig.gds (1948280 bytes)   klayout: KLayout 0.30.8
+exit code 0; wall 3:09.92; peak RSS 641 MB; run directory 1 MB
 tables run: 1 report databases: afe_dig_main 
 TOTAL 0 violations in 0 rules, 660 rules checked, 1 files
 RESULT KLayout DRC variant D: PASS (0 violations)

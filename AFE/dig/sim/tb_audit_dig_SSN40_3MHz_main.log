@@ -273,4 +273,4 @@ ASSERT X5.word0 FAIL | RSTN pulse during config word 0 (edges 8-9): the SAME fra
         committed by that frame: rst_amp 1 mode 1 en 01001100 (host sent 0x1FF = record, all channels) -> sw_rec 01001100 sw_ipg 00000000
 ASSERT X5.next PASS | the next complete frame restores the intended config and converts correctly
 SUMMARY main PER 333.33 ns: 202 assertions, 10 FAIL
-/foss/designs/ENGN2912E_Project/AFE/review/tb/tb_audit.v:444: $finish called at 126065577886 (1ps)
+/foss/designs/ENGN2912E_Project/.claude/worktrees/l1d-dig/AFE/review/tb/tb_audit.v:444: $finish called at 126065577886 (1ps)
