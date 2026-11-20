@@ -1,0 +1,109 @@
+AUDIT step 4 / 8: ADC timing at MIXED corners (never simulated: D4 / I2 / X2 always paired analog ff with digital ff and ss with ss).
+The comparator-clock chain is built from 7t5v0 standard cells (5 V thick-oxide devices); the DAC drivers, switches and the comparator are 3.3 V devices.
+The two device families are only partly correlated, so the worst case for the analog-digital timing is: FASTEST std-cell timing (shortest DAC -> comparator time T0 - arr and
+shortest decision window W) with SLOW 3.3 V devices (slowest DAC settling, slowest comparator).  Also fs / sf (never run).
+Method: X2 closed-loop PWL replay (AFE/adc/scripts/x2lib.py, read only; scratch redirected to AFE/review/.ptmp), ONE ADC cell, ideal supply and input, SCLK 3 MHz,
+STA timing from AFE/review/sim/sta_audit.log (current netlist).  Per trial k (frame 2 of 2):
+  s_k  = DAC settling alone (companion run of the same replayed bits with the comparator clock held at 0): (plate - ref) 0.1 ns before the instant the comparator clock would rise
+         MINUS its value 0.5 ns before the next DAC edge = what the DAC still had to settle when the comparator fires [LSB]
+  td_k = comparator clock rise -> first output below VDD/2 (decision time); available = cap - rise - flop setup (STA: tapw arrives before the window end)
+
+== ff-40m  ff -40 C  VDD 3.6 V  timing a_ff_n40  (MATCHED reference (the D4 / X2 pairing))
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 18 s
+   Vin 1.25455 V code 1392 (ideal 1427, diff -35) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.01 +0.01 -0.00 +0.00 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 +0.00 +0.00 | max|s| 0.01 at trial 2 | td max 0.96 ns (trial 8), decisions later than available: 0
+   Vin 1.35026 V code 1501 (ideal 1536, diff -35) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.01 +0.06 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 | max|s| 0.06 at trial 2 | td max 0.96 ns (trial 12), decisions later than available: 0
+   Vin 1.80026 V code 2011 (ideal 2048, diff -37) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.00 +0.10 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 +0.00 | max|s| 0.10 at trial 2 | td max 0.96 ns (trial 12), decisions later than available: 0
+   Vin 2.07273 V code 2322 (ideal 2358, diff -36) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.01 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 | max|s| 0.01 at trial 1 | td max 0.95 ns (trial 11), decisions later than available: 0
+   Vin 2.25026 V code 2523 (ideal 2560, diff -37) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.47 -0.16 -0.15 -0.12 -0.09 -0.07 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | max|s| 0.47 at trial 1 | td max 0.95 ns (trial 12), decisions later than available: 0
+   Vin 2.34545 V code 2629 (ideal 2668, diff -39) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -1.45 -0.27 -0.22 -0.13 -0.11 -0.09 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 | max|s| 1.45 at trial 1 | td max 0.99 ns (trial 12), decisions later than available: 0
+   VERDICT ff-40m: worst unsettled plate at a comparator clock 1.45 LSB (limit 0.5): FAIL;  slowest decision 0.99 ns vs 2.66 ns available: PASS;  failed runs 0
+
+== tt-40x  typical -40 C  VDD 3.6 V  timing a_ff_n40  (mixed: typical 3.3 V devices, fastest std cells)
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 17 s
+   Vin 1.25455 V code 1398 (ideal 1427, diff -29) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.09 +0.05 +0.00 -0.00 -0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.09 at trial 1 | td max 1.18 ns (trial 12), decisions later than available: 0
+   Vin 1.35026 V code 1507 (ideal 1536, diff -29) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.07 +0.07 +0.00 -0.00 -0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.07 at trial 1 | td max 1.18 ns (trial 12), decisions later than available: 0
+   Vin 1.80026 V code 2017 (ideal 2048, diff -31) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.06 +0.10 +0.00 +0.00 -0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.10 at trial 2 | td max 1.20 ns (trial 11), decisions later than available: 0
+   Vin 2.07273 V code 2328 (ideal 2358, diff -30) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.07 +0.06 -0.05 -0.01 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.07 at trial 1 | td max 1.19 ns (trial 12), decisions later than available: 0
+   Vin 2.25026 V code 2530 (ideal 2560, diff -30) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.11 +0.04 -0.07 -0.04 -0.03 -0.03 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.11 at trial 1 | td max 1.18 ns (trial 12), decisions later than available: 0
+   Vin 2.34545 V code 2636 (ideal 2668, diff -32) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.70 -0.13 -0.21 -0.11 -0.09 -0.08 +0.00 -0.00 +0.00 -0.00 +0.00 -0.00 | max|s| 0.70 at trial 1 | td max 1.19 ns (trial 12), decisions later than available: 0
+   VERDICT tt-40x: worst unsettled plate at a comparator clock 0.70 LSB (limit 0.5): FAIL;  slowest decision 1.20 ns vs 2.66 ns available: PASS;  failed runs 0
+
+== ss-40x  ss -40 C  VDD 3.6 V  timing a_ff_n40  (MIXED worst: slow 3.3 V devices, fastest std cells)
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 15 s
+   Vin 1.25455 V code 1403 (ideal 1427, diff -24) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 +0.41 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 | max|s| 0.65 at trial 1 | td max 1.52 ns (trial 10), decisions later than available: 0
+   Vin 1.35026 V code 1512 (ideal 1536, diff -24) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.64 +0.41 +0.00 -0.00 -0.00 +0.00 +0.00 +0.00 -0.00 -0.00 +0.00 +0.00 | max|s| 0.64 at trial 1 | td max 1.52 ns (trial 12), decisions later than available: 0
+   Vin 1.80026 V code 2023 (ideal 2048, diff -25) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.63 +0.43 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 -0.00 +0.00 -0.00 -0.00 | max|s| 0.63 at trial 1 | td max 1.53 ns (trial 12), decisions later than available: 0
+   Vin 2.07273 V code 2333 (ideal 2358, diff -25) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 +0.42 -0.34 -0.05 +0.01 -0.00 +0.02 -0.03 -0.00 -0.00 -0.00 -0.00 | max|s| 0.65 at trial 1 | td max 1.55 ns (trial 11), decisions later than available: 0
+   Vin 2.25026 V code 2536 (ideal 2560, diff -24) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.64 +0.41 -0.33 -0.05 +0.01 +0.00 +0.03 -0.00 +0.01 -0.00 +0.00 +0.00 | max|s| 0.64 at trial 1 | td max 1.63 ns (trial 9), decisions later than available: 0
+   Vin 2.34545 V code 2643 (ideal 2668, diff -25) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.75 +0.37 -0.38 -0.03 -0.06 -0.04 +0.03 -0.03 -0.00 +0.00 +0.00 +0.00 | max|s| 0.75 at trial 1 | td max 1.56 ns (trial 12), decisions later than available: 0
+   VERDICT ss-40x: worst unsettled plate at a comparator clock 0.75 LSB (limit 0.5): FAIL;  slowest decision 1.63 ns vs 2.66 ns available: PASS;  failed runs 0
+
+== fs-40x  fs -40 C  VDD 3.6 V  timing a_ff_n40  (fs (never run), fastest std cells)
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 15 s
+   Vin 1.25455 V code 1402 (ideal 1427, diff -25) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.17 +0.03 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.17 at trial 1 | td max 1.29 ns (trial 11), decisions later than available: 0
+   Vin 1.35026 V code 1511 (ideal 1536, diff -25) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.16 +0.04 +0.00 +0.00 -0.00 -0.00 +0.00 +0.00 +0.00 -0.00 -0.00 -0.00 | max|s| 0.16 at trial 1 | td max 1.38 ns (trial 12), decisions later than available: 0
+   Vin 1.80026 V code 2021 (ideal 2048, diff -27) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.17 +0.05 +0.00 -0.00 -0.00 -0.00 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.17 at trial 1 | td max 1.28 ns (trial 1), decisions later than available: 0
+   Vin 2.07273 V code 2332 (ideal 2358, diff -26) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.14 +0.14 -0.06 -0.01 +0.00 +0.00 +0.01 -0.00 +0.00 -0.00 +0.00 -0.00 | max|s| 0.14 at trial 2 | td max 1.33 ns (trial 10), decisions later than available: 0
+   Vin 2.25026 V code 2533 (ideal 2560, diff -27) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.43 +0.01 -0.18 -0.11 -0.08 -0.06 +0.01 -0.00 +0.00 +0.00 -0.00 +0.00 | max|s| 0.43 at trial 1 | td max 1.27 ns (trial 12), decisions later than available: 0
+   Vin 2.34545 V code 2638 (ideal 2668, diff -30) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -1.35 -0.12 -0.27 -0.12 -0.11 -0.09 +0.01 -0.00 -0.00 +0.00 -0.00 -0.00 | max|s| 1.35 at trial 1 | td max 1.28 ns (trial 12), decisions later than available: 0
+   VERDICT fs-40x: worst unsettled plate at a comparator clock 1.35 LSB (limit 0.5): FAIL;  slowest decision 1.38 ns vs 2.66 ns available: PASS;  failed runs 0
+
+== sf-40x  sf -40 C  VDD 3.6 V  timing a_ff_n40  (sf (never run), fastest std cells)
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 17 s
+   Vin 1.25455 V code 1394 (ideal 1427, diff -33) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.03 +0.09 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 +0.00 +0.00 -0.00 +0.00 | max|s| 0.09 at trial 2 | td max 1.13 ns (trial 12), decisions later than available: 0
+   Vin 1.35026 V code 1503 (ideal 1536, diff -33) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.04 +0.13 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 | max|s| 0.13 at trial 2 | td max 1.12 ns (trial 7), decisions later than available: 0
+   Vin 1.80026 V code 2014 (ideal 2048, diff -34) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.04 +0.18 +0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.18 at trial 2 | td max 1.13 ns (trial 11), decisions later than available: 0
+   Vin 2.07273 V code 2325 (ideal 2358, diff -33) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.03 +0.02 -0.04 -0.00 -0.00 +0.00 +0.00 -0.01 -0.00 -0.00 -0.00 +0.00 | max|s| 0.04 at trial 3 | td max 1.13 ns (trial 12), decisions later than available: 0
+   Vin 2.25026 V code 2527 (ideal 2560, diff -33) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.05 +0.03 -0.04 -0.01 -0.00 -0.00 +0.00 -0.01 -0.00 -0.00 -0.00 +0.00 | max|s| 0.05 at trial 1 | td max 1.13 ns (trial 12), decisions later than available: 0
+   Vin 2.34545 V code 2634 (ideal 2668, diff -34) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.23 -0.06 -0.12 -0.06 -0.06 -0.05 +0.00 -0.01 +0.00 -0.00 +0.00 +0.00 | max|s| 0.23 at trial 1 | td max 1.13 ns (trial 11), decisions later than available: 0
+   VERDICT sf-40x: worst unsettled plate at a comparator clock 0.23 LSB (limit 0.5): PASS;  slowest decision 1.13 ns vs 2.66 ns available: PASS;  failed runs 0
+
+== ss125x  ss 125 C  VDD 3.6 V  timing a_ff_125  (MIXED hot: slow 3.3 V devices, ff_125C std cells)
+   DAC edge -> comparator clock 31.91 ns; window W 4.65 ns; decision time available (cap - rise - setup) 4.00 ns; wall 17 s
+   Vin 1.25455 V code 1397 (ideal 1427, diff -30) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.35 +0.35 +0.00 -0.00 +0.00 +0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 | max|s| 0.35 at trial 1 | td max 1.95 ns (trial 12), decisions later than available: 0
+   Vin 1.35026 V code 1506 (ideal 1536, diff -30) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.37 +0.38 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.38 at trial 2 | td max 2.02 ns (trial 11), decisions later than available: 0
+   Vin 1.80026 V code 2016 (ideal 2048, diff -32) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.32 +0.44 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.44 at trial 2 | td max 1.92 ns (trial 12), decisions later than available: 0
+   Vin 2.07273 V code 2327 (ideal 2358, diff -31) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.37 +0.21 -0.19 -0.03 +0.00 -0.01 +0.01 -0.02 -0.00 +0.00 -0.00 -0.00 | max|s| 0.37 at trial 1 | td max 1.90 ns (trial 12), decisions later than available: 0
+   Vin 2.25026 V code 2528 (ideal 2560, diff -32) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 +0.04 -0.33 -0.15 -0.10 -0.09 +0.01 -0.00 +0.00 +0.00 +0.00 +0.00 | max|s| 0.65 at trial 1 | td max 1.91 ns (trial 7), decisions later than available: 0
+   Vin 2.34545 V code 2634 (ideal 2668, diff -34) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -1.33 -0.14 -0.46 -0.17 -0.16 -0.13 +0.01 -0.02 +0.00 -0.00 -0.00 -0.00 | max|s| 1.33 at trial 1 | td max 1.90 ns (trial 12), decisions later than available: 0
+   VERDICT ss125x: worst unsettled plate at a comparator clock 1.33 LSB (limit 0.5): FAIL;  slowest decision 2.02 ns vs 4.00 ns available: PASS;  failed runs 0
+
+== tt27m  typical 27 C  VDD 3.3 V  timing a_tt  (MATCHED typical (reference))
+   DAC edge -> comparator clock 40.19 ns; window W 5.88 ns; decision time available (cap - rise - setup) 5.11 ns; wall 14 s
+   Vin 1.15000 V code 1398 (ideal 1427, diff -29) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 +0.00 -0.00 +0.00 -0.00 +0.00 -0.00 | max|s| 0.00 at trial 1 | td max 1.55 ns (trial 11), decisions later than available: 0
+   Vin 1.23774 V code 1507 (ideal 1536, diff -29) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.00 at trial 2 | td max 1.58 ns (trial 12), decisions later than available: 0
+   Vin 1.65024 V code 2017 (ideal 2048, diff -31) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.07 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.07 at trial 2 | td max 1.51 ns (trial 11), decisions later than available: 0
+   Vin 1.90000 V code 2328 (ideal 2358, diff -30) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | max|s| 0.00 at trial 2 | td max 1.53 ns (trial 9), decisions later than available: 0
+   Vin 2.06274 V code 2529 (ideal 2560, diff -31) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.12 -0.07 -0.07 -0.07 -0.06 -0.05 +0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | max|s| 0.12 at trial 1 | td max 1.53 ns (trial 11), decisions later than available: 0
+   Vin 2.15000 V code 2635 (ideal 2668, diff -33) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 -0.25 -0.20 -0.14 -0.12 -0.10 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.65 at trial 1 | td max 1.53 ns (trial 10), decisions later than available: 0
+   VERDICT tt27m: worst unsettled plate at a comparator clock 0.65 LSB (limit 0.5): FAIL;  slowest decision 1.58 ns vs 5.11 ns available: PASS;  failed runs 0
+
+== ff125s  ff 125 C  VDD 3.0 V  timing a_ss_125  (mixed the other way: fast 3.3 V devices, slowest std cells (window end check))
+   DAC edge -> comparator clock 85.01 ns; window W 12.26 ns; decision time available (cap - rise - setup) 10.97 ns; wall 22 s
+   Vin 1.04545 V code 1388 (ideal 1427, diff -39) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.15 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.15 at trial 2 | td max 1.51 ns (trial 12), decisions later than available: 0
+   Vin 1.12522 V code 1497 (ideal 1536, diff -39) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.30 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.30 at trial 2 | td max 1.51 ns (trial 12), decisions later than available: 0
+   Vin 1.50022 V code 2007 (ideal 2048, diff -41) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.50 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.50 at trial 2 | td max 1.56 ns (trial 9), decisions later than available: 0
+   Vin 1.72727 V code 2318 (ideal 2358, diff -40) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.09 -0.06 -0.06 -0.06 -0.06 -0.05 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.09 at trial 1 | td max 1.53 ns (trial 11), decisions later than available: 0
+   Vin 1.87522 V code 2517 (ideal 2560, diff -43) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.84 -0.34 -0.26 -0.20 -0.15 -0.12 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.84 at trial 1 | td max 1.55 ns (trial 11), decisions later than available: 0
+   Vin 1.95455 V code 2623 (ideal 2668, diff -45) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -1.37 -0.43 -0.30 -0.20 -0.16 -0.13 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 1.37 at trial 1 | td max 1.53 ns (trial 6), decisions later than available: 0
+   VERDICT ff125s: worst unsettled plate at a comparator clock 1.37 LSB (limit 0.5): FAIL;  slowest decision 1.56 ns vs 10.97 ns available: PASS;  failed runs 0
+
+== tt27m_ca54  typical 27 C  VDD 3.3 V  timing a_tt  (what-if: CMP_CA = 54.5 fF (one legal 5x5 um MIM unit per preamp node))  TESTBENCH OVERRIDE: .param CMP_CA=54.5f
+   DAC edge -> comparator clock 40.19 ns; window W 5.88 ns; decision time available (cap - rise - setup) 5.11 ns; wall 10 s
+   Vin 1.15000 V code 1399 (ideal 1427, diff -28) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.00 -0.00 +0.00 -0.00 +0.00 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | max|s| 0.00 at trial 7 | td max 1.60 ns (trial 9), decisions later than available: 0
+   Vin 1.23774 V code 1508 (ideal 1536, diff -28) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 | max|s| 0.00 at trial 2 | td max 1.60 ns (trial 12), decisions later than available: 0
+   Vin 1.65024 V code 2019 (ideal 2048, diff -29) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: +0.00 +0.07 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.07 at trial 2 | td max 1.60 ns (trial 12), decisions later than available: 0
+   Vin 1.90000 V code 2329 (ideal 2358, diff -29) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 | max|s| 0.00 at trial 1 | td max 1.61 ns (trial 11), decisions later than available: 0
+   Vin 2.06274 V code 2531 (ideal 2560, diff -29) passes 1 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.11 -0.07 -0.07 -0.07 -0.06 -0.05 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | max|s| 0.11 at trial 1 | td max 1.60 ns (trial 12), decisions later than available: 0
+   Vin 2.15000 V code 2637 (ideal 2668, diff -31) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 -0.25 -0.20 -0.14 -0.12 -0.10 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | max|s| 0.65 at trial 1 | td max 1.60 ns (trial 12), decisions later than available: 0
+   VERDICT tt27m_ca54: worst unsettled plate at a comparator clock 0.65 LSB (limit 0.5): FAIL;  slowest decision 1.61 ns vs 5.11 ns available: PASS;  failed runs 0
+
+== ss-40x_ca54  ss -40 C  VDD 3.6 V  timing a_ff_n40  (what-if: CMP_CA = 54.5 fF at the mixed worst corner)  TESTBENCH OVERRIDE: .param CMP_CA=54.5f
+   DAC edge -> comparator clock 21.41 ns; window W 3.19 ns; decision time available (cap - rise - setup) 2.66 ns; wall 17 s
+   Vin 1.25455 V code 1405 (ideal 1427, diff -22) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.65 +0.41 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | max|s| 0.65 at trial 1 | td max 1.65 ns (trial 12), decisions later than available: 0
+   Vin 1.35026 V code 1514 (ideal 1536, diff -22) passes 3 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.62 +0.42 +0.00 -0.00 +0.00 -0.00 +0.00 +0.00 +0.00 -0.00 +0.00 -0.00 | max|s| 0.62 at trial 1 | td max 1.68 ns (trial 11), decisions later than available: 0
+   Vin 1.80026 V code 2024 (ideal 2048, diff -24) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.60 +0.42 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 | max|s| 0.60 at trial 1 | td max 1.62 ns (trial 12), decisions later than available: 0
+   Vin 2.07273 V code 2335 (ideal 2358, diff -23) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.60 +0.40 -0.33 -0.05 +0.01 -0.00 +0.02 -0.03 -0.00 -0.00 -0.00 -0.00 | max|s| 0.60 at trial 1 | td max 1.62 ns (trial 12), decisions later than available: 0
+   Vin 2.25026 V code 2537 (ideal 2560, diff -23) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.64 +0.42 -0.34 -0.05 +0.01 -0.00 +0.03 -0.00 +0.01 -0.00 +0.00 +0.00 | max|s| 0.64 at trial 1 | td max 1.62 ns (trial 12), decisions later than available: 0
+   Vin 2.34545 V code 2644 (ideal 2668, diff -24) passes 2 unres 0 | DAC-only s_k [LSB] trial 1..12: -0.72 +0.37 -0.40 -0.02 -0.05 -0.04 +0.02 -0.03 -0.00 +0.00 -0.00 -0.00 | max|s| 0.72 at trial 1 | td max 1.60 ns (trial 12), decisions later than available: 0
+   VERDICT ss-40x_ca54: worst unsettled plate at a comparator clock 0.72 LSB (limit 0.5): FAIL;  slowest decision 1.68 ns vs 2.66 ns available: PASS;  failed runs 0

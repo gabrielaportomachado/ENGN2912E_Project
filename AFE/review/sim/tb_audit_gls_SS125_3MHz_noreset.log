@@ -1,0 +1,8 @@
+--- P3 power-up WITHOUT a reset pulse (RSTN = 1 from t = 0) ---
+ASSERT P3.x_before PASS | without RSTN the routing switches / RST_AMP are UNDEFINED after power-up (expected: this is why RSTN must be held low, Decision 41e)
+        sw_rec xxxxxxxx sw_ipg xxxxxxxx rst_amp x mode x en xxxxxxxx
+        after one full frame (config 0): sw_rec 00000000 sw_ipg 00000000 rst_amp 0 mode 0 en 00000000
+ASSERT P3.selfinit PASS | two full frames with config 0 bring the chip to the defined all-open state even without RSTN
+ASSERT P3.data PASS | conversions are correct after the self-initialisation
+SUMMARY noreset PER 333.33 ns: 3 assertions, 0 FAIL
+/foss/designs/ENGN2912E_Project/AFE/review/tb/tb_audit.v:444: $finish called at 1001000000 (1ps)

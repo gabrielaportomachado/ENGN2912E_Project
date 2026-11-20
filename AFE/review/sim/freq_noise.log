@@ -1,0 +1,31 @@
+AUDIT steps 2 and 7: amplifier roll-off above the signal band, aliasing at 4 kS/s, and the auditor's own end-to-end noise / ENOB budget.
+New simulation (cheap): .ac and .noise of the frozen A4c channel (AFE/amp/tb/tb_a4c_noise.spice netlist, includes rewritten to absolute paths, IDEAL feedback resistors
+= R0 per corner as Decision 8 and sim/a4c_noise.log), typ 27 / ff 85 / ss -40, typical flicker (fnoicor = 0).  The spectrum is integrated here in Python:
+  in band 0.5-300 Hz; first Nyquist zone 0.5 Hz-2 kHz; aliases = sum over k >= 1 of the bands k*4 kHz +- 300 Hz that fold onto 0.5-300 Hz; total 0.5 Hz - 2 MHz.
+ADC terms from saved logs (stated per line).
+
+1. ROLL-OFF OF THE CHANNEL (|H| relative to the mid-band gain at 12.25 Hz, dB) and the local slope
+corner      T | gmid_dB f_hi_Hz |     300      1k      2k    3.7k      4k    4.3k    7.7k      8k     16k     40k    100k    400k   1000k | slope 4k-40k, 40k-400k dB/dec
+typical    27 |  60.058   661.6 |    -0.8    -5.2   -10.1   -15.2   -15.8   -16.4   -21.4   -21.8   -27.8   -36.0   -45.0   -60.7   -66.3 |  -20.1  -24.7
+ff         85 |  60.063  1001.4 |    -0.4    -3.0    -7.0   -11.7   -12.3   -12.9   -17.8   -18.1   -24.1   -32.2   -40.9   -56.8   -65.0 |  -19.9  -24.6
+ss        -40 |  60.043   427.1 |    -1.8    -8.2   -13.7   -18.9   -19.6   -20.2   -25.2   -25.6   -31.6   -39.9   -49.3   -62.8   -66.3 |  -20.3  -22.9
+  -> first-order roll-off (-20 dB/decade) from f_hi up to at least 40 kHz; alias attenuation of an interferer at 3.7 / 4.3 kHz (lands at 300 Hz) and 7.7 kHz read from the table.
+
+2. AMPLIFIER NOISE, input-referred = output noise / mid-band gain [uV rms], typical flicker, electrodes included (Randles pair)
+corner      T | 0.5-300Hz  0.5Hz-2kHz     2k-2MHz   total 2MHz |  aliases->band   band+aliases | codes 0-2kHz
+typical    27 |     1.669       1.797       0.331        1.827 |          0.116          1.673 |        1.827
+ff         85 |     1.849       2.004       0.458        2.055 |          0.161          1.856 |        2.055
+ss        -40 |     1.541       1.626       0.227        1.641 |          0.080          1.543 |        1.641
+  (aliases->band = noise from k*4 kHz +- 300 Hz folded onto the 0.5-300 Hz band; "codes 0-2kHz" = everything the 4 kS/s code stream contains if the host does NOT low-pass to 300 Hz = the total wideband noise)
+  cross-check with AFE/amp/sim/a4c_noise.log: 0.5-300 Hz 1.668 / 1.847 / 1.540, 0.5 Hz-2 kHz 1.796 / 2.003 / 1.625, 0.5 Hz-1 MHz 1.826 / 2.055 / 1.641 uV
+
+3. END-TO-END BUDGET at the electrode (1 LSB = 0.8057 mV at the ADC input = 0.8057 uV at the electrode; gain 1000)
+corner      T |  amp_ib   alias   TGATE |   kT/C   Cref    cmp  latch  quant    DNL  ADC_rss |   IN-BAND   margin% |  WIDEBAND   ADC_LSB | SNR_dB  SINAD ENOB_FS
+typical    27 |   1.669   0.116   0.323 |   34.1   24.0  118.0   50.0  232.6  201.4    335.9 |     1.709      14.5 |     2.036     0.417 |   44.8   44.8   8.87
+ff         85 |   1.849   0.161   0.304 |   37.3   28.0  168.0   50.0  232.6  201.4    357.2 |     1.886       5.7 |     2.229     0.443 |   44.0   31.7   6.69
+ss        -40 |   1.541   0.080   0.363 |   30.1   21.0  108.0   50.0  232.6  201.4    331.9 |     1.591      20.5 |     1.920     0.412 |   45.3   45.3   8.95
+  columns: amp_ib, alias, TGATE [uV at the electrode]; kT/C .. DNL, ADC_rss [uV at the ADC input, over 0-2 kHz]; IN-BAND = rss of amplifier 0.5-300 Hz + aliases + TGATE Ron thermal noise
+  + the ADC noise share inside 0-300 Hz [uV at the electrode]; margin vs the 2 uV target; WIDEBAND = all noise in the code stream without host filtering;
+  SNR for a +-500 uV sine against WIDEBAND; SINAD adds the amplifier THD at +-0.5 mV (a4c_thd.log); ENOB_FS = (SINAD - 1.76)/6.02 + log2(1.65 V / 0.5 V).
+  NOT in this budget (static, deterministic or host-side): fixed code offset -22..-40 LSB, the code-dependent threshold steps (-1.1 / +1.3 LSB at codes 1536 / 2048, Decision 43b), the
+  top-of-range error (Decision 43c), supply ripple (0.6 LSB per mV: board requirement <= 1 mV rms), CS jitter (<= 85 ns rms for 0.1 LSB at 300 Hz full scale), fnoicor = 1 (4.4-4.9 uV, Decision 10).

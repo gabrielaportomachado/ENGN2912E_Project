@@ -1,0 +1,99 @@
+rtl_FFN40              2 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_FFN40              2 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_FFN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_FFN40              3 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_FFN40              3 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_FFN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_FF125              2 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_FF125              2 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_FF125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_FF125              3 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_FF125              3 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_FF125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_TT                 2 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_TT                 2 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_TT                 2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_TT                 3 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_TT                 3 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_TT                 3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_SSN40              2 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_SSN40              2 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_SSN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_SSN40              3 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_SSN40              3 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_SSN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_SS125              2 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_SS125              2 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_SS125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_SS125              3 MHz main      202 assertions, 3 FAIL  FAILS: X1.contention X5.after33d X5.word0 
+rtl_SS125              3 MHz rstlate   26 assertions, 0 FAIL  FAILS: 
+rtl_SS125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_FFN40_MIXED        2 MHz main      202 assertions, 10 FAIL  FAILS: T2.settle T2.settle T2.settle X1.contention T2.settle T2.settle T2.settle T2.settle X5.after33d X5.word0 
+rtl_FFN40_MIXED        2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T2.settle 
+rtl_FFN40_MIXED        2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+rtl_FFN40_MIXED        3 MHz main      202 assertions, 10 FAIL  FAILS: T2.settle T2.settle T2.settle X1.contention T2.settle T2.settle T2.settle T2.settle X5.after33d X5.word0 
+rtl_FFN40_MIXED        3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T2.settle 
+rtl_FFN40_MIXED        3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FFN40              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_FFN40              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_FFN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FFN40              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_FFN40              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_FFN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FF125              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_FF125              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_FF125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FF125              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_FF125              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_FF125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_TT                 2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_TT                 2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_TT                 2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_TT                 3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_TT                 3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_TT                 3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_SSN40              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_SSN40              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_SSN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_SSN40              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_SSN40              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_SSN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_SS125              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_SS125              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_SS125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_SS125              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+gls_SS125              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+gls_SS125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FFN40_MIXED        2 MHz main      202 assertions, 17 FAIL  FAILS: T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X1.contention T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X5.after33d X5.word0 
+gls_FFN40_MIXED        2 MHz rstlate   26 assertions, 2 FAIL  FAILS: T2.settle T11.crowbar 
+gls_FFN40_MIXED        2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+gls_FFN40_MIXED        3 MHz main      202 assertions, 17 FAIL  FAILS: T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X1.contention T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X5.after33d X5.word0 
+gls_FFN40_MIXED        3 MHz rstlate   26 assertions, 2 FAIL  FAILS: T2.settle T11.crowbar 
+gls_FFN40_MIXED        3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+
+MEASURED NUMBERS (worst over the `main` scenario; ns unless stated).  rtl_* = RTL + per-corner cell models + STA port delays; gls_* = delay-annotated hardened netlist (gen_gl.py)
+build_corner_f           DAC->ck   TSET | end->edg      W  TDEC | rst->tg CS->rst spread |  DOUT  DOUTsu |  crowb     n  abort | TACQ7_us hold_us | failing assertions
+gls_FF125_2MHz             32.54   20.0 |   381.38   4.91  1.40 |   2.54   0.87  0.075 |  1.20  248.80 |  0.073  5976   3.09 |   239.65    9.47 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_FF125_3MHz             32.54   20.0 |   214.71   4.91  1.40 |   2.54   0.87  0.075 |  1.20  165.47 |  0.073  5976   3.09 |   243.07    6.38 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_FFN40_2MHz             21.88   15.1 |   419.65   3.37  0.99 |   1.72   0.63  0.070 |  0.84  249.16 |  0.059  6264   2.40 |   239.65    9.43 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_FFN40_3MHz             21.88   15.1 |   252.98   3.37  0.99 |   1.72   0.63  0.070 |  0.84  165.83 |  0.059  6264   2.40 |   243.07    6.35 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_FFN40_MIXED_2MHz       21.88   24.0 |   419.65   3.37  1.63 |   1.72   0.63  0.070 |  0.84  249.16 |  0.059  6264   2.40 |   239.65    9.43 | T11.crowbar T2.settle X1.contention X5.after33d X5.word0
+gls_FFN40_MIXED_3MHz       21.88   24.0 |   252.98   3.37  1.63 |   1.72   0.63  0.070 |  0.84  165.83 |  0.059  6264   2.40 |   243.07    6.35 | T11.crowbar T2.settle X1.contention X5.after33d X5.word0
+gls_SS125_2MHz             86.49   35.8 |   189.09  12.79  2.60 |   6.79   2.10  0.072 |  2.91  247.09 |  0.207  6192   5.58 |   239.65    9.66 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_SS125_3MHz             86.49   35.8 |    22.42  12.79  2.60 |   6.79   2.10  0.072 |  2.91  163.76 |  0.207  6192   5.58 |   243.06    6.58 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_SSN40_2MHz             58.91   24.0 |   287.32   8.79  1.80 |   4.64   1.48  0.045 |  2.06  247.94 |  0.190  6048   4.57 |   239.65    9.56 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_SSN40_3MHz             58.91   24.0 |   120.66   8.79  1.80 |   4.64   1.48  0.045 |  2.06  164.61 |  0.190  6048   4.57 |   243.06    6.48 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_TT_2MHz                40.97   22.6 |   351.35   6.16  1.58 |   3.22   1.06  0.061 |  1.45  248.55 |  0.096  6264   3.45 |   239.65    9.50 | T11.crowbar X1.contention X5.after33d X5.word0
+gls_TT_3MHz                40.97   22.6 |   184.68   6.16  1.58 |   3.22   1.06  0.061 |  1.45  165.22 |  0.096  6264   3.45 |   243.06    6.41 | T11.crowbar X1.contention X5.after33d X5.word0
+rtl_FF125_2MHz             31.92   20.0 |   381.87   4.77  1.40 |   2.41   0.87  0.000 |  1.26  248.74 |  0.000     0   1.74 |   239.65    9.47 | X1.contention X5.after33d X5.word0
+rtl_FF125_3MHz             31.92   20.0 |   215.21   4.77  1.40 |   2.41   0.87  0.000 |  1.26  165.41 |  0.000     0   1.74 |   243.07    6.38 | X1.contention X5.after33d X5.word0
+rtl_FFN40_2MHz             21.45   15.1 |   420.00   3.24  0.99 |   1.62   0.63  0.000 |  0.90  249.10 |  0.000     0   1.37 |   239.65    9.43 | X1.contention X5.after33d X5.word0
+rtl_FFN40_3MHz             21.45   15.1 |   253.34   3.24  0.99 |   1.62   0.63  0.000 |  0.90  165.77 |  0.000     0   1.37 |   243.07    6.35 | X1.contention X5.after33d X5.word0
+rtl_FFN40_MIXED_2MHz       21.45   24.0 |   420.00   3.24  1.63 |   1.62   0.63  0.000 |  0.90  249.10 |  0.000     0   1.37 |   239.65    9.43 | T2.settle X1.contention X5.after33d X5.word0
+rtl_FFN40_MIXED_3MHz       21.45   24.0 |   253.34   3.24  1.63 |   1.62   0.63  0.000 |  0.90  165.77 |  0.000     0   1.37 |   243.07    6.35 | T2.settle X1.contention X5.after33d X5.word0
+rtl_SS125_2MHz             85.38   35.8 |   190.14  12.51  2.60 |   6.45   2.06  0.000 |  2.97  247.03 |  0.000     0   2.97 |   239.65    9.66 | X1.contention X5.after33d X5.word0
+rtl_SS125_3MHz             85.38   35.8 |    23.48  12.51  2.60 |   6.45   2.06  0.000 |  2.97  163.70 |  0.000     0   2.97 |   243.07    6.57 | X1.contention X5.after33d X5.word0
+rtl_SSN40_2MHz             58.02   24.0 |   288.17   8.56  1.80 |   4.37   1.47  0.000 |  2.12  247.88 |  0.000     0   2.44 |   239.65    9.56 | X1.contention X5.after33d X5.word0
+rtl_SSN40_3MHz             58.02   24.0 |   121.50   8.56  1.80 |   4.37   1.47  0.000 |  2.12  164.55 |  0.000     0   2.44 |   243.07    6.48 | X1.contention X5.after33d X5.word0
+rtl_TT_2MHz                40.33   22.6 |   351.91   5.98  1.58 |   3.04   1.06  0.000 |  1.51  248.49 |  0.000     0   1.91 |   239.65    9.50 | X1.contention X5.after33d X5.word0
+rtl_TT_3MHz                40.33   22.6 |   185.25   5.98  1.58 |   3.04   1.06  0.000 |  1.51  165.16 |  0.000     0   1.91 |   243.07    6.41 | X1.contention X5.after33d X5.word0

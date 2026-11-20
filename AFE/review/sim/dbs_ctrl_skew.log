@@ -1,0 +1,8 @@
+AUDIT step 4: sw_rec / sw_rec_b skew, ESTIMATE from a yosys synthesis of rtl/dbs.v dbs_ctrl #(8) (not hardened; no wire parasitics) + OpenSTA with an assumed load per output.
+
+ff_n40C_3v60   load 0.05 pF: sw_rec_b fall 1.93 rise 1.75 | sw_rec rise 2.08 fall 1.68 | skew at closing (sw_rec rise - sw_rec_b fall) 0.16 ns, at opening (sw_rec fall - sw_rec_b rise) -0.07 ns
+ff_n40C_3v60   load 0.20 pF: sw_rec_b fall 3.00 rise 3.09 | sw_rec rise 3.34 fall 2.40 | skew at closing (sw_rec rise - sw_rec_b fall) 0.34 ns, at opening (sw_rec fall - sw_rec_b rise) -0.69 ns
+tt_025C_3v30   load 0.05 pF: sw_rec_b fall 3.31 rise 2.92 | sw_rec rise 3.56 fall 2.81 | skew at closing (sw_rec rise - sw_rec_b fall) 0.25 ns, at opening (sw_rec fall - sw_rec_b rise) -0.11 ns
+tt_025C_3v30   load 0.20 pF: sw_rec_b fall 5.08 rise 5.09 | sw_rec rise 5.59 fall 3.93 | skew at closing (sw_rec rise - sw_rec_b fall) 0.51 ns, at opening (sw_rec fall - sw_rec_b rise) -1.17 ns
+ss_125C_3v00   load 0.05 pF: sw_rec_b fall 6.56 rise 5.61 | sw_rec rise 7.04 fall 5.42 | skew at closing (sw_rec rise - sw_rec_b fall) 0.48 ns, at opening (sw_rec fall - sw_rec_b rise) -0.19 ns
+ss_125C_3v00   load 0.20 pF: sw_rec_b fall 9.87 rise 9.63 | sw_rec rise 10.76 fall 7.38 | skew at closing (sw_rec rise - sw_rec_b fall) 0.89 ns, at opening (sw_rec fall - sw_rec_b rise) -2.25 ns

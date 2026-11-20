@@ -1,0 +1,8 @@
+AUDIT step 8: the amplifier at the skewed MOS corners fs / sf (never simulated in A1-A4c): gain, f_hi, in-band noise and supply current of the frozen A4c channel at 27 C, 3.3 V.
+Same netlist and method as freq_noise.py (tb_a4c_noise.spice, IDEAL feedback resistors at the typical-corner R0 5.235 TOhm: the pseudo-R floor does not depend on the MOS corner at 27 C, A2).
+typical is run alongside as the reference.
+corner   |  gmid_dB  f_lo_Hz  f_hi_Hz |   noise_ib  noise_tot |   Isup_uA   vout_V
+typical  |   60.058    0.195    661.6 |      1.669      1.827 |     74.37   1.6502
+fs       |   60.059    0.195    677.0 |      1.685      1.847 |     74.06   1.6502
+sf       |   60.057    0.195    646.5 |      1.653      1.807 |     74.88   1.6501
+noise in uV rms at the electrode (0.5-300 Hz, and 0.5 Hz-2 MHz), typical flicker.  f_lo here is with the IDEAL 5.235 TOhm resistors.

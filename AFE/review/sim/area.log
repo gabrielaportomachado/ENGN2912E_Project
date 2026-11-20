@@ -1,0 +1,111 @@
+AUDIT step 5: bottom-up area from the netlists (every size is evaluated from the SPICE parameters; nothing typed by hand).
+Blocks: afe_chc (stage 1, stage 2, follower, muxes, park), fs_oneshot_c, bias_genc, dac_sw (+ dac_units), cmp_p, vhalf, vrefs, the 2 routing TGATEs, the digital macro
+(LibreLane run AFE/adc/lg/runs/d3 + dbs_ctrl estimate), decap (Decision 40e), then per channel / per ADC / chip totals, MIM rule checks (25 um2 <= area <= 10,000 um2) and a floorplan.
+LAYOUT MODEL (ESTIMATE, stated so every number can be redone):
+  MOS footprint      = m * (W + 0.8 um) * (L + 1.0 um)        contacted source/drain 0.5 um per side, poly end caps 0.4 um per side (3.3 V devices; x1.2 for 5 V / 6 V devices)
+  MIM footprint      = (side + 2 * 0.6 um bottom-plate overlap + 0.6 um spacing)^2 per piece  (MIMTM.3 / MIMTM.6, AFE/layout/PLAN.md section 1)
+  HRES poly resistor = length * (width + 0.4 um spacing) * 1.2   (serpentine, HRES spacing 0.4 um, heads / contacts 20 %)
+  block factor       = 1.5 for blocks of large analog devices (wells, guard ring, dummies, local wiring), 2.5 for blocks of small devices (comparator, switches, one-shot, muxes)
+  top-level factor   = x1.30 on the sum of all blocks (channel-to-channel routing, the vcm / bias daisy chain, supply straps, pin access); the digital macro is taken as hardened.
+
+1. BLOCKS (device groups sorted by footprint; sizes evaluated from the netlist parameters)
+  -- afe_chc = stage 1 (OTA1, Cin x2, Cf x2, pseudo-R) + stage 2 (OTA2, follower) + gate muxes + REC park
+     cap_mim_2f0 (W x L)           2 x   100.01 x  100.01 um   drawn     20005 um2  C   39.999 pF  footprint     21036
+     nfet_03v3                  m    8  W  50.00 L  16.00 um   gate     6400.0 um2                 footprint      6909
+     pfet_03v3                  m   32  W  50.00 L   2.00 um   gate     3200.0 um2                 footprint      4877
+     nfet_03v3                  m   30  W  16.00 L   4.00 um   gate     1920.0 um2                 footprint      2520
+     cap_mim_2f0 (W x L)           1 x    38.59 x   38.59 um   drawn      1489 um2  C    3.000 pF  footprint      1631
+     pfet_03v3                  m    6  W  50.00 L   4.00 um   gate     1200.0 um2                 footprint      1524
+     cap_mim_2f0 (W x L)           1 x    31.46 x   31.46 um   drawn       990 um2  C    2.000 pF  footprint      1106
+     cap_mim_2f0 (W x L)           1 x    22.00 x   22.00 um   drawn       484 um2  C    0.984 pF  footprint       566
+     cap_mim_2f0 (W x L)           2 x     9.79 x    9.79 um   drawn       192 um2  C    0.400 pF  footprint       269
+     cap_mim_2f0 (W x L)           1 x    11.92 x   11.92 um   drawn       142 um2  C    0.294 pF  footprint       188
+     nfet_03v3                  m    2  W   1.00 L  40.00 um   gate       80.0 um2                 footprint       148
+     pfet_03v3                  m    2  W   1.00 L  20.00 um   gate       40.0 um2                 footprint        76
+     nfet_06v0_nvt              m    1  W  10.00 L   2.00 um   gate       20.0 um2                 footprint        39
+     nfet_03v3                  m    1  W   1.00 L  20.00 um   gate       20.0 um2                 footprint        38
+     ... 5 more device groups
+     gate area 12883 um2, MOS footprint 16153 (large 15868 x1.5, small 285 x2.5), MIM drawn 23301 / footprint 24797 (8 caps), poly R 0  ->  ESTIMATE 49312 um2
+     MIM RULE: xs1.xcin1 100.0 x 100.0 um = 10002 um2 > 10,000 (MIMTM.8b): 2 pieces assumed
+     MIM RULE: xs1.xcin2 100.0 x 100.0 um = 10002 um2 > 10,000 (MIMTM.8b): 2 pieces assumed
+  -- fs_oneshot_c (C_T 4 pF)
+     cap_mim_2f0 (W x L)           1 x    44.59 x   44.59 um   drawn      1989 um2  C    3.999 pF  footprint      2152
+     nfet_03v3                  m    1  W   0.28 L  40.00 um   gate       11.2 um2                 footprint        44
+     pfet_03v3                  m    3  W   1.00 L   0.50 um   gate        1.5 um2                 footprint         8
+     nfet_03v3                  m    3  W   1.00 L   0.50 um   gate        1.5 um2                 footprint         8
+     pfet_03v3                  m    1  W   2.00 L   0.50 um   gate        1.0 um2                 footprint         4
+     gate area 15 um2, MOS footprint 65 (large 0 x1.5, small 65 x2.5), MIM drawn 1989 / footprint 2152 (1 caps), poly R 0  ->  ESTIMATE 2314 um2
+  -- bias_genc (one per chip; ladders are ppolyf_u_3k as frozen)
+     cap_mim_2f0 (W x L)           1 x    49.89 x   49.89 um   drawn      2489 um2  C    5.001 pF  footprint      2671
+     ppolyf_u_3k                   2 x  W  1.00 L    275.0 um   drawn       550 um2                 footprint       924
+     nfet_03v3                  m    5  W  16.00 L   4.00 um   gate      320.0 um2                 footprint       420
+     pfet_03v3                  m    2  W  40.00 L   4.00 um   gate      320.0 um2                 footprint       408
+     ppolyf_u_3k                   1 x  W  1.00 L    241.7 um   drawn       242 um2                 footprint       406
+     ppolyf_u_1k                   1 x  W  2.00 L    120.0 um   drawn       240 um2                 footprint       346
+     ppolyf_u_3k                   1 x  W  1.00 L    150.0 um   drawn       150 um2                 footprint       252
+     ppolyf_u_3k                   1 x  W  1.00 L    125.0 um   drawn       125 um2                 footprint       210
+     ppolyf_u_3k                   1 x  W  1.00 L     33.3 um   drawn        33 um2                 footprint        56
+     nfet_03v3                  m    1  W   0.28 L  40.00 um   gate       11.2 um2                 footprint        44
+     pfet_03v3                  m    3  W   0.50 L   4.00 um   gate        6.0 um2                 footprint        20
+     pfet_03v3                  m    1  W   0.22 L   0.50 um   gate        0.1 um2                 footprint         2
+     gate area 657 um2, MOS footprint 893 (large 828 x1.5, small 65 x2.5), MIM drawn 2489 / footprint 2671 (1 caps), poly R 2194  ->  ESTIMATE 6270 um2
+  -- dac_sw = 128 MIM units + bridge + 13 drivers + 13 sampling TGs + 2 reset switches
+     cap_mim_2f0 (W x L)         127 x     5.00 x    5.00 um   drawn      3175 um2  C    6.924 pF  footprint      5872
+     pfet_03v3                  m   26  W   2.00 L   0.28 um   gate       14.6 um2                 footprint        93
+     nfet_03v3                  m   26  W   1.00 L   0.28 um   gate        7.3 um2                 footprint        60
+     cap_mim_2f0 (W x L)           1 x     5.08 x    5.00 um   drawn        25 um2  C    0.055 pF  footprint        47
+     nfet_03v3                  m    2  W   0.50 L   0.28 um   gate        0.3 um2                 footprint         3
+     gate area 22 um2, MOS footprint 156 (large 0 x1.5, small 156 x2.5), MIM drawn 3200 / footprint 5919 (128 caps), poly R 0  ->  ESTIMATE 6310 um2
+  -- cmp_p (the two 40 fF preamp capacitors are IDEAL in the netlist: not counted; one legal 5x5 um MIM each would add 2 x 46 um2)
+     pfet_03v3                  m    2  W  80.00 L   0.50 um   gate       80.0 um2                 footprint       242
+     pfet_03v3                  m    5  W   4.00 L   0.28 um   gate        5.6 um2                 footprint        31
+     nfet_03v3                  m    2  W   8.00 L   0.50 um   gate        8.0 um2                 footprint        26
+     pfet_03v3                  m    5  W   2.00 L   0.28 um   gate        2.8 um2                 footprint        18
+     nfet_03v3                  m    4  W   2.00 L   0.28 um   gate        2.2 um2                 footprint        14
+     nfet_03v3                  m    2  W   4.00 L   0.28 um   gate        2.2 um2                 footprint        12
+     nfet_03v3                  m    3  W   1.00 L   0.28 um   gate        0.8 um2                 footprint         7
+     gate area 102 um2, MOS footprint 351 (large 0 x1.5, small 351 x2.5), MIM drawn 0 / footprint 0 (0 caps), poly R 0  ->  ESTIMATE 877 um2
+  -- vhalf (2 x 250 kOhm ppolyf_u_3k + 1 pF)
+     cap_mim_2f0 (W x L)           1 x    22.18 x   22.18 um   drawn       492 um2  C    1.000 pF  footprint       575
+     ppolyf_u_3k                   2 x  W  1.00 L     83.3 um   drawn       167 um2                 footprint       280
+     gate area 0 um2, MOS footprint 0 (large 0 x1.5, small 0 x2.5), MIM drawn 492 / footprint 575 (1 caps), poly R 280  ->  ESTIMATE 855 um2
+  -- vrefs (TG + Cref 7 pF: ONE MIM in the netlist; Decision 42 / L1a say 128 x 5x5 um units)
+     cap_mim_2f0 (W x L)           1 x    59.07 x   59.07 um   drawn      3489 um2  C    7.000 pF  footprint      3705
+     pfet_03v3                  m    1  W   2.00 L   0.28 um   gate        0.6 um2                 footprint         4
+     nfet_03v3                  m    1  W   1.00 L   0.28 um   gate        0.3 um2                 footprint         2
+     gate area 1 um2, MOS footprint 6 (large 0 x1.5, small 6 x2.5), MIM drawn 3489 / footprint 3705 (1 caps), poly R 0  ->  ESTIMATE 3720 um2
+  -- unit-array view: DAC 129 units as 12 x 11 sites + one dummy ring on a 6.8 um pitch = 8416 um2 (the per-piece footprint above gives 5919); Cref as 128 units 5919 um2 vs one plate 3705 um2
+  -- TGATE macro (TGATE/TGATE.lef SIZE): 3.36 x 3.92 um = 13.2 um2 each, 2 per channel (std-cell row height: needs VDD / VSS rails and well taps: x3 assumed) = 79 um2 per channel
+  -- HRES option of gf180mcuD (ppolyf_u_1k, same resistance (3x the squares)): bias ladders 5890 um2, vhalf pair 840 um2 per ADC
+  -- HRES option of gf180mcuD (ppolyf_u_1k, same squares (R / 3)): bias ladders 2194 um2, vhalf pair 280 um2 per ADC
+
+2. DIGITAL MACRO (LibreLane run AFE/adc/lg/runs/d3/final/metrics.json = adc8_top only, I1 RTL, no CTS)
+     die 300.29 x 318.21 um = 95555 um2, core 82048 um2, std cells 31872 um2 (1684 cells), utilization 38.8 %, sequential 11033 um2 (149 flops)
+     dbs_ctrl (not hardened yet; ESTIMATE): 18 flops x 74.0 um2 + 32 NAND3 / INV + FSM gates = 1789 um2 of std cells
+     afe_dig at 39 % utilization: 86310 um2 (294 x 294 um square)
+     afe_dig at 50 % utilization: 67322 um2 (259 x 259 um square)
+     afe_dig at 60 % utilization: 56102 um2 (237 x 237 um square)
+
+3. DECAP (Decision 40e / 43f: 0.125 nF main rail + 0.1 nF DAC strap = 0.225 nF; MOS cap density from the PDK model cap_nmos_03v3: 3.98 fF/um2 at 3.3 V)
+     as MOS capacitors: 56533 um2 drawn x1.25 = 70666 um2 (D2 assumed 4.6 fF/um2: 0.049 mm2); as MIM 2 fF/um2: 129375 um2.  Under the Cin MIM plates (8 x 2 x 10,000 um2 available) it costs no area.
+
+4. TOTALS
+     amplifier part of a channel (afe_chc + one-shot + 2 TGATE + OR2 / INV): 51825 um2   [gate 12898, MIM drawn 25290]
+     ADC analog part of a channel (dac_sw with the unit array + cmp_p + vhalf + vrefs): 14351 um2   [MIM drawn 7182]
+     one channel cell afe_ch: 66176 um2 (e.g. 203 x 325 um)
+     chip blocks: 8 channels 529411 + bias 6270 + digital macro at 45 % 74802 + decap (MOS, not under MIM) 70666 = 681150 um2 = 0.681 mm2
+     x1.30 top-level factor (planning value)            total 0.863 mm2 =  929 x  929 um | 1110 x 1110 um slot (ASSUMED, TAPEOUT.md)                          1.232 mm2 -> utilization  70 %, margin  30 %
+     x1.30 top-level factor (planning value)            total 0.863 mm2 =  929 x  929 um | one third of the 2040 x 2040 um area (organizer Integration README) 1.387 mm2 -> utilization  62 %, margin  38 %
+     x1.30 top-level factor (planning value)            total 0.863 mm2 =  929 x  929 um | one third of 2235 x 2235 um (TAPEOUT.md planning frame)            1.665 mm2 -> utilization  52 %, margin  48 %
+     x1.50 (pessimistic: first-time generated layout)   total 0.984 mm2 =  992 x  992 um | 1110 x 1110 um slot (ASSUMED, TAPEOUT.md)                          1.232 mm2 -> utilization  80 %, margin  20 %
+     x1.50 (pessimistic: first-time generated layout)   total 0.984 mm2 =  992 x  992 um | one third of the 2040 x 2040 um area (organizer Integration README) 1.387 mm2 -> utilization  71 %, margin  29 %
+     x1.50 (pessimistic: first-time generated layout)   total 0.984 mm2 =  992 x  992 um | one third of 2235 x 2235 um (TAPEOUT.md planning frame)            1.665 mm2 -> utilization  59 %, margin  41 %
+     decap under the Cin MIM instead: blocks 0.610 mm2 -> x1.30 total 0.771 mm2
+     8 amplifier parts 0.415 mm2 (earlier estimate 0.40-0.45 mm2), 8 ADC analog parts 0.115 mm2 + digital 0.075 mm2 = 0.190 mm2 (earlier 0.08-0.12 mm2 / D0b 0.136 mm2), block total earlier 0.8-1.0 mm2
+
+5. LEVERS if the slot is smaller (area saved, from the numbers above)
+     decap under the Cin MIM: -0.071 mm2 (x1.3: -0.092)
+     Cin 20 -> 10 pF (noise +: kT/C and OTA noise gain; gain ratio kept with Cf 100 fF): -0.084 mm2 for 8 channels
+     Cref as ONE plate (netlist) instead of 128 units (Decision text): -0.018 mm2 for 8
+     N = 4 channels: -0.265 mm2 of blocks
+     11-bit DAC (6+5): -32 units per ADC: -0.012 mm2 for 8 (not worth it)

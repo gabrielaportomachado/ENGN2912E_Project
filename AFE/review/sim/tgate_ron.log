@@ -1,0 +1,21 @@
+AUDIT step 8: the 5 V-device routing TGATE (TGATE/TGATE.spice, read only) at the single 3.3 V supply (Decision 30).
+A4b measured Ron only over 1.15-2.15 V (sim/a4b_tg33_ron.log).  Here: Ron over the whole 0-VDD range (10 mV across the switch, C = VDD, CBAR = 0),
+the OFF leakage (C = 0, CBAR = VDD, 1 V across) and the current into the supply when a pad is driven beyond the rails (body diodes).
+
+ON resistance [kOhm] vs signal voltage (both terminals at V, 10 mV across):
+corner      T  VDD |       0     0.1     0.3     0.5   0.825    1.15    1.65    2.15    2.48     2.8       3     3.2     3.3 |   max  at V
+typical    27  3.3 |     4.3     4.5     4.9     5.4     6.5     8.3    12.7    21.0    15.7    12.3    10.9     9.8     9.3 |   21.0  2.12
+ff         85  3.3 |     4.1     4.2     4.6     5.0     5.9     7.2     9.3    13.8    14.2    11.5    10.3     9.3     8.9 |   15.6  2.30
+ss        -40  3.3 |     4.5     4.7     5.2     5.8     7.2     9.6    20.7    25.3    16.5    12.4    10.8     9.6     9.1 |   34.2  1.95
+ss        -40  3.0 |     4.9     5.2     5.8     6.7     8.8    13.2    60.6    22.5    15.2    11.6    10.1       -       - |   64.9  1.70
+ss        125  3.0 |     8.4     8.8     9.9    11.2    14.5    20.8    46.3    36.1    25.6    19.9    17.5       -       - |   56.2  1.80
+ff        -40  3.6 |     2.6     2.7     2.8     3.1     3.5     4.2     5.3     6.7     9.4     7.8     7.0     6.3     6.1 |    9.4  2.50
+
+OFF switch (C = 0, CBAR = VDD), far side held at 1.65 V: current into the driven pin [A] vs its voltage (negative = flows out of the pin):
+corner      T  VDD |      -0.8      -0.6      -0.4      -0.2         0      0.65      1.65      2.65       3.3       3.5       3.7       3.9       4.1
+typical    27  3.3 | -1.75e-05 -4.63e-06 -1.03e-07 -9.21e-11 -2.18e-13 -1.40e-13 -7.89e-14 -9.90e-15  3.10e-15  3.23e-13  5.55e-10  2.74e-07  1.62e-05
+ff         85  3.3 | -8.94e-05 -1.25e-05 -1.92e-06 -1.90e-08 -3.50e-11 -1.60e-13 -9.03e-14 -1.16e-14  2.85e-13  1.90e-10  6.46e-08  2.85e-06  2.47e-04
+ss        -40  3.3 | -6.86e-06 -6.57e-07 -3.13e-10 -1.81e-13 -1.54e-13 -1.21e-13 -6.81e-14 -7.90e-15  3.10e-15  3.96e-15  2.25e-13  2.01e-09  1.13e-06
+ss        -40  3.0 | -6.86e-06 -6.57e-07 -3.13e-10 -1.66e-13 -1.39e-13 -1.06e-13 -5.14e-14  7.59e-16  5.76e-15  2.39e-11  8.54e-08         -         -
+ss        125  3.0 | -3.53e-04 -3.46e-06 -7.91e-08 -4.39e-10 -1.49e-12 -1.17e-13 -6.18e-14 -9.54e-15  7.61e-10  2.34e-07  7.22e-05         -         -
+ff        -40  3.6 | -2.53e-05 -1.09e-05 -3.64e-07 -5.27e-11 -2.24e-13 -1.79e-13 -1.12e-13 -3.45e-14  1.54e-15  3.52e-15  4.16e-15  2.87e-12  2.44e-08

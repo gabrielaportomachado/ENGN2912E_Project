@@ -8,3 +8,4 @@ RDY/READY_sweep/*.txt
 runs/
 AFE/adc/sim/.ptmp/
 AFE/layout/.ptmp/
+AFE/review/.ptmp/

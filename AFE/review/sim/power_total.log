@@ -1,0 +1,24 @@
+AUDIT step 6: power.  Static currents [review/sim/power_op.log]; digital energy per SCLK cycle = LibreLane power.rpt / 2 MHz (tt 79.6 pJ, ss 125 C 3.0 V 67.5 pJ, ff -40 C 3.6 V 96.2 pJ; default data activity,
+clock and flop-clock-pin power dominate: 97 %); 160 SCLK per frame, 4000 frames/s.  DOUT pad: C_load ASSUMED, 36 rising edges per frame (144 data bits x 0.25), E = C V^2 per rising edge.
+
+corner                 |     amps    bias   vhalf |  digital     cmp     DAC DOUT15pF  dyn_sum |   RECORD     IDLE | uA record (avg from the pad)
+typical    27 C 3.3 V  |   1817.9    18.2   166.6 |     54.0    2.30    1.88     23.5     81.7 |   2084.4   2002.7 |   631.6
+ff         85 C 3.3 V  |   2930.7    27.3   242.4 |     54.8    2.69    1.70     23.5     82.7 |   3283.1   3200.3 |   994.9
+ss        -40 C 3.3 V  |   1137.0    12.4   118.0 |     55.4    2.23    2.06     23.5     83.2 |   1350.7   1267.5 |   409.3
+ff        -40 C 3.6 V  |   2126.0    24.0   234.1 |     65.2    2.69    1.85     28.0     97.8 |   2482.0   2384.2 |   689.4
+ss        125 C 3.0 V  |   1773.4    15.1   126.0 |     45.8    2.23    1.87     19.4     69.4 |   1983.8   1914.5 |   661.3
+  all in uW.  RECORD = STIMULATE (frames still read) = RESET (RST_AMP held) : the analog current does not depend on the mode; IDLE = SCLK stopped (static only).
+  SCLK 2 MHz and 3 MHz give the same average (160 clocks per frame at both).  If the host lets SCLK free-run: digital = 159 uW at 2 MHz, 239 uW at 3 MHz (tt) instead of ~54 uW.
+  DOUT load 10 / 20 pF: 15.7 / 31.4 uW at 3.3 V.  One-shot timer legs: 8 x ~2 nA while the routing switch is open (negligible).
+
+PEAK / TRANSIENT (ESTIMATE):
+  digital charge per SCLK cycle = 24.1 pC (tt), 26.7 pC (ff -40 C 3.6 V), 22.5 pC (ss 125 C 3.0 V); X2 S4 assumed 1.5 pC per converting ADC per edge = 12 pC at most.
+  comparator 1.8-2.6 pC per decision in ~2 ns (about 1 mA peak each, staggered); DAC 2.9 pC on the MSB trial; DOUT pad 15 pF x 3.3 V = 50 pC per edge in 5-10 ns: 5-10 mA peak, only during read-out (after the conversions).
+  peak from the pad pair therefore ~10-25 mA for a few ns; on-chip decap 0.225 nF: 24 pC -> ~0.1 V if taken from 0.225 nF alone, 45 mV measured in X2 S4 with 12 pC [AFE/adc/sim/x2_s4_summary.log].
+
+STATIC IR DROP AND ELECTROMIGRATION (floorplan of section 5; sheet resistance from the PDK model: Metal1-4 0.09 ohm/sq, top metal 11k 0.04 ohm/sq):
+  analog strap, top metal, 1000 um x 10 um             R =   4.0 ohm, I = 0.610 mA -> IR drop 2.44 mV; current density 0.061 mA/um (limit 2.09 mA/um at 85 C, 1.0 at 110 C for Metal1-4; 4.5 for the top metal: ORGANIZER table)
+  analog strap at ff 85 C                              R =   4.0 ohm, I = 0.970 mA -> IR drop 3.88 mV; current density 0.097 mA/um (limit 2.09 mA/um at 85 C, 1.0 at 110 C for Metal1-4; 4.5 for the top metal: ORGANIZER table)
+  same on Metal3, 1000 um x 10 um                      R =   9.0 ohm, I = 0.610 mA -> IR drop 5.49 mV; current density 0.061 mA/um (limit 2.09 mA/um at 85 C, 1.0 at 110 C for Metal1-4; 4.5 for the top metal: ORGANIZER table)
+  per-channel branch, Metal3 300 um x 2 um (0.085 mA)  R =  13.5 ohm, I = 0.085 mA -> IR drop 1.15 mV; current density 0.043 mA/um (limit 2.09 mA/um at 85 C, 1.0 at 110 C for Metal1-4; 4.5 for the top metal: ORGANIZER table)
+  one dvdd / dvss pad cell carries 60 mA DC (ORGANIZER table): average 0.6-1.0 mA is 60x below; one pad pair is enough for DC. The inductance question (X2 S4, ff -40 C) is separate.

@@ -1,0 +1,33 @@
+AUDIT step 8 (robustness): start-up of bias_genc with the vbn gate load of N channels.
+A4b measured the master start-up with ONE channel (0.55 ms typ, 611 ms at ss -40 C: the 3-diode start-up stack only conducts at leakage level when cold/slow).
+The chip has 8 channels on vbn: per channel 30 x 16u/4u mirror gates (OTA1 sink x24, follower sink x6) + stage-2 tail 1u/20u + one-shot leg 0.28u/40u.
+Netlist: bias_genc (design file, read only) + that load x N; VDD ramps 0 -> VDD in 1 ms from the all-zero state (no nodesets, as A4b).
+t90 = time after the START of the ramp at which the master current (Xmn1) reaches 90 % of its final value.
+Not a switching transient: abstol 1e-16 (A4b used 1e-20; 1e-12 would be coarser than the pA start-up current).
+corner      T  VDD  N |     t90_ms Imaster_uA   Isink_uA    vbn_V    vcm_V    vrs_V final state reached inside the window
+   job bst_typical_27_3.3_n1: pid 1663370 exit 0 wall 0 s
+   job bst_typical_27_3.3_n8: pid 1663371 exit 0 wall 0 s
+   job bst_ff_85_3.3_n1: pid 1663372 exit 0 wall 0 s
+   job bst_ff_85_3.3_n8: pid 1663378 exit 0 wall 0 s
+   job bst_ss_-40_3.3_n1: pid 1663379 exit 0 wall 0 s
+   job bst_ss_-40_3.3_n8: pid 1663380 exit 0 wall 0 s
+   job bst_ss_-40_3_n1: pid 1663398 exit 0 wall 0 s
+   job bst_typical_-40_3.3_n1: pid 1663400 exit 0 wall 0 s
+   job bst_typical_-40_3.3_n8: pid 1663401 exit 0 wall 0 s
+   job bst_ss_-40_3_n8: pid 1663399 exit 0 wall 1 s
+   job bst_ss_27_3.3_n1: pid 1663402 exit 0 wall 0 s
+   job bst_ss_27_3.3_n8: pid 1663403 exit 0 wall 0 s
+   job bst_ss_-40_3.3_n8_abstol1e-13: pid 1663404 exit 0 wall 0 s
+bst_typical_27_3.3_n1              | t90      1.388 ms  Imaster   0.8466 uA  Isink(N x 24)    21.187 uA  vbn 0.6477  vcm 1.6484  vrs 1.0277  settled (window 0.2 s, wall 0 s)
+bst_typical_27_3.3_n8              | t90      3.716 ms  Imaster   0.8466 uA  Isink(N x 24)   169.500 uA  vbn 0.6477  vcm 1.6484  vrs 1.0277  settled (window 0.2 s, wall 0 s)
+bst_ff_85_3.3_n1                   | t90      0.744 ms  Imaster   1.3696 uA  Isink(N x 24)    34.118 uA  vbn 0.5089  vcm 1.6482  vrs 1.2217  settled (window 0.2 s, wall 0 s)
+bst_ff_85_3.3_n8                   | t90      1.005 ms  Imaster   1.3696 uA  Isink(N x 24)   272.944 uA  vbn 0.5089  vcm 1.6482  vrs 1.2217  settled (window 0.2 s, wall 0 s)
+bst_ss_-40_3.3_n1                  | t90    608.055 ms  Imaster   0.5273 uA  Isink(N x 24)    13.270 uA  vbn 0.8049  vcm 1.6486  vrs 0.8139  settled (window 7.5 s, wall 0 s)
+bst_ss_-40_3.3_n8                  | t90   3564.806 ms  Imaster   0.5273 uA  Isink(N x 24)   106.164 uA  vbn 0.8049  vcm 1.6486  vrs 0.8139  settled (window 30.0 s, wall 0 s)
+bst_ss_-40_3_n1                    | t90   3847.593 ms  Imaster   0.5197 uA  Isink(N x 24)    12.952 uA  vbn 0.8042  vcm 1.4987  vrs 0.6645  settled (window 15.0 s, wall 0 s)
+bst_ss_-40_3_n8                    | t90  23426.940 ms  Imaster   0.5197 uA  Isink(N x 24)   103.620 uA  vbn 0.8042  vcm 1.4987  vrs 0.6645  settled (window 60.0 s, wall 1 s)
+bst_typical_-40_3.3_n1             | t90      8.412 ms  Imaster   0.6543 uA  Isink(N x 24)    16.553 uA  vbn 0.7045  vcm 1.6486  vrs 0.9295  settled (window 2.5 s, wall 0 s)
+bst_typical_-40_3.3_n8             | t90     44.619 ms  Imaster   0.6543 uA  Isink(N x 24)   132.422 uA  vbn 0.7045  vcm 1.6486  vrs 0.9295  settled (window 10.0 s, wall 0 s)
+bst_ss_27_3.3_n1                   | t90     11.130 ms  Imaster   0.6846 uA  Isink(N x 24)    17.067 uA  vbn 0.7469  vcm 1.6484  vrs 0.9134  settled (window 1.2 s, wall 0 s)
+bst_ss_27_3.3_n8                   | t90     62.701 ms  Imaster   0.6846 uA  Isink(N x 24)   136.540 uA  vbn 0.7469  vcm 1.6484  vrs 0.9134  settled (window 5.0 s, wall 0 s)
+bst_ss_-40_3.3_n8_abstol1e-13      | t90   3564.022 ms  Imaster   0.5273 uA  Isink(N x 24)   106.164 uA  vbn 0.8049  vcm 1.6486  vrs 0.8139  settled (window 30.0 s, wall 0 s)
