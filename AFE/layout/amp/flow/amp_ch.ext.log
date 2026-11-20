@@ -16,7 +16,7 @@ The following types are not handled by extraction and will be treated as non-ele
     obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
 Scaled tech values by 10 / 1 to match internal grid scaling
 Loading gf180mcuD Device Generator Menu ...
-Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/run.tcl" from command line.
+Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/run.tcl" from command line.
 Warning: Calma reading is not undoable!  I hope that's OK.
 Library written using GDS-II Release 6.0
 Library name: gf180mcu_fd_sc_mcu7t5v0
@@ -79,73 +79,73 @@ Reading "xm6".
 Reading "mir".
 Reading "ota_p".
 Reading "amp_ch".
-Extracting nfet__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__3.ext:
-Extracting xm6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/xm6.ext:
-Extracting pfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__1.ext:
-Extracting tail6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/tail6.ext:
-Extracting pfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__0.ext:
-Extracting pair_a2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pair_a2.ext:
-Extracting pair_b2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pair_b2.ext:
-Extracting pair_b1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pair_b1.ext:
-Extracting pair_a1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pair_a1.ext:
-Extracting ota_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/ota_p.ext:
-Extracting nfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__4.ext:
-Extracting sink1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/sink1.ext:
-Extracting pfet__9 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__9.ext:
-Extracting s2p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/s2p.ext:
-Extracting cap_mim__17 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__17.ext:
-Extracting cc1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cc1.ext:
+Extracting nfet__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__3.ext:
+Extracting xm6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/xm6.ext:
+Extracting pfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__1.ext:
+Extracting tail6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/tail6.ext:
+Extracting pfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__0.ext:
+Extracting pair_a2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pair_a2.ext:
+Extracting pair_b2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pair_b2.ext:
+Extracting pair_b1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pair_b1.ext:
+Extracting pair_a1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pair_a1.ext:
+Extracting ota_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/ota_p.ext:
+Extracting nfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__4.ext:
+Extracting sink1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/sink1.ext:
+Extracting pfet__9 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__9.ext:
+Extracting s2p into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/s2p.ext:
+Extracting cap_mim__17 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__17.ext:
+Extracting cc1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cc1.ext:
 cc1: 4 errors
-Extracting nfet_06v0_nvt__10 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet_06v0_nvt__10.ext:
-Extracting fol into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/fol.ext:
-Extracting nfet__5 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__5.ext:
-Extracting xms into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/xms.ext:
-Extracting nfet__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__2.ext:
-Extracting m3b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/m3b.ext:
-Extracting m4b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/m4b.ext:
-Extracting m4a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/m4a.ext:
-Extracting m3a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/m3a.ext:
-Extracting mir into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/mir.ext:
-Extracting nfet__6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__6.ext:
-Extracting s2pair into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/s2pair.ext:
-Extracting nfet__8 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__8.ext:
-Extracting nfet__7 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__7.ext:
-Extracting s2tail into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/s2tail.ext:
-Extracting pfet__16 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__16.ext:
-Extracting pr2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pr2.ext:
-Extracting cap_mim__18 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__18.ext:
-Extracting cf1p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cf1p.ext:
-cf1p: 6 errors
-Extracting nfet__12 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__12.ext:
-Extracting nfet__11 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/nfet__11.ext:
-Extracting sn into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/sn.ext:
-Extracting pfet__14 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__14.ext:
-Extracting pfet__15 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__15.ext:
-Extracting pfet__13 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pfet__13.ext:
-Extracting sp into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/sp.ext:
-Extracting cf1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cf1.ext:
-cf1: 6 errors
-Extracting pr1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pr1.ext:
-Extracting gf180mcu_fd_sc_mcu7t5v0__filltie into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/gf180mcu_fd_sc_mcu7t5v0__filltie.ext:
-Extracting gf180mcu_fd_sc_mcu7t5v0__or2_1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/gf180mcu_fd_sc_mcu7t5v0__or2_1.ext:
-Extracting or2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/or2.ext:
-Extracting cap_mim__21 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__21.ext:
-Extracting cf2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cf2.ext:
-cf2: 6 errors
-Extracting pr3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/pr3.ext:
-Extracting cap_mim__19 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__19.ext:
-Extracting cin2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cin2.ext:
+Extracting nfet_06v0_nvt__10 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet_06v0_nvt__10.ext:
+Extracting fol into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/fol.ext:
+Extracting nfet__5 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__5.ext:
+Extracting xms into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/xms.ext:
+Extracting nfet__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__2.ext:
+Extracting m3b into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/m3b.ext:
+Extracting m4b into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/m4b.ext:
+Extracting m4a into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/m4a.ext:
+Extracting m3a into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/m3a.ext:
+Extracting mir into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/mir.ext:
+Extracting nfet__8 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__8.ext:
+Extracting nfet__7 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__7.ext:
+Extracting s2tail into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/s2tail.ext:
+Extracting nfet__6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__6.ext:
+Extracting s2pair into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/s2pair.ext:
+Extracting pfet__16 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__16.ext:
+Extracting pr2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pr2.ext:
+Extracting cap_mim__18 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__18.ext:
+Extracting cf1p into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cf1p.ext:
+cf1p: 4 errors
+Extracting nfet__12 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__12.ext:
+Extracting nfet__11 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/nfet__11.ext:
+Extracting sn into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/sn.ext:
+Extracting pfet__14 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__14.ext:
+Extracting pfet__15 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__15.ext:
+Extracting pfet__13 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pfet__13.ext:
+Extracting sp into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/sp.ext:
+Extracting cf1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cf1.ext:
+cf1: 4 errors
+Extracting pr1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pr1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__filltie into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/gf180mcu_fd_sc_mcu7t5v0__filltie.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__or2_1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/gf180mcu_fd_sc_mcu7t5v0__or2_1.ext:
+Extracting or2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/or2.ext:
+Extracting cap_mim__19 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__19.ext:
+Extracting cin2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cin2.ext:
 cin2: 6 errors
-Extracting cap_mim__20 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__20.ext:
-Extracting cc2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cc2.ext:
+Extracting cap_mim__21 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__21.ext:
+Extracting cf2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cf2.ext:
+cf2: 6 errors
+Extracting pr3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/pr3.ext:
+Extracting cap_mim__20 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__20.ext:
+Extracting cc2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cc2.ext:
 cc2: 6 errors
-Extracting cap_mim__22 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__22.ext:
-Extracting ct into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/ct.ext:
+Extracting cap_mim__22 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__22.ext:
+Extracting ct into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/ct.ext:
 ct: 6 errors
-Extracting cap_mim__23 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cap_mim__23.ext:
-Extracting cin_blk into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/cin_blk.ext:
-cin_blk: 9 errors
-Extracting amp_ch into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/.ptmp/ext_amp_ch/amp_ch.ext:
-Total of 49 errors (check feedback entries).
+Extracting cap_mim__23 into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cap_mim__23.ext:
+Extracting cin_blk into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/cin_blk.ext:
+cin_blk: 12 errors
+Extracting amp_ch into /foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/.ptmp/ext_amp_ch/amp_ch.ext:
+Total of 48 errors (check feedback entries).
 exttospice finished.
 FLOW_EXT_DONE

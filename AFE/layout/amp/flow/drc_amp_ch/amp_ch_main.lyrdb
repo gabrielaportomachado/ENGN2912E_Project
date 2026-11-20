@@ -2,7 +2,7 @@
 <report-database>
  <description>DRC Run Report at</description>
  <original-file/>
- <generator>drc: script='/foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/amp/flow/drc_amp_ch/main.drc'</generator>
+ <generator>drc: script='/foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/amp/flow/drc_amp_ch/main.drc'</generator>
  <top-cell>amp_ch</top-cell>
  <tags>
  </tags>

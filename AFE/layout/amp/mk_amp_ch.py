@@ -19,7 +19,7 @@ plan = int(globals().get('plan', '0'))
 gdsname = globals().get('gds', 'amp_ch.gds')
 os.makedirs(out, exist_ok=True)
 
-LAY = int(globals().get('lay', '3'))             # 1 = packing of the first L2a pass (commit 1b3076a), 2 = packing "A-3" (rework step 1), 3 = tail group merged + pair and xm6 in one row (rework step 2, default)
+LAY = int(globals().get('lay', '5'))             # 5 = R6 packing for Cin 15 pF (default); 1 = packing of the first L2a pass (commit 1b3076a), 2 = packing "A-3" (rework step 1), 3 = tail group merged + pair and xm6 in one row (rework step 2, default)
 _KD = dict(rg=2.5, gg=2.5, cg=3.0) if LAY == 1 else dict(rg=1.5, gg=1.5, cg=1.5)       # ring gaps (um) of dev_block / group_block / compose
 for _n in ('rg', 'gg', 'cg'):
     a.KNOB[_n] = float(globals().get(_n, _KD[_n]))
@@ -29,7 +29,13 @@ TOP = ly.create_cell('amp_ch')
 B = BA.blocks(ly)
 VN, VP, V1 = BA.VN, BA.VP, BA.V1
 
-T, P = 70.65, 76.15                       # Cin piece (top plate) and the pitch of the 2 x 2 block (5.5 um corridors: MIMTM.1 needs 2.26 um from a top plate to a Metal4 strap that is part of the plate polygon)
+T = float(globals().get('cint', '61.15'))     # Cin piece (top plate): 61.15 um = 7.4995 pF each, 2 pieces per input capacitor = 15 pF (R4 / R6, Decision 50; the 20 pF layout used 70.65)
+P = round(T + 5.5, 2)                     # pitch of the 2 x 2 block (5.5 um corridors: MIMTM.1 needs 2.26 um from a top plate to a Metal4 strap that is part of the plate polygon)
+LX = float(globals().get('lanex', '4.5' if LAY < 5 else '2.5'))     # offset of the vp north / east lane above / right of the Cin block (um): lay=5 compresses the lanes (20 pF layout: 4.5 / 9.5 / 4.0)
+LY = float(globals().get('laney', '9.5' if LAY < 5 else '5.5'))     # offset of the ref north lane
+LT = float(globals().get('lanet', '4.0' if LAY < 5 else '3.0'))     # rec via above the ref lane
+XD1 = float(globals().get('xd1', '31.0'))   # x of the vn descender (inside piece A1; the vn north lane runs down at the same x inside B2)
+XD2 = float(globals().get('xd2', '116.0'))  # x of the vp descender (inside piece B1)
 
 
 def cin_block():
@@ -49,11 +55,11 @@ def cin_block():
     top_edge = P + T                                                   # 146.3
     # vn: through the centre of the corridors
     xcc = T + (P - T) / 2.0
-    m5(66.0, 67.0, xcc + 0.5, 68.0)
-    m5(xcc - 0.5, 67.0, xcc + 0.5, 79.0)
-    m5(xcc - 0.5, 78.0, P + 4.35, 79.0)
+    m5(T - 4.65, T - 3.65, xcc + 0.5, T - 2.65)
+    m5(xcc - 0.5, T - 3.65, xcc + 0.5, P + 2.85)
+    m5(xcc - 0.5, P + 1.85, P + 4.35, P + 2.85)
     # vn / vp descenders to the OTA (Metal5 down, Via4 to a Metal4 pad below the block = router terminal)
-    for (xc, net) in ((35.0, VN), (111.0, VP)):
+    for (xc, net) in ((XD1, VN), (XD2, VP)):
         m5(xc - 0.5, -7.0, xc + 0.5, 2.0)
         m5(xc - 1.0, -7.0, xc + 1.0, -5.0)
         m4(xc - 1.0, -7.0, xc + 1.0, -5.0)
@@ -61,38 +67,38 @@ def cin_block():
         C.term(net, 'metal4', (xc - 1.0, -7.0, xc + 1.0, -5.0))
         C.fixed_shape(a.M4, (xc - 1.0, -7.0, xc + 1.0, -5.0), net)
     # vp: east lane (inner) and north lane (inner)
-    ex = top_edge + 4.5
-    m5(140.0, 30.0, ex + 0.5, 31.0)
+    ex = top_edge + LX
+    m5(top_edge - 6.8, 30.0, ex + 0.5, 31.0)
     m5(ex - 0.5, 30.0, ex + 0.5, ex + 0.5)
-    m5(34.5, ex - 0.5, ex + 0.5, ex + 0.5)
-    m5(34.5, top_edge - 1.3, 35.5, ex + 0.5)
+    m5(XD1 - 0.5, ex - 0.5, ex + 0.5, ex + 0.5)
+    m5(XD1 - 0.5, top_edge - 1.3, XD1 + 0.5, ex + 0.5)
     # ref: Metal4 tabs east (B1) and west (B2), Via4 to Metal5 pads, outer lanes
-    ex2 = top_edge + 11.3
-    ty = top_edge + 9.5
+    ex2 = top_edge + LX + 6.8
+    ty = top_edge + LY
     m4(top_edge - 0.3, 10.0, ex2 + 0.6, 11.2)
     m5(ex2 - 0.6, 10.0, ex2 + 0.6, 11.2)
     via4(ex2 - 0.6, 10.0, ex2 + 0.6, 11.2)
     m5(ex2 - 0.6, 10.0, ex2 + 0.6, ty + 0.6)
     m5(-6.0, ty - 0.6, ex2 + 0.6, ty + 0.6)
-    m4(-6.0, 110.0, 0.0, 111.2)
-    m5(-6.0, 110.0, -4.8, 111.2)
-    via4(-6.0, 110.0, -4.8, 111.2)
-    m5(-6.0, 110.0, -4.8, ty + 0.6)
+    m4(-6.0, 90.0, 0.0, 91.2)
+    m5(-6.0, 90.0, -4.8, 91.2)
+    via4(-6.0, 90.0, -4.8, 91.2)
+    m5(-6.0, 90.0, -4.8, ty + 0.6)
     # rec: Metal4 strap (0.9 um) through the vertical corridor, stubs to the plates, pad below the block, via to Metal5 above the lanes
     m4(T + 0.5, 34.5, xcc + 0.45, 35.5)
-    m4(xcc + 0.45 - 0.1, 110.0, P - 0.5, 111.0)
-    ytop = ty + 4.0
+    m4(xcc + 0.45 - 0.1, 100.0, P - 0.5, 101.0)
+    ytop = ty + LT
     m4(xcc - 0.45, -7.0, xcc + 0.45, ytop)
     m4(xcc - 1.0, -7.0, xcc + 1.0, -5.0)
     C.term('rec', 'metal4', (xcc - 1.0, -7.0, xcc + 1.0, -5.0))
     m5(xcc - 0.6, ytop - 1.5, xcc + 0.6, ytop)
     via4(xcc - 0.45, ytop - 1.4, xcc + 0.45, ytop - 0.1)
-    for r in ((xcc - 0.45, -7.0, xcc + 0.45, ytop), (xcc - 1.0, -7.0, xcc + 1.0, -5.0), (T + 0.5, 34.5, xcc + 0.45, 35.5), (xcc + 0.35, 110.0, P - 0.5, 111.0)):
+    for r in ((xcc - 0.45, -7.0, xcc + 0.45, ytop), (xcc - 1.0, -7.0, xcc + 1.0, -5.0), (T + 0.5, 34.5, xcc + 0.45, 35.5), (xcc + 0.35, 100.0, P - 0.5, 101.0)):
         C.fixed_shape(a.M4, r, 'rec')
-    for r in ((146.0, 10.0, ex2 + 0.6, 11.2), (-6.0, 110.0, 0.0, 111.2)):
+    for r in ((146.0, 10.0, ex2 + 0.6, 11.2), (-6.0, 90.0, 0.0, 91.2)):
         C.fixed_shape(a.M4, r, 'ref')
     C.size = (P + T + 0.6 + 6.0 + 12.0, ytop + 7.0)
-    C.pins = dict(rec_x=xcc, ref_x=125.0, ytop=ytop, ty=ty)
+    C.pins = dict(rec_x=xcc, ref_x=round(top_edge - 22.0),  ytop=ytop, ty=ty)
     C.keepout = (-1.0, -1.0, P + T + 1.0, P + T + 1.0)
     C.plates = [(x, y) for (x, y) in ((0.0, 0.0), (P, 0.0), (0.0, P), (P, P))]
     return C
@@ -134,7 +140,7 @@ def row(names, y, x0=WEST, gap=3.0):
 
 GX = float(globals().get('gx', '2.0' if LAY == 1 else '1.5'))          # gap between blocks of a row (um)
 GY = float(globals().get('gy', '2.0' if LAY == 1 else '1.0'))          # gap between rows
-CAP = float(globals().get('capt', '8.0' if LAY == 1 else '2.0'))       # margin above the Cin block lanes (pins) up to the cell top
+CAP = float(globals().get('capt', '8.0' if LAY == 1 else ('1.0' if LAY == 5 else '2.0')))       # margin above the Cin block lanes (pins) up to the cell top
 if LAY == 1:
     GAP_Y = 3.0
     x, t1 = row(['sink1', 'xms', 'fol', 's2p'], 3.0, x0=8.0, gap=2.0)
@@ -210,6 +216,50 @@ elif LAY == 4:
     for n in ('cc2',):
         xe, ye = put(n, B[n], xc, yc)
         yc = ye + GY
+elif LAY == 5:
+    # ---- packing "R6" (Cin 15 pF, Decision 50): like lay=3, but (i) xm6 stands as low as the bottom row allows (its bottom row neighbours are only 54.5 um tall), (ii) the east column starts right above xm6 and is compacted
+    #      (Cf2 + pseudo-R 3 beside Cin2), (iii) the lanes above the Cin block are tighter (lx / ly / lt), (iv) the x positions of the Cf1 strip follow the descenders xd1 / xd2.
+    XR = float(globals().get('xr', '1.0'))
+    xm_, tmir = put('mir', B['mir'], XR, 3.0)
+    xc0 = xm_ + GX
+    x, top2 = xc0, 3.0
+    for n in ('xms', 'fol', 'cc1', 's2p'):
+        xe, ye = put(n, B[n], x, 3.0)
+        x = xe + GX
+        top2 = max(top2, ye)
+    xe, ye = put('sink1', B['sink1'], xc0, top2 + GY)
+    yt = max(ye, tmir) + GY
+    xo, tt = put('ota_p', B['ota_p'], XR, yt)
+    x6 = float(globals().get('x6', '146.5'))
+    y6 = ye + GY + float(globals().get('y6add', '0.0'))                  # xm6 directly above sink1
+    xe6, t6 = put('xm6', B['xm6'], max(x6, xo + GX), y6)
+    t5 = max(tt, 0.0)
+    STRIP = float(globals().get('strip', '24.0'))
+    Y0 = math.ceil(t5 + GY + STRIP + 0.6)
+    X0 = float(globals().get('x0', '7.0'))
+    k.put(TOP, cin.cell, X0, Y0)
+    PLACED.append(('cin', cin, X0, Y0))
+    ys = Y0 - STRIP
+    put('or2', B['or2'], 9.0, ys + 3.0)
+    put('pr1', B['pr1'], X0 + XD1 - 13.0, ys + 3.0)
+    put('cf1', B['cf1'], X0 + XD1 + 4.0, ys)
+    xe, y1 = put('sp', B['sp'], X0 + XD1 + 24.0, ys)
+    put('sn', B['sn'], X0 + XD1 + 24.0, y1 + GY)
+    put('cf1p', B['cf1p'], X0 + XD2 + 4.0, ys)
+    xe_pr2, _ = put('pr2', B['pr2'], X0 + XD2 + 20.0, ys + 3.0)
+    xc = max(X0 + cin.bbox[2] + 2.0, xe_pr2 + float(globals().get('xgap', '3.0')), float(globals().get('xcol', '0')))
+    yc = max(t6 + GY, float(globals().get('ycol', '0')))
+    xe, yc = put('s2tail', B['s2tail'], xc, yc)
+    yc += GY
+    xe, yc = put('s2pair', B['s2pair'], xc, yc)
+    yc += GY
+    xe, ye = put('cin2', B['cin2'], xc, yc)
+    xe2, ye2 = put('cf2', B['cf2'], xe + GX, yc)
+    put('pr3', B['pr3'], xe + GX, ye2 + GY)
+    yc = ye + GY
+    for n in ('cc2', 'ct'):
+        xe, ye = put(n, B[n], xc, yc)
+        yc = ye + GY
 elif LAY == 3:
     # ---- packing "A-3, step 2": tail group merged (tm=1) so that the input pair and xm6 share ONE row; bottom row = mirror + (sink1 over xms / fol / Cc1 / s2p);
     #      the Cf1 strip (taller) also holds the OR2, pseudo-R 1 / 2 and the sp / sn gate-mux stack; the east column starts with s2tail + s2pair
@@ -232,12 +282,12 @@ elif LAY == 3:
     PLACED.append(('cin', cin, X0, Y0))
     ys = Y0 - STRIP
     put('or2', B['or2'], 9.0, ys + 3.0)
-    put('pr1', B['pr1'], X0 + 22.0, ys + 3.0)
-    put('cf1', B['cf1'], X0 + 39.0, ys)
-    xe, y1 = put('sp', B['sp'], X0 + 58.0, ys)
-    put('sn', B['sn'], X0 + 58.0, y1 + GY)
-    put('cf1p', B['cf1p'], X0 + 115.0, ys)
-    put('pr2', B['pr2'], X0 + 135.0, ys + 3.0)
+    put('pr1', B['pr1'], X0 + XD1 - 13.0, ys + 3.0)
+    put('cf1', B['cf1'], X0 + XD1 + 4.0, ys)                      # right of the vn descender, same orientation as the Cin pieces
+    xe, y1 = put('sp', B['sp'], X0 + XD1 + 24.0, ys)
+    put('sn', B['sn'], X0 + XD1 + 24.0, y1 + GY)
+    put('cf1p', B['cf1p'], X0 + XD2 + 4.0, ys)                    # right of the vp descender
+    put('pr2', B['pr2'], X0 + XD2 + 20.0, ys + 3.0)
     xc = X0 + cin.bbox[2] + 2.0
     yc = ys
     xe, yc = put('s2tail', B['s2tail'], xc, yc)
@@ -319,7 +369,7 @@ for i, n in enumerate(('vbn', 'vcm', 'vg1', 'vcmo', 'vg2', 'vrs')):
     PINS.append((n, 'metal3', 1.0 + i, ytop_pin))
 for i, n in enumerate(('sw_rec', 'sw_rec_b', 'rst_amp')):
     PINS.append((n, 'metal2', 1.0, H - 12.0 - 8.0 * i))
-if LAY in (3, 4):
+if LAY in (3, 4, 5):
     PINS.append(('vdd', 'metal4', W - 4.0, 14.0))                 # east edge, bottom (inner) half: free of blocks
     PINS.append(('vss', 'metal4', W - 4.0, 30.0))
 else:

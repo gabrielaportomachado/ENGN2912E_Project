@@ -92,8 +92,8 @@ def blocks(ly):
     B['pr3'] = a.pr_block(ly, 'pr3', VN2, 'out', M3R, GM2)
     # ------------------------------------------------------------------ MIM capacitors outside the Cin block
     B['cc1'] = a.mim_block(ly, 'cc1', 22.0, O1, V1)
-    B['cf1'] = a.mim_block(ly, 'cf1', 9.79, VN, V1)
-    B['cf1p'] = a.mim_block(ly, 'cf1p', 9.79, VP, 'vcm')
+    B['cf1'] = a.mim_block(ly, 'cf1', 8.45, VN, V1)
+    B['cf1p'] = a.mim_block(ly, 'cf1p', 8.45, VP, 'vcm')
     B['cin2'] = a.mim_block(ly, 'cin2', 38.59, VN2, V1)
     B['cc2'] = a.mim_block(ly, 'cc2', 31.465, O2, VSS)
     B['cf2'] = a.mim_block(ly, 'cf2', 11.92, VN2, 'out')
