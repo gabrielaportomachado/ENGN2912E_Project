@@ -17,17 +17,18 @@ PREF = ('h', 'v', 'h')
 
 
 class Router:
-    def __init__(self, x0, y0, x1, y1, pitch=1.0, hw=0.25, clr=0.30, via_cost=5.0, wrong=3.0):
+    def __init__(self, x0, y0, x1, y1, pitch=1.0, hw=0.25, clr=0.30, via_cost=5.0, wrong=3.0, halo_cost=40.0):
         self.x0, self.y0, self.p = x0, y0, pitch
         self.nx = int(round((x1 - x0) / pitch)) + 1
         self.ny = int(round((y1 - y0) / pitch)) + 1
         self.hw, self.clr = hw, clr
         self.exp = hw + clr
-        self.via_cost, self.wrong = via_cost, wrong
+        self.via_cost, self.wrong, self.halo_cost = via_cost, wrong, halo_cost
         n = (3, self.nx, self.ny)
         self.occ = np.zeros(n, dtype=np.int32)        # net occupying the node (0 = free)
         self.blk = np.zeros(n, dtype=np.int32)        # obstacle net (0 free, -1 blocked for everybody)
         self.halo = np.zeros(n, dtype=np.int32)       # sensitive-node clearance: blocked for every net except the owner
+        self.hard = np.zeros(n, dtype=np.int32)       # extra clearance of a shape (MIMTM.1): blocked for every net except the owner (-1: for all)
         self.ovl = np.zeros(n, dtype=np.int32)        # net of a fixed shape that the pad of this node OVERLAPS (an own-net node that only comes near a shape would violate the spacing rule)
         self.netid = {}
         self.names = {0: ''}
@@ -55,24 +56,32 @@ class Router:
         return i1, i2, j1, j2
 
     def obstacle(self, layer, rect, net=None, extra=0.0):
-        """layer: 0..2 (metal2..metal4); net=None blocks for everybody.  extra = additional clearance (um)"""
-        i1, i2, j1, j2 = self.ij_range(rect, self.exp + extra)
-        if i1 > i2 or j1 > j2:
-            return
+        """layer: 0..2 (metal2..metal4); net=None blocks for everybody.  extra = additional clearance (um) that only keeps OTHER nets away (the owner may come as close as the spacing rule)"""
         nid = self.nid(net) if net is not None else -1
-        if net is not None:
-            o1, o2, p1, p2 = self.ij_range(rect, self.hw + 0.005)
-            if o1 <= o2 and p1 <= p2:
-                ov = self.ovl[layer, o1:o2 + 1, p1:p2 + 1]
-                ov[ov == 0] = nid
-        a = self.blk[layer, i1:i2 + 1, j1:j2 + 1]
-        if nid == -1:
-            a[:, :] = -1
-        else:
-            m0 = (a == 0)
-            mo = (a != 0) & (a != nid)
-            a[m0] = nid
-            a[mo] = -1
+        i1, i2, j1, j2 = self.ij_range(rect, self.exp)
+        if i1 <= i2 and j1 <= j2:
+            if net is not None:
+                o1, o2, p1, p2 = self.ij_range(rect, self.hw + 0.005)
+                if o1 <= o2 and p1 <= p2:
+                    ov = self.ovl[layer, o1:o2 + 1, p1:p2 + 1]
+                    ov[ov == 0] = nid
+            a = self.blk[layer, i1:i2 + 1, j1:j2 + 1]
+            if nid == -1:
+                a[:, :] = -1
+            else:
+                m0 = (a == 0)
+                mo = (a != 0) & (a != nid)
+                a[m0] = nid
+                a[mo] = -1
+        if extra > 0:
+            e1, e2, f1, f2 = self.ij_range(rect, self.exp + extra)
+            if e1 <= e2 and f1 <= f2:
+                h = self.hard[layer, e1:e2 + 1, f1:f2 + 1]
+                if nid == -1:
+                    h[:, :] = -1
+                else:
+                    h[h == 0] = nid
+                    h[(h != 0) & (h != nid)] = -1
         self.fixed.append((layer, rect, net))
 
     def add_halo(self, layer, rect, net, extra):
@@ -95,7 +104,11 @@ class Router:
         self.terms.setdefault(net, []).append((code, tuple(rect)))
 
     # ---------------------------------------------------------------- search
-    def free(self, l, i, j, n, halo=True):
+    def free(self, l, i, j, n, halo=False):
+        """halo is SOFT by default: a node inside the clearance of a sensitive net costs HALO_COST extra (see astar) but stays usable; halo=True makes it a hard obstacle"""
+        h = self.hard[l, i, j]
+        if h != 0 and h != n:
+            return False
         h = self.halo[l, i, j]
         if halo and h != 0 and h != n:
             return False
@@ -225,7 +238,7 @@ class Router:
                 nl, ni, nj = l + dl, i + di, j + dj
                 if nl < 0 or nl > 2 or ni < 0 or ni >= nx or nj < 0 or nj >= ny:
                     continue
-                if not self.free(nl, ni, nj, n, halo=((nl, ni, nj) not in tset)):
+                if not self.free(nl, ni, nj, n):
                     continue
                 if dl:
                     c = self.via_cost
@@ -233,6 +246,9 @@ class Router:
                     horiz = (di != 0)
                     c = 1.0 if (horiz == (PREF[l] == 'h')) else self.wrong
                 v = (nl, ni, nj)
+                hh = self.halo[nl, ni, nj]
+                if hh != 0 and hh != n:
+                    c += self.halo_cost
                 ng = g + c
                 if ng < best.get(v, 1e18) - 1e-9:
                     best[v] = ng

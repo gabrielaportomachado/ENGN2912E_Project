@@ -1,11 +1,11 @@
 {
- "W": 220.5,
- "H": 374.25,
+ "W": 219.25,
+ "H": 385.25,
  "bbox": [
-  -0.25,
+  0.75,
   1.75,
-  220.25,
-  376.0
+  220.0,
+  387.0
  ],
  "slot": [
   220,
@@ -109,48 +109,131 @@
    13,
    139
   ],
-  "cf1": [
-   15.6,
-   10.99,
-   164,
-   133
-  ],
-  "cf1p": [
-   15.6,
-   10.99,
-   182,
-   133
-  ],
   "cin": [
    164.7,
    167.3,
    9.0,
-   207
+   218
+  ],
+  "cf1": [
+   15.6,
+   10.99,
+   49,
+   200
+  ],
+  "cf1p": [
+   15.6,
+   10.99,
+   125,
+   200
   ],
   "ct": [
    49.6,
    45.8,
    171,
-   209
+   220
   ],
   "cin2": [
    43.6,
    39.79,
    171,
-   258
+   269
   ],
   "cc2": [
    36.6,
    32.66,
    171,
-   301
+   312
   ],
   "cf2": [
    17.6,
    13.12,
    171,
-   337
+   348
   ]
  },
- "failed": []
+ "failed": [],
+ "clearance": {
+  "xs1_vn": {
+   "nodes": 227,
+   "nodes_closer_than_2um": 0,
+   "min_clearance_um": 2.5
+  },
+  "xs1_vp": {
+   "nodes": 218,
+   "nodes_closer_than_2um": 10,
+   "min_clearance_um": 1.5
+  },
+  "xs2_vn2": {
+   "nodes": 493,
+   "nodes_closer_than_2um": 22,
+   "min_clearance_um": 0.5
+  },
+  "xs1_xr1_m": {
+   "nodes": 0,
+   "nodes_closer_than_2um": 0,
+   "min_clearance_um": 99.0
+  },
+  "xs1_xr2_m": {
+   "nodes": 0,
+   "nodes_closer_than_2um": 0,
+   "min_clearance_um": 99.0
+  },
+  "xs2_xr_m": {
+   "nodes": 0,
+   "nodes_closer_than_2um": 0,
+   "min_clearance_um": 99.0
+  },
+  "rec": {
+   "nodes": 245,
+   "nodes_closer_than_2um": 47,
+   "min_clearance_um": 0.5
+  }
+ },
+ "cin": {
+  "X0": 9.0,
+  "Y0": 218,
+  "T": 70.65,
+  "P": 76.15
+ },
+ "halo": {
+  "extra_um": 1.95,
+  "end_nodes": 8
+ },
+ "wire_um": {
+  "xs1_vn": 291.0,
+  "xs1_vp": 282.0,
+  "xs2_vn2": 551.0,
+  "xs1_xr1_m": 10.0,
+  "xs1_xr2_m": 10.0,
+  "xs2_xr_m": 10.0,
+  "rec": 277.0,
+  "xs1_xota_o1": 278.0,
+  "xs2_xota2_o2": 537.0,
+  "sw_rec_b": 460.0,
+  "mm": 17.0,
+  "vg1": 508.0,
+  "vg2": 513.0,
+  "rst_amp": 466.0,
+  "vcmo": 361.0,
+  "vrs": 469.0,
+  "fs_os": 89.0,
+  "gm2": 75.0,
+  "vbn": 525.0,
+  "ibias1": 202.0,
+  "out": 434.0,
+  "xs2_xota2_d1": 214.0,
+  "xs2_xota2_tail": 105.0,
+  "t": 358.0,
+  "fs": 85.0,
+  "vcm": 552.0,
+  "nd": 88.0,
+  "sw_rec": 536.0,
+  "xs1_xota_tail": 159.0,
+  "gm1": 89.0,
+  "v1": 543.0,
+  "xs1_xota_d1": 236.0,
+  "vdd": 564.0,
+  "vss": 859.0
+ }
 }

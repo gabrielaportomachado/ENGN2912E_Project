@@ -1,0 +1,86 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/pex_amp_ch/nomim/run.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: gf180mcu_fd_sc_mcu7t5v0
+Reading "nfet__2".
+Reading "pfet__1".
+Reading "pfet__0".
+Reading "cap_mim__23".
+Reading "cap_mim__22".
+Reading "cap_mim__21".
+Reading "cap_mim__20".
+Reading "cap_mim__19".
+Reading "cap_mim__18".
+Reading "cap_mim__17".
+Reading "pfet__16".
+Reading "gf180mcu_fd_sc_mcu7t5v0__filltie".
+Reading "gf180mcu_fd_sc_mcu7t5v0__or2_1".
+Reading "pfet__15".
+Reading "pfet__14".
+Reading "pfet__13".
+Reading "nfet__12".
+Reading "nfet__11".
+Reading "nfet_06v0_nvt__10".
+Reading "pfet__9".
+Reading "nfet__8".
+Reading "nfet__7".
+Reading "nfet__6".
+Reading "nfet__5".
+Reading "nfet__4".
+Reading "nfet__3".
+Reading "m3b".
+Reading "m4b".
+Reading "m4a".
+Reading "m3a".
+Reading "tail_m7".
+Reading "tail_mt".
+Reading "tail_mb".
+Reading "pair_a2".
+Reading "pair_b2".
+Reading "pair_b1".
+Reading "pair_a1".
+Reading "cin_blk".
+Reading "ct".
+Reading "cf2".
+Reading "cc2".
+Reading "cin2".
+Reading "cf1p".
+Reading "cf1".
+Reading "cc1".
+Reading "pr3".
+Reading "pr2".
+Reading "pr1".
+Reading "or2".
+Reading "sp".
+Reading "sn".
+Reading "fol".
+Reading "s2p".
+Reading "s2tail".
+Reading "s2pair".
+Reading "xms".
+Reading "sink1".
+Reading "xm6".
+Reading "mir".
+Reading "ota_p".
+Reading "amp_ch".
+Extracting amp_ch_pexflat into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/pex_amp_ch/nomim/amp_ch_pexflat.ext:
+exttospice finished.
+FLOW_PEX_DONE

@@ -141,12 +141,14 @@ for n in ('pr1', 'pr2', 'pr3'):
     xx = xe + 2.0
 put('or2', B['or2'], _pl['sp'][0] + _pl['sp'][2].bbox[0], _pl['sp'][1] + _pl['sp'][2].bbox[3] + 3.0)
 x, t3 = row(['mir', 'xm6', 'cc1'], t2 + GAP_Y, x0=8.0, gap=2.0)
-x, t4 = row(['ota_p', 'cf1', 'cf1p'], t3 + GAP_Y, x0=8.0, gap=2.0)
+x, t4 = row(['ota_p'], t3 + GAP_Y, x0=8.0, gap=2.0)
 t5 = t4
-Y0 = math.ceil(t5 + 7.0 + 4.0 + 0.6)                     # origin of the Cin block (descender pads 7 um below it)
+Y0 = math.ceil(t5 + GAP_Y + 19.0 + 0.6)                  # origin of the Cin block: the strip of the two Cf1 pieces (SPEC.md 3.2 item 1: next to the Cin block) lies below it, its descender pads 7 um below it
 X0 = 9.0
 k.put(TOP, cin.cell, X0, Y0)
 PLACED.append(('cin', cin, X0, Y0))
+put('cf1', B['cf1'], X0 + 39.0, Y0 - 19.0)                  # right of the vn descender (x = 35), same orientation as the Cin pieces
+put('cf1p', B['cf1p'], X0 + 115.0, Y0 - 19.0)               # right of the vp descender (x = 111)
 # column of the stage-2 / one-shot capacitors east of the Cin block
 xc = X0 + cin.bbox[2] + 2.5
 yc = Y0 + 1.0
@@ -160,10 +162,10 @@ print('placed: W = %.1f  H = %.1f  rows tops %s' % (W, H, [round(v, 1) for v in 
 # =====================================================================================================================================================================
 # router: obstacles, terminals, pins
 # =====================================================================================================================================================================
-rt = RT.Router(0.0, 0.0, float(W), float(H))
+rt = RT.Router(1.0, 1.0, float(W) - 1.0, float(H) - 1.0)
 for (name, blk, dx, dy) in PLACED:
-    for (l, r, n) in blk.fixed:
-        rt.obstacle(l, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy), n)
+    for (l, r, n, ex) in blk.fixed:
+        rt.obstacle(l, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy), n, extra=ex)
     for (n, c, r) in blk.terms:
         rt.terminal(n, c, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy))
     if hasattr(blk, 'mim'):
@@ -199,8 +201,9 @@ for (n, lay, px, py) in PINS:
     else:
         rt.terminal(n, 'metal2', a.pad_rect(px, py, 0.5))
 
-HALO_NETS = [BA.VN, BA.VP, BA.VN2]          # the routed wires of the summing nodes keep ~2 um from every other net (SPEC.md 3.2 item 5); their ends are inside device blocks, the pseudo-resistor nodes sit in compact blocks
-HALO = float(globals().get('halo', '1.4'))
+HALO_NETS = [BA.VN, BA.VP, BA.VN2, BA.M1R, BA.M2R, BA.M3R, 'rec']   # routed wires of the summing nodes / pseudo-resistor nodes / rec: a SOFT clearance of ~2 um to other nets (SPEC.md 3.2 item 5); the ends sit inside device blocks
+HALO = float(globals().get('halo', '1.95'))
+HEND = int(globals().get('hend', '8'))
 rt.reserve()
 # ---- routing order: sensitive / short nets first, power last
 SENS = [BA.VN, BA.VP, BA.VN2, BA.M1R, BA.M2R, BA.M3R, 'rec', BA.O1, BA.O2]
@@ -216,13 +219,38 @@ for n in ORDER:
     if n in HALO_NETS and ok:
         for path in rt.paths.get(n, []):
             for idx, (l, i, j) in enumerate(path):
-                if idx < 6 or idx > len(path) - 7:                  # the ends sit inside the device blocks: no halo there
+                if idx < HEND or idx > len(path) - 1 - HEND:         # the ends sit inside the device blocks: no halo there
                     continue
                 x, y = rt.xy(i, j)
                 rt.add_halo(l, (x - 0.25, y - 0.25, x + 0.25, y + 0.25), n, HALO)
 print('routing: %d nets, %d failed: %s' % (len(ORDER), len(bad), bad))
 for f in rt.failed:
     print('  FAILED', f)
+
+
+# ---- achieved clearance of the sensitive nets (routed wires only): edge-to-edge distance to the nearest wire of another net on the same layer
+CLEAR = {}
+for n in HALO_NETS:
+    nid = rt.nid(n)
+    worst, tot, near = 99.0, 0, 0
+    for path in rt.paths.get(n, []):
+        for idx, (l, i, j) in enumerate(path):
+            if idx < HEND or idx > len(path) - 1 - HEND:
+                continue
+            tot += 1
+            best = 99.0
+            for di in range(-3, 4):
+                for dj in range(-3, 4):
+                    ii, jj = i + di, j + dj
+                    if 0 <= ii < rt.nx and 0 <= jj < rt.ny:
+                        o = rt.occ[l, ii, jj]
+                        if o not in (0, nid):
+                            best = min(best, max(abs(di), abs(dj)) * 1.0 - 0.5)
+            worst = min(worst, best)
+            if best < 2.0:
+                near += 1
+    CLEAR[n] = dict(nodes=tot, nodes_closer_than_2um=near, min_clearance_um=round(worst, 2))
+print('clearance of the sensitive nets (edge to edge, same layer):', json.dumps(CLEAR))
 
 # =====================================================================================================================================================================
 # emit router shapes
@@ -258,21 +286,10 @@ for (n, lay, px, py) in PINS:
     if lay == 'metal2':
         k.rect(TOP, 'metal2', px - 0.25, py - 0.25, px + 0.25, py + 0.25)
 
-if dbg:
-    done = set()
-    for (name, blk, dx, dy) in PLACED:
-        for (n, c, r) in blk.terms:
-            key = (n, c)
-            if key in done:
-                continue
-            done.add(key)
-            if n in ('rec', 'ref', 'vdd', 'vss', 'out', 'vbn', 'vcm', 'vg1', 'vcmo', 'vg2', 'vrs', 'sw_rec', 'sw_rec_b', 'rst_amp'):
-                continue
-            k.label(TOP, c, n, (r[0] + r[2]) / 2.0 + dx, (r[1] + r[3]) / 2.0 + dy)
-
 bb = TOP.dbbox()
 info = dict(W=round(bb.width(), 3), H=round(bb.height(), 3), bbox=[round(v, 3) for v in (bb.left, bb.bottom, bb.right, bb.top)], slot=[220, 263], dbg=dbg,
-            blocks={n: [round(blk.bbox[2] - blk.bbox[0], 2), round(blk.bbox[3] - blk.bbox[1], 2), dx, dy] for (n, blk, dx, dy) in PLACED}, failed=bad)
+            blocks={n: [round(blk.bbox[2] - blk.bbox[0], 2), round(blk.bbox[3] - blk.bbox[1], 2), dx, dy] for (n, blk, dx, dy) in PLACED}, failed=bad, clearance=CLEAR, cin=dict(X0=X0, Y0=Y0, T=T, P=P), halo=dict(extra_um=HALO, end_nodes=HEND),
+            wire_um={n: round(sum(len(p) for p in rt.paths.get(n, [])) * 1.0, 1) for n in rt.paths})
 json.dump(info, open(os.path.join(out, 'amp_ch.build.json' if not dbg else 'amp_ch_dbg.build.json'), 'w'), indent=1)
 k.write(ly, os.path.join(out, gdsname), 'amp_ch')
 print('wrote %s  %.2f x %.2f um' % (gdsname, bb.width(), bb.height()))

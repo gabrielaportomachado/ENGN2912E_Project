@@ -119,11 +119,6 @@ Extracting sink1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/
 Extracting cap_mim__17 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cap_mim__17.ext:
 Extracting cc1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cc1.ext:
 cc1: 4 errors
-Extracting cap_mim__18 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cap_mim__18.ext:
-Extracting cf1p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cf1p.ext:
-cf1p: 6 errors
-Extracting cf1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cf1.ext:
-cf1: 6 errors
 Extracting pfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/pfet__1.ext:
 Extracting tail_m7 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/tail_m7.ext:
 Extracting tail_mt into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/tail_mt.ext:
@@ -137,6 +132,11 @@ Extracting ota_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/
 Extracting cap_mim__23 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cap_mim__23.ext:
 Extracting cin_blk into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cin_blk.ext:
 cin_blk: 9 errors
+Extracting cap_mim__18 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cap_mim__18.ext:
+Extracting cf1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cf1.ext:
+cf1: 6 errors
+Extracting cf1p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cf1p.ext:
+cf1p: 6 errors
 Extracting cap_mim__22 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/cap_mim__22.ext:
 Extracting ct into /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/.ptmp/ext_amp_ch/ct.ext:
 ct: 6 errors

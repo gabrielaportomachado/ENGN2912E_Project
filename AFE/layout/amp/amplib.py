@@ -271,8 +271,8 @@ class Block:
     def term(self, net, code, rect):
         self.terms.append((net, code, tuple(rect)))
 
-    def fixed_shape(self, layer_idx, rect, net):
-        self.fixed.append((layer_idx, tuple(rect), net))
+    def fixed_shape(self, layer_idx, rect, net, extra=0.0):
+        self.fixed.append((layer_idx, tuple(rect), net, extra))
 
 
 M2, M3, M4 = 0, 1, 2
@@ -523,12 +523,15 @@ def mim_block(ly, name, w, top, bot, tab_y_top=None, tab_y_bot=None):
     B.rect('metal4', w - 0.1, yb + 0.4, px + 1.0, yb + 1.6)
     B.rect('metal4', px, yb, px + 2.0, yb + 2.0)
     B.term(bot, 'metal4', (px, yb, px + 2.0, yb + 2.0))
+    B.fixed_shape(M4, (w - 0.1, yb + 0.4, px + 1.0, yb + 1.6), bot, 1.0)                  # MIMTM.1: no other Metal4 within 1.2 um of the bottom plate metal (plate + tab + pad)
+    B.fixed_shape(M4, (px, yb, px + 2.0, yb + 2.0), bot, 1.0)
     # top plate
     B.rect('metal5', w - 1.5, yt + 0.4, px + 1.0, yt + 1.6)
     B.rect('metal5', px, yt, px + 2.0, yt + 2.0)
     B.rect('metal4', px, yt, px + 2.0, yt + 2.0)
     cuts(B.cell, 'via4', px, yt, px + 2.0, yt + 2.0, inset=0.3)
     B.term(top, 'metal4', (px, yt, px + 2.0, yt + 2.0))
+    B.fixed_shape(M4, (px, yt, px + 2.0, yt + 2.0), top, 0.0)
     B.mim = dict(w=w, plate=(-0.6, -0.6, w + 0.6, w + 0.6), top=(0.0, 0.0, w, w), bot=bot, topnet=top)
     B.size = (px + 2.0 + 0.6, w + 1.2)
     return B
@@ -544,8 +547,8 @@ def compose(ly, name, parts, ring_kind=None, ring_net=None, gap=2.5, nwell=None,
         k.put(B.cell, P.cell, dx, dy)
         for (n, c, r) in P.terms:
             B.term(n, c, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy))
-        for (l, r, n) in P.fixed:
-            B.fixed_shape(l, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy), n)
+        for (l, r, n, ex) in P.fixed:
+            B.fixed_shape(l, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy), n, ex)
         B.grow(P.bbox[0] + dx, P.bbox[1] + dy, P.bbox[2] + dx, P.bbox[3] + dy)
     if dummy_l:
         # poly-only dummy lines (not devices) at both outer ends of every group of parts (dummy_groups = list of lists of part indices; default: all parts)

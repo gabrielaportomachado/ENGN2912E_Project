@@ -1,5 +1,6 @@
 (22, 0)
-placed: W = 220.0  H = 376.0  rows tops [29.5, 63.5, 128.5, 195.3, 195.3]
+placed: W = 220.0  H = 387.0  rows tops [29.5, 63.5, 128.5, 195.3, 195.3]
 routing: 34 nets, 0 failed: []
-router shapes: 20944 wires, 421 vias
-wrote amp_ch.gds  220.50 x 374.25 um
+clearance of the sensitive nets (edge to edge, same layer): {"xs1_vn": {"nodes": 227, "nodes_closer_than_2um": 0, "min_clearance_um": 2.5}, "xs1_vp": {"nodes": 218, "nodes_closer_than_2um": 10, "min_clearance_um": 1.5}, "xs2_vn2": {"nodes": 493, "nodes_closer_than_2um": 22, "min_clearance_um": 0.5}, "xs1_xr1_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs1_xr2_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "xs2_xr_m": {"nodes": 0, "nodes_closer_than_2um": 0, "min_clearance_um": 99.0}, "rec": {"nodes": 245, "nodes_closer_than_2um": 47, "min_clearance_um": 0.5}}
+router shapes: 21189 wires, 429 vias
+wrote amp_ch.gds  219.25 x 385.25 um
