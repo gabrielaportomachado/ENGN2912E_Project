@@ -9,6 +9,7 @@ PASS  "## L1a findings" section in AFE/NOTES.md
 PASS  Results-log row for L1a in AFE/NOTES.md
 PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
 PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
 --- adc_ch layout: AFE/layout/adc/adc_ch.gds
 PASS  DRC report belongs to the current GDS (sha1)
 PASS  DRC ran with the official deck, variant D

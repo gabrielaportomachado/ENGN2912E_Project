@@ -112,4 +112,4 @@ GATE L1a: PASS  (0 FAIL)
 ## 10. Files changed and commit
 First build: AFE/layout/adc/{mk_adc_ch.py, dac_lib.py, cmp_lib.py, cmp_top.py, vhalf_lib.py, rlib.py, adclib.py, router.py, adc_ch.gds, adc_ch.build.json, dac_sites.log, keepout.log, FLOW_ADC.md, l1a_findings.md, test/*.py}, AFE/layout/reports/{L1a.md, L2a.md}, AFE/layout/sim/flow/adc_ch.{drc,lvs}.json (+ .log / .out), AFE/layout/sim/gate_L1a.log (commit 36cb8d8, branch worktree-l1a-adc, merged).
 R5: changed AFE/layout/adc/{mk_adc_ch.py, dac_lib.py, cmp_lib.py, cmp_top.py, vhalf_lib.py, rlib.py, adclib.py, router.py, adc_ch.gds, adc_ch.build.json, dac_sites.log, keepout.log, FLOW_ADC.md, test/mk_dactest.py}, new AFE/layout/adc/test/{mk_drvtest.py, mk_vhtest.py, probe_short.py, probe_side.py, probe_pair.py}, AFE/layout/reports/L1a.md, AFE/layout/sim/flow/adc_ch.*, AFE/layout/sim/gate_L1a.log, AFE/layout/SPEC.md (section 3.3), AFE/NOTES.md ("R5 findings", Results-log row). GDS sha1 d6b23a88cdd130fd909f08cc581ef7e5df02ec31.
-Commit: (pending) (branch worktree-r5-adc-repack).
+Commit: 46a9ada (branch worktree-r5-adc-repack, on top of main c18ea08); this hash line is added by a second small commit.
