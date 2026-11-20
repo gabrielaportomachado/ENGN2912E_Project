@@ -112,6 +112,11 @@ Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R4 (
 Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R5 (read R1 first, and R3's report if it exists for the final adc_h). Update AFE/layout/reports/L1a.md (section 9 lists R1, R5), run `python3 AFE/layout/scripts/gate.py L1a` until PASS, commit and push.
 ```
 
+### R7: continue R4 with Cin 15 pF (Decision 50; after R4's BLOCKED.md)
+```
+Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R7 (read R1, R4 and Decision 50 first), which continues R4 at its step 2 (LVS reference) and step 3 (amp_ch re-layout <= 222 x 285 um). Update AFE/layout/reports/L2a.md (section 9 lists R1, R4, R7), run `python3 AFE/layout/scripts/gate.py L2a` until PASS, commit and push.
+```
+
 If a cell misses its budget by more than 3 % after its first attempt, run the same prompt once more in a fresh session; if it still misses (or R4's simulations fail a target), the agent writes AFE/layout/BLOCKED.md: push it and tell Jojo.
 
 ## L2b: amplifier PEX and post-layout simulations
