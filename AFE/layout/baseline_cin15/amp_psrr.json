@@ -1,0 +1,47 @@
+{
+ "check": "amp_psrr",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 22:15",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_ff85.log",
+   "values": {
+    "supply_gain_1khz": 0.424167,
+    "supply_gain_300hz": 0.55796,
+    "supply_gain_50hz": 0.579878,
+    "supply_gain_60hz": 0.579585
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 22:15",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_ss-40.log",
+   "values": {
+    "supply_gain_1khz": 0.244662,
+    "supply_gain_300hz": 0.473261,
+    "supply_gain_50hz": 0.567331,
+    "supply_gain_60hz": 0.565738
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 22:15",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_typ.log",
+   "values": {
+    "supply_gain_1khz": 0.334957,
+    "supply_gain_300hz": 0.525936,
+    "supply_gain_50hz": 0.572389,
+    "supply_gain_60hz": 0.571718
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_psrr.py"
+}
