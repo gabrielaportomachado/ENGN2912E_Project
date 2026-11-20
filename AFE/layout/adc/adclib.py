@@ -291,7 +291,7 @@ class Block:
 M2, M3, M4 = 0, 1, 2
 
 
-def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=2.5, wide_ring=False):
+def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=1.5, wide_ring=False):
     """one multi-finger transistor array (nf >= 2) as a block.
     kind 'nfet' | 'pfet';  d_nets: a list with one net per drain strip (strips 1, 3, 5 ... of the pcell) or a single net name.  Sources = strips 0, 2, 4 ... all on s_net.
     Drawing: S rail Metal1 under the comp (strips extended down), gates joined by a Metal1 bus above the comp (landing pad at its left end), drains by Via1 + Metal2 stubs to ONE
@@ -445,11 +445,12 @@ def add_tile(B, kind, w, l, x, y, s, d, g, extra=None, ring_s=False, ring_g=Fals
     # source / drain: FINDING (L1a): the straight stubs of L2a ran 0.16 um beside the gate pad of narrow devices (M1.2a 0.23 um): a short cap above the strip, a horizontal run
     # away from the gate pad, then the vertical stub on the pad column
     # (the horizontal runs use the y-range of the strip itself: for the narrow devices there is no room above the strip, the gate pad is only 0.34 um higher)
-    B.rect('metal1', min(S[0], xs - 0.25), S[1], S[2], S[3])
-    B.rect('metal1', xs - 0.25, S[1], xs + 0.25, ry1 + 0.25)
     if ring_s:
+        B.rect('metal1', S[0], S[1], S[2], S[3])                   # (R5) no pad column for a tied source: neighbours may sit 3 um apart
         B.ring_tie.append(('s', S))                                # (L1a) the source goes straight down to the ring of the group (same net): no router terminal
     else:
+        B.rect('metal1', min(S[0], xs - 0.25), S[1], S[2], S[3])
+        B.rect('metal1', xs - 0.25, S[1], xs + 0.25, ry1 + 0.25)
         B.term(s, 'metal1', pad_rect(xs, ry1))
     B.rect('metal1', Dd[0], Dd[1], max(Dd[2], xd + 0.25), Dd[3])
     B.rect('metal1', xd - 0.25, Dd[1], xd + 0.25, ry1 + 0.25)
@@ -471,7 +472,7 @@ def add_tile(B, kind, w, l, x, y, s, d, g, extra=None, ring_s=False, ring_g=Fals
     return D
 
 
-def group_block(ly, name, tiles, ring_kind=None, ring_net=None, gap=2.5, extra_blocks=None):
+def group_block(ly, name, tiles, ring_kind=None, ring_net=None, gap=1.0, extra_blocks=None):
     """tiles: list of dict(kind, w, l, x, y, s, d, g[, extra]); one ring (p for nfet / nvt, n for pfet) around all of them; for pfet an n-well around the ring"""
     B = Block(ly, name)
     B.ring_tie = []

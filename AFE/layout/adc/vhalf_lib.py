@@ -12,6 +12,7 @@ import adclib as a
 LSEG = 25.0
 PITCH = 3.0
 NSEG = 10
+DUMMIES = True
 
 
 def res_cell(ly):
@@ -38,7 +39,7 @@ def build(ly, name='vhalf_res'):
         k.put(B.cell, seg, 0.0, r * PITCH)
         B.grow(-1.0, r * PITCH - 0.4, LSEG + 1.0, r * PITCH + 1.4)
     # plain poly dummy lines (no res_mk, no contacts) one row beyond each end
-    for r in (-1, ROWS):
+    for r in ((-1, ROWS) if DUMMIES else ()):
         B.rect('poly2', -0.64, r * PITCH, LSEG + 0.64, r * PITCH + 1.0)
     yc = lambda r: r * PITCH + 0.5
 
@@ -91,7 +92,9 @@ def build(ly, name='vhalf_res'):
         B.rect('metal2', tx - 0.25, ty - 0.25, tx + 0.25, ty + 0.25)
         B.term(net, 'metal2', a.pad_rect(tx, ty, 0.25))
         B.fixed_shape(a.M2, (xcol - 0.25, min(yc(r), ty) - 0.25, xcol + 0.25, max(yc(r), ty) + 0.25), net)
-    B.grow(-6.0, -1.0, LSEG + 3.0, ROWS * PITCH + 1.0)
-    B.plates = [(-2.2, -1.5, LSEG + 2.5, ROWS * PITCH + 1.5)]
+    ytop = ROWS * PITCH + 1.0 if DUMMIES else (ROWS - 1) * PITCH + 1.6
+    ybot = -1.0 if DUMMIES else -0.6
+    B.grow(-6.0, ybot, LSEG + 3.0, ytop)
+    B.plates = [(-2.2, ybot - 0.5, LSEG + 2.5, ytop + 0.5)]
     B.size = (B.bbox[2] - B.bbox[0], B.bbox[3] - B.bbox[1])
     return B
