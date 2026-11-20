@@ -22,7 +22,7 @@ def L(ly, name):
 
 
 _cache = {}
-SNAP_LAYERS = ('metal1', 'metal2')          # FINDING (L2a): the PDK transistor pcells draw Metal1 gate pads with 1 nm coordinates (e.g. y = 2.289 um): DRC metal1_OFFGRID
+SNAP_LAYERS = ('metal1', 'metal2', 'dualgate', 'v5_xtor')          # FINDING (L2a): the PDK transistor pcells draw Metal1 gate pads with 1 nm coordinates (e.g. y = 2.289 um): DRC metal1_OFFGRID
 
 
 MIM_NEAREST = ('fusetop', 'cap_mk', 'mim_l_mk', 'metal4', 'metal5')          # FINDING (L2a): the cap_mim pcell rounds sizes to 2 nm (44.595 -> 44.596) and places the Via4 sea on a 1 nm grid
@@ -201,6 +201,19 @@ def info_mim(ly, w, l):
         m.cell = mim_snapped_copy(ly, k.pcell(ly, 'cap_mim', mim_option='MIM-B', metal_level='M5', wc=w, lc=l), 'cap_mim')
         dbu = ly.dbu
         ft = region(ly, m.cell, 'fusetop').bbox()
+        if w >= 10.0:
+            # FINDING (L1a): rounding the pcell's Via4 sea (pitch 0.760 +- 0.001) to 5 nm gives spacings of 0.495 um (MIMTM.9 0.5 um, V4.2a): a regular sea of pitch 0.76 replaces it
+            vi = k.li(ly, 'via4')
+            m.cell.shapes(vi).clear()
+            x1, y1, x2, y2 = ft.left * dbu, ft.bottom * dbu, ft.right * dbu, ft.top * dbu
+            nx = int((x2 - x1 - 0.9 - 0.26) // 0.76) + 1
+            ny = int((y2 - y1 - 0.9 - 0.26) // 0.76) + 1
+            ox = snap(x1 + (x2 - x1 - (nx - 1) * 0.76 - 0.26) / 2.0)
+            oy = snap(y1 + (y2 - y1 - (ny - 1) * 0.76 - 0.26) / 2.0)
+            for i in range(nx):
+                for j in range(ny):
+                    xv, yv = ox + i * 0.76, oy + j * 0.76
+                    m.cell.shapes(vi).insert(pya.Box(k.u(xv, ly), k.u(yv, ly), k.u(xv + 0.26, ly), k.u(yv + 0.26, ly)))
         m4 = region(ly, m.cell, 'metal4').bbox()
         m5 = region(ly, m.cell, 'metal5').bbox()
         m.tp = (ft.left * dbu, ft.bottom * dbu, ft.right * dbu, ft.top * dbu)
@@ -399,10 +412,12 @@ import math
 
 
 def pcname(kind):
-    return 'nfet_06v0_nvt' if kind == 'nvt' else kind
+    return 'nfet_06v0_nvt' if kind == 'nvt' else {'nfet5': 'nfet', 'pfet5': 'pfet'}.get(kind, kind)
 
 
 def tile_params(kind, w, l):
+    if kind in ('nfet5', 'pfet5'):
+        return dict(volt='5V', bulk='None', w_gate=w, l_gate=l, nf=1, gate_con_pos='top')
     if kind == 'nvt':
         return dict(bulk='None', w_gate=w, l_gate=l, nf=1, gate_con_pos='top')
     return dict(volt='3.3V', bulk='None', w_gate=w, l_gate=l, nf=1, gate_con_pos='top')
@@ -429,17 +444,15 @@ def add_tile(B, kind, w, l, x, y, s, d, g, extra=None, ring_s=False, ring_g=Fals
     xd = math.ceil(dc + 0.3 - 1e-9)
     # source / drain: FINDING (L1a): the straight stubs of L2a ran 0.16 um beside the gate pad of narrow devices (M1.2a 0.23 um): a short cap above the strip, a horizontal run
     # away from the gate pad, then the vertical stub on the pad column
-    cap = 0.25
-    B.rect('metal1', S[0], S[3] - 0.02, S[2], S[3] + cap)
-    B.rect('metal1', min(S[0], xs - 0.25), S[3], S[2], S[3] + cap)
-    B.rect('metal1', xs - 0.25, S[3], xs + 0.25, ry1 + 0.25)
+    # (the horizontal runs use the y-range of the strip itself: for the narrow devices there is no room above the strip, the gate pad is only 0.34 um higher)
+    B.rect('metal1', min(S[0], xs - 0.25), S[1], S[2], S[3])
+    B.rect('metal1', xs - 0.25, S[1], xs + 0.25, ry1 + 0.25)
     if ring_s:
         B.ring_tie.append(('s', S))                                # (L1a) the source goes straight down to the ring of the group (same net): no router terminal
     else:
         B.term(s, 'metal1', pad_rect(xs, ry1))
-    B.rect('metal1', Dd[0], Dd[3] - 0.02, Dd[2], Dd[3] + cap)
-    B.rect('metal1', Dd[0], Dd[3], max(Dd[2], xd + 0.25), Dd[3] + cap)
-    B.rect('metal1', xd - 0.25, Dd[3], xd + 0.25, ry1 + 0.25)
+    B.rect('metal1', Dd[0], Dd[1], max(Dd[2], xd + 0.25), Dd[3])
+    B.rect('metal1', xd - 0.25, Dd[1], xd + 0.25, ry1 + 0.25)
     B.term(d, 'metal1', pad_rect(xd, ry1))
     # gate
     wide = (gp[2] - gp[0]) >= 1.3

@@ -11,6 +11,9 @@ import kpdk as k
 import adclib as a
 import router as RT
 import dac_lib as DL
+import rlib as R
+import cmp_top as CT
+import vhalf_lib as VH
 
 outgds = globals().get('out', 'AFE/layout/adc/adc_ch.gds')
 outdir = os.path.dirname(outgds) or '.'
@@ -111,16 +114,99 @@ if plan:
     sys.exit(0)
 
 # =====================================================================================================================================================================
+# the rest of the cell: comparator, Cref (+ switch, inverter), vhalf (+ capacitor), reset switches
+# =====================================================================================================================================================================
+EXPLICIT = []                                 # (layer index 0..2, rect, net, extra): shapes drawn by hand below (stacks of t / vref / m): obstacles for the router
+# ---- comparator (two mirror-image halves + centre column)
+CMP = CT.comparator(ly)
+XC, YC = 205, 6                               # axis x of the comparator, y offset
+k.put(TOP, CMP.cell, XC, YC)
+PLACED.append(('cmp', CMP, XC, YC))
+vref_pad = (CMP.ext['vref'][0] + XC, CMP.ext['vref'][1] + YC)
+t_pad = (CMP.ext['t'][0] + XC, CMP.ext['t'][1] + YC)
+print('comparator: %.1f x %.1f  x %.1f .. %.1f  y %.1f .. %.1f  vref pad %s  t pad %s  failed %s' % (CMP.size[0], CMP.size[1], CMP.bbox[0] + XC, CMP.bbox[2] + XC, CMP.bbox[1] + YC, CMP.bbox[3] + YC, vref_pad, t_pad, CMP.failed))
+
+
+def stack_up(cell, x, y, lo, hi, w5=0.8):
+    """via stack at (x, y) from metal `lo` to metal `hi` (1..5): 0.5 um pads (Metal5: w5), one cut per via; returns the list of (router layer idx, rect) for Metal2..4"""
+    out = []
+    for m in range(lo, hi + 1):
+        w = w5 if m == 5 else 0.5
+        k.rect(cell, k.METAL[m], x - w / 2, y - w / 2, x + w / 2, y + w / 2)
+        if 2 <= m <= 4:
+            out.append((m - 2, (x - w / 2, y - w / 2, x + w / 2, y + w / 2)))
+        if m < hi:
+            c = {1: 'via1', 2: 'via2', 3: 'via3', 4: 'via4'}[m]
+            k.rect(cell, c, x - 0.13, y - 0.13, x + 0.13, y + 0.13)
+    return out
+
+
+# ---- Cref switch (vrefs: nfet 1/0.28 gate tg_on, pfet 2/0.28 gate samb, in = vcmd, out = vref) and the inverter samb = not tg_on (5 V devices of inv_1)
+SWN = a.group_block(ly, 'sw_n', [dict(kind='nfet', w=1.0, l=0.28, x=0, y=0, s='vcmd', d='vref', g='tg_on')], ring_kind='p', ring_net='vss')
+SWP = a.group_block(ly, 'sw_p', [dict(kind='pfet', w=2.0, l=0.28, x=0, y=0, s='vcmd', d='vref', g='samb')], ring_kind='n', ring_net='vdd')
+IVN = a.group_block(ly, 'iv_n', [dict(kind='nfet5', w=0.82, l=0.6, x=0, y=0, s='vss', d='samb', g='tg_on', ring_s=True)], ring_kind='p', ring_net='vss')
+IVP = a.group_block(ly, 'iv_p', [dict(kind='pfet5', w=1.22, l=0.5, x=0, y=0, s='vdd', d='samb', g='tg_on', ring_s=True)], ring_kind='n', ring_net='vdd')
+ysw = math.ceil(YC + CMP.bbox[3] + 2)
+xe = XC + CMP.bbox[2] - 2
+for nm, blk in (('sw_n', SWN), ('sw_p', SWP), ('iv_n', IVN), ('iv_p', IVP)):
+    xw = blk.bbox[2] - blk.bbox[0]
+    put(nm, blk, xe - xw, ysw)
+    xe = xe - xw - 3
+print('switch / inverter blocks at y %d' % ysw)
+
+HSW = max(blk.bbox[3] - blk.bbox[1] for blk in (SWN, SWP, IVN, IVP))
+# ---- Cref: ONE 59.07 um MIM plate, top plate = vref, bottom plate = vss; nothing below Metal4 in its footprint
+CREF_W = 59.07
+cref = R.mim_unit_block(ly, 'cref', CREF_W, 'vref', 'vss', yb=1, yt=4)
+cref.terms = [t for t in cref.terms if t[0] != 'vref']
+cx0 = math.ceil(vref_pad[0] + 3.0 - CREF_W)
+cy0 = int(math.ceil(ysw + HSW + 3))
+dxr, dyr = cx0, cy0
+k.put(TOP, cref.cell, dxr, dyr)
+PLACED.append(('cref', cref, dxr, dyr))
+# vref: Metal5 strap from the plate to the comparator pad (Metal3 pad -> Via3 -> Metal4 -> Via4 -> Metal5)
+vx, vy = vref_pad
+EXPLICIT += [(l, r, 'vref', 0.0) for (l, r) in stack_up(TOP, vx, vy, 3, 5, w5=1.0)]
+k.rect(TOP, 'metal5', vx - 0.5, vy - 0.5, vx + 0.5, dyr + 0.01)
+print('Cref: x %.1f .. %.1f  y %.1f .. %.1f' % (dxr, dxr + CREF_W, dyr, dyr + CREF_W))
+
+# ---- vhalf: serpentine + 22.18 um capacitor (vcmd to vss)
+VHR = VH.build(ly)
+vx0, vy0 = 140, math.ceil(max(D.ys[1], YC + CMP.bbox[3] + 8))
+put('vhalf', VHR, 171, vy0)
+VHC = R.mim_unit_block(ly, 'vh_cap', 22.18, 'vcmd', 'vss', yb=1, yt=4)
+put('vh_cap', VHC, 142, vy0 + 1)
+
+# ---- reset switches (t / m to vcmd, gate rst_sw) next to the lower ends of the trunks
+XR0 = a.group_block(ly, 'xr0', [dict(kind='nfet', w=0.5, l=0.28, x=0, y=0, s='vcmd', d='t', g='rst_sw')], ring_kind='p', ring_net='vss')
+XR1 = a.group_block(ly, 'xr1', [dict(kind='nfet', w=0.5, l=0.28, x=0, y=0, s='vcmd', d='m', g='rst_sw')], ring_kind='p', ring_net='vss')
+y_tstrap = math.ceil(D.ys[0]) - 8
+put('xr0', XR0, D.xp_t + 3, y_tstrap - 4)
+put('xr1', XR1, D.xl0 - 12, y_tstrap - 4)
+
+# =====================================================================================================================================================================
 # router: obstacles, terminals, pins
 # =====================================================================================================================================================================
-W = 232
-H = int(math.ceil(H_DAC + 4.0))
+W_CELL = max(dx + blk.bbox[2] for (_, blk, dx, dy) in PLACED)
+H_CELL = max(H_DAC, max(dy + blk.bbox[3] for (_, blk, dx, dy) in PLACED))
+W = int(math.ceil(W_CELL)) + 4
+H = int(math.ceil(H_CELL)) + 3
+print('placed extent: W = %.1f  H = %.1f' % (W_CELL, H_CELL))
 rt = RT.Router(1.0, 1.0, float(W) - 1.0, float(H) - 1.0)
 for (name, blk, dx, dy) in PLACED:
     for (l, r, n, ex) in blk.fixed:
         rt.obstacle(l, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy), n, extra=ex)
     for (n, c, r) in blk.terms:
         rt.terminal(n, c, (r[0] + dx, r[1] + dy, r[2] + dx, r[3] + dy))
+    if hasattr(blk, 'mim'):
+        pl = blk.mim['plate']
+        pl = (pl[0] + dx, pl[1] + dy, pl[2] + dx, pl[3] + dy)
+        rt.block_all(pl, layers=(0, 1))
+        rt.obstacle(2, pl, None, extra=0.9)
+    for pl in getattr(blk, 'plates', []):
+        pl = (pl[0] + dx, pl[1] + dy, pl[2] + dx, pl[3] + dy)
+        rt.block_all(pl, layers=(0, 1))
+        rt.obstacle(2, pl, None, extra=0.9)
 # DAC: nothing of Metal2 / Metal3 under the plate area except the channel strip; Metal4 keeps 1.2 um (MIMTM.1) from every plate polygon
 ych = D.ych
 body_x1, body_x2 = D.xl0 - 0.6, D.xm1 + 0.6
@@ -142,6 +228,35 @@ for (n, r) in D.tabs:
 for (xT, ylo, yhi) in (D.tr_m, D.tr_t):
     rt.block_all((xT - 1.5, ylo - 1.0, xT + 1.5, yhi + 1.0), layers=(1, 2))
 
+# ---- the t / m / vref connections drawn explicitly (Metal5): trunks -> reset switch drains and -> the comparator pads
+def placed(name):
+    for (n, blk, dx, dy) in PLACED:
+        if n == name:
+            return blk, dx, dy
+
+
+def term_xy(name, net, code='metal1'):
+    blk, dx, dy = placed(name)
+    for (n, c, r) in blk.terms:
+        if n == net and c == code:
+            return ((r[0] + r[2]) / 2.0 + dx, (r[1] + r[3]) / 2.0 + dy)
+
+
+for (nm, net, trunk, rt_x) in (('xr0', 't', D.tr_t, D.xT_t), ('xr1', 'm', D.tr_m, D.xT_m)):
+    xd, yd = term_xy(nm, net)
+    EXPLICIT += [(l, r, net, 0.0) for (l, r) in stack_up(TOP, xd, yd, 1, 5, w5=0.8)]
+    k.rect(TOP, 'metal5', min(xd, rt_x) - 0.5, yd - 0.5, max(xd, rt_x) + 0.5, yd + 0.5)       # strap to the trunk column
+    k.rect(TOP, 'metal5', rt_x - 0.5, yd - 0.5, rt_x + 0.5, trunk[1] + 0.01)                  # the trunk is extended down to the switch
+tx, ty = t_pad
+EXPLICIT += [(l, r, 't', 0.0) for (l, r) in stack_up(TOP, tx, ty, 3, 5, w5=1.0)]
+k.rect(TOP, 'metal5', D.xT_t - 0.5, ty - 0.5, tx + 0.5, ty + 0.5)
+k.rect(TOP, 'metal5', D.xT_t - 0.5, min(ty, term_xy('xr0', 't')[1]) - 0.5, D.xT_t + 0.5, max(ty, term_xy('xr0', 't')[1]) + 0.5)
+for (l, r, n, ex) in EXPLICIT:
+    rt.obstacle(l, r, n, extra=ex)
+for net in ('t', 'm'):
+    rt.terms.pop(net, None)                                                  # drawn explicitly: no router terminal
+bridge_pads = [i for i, (n, c, r) in enumerate(D.terms) if n == 'm']
+
 # ---- pins
 PINS = []
 PIN_X = {'rst_sw': 12, 'tg_on': 15, 'dac_gdn': 18, 'cmp_clk': 21, 'cmp_q': 24}
@@ -154,6 +269,12 @@ for n, x in PIN_X.items():
     rt.obstacle(0, (x - 0.25, 0.0, x + 0.25, 1.25), n)
 PINS.append(('vin', 'metal3', 4.0, H - 2.0))
 rt.terminal('vin', 'metal3', a.pad_rect(4.0, H - 2.0, 0.5))
+PIN_RECT = {'vdd_cmp': (110.0, 0.0, 130.0, 4.0), 'vdd_dac': (140.0, 0.0, 160.0, 4.0), 'vss': (170.0, 0.0, 210.0, 4.0),
+            'vdd': (math.floor(W_CELL) - 6.0, 48.0, math.floor(W_CELL) - 0.0, 54.0)}
+for n, r in PIN_RECT.items():
+    PINS.append((n, 'metal4', (r[0] + r[2]) / 2.0, (r[1] + r[3]) / 2.0))
+    rt.terminal(n, 'metal4', r)
+    rt.obstacle(2, r, n)
 rt.reserve()
 for (n, c, r) in D.terms:                                              # the stack above a DAC pad (Via3 -> Metal3 -> Via2 -> Metal2) is reserved for its net: long Metal3 tracks of other nets must not wall the pad in
     nid = rt.nid(n)
@@ -181,6 +302,11 @@ for n in ORDER_R:
 print('routing: %d nets, %d failed: %s' % (len(ORDER_R), len(bad), bad))
 for f in rt.failed:
     print('  FAILED', str(f)[:300])
+    if f[1].startswith('terminal without') and int(globals().get('dbg', '0')):
+        (c, r) = f[2]
+        for (l, rr, nn) in rt.fixed:
+            if rr[0] < r[2] + 3 and rr[2] > r[0] - 3 and rr[1] < r[3] + 3 and rr[3] > r[1] - 3:
+                print('      near fixed: layer', l, [round(v, 2) for v in rr], nn)
     if f[1] == 'no path' and int(globals().get('dbg', '0')):
         (c, r) = f[2]
         cx, cy = (r[0] + r[2]) / 2.0, (r[1] + r[3]) / 2.0
@@ -204,6 +330,8 @@ for (n, lay, px, py) in PINS:
         k.rect(TOP, 'metal3', px - 0.25, py - 0.25, px + 0.25, py + 0.25)
     if lay == 'metal2':
         k.rect(TOP, 'metal2', px - 0.25, 0.0, px + 0.25, 1.25)
+    if lay == 'metal4':
+        k.rect(TOP, 'metal4', *PIN_RECT[n])
     k.label(TOP, lay, n, px, py)
 bb = TOP.dbbox()
 print('wrote %s  %.2f x %.2f um' % (outgds, bb.width(), bb.height()))
