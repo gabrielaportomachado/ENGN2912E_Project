@@ -5,16 +5,17 @@ PASS  AFE/layout/REVIEW.md not edited by this phase
 INFO  no open REVIEW.md item for L2a or an earlier phase
 PASS  "## L2a findings" section in AFE/layout/NOTES_L2.md
 PASS  Results-log row for L2a in AFE/layout/NOTES_L2.md
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
 --- amp_ch layout: AFE/layout/amp/amp_ch.gds
-RUN   /foss/tools/bin/python3 AFE/layout/scripts/flow.py drc --gds /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/amp/amp_ch.gds --top amp_ch
+RUN   /foss/tools/bin/python3 AFE/layout/scripts/flow.py drc --gds /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/amp/amp_ch.gds --top amp_ch
 PASS  DRC report belongs to the current GDS (sha1)
 PASS  DRC ran with the official deck, variant D
 PASS  DRC amp_ch: 0 violations
-RUN   /foss/tools/bin/python3 AFE/layout/scripts/flow.py lvs --gds /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/amp/amp_ch.gds --top amp_ch --ref /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/lvs/afe_chc.spice
+RUN   /foss/tools/bin/python3 AFE/layout/scripts/flow.py lvs --gds /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/amp/amp_ch.gds --top amp_ch --ref /foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/lvs/afe_chc.spice
 PASS  LVS report belongs to the current GDS (sha1)
 PASS  LVS reference AFE/layout/lvs/afe_chc.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
 PASS  LVS amp_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
-FAIL  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-amp/AFE/layout/amp/amp_ch.gds: floorplan.py check: 16 PASS, 1 FAIL
-      -> DO: ACCEPT.md ladder A (area) or G-5 (pin side); failing lines: FAIL  5  as-built amp_ch 219.25 x 385.25 um fits its slot 220.00 x 263.00 um  see AFE/layout/ACCEPT.md ladder "area"
+FAIL  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/l2a-rework/AFE/layout/amp/amp_ch.gds: floorplan.py check: 16 PASS, 1 FAIL
+      -> DO: ACCEPT.md ladder A (area) or G-5 (pin side); failing lines: FAIL  5  as-built amp_ch 217.50 x 327.25 um fits its slot 220.00 x 263.00 um  see AFE/layout/ACCEPT.md ladder "area"
 GATE L2a: FAIL  (1 FAIL)

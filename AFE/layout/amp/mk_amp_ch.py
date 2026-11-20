@@ -19,6 +19,10 @@ plan = int(globals().get('plan', '0'))
 gdsname = globals().get('gds', 'amp_ch.gds')
 os.makedirs(out, exist_ok=True)
 
+LAY = int(globals().get('lay', '2'))             # 1 = packing of the first L2a pass (commit 1b3076a), 2 = packing "A-3" of the L2a rework (default)
+_KD = dict(rg=2.5, gg=2.5, cg=3.0) if LAY == 1 else dict(rg=1.5, gg=1.5, cg=1.5)       # ring gaps (um) of dev_block / group_block / compose
+for _n in ('rg', 'gg', 'cg'):
+    a.KNOB[_n] = float(globals().get(_n, _KD[_n]))
 ly = k.new_layout()
 TOP = ly.create_cell('amp_ch')
 B = BA.blocks(ly)
@@ -127,37 +131,82 @@ def row(names, y, x0=WEST, gap=3.0):
     return x, top
 
 
-GAP_Y = 3.0
-x, t1 = row(['sink1', 'xms', 'fol', 's2p'], 3.0, x0=8.0, gap=2.0)
-x, t2 = row(['s2pair', 's2tail', 'sn', 'sp'], t1 + GAP_Y, x0=8.0, gap=2.0)
-for n in ('sn', 'sp'):
-    pass
-_pl = {nm: (dx, dy, blk) for (nm, blk, dx, dy) in PLACED}
-# small blocks above the short ones of row 2: pseudo-resistors above sn, OR2 above sp
-yy = _pl['sn'][1] + _pl['sn'][2].bbox[3] + 3.0
-xx = _pl['sn'][0] + _pl['sn'][2].bbox[0]
-for n in ('pr1', 'pr2', 'pr3'):
-    xe, ye = put(n, B[n], xx, yy)
-    xx = xe + 2.0
-put('or2', B['or2'], _pl['sp'][0] + _pl['sp'][2].bbox[0], _pl['sp'][1] + _pl['sp'][2].bbox[3] + 3.0)
-x, t3 = row(['mir', 'xm6', 'cc1'], t2 + GAP_Y, x0=8.0, gap=2.0)
-x, t4 = row(['ota_p'], t3 + GAP_Y, x0=8.0, gap=2.0)
-t5 = t4
-Y0 = math.ceil(t5 + GAP_Y + 19.0 + 0.6)                  # origin of the Cin block: the strip of the two Cf1 pieces (SPEC.md 3.2 item 1: next to the Cin block) lies below it, its descender pads 7 um below it
-X0 = 9.0
-k.put(TOP, cin.cell, X0, Y0)
-PLACED.append(('cin', cin, X0, Y0))
-put('cf1', B['cf1'], X0 + 39.0, Y0 - 19.0)                  # right of the vn descender (x = 35), same orientation as the Cin pieces
-put('cf1p', B['cf1p'], X0 + 115.0, Y0 - 19.0)               # right of the vp descender (x = 111)
-# column of the stage-2 / one-shot capacitors east of the Cin block
-xc = X0 + cin.bbox[2] + 2.5
-yc = Y0 + 1.0
-for n in ('ct', 'cin2', 'cc2', 'cf2'):
-    xe, ye = put(n, B[n], xc, yc)
-    yc = ye + 3.0
-H = math.ceil(Y0 + cin.pins['ytop'] + 8.0)
+GX = float(globals().get('gx', '2.0' if LAY == 1 else '1.5'))          # gap between blocks of a row (um)
+GY = float(globals().get('gy', '2.0' if LAY == 1 else '1.0'))          # gap between rows
+CAP = float(globals().get('capt', '8.0' if LAY == 1 else '2.0'))       # margin above the Cin block lanes (pins) up to the cell top
+if LAY == 1:
+    GAP_Y = 3.0
+    x, t1 = row(['sink1', 'xms', 'fol', 's2p'], 3.0, x0=8.0, gap=2.0)
+    x, t2 = row(['s2pair', 's2tail', 'sn', 'sp'], t1 + GAP_Y, x0=8.0, gap=2.0)
+    for n in ('sn', 'sp'):
+        pass
+    _pl = {nm: (dx, dy, blk) for (nm, blk, dx, dy) in PLACED}
+    # small blocks above the short ones of row 2: pseudo-resistors above sn, OR2 above sp
+    yy = _pl['sn'][1] + _pl['sn'][2].bbox[3] + 3.0
+    xx = _pl['sn'][0] + _pl['sn'][2].bbox[0]
+    for n in ('pr1', 'pr2', 'pr3'):
+        xe, ye = put(n, B[n], xx, yy)
+        xx = xe + 2.0
+    put('or2', B['or2'], _pl['sp'][0] + _pl['sp'][2].bbox[0], _pl['sp'][1] + _pl['sp'][2].bbox[3] + 3.0)
+    x, t3 = row(['mir', 'xm6', 'cc1'], t2 + GAP_Y, x0=8.0, gap=2.0)
+    x, t4 = row(['ota_p'], t3 + GAP_Y, x0=8.0, gap=2.0)
+    t5 = t4
+    Y0 = math.ceil(t5 + GAP_Y + 19.0 + 0.6)                  # origin of the Cin block: the strip of the two Cf1 pieces (SPEC.md 3.2 item 1: next to the Cin block) lies below it, its descender pads 7 um below it
+    X0 = 9.0
+    k.put(TOP, cin.cell, X0, Y0)
+    PLACED.append(('cin', cin, X0, Y0))
+    put('cf1', B['cf1'], X0 + 39.0, Y0 - 19.0)                  # right of the vn descender (x = 35), same orientation as the Cin pieces
+    put('cf1p', B['cf1p'], X0 + 115.0, Y0 - 19.0)               # right of the vp descender (x = 111)
+    # column of the stage-2 / one-shot capacitors east of the Cin block
+    xc = X0 + cin.bbox[2] + 2.5
+    yc = Y0 + 1.0
+    for n in ('ct', 'cin2', 'cc2', 'cf2'):
+        xe, ye = put(n, B[n], xc, yc)
+        yc = ye + 3.0
+    H = math.ceil(Y0 + cin.pins['ytop'] + 8.0)
+    W = max(EAST, math.ceil(max(dx + blk.bbox[2] for (_, blk, dx, dy) in PLACED)) + 0.0)
+else:
+    # ---- packing "A-3" (L2a rework): rows below the Cin block (ota_p on top, directly under the descenders), stage-2 + one-shot MIM column east of the Cin block
+    XR = float(globals().get('xr', '4.0'))                 # west start of the device rows
+    S2P_UP = int(globals().get('s2p_up', '1'))                                       # 1: s2p in the pocket east of ota_p (above s2tail) instead of the bottom row
+    x, tb = row(['sink1', 'xms', 'fol'] + ([] if S2P_UP else ['s2p']), 3.0, x0=XR, gap=GX)      # bottom row: the out pin (fol) at the inner edge
+    ym = tb + GY
+    x, tm = row(['mir', 'xm6'], ym, x0=XR, gap=GX)                                  # stage-1 load mirror + xm6
+    _pl = {nm: (dx, dy, blk) for (nm, blk, dx, dy) in PLACED}
+    xe, _ = put('cc1', B['cc1'], x + GX, ym)
+    yt = tm + GY
+    xo, tt = row(['ota_p'], yt, x0=XR, gap=GX)                                      # input pair + tail group: the row next to the Cf1 strip
+    xp = xo                                                                         # pocket east of ota_p: gate-mux / park / one-shot devices, OR2
+    _, y1 = put('sp', B['sp'], xp, yt)
+    _, y2 = put('sn', B['sn'], xp, y1 + GY)
+    put('or2', B['or2'], xp + B['sn'].bbox[2] - B['sn'].bbox[0] + GX, y1 + GY)
+    _, y3 = put('s2tail', B['s2tail'], xp, y2 + GY)
+    if S2P_UP:
+        _, y3 = put('s2p', B['s2p'], xp, y3 + GY)
+    t5 = max(tt, y3)
+    STRIP = float(globals().get('strip', '15.0'))
+    Y0 = math.ceil(t5 + GY + STRIP + 0.6)                  # origin of the Cin block: the strip of the two Cf1 pieces lies below it
+    X0 = float(globals().get('x0', '7.0'))
+    k.put(TOP, cin.cell, X0, Y0)
+    PLACED.append(('cin', cin, X0, Y0))
+    put('cf1', B['cf1'], X0 + 39.0, Y0 - STRIP)                  # right of the vn descender (x = 35), same orientation as the Cin pieces
+    put('pr1', B['pr1'], X0 + 39.0 + 20.0, Y0 - STRIP + 3.0)
+    put('cf1p', B['cf1p'], X0 + 115.0, Y0 - STRIP)               # right of the vp descender (x = 111)
+    put('pr2', B['pr2'], X0 + 115.0 + 20.0, Y0 - STRIP + 3.0)
+    # east column: stage-2 diff pair, Cf2 + pseudo-R 3, Cin2, Cc2, C_T
+    xc = X0 + cin.bbox[2] + 2.0
+    yc = Y0 - STRIP
+    xe, yc = put('s2pair', B['s2pair'], xc, yc)
+    yc += GY
+    xe, ye = put('cf2', B['cf2'], xc, yc)
+    put('pr3', B['pr3'], xe + GX, yc)
+    yc = ye + GY
+    for n in ('cin2', 'cc2', 'ct'):
+        xe, ye = put(n, B[n], xc, yc)
+        yc = ye + GY
+H = math.ceil(Y0 + cin.pins['ytop'] + CAP)
 W = max(EAST, math.ceil(max(dx + blk.bbox[2] for (_, blk, dx, dy) in PLACED)) + 0.0)
-print('placed: W = %.1f  H = %.1f  rows tops %s' % (W, H, [round(v, 1) for v in (t1, t2, t3, t4, t5)]))
+print('placed: W = %.1f  H = %.1f  Y0 = %d  row top t5 = %.1f' % (W, H, Y0, t5))
 
 # =====================================================================================================================================================================
 # router: obstacles, terminals, pins
@@ -185,8 +234,8 @@ for i, n in enumerate(('vbn', 'vcm', 'vg1', 'vcmo', 'vg2', 'vrs')):
     PINS.append((n, 'metal3', 1.0 + i, ytop_pin))
 for i, n in enumerate(('sw_rec', 'sw_rec_b', 'rst_amp')):
     PINS.append((n, 'metal2', 1.0, H - 12.0 - 8.0 * i))
-PINS.append(('vdd', 'metal4', W - 6.0, H - 6.0))
-PINS.append(('vss', 'metal4', W - 6.0, H - 14.0))
+PINS.append(('vdd', 'metal4', W - 6.0, H - (6.0 if LAY == 1 else 5.0)))
+PINS.append(('vss', 'metal4', W - (6.0 if LAY == 1 else 16.0), H - (14.0 if LAY == 1 else 5.0)))
 xo = None
 for (name, blk, dx, dy) in PLACED:
     if name == 'fol':

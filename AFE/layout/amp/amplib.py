@@ -11,6 +11,7 @@ import pya
 import kpdk as k
 
 GRID = 0.005
+KNOB = dict(rg=2.5, gg=2.5, cg=3.0)          # L2a rework: ring gaps (um) of dev_block / group_block / compose, set by mk_amp_ch.py (rg= gg= cg=)
 
 
 def snap(v):
@@ -278,7 +279,9 @@ class Block:
 M2, M3, M4 = 0, 1, 2
 
 
-def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=2.5, wide_ring=False):
+def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=None, wide_ring=False):
+    if ring_gap is None:
+        ring_gap = KNOB['rg']
     """one multi-finger transistor array (nf >= 2) as a block.
     kind 'nfet' | 'pfet';  d_nets: a list with one net per drain strip (strips 1, 3, 5 ... of the pcell) or a single net name.  Sources = strips 0, 2, 4 ... all on s_net.
     Drawing: S rail Metal1 under the comp (strips extended down), gates joined by a Metal1 bus above the comp (landing pad at its left end), drains by Via1 + Metal2 stubs to ONE
@@ -449,7 +452,9 @@ def add_tile(B, kind, w, l, x, y, s, d, g, extra=None):
     return D
 
 
-def group_block(ly, name, tiles, ring_kind=None, ring_net=None, gap=2.5, extra_blocks=None):
+def group_block(ly, name, tiles, ring_kind=None, ring_net=None, gap=None, extra_blocks=None):
+    if gap is None:
+        gap = KNOB['gg']
     """tiles: list of dict(kind, w, l, x, y, s, d, g[, extra]); one ring (p for nfet / nvt, n for pfet) around all of them; for pfet an n-well around the ring"""
     B = Block(ly, name)
     for t in tiles:
@@ -540,7 +545,9 @@ def mim_block(ly, name, w, top, bot, tab_y_top=None, tab_y_bot=None):
 # =====================================================================================================================================================================
 # composition, standard cell block, Cin block
 # =====================================================================================================================================================================
-def compose(ly, name, parts, ring_kind=None, ring_net=None, gap=2.5, nwell=None, dummy_l=None, dummy_groups=None):
+def compose(ly, name, parts, ring_kind=None, ring_net=None, gap=None, nwell=None, dummy_l=None, dummy_groups=None):
+    if gap is None:
+        gap = KNOB['cg']
     """parent block that instantiates `parts` = [(block, dx, dy)] (integer offsets); terminals / fixed shapes are copied with the offset; optional ring around all of them"""
     B = Block(ly, name)
     for (P, dx, dy) in parts:

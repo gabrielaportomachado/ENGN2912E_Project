@@ -34,7 +34,7 @@ def blocks(ly):
         w = blk.bbox[2] - blk.bbox[0]
         parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
         x = x + w + 1.5
-    B['ota_p'] = a.compose(ly, 'ota_p', parts, ring_kind='n', ring_net=VDD, gap=3.0, dummy_l=2.0, dummy_groups=[[0, 1, 2, 3], [4, 5, 6]])
+    B['ota_p'] = a.compose(ly, 'ota_p', parts, ring_kind='n', ring_net=VDD, dummy_l=2.0, dummy_groups=[[0, 1, 2, 3], [4, 5, 6]])
     # ------------------------------------------------------------------ stage 1 N side: mirror xm3 / xm4 (ABBA), xm6
     na = lambda nm, g, d, nf=1, w=50.0: a.dev_block(ly, nm, 'nfet', w, 16.0, nf, s_net=VSS, d_nets=d, g_net=g, bulk_net=VSS, ring=False)
     m3a, m4a, m4b, m3b = na('m3a', D1, D1), na('m4a', D1, O1), na('m4b', D1, O1), na('m3b', D1, D1)
@@ -44,7 +44,7 @@ def blocks(ly):
         w = blk.bbox[2] - blk.bbox[0]
         parts.append((blk, math.ceil(x - blk.bbox[0]), 0))
         x = x + w + 1.5
-    B['mir'] = a.compose(ly, 'mir', parts, ring_kind='p', ring_net=VSS, gap=3.0, dummy_l=2.0)
+    B['mir'] = a.compose(ly, 'mir', parts, ring_kind='p', ring_net=VSS, dummy_l=2.0)
     B['xm6'] = a.dev_block(ly, 'xm6', 'nfet', 50.0, 16.0, 4, s_net=VSS, d_nets=V1, g_net=O1, bulk_net=VSS, ring=True)
     B['sink1'] = a.dev_block(ly, 'sink1', 'nfet', 16.0, 4.0, 24, s_net=VSS, d_nets=IB1, g_net='vbn', bulk_net=VSS, ring=True)
     B['xms'] = a.dev_block(ly, 'xms', 'nfet', 16.0, 4.0, 6, s_net=VSS, d_nets='out', g_net='vbn', bulk_net=VSS, ring=True)

@@ -3,13 +3,13 @@
  "databases": [
   "AFE/layout/amp/flow/drc_amp_ch/amp_ch_main.lyrdb"
  ],
- "date": "2026-11-20 18:26",
+ "date": "2026-11-20 19:14",
  "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
  "density": false,
  "gds": "AFE/layout/amp/amp_ch.gds",
- "gds_sha1": "b9407198f235d12f32265702ff358816556814b0",
+ "gds_sha1": "d1729d7612890c7f5f35628714d8e27377c31b4c",
  "log": "AFE/layout/amp/flow/amp_ch.drc.log",
- "maxrss_mb": 489,
+ "maxrss_mb": 499,
  "mode": "flat",
  "offgrid": true,
  "ran": true,
@@ -18,5 +18,5 @@
  "top": "amp_ch",
  "total": 0,
  "variant": "D",
- "wall_s": 7.7
+ "wall_s": 7.5
 }
