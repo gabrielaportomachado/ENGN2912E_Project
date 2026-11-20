@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:39
+   job pu_schprdiff_ss-40: exit 0, 1 s
+RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=1.80787  vout_100ms_v=1.64856  vout_1s_v=1.64849  err_1s_mv=1.50909  codes_from_mid_1s=1.8731  vbn_end_v=0.804863  vrs_end_v=0.81515

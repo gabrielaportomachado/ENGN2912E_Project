@@ -8,7 +8,10 @@ tested as CIRCUITS, not only as text:
      closed-loop replay (AFE/adc/scripts/x2_adc.py with X2_ADC_INC), 12 inputs, against the X2 baseline block of AFE/adc/sim/x2_adc.log.  A FUNCTIONAL check: the flat cells must convert,
      with one uniform code shift.  The shift is NOT the effect of the rule substitutions alone: the reference also carries no diffusion parameters (junction capacitances), which the layout
      will have.  The effect of Cxa alone is measured separately on the design netlists (AFE/adc/sim/f1_x2_inl_step.log, `.param CMP_CA=54.52f`).
-  C. netgen -batch (run by PID with a time limit): every file is read and its top cell compared with itself (syntax, device classes, pin lists, the black box, the 0-ohm ties).
+  C. netgen -batch (run by PID with a time limit): every file is read and its top cell compared with itself (syntax, device classes, pin lists, the black box, the pad-control ties).
+     LP step 5: if the top was written with --dig-netlist (its header names the powered gate-level netlist of afe_dig), the top is ALSO read the way the full-chip LVS will read it:
+     standard-cell SPICE library, then the SPICE top (afe_dig = placeholder), then the Verilog netlist, which replaces the placeholder (the order matters: Verilog first makes netgen
+     stop with "SPICE subcircuit afe_dig redefines a verilog module").  The 288 nets of the instance then meet the 288 port bits of the module; compared with a copy.
 usage: python3 check_lvs_netlists.py [A] [B] [C]     (default: all)   -> AFE/layout/lvs/check_lvs_netlists.log; scratch AFE/layout/.ptmp/lvschk (removed at the end)"""
 import os, re, sys, subprocess, time, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -28,8 +31,9 @@ def P(*a):
     OUT.append(s)
 
 
-def run_ng(jobs, npar=3, wall=1200.0):
-    """jobs [(name, netlist text)] -> {name: stdout+stderr}; one thread per job (job-local .spiceinit), by PID, no cut, no timeout wrapper"""
+def run_ng(jobs, npar=int(os.environ.get('LVSCHK_NPAR', '3')), wall=1200.0):
+    """jobs [(name, netlist text)] -> {name: stdout+stderr}; one thread per job (job-local .spiceinit), by PID, no cut, no timeout wrapper.
+    npar = ngspice processes at a time (env LVSCHK_NPAR, default 3; part B runs AFE/adc/scripts/x2_adc.py, which has its own limit of 3)"""
     os.makedirs(PT, exist_ok=True)
     open(os.path.join(PT, '.spiceinit'), 'w').write('set num_threads=1\n')
     todo, run, res = list(jobs), [], {}
@@ -192,7 +196,7 @@ def part_b():
 
 def part_c():
     P('\nC. netgen -batch: each file read and its top cell compared with a copy of the same file (netgen does not compare two cells of one file); setup %s' % os.path.relpath(NETGEN_SETUP, '/foss/pdks'))
-    P('   This is a READ check (syntax, bracketed bus names, m =, the black box, the 0-ohm ties, device classes known to the setup file), not an LVS against a layout.')
+    P('   This is a READ check (syntax, bracketed bus names, m =, the black box, the pad-control ties, device classes known to the setup file), not an LVS against a layout.')
     os.makedirs(PT, exist_ok=True)
     ok = True
     for fn, cell in (('bias_genc.spice', 'bias_genc'), ('afe_chc.spice', 'amp_ch'), ('adc_ch.spice', 'adc_ch'), ('dbs_afe_top.spice', 'dbs_afe_top')):
@@ -222,7 +226,47 @@ def part_c():
         P('  %-18s %-12s %s | top cell: %s devices, %s nets%s | classes: %s | sub-cells compared: %d | messages: %s' % (
             fn, cell, 'READ, MATCHES ITS COPY' if match else 'PROBLEM', m[-1][0] if m else '?', m[-1][2] if m else '?', (', %s disconnected pin' % disc[0]) if disc else '',
             ', '.join('%s x%s' % c for c in cls), len(m), '; '.join(msgs)[:300] or 'none'))
-    P('  netgen keeps the 15 pad-control ties as devices of class r (0 ohm) and reports DOUT_IN as the 1 disconnected pin of the top: the layout netlist must show the same (see the header of dbs_afe_top.spice).')
+    toptxt = open(os.path.join(LVS, 'dbs_afe_top.spice')).read()
+    nres = len(re.findall(r'^Rtie_', toptxt, flags=re.M))
+    if nres:
+        P('  netgen keeps the %d pad-control ties as devices of class r (0 ohm) and reports DOUT_IN as the 1 disconnected pin of the top: the layout netlist must show the same (see the header of dbs_afe_top.spice).' % nres)
+    else:
+        P('  pad-control ties: no device in the top (Decision 46e): the 15 constant pins are nets between the pads and the afe_dig pins of the same name; DOUT_IN is the 1 disconnected pin of the top.')
+    mdig = re.search(r'powered gate-level netlist (\S+) \(LVS_VERILOG_FILES\)', toptxt)
+    if mdig:
+        pnl = os.path.join(REPO, mdig.group(1))
+        std = '/foss/pdks/gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice'
+        if not os.path.exists(pnl):
+            P('  C2 hierarchical read: the netlist named in the header (%s) does not exist: FAIL' % mdig.group(1))
+            ok = False
+        else:
+            for src, dst in ((std, 'c2_std.spice'), (pnl, 'c2_afe_dig.pnl.v'), (os.path.join(LVS, 'dbs_afe_top.spice'), 'c2_top.spice')):
+                shutil.copy(src, os.path.join(PT, dst))
+            open(os.path.join(PT, 'c2.tcl'), 'w').write(
+                'readnet spice %s 1\nreadnet spice %s 1\nreadnet verilog %s 1\nreadnet spice c2_std.spice 2\nreadnet spice c2_top.spice 2\nreadnet verilog c2_afe_dig.pnl.v 2\n'
+                'lvs "dbs_afe_top 1" "dbs_afe_top 2" %s netgen_c2.out\nquit\n' % (std, os.path.join(LVS, 'dbs_afe_top.spice'), pnl, NETGEN_SETUP))
+            lg = os.path.join(PT, 'netgen_c2.log')
+            p = subprocess.Popen(['netgen', '-batch', 'source', 'c2.tcl'], cwd=PT, stdout=open(lg, 'w'), stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
+            t0 = time.time()
+            while p.poll() is None and time.time() - t0 < 600:
+                time.sleep(0.5)
+            if p.poll() is None:
+                p.kill()
+                p.wait()
+                P('  C2 hierarchical read: netgen did not finish in 600 s: KILLED (pid %d)' % p.pid)
+                ok = False
+            else:
+                txt = open(lg, errors='replace').read()
+                match = txt.rstrip().count('Circuits match uniquely') >= 1 and 'do not match' not in txt and 'Cannot compare' not in txt and 'redefines' not in txt
+                nrep = txt.count('Verilog placeholder module afe_dig replaced by module definition')
+                ndev = re.findall(r"Circuit afe_dig contains (\d+) device instances", txt)
+                m = re.findall(r'Circuit 1 contains (\d+) devices, Circuit 2 contains (\d+) devices\.\s*\nCircuit 1 contains (\d+) nets,\s+Circuit 2 contains (\d+) nets', txt)
+                good = match and nrep == 2 and bool(ndev)
+                ok = ok and good
+                P('  C2 hierarchical read (standard-cell library, SPICE top, then %s): %s | afe_dig placeholder replaced by the Verilog module in %d of 2 circuits, %s cell instances in afe_dig | '
+                  'top: %s devices, %s nets | cells compared: %d' % (mdig.group(1), 'READ, MATCHES ITS COPY' if good else 'PROBLEM', nrep, ndev[0] if ndev else '?', m[-1][0] if m else '?', m[-1][2] if m else '?', len(m)))
+    else:
+        P('  C2 hierarchical read: not run (the top has the provisional empty black box: no --dig-netlist was given to mk_lvs_netlists.py).')
     P('  RESULT C: %s' % ('PASS' if ok else 'FAIL'))
     return ok
 

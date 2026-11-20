@@ -1,0 +1,47 @@
+{
+ "check": "amp_psrr",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_psrr_ff85.log",
+   "values": {
+    "supply_gain_1khz": 0.423224,
+    "supply_gain_300hz": 0.556698,
+    "supply_gain_50hz": 0.57856,
+    "supply_gain_60hz": 0.578268
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_psrr_ss-40.log",
+   "values": {
+    "supply_gain_1khz": 0.244033,
+    "supply_gain_300hz": 0.471985,
+    "supply_gain_50hz": 0.565783,
+    "supply_gain_60hz": 0.564196
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:37",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_psrr_typ.log",
+   "values": {
+    "supply_gain_1khz": 0.334163,
+    "supply_gain_300hz": 0.524653,
+    "supply_gain_50hz": 0.570985,
+    "supply_gain_60hz": 0.570316
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_psrr.py"
+}

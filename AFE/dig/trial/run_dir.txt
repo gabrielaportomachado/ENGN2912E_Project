@@ -1,0 +1,2 @@
+LibreLane run directory of these files (scratch, not in git; regenerate with `bash AFE/dig/run_dig.sh`): /tmp/lp_dig/design/runs/trial
+final/gds/afe_dig.gds, final/def, final/nl, final/spef/{nom,min,max}, final/sdf/<corner>, final/lib/<corner> are there.

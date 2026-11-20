@@ -1,0 +1,4 @@
+== amp_reset_host  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:42
+   job rs_sch_ss-40_10m: exit 0, 12 s
+   job rs_sch_ss-40_100m: exit 0, 31 s
+RESULT amp_reset_host ss-40: t_fs_ms_os10m=5.79365  peak_mv_os10m=2.70705  rel_step_mv_os10m=-1.57014  t_1mv_s_os10m=3.7055  final_v_os10m=1.65021  drift_mv_s_os10m=-0.544572  resid_end_mv_os10m=0.000475555  t_fs_ms_os100m=5.7712  peak_mv_os100m=35.9438  rel_step_mv_os100m=-1.51371  t_1mv_s_os100m=7.4649  final_v_os100m=1.65029  drift_mv_s_os100m=-7.45167  resid_end_mv_os100m=0.000337886

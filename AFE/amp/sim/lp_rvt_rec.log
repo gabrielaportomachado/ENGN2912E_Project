@@ -1,0 +1,13 @@
+STAGE rec (as scripts/run_a4c.sh rec, one case): 10 mV electrode offset step at 0.1 s with the IDEAL reset pulse (fs high) of 3 ms starting 10 us before the step, no TGATE, 20 s.
+  release step = out just after the pulse minus out at the pulse end; time until the output stays within 1 mV of its final value.  A4c: release step -0.05..-0.14 mV, 10 mV step 3.4-4.7 s.
+
+variant        corner      T |       rest V     err@end mV     release mV      out@+1ms mV    t(1 mV) s
+orig           typical    27 |       1.6506         -1.023          0.335            3.035        4.968
+orig           ff         85 |       1.6510         -0.591         -0.050           -1.160        4.483
+orig           ss        -40 |       1.6501          1.162          0.312            6.514        4.141
+rvt            typical    27 |       1.6502         -1.155          0.464            4.253        5.069
+rvt            ff         85 |       1.6503         -0.762          0.042           -0.563        4.551
+rvt            ss        -40 |       1.6496          1.797          0.030            1.985        3.785
+B_10x10_0p28   typical    27 |       1.6500         -0.468          0.419            5.054        5.121
+B_10x10_0p28   ff         85 |       1.6503         -0.401         -0.429           -4.486        4.028
+B_10x10_0p28   ss        -40 |       1.6496         -1.270          0.501            8.325        4.287

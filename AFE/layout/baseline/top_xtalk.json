@@ -1,0 +1,25 @@
+{
+ "check": "top_xtalk",
+ "corners": {
+  "typ": {
+   "date": "2026-11-20 08:14",
+   "info": {
+    "adc": "schematic",
+    "amp": "schematic",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_xtalk_typ.log",
+   "values": {
+    "dcode_conv": 1.0,
+    "floor_lsb": 0.2772867878787879,
+    "kick_mv": 283.0,
+    "victim_conv_lsb": 0.001117090909090916,
+    "victim_conv_uv": 0.9000000000000057,
+    "victim_peak_mv": 0.648
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_top_xtalk.py"
+}

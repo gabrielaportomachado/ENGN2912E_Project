@@ -1,0 +1,123 @@
+{
+ "check": "adc_codes",
+ "corners": {
+  "ff-40": {
+   "date": "2026-11-20 07:32",
+   "info": {
+    "predictor": "237 decisions within 8 LSB of the threshold: misclassified by a constant threshold 18, by the bit-dependent threshold 0; theta0 -34.78 LSB, per-bit shift b11..b0 [LSB] -0.15 +0.15 -0.51 -0.25 +0.21 -0.49 +0.21 +0.15 -0.03 +0.03 -0.05 +0.14",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_codes_ff-40.log",
+   "values": {
+    "alpha": 0.9804804861821923,
+    "code_offset_lsb": -36.1,
+    "failed": 0.0,
+    "first_conv_dlsb": 0.24040928965519015,
+    "gain_err_pct": -0.018340897751019346,
+    "inl_code_lo_lsb": 0.6217968749206619,
+    "inl_lo_lsb": 0.2780080841251902,
+    "n_inputs": 12.0,
+    "t_offset_lsb": 35.87530976736173,
+    "theta_lsb": -34.77784926039582,
+    "top_2v10_lsb": 2.003724804335775,
+    "top_2v15_lsb": 2.97588232491114,
+    "unresolved": 0.0
+   }
+  },
+  "ff85": {
+   "date": "2026-11-20 07:30",
+   "info": {
+    "predictor": "183 decisions within 8 LSB of the threshold: misclassified by a constant threshold 14, by the bit-dependent threshold 0; theta0 -38.62 LSB, per-bit shift b11..b0 [LSB] +0.02 -0.02 -0.45 -0.25 +0.23 -0.40 +0.36 +0.24 +0.00 +0.14 -0.02 -0.13",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_codes_ff85.log",
+   "values": {
+    "alpha": 0.9800956724986872,
+    "code_offset_lsb": -40.1,
+    "failed": 0.0,
+    "first_conv_dlsb": 0.023873280458747103,
+    "gain_err_pct": -0.10830702471972692,
+    "inl_code_lo_lsb": 1.0697351744247712,
+    "inl_lo_lsb": 1.5655957692721358,
+    "n_inputs": 12.0,
+    "t_offset_lsb": 39.958170630023574,
+    "theta_lsb": -38.623394671636966,
+    "top_2v10_lsb": 3.5135265196810224,
+    "top_2v15_lsb": 4.426956078055923,
+    "unresolved": 0.0
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:31",
+   "info": {
+    "predictor": "236 decisions within 8 LSB of the threshold: misclassified by a constant threshold 12, by the bit-dependent threshold 0; theta0 -21.27 LSB, per-bit shift b11..b0 [LSB] -0.21 +0.21 -0.49 +0.06 -0.01 -0.10 +0.24 +0.02 -0.15 +0.14 -0.04 +0.04",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_codes_ss-40.log",
+   "values": {
+    "alpha": 0.9819138163936891,
+    "code_offset_lsb": -22.0,
+    "failed": 0.0,
+    "first_conv_dlsb": 0.31163031878418224,
+    "gain_err_pct": -0.0021654860830658987,
+    "inl_code_lo_lsb": 0.31894231560420394,
+    "inl_lo_lsb": 0.1596757133312856,
+    "n_inputs": 12.0,
+    "t_offset_lsb": 22.04510834437208,
+    "theta_lsb": -21.274664755703864,
+    "top_2v10_lsb": 0.011685516170178545,
+    "top_2v15_lsb": 0.13176968698387626,
+    "unresolved": 0.0
+   }
+  },
+  "ss125": {
+   "date": "2026-11-20 07:33",
+   "info": {
+    "predictor": "164 decisions within 8 LSB of the threshold: misclassified by a constant threshold 12, by the bit-dependent threshold 2; theta0 -25.10 LSB, per-bit shift b11..b0 [LSB] -0.16 +0.16 -0.57 -0.32 +0.19 -0.19 +0.30 -0.14 +0.07 +0.06 -0.10 -0.16",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_codes_ss125.log",
+   "values": {
+    "alpha": 0.9816554819674624,
+    "code_offset_lsb": -26.4,
+    "failed": 0.0,
+    "first_conv_dlsb": 0.06263676138571554,
+    "gain_err_pct": -0.008246056627755344,
+    "inl_code_lo_lsb": 0.25050730806806243,
+    "inl_lo_lsb": 0.1321872230837684,
+    "n_inputs": 12.0,
+    "t_offset_lsb": 26.07120863048747,
+    "theta_lsb": -25.100183507978517,
+    "top_2v10_lsb": 0.8712302536437377,
+    "top_2v15_lsb": 1.5782440430644087,
+    "unresolved": 0.0
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:29",
+   "info": {
+    "predictor": "181 decisions within 8 LSB of the threshold: misclassified by a constant threshold 21, by the bit-dependent threshold 1; theta0 -28.96 LSB, per-bit shift b11..b0 [LSB] -0.18 +0.18 -0.63 -0.13 +0.13 -0.29 +0.23 +0.25 +0.01 -0.24 -0.04 +0.06",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_codes_typ.log",
+   "values": {
+    "alpha": 0.9812068894832316,
+    "code_offset_lsb": -30.2,
+    "failed": 0.0,
+    "first_conv_dlsb": 0.35928841128300065,
+    "gain_err_pct": -0.00793567996468789,
+    "inl_code_lo_lsb": 0.5189423156042032,
+    "inl_lo_lsb": 0.11852737203789587,
+    "n_inputs": 12.0,
+    "t_offset_lsb": 29.89552335661356,
+    "theta_lsb": -28.955159969819235,
+    "top_2v10_lsb": 1.1851409022046013,
+    "top_2v15_lsb": 2.0630179783669504,
+    "unresolved": 0.0
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_adc_codes.py"
+}

@@ -1,0 +1,37 @@
+# LP step 6: isolated-p-well follower drawn by the PDK pcell, extracted by Magic, checked by the KLayout DRC deck (variant D).  2026-11-20 07:25:50
+# tools: KLayout 0.30.8, magic 8.3.636
+## 1. PDK pcell (klayout -b, USER set)
+SIZE variant   nfet_03v3 8 x 10u/1u, LVPWELL tap ring + DNWELL + P+ ring : 27.00 x 25.14 um = 678.8 um2
+LAYER 33/0     Contact   465 shapes, bbox 26.50 x 24.64 um
+LAYER 34/0     Metal1     17 shapes, bbox 12.82 x 11.34 um
+LAYER 31/0     Pplus       2 shapes, bbox 27.00 x 25.14 um
+LAYER 22/0     COMP        5 shapes, bbox 26.66 x 24.80 um
+LAYER 30/0     Poly2      16 shapes, bbox 11.64 x 11.32 um
+LAYER 12/0     DNWELL      1 shapes, bbox 20.50 x 18.64 um
+LAYER 204/0    LVPWELL     1 shapes, bbox 15.48 x 13.62 um
+LAYER 32/0     Nplus       1 shapes, bbox 13.20 x 10.48 um
+SIZE original  nfet_06v0_nvt 10u/2u with its P+ ring                          : 7.34 x 14.20 um = 104.2 um2
+SIZE runner-up nfet_03v3 10 x 10u/0.28u with its P+ ring, no DNWELL            : 10.76 x 13.06 um = 140.5 um2
+## 2. Magic extraction of the flattened cell (magic -dnull -noconsole, extract all, ext2spice lvs)
+.subckt fol_rvt
+X0 a_2062_0# a_1862_n132# a_1758_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X1 a_846_0# a_646_n132# a_542_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X2 a_2366_0# a_2166_n60# a_2062_0# w_n848_n864# nfet_03v3 ad=6.1p pd=21.22u as=2.6p ps=10.52u w=10u l=1u
+X3 a_1454_0# a_1254_n132# a_1150_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X4 a_1150_0# a_950_n60# a_846_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X5 a_1758_0# a_1558_n60# a_1454_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X6 a_542_0# a_342_n60# a_238_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=1u
+X7 a_238_0# a_38_n132# a_n84_0# w_n848_n864# nfet_03v3 ad=2.6p pd=10.52u as=6.1p ps=21.22u w=10u l=1u
+.ends
+   devices: 8 x nfet_03v3 ; bulk nets: w_n848_n864# (a well net of its own, not the substrate net of the cell)
+## 3. KLayout DRC, sign-off deck, variant D (run_drc.py --variant=D)
+   result files: 1; violations: 286 {'CO.6': 286}
+   well / diffusion / poly / implant rules violated (DN.*, LPW.*, NW.*, DF.*, PL.*, NP.*, PP.*): none
+   -> the ONLY violations are CO.6 (Metal1 overlap of contact >= 0.005 um): the pcell draws the contacts of its two rings (P+ tap ring in the LVPWELL, P+ ring around the DNWELL)
+      without Metal1; the layout adds the Metal1 rings that wire them (p-well ring -> out, outer ring -> vss).  The pcell also draws NO N+ tap for the DNWELL (Nplus has one shape,
+      the device): the layout must add one N+ / COMP tap inside the DNWELL outside the LVPWELL (the 2.5 um LPW.3 band) and wire it to vdd.
+20-Nov-2026 07:26:00 | ERROR   | Klayout DRC run is not clean.
+20-Nov-2026 07:26:00 | ERROR   | Violated rules are : {'CO.6'}
+## 4. What this shows: (a) the isolated-p-well follower can be drawn with the PDK generator; its footprint with both rings is the SIZE line above (ESTIMATE of the layout cost: variant minus
+   original); (b) Magic extracts 8 x nfet_03v3 w=10u l=1u whose bulk is a well net of its own (the LVPWELL), i.e. spice/ota2_rvt.spice with bulk = source is LVS-able; (c) no well-rule violation.
+   NOT shown: netgen LVS of the wired cell (the pcell leaves gates / sources / drains unconnected), the DNWELL tap, the complete amplifier cell (layout phases).

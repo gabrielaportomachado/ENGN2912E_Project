@@ -1,0 +1,28 @@
+LP step 6, screening of the follower candidates (lp_rvt_lib.CAND): stage-2 OTA + follower + sink in an INVERTING gain -1 loop made of two IDEAL 100 MOhm resistors (screening scaffold only),
+non-inverting input on the REAL vcm_out tap of bias_genc (1.65 V, as in the channel, so the pair's tail sits where it sits in the channel), DC sweep of the source: out = 2 vcm_out - Vx.
+For every candidate and corner: the output range in which the stage still follows (|d out / d Vx| >= 0.99 and >= 0.9), the node o2 and the follower Vgs / Vth at out = 1.15 / 1.65 / 2.15 V,
+the follower current.  The stage-2 loop of the channel has the same DC limits (o2 cannot go above VDD - Vdsat of the PMOS mirror nor below the pair's tail + Vdsat), so this finds the swing of a
+candidate in seconds; the candidates that pass are then run in the full channel (lp_rvt_swing.py).
+Columns: follow99 / follow90 = output range [V] around mid = vcm_out where |d out / d Vx| >= 0.99 / 0.90; tail = source node of the pair; o2, Vgs, Vth of the follower at out = mid - 0.5 /
+         mid / mid + 0.5 V; Id, gm of the follower at mid (all fingers); err = ideal - actual output [mV] at those three outputs (finite loop gain).  Needed range: mid +- 0.5 V = 1.15 ..
+         2.15 V at 3.3 V (Decision 17; +-0.5 mV x 1000); mid = VDD / 2 (ratiometric), so at another VDD the needed range moves with it.  nan = that output is not reached.
+
+candidate    corner      T  VDD | follow99 [V]  follow90 [V]  |  tail | o2 @mid-.5/mid/mid+.5 | Vgs @ same           | Vth @ same           |   Id uA   gm uS | err mV @ same         
+# orig: spice/ota2.spice as designed (nfet_06v0_nvt 10u/2u, bulk vss)
+orig         typical    27  3.3 | 0.544 - 2.200 0.501 - 2.200 | 0.369 |  0.612  1.147  1.680 | -0.038 -0.003  0.030 | -0.044 -0.016  0.009 |   5.148   100.4 |  -3.93  -2.77  -1.66   PASS (margin bottom 106 mV, top 550 mV)
+orig         ff         85  3.3 | 0.929 - 2.201 0.885 - 2.201 | 0.479 |    nan  0.878  1.416 |    nan -0.272 -0.234 |    nan -0.280 -0.252 |   8.330   147.3 |    nan  -3.33  -2.30   FAIL bottom 0.929 > 0.650
+orig         ss        -40  3.3 | 0.150 - 2.199 0.111 - 2.199 | 0.249 |  0.887  1.417  1.946 |  0.237  0.267  0.296 |  0.238  0.262  0.283 |   3.203    72.4 |  -3.42  -2.14  -0.88   PASS (margin bottom 500 mV, top 549 mV)
+# B_10_2: B: nfet_03v3 10u/2u, bulk vss (= the A4a follower)
+B_10_2       typical    27  3.3 | 0.019 - 1.793 0.009 - 1.880 | 0.369 |  1.625  2.268  2.895 |  0.975  1.118  1.245 |  0.892  1.033  1.156 |   5.148    67.5 |  -1.78  -0.44   0.99   PASS (margin bottom 631 mV, top 143 mV)
+B_10_2       ff         85  3.3 | 0.054 - 1.879 0.029 - 1.971 | 0.479 |  1.500  2.137  2.759 |  0.850  0.987  1.109 |  0.715  0.850  0.970 |   8.330    84.0 |  -2.15  -0.95   0.30   PASS (margin bottom 596 mV, top 229 mV)
+B_10_2       ss        -40  3.3 | 0.018 - 1.693 0.004 - 1.770 | 0.249 |  1.771  2.420  3.052 |  1.121  1.270  1.402 |  1.079  1.223  1.351 |   3.203    55.9 |  -1.30   0.27   2.08   PASS (margin bottom 632 mV, top 43 mV)
+# B_40_0p5: B: nfet_03v3 40u/0.5u, bulk vss
+B_40_0p5     typical    27  3.3 | 0.019 - 1.973 0.009 - 2.056 | 0.369 |  1.462  2.086  2.694 |  0.812  0.936  1.044 |  0.905  1.024  1.127 |   5.148   116.9 |  -2.12  -0.82   0.49   PASS (margin bottom 631 mV, top 323 mV)
+B_40_0p5     ff         85  3.3 | 0.144 - 2.084 0.105 - 2.180 | 0.479 |  1.301  1.921  2.525 |  0.651  0.771  0.875 |  0.730  0.846  0.946 |   8.330   160.9 |  -2.52  -1.36  -0.20   PASS (margin bottom 506 mV, top 434 mV)
+B_40_0p5     ss        -40  3.3 | 0.014 - 1.838 0.004 - 1.920 | 0.249 |  1.640  2.269  2.880 |  0.990  1.119  1.230 |  1.088  1.210  1.316 |   3.203    88.7 |  -1.61  -0.10   1.47   PASS (margin bottom 636 mV, top 188 mV)
+# C5_40_0p6: C: nfet_05v0 40u/0.6u, bulk vss
+C5_40_0p6    typical    27  3.3 | 0.019 - 1.948 0.009 - 2.035 | 0.369 |  1.460  2.095  2.713 |  0.810  0.945  1.063 |  0.924  1.049  1.155 |   5.148   118.9 |  -2.12  -0.80   0.53   PASS (margin bottom 631 mV, top 298 mV)
+C5_40_0p6    ff         85  3.3 | 0.184 - 2.079 0.145 - 2.171 | 0.479 |  1.264  1.899  2.518 |  0.614  0.749  0.868 |  0.722  0.845  0.951 |   8.330   163.2 |  -2.59  -1.40  -0.21   PASS (margin bottom 466 mV, top 429 mV)
+C5_40_0p6    ss        -40  3.3 | 0.014 - 1.793 0.004 - 1.870 | 0.249 |  1.680  2.317  2.935 |  1.030  1.167  1.285 |  1.136  1.265  1.374 |   3.203    90.4 |  -1.52   0.01   1.63   PASS (margin bottom 636 mV, top 143 mV)
+
+complete ngspice outputs: lp_rvt_screen_vocm1p15_nglogs.tgz

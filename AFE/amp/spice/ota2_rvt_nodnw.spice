@@ -1,0 +1,28 @@
+* ota2_rvt_nodnw.spice (LP step 6, 2026-11-20): SECOND FALLBACK of the stage-2 follower for audit issue M7, to be used ONLY if the organizer offers NEITHER the native-Vt device
+* nfet_06v0_nvt (ota2.spice) NOR the deep n-well (ota2_rvt.spice, the chosen variant).  Runner-up of the LP study, NOT the recommended variant.
+* DROP-IN like ota2_rvt.spice: same subckt name (ota2) and pins; include it INSTEAD of ota2.spice (afe_chc.spice or afe_chc_rvt.spice with it: they are identical).
+* THE ONE CHANGE = the follower Xmf:  nfet_06v0_nvt 10u/2u  ->  regular nfet_03v3  L = 0.28u (minimum)  W = 10u  m = 10, bulk on vss, no extra well.
+*   It works because at minimum length the 3.3 V NMOS has a much lower threshold (0.84 V at Vsb 1.65 V, typ; 1.13 V at L = 0.5u) and 100u / 0.28u is deep in weak inversion.
+*   LIMITS (AFE/amp/sim/lp_rvt_screen.log, lp_rvt_screen_vdd.log, lp_rvt_swing.log): the top of the output range is 2.32 / 2.44 / 2.18 V (typ 27 / ff 85 / ss -40 C, 3.3 V): only 32 mV
+*   above the needed 2.15 V at ss -40 C, and BELOW it at ss -40 C for VDD <= 3.15 V; the margin moves by about 55 mV per 0.02 um of gate length (L = 0.30u already fails at ss -40 C), so it
+*   depends on the minimum-length threshold roll-off of the model.  THD at +-0.5 mV 12.25 Hz 0.044 / 0.074 / 0.100 %, 0.42 % at +-0.6 mV ss -40 C.  f_hi is 8 % lower (602 / 925 / 386 Hz:
+*   the wide gate loads o2).  X2 S1 was run at typ only (AFE/adc/sim/lp_rvt_x2_s1_report.log: offset -30.35 LSB, INL below 2.05 V 0.68 LSB), not at ff 85 / ss -40 C.
+* ---- below: ota2.spice, unchanged except the line Xmf ----
+* A4a stage-2 OTA: NMOS pair + PMOS mirror load (high-impedance node o2 loaded by CC2) + NMOS source FOLLOWER (buffer, inside the stage-2 loop).
+* Pin order = the order xschem emits (inputs, outputs, inouts): inp inn vbn out vdd vss.
+* Pins: inp (non-inverting = gate of M1, the DIODE side of the mirror: I1 up -> o2 up; = VOUT_CM), inn (inverting = gate of M2, output side; feedback node), out (buffered), vdd vss, vbn (NMOS mirror gate bias from bias_gen).
+* Tail = mirror leg of the master (W/L = 1/20 vs master 4: ~1/80), pair at the same current density (W/L = 1/40 each), follower sink = KSF x master.
+* Diffusion: same DIFF scheme as ota1.spice (nrd = nrs = 0).  Dominant pole: CC2 (MIM, o2 to vss).
+.subckt ota2 inp inn vbn out vdd vss
+Xmt tail vbn vss vss nfet_03v3 L={OTA2_LT} W={OTA2_WT} nf=1 ad={DIFF*OTA2_WT*0.18u} as={DIFF*OTA2_WT*0.18u} pd={DIFF*2*(OTA2_WT+0.18u)} ps={DIFF*2*(OTA2_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm1 d1 inp tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm2 o2 inn tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm3 d1 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm4 o2 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+* follower (drain on vdd, gate o2, source out) and its sink (master unit 16u/4u x BM_KSF).  A4b: the follower is the PDK NATIVE-Vt 6 V NMOS nfet_06v0_nvt (vth0 -0.04 V typ),
+* NOT nfet_03v3: the 3.3 V device needs Vgs ~ 1.25 V with its body effect at out = 1.65 V, which clipped the output at ~1.94 V (A4b, sim/a4b_swing.log).  Min L of the model is 1.8u.
+* (second fallback) follower: regular 3.3 V NMOS, 10 x 10u/0.28u, bulk on vss.  OTA2_WF / OTA2_LF of afe_params.spice are not used by this file.
+Xmf vdd o2 out vss nfet_03v3 L=0.28u W=10u nf=1 ad={DIFF*10u*0.18u} as={DIFF*10u*0.18u} pd={DIFF*2*(10u+0.18u)} ps={DIFF*2*(10u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={10}
+Xms out vbn vss vss nfet_03v3 L=4u W=16u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={BM_KSF}
+Xcc o2 vss cap_mim_2f0_m2m3_noshield c_length={LCC2} c_width={LCC2}
+.ends ota2

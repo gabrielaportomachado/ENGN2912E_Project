@@ -1,0 +1,4 @@
+== bias_startup  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:45
+   job bs_sch_ff85_n8: exit 0, 0 s
+   job bs_sch_ff85_n1: exit 0, 0 s
+RESULT bias_startup ff85: t90_n8_ms=1.00525  i_sink_n8_ua=272.944  vbn_v=0.508889  vcm_v=1.6486  vrs_v=1.22211  settled_n8=1  t90_n1_ms=0.744558

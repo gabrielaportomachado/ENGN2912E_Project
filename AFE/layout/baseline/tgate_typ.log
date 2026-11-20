@@ -1,0 +1,3 @@
+== tgate  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:45
+   job tg_sch_typ: exit 0, 0 s
+RESULT tgate typ: ron_max_kohm=21.0207  ron_min_kohm=4.32431  ron_1v65_kohm=12.7422  v_at_ron_max=2.125  i_off_pa=0.0102972

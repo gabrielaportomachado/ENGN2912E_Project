@@ -1,0 +1,17 @@
+LP step 6: does the LVS-reference generator accept the native-Vt-free variant?  AFE/layout/scripts/mk_lvs_netlists.py is NOT edited (another session owns it): it is loaded in memory, its list
+SIM_FILES gets the two substitutions  AFE/amp/spice/ota2.spice -> ota2_rvt.spice  and  AFE/amp/spice/afe_chc.spice -> afe_chc_rvt.spice, and it writes to /tmp/lp_rvt/lvs_rvt (nothing under
+AFE/layout is touched).  The result is compared with a default run in /tmp/lp_rvt/lvs_orig and with the committed AFE/layout/lvs/.
+default run: OK;  run with SIM_FILES substituted (ota2.spice -> ota2_rvt.spice, afe_chc.spice -> afe_chc_rvt.spice): OK
+afe_chc.spice      default vs variant: 1 changed lines
+     -Xs2_xota2_xmf vdd xs2_xota2_o2 out vss nfet_06v0_nvt w=10u l=2u
+     +Xs2_xota2_xmf vdd xs2_xota2_o2 out out nfet_03v3 w=10u l=1u m=8
+                   default run in memory == committed AFE/layout/lvs/afe_chc.spice: True
+adc_ch.spice       default vs variant: 0 changed lines
+                   default run in memory == committed AFE/layout/lvs/adc_ch.spice: True
+bias_genc.spice    default vs variant: 0 changed lines
+                   default run in memory == committed AFE/layout/lvs/bias_genc.spice: True
+dbs_afe_top.spice  default vs variant: 1 changed lines
+     -Xs2_xota2_xmf vdd xs2_xota2_o2 out vss nfet_06v0_nvt w=10u l=2u
+     +Xs2_xota2_xmf vdd xs2_xota2_o2 out out nfet_03v3 w=10u l=1u m=8
+                   default run in memory == committed AFE/layout/lvs/dbs_afe_top.spice: True
+RESULT: PASS (expected: exactly ONE device line changes, the follower Xs2_xota2_xmf, in afe_chc.spice and in the copy of that cell in dbs_afe_top.spice; adc_ch and bias_genc unchanged)

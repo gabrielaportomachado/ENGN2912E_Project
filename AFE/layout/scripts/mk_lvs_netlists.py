@@ -16,7 +16,10 @@ or if a device is not in the list of gf180mcuD LVS devices.
   4. Cin (stage1c Xcin1, Xcin2; one 100.01 um plate = 10,002 um2 > the 10,000 um2 limit) -> N pieces (default 2 squares sized for C/N each, so the capacitance and the ratio Cin : Cf1 = 100
      stay as simulated).  --cin N,W,L sets what the layout draws.
   5. Cref (vrefs) stays ONE plate (59.07 um, P-A10).   6. Resistors: ppolyf_u_1k as in the netlists (F1 item 1); ppolyf_u_3k is refused.
-  7. Top: SPICE top = 8 x afe_ch + bias_genc + the supply devices (strap resistor, MOS decap) + the digital macro afe_dig as a BLACK BOX; pad-control ties as 0-ohm resistors.
+  7. Top: SPICE top = 8 x afe_ch + bias_genc + the supply devices (strap resistor, MOS decap) + the digital macro afe_dig as a BLACK BOX.  The 15 constant pad-control pins of the top
+     (`assign X = 1'b0 / 1'b1` in AFE/top/dbs_afe_top.v) are OUTPUT PINS of afe_dig, driven there by tie cells (Decision 46e, LP step 5; AFE/dig/afe_dig.v, whose tie values are
+     checked against the Verilog top here): each such top pin is simply a net between the pad and the macro pin of the same name.  `--ties resistor` writes the F1 form instead
+     (a 0-ohm resistor from the pin to VDD / VSS and no tie pins on afe_dig).
   8. Routing TGATE: TGATE/TGATE.spice with VDD / VSS on the analog strap; the two standard cells get VDD / VNW on the analog strap and VSS / VPW on vss.
 Every device parameter is evaluated to a number (netgen does not evaluate ngspice .param expressions); the simulation-only instance parameters (ad as pd ps nrd nrs sa sb sd, nf = 1) are dropped.
 Analog cells are written FLAT (one .subckt per cell, device names = the hierarchical simulation names with `_` for `.`), so the reference does not depend on the layout hierarchy:
@@ -29,7 +32,11 @@ Output (default AFE/layout/lvs/), one file per cell, each self-contained:
   dbs_afe_top.spice  everything above + TGATE + afe_ch + dbs_afe_top (L3); afe_dig is a black box (an empty .subckt with the L1d pin list, or the port order of --dig-netlist)
   mk_lvs_netlists.log   what was removed / replaced, device census, MIM and resistor tables, pin lists
 
-usage: python3 mk_lvs_netlists.py [--out DIR] [--cin N[,W_um,L_um]] [--cin-top sum|rec] [--decap W_um,L_um] [--rstrap MODEL,W_um,L_um] [--dig-netlist afe_dig.pnl.v]
+usage: python3 mk_lvs_netlists.py [--out DIR] [--cin N[,W_um,L_um]] [--cin-top sum|rec] [--decap W_um,L_um] [--decap-n NMAIN,NDAC] [--rstrap MODEL,W_um,L_um]
+                                  [--ties dig|resistor] [--dig-netlist afe_dig.pnl.v]
+  --decap-n NMAIN,NDAC   explicit numbers of decap units on the ADC-main strap (net VDD) and on the ADC-DAC strap (net vdd_dac), e.g. 80,64 for 8 x 10 and 8 x 8 units under the Cin
+                         plates (Decision 46c).  Default: the smallest number of units that reaches the capacitance asked in the Verilog top (0.125 nF / 0.1 nF).
+  --dig-netlist FILE     powered gate-level netlist of afe_dig (LP trial: AFE/dig/trial/afe_dig.pnl.v; L1d: the final one): the black-box instance follows ITS port order.
 """
 import os, re, sys, math, argparse
 
@@ -639,12 +646,23 @@ def main():
                     '(electrode / driven side on top, summing node on the bottom plate); sum = summing node on the top plate')
     ap.add_argument('--decap', default='20,20', help='W_um,L_um of ONE cap_nmos_03v3 decap unit (c_width, c_length)')
     ap.add_argument('--rstrap', default='rm3,2,222.2', help='MODEL,W_um,L_um of the 10 ohm strap resistor')
+    ap.add_argument('--decap-n', default=None, help='NMAIN,NDAC: explicit numbers of decap units on the ADC-main strap (VDD) and on the ADC-DAC strap (vdd_dac); default: computed from the capacitance')
+    ap.add_argument('--ties', default='dig', choices=('dig', 'resistor'), help='the 15 constant pad-control pins: dig = output pins of afe_dig driven by its tie cells (Decision 46e, default); '
+                    'resistor = 0-ohm resistors to VDD / VSS in the top (the F1 form)')
     ap.add_argument('--dig-netlist', default=None, help='powered gate-level netlist of afe_dig (L1d): its port order is used for the black-box instance')
     opt = ap.parse_args()
     c = opt.cin.split(',')
     opt.cin_n, opt.cin_w, opt.cin_l = int(c[0]), (float(c[1]) if len(c) == 3 else None), (float(c[2]) if len(c) == 3 else None)
     dw, dl = [float(x) for x in opt.decap.split(',')]
     rs_model, rs_w, rs_l = opt.rstrap.split(',')[0], float(opt.rstrap.split(',')[1]), float(opt.rstrap.split(',')[2])
+    decap_n = None
+    if opt.decap_n:
+        try:
+            decap_n = {'main': int(opt.decap_n.split(',')[0]), 'dac': int(opt.decap_n.split(',')[1])}
+        except Exception:
+            die('--decap-n expects NMAIN,NDAC (two integers), got %r' % opt.decap_n)
+        if min(decap_n.values()) < 1:
+            die('--decap-n: the numbers of units must be >= 1')
     if rs_model not in RES2 + RES3:
         die('--rstrap: unknown resistor model %s' % rs_model)
     os.makedirs(opt.out, exist_ok=True)
@@ -657,9 +675,23 @@ def main():
         if need not in mods:
             die('module %s not found in %s' % (need, TOP_V))
 
-    HDR = ('* LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).\n'
-           '* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: %s\n'
-           '* MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.\n' % (' '.join(sys.argv[1:]) or '(defaults)'))
+    # options as given on the command line, per file: the cell files (afe_chc / adc_ch / bias_genc) only depend on the Cin options, so their text does not change when the top is
+    # regenerated for another digital netlist, decap count or strap resistor (LP step 5)
+    argl, k = [], 1
+    while k < len(sys.argv):
+        a = sys.argv[k]
+        if a.startswith('--') and '=' not in a and k + 1 < len(sys.argv):
+            argl.append((a, a + ' ' + sys.argv[k + 1]))
+            k += 2
+        else:
+            argl.append((a.split('=')[0], a))
+            k += 1
+    opt_cells = ' '.join(t for f, t in argl if f in ('--cin', '--cin-top')) or '(defaults)'
+    opt_top = ' '.join(t for f, t in argl if f != '--out') or '(defaults)'
+    HDR0 = ('* LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).\n'
+            '* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: %s\n'
+            '* MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.\n')
+    HDR, HDR_TOP = HDR0 % opt_cells, HDR0 % opt_top
 
     # ---------------- flat analog cells
     flat = {}
@@ -839,9 +871,14 @@ def main():
             cn = float(par['C_NF'])
             unit = dw * dl * MOSCAP_FF_UM2 * 1e-6      # nF per unit
             m = int(math.ceil(cn / unit - 1e-9))
+            how = 'smallest number of units that reaches the capacitance asked'
+            if decap_n:
+                strap = 'dac' if p_ == 'vdd_dac' else 'main'       # the ADC-DAC strap is the net vdd_dac; the ADC-main strap is the net VDD
+                how = '--decap-n: %d units as placed on the ADC-%s strap (the capacitance alone would need %d)' % (decap_n[strap], strap, m)
+                m = decap_n[strap]
             supply_devs.append(('x' + iname, [p_, n_], 'cap_nmos_03v3', {'c_length': fmt_um(dl * 1e-6), 'c_width': fmt_um(dw * 1e-6), 'm': '%d' % m}))
-            P('  decap           X%s %s %s: cap_nmos_03v3  %d units of %g x %g um (c_width x c_length) = %.0f um2, %.2f fF/um2 at 3.3 V -> %.2f pF  (asked: %.1f pF)' % (
-                iname, p_, n_, m, dw, dl, m * dw * dl, MOSCAP_FF_UM2, m * unit * 1e3, cn * 1e3))
+            P('  decap           X%s %s %s: cap_nmos_03v3  %d units of %g x %g um (c_width x c_length) = %.0f um2, %.2f fF/um2 at 3.3 V -> %.2f pF  (asked: %.1f pF; %s)%s' % (
+                iname, p_, n_, m, dw, dl, m * dw * dl, MOSCAP_FF_UM2, m * unit * 1e3, cn * 1e3, how, '' if m * unit >= cn - 1e-12 else '   WARNING: LESS THAN ASKED'))
         else:
             top_lines.append(xline(top, iname, typ, pins))
             top_lines[-1] = (top_lines[-1][0], [A(x) for x in top_lines[-1][1]], top_lines[-1][2], {})
@@ -868,6 +905,22 @@ def main():
                 dig_map['%s[%d]' % (pin, len(b) - 1 - k)] = n
     for pin, net in DIG_POWER:
         dig_map[pin] = net
+    # pad-control constants (Decision 46e): tie cells inside afe_dig, one macro output pin per constant-tied top pin, same name
+    tie_pins = []
+    if opt.ties == 'dig':
+        dig_v = os.path.join(AFE, 'dig', 'afe_dig.v')
+        if not os.path.exists(dig_v):
+            die('--ties dig needs AFE/dig/afe_dig.v (the wrapper with the tie cells); use --ties resistor for the F1 form')
+        cells = {}
+        for mm in re.finditer(r'gf180mcu_fd_sc_mcu7t5v0__tie([hl])\s+\w+\s*\(\s*\.\w+\s*\(\s*(\w+)\s*\)\s*\)', re.sub(r'//[^\n]*', '', open(dig_v).read())):
+            cells[mm.group(2)] = 'VDD' if mm.group(1) == 'h' else 'VSS'
+        if cells != dict(ties):
+            die('pad-control constants: AFE/top/dbs_afe_top.v assigns %s, the tie cells of AFE/dig/afe_dig.v drive %s' % (sorted(ties), sorted(cells.items())))
+        for port, rail in ties:
+            if port in dig_map:
+                die('tie pin %s clashes with a signal pin of afe_dig' % port)
+            dig_map[port] = port
+            tie_pins.append(port)
     for i1, p1, _, _ in DIG_INTERNAL[2:]:
         for n in expand(dig[i1][p1], top):
             users = [x for x in top_lines if n in x[1]]
@@ -889,11 +942,13 @@ def main():
         dig_order = [p for p, _ in DIG_POWER]
         for pin, _, _ in DIG_PINS:
             dig_order += [pin] if dig_w[pin] == 1 else ['%s[%d]' % (pin, k) for k in range(dig_w[pin] - 1, -1, -1)]
-        dig_def = ('* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top, hardened in L1d) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first.\n'
+        dig_order += tie_pins
+        dig_def = ('* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top, hardened in L1d) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first'
+                   + (' and the %d pad-control tie pins last' % len(tie_pins) if tie_pins else '') + '.\n'
                    '* When the powered gate-level netlist exists, run this script with --dig-netlist <file>: the instance then follows the port order of that file and this empty definition is not written\n'
                    '* (the netlist itself goes into LVS_VERILOG_FILES, as in the organizer\'s mixed-signal example).\n' + wrap('.subckt afe_dig ' + ' '.join(dig_order)) + '\n.ends afe_dig\n')
     top_lines.insert(0, ('xdig', [dig_map[b] for b in dig_order], 'afe_dig', {}))
-    tie_lines = ['Rtie_%s %s %s 0' % (p, p, r) for p, r in ties]
+    tie_lines = ['Rtie_%s %s %s 0' % (p, p, r) for p, r in ties] if opt.ties == 'resistor' else []
     nets_top = set(n for l in top_lines + supply_devs for n in l[1])
     open_ports = [b for b in topbits if b not in nets_top and b not in [p for p, _ in ties]]
     if open_ports != ['DOUT_IN']:
@@ -907,7 +962,9 @@ def main():
     cnt = {}
     for l in top_lines:
         cnt[l[2]] = cnt.get(l[2], 0) + 1
-    P('  instances: %s + %d supply devices + %d pad-control ties (0-ohm resistors: %s)' % (', '.join('%d x %s' % (v, k) for k, v in cnt.items()), len(supply_devs), len(ties), ', '.join('%s-%s' % t for t in ties)))
+    P('  instances: %s + %d supply devices + %d pad-control ties (%s: %s)' % (', '.join('%d x %s' % (v, k) for k, v in cnt.items()), len(supply_devs), len(ties),
+                                                                              'output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant' if opt.ties == 'dig' else '0-ohm resistors',
+                                                                              ', '.join('%s-%s' % t for t in ties)))
     P('  pad pins that are plain nets of the macro: %s;  top port without a connection inside: %s (the pad input is not used, DOUT_IE = 0)' % (
         ', '.join('%s = afe_dig.%s' % (dig_map[p], p) for p in ('DOUT', 'DOUT_OE')), ' '.join(open_ports)))
     P('  net census: VDD on %d channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on %d channel pins + decap + strap' % (
@@ -934,10 +991,16 @@ def main():
     top_text = wrap('.subckt dbs_afe_top ' + ' '.join(topbits)) + '\n'
     top_text += '* digital macro\n' + dev_line(top_lines[0]) + '\n* shared bias and the 8 channels\n' + '\n'.join(dev_line(l) for l in top_lines[1:]) + '\n'
     top_text += '* supply network (Decision 44d): ADC-main strap decap and ADC-DAC strap decap (MOS capacitors, gate on the rail), the strap resistor between the two straps\n' + '\n'.join(dev_line(l) for l in supply_devs) + '\n'
-    top_text += ('* pad-control ties (Decision 41d / 44b): a top pin shorted to VDD or VSS, written as a 0-ohm resistor so that the pin keeps its own name.  Magic writes the same element from a layout\n'
-                 '* short with `ext2spice short resistor`; alternatively L1d can move the ties into afe_dig (then they are tie cells of the macro and these lines go away).\n' + '\n'.join(tie_lines) + '\n.ends dbs_afe_top\n')
-    top_file = (HDR + '* File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 8 x afe_ch + supply devices + pad-control ties;\n'
-                '* afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.\n\n'
+    if opt.ties == 'resistor':
+        top_text += ('* pad-control ties (Decision 41d / 44b): a top pin shorted to VDD or VSS, written as a 0-ohm resistor so that the pin keeps its own name.  Magic writes the same element from a layout\n'
+                     '* short with `ext2spice short resistor` (F1 form; the default since Decision 46e is tie cells inside afe_dig).\n' + '\n'.join(tie_lines) + '\n.ends dbs_afe_top\n')
+    else:
+        top_text += ('* pad-control ties (Decisions 41d / 44b / 46e): the %d constant pad-control pins (%s)\n'
+                     '* are driven by tie cells INSIDE afe_dig (gf180mcu_fd_sc_mcu7t5v0__tiel / __tieh) and reach the top pins as plain nets: there is no device for them at this level.\n'
+                     '.ends dbs_afe_top\n' % (len(ties), wrap(' '.join('%s = %s' % (p, '1' if r == 'VDD' else '0') for p, r in ties), 190).replace('\n+ ', '\n*   ')))
+    top_file = (HDR_TOP + '* File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 8 x afe_ch + supply devices%s;\n'
+                % (' + pad-control ties' if opt.ties == 'resistor' else '; the 15 pad-control constants are pins of afe_dig')
+                + '* afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.\n\n'
                 + '* ---------------- amplifier part\n' + cell('afe_chc') + '\n' + cell('fs_oneshot_c') + '\n' + ''.join(std_text[k] for k in sorted(std_text) if 'or2' in k) + '\n'
                 + subckt_text('amp_ch', group_ports['amp_ch'], group_text['amp_ch'])
                 + '\n* ---------------- ADC analog part\n' + cell('dac_sw') + '\n' + cell('cmp_p') + '\n' + cell('vhalf') + '\n' + cell('vrefs') + '\n' + ''.join(std_text[k] for k in sorted(std_text) if 'inv' in k) + '\n'
@@ -964,8 +1027,9 @@ def main():
     amp_n = per['afe_chc'] + per['fs_oneshot_c'] + sum(v for k, v in std_n.items() if 'or2' in k)
     adc_n = per['dac_sw'] + per['cmp_p'] + per['vhalf'] + per['vrefs'] + sum(v for k, v in std_n.items() if 'inv' in k)
     chn = amp_n + adc_n + 2 * per['tgate']
-    P('\nFLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch %d, adc_ch %d, afe_ch %d, bias_genc %d; chip without the digital macro: 8 x %d + %d + %d supply devices = %d (+ %d tie resistors)' % (
-        amp_n, adc_n, chn, per['bias_genc'], chn, per['bias_genc'], len(supply_devs), 8 * chn + per['bias_genc'] + len(supply_devs), len(ties)))
+    P('\nFLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch %d, adc_ch %d, afe_ch %d, bias_genc %d; chip without the digital macro: 8 x %d + %d + %d supply devices = %d (+ %d tie %s)' % (
+        amp_n, adc_n, chn, per['bias_genc'], chn, per['bias_genc'], len(supply_devs), 8 * chn + per['bias_genc'] + len(supply_devs), len(ties),
+        'resistors' if opt.ties == 'resistor' else 'pins of afe_dig, no device in the top'))
     open(os.path.join(opt.out, 'mk_lvs_netlists.log'), 'w').write('\n'.join(LOG) + '\n')
     print('\n'.join(LOG))
 

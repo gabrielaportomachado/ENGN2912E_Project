@@ -1,0 +1,4 @@
+== bias_startup  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:45
+   job bs_sch_typ_n8: exit 0, 0 s
+   job bs_sch_typ_n1: exit 0, 0 s
+RESULT bias_startup typ: t90_n8_ms=3.71468  i_sink_n8_ua=169.5  vbn_v=0.647681  vcm_v=1.64889  vrs_v=1.02819  settled_n8=1  t90_n1_ms=1.38735

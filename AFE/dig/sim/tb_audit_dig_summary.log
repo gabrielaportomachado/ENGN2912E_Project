@@ -1,0 +1,36 @@
+dig_FFN40              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_FFN40              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_FFN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_FFN40              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_FFN40              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_FFN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_FF125              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_FF125              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_FF125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_FF125              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_FF125              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_FF125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_TT                 2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_TT                 2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_TT                 2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_TT                 3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_TT                 3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_TT                 3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_SSN40              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_SSN40              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_SSN40              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_SSN40              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_SSN40              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_SSN40              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_SS125              2 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_SS125              2 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_SS125              2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_SS125              3 MHz main      202 assertions, 10 FAIL  FAILS: T11.crowbar T11.crowbar T11.crowbar X1.contention T11.crowbar T11.crowbar T11.crowbar T11.crowbar X5.after33d X5.word0 
+dig_SS125              3 MHz rstlate   26 assertions, 1 FAIL  FAILS: T11.crowbar 
+dig_SS125              3 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_FFN40_MIXED        2 MHz main      202 assertions, 17 FAIL  FAILS: T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X1.contention T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X5.after33d X5.word0 
+dig_FFN40_MIXED        2 MHz rstlate   26 assertions, 2 FAIL  FAILS: T2.settle T11.crowbar 
+dig_FFN40_MIXED        2 MHz noreset   3 assertions, 0 FAIL  FAILS: 
+dig_FFN40_MIXED        3 MHz main      202 assertions, 17 FAIL  FAILS: T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X1.contention T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar T2.settle T11.crowbar X5.after33d X5.word0 
+dig_FFN40_MIXED        3 MHz rstlate   26 assertions, 2 FAIL  FAILS: T2.settle T11.crowbar 
+dig_FFN40_MIXED        3 MHz noreset   3 assertions, 0 FAIL  FAILS: 

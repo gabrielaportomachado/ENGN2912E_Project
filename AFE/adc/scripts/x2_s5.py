@@ -12,6 +12,8 @@ import sys, os, time, numpy as np
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, H)
 import x2lib as X, x2_adc as A, x2_s4 as S4
 T = 500e-9; TFR = 250e-6; GNOM = 1000.0; TJ = 20e-6; TEDGE = 20e-6
+LOGP = os.environ.get('X2_LOG_PREFIX', 'x2')          # log-file prefix (LP kit: the wrappers of AFE/layout/tb use their own so that the X2 logs stay as they are)
+CALNPZ = os.environ.get('X2_CAL_NPZ', '')           # predictor calibration file instead of sim/x2_s1_<corner>.npz (a missing file = calibrate here); used with an extracted ADC cell
 SH = ['vcm', 'vcmo', 'vbn', 'vrs', 'vg1', 'vg2', 'ref']
 def esrc(c, v):
     return [f'Vsin{c} esa{c} tis 0', f'Vstp{c} es{c} esa{c} PWL(0 0 {TJ:.6e} 0 {TJ+TEDGE:.6e} {v:.9e})']
@@ -33,7 +35,7 @@ if __name__ == '__main__':
     vdd = X.COR[ck][2]; lsb = vdd / 4096; out = []; t00 = time.time()
     def P(s): print(s, flush=True); out.append(s)
     P(f'# X2 S5 {ck} {X.COR[ck]}: 2 channels (A4c amplifier + ADC cell) on one bias_genc, shared REF electrode, supply model {S4.MODEL}; aggressor levels {levels} V, TPRE {tpre*1e3:g} ms, SCLK 2 MHz, abstol 1e-12')
-    cal = X.Cal(vdd); npz = f'{X.ADC}/sim/x2_s1_{ck}.npz'
+    cal = X.Cal(vdd); npz = CALNPZ or f'{X.ADC}/sim/x2_s1_{ck}.npz'
     if os.path.exists(npz): z = np.load(npz); cal.theta, cal.alpha, cal.c0 = float(z['theta']), float(z['alpha']), float(z['c0']); cal.gw = z['gw'] if 'gw' in z else cal.gw; cal.obs = [tuple(r) for r in z['obs']] if 'obs' in z else []
     else:
         vc = list(1.15 + (np.arange(9) + 0.37) / 9); cal, rows, _ = A.static(ck, vc, log=P, tag=f's5cal_{ck}')
@@ -81,6 +83,6 @@ if __name__ == '__main__':
     ok = worst['dv'] / lsb < 0.5 and worst['dT'] < 0.5 and worst['dc'] == 0
     s = (f'RESULT S5 {ck}: aggressor kick spike on its own output up to {worst["spk"]*1e3:.0f} mV; on the victim output (A - B) peak {worst["vict"]*1e3:.3f} mV right after it; at the victim\'s next sampling instants |A - B| <= {worst["dv"]*1e6:.1f} uV = {worst["dv"]/lsb:.4f} LSB '
          f'= {worst["dv"]/GNOM*1e6:.4f} uV input-referred; victim code changes {worst["dc"]}, trial-12 residue change <= {worst["dT"]:.3f} LSB | {"PASS" if ok else "FAIL"} (limit 0.5 LSB); wall {time.time()-t00:.0f} s')
-    P(s); open(f'{X.ADC}/sim/x2_s5_summary.log', 'a').write(s + '\n')
-    open(f'{X.ADC}/sim/x2_s5_{ck}.log', 'w').write('\n'.join(out) + '\n')
-    open(f'{X.ADC}/sim/x2_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s5 {ck} done, wall {time.time()-t00:.0f} s\n')
+    P(s); open(f'{X.ADC}/sim/{LOGP}_s5_summary.log', 'a').write(s + '\n')
+    open(f'{X.ADC}/sim/{LOGP}_s5_{ck}.log', 'w').write('\n'.join(out) + '\n')
+    open(f'{X.ADC}/sim/{LOGP}_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s5 {ck} done, wall {time.time()-t00:.0f} s\n')

@@ -1,0 +1,4 @@
+== bias_startup  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:45
+   job bs_sch_ss-40_n1: exit 0, 0 s
+   job bs_sch_ss-40_n8: exit 0, 0 s
+RESULT bias_startup ss-40: t90_n8_ms=3564.81  i_sink_n8_ua=106.164  vbn_v=0.804863  vcm_v=1.64911  vrs_v=0.814347  settled_n8=1  t90_n1_ms=607.991

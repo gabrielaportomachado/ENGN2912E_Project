@@ -1,0 +1,3 @@
+== tgate  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:45
+   job tg_sch_ff85: exit 0, 0 s
+RESULT tgate ff85: ron_max_kohm=15.6051  ron_min_kohm=4.05784  ron_1v65_kohm=9.2535  v_at_ron_max=2.3  i_off_pa=0.0120119

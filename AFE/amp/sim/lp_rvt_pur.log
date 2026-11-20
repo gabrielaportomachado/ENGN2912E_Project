@@ -1,0 +1,13 @@
+STAGE pur (as scripts/run_a4c_b.sh pur, W = 100 ms): VDD ramp 0 -> 3.3 V in 1 ms from the all-zero state (no nodesets), no TGATE, then the IDEAL reset pulse (fs = RST_AMP) at 3 s for 100 ms, 12 s.
+  Time from the end of the pulse until the output stays within 10 mV / 1 mV of 1.65 V; supply current at the end.  A4c (sim/a4c_pur.log, 100 ms): within 1 mV after 0.14 / 0 / 0.92 s,
+  supply 74.4 / 119.3 / 46.8 uA (the 3k-poly ladders of that time; 74.4 / 118.8 / 47.1 uA with ppolyf_u_1k, F1).
+
+variant        corner      T |    final V     err mV |   t(10 mV) s    t(1 mV) s |   I sup uA   I master | out min / max before the reset
+orig           typical    27 |     1.6506       0.64 |        0.000        2.073 |      74.43      0.847 | 2.608 / 2.690 V
+orig           ff         85 |     1.6510       0.99 |        0.000        7.112 |     118.81      1.370 | 1.141 / 1.142 V
+orig           ss        -40 |     1.6502       0.21 |        0.000        1.901 |      47.13      0.527 | 0.009 / 2.944 V
+rvt            typical    27 |     1.6501       0.05 |        0.000        0.149 |      74.43      0.847 | 2.683 / 2.684 V
+rvt            ff         85 |     1.6503       0.30 |        0.000        2.529 |     118.81      1.370 | 2.322 / 2.833 V
+rvt            ss        -40 |     1.6496      -0.37 |        0.257        3.387 |      47.13      0.527 | -0.011 / 2.529 V
+# orig = spice/ota2.spice (nfet_06v0_nvt 10u/2u, bulk vss)
+# rvt = spice/ota2_rvt.spice + afe_chc_rvt.spice (nfet_03v3 8 x 10u/1u, isolated p-well, bulk = source)

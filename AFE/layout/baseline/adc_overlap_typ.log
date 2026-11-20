@@ -1,0 +1,8 @@
+== adc_overlap  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:33
+OVERLAP typ Vin 1.15000: code 1397 -> 1397, T +29.920 -> +29.920 LSB
+OVERLAP typ Vin 1.23774: code 1506 -> 1506, T +29.930 -> +29.927 LSB
+OVERLAP typ Vin 1.65024: code 2017 -> 2017, T +29.973 -> +29.970 LSB
+OVERLAP typ Vin 1.90000: code 2328 -> 2328, T +29.954 -> +29.953 LSB
+OVERLAP typ Vin 2.06274: code 2529 -> 2529, T +30.611 -> +30.610 LSB
+OVERLAP typ Vin 2.00000: code 2452 -> 2452, T +30.093 -> +30.094 LSB
+RESULT adc_overlap typ: dt_max_lsb=0.0036841  dcode_max=0  t_offset_nom_lsb=30.0804  t_offset_ovl_lsb=30.0791  overlap_ns=0.21  n=6

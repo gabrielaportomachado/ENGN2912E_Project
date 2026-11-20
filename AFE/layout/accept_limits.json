@@ -1,0 +1,945 @@
+{
+ "_about": "Machine-readable acceptance limits of AFE/layout/ACCEPT.md (PROPOSED until the user approves ACCEPT.md as Decision 47). Read by AFE/layout/tb/compare.py and AFE/layout/scripts/gate.py. kinds: max / min (value against the limit), range [lo, hi], absmax (|value|), dmax (|value - baseline|), dinc (value - baseline), rrange [lo, hi] (value / baseline), report (no limit). A limit may be a number or {corner: number}. nan_ok: a missing value passes. soft: a miss prints WARN and does not fail the gate. Rationale and the Decision behind every row: ACCEPT.md section 3.",
+ "amp_ac": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "g_mid_db": [
+    {
+     "kind": "range",
+     "limit": [
+      59.0,
+      61.0
+     ],
+     "why": "Decision 1: 60 +-1 dB"
+    },
+    {
+     "kind": "dmax",
+     "limit": 0.3,
+     "soft": true,
+     "why": "more than 0.3 dB from the baseline = the Cin : Cf1 ratio moved by more than 3 %: check the capacitor pieces"
+    }
+   ],
+   "f_lo_hz": [
+    {
+     "kind": "max",
+     "limit": 0.5,
+     "nan_ok": true,
+     "why": "Decisions 1, 2: f_lo <= 0.5 Hz (nan = no corner above 1 mHz)"
+    }
+   ],
+   "f_hi_hz": [
+    {
+     "kind": "min",
+     "limit": 300.0,
+     "why": "Decision 1: f_hi >= 300 Hz (baseline 653 / 998 / 422 Hz)"
+    }
+   ],
+   "idd_ua": [
+    {
+     "kind": "rrange",
+     "limit": [
+      0.95,
+      1.05
+     ],
+     "why": "a layout does not change the bias current: more than 5 % means a device or extraction error"
+    }
+   ],
+   "vout_v": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c)"
+    }
+   ],
+   "hf_dev_db": [
+    {
+     "kind": "max",
+     "limit": 2.0,
+     "why": "port-level stand-in for the stage-1 loop margin: 2 dB = about 8 deg (calibration in baseline/amp_loop.json); baseline 76-81 deg, Decision 12 wants >= 60 deg"
+    }
+   ],
+   "g_300_db": [
+    {
+     "kind": "report"
+    }
+   ],
+   "g_0p5_db": [
+    {
+     "kind": "report"
+    }
+   ],
+   "g1_mid_db": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "amp_noise": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "noise_d8_post_uv": [
+    {
+     "kind": "max",
+     "limit": 2.0,
+     "why": "Decisions 1, 4, 8: <= 2 uV rms in 0.5-300 Hz at typical flicker, pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline 1.668 / 1.847 / 1.540 uV"
+    }
+   ],
+   "noise_real_uv": [
+    {
+     "kind": "report"
+    }
+   ],
+   "noise_real_fn1_uv": [
+    {
+     "kind": "report",
+     "why": "fnoicor = 1: documented risk, Decision 10"
+    }
+   ]
+  }
+ },
+ "amp_loop": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "pm_deg": [
+    {
+     "kind": "min",
+     "limit": 60.0,
+     "nan_ok": true,
+     "why": "Decision 12 / 21b: stage-1 loop phase margin >= 60 deg with the real stage-2 load (baseline 79.2 / 76.4 / 81.1); nan = no anchor, then hf_dev_db of amp_ac decides"
+    }
+   ],
+   "fu_hz": [
+    {
+     "kind": "report"
+    }
+   ],
+   "t_100hz_db": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "amp_psrr": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "supply_gain_50hz": [
+    {
+     "kind": "range",
+     "limit": [
+      0.38,
+      0.62
+     ],
+     "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579)"
+    }
+   ],
+   "supply_gain_60hz": [
+    {
+     "kind": "report"
+    }
+   ],
+   "supply_gain_300hz": [
+    {
+     "kind": "report"
+    }
+   ],
+   "supply_gain_1khz": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "amp_thd": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "thd_pct": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 0.5,
+      "ss-40": 0.5,
+      "ff85": 4.5
+     },
+     "why": "no target; typ / ss -40 baseline 0.04-0.05 %; ff 85 C clips at the bottom, accepted by Decision 28 (baseline of this script 2.5-3.7 %)"
+    }
+   ],
+   "out_max_v": [
+    {
+     "kind": "min",
+     "limit": 2.13,
+     "why": "output reaches the top of the 1.15-2.15 V range (baseline 2.149-2.167 V)"
+    }
+   ],
+   "out_min_v": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 1.17,
+      "ss-40": 1.17,
+      "ff85": 1.25
+     },
+     "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28)"
+    }
+   ],
+   "gain_db": [
+    {
+     "kind": "range",
+     "limit": [
+      58.8,
+      61.0
+     ],
+     "why": "Decision 1 with the ff 85 compression (baseline 59.82)"
+    }
+   ],
+   "hd2_dbc": [
+    {
+     "kind": "report"
+    }
+   ],
+   "hd3_dbc": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "amp_pwrup": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "err_1s_mv": [
+    {
+     "kind": "max",
+     "limit": 10.0,
+     "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV)"
+    }
+   ],
+   "vout_before_v": [
+    {
+     "kind": "report",
+     "why": "a rail before the reset = the power-up latch of A4c, expected"
+    }
+   ]
+  }
+ },
+ "amp_reset": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "t_fs_ms_os10m": [
+    {
+     "kind": "rrange",
+     "limit": [
+      0.7,
+      1.4
+     ],
+     "why": "one-shot pulse: C_T x threshold / mirror current; baseline 3.0 / 1.6 / 5.8 ms (A4c 3.56 / 1.90 / 6.86 with its own threshold); 3 ms clears every step at typ and ss -40, 1 ms at ff 85"
+    }
+   ],
+   "t_1mv_s_os0": [
+    {
+     "kind": "max",
+     "limit": 4.5,
+     "why": "baseline 1.5 / 3.2 / 0.7 s"
+    }
+   ],
+   "t_1mv_s_os1m": [
+    {
+     "kind": "max",
+     "limit": 4.5,
+     "why": "baseline 0.004 / 1.4 / 0.5 s"
+    }
+   ],
+   "t_1mv_s_os10m": [
+    {
+     "kind": "max",
+     "limit": 6.5,
+     "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s)"
+    }
+   ],
+   "t_1mv_s_os100m": [
+    {
+     "kind": "max",
+     "limit": 12.0,
+     "why": "Decision 38b accepted 7.3-9.0 s (baseline 8.9 / 8.6 / 8.2 s)"
+    }
+   ],
+   "final_v_os100m": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "returns to mid-scale"
+    }
+   ],
+   "final_v_os10m": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "returns to mid-scale"
+    }
+   ],
+   "peak_mv_os100m": [
+    {
+     "kind": "report"
+    }
+   ],
+   "rel_step_mv_os10m": [
+    {
+     "kind": "report"
+    }
+   ],
+   "drift_mv_s_os10m": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "amp_reset_host": {
+  "phase": "L2b",
+  "convention": "design",
+  "metrics": {
+   "t_1mv_s_os10m": [
+    {
+     "kind": "max",
+     "limit": 6.5,
+     "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start"
+    }
+   ],
+   "t_1mv_s_os100m": [
+    {
+     "kind": "max",
+     "limit": 12.0,
+     "why": "as amp_reset"
+    }
+   ],
+   "final_v_os100m": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "returns to mid-scale"
+    }
+   ]
+  }
+ },
+ "amp_ac_junction": {
+  "phase": "L2b",
+  "convention": "junction",
+  "metrics": {
+   "g_mid_db": [
+    {
+     "kind": "range",
+     "limit": [
+      59.0,
+      61.0
+     ],
+     "why": "Decision 1 holds in both conventions"
+    }
+   ],
+   "f_hi_hz": [
+    {
+     "kind": "min",
+     "limit": 300.0,
+     "why": "Decision 1"
+    }
+   ],
+   "vout_v": [
+    {
+     "kind": "range",
+     "limit": [
+      1.5,
+      1.8
+     ],
+     "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check"
+    }
+   ],
+   "f_lo_hz": [
+    {
+     "kind": "max",
+     "limit": 0.5,
+     "nan_ok": true,
+     "why": "any corner below 0.5 Hz passes (Decision 2); in this convention it is below 1 mHz at typ and -40 C: report"
+    }
+   ]
+  }
+ },
+ "amp_pwrup_junction": {
+  "phase": "L2b",
+  "convention": "junction",
+  "metrics": {
+   "err_1s_mv": [
+    {
+     "kind": "max",
+     "limit": 50.0,
+     "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB"
+    }
+   ]
+  }
+ },
+ "amp_reset_host_junction": {
+  "phase": "L2b",
+  "convention": "junction",
+  "metrics": {
+   "drift_mv_s_os10m": [
+    {
+     "kind": "absmax",
+     "limit": 30.0,
+     "soft": true,
+     "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2)"
+    }
+   ],
+   "final_v_os10m": [
+    {
+     "kind": "report"
+    }
+   ],
+   "final_v_os100m": [
+    {
+     "kind": "report"
+    }
+   ],
+   "t_1mv_s_os10m": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "adc_codes": {
+  "phase": "L1b",
+  "metrics": {
+   "code_offset_lsb": [
+    {
+     "kind": "dmax",
+     "limit": 15.0,
+     "why": "a pure code shift (AC-coupled signal); F1 expects several LSB from junction and wiring capacitance (Decision 46d: L1b restates it); 15 LSB keeps the inputs of tb_adc_steps on their boundary"
+    }
+   ],
+   "inl_lo_lsb": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 1.0,
+      "ss-40": 1.0,
+      "ff-40": 1.0,
+      "ss125": 1.0,
+      "ff85": 2.5
+     },
+     "why": "Decision 43c: INL <= 1 LSB beyond the offset for inputs <= 2.0 V (typ); at ff 85 C the claim ends at 1.9 V (baseline 1.57 LSB up to 2.05 V, accepted)"
+    }
+   ],
+   "inl_code_lo_lsb": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 1.5,
+      "ss-40": 1.5,
+      "ff-40": 1.5,
+      "ss125": 1.5,
+      "ff85": 2.0
+     },
+     "why": "code-based INL less the quantisation: contains the code-dependent threshold accepted by Decision 43b (baseline 0.25-1.07)"
+    }
+   ],
+   "top_2v15_lsb": [
+    {
+     "kind": "dinc",
+     "limit": 1.5,
+     "why": "top-of-range plate error accepted by Decision 43c (+2.1 typ / +4.4 ff 85); L1b reports the change; more than +1.5 LSB on top needs the ladder"
+    }
+   ],
+   "top_2v10_lsb": [
+    {
+     "kind": "report"
+    }
+   ],
+   "alpha": [
+    {
+     "kind": "dmax",
+     "limit": 0.02,
+     "why": "plate attenuation: -0.02 = about 70 fF of extra capacitance on the 3.49 pF DAC top plate"
+    }
+   ],
+   "gain_err_pct": [
+    {
+     "kind": "range",
+     "limit": [
+      -0.5,
+      0.5
+     ],
+     "why": "ADC gain error (baseline -0.002 .. -0.11 %)"
+    }
+   ],
+   "unresolved": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "no metastable decision"
+    }
+   ],
+   "failed": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "every conversion converges"
+    }
+   ],
+   "first_conv_dlsb": [
+    {
+     "kind": "report",
+     "why": "Decision 43d: the host discards the first frame"
+    }
+   ]
+  }
+ },
+ "adc_steps": {
+  "phase": "L1b",
+  "metrics": {
+   "step_1536_lsb": [
+    {
+     "kind": "absmax",
+     "limit": 2.0,
+     "why": "Decision 43b accepted -1.1 LSB (typ / ff 85): static, below the 2.3 LSB rms of amplifier noise at the ADC input"
+    }
+   ],
+   "step_2048_lsb": [
+    {
+     "kind": "absmax",
+     "limit": 2.0,
+     "why": "Decision 43b accepted +1.3 / +1.55 LSB; with the MIM preamp capacitors F1 expects +0.8 / +1.3"
+    }
+   ],
+   "step_2112_lsb": [
+    {
+     "kind": "absmax",
+     "limit": 0.5,
+     "why": "roll-over of the LSB array: bridge capacitor and bridge-node parasitic (Decision 40a; 0.018 LSB per fF, baseline 0.05 LSB)"
+    }
+   ]
+  }
+ },
+ "adc_timing": {
+  "phase": "L1b",
+  "metrics": {
+   "settle_worst_lsb": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 0.5,
+      "ff-40": 0.5,
+      "ss125": 0.5,
+      "ss-40x": 1.0
+     },
+     "why": "DAC settled to 0.5 LSB when the comparator fires, inputs up to 2.0 V, matched corners; the mixed corner misses by 0.65-0.75 LSB pre-layout, accepted by Decision 44f"
+    }
+   ],
+   "late": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "every decision inside the window of the clock chain"
+    }
+   ],
+   "failed": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "every run converges"
+    }
+   ],
+   "td_max_ns": [
+    {
+     "kind": "report"
+    }
+   ],
+   "settle_trial1_lsb": [
+    {
+     "kind": "report"
+    }
+   ],
+   "settle_trial2_lsb": [
+    {
+     "kind": "report"
+    }
+   ],
+   "settle_top_lsb": [
+    {
+     "kind": "dinc",
+     "limit": 0.5,
+     "why": "inputs above 2.0 V: slow tail of the top-of-range error accepted by Decision 43c (baseline up to 1.45 LSB at ff -40); L1b reports the change"
+    }
+   ]
+  }
+ },
+ "adc_overlap": {
+  "phase": "L1b",
+  "metrics": {
+   "dt_max_lsb": [
+    {
+     "kind": "max",
+     "limit": 0.2,
+     "why": "the 0.21 ns driver-gate overlap of the gate-level timing (audit m3) must not move a transition (baseline 0.004 LSB)"
+    }
+   ],
+   "dcode_max": [
+    {
+     "kind": "max",
+     "limit": 1,
+     "why": "codes unchanged"
+    }
+   ]
+  }
+ },
+ "bias_startup": {
+  "phase": "L3b",
+  "metrics": {
+   "t90_n8_ms": [
+    {
+     "kind": "max",
+     "limit": 4500.0,
+     "why": "the host waits >= 5 s before RST_AMP (Decision 44c); baseline 3.7 / 1.0 / 3565 ms"
+    }
+   ],
+   "settled_n8": [
+    {
+     "kind": "min",
+     "limit": 1,
+     "why": "the bias reaches its final state"
+    }
+   ],
+   "vcm_v": [
+    {
+     "kind": "dmax",
+     "limit": 0.005,
+     "why": "ladder tap (ratio of matched ppolyf_u_1k segments): 5 mV = 6 LSB"
+    }
+   ],
+   "vrs_v": [
+    {
+     "kind": "dmax",
+     "limit": 0.03,
+     "why": "reset level of the replica"
+    }
+   ],
+   "i_sink_n8_ua": [
+    {
+     "kind": "rrange",
+     "limit": [
+      0.9,
+      1.1
+     ],
+     "why": "master current (beta multiplier, Rb 60 kOhm)"
+    }
+   ]
+  }
+ },
+ "tgate": {
+  "phase": "L3a",
+  "metrics": {
+   "ron_max_kohm": [
+    {
+     "kind": "max",
+     "limit": 133.0,
+     "why": "A4b: more than 133 kOhm in series breaks the 2 uV noise budget (baseline 21 / 16 / 34 kOhm)"
+    },
+    {
+     "kind": "rrange",
+     "limit": [
+      0.9,
+      1.1
+     ],
+     "why": "same devices: 10 %"
+    }
+   ],
+   "i_off_pa": [
+    {
+     "kind": "max",
+     "limit": 1.0,
+     "why": "off leakage below 1 pA inside the rails (audit i4)"
+    }
+   ]
+  }
+ },
+ "top_e2e": {
+  "phase": "L3b",
+  "metrics": {
+   "offset_lsb": [
+    {
+     "kind": "dmax",
+     "limit": 15.0,
+     "why": "pure code shift (Decisions 43e, 46d); same limit as adc_codes"
+    }
+   ],
+   "inl_lo_lsb": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 1.0,
+      "ss-40": 1.0,
+      "ff85": 2.5
+     },
+     "why": "Decision 43c: INL <= 1 LSB beyond the offset below 2.05 V; ff 85 C 1.99 LSB accepted (claim ends at 1.9 V)"
+    }
+   ],
+   "amp_minus_adc_lsb": [
+    {
+     "kind": "max",
+     "limit": 0.5,
+     "why": "settling of amplifier + TGATE into the ADC within T_ACQ: <= 0.5 LSB (pre-layout 0.08 LSB without the TGATE)"
+    }
+   ],
+   "gain_sine_code_db": [
+    {
+     "kind": "range",
+     "limit": {
+      "typ": [
+       59.0,
+       61.0
+      ],
+      "ss-40": [
+       59.0,
+       61.0
+      ],
+      "ff85": [
+       58.8,
+       61.0
+      ]
+     },
+     "why": "Decision 1 end to end (pre-layout 60.007 / 59.865 / 59.990 dB)"
+    }
+   ],
+   "unresolved": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "no metastable decision"
+    }
+   ],
+   "inl_all_lsb": [
+    {
+     "kind": "report",
+     "why": "whole 1.15-2.15 V range: top-of-range error accepted by Decision 43c"
+    }
+   ],
+   "vout_min_v": [
+    {
+     "kind": "report"
+    }
+   ],
+   "vout_max_v": [
+    {
+     "kind": "report"
+    }
+   ],
+   "kick_max_mv": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "top_supply": {
+  "phase": "L3b",
+  "metrics": {
+   "dt_max_lsb": [
+    {
+     "kind": "max",
+     "limit": 0.5,
+     "why": "shift of a transition level by the supply: <= 0.5 LSB (Decision 40e / 43f; pre-layout <= 0.03 LSB at the last trial, 0.25 LSB by input sweep at ff -40)"
+    }
+   ],
+   "dres_max_lsb": [
+    {
+     "kind": "max",
+     "limit": {
+      "typ": 0.5,
+      "ss125": 0.5,
+      "ff-40": 0.8
+     },
+     "why": "plate residue change at any decision instant; ff -40 C 3.6 V was AT 0.5 LSB pre-layout (an inductance item, Decision 43f): up to 0.8 is the pre-approved degradation, above it the ladder applies"
+    },
+    {
+     "kind": "max",
+     "limit": {
+      "ff-40": 0.5
+     },
+     "soft": true,
+     "why": "ff -40: more than the pre-layout 0.5 LSB: report and state the pad inductance used"
+    }
+   ],
+   "failed": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "every case converges"
+    }
+   ],
+   "dcode_max": [
+    {
+     "kind": "report",
+     "why": "a 1 LSB code change is not a measure of the error (X2 S4: the centred inputs sit on a transition)"
+    }
+   ],
+   "droop_dac_mv": [
+    {
+     "kind": "report"
+    }
+   ],
+   "droop_main_mv": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ },
+ "top_xtalk": {
+  "phase": "L3b",
+  "metrics": {
+   "victim_conv_lsb": [
+    {
+     "kind": "max",
+     "limit": 0.5,
+     "why": "what the neighbour's conversions add at the victim's next samples: <= 0.5 LSB (pre-layout 0.002 LSB; the kick only matters within 5 us of a resume)"
+    }
+   ],
+   "dcode_conv": [
+    {
+     "kind": "max",
+     "limit": 0,
+     "why": "the victim code does not change with the neighbour's conversions"
+    }
+   ],
+   "victim_peak_mv": [
+    {
+     "kind": "report"
+    }
+   ],
+   "kick_mv": [
+    {
+     "kind": "report"
+    }
+   ],
+   "floor_lsb": [
+    {
+     "kind": "report",
+     "why": "numerical floor between two separate runs, not crosstalk"
+    }
+   ]
+  }
+ },
+ "top_pwrup8": {
+  "phase": "L3b",
+  "metrics": {
+   "err_max_mv": [
+    {
+     "kind": "max",
+     "limit": 10.0,
+     "why": "L3b item 5: every output within 10 mV of 1.65 V 1 s after the common RST_AMP"
+    }
+   ],
+   "vrs_dip_mv": [
+    {
+     "kind": "max",
+     "limit": 60.0,
+     "soft": true,
+     "why": "dip of the shared reset level while 8 channels reset together (audit R10 estimate 12 mV; baseline 15 mV): report"
+    }
+   ],
+   "latched_before": [
+    {
+     "kind": "report",
+     "why": "8 = every channel latched before the reset, expected (A4c)"
+    }
+   ]
+  }
+ },
+ "top_stim": {
+  "phase": "L3b",
+  "metrics": {
+   "rec_dev_mv": [
+    {
+     "kind": "max",
+     "limit": 5.0,
+     "why": "the parked amplifier input stays on vcm_in while the IPG path carries 2.9 V pp"
+    }
+   ],
+   "out_dev_mv": [
+    {
+     "kind": "max",
+     "limit": 50.0,
+     "why": "the parked amplifier stays out of the rails during stimulation (baseline 0.02 mV)"
+    }
+   ],
+   "rec_dev_mv_leak": [
+    {
+     "kind": "max",
+     "limit": 5.0,
+     "why": "same with 200 pA of pad leakage on E and REF"
+    }
+   ],
+   "out_dev_mv_leak": [
+    {
+     "kind": "max",
+     "limit": 50.0,
+     "why": "same with 200 pA of pad leakage"
+    }
+   ],
+   "final_v": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "record start 0.3 s after the stimulation: back at mid-scale"
+    }
+   ],
+   "final_v_leak": [
+    {
+     "kind": "range",
+     "limit": [
+      1.6,
+      1.7
+     ],
+     "why": "same with pad leakage"
+    }
+   ],
+   "t_1mv_s": [
+    {
+     "kind": "max",
+     "limit": 4.5,
+     "why": "as amp_reset without offset (baseline 0.8 s)"
+    }
+   ],
+   "e_swing_v": [
+    {
+     "kind": "report"
+    }
+   ],
+   "e_resid_mv": [
+    {
+     "kind": "report"
+    }
+   ]
+  }
+ }
+}

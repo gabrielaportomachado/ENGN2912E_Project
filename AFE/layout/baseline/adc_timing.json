@@ -1,0 +1,84 @@
+{
+ "check": "adc_timing",
+ "corners": {
+  "ff-40": {
+   "date": "2026-11-20 07:49",
+   "info": {
+    "timing": "a_ff_n40",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_timing_ff-40.log",
+   "values": {
+    "dac_to_clk_ns": 21.41,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 1.4548284979329966,
+    "settle_trial1_lsb": 0.0058649394702570135,
+    "settle_trial2_lsb": 0.09802812163103328,
+    "settle_worst_lsb": 0.09802812163103328,
+    "td_avail_ns": 2.6599999999999997,
+    "td_max_ns": 0.9464527876159278
+   }
+  },
+  "ss-40x": {
+   "date": "2026-11-20 07:51",
+   "info": {
+    "timing": "a_ff_n40",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_timing_ss-40x.log",
+   "values": {
+    "dac_to_clk_ns": 21.41,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.7464603631024147,
+    "settle_trial1_lsb": 0.6495163834260135,
+    "settle_trial2_lsb": 0.4261139742104408,
+    "settle_worst_lsb": 0.6495163834260135,
+    "td_avail_ns": 2.6599999999999997,
+    "td_max_ns": 1.5484856029260134
+   }
+  },
+  "ss125": {
+   "date": "2026-11-20 07:50",
+   "info": {
+    "timing": "a_ss_125",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_timing_ss125.log",
+   "values": {
+    "dac_to_clk_ns": 85.01,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.278995255999007,
+    "settle_trial1_lsb": 0.001320861007457097,
+    "settle_trial2_lsb": 0.11297360535581902,
+    "settle_worst_lsb": 0.11297360535581902,
+    "td_avail_ns": 10.97,
+    "td_max_ns": 2.6429934279559655
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:48",
+   "info": {
+    "timing": "a_tt",
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/adc_timing_typ.log",
+   "values": {
+    "dac_to_clk_ns": 40.19,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.65248911863922,
+    "settle_trial1_lsb": 0.0012660584021625366,
+    "settle_trial2_lsb": 0.07394333243375899,
+    "settle_worst_lsb": 0.07394333243375899,
+    "td_avail_ns": 5.11,
+    "td_max_ns": 1.5330654836429904
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_adc_timing.py"
+}

@@ -1,0 +1,22 @@
+STAGE slew (as scripts/run_a4b.sh slew): electrode offset step +-0.5 mV at 5 ms (1 us edge): maximum |d out / dt|, 10-90 % rise time, step reached at 35 ms after the edge.
+  Need (ESTIMATE): 2 pi x 300 Hz x 0.5 V = 942 V/s.  A4b: 1937 / 2985 / 1227 V/s (typ / ff 85 / ss -40).
+
+variant        corner      T  step |    max V/s  t10-90 ms     step V
+orig           typical    27 +0.5m |       1949      0.484     0.4890
+orig           typical    27 -0.5m |       1936      0.484    -0.4889
+orig           ff         85 +0.5m |       3007      0.308     0.4856
+orig           ff         85 -0.5m |       2980      0.225    -0.4326
+orig           ss        -40 +0.5m |       1231      0.754     0.4880
+orig           ss        -40 -0.5m |       1221      0.753    -0.4879
+rvt            typical    27 +0.5m |       2056      0.459     0.4892
+rvt            typical    27 -0.5m |       2042      0.458    -0.4894
+rvt            ff         85 +0.5m |       3207      0.288     0.4859
+rvt            ff         85 -0.5m |       3178      0.275    -0.4788
+rvt            ss        -40 +0.5m |       1284      0.721     0.4879
+rvt            ss        -40 -0.5m |       1276      0.720    -0.4883
+B_10x10_0p28   typical    27 +0.5m |       1796      0.523     0.4882
+B_10x10_0p28   typical    27 -0.5m |       1782      0.530    -0.4886
+B_10x10_0p28   ff         85 +0.5m |       2791      0.331     0.4852
+B_10x10_0p28   ff         85 -0.5m |       2769      0.318    -0.4781
+B_10x10_0p28   ss        -40 +0.5m |       1125      0.816     0.4861
+B_10x10_0p28   ss        -40 -0.5m |       1118      0.829    -0.4874

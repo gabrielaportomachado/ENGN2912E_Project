@@ -1,0 +1,10 @@
+PADCTL PASS: DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU = 0, RSTN_PD = 1 (read 000000000000001)
+T2: fs[0] high from 0.017 ms to 105.517 ms = 105.500 ms (the host holds the bit; the RTL adds no timer)
+T3: fs rise - sw_rec rise (ch0) = 0.200 ns
+T3: fs pulse width ch0 3.5600 ms, ch7 3.5600 ms; 14 of 30 frames sampled during the pulse (code 0xAAA); word errors 0
+T5: break-before-make, sw_ipg fall -> sw_rec rise (treat -> record): 500.0 .. 500.0 ns
+e_ref 0  e_dout 0  DOUT_OE_ok 1
+RESULT PASS errors 0
+tb_top.v:172: $finish called at 114500310000 (1ps)
+EQUIVALENCE afe_dig vs reference top: RESULT PASS lines 1 (want 1), PADCTL PASS / FAIL lines 1 / 0 (want 1 / 0), log lines that differ from sim/i0_top.log (the $finish line excluded): 0 (want 0)
+EQUIV PASS

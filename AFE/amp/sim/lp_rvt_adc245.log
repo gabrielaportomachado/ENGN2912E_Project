@@ -1,0 +1,25 @@
+STAGE adc245 (the A4b check behind Decision 37): spice/adc_load.spice = IDEAL switch 1 kOhm + C_s 17 pF, NO reset: C_s starts +-0.24 V away from the amplifier output (300 Hz full-scale
+  sample-to-sample step), connected for T_ACQ = 245 us, amplifier at rest.  err(T) = v(C_s)(t0 + T) - v(out) before the connect [LSB = 0.806 mV].  A4b result: |err| <= 0.26 LSB at 245 us.
+
+variant        corner      T   dV V | err@ 11us err@ 50us err@100us err@150us err@200us err@245us | kick peak mV
+orig           typical    27  +0.24 |    -0.469    -0.400    -0.326    -0.266    -0.217    -0.180 |     226.7
+orig           typical    27  -0.24 |     0.118     0.101     0.082     0.067     0.054     0.045 |    -180.4
+orig           ff         85  +0.24 |    -0.438    -0.343    -0.251    -0.184    -0.135    -0.102 |     221.9
+orig           ff         85  -0.24 |     0.121     0.094     0.069     0.050     0.036     0.027 |    -163.7
+orig           ss        -40  +0.24 |    -0.485    -0.439    -0.385    -0.338    -0.297    -0.264 |     230.7
+orig           ss        -40  -0.24 |     0.103     0.092     0.079     0.069     0.059     0.052 |    -188.6
+rvt            typical    27  +0.24 |    -0.503    -0.425    -0.342    -0.275    -0.222    -0.183 |     225.3
+rvt            typical    27  -0.24 |     0.092     0.078     0.063     0.051     0.041     0.033 |    -149.8
+rvt            ff         85  +0.24 |    -0.485    -0.374    -0.268    -0.192    -0.138    -0.102 |     220.8
+rvt            ff         85  -0.24 |     0.117     0.090     0.065     0.046     0.033     0.024 |    -147.1
+rvt            ss        -40  +0.24 |    -0.503    -0.452    -0.393    -0.342    -0.298    -0.263 |     228.3
+rvt            ss        -40  -0.24 |     0.066     0.059     0.051     0.045     0.039     0.034 |    -147.6
+B_10x10_0p28   typical    27  +0.24 |    -0.416    -0.359    -0.297    -0.246    -0.204    -0.172 |     226.0
+B_10x10_0p28   typical    27  -0.24 |     0.049     0.042     0.035     0.029     0.024     0.020 |    -116.8
+B_10x10_0p28   ff         85  +0.24 |    -0.392    -0.312    -0.234    -0.175    -0.131    -0.101 |     221.3
+B_10x10_0p28   ff         85  -0.24 |     0.062     0.049     0.037     0.027     0.020     0.016 |    -113.8
+B_10x10_0p28   ss        -40  +0.24 |    -0.426    -0.387    -0.343    -0.304    -0.269    -0.242 |     229.2
+B_10x10_0p28   ss        -40  -0.24 |     0.034     0.031     0.028     0.025     0.022     0.019 |    -115.4
+# orig = spice/ota2.spice (nfet_06v0_nvt 10u/2u, bulk vss)
+# rvt = spice/ota2_rvt.spice + afe_chc_rvt.spice (nfet_03v3 8 x 10u/1u, isolated p-well, bulk = source)
+# B_10x10_0p28: B: nfet_03v3 10 x 10u/0.28u (minimum L), bulk vss, NO deep n-well

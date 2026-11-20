@@ -783,6 +783,32 @@ run_a4c_tbl.sh, run_a4c_prsize.sh, a4c_analyze.py, a4c_lib.py, a4c_ring.py, fs_p
   L3a: "--decap and --rstrap with the drawn sizes; the TGATE extracted view".
 - Not done: ss -40 for the Cxa what-if; the S4 / S5 runs with the chip rail partition (vana / vtg); netgen against a layout (none exists); bias start-up and corner ac / noise re-runs with the 1k poly; nothing under AFE/layout/amp/ or FLOW.md was touched.
 
+## LP findings (2026-11-20; layout preparation: the kit that lets ONE person run L1a, L1d, L2b, L1b, L3a, L3b, L4 without asking anyone; Claude Fable 5.2 / max; files AFE/layout/{SPEC.md, floorplan.json, ACCEPT.md, RUNBOOK.md, scripts/, tb/, baseline/, sim/}, AFE/dig/, AFE/prompts/layout_run.md; NO design netlist or RTL was changed)
+(written step by step; the summary "ready per phase / still needs a human / risks" is at the end of this section)
+- STEP 1, ENVIRONMENT CHECK: `bash AFE/layout/scripts/check_env.sh` (1-2 min; PASS / WARN / FAIL per line with the action on FAIL); reference run of this machine AFE/layout/sim/check_env_ref.log.
+  New kit commands used by every later phase: `AFE/layout/scripts/flow.py drc | lvs | pex | info | versions` (official KLayout deck --variant=D, Magic, netgen -batch; JSON reports that gate.py reads),
+  `kl.sh` + `kpdk.py` (KLayout-Python generators with the PDK pcells), `slot.sh` (machine-wide limit of 3 heavy jobs, common rule 4), `mk_testcells.py` (the five test cells below).
+  Facts established with evidence in that log (all on generated test cells, DRC variant D = 0 violations, netgen LVS = match):
+  (a) rm3 IS an LVS-extractable resistor of variant D (Decision 46e): 2 x 222.2 um extracts as `rm3 r_width=2u r_length=0.2222m` and matches. BUT the PDK pcell `metal_resistor` draws only layer 110/13; Magic builds the
+      device from Metal3 AND RES_MK (110/5) AND 110/13 in ONE cell, so the pcell extracts as two open Metal3 stubs and NO device. Use `kpdk.metal_res()` (draws all three shapes; DRC clean).
+  (b) cap_nmos_03v3 (20 x 20 um unit) extracts as a device, also when it lies UNDER a MIM plate (Decision 46c, test cell lp_cin_decap: one 70.65 um Cin piece over 4 decap units + a Metal3 shield: 1 MIM + 4 cap_nmos_03v3 on the right nets).
+  (c) MIM terminal order (Decision 46a): terminal 1 of cap_mim_2f0_m4m5_noshield = TOP plate (FuseTop / Metal5 side). A 5 x 5 um unit with plates labelled TOPNET / BOTNET extracts as `X0 TOPNET BOTNET ...`; LVS matches `X1 TOPNET BOTNET`
+      and does NOT match the swapped reference. F1's reading of the tech file was right; the `--cin-top sum` references are correct. (L2a's FLOW.md was not on origin: check_env.sh compares with it once it exists.)
+  (d) NEW, a trap for every post-layout number: Magic treats the MIM top-plate tile as Metal4 of the TOP-plate node, so a stock `ext2spice` attaches the capacitance between the capacitor and whatever lies below it (substrate, wells,
+      Metal1-3) to terminal 1. With the summing nodes on the top plates (Decision 46a) every PEX run would show a false parasitic on vn / vp / vn2, the DAC plate, the bridge node and the Cref node (test cell: 305.3 fF from the top plate
+      to the shield, 59-61 aF/um2 = the Metal4-to-Metal3 value of the tech file; in silicon the bottom plate shields it). `flow.py pex` extracts twice (stock, and with the MIM tile removed from the parasitic rules) and moves the
+      difference to the bottom-plate net(s): 10.7 fF left on the top plate, 294.6 fF moved to the bottom plate. Post-layout phases must use `flow.py pex`, never a raw ext2spice.
+  (e) The PDK pcells (nfet, pfet, nfet_06v0_nvt, cap_mim, cap_nmos, resistors, vias) DO work in KLayout batch mode once the environment variable USER exists (the container has none; draw_efuse.py reads it): `kl.sh` sets it.
+      This corrects AFE/layout/PLAN.md section 2 ("gdsfactory fails at import").
+  (f) Grid: every drawn dimension must be a multiple of 5 nm. The F1 default Cin piece 70.649 um is off grid (DRC *_OFFGRID): draw 70.65 um and regenerate with `mk_lvs_netlists.py --cin 2,70.65,70.65` (20.0006 pF, +0.003 %).
+  (g) The routing switch TGATE/TGATE.gds alone fails DRC (DF.13_MV / DF.14_MV: no well / substrate tap within 15 um) and extracts with its PMOS bulk on an unnamed net and the NMOS bulk on the bare substrate (the F1 note). With ONE filltie
+      standard cell abutted (test cell lp_tgate_tap) it is DRC clean and matches TGATE.spice: L3a places every TGATE with a tap cell.
+  (h) MIM rules that constrain the top-level wiring (KLayout deck mim_b.drc; design manual 10.4.2 fetched 2026-11-20): MIMTM.10 no Via3 on the bottom plate, the bottom plate is contacted only from above (Via4 / Metal5) or by a Metal4 wire;
+      MIMTM.11 capacitors may share one bottom-plate polygon only up to 10,000 um2 of MIM, so the REF net (16 pieces) must leave each plate pair through Via4 / Metal5 and must not be one Metal4 polygon; guideline "no sensitive matching analog
+      circuitry underneath MIM" (decap and wiring are allowed).
+  (i) ngspice here starts 8 threads per job unless the job directory has a .spiceinit (confirmed again); the PEX device lines (r_width / r_length, c_width / c_length, ad / as / pd / ps) load in ngspice with the PDK libraries
+      (add `.lib ... moscap_typical` for cap_nmos_03v3: the amplifier model files do not include it).
+
 ## Open questions
 - (F1, DECIDED by Decision 46a: summing nodes on the top plate) Plate order of the input MIM capacitors (Cin1 / Cin2 of stage 1, Cin of stage 2): the netlists have the summing nodes on the BOTTOM plates and LVS does not swap MIM terminals. Decide before L2a's LVS; `mk_lvs_netlists.py --cin-top sum` puts them on top ("F1 findings", attention 1).
 - (F1) After layout the comparator's preamp capacitors are 54.5 fF MIM units, not 40 fF: code offset about +1.5 / +1.9 LSB (typ / ff 85), and the offset is sensitive to junction capacitance by several LSB: the offsets of Decision 43e are pre-layout numbers, to be restated after L1b.

@@ -1,0 +1,8 @@
+== adc_timing  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:46
+TIMING typ Vin 1.15000 V code 1398 (ideal 1427): s_k [LSB] +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 +0.00 -0.00 +0.00 -0.00 +0.00 -0.00 | slowest decision 1.50 ns
+TIMING typ Vin 1.23774 V code 1507 (ideal 1536): s_k [LSB] +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | slowest decision 1.49 ns
+TIMING typ Vin 1.65024 V code 2017 (ideal 2048): s_k [LSB] +0.00 +0.07 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | slowest decision 1.51 ns
+TIMING typ Vin 1.90000 V code 2328 (ideal 2358): s_k [LSB] +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | slowest decision 1.50 ns
+TIMING typ Vin 2.06274 V code 2529 (ideal 2560): s_k [LSB] -0.12 -0.07 -0.07 -0.07 -0.06 -0.05 +0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | slowest decision 1.53 ns
+TIMING typ Vin 2.15000 V code 2635 (ideal 2668): s_k [LSB] -0.65 -0.25 -0.20 -0.14 -0.12 -0.10 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 | slowest decision 1.53 ns
+RESULT adc_timing typ: settle_worst_lsb=0.0739433  settle_trial1_lsb=0.00126606  settle_trial2_lsb=0.0739433  settle_top_lsb=0.652489  td_max_ns=1.53307  td_avail_ns=5.11  dac_to_clk_ns=40.19  late=0  failed=0

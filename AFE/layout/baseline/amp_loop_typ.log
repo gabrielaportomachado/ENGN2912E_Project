@@ -1,0 +1,10 @@
+== amp_loop  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:37
+   job loop_sch_typ: exit 0, 0 s
+   job loop_sch_typ_cx2: exit 0, 0 s
+   job loop_sch_typ_cx5: exit 0, 0 s
+   job loop_sch_typ_cx10: exit 0, 0 s
+   job hf_sch_typ_cx0: exit 0, 0 s
+   job hf_sch_typ_cx2: exit 0, 0 s
+   job hf_sch_typ_cx5: exit 0, 0 s
+   job hf_sch_typ_cx10: exit 0, 0 s
+RESULT amp_loop typ: t_100hz_db=60.8025  fu_hz=268536  pm_deg=79.1694  pm_cx2p_deg=71.4361  hfdev_cx2p_db=2.01613  pm_cx5p_deg=62.4032  hfdev_cx5p_db=5.88141  pm_cx10p_deg=52.6483  hfdev_cx10p_db=10.5705

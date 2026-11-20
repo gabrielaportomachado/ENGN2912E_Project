@@ -1,0 +1,6 @@
+== amp_reset_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:39
+   job rs_schprdiff_typ_1m: exit 0, 6 s
+   job rs_schprdiff_typ_0: exit 0, 9 s
+   job rs_schprdiff_typ_10m: exit 0, 15 s
+   job rs_schprdiff_typ_100m: exit 0, 31 s
+RESULT amp_reset_junction typ: t_fs_ms_os0=2.9849  peak_mv_os0=4.06778  rel_step_mv_os0=-5.39483  t_1mv_s_os0=0.00442534  final_v_os0=1.64943  drift_mv_s_os0=0.0259281  resid_end_mv_os0=0.00151973  t_fs_ms_os1m=3.08228  peak_mv_os1m=10.3149  rel_step_mv_os1m=-7.81303  t_1mv_s_os1m=4.84323  final_v_os1m=1.65465  drift_mv_s_os1m=1.00084  resid_end_mv_os1m=0.148969  t_fs_ms_os10m=3.11201  peak_mv_os10m=111.626  rel_step_mv_os10m=7.8309  t_1mv_s_os10m=nan  final_v_os10m=1.75926  drift_mv_s_os10m=9.54037  resid_end_mv_os10m=2.82688  t_fs_ms_os100m=3.02424  peak_mv_os100m=1078.64  rel_step_mv_os100m=10.7464  t_1mv_s_os100m=12.5887  final_v_os100m=2.73873  drift_mv_s_os100m=95.0948  resid_end_mv_os100m=0.0149287

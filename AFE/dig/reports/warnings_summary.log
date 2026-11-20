@@ -1,0 +1,16 @@
+LibreLane warning.log of the run, condensed: count, first occurrence of each distinct message (numbers and pin / net names folded)
+  2000  [EST-0026] Missing route to pin u_oe/I in net CS.
+     8  [DRT-0349] LEF58_ENCLOSURE with no CUTCLASS is not supported. Skipping for layer Via1
+     2  [EST-0026] message limit (1000) reached. This message will no longer print.
+     1  412 Lint warnings found.
+     1  Bterm VDD is declared as a 'POWER' pin. It will be ignored.
+     1  Bterm VSS is declared as a 'GROUND' pin. It will be ignored.
+     1  [RSZ-0020] found 2 floating nets.
+     1  [RSZ-0062] Unable to repair all setup violations.
+     1  [DRT-0120] Large net RSTN has 136 pins which may impact routing performance. Consider optimization.
+     1  [DRT-0120] Large net sclk_i has 161 pins which may impact routing performance. Consider optimization.
+     1  Threshold for Threshold-surpassing long wires is not set. The checker will be skipped.
+     1  'VSRC_LOC_FILES' was not given a value, which may make the results of IR drop analysis inaccurate. If you are not integrating a top-level chip for manufacture, you may ignore this warning, otherwise, see the documentation for 'VSRC_LOC_FILES'.
+     1  KLAYOUT_DRC_RUNSET is unset. KLayout.DRC may not be supported for the gf180mcuD PDK. This step will be skipped.
+     1  The KLayout DRC errors metric was not found. Are you sure the relevant step was run?
+     1  klayout__drc_error__count not reported. KLayout.DRC may have been skipped.

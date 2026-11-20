@@ -1,0 +1,17 @@
+== adc_codes  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:29
+   pass 1: 12 runs in 20 s, still open 7, failed 0; disk 13.3 GB, RAM 4319 MB free | predictor: 102 decisions within 8 LSB of the threshold: misclassified by a constant threshold 13, by the bit-dependent threshold 0; theta0 -29.28 LSB, per-bit shift b11..b0 [LSB] -0.07 +0.07 -0.38 -0.07 +0.13 -0.35 +0.17 +0.35 +0.00 +0.00 +0.00 +0.05
+   pass 2: 7 runs in 13 s, still open 1, failed 0; disk 13.2 GB, RAM 4205 MB free | predictor: 171 decisions within 8 LSB of the threshold: misclassified by a constant threshold 13, by the bit-dependent threshold 1; theta0 -29.01 LSB, per-bit shift b11..b0 [LSB] -0.15 +0.15 -0.58 -0.13 +0.14 -0.31 +0.22 +0.25 +0.01 -0.21 -0.02 +0.06
+   pass 3: 1 runs in 4 s, still open 0, failed 0; disk 13.2 GB, RAM 4165 MB free | predictor: 181 decisions within 8 LSB of the threshold: misclassified by a constant threshold 21, by the bit-dependent threshold 1; theta0 -28.96 LSB, per-bit shift b11..b0 [LSB] -0.18 +0.18 -0.63 -0.13 +0.13 -0.29 +0.23 +0.25 +0.01 -0.24 -0.04 +0.06
+ADC typ vin 1.183300 code 1439 ideal 1468 diff -29 | T +29.871 LSB | passes 1 unresolved 0
+ADC typ vin 1.273515 code 1550 ideal 1580 diff -30 | T +29.883 LSB | passes 2 unresolved 0
+ADC typ vin 1.363245 code 1661 ideal 1692 diff -31 | T +29.856 LSB | passes 2 unresolved 0
+ADC typ vin 1.453099 code 1773 ideal 1803 diff -30 | T +29.868 LSB | passes 2 unresolved 0
+ADC typ vin 1.543407 code 1884 ideal 1915 diff -31 | T +29.883 LSB | passes 2 unresolved 0
+ADC typ vin 1.633473 code 1996 ideal 2027 diff -31 | T +29.958 LSB | passes 1 unresolved 0
+ADC typ vin 1.723148 code 2109 ideal 2138 diff -29 | T +29.859 LSB | passes 1 unresolved 0
+ADC typ vin 1.813166 code 2220 ideal 2250 diff -30 | T +29.873 LSB | passes 1 unresolved 0
+ADC typ vin 1.903486 code 2332 ideal 2362 diff -30 | T +29.890 LSB | passes 1 unresolved 0
+ADC typ vin 1.993386 code 2443 ideal 2474 diff -31 | T +30.014 LSB | passes 2 unresolved 0
+ADC typ vin 2.100000 code 2574 ideal 2606 diff -32 | T +31.081 LSB | passes 3 unresolved 0
+ADC typ vin 2.150000 code 2635 ideal 2668 diff -33 | T +31.959 LSB | passes 2 unresolved 0
+RESULT adc_codes typ: code_offset_lsb=-30.2  t_offset_lsb=29.8955  inl_lo_lsb=0.118527  inl_code_lo_lsb=0.518942  top_2v10_lsb=1.18514  top_2v15_lsb=2.06302  gain_err_pct=-0.00793568  alpha=0.981207  theta_lsb=-28.9552  unresolved=0  failed=0  first_conv_dlsb=0.359288  n_inputs=12

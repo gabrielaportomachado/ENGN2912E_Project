@@ -1,0 +1,35 @@
+* ota2_rvt.spice (LP step 6, 2026-11-20): NATIVE-VT-FREE VARIANT of ota2.spice, the fallback for audit issue M7 (the organizer may not offer nfet_06v0_nvt).
+* DROP-IN: same subckt name (ota2), same pins (inp inn vbn out vdd vss), same parameters; include this file INSTEAD of ota2.spice (and afe_chc_rvt.spice instead of afe_chc.spice).
+* Do NOT include it together with ota2.spice (two definitions of ota2).  Nothing else changes: afe_params.spice, stage2c.spice, bias_genc.spice and every testbench are used as they are.
+* THE ONE CHANGE = the follower Xmf:
+*     original : nfet_06v0_nvt  L = 2u  W = 10u  m = 1, bulk on vss                    (native-Vt 6 V NMOS, Vgs ~ 0 V)
+*     variant  : nfet_03v3      L = 1u  W = 10u  m = 8, bulk tied to its SOURCE (out)  (regular 3.3 V NMOS in an ISOLATED p-well: LVPWELL inside DNWELL, the DNWELL on vdd)
+*   Why: with the bulk on the source there is no body effect, Vgs = 0.61 / 0.46 / 0.78 V (typ 27 / ff 85 / ss -40 C), so o2 = out + Vgs stays below VDD - Vdsat of the PMOS mirror up to
+*   out = 2.48 / 2.59 / 2.34 V (needed 2.15 V) and, because Vgs is now positive, above the pair's tail down to out < 0.6 V: the ff 85 C bottom limit of the native device (1.22 V, the
+*   accepted miss of Decision 28) is gone.  A regular nfet_03v3 with its bulk on vss (the A4a follower) clips at 1.80 / 1.88 / 1.70 V.  W / L = 80 / 1 (8 fingers of 10 um, the finger
+*   width of the original) puts the device in weak inversion: gm 116 / 159 / 90 uS (original 100 / 147 / 72 uS) and 192 mV of top margin at ss -40 C (42 mV at VDD = 3.0 V).
+*   Numbers: AFE/amp/sim/lp_rvt_screen*.log, lp_rvt_tables.log, lp_rvt_swing.log; summary AFE/amp/sim/lp_rvt_summary.md; scripts AFE/amp/scripts/lp_rvt_*.py.
+* LAYOUT: the 8 fingers sit in their own LVPWELL inside a DNWELL; the p-well tap (P+ in the LVPWELL) is wired to out, the DNWELL to vdd through an N+ / Nwell ring, a P+ substrate ring
+*   around it (rules DN.1-3, LPW.1-2, NW.3: AFE/layout/PLAN.md section 1).  LVS: Magic and the KLayout deck extract an NMOS inside DNWELL as nfet_03v3 with the LVPWELL as its bulk net
+*   (Magic gf180mcuD.tech `device msubcircuit nfet_03v3 nfet ndiff,ndc ndiff,ndc allpsub` with `substrate ... -dnwell,isosub`; KLayout mos_extraction.lvs "3.3V NMOS transistor inside
+*   DNWELL as regular, non dw device"), so this netlist is the LVS netlist.  The LVPWELL / DNWELL junction (out to vdd, reverse biased) is a parasitic, NOT a device of this netlist:
+*   its effect was simulated with the PDK model diode_pw2dw across the pins out / vdd (lp_rvt_tables log of the what-if run).
+* ---- below: ota2.spice, unchanged except the line Xmf ----
+* A4a stage-2 OTA: NMOS pair + PMOS mirror load (high-impedance node o2 loaded by CC2) + NMOS source FOLLOWER (buffer, inside the stage-2 loop).
+* Pin order = the order xschem emits (inputs, outputs, inouts): inp inn vbn out vdd vss.
+* Pins: inp (non-inverting = gate of M1, the DIODE side of the mirror: I1 up -> o2 up; = VOUT_CM), inn (inverting = gate of M2, output side; feedback node), out (buffered), vdd vss, vbn (NMOS mirror gate bias from bias_gen).
+* Tail = mirror leg of the master (W/L = 1/20 vs master 4: ~1/80), pair at the same current density (W/L = 1/40 each), follower sink = KSF x master.
+* Diffusion: same DIFF scheme as ota1.spice (nrd = nrs = 0).  Dominant pole: CC2 (MIM, o2 to vss).
+.subckt ota2 inp inn vbn out vdd vss
+Xmt tail vbn vss vss nfet_03v3 L={OTA2_LT} W={OTA2_WT} nf=1 ad={DIFF*OTA2_WT*0.18u} as={DIFF*OTA2_WT*0.18u} pd={DIFF*2*(OTA2_WT+0.18u)} ps={DIFF*2*(OTA2_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm1 d1 inp tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm2 o2 inn tail vss nfet_03v3 L={OTA2_LP} W={OTA2_WP} nf=1 ad={DIFF*OTA2_WP*0.18u} as={DIFF*OTA2_WP*0.18u} pd={DIFF*2*(OTA2_WP+0.18u)} ps={DIFF*2*(OTA2_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm3 d1 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+Xm4 o2 d1 vdd vdd pfet_03v3 L={OTA2_LL} W={OTA2_WL} nf=1 ad={DIFF*OTA2_WL*0.18u} as={DIFF*OTA2_WL*0.18u} pd={DIFF*2*(OTA2_WL+0.18u)} ps={DIFF*2*(OTA2_WL+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={1}
+* follower (drain on vdd, gate o2, source out) and its sink (master unit 16u/4u x BM_KSF).  ORIGINAL (ota2.spice): PDK native-Vt 6 V NMOS nfet_06v0_nvt 10u/2u, bulk vss;
+* the plain 3.3 V device with its bulk on vss needs Vgs ~ 1.25 V with its body effect at out = 1.65 V, which clipped the output at ~1.94 V (A4b, sim/a4b_swing.log).
+* (variant) follower: regular 3.3 V NMOS, 8 x 10u/1u, isolated p-well, bulk = source.  OTA2_WF / OTA2_LF of afe_params.spice are not used by this file.
+Xmf vdd o2 out out nfet_03v3 L=1u W=10u nf=1 ad={DIFF*10u*0.18u} as={DIFF*10u*0.18u} pd={DIFF*2*(10u+0.18u)} ps={DIFF*2*(10u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={8}
+Xms out vbn vss vss nfet_03v3 L=4u W=16u nf=1 ad={DIFF*16u*0.18u} as={DIFF*16u*0.18u} pd={DIFF*2*(16u+0.18u)} ps={DIFF*2*(16u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m={BM_KSF}
+Xcc o2 vss cap_mim_2f0_m2m3_noshield c_length={LCC2} c_width={LCC2}
+.ends ota2

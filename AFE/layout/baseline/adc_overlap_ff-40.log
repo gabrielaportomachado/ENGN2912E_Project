@@ -1,0 +1,8 @@
+== adc_overlap  netlist schematic  corner ff-40 (ff, -40 C, 3.6 V)  2026-11-20 07:33
+OVERLAP ff-40 Vin 1.25455: code 1392 -> 1392, T +35.619 -> +35.615 LSB
+OVERLAP ff-40 Vin 1.35026: code 1501 -> 1501, T +35.640 -> +35.638 LSB
+OVERLAP ff-40 Vin 1.80026: code 2011 -> 2011, T +35.972 -> +35.968 LSB
+OVERLAP ff-40 Vin 2.07273: code 2322 -> 2322, T +35.649 -> +35.650 LSB
+OVERLAP ff-40 Vin 2.25026: code 2522 -> 2522, T +37.032 -> +37.029 LSB
+OVERLAP ff-40 Vin 2.18182: code 2445 -> 2445, T +36.059 -> +36.058 LSB
+RESULT adc_overlap ff-40: dt_max_lsb=0.00414094  dcode_max=0  t_offset_nom_lsb=35.9953  t_offset_ovl_lsb=35.993  overlap_ns=0.21  n=6

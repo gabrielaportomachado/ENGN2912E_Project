@@ -1,0 +1,56 @@
+{
+ "check": "bias_startup",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:45",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/bias_startup_ff85.log",
+   "values": {
+    "i_sink_n8_ua": 272.94368366666674,
+    "settled_n8": 1.0,
+    "t90_n1_ms": 0.744558238,
+    "t90_n8_ms": 1.00524667,
+    "vbn_v": 0.508888542,
+    "vcm_v": 1.64860374,
+    "vrs_v": 1.22211138
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:45",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/bias_startup_ss-40.log",
+   "values": {
+    "i_sink_n8_ua": 106.16364030564785,
+    "settled_n8": 1.0,
+    "t90_n1_ms": 607.9914220000001,
+    "t90_n8_ms": 3564.80797,
+    "vbn_v": 0.804862654,
+    "vcm_v": 1.64910985,
+    "vrs_v": 0.814347245
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:45",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/bias_startup_typ.log",
+   "values": {
+    "i_sink_n8_ua": 169.499682,
+    "settled_n8": 1.0,
+    "t90_n1_ms": 1.38734987,
+    "t90_n8_ms": 3.71468328,
+    "vbn_v": 0.64768095,
+    "vcm_v": 1.64889235,
+    "vrs_v": 1.02818963
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_bias_startup.py"
+}

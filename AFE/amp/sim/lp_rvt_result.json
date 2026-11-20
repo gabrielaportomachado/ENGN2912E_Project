@@ -1,0 +1,556 @@
+{
+ "task": "LP step 6 (audit M7): native-Vt fallback of the stage-2 follower",
+ "date": "2026-11-20 07:30:18",
+ "variant": {
+  "name": "rvt",
+  "description": "regular nfet_03v3, 8 x 10u/1u, in an isolated p-well (LVPWELL in DNWELL, DNWELL on vdd), bulk tied to its source (out), in place of nfet_06v0_nvt 10u/2u (bulk vss)",
+  "files": [
+   "AFE/amp/spice/ota2_rvt.spice",
+   "AFE/amp/spice/afe_chc_rvt.spice"
+  ],
+  "subckt_names_and_pins": "unchanged (ota2: inp inn vbn out vdd vss; afe_chc: rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb)",
+  "use": "include ota2_rvt.spice instead of ota2.spice and afe_chc_rvt.spice instead of afe_chc.spice",
+  "device_changes": [
+   {
+    "instance": "afe_chc.Xs2.Xota2.Xmf (follower)",
+    "original": "nfet_06v0_nvt L=2u W=10u m=1, bulk vss",
+    "variant": "nfet_03v3 L=1u W=10u m=8, bulk = source (out), isolated p-well in deep n-well on vdd"
+   }
+  ],
+  "needs": "deep n-well (DNWELL) and LVPWELL layers; no native-Vt layer",
+  "netlist_checks_pass": true,
+  "layout": {
+   "pcell": "gf180mcu nfet, volt 3.3V, w_gate 10, l_gate 1, nf 8, deepnwell 1, pcmpgr 1, bulk Guard Ring",
+   "footprint_um": [
+    27.0,
+    25.14
+   ],
+   "footprint_um2": 678.8,
+   "original_footprint_um2": 104.2,
+   "extra_area_per_channel_um2": 574.6,
+   "wiring": "p-well tap ring -> out; N+ tap in the DNWELL (not drawn by the pcell) -> vdd; outer P+ ring -> vss; Metal1 on the ring contacts (CO.6)",
+   "source": "AFE/amp/sim/lp_rvt_dnw_cell.log"
+  },
+  "lvs": {
+   "sim_files_substitution": {
+    "AFE/amp/spice/ota2.spice": "AFE/amp/spice/ota2_rvt.spice",
+    "AFE/amp/spice/afe_chc.spice": "AFE/amp/spice/afe_chc_rvt.spice"
+   },
+   "reference_line": "Xs2_xota2_xmf vdd xs2_xota2_o2 out out nfet_03v3 w=10u l=1u m=8",
+   "source": "AFE/amp/sim/lp_rvt_lvs_check.log"
+  }
+ },
+ "corners": {
+  "typ": "typical 27 C 3.3 V",
+  "ff85": "ff 85 C 3.3 V",
+  "ss-40": "ss -40 C 3.3 V"
+ },
+ "original": {
+  "typ": {
+   "gain_db": 60.0559,
+   "f_lo_hz": 0.202295,
+   "f_hi_hz": 653.466,
+   "noise_uv": 1.66753,
+   "noise_fnoicor1_uv": 4.7195,
+   "pm_deg": 87.7435,
+   "pm_stage2_real_beta_deg": 90.4623,
+   "pm_stage1_loop_deg": 79.1694,
+   "a0_stage2_db": 59.6458,
+   "gbw_stage2_hz": 7334.71,
+   "idd_ua": 74.43,
+   "out_dc_err_mv": 0.804947,
+   "o2_v": 1.68102,
+   "follower_vgs_v": 0.0303819,
+   "follower_gm_us": 100.37100000000001,
+   "psrr_path_50hz_v_per_v": 0.570984,
+   "out_max_v": 2.1539528,
+   "out_min_v": 1.14812749,
+   "thd_pct": 0.03379759424317876,
+   "gain_tran_db": 60.03523122470101,
+   "thd_0p6mv_pct": 0.03834879348619886,
+   "thd_300hz_pct": 0.042928783826659905,
+   "settle_lsb": 0.09035603915238855,
+   "settle_end_raw_lsb": 0.08326871794034603,
+   "kick_spike_mv": 277.55051988309344,
+   "settle_end_tight_tol_lsb": 0.08637222811581081,
+   "adc245_ideal_load_lsb": 0.18026123636363164,
+   "slew_v_per_s": 1936.0102781765163,
+   "follow_lo_v": 0.898053176,
+   "follow_hi_v": 2.96790444,
+   "swing_margin_top_mv": 818.07285,
+   "swing_margin_bottom_mv": 251.778414
+  },
+  "ff85": {
+   "gain_db": 60.0605,
+   "f_lo_hz": 0.226017,
+   "f_hi_hz": 997.579,
+   "noise_uv": 1.84693,
+   "noise_fnoicor1_uv": 4.93342,
+   "pm_deg": 87.1259,
+   "pm_stage2_real_beta_deg": 90.3621,
+   "pm_stage1_loop_deg": 76.3977,
+   "a0_stage2_db": 60.2496,
+   "gbw_stage2_hz": 11224.0,
+   "idd_ua": 118.81099999999999,
+   "out_dc_err_mv": 1.1124399999999999,
+   "o2_v": 1.41701,
+   "follower_vgs_v": -0.233948,
+   "follower_gm_us": 147.455,
+   "psrr_path_50hz_v_per_v": 0.57856,
+   "out_max_v": 2.1855902,
+   "out_min_v": 1.21992059,
+   "thd_pct": 2.5050596706347976,
+   "gain_tran_db": 59.88407293681927,
+   "thd_0p6mv_pct": 6.126453444020185,
+   "thd_300hz_pct": 0.40649287017967384,
+   "settle_lsb": 0.08906578893699843,
+   "settle_end_raw_lsb": 0.10115519499744226,
+   "kick_spike_mv": 291.50094212871744,
+   "settle_end_tight_tol_lsb": 0.09426734620954359,
+   "adc245_ideal_load_lsb": 0.10197798787885404,
+   "slew_v_per_s": 2980.4784378269687,
+   "follow_lo_v": 1.28782584,
+   "follow_hi_v": 3.14842526,
+   "swing_margin_top_mv": 998.5771299999997,
+   "swing_margin_bottom_mv": -137.97770999999992
+  },
+  "ss-40": {
+   "gain_db": 60.0413,
+   "f_lo_hz": 0.237402,
+   "f_hi_hz": 422.015,
+   "noise_uv": 1.53982,
+   "noise_fnoicor1_uv": 4.3931700000000005,
+   "pm_deg": 88.2942,
+   "pm_stage2_real_beta_deg": 90.6086,
+   "pm_stage1_loop_deg": 81.0839,
+   "a0_stage2_db": 58.4577,
+   "gbw_stage2_hz": 4719.02,
+   "idd_ua": 47.1327,
+   "out_dc_err_mv": 0.42454899999999995,
+   "o2_v": 1.94573,
+   "follower_vgs_v": 0.29553,
+   "follower_gm_us": 72.1438,
+   "psrr_path_50hz_v_per_v": 0.565782,
+   "out_max_v": 2.15225995,
+   "out_min_v": 1.14832918,
+   "thd_pct": 0.04405853497222487,
+   "gain_tran_db": 60.01987357584212,
+   "thd_0p6mv_pct": 0.048347369164823156,
+   "thd_300hz_pct": 0.1649003722620592,
+   "settle_lsb": 0.07486532923108632,
+   "settle_end_raw_lsb": 0.06731875953423035,
+   "kick_spike_mv": 253.82240151241692,
+   "settle_end_tight_tol_lsb": 0.06393076772093871,
+   "adc245_ideal_load_lsb": 0.26405546666644636,
+   "slew_v_per_s": 1221.3422247762792,
+   "follow_lo_v": 0.498365816,
+   "follow_hi_v": 2.76220826,
+   "swing_margin_top_mv": 612.43326,
+   "swing_margin_bottom_mv": 651.409184
+  }
+ },
+ "variant_results": {
+  "typ": {
+   "gain_db": 60.0624,
+   "f_lo_hz": 0.202604,
+   "f_hi_hz": 689.927,
+   "noise_uv": 1.66838,
+   "noise_fnoicor1_uv": 4.72218,
+   "pm_deg": 87.6171,
+   "pm_stage2_real_beta_deg": 90.4192,
+   "pm_stage1_loop_deg": 79.1705,
+   "a0_stage2_db": 60.0715,
+   "gbw_stage2_hz": 7748.48,
+   "idd_ua": 74.4299,
+   "out_dc_err_mv": 0.382284,
+   "o2_v": 2.26222,
+   "follower_vgs_v": 0.612005,
+   "follower_gm_us": 115.78,
+   "psrr_path_50hz_v_per_v": 0.572008,
+   "out_max_v": 2.15371291,
+   "out_min_v": 1.14722282,
+   "thd_pct": 0.034876473828723865,
+   "gain_tran_db": 60.0411488139316,
+   "thd_0p6mv_pct": 0.041114857079965705,
+   "thd_300hz_pct": 0.04958153517475554,
+   "settle_lsb": 0.022093025355272213,
+   "settle_end_raw_lsb": 0.015018116264366383,
+   "kick_spike_mv": 207.03420456835897,
+   "settle_end_tight_tol_lsb": 0.022514736070859843,
+   "adc245_ideal_load_lsb": 0.18253265454542558,
+   "slew_v_per_s": 2041.6390019413084,
+   "follow_lo_v": 0.273045813,
+   "follow_hi_v": 2.47786582,
+   "swing_margin_top_mv": 328.0342300000001,
+   "swing_margin_bottom_mv": 876.785777
+  },
+  "ff85": {
+   "gain_db": 60.0711,
+   "f_lo_hz": 0.226391,
+   "f_hi_hz": 1064.57,
+   "noise_uv": 1.8473300000000001,
+   "noise_fnoicor1_uv": 4.93486,
+   "pm_deg": 86.903,
+   "pm_stage2_real_beta_deg": 90.2923,
+   "pm_stage1_loop_deg": 76.3999,
+   "a0_stage2_db": 60.9782,
+   "gbw_stage2_hz": 11989.6,
+   "idd_ua": 118.81099999999999,
+   "out_dc_err_mv": 0.49333099999999996,
+   "o2_v": 2.11197,
+   "follower_vgs_v": 0.461629,
+   "follower_gm_us": 158.607,
+   "psrr_path_50hz_v_per_v": 0.579676,
+   "out_max_v": 2.18649024,
+   "out_min_v": 1.17917682,
+   "thd_pct": 0.07768601909668765,
+   "gain_tran_db": 60.049786168418976,
+   "thd_0p6mv_pct": 0.09795715282827903,
+   "thd_300hz_pct": 0.02167608119791104,
+   "settle_lsb": 0.010152566197684287,
+   "settle_end_raw_lsb": 0.15572192377343863,
+   "kick_spike_mv": 222.32994682073226,
+   "settle_end_tight_tol_lsb": 0.01055030303039971,
+   "adc245_ideal_load_lsb": 0.10207728484849875,
+   "slew_v_per_s": 3177.7417119513266,
+   "follow_lo_v": 0.5678364,
+   "follow_hi_v": 2.59330372,
+   "swing_margin_top_mv": 443.45559000000014,
+   "swing_margin_bottom_mv": 582.0117300000001
+  },
+  "ss-40": {
+   "gain_db": 60.0463,
+   "f_lo_hz": 0.237568,
+   "f_hi_hz": 440.718,
+   "noise_uv": 1.54115,
+   "noise_fnoicor1_uv": 4.39721,
+   "pm_deg": 88.2395,
+   "pm_stage2_real_beta_deg": 90.5782,
+   "pm_stage1_loop_deg": 81.0845,
+   "a0_stage2_db": 58.7563,
+   "gbw_stage2_hz": 4932.56,
+   "idd_ua": 47.1326,
+   "out_dc_err_mv": -0.14142700000000002,
+   "o2_v": 2.42985,
+   "follower_vgs_v": 0.780219,
+   "follower_gm_us": 89.5443,
+   "psrr_path_50hz_v_per_v": 0.566907,
+   "out_max_v": 2.15159199,
+   "out_min_v": 1.14735083,
+   "thd_pct": 0.05024882113080542,
+   "gain_tran_db": 60.023234939284094,
+   "thd_0p6mv_pct": 0.06758237652259187,
+   "thd_300hz_pct": 0.16188697373265362,
+   "settle_lsb": 0.025902855990474448,
+   "settle_end_raw_lsb": 0.04274610447520783,
+   "kick_spike_mv": 200.32057511315395,
+   "settle_end_tight_tol_lsb": 0.026089136182503966,
+   "adc245_ideal_load_lsb": 0.2633479757577968,
+   "slew_v_per_s": 1276.4954720004462,
+   "follow_lo_v": 0.102835378,
+   "follow_hi_v": 2.34215207,
+   "swing_margin_top_mv": 192.37707000000003,
+   "swing_margin_bottom_mv": 1046.939622
+  }
+ },
+ "runner_up": {
+  "name": "B_10x10_0p28",
+  "description": "regular nfet_03v3, 10 x 10u/0.28u (minimum L), bulk on vss, NO deep n-well: second fallback if neither the native-Vt device nor DNWELL is offered",
+  "file": "AFE/amp/spice/ota2_rvt_nodnw.spice",
+  "results": {
+   "typ": {
+    "gain_db": 60.0487,
+    "f_lo_hz": 0.202227,
+    "f_hi_hz": 601.934,
+    "noise_uv": 1.66608,
+    "noise_fnoicor1_uv": 4.71497,
+    "pm_deg": 88.0058,
+    "pm_stage2_real_beta_deg": 90.5383,
+    "pm_stage1_loop_deg": 79.1678,
+    "a0_stage2_db": 58.9827,
+    "gbw_stage2_hz": 6752.87,
+    "idd_ua": 74.43,
+    "out_dc_err_mv": 0.15545199999999998,
+    "o2_v": 2.3317,
+    "follower_vgs_v": 0.681716,
+    "follower_gm_us": 138.577,
+    "psrr_path_50hz_v_per_v": 0.5713,
+    "out_max_v": 2.15239308,
+    "out_min_v": 1.14779054,
+    "thd_pct": 0.043569457765402206,
+    "gain_tran_db": 60.02580138803296,
+    "thd_0p6mv_pct": 0.06824271419912795,
+    "thd_300hz_pct": 0.1283252485053448,
+    "settle_lsb": 0.005123421200272674,
+    "settle_end_raw_lsb": 0.006451518170166306,
+    "kick_spike_mv": 192.469414919447,
+    "adc245_ideal_load_lsb": 0.17231747878792125,
+    "slew_v_per_s": 1782.4892286702525,
+    "follow_lo_v": 0.397998527,
+    "follow_hi_v": 2.31794768,
+    "swing_margin_top_mv": 168.11609000000027,
+    "swing_margin_bottom_mv": 751.833063
+   },
+   "ff85": {
+    "gain_db": 60.0587,
+    "f_lo_hz": 0.225989,
+    "f_hi_hz": 925.258,
+    "noise_uv": 1.84636,
+    "noise_fnoicor1_uv": 4.9314599999999995,
+    "pm_deg": 87.4007,
+    "pm_stage2_real_beta_deg": 90.4134,
+    "pm_stage1_loop_deg": 76.3961,
+    "a0_stage2_db": 59.8852,
+    "gbw_stage2_hz": 10416.7,
+    "idd_ua": 118.81099999999999,
+    "out_dc_err_mv": 0.43378500000000003,
+    "o2_v": 2.15915,
+    "follower_vgs_v": 0.508868,
+    "follower_gm_us": 188.95000000000002,
+    "psrr_path_50hz_v_per_v": 0.579245,
+    "out_max_v": 2.18554159,
+    "out_min_v": 1.17982115,
+    "thd_pct": 0.07353395854662101,
+    "gain_tran_db": 60.03645777137333,
+    "thd_0p6mv_pct": 0.09635475580753956,
+    "thd_300hz_pct": 0.08310038926573007,
+    "settle_lsb": 0.006293287569584787,
+    "settle_end_raw_lsb": 0.008665579808106326,
+    "kick_spike_mv": 205.3281084695274,
+    "adc245_ideal_load_lsb": 0.1013946181818469,
+    "slew_v_per_s": 2769.030718759168,
+    "follow_lo_v": 0.667794794,
+    "follow_hi_v": 2.43838475,
+    "swing_margin_top_mv": 288.5366199999999,
+    "swing_margin_bottom_mv": 482.0533360000001
+   },
+   "ss-40": {
+    "gain_db": 60.0298,
+    "f_lo_hz": 0.237202,
+    "f_hi_hz": 386.341,
+    "noise_uv": 1.5368,
+    "noise_fnoicor1_uv": 4.38405,
+    "pm_deg": 88.5333,
+    "pm_stage2_real_beta_deg": 90.7038,
+    "pm_stage1_loop_deg": 81.0827,
+    "a0_stage2_db": 57.6569,
+    "gbw_stage2_hz": 4314.58,
+    "idd_ua": 47.1327,
+    "out_dc_err_mv": -0.169261,
+    "o2_v": 2.52031,
+    "follower_vgs_v": 0.870702,
+    "follower_gm_us": 108.41,
+    "psrr_path_50hz_v_per_v": 0.565549,
+    "out_max_v": 2.14971693,
+    "out_min_v": 1.14850529,
+    "thd_pct": 0.10024165143405105,
+    "gain_tran_db": 60.00101232515149,
+    "thd_0p6mv_pct": 0.421544622043094,
+    "thd_300hz_pct": 0.22225029218784598,
+    "settle_lsb": 0.005337569283814943,
+    "settle_end_raw_lsb": 0.00953250909085248,
+    "kick_spike_mv": 210.4826383825454,
+    "adc245_ideal_load_lsb": 0.2415647030303455,
+    "slew_v_per_s": 1118.4280000003055,
+    "follow_lo_v": 0.113336,
+    "follow_hi_v": 2.18221417,
+    "swing_margin_top_mv": 32.43916999999996,
+    "swing_margin_bottom_mv": 1036.4389999999999
+   }
+  },
+  "x2_s1": {
+   "typ": {
+    "offset_lsb": -30.34947457384589,
+    "inl_below_2p05_lsb": 0.6814927506901469,
+    "inl_whole_range_lsb": 2.0689369969064124,
+    "amp_minus_adc_alone_lsb": [
+     -0.01169154577890594,
+     -0.06736125858162978,
+     0.03164260247605066
+    ],
+    "kick_mv": [
+     126.0690821251107,
+     276.8716505091955
+    ],
+    "gain_sine_code_db": 59.99791598290361,
+    "runs": 17,
+    "vout_range": [
+     1.1488827287180783,
+     2.1506277363337136
+    ],
+    "file": "lp_rvt_x2_s1_nodnw_typ.npz"
+   }
+  }
+ },
+ "x2_s1": {
+  "typ": {
+   "orig": {
+    "offset_lsb": -30.21691405382363,
+    "inl_below_2p05_lsb": 0.7587618288740572,
+    "inl_whole_range_lsb": 2.9387470642631257,
+    "amp_minus_adc_alone_lsb": [
+     -0.013216770724152345,
+     -0.07153099482153102,
+     0.0244868745413227
+    ],
+    "kick_mv": [
+     172.45398894025078,
+     515.0196576684185
+    ],
+    "gain_sine_code_db": 60.00645634709235,
+    "runs": 17,
+    "vout_range": [
+     1.1492460699077962,
+     2.152153770207764
+    ],
+    "file": "lp_rvt_x2_s1_orig_typ.npz"
+   },
+   "rvt": {
+    "offset_lsb": -30.26917925566413,
+    "inl_below_2p05_lsb": 0.5374080136207802,
+    "inl_whole_range_lsb": 2.443486490087434,
+    "amp_minus_adc_alone_lsb": [
+     -0.011742577616024997,
+     -0.0680117406880123,
+     0.03120247981702373
+    ],
+    "kick_mv": [
+     119.53025770580527,
+     339.7941717193269
+    ],
+    "gain_sine_code_db": 60.013496503771165,
+    "runs": 17,
+    "vout_range": [
+     1.1481617245684164,
+     2.151697216054927
+    ],
+    "file": "lp_rvt_x2_s1_rvt_typ.npz"
+   }
+  },
+  "ff85": {
+   "orig": {
+    "offset_lsb": -40.36572783895014,
+    "inl_below_2p05_lsb": 1.9949768898797098,
+    "inl_whole_range_lsb": 4.82281411172783,
+    "amp_minus_adc_alone_lsb": [
+     -0.011120572681763885,
+     -0.07610847146438515,
+     0.04186891653652247
+    ],
+    "kick_mv": [
+     105.90660292804932,
+     481.25371719996355
+    ],
+    "gain_sine_code_db": 59.86191431640716,
+    "runs": 17,
+    "vout_range": [
+     1.2132577762989047,
+     2.152886276473935
+    ],
+    "file": "lp_rvt_x2_s1_orig_ff85.npz"
+   },
+   "rvt": {
+    "offset_lsb": -40.46550347125756,
+    "inl_below_2p05_lsb": 1.9981889896300573,
+    "inl_whole_range_lsb": 4.401235934150213,
+    "amp_minus_adc_alone_lsb": [
+     -0.012139690910106308,
+     -0.0777800583785917,
+     0.04425680651406694
+    ],
+    "kick_mv": [
+     84.38986321856801,
+     318.7436010824081
+    ],
+    "gain_sine_code_db": 60.00448460350661,
+    "runs": 17,
+    "vout_range": [
+     1.1486393572433427,
+     2.152589473057288
+    ],
+    "file": "lp_rvt_x2_s1_rvt_ff85.npz"
+   }
+  },
+  "ss-40": {
+   "orig": {
+    "offset_lsb": -22.020538344730806,
+    "inl_below_2p05_lsb": 0.30127277804509234,
+    "inl_whole_range_lsb": 0.8525630240271376,
+    "amp_minus_adc_alone_lsb": [
+     -0.0016709069943980693,
+     -0.02716804375443116,
+     0.052076338564227165
+    ],
+    "kick_mv": [
+     103.63737167038155,
+     407.13643642909705
+    ],
+    "gain_sine_code_db": 59.98973322048077,
+    "runs": 17,
+    "vout_range": [
+     1.1487977143668586,
+     2.1502151451457276
+    ],
+    "file": "lp_rvt_x2_s1_orig_ss-40.npz"
+   },
+   "rvt": {
+    "offset_lsb": -22.052074460943793,
+    "inl_below_2p05_lsb": 0.439632189988167,
+    "inl_whole_range_lsb": 0.9070520152828365,
+    "amp_minus_adc_alone_lsb": [
+     -0.0014721992472150984,
+     -0.02979099189117146,
+     0.05584603436873525
+    ],
+    "kick_mv": [
+     82.99052712187338,
+     279.1718574379933
+    ],
+    "gain_sine_code_db": 59.99253734053282,
+    "runs": 17,
+    "vout_range": [
+     1.1485647117905649,
+     2.1502262866474067
+    ],
+    "file": "lp_rvt_x2_s1_rvt_ss-40.npz"
+   }
+  }
+ },
+ "verdict": "WORKS: every amplifier target of the original is met at typ 27 / ff 85 / ss -40 C with the native-Vt-free follower; netlist checks PASS; 42 checks, 0 failed",
+ "failed_checks": [],
+ "logs": {
+  "amp": [
+   "AFE/amp/sim/lp_rvt_screen.log",
+   "AFE/amp/sim/lp_rvt_screen_vdd.log",
+   "AFE/amp/sim/lp_rvt_screen_pvt9.log",
+   "AFE/amp/sim/lp_rvt_screen_vocm1p15.log",
+   "AFE/amp/sim/lp_rvt_tables.log",
+   "AFE/amp/sim/lp_rvt_swing.log",
+   "AFE/amp/sim/lp_rvt_adc245.log",
+   "AFE/amp/sim/lp_rvt_settle.log",
+   "AFE/amp/sim/lp_rvt_settle_tight.log",
+   "AFE/amp/sim/lp_rvt_slew.log",
+   "AFE/amp/sim/lp_rvt_rec.log",
+   "AFE/amp/sim/lp_rvt_pur.log",
+   "AFE/amp/sim/lp_rvt_dnw_cell.log",
+   "AFE/amp/sim/lp_rvt_lvs_check.log",
+   "AFE/amp/sim/lp_rvt_report.log",
+   "AFE/amp/sim/lp_rvt_summary.md"
+  ],
+  "adc": [
+   "AFE/adc/sim/lp_rvt_x2_s1_report.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_orig_ff85.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_orig_ss-40.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_orig_typ.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_rvt_ff85.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_rvt_ss-40.log",
+   "AFE/adc/sim/lp_rvt_x2_s1_rvt_typ.log"
+  ]
+ },
+ "notes": [
+  "settle_lsb = max over 19 kick cases of |(L-U at the end of T_ACQ) - (L-U before the frame)|, real sampling TG + split DAC on the output (D5 method); settle_end_raw_lsb = the raw D5 number, which contains the DC-solve difference of the two amplifier copies (see lp_rvt_settle.log)",
+  "pm_deg = stage-2 OTA + follower open loop at beta = 1 (worst-case bound, as A4a); pm_stage2_real_beta_deg at beta = CF2 / (CIN2 + CF2)",
+  "thd / out_max / out_min: +-0.5 mV differential at 12.25 Hz, 8 s, last 4 periods",
+  "idd_ua = supply current of bias_genc + one channel"
+ ]
+}

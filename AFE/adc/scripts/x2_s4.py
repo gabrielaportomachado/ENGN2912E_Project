@@ -16,7 +16,7 @@ usage: x2_s4.py <ff-40|typ|ss125> <fs|mid|alt|all> [SCLK MHz=3] [nodig]     -> s
 import sys, os, time, numpy as np
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, H)
 import x2lib as X, x2_adc as A
-MODEL = dict(Rp=0.25, Lp=2e-9, Cm=0.125e-9, Cd=0.1e-9, Rs=10.0, Rd=3.0, Cpad=float(os.environ.get('X2_CPAD', '1e-12'))); QDIG = 1.5e-12; KC = 0.038       # Cpad: see x2lib.supply (1 pF per supply pad to the board ground, ASSUMED)
+MODEL = dict(Rp=0.25, Lp=2e-9, Cm=0.125e-9, Cd=0.1e-9, Rs=10.0, Rd=3.0, Cpad=float(os.environ.get('X2_CPAD', '1e-12'))); QDIG = float(os.environ.get('X2_QDIG', '1.5e-12')); KC = 0.038       # Cpad: see x2lib.supply (1 pF per supply pad to the board ground, ASSUMED)
 TCS = 20e-9
 LOGP = os.environ.get('X2_LOG_PREFIX', 'x2')          # log-file prefix: sim/<prefix>_s4_<corner>.log, <prefix>_s4_summary.log (F1 uses f1_x2 so that the X2 logs stay as they are)
 for _k, _e in (('Cm', 'X2_CM'), ('Cd', 'X2_CD'), ('Lp', 'X2_LP'), ('Rd', 'X2_RD'), ('Rs', 'X2_RS'), ('Rp', 'X2_RP')):       # what-if overrides of the ASSUMED supply model (PROPOSAL evidence); logged in every line

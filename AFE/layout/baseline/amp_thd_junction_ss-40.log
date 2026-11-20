@@ -1,0 +1,3 @@
+== amp_thd_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 08:11
+   job thd_schprdiff_ss-40: exit 0, 1 s
+RESULT amp_thd_junction ss-40: thd_pct=0.00288512  out_max_v=2.14793  out_min_v=1.14388  gain_db=60.0351  hd2_dbc=-92.8312  hd3_dbc=-95.2  out_mean_v=1.64589

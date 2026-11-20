@@ -1,0 +1,5 @@
+== adc_steps  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:36
+STEP ff85 boundary 1536: 8 below (1500..1534), 8 above (1538..1573): e below -39.10, above -40.18 -> step -1.08 LSB
+STEP ff85 boundary 2048: 8 below (2010..2044), 8 above (2051..2086): e below -40.73, above -39.18 -> step +1.55 LSB
+STEP ff85 boundary 2112: 8 below (2076..2110), 8 above (2115..2151): e below -39.10, above -38.93 -> step +0.17 LSB
+RESULT adc_steps ff85: step_1536_lsb=-1.07957  offset_1536_lsb=-39.641  n_1536=16  step_2048_lsb=1.54543  offset_2048_lsb=-39.9535  n_2048=16  step_2112_lsb=0.170432  offset_2112_lsb=-39.016  n_2112=16

@@ -1,0 +1,4 @@
+== top_stim  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 07:46
+   job st_sch_typ: exit 0, 13 s
+   job st_sch_typ_leak: exit 0, 13 s
+RESULT top_stim typ: rec_dev_mv=0  out_dev_mv=0.0236136  e_swing_v=1.02175  final_v=1.65058  e_resid_mv=1e-05  t_1mv_s=0.826447  rec_dev_mv_leak=0  out_dev_mv_leak=0.0231041  e_swing_v_leak=1.02184  final_v_leak=1.6506  e_resid_mv_leak=-0.01019  t_1mv_s_leak=0.877846

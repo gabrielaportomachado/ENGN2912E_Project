@@ -12,7 +12,7 @@ import sys, os, time, numpy as np
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, H)
 import x2lib as X, x2_adc as A
 T = 500e-9; TFR = 250e-6; FSIG = 3 * 4000.0 / 512; AE = 0.45e-3; GNOM = 1000.0; TJ = 20e-6; TEDGE = 20e-6
-OPTS = os.environ.get('X2_OPTS', ''); TMAX = os.environ.get('X2_TMAX', '1u'); SUF = os.environ.get('X2_SUFFIX', '')
+OPTS = os.environ.get('X2_OPTS', ''); TMAX = os.environ.get('X2_TMAX', '1u'); SUF = os.environ.get('X2_SUFFIX', ''); LOGP = os.environ.get('X2_LOG_PREFIX', 'x2')
 def src(kind, par, tpre):
     """electrode differential source of channel 0 (two series sources between the tissue node and the Randles network); returns (lines, ve(t) function)"""
     if kind == 'lvl':
@@ -102,4 +102,4 @@ if __name__ == '__main__':
                  cols='is_sine par frame electrode_V ampout_V code ideal T_LSB x12_LSB slope_V_per_s kick_V passes unresolved')
         if not SUF: open(f'{X.ADC}/sim/x2_s1_summary.log', 'a').write('\n'.join(l for l in out if l.startswith(('RESULT', 'VERDICT', 'ADC ALONE (', 'PREDICTOR'))) + '\n')
     open(f'{X.ADC}/sim/x2_s1_{ck}{"_tgate" if tgate else ""}{"" if which == "all" else "_" + which.replace(",", "_")}{SUF}.log', 'w').write('\n'.join(out) + '\n')
-    open(f'{X.ADC}/sim/x2_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s1 {ck} {which} done, wall {time.time()-t00:.0f} s\n')
+    open(f'{X.ADC}/sim/{LOGP}_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s1 {ck} {which} done, wall {time.time()-t00:.0f} s\n')

@@ -1,0 +1,44 @@
+LP step 6 (M7): full-channel verification of follower variants against the ORIGINAL netlist, same script, same session.
+STAGE tables: typ 27 / ff 85 / ss -40 C, 3.3 V.  Testbenches: tb_a4c_op / tb_a4c_ac / tb_a4c_noise / tb_a4c_loop (FSV = 0), tb_ota2_ol (stage-2 OTA alone, IDEAL DC servo, CL 10 pF as A4a),
+  psrr = tb_a4c_ac with the AC source moved from the electrode to VDD (as tb_afe_1ch_psrr.spice of A4b).  Noise: IDEAL RESISTOR (noise) RFIX / RFIX2 per corner (a4c_noise.log headers).
+
+quantity  [typ 27 / ff 85 / ss -40]              | orig                               | rvt                                | rvt+dio                            | B_10x10_0p28                      
+supply current (bias + channel) [uA]             | 74.43 / 118.81 / 47.13             | 74.43 / 118.81 / 47.13             | 74.43 / 118.81 / 47.13             | 74.43 / 118.81 / 47.13            
+output DC error out - vcm_out [mV]               | 0.805 / 1.112 / 0.425              | 0.382 / 0.493 / -0.141             | 0.262 / 0.499 / -0.133             | 0.155 / 0.434 / -0.169            
+o2 (stage-2 OTA output) [V]                      | 1.6810 / 1.4170 / 1.9457           | 2.2622 / 2.1120 / 2.4299           | 2.2621 / 2.1120 / 2.4299           | 2.3317 / 2.1591 / 2.5203          
+follower Vgs [V]                                 | 0.0304 / -0.2339 / 0.2955          | 0.6120 / 0.4616 / 0.7802           | 0.6120 / 0.4616 / 0.7802           | 0.6817 / 0.5089 / 0.8707          
+follower Vth [V]                                 | 0.0094 / -0.2518 / 0.2835          | 0.6884 / 0.5207 / 0.8654           | 0.6884 / 0.5207 / 0.8654           | 0.8366 / 0.6641 / 1.0165          
+follower Vbs [V]                                 | -1.6506 / -1.6510 / -1.6502        | 0.0000 / 0.0000 / 0.0000           | 0.0000 / 0.0000 / 0.0000           | -1.6500 / -1.6503 / -1.6496       
+follower Id, all fingers [uA]                    | 5.2141 / 8.4120 / 3.2597           | 5.2139 / 8.4118 / 3.2596           | 5.2139 / 8.4118 / 3.2596           | 5.2140 / 8.4119 / 3.2596          
+follower gm, all fingers [uS]                    | 100.37 / 147.46 / 72.14            | 115.78 / 158.61 / 89.54            | 115.78 / 158.61 / 89.54            | 138.58 / 188.95 / 108.41          
+follower sink Id (6 x 16u/4u) [uA]               | 5.2140 / 8.4119 / 3.2597           | 5.2140 / 8.4118 / 3.2596           | 5.2139 / 8.4118 / 3.2596           | 5.2139 / 8.4118 / 3.2596          
+mirror M4: Vsd [V]                               | 1.619 / 1.883 / 1.354              | 1.038 / 1.188 / 0.870              | 1.038 / 1.188 / 0.870              | 0.968 / 1.141 / 0.780             
+mirror M4: Vdsat [V]                             | 0.081 / 0.110 / 0.056              | 0.081 / 0.110 / 0.056              | 0.081 / 0.110 / 0.056              | 0.081 / 0.110 / 0.056             
+mid-band gain [dB] (60 +- 1)                     | 60.0559 / 60.0605 / 60.0413        | 60.0624 / 60.0711 / 60.0463        | 60.0624 / 60.0711 / 60.0461        | 60.0487 / 60.0587 / 60.0298       
+f_lo [Hz] (<= 0.5)                               | 0.2023 / 0.2260 / 0.2374           | 0.2026 / 0.2264 / 0.2376           | 0.2024 / 0.2263 / 0.2374           | 0.2022 / 0.2260 / 0.2372          
+f_hi [Hz] (>= 300)                               | 653.47 / 997.58 / 422.01           | 689.93 / 1064.57 / 440.72          | 689.93 / 1064.57 / 440.74          | 601.93 / 925.26 / 386.34          
+gain at 300 Hz [dB]                              | 59.229 / 59.687 / 58.272           | 59.314 / 59.741 / 58.400           | 59.314 / 59.741 / 58.400           | 59.089 / 59.627 / 57.989          
+noise 0.5-300 Hz, fnoicor 0 [uV] (<= 2)          | 1.6675 / 1.8469 / 1.5398           | 1.6684 / 1.8473 / 1.5412           | 1.6684 / 1.8473 / 1.5412           | 1.6661 / 1.8464 / 1.5368          
+noise 0.5-300 Hz, fnoicor 1 [uV] (report)        | 4.7195 / 4.9334 / 4.3932           | 4.7222 / 4.9349 / 4.3972           | 4.7222 / 4.9349 / 4.3972           | 4.7150 / 4.9315 / 4.3841          
+noise 0.5 Hz-2 kHz, fnoicor 0 [uV]               | 1.7965 / 2.0032 / 1.6255           | 1.8040 / 2.0108 / 1.6314           | 1.8040 / 2.0108 / 1.6314           | 1.7851 / 1.9944 / 1.6134          
+stage-1 loop: T at 100 Hz [dB]                   | 60.803 / 60.754 / 60.294           | 60.803 / 60.754 / 60.294           | 60.803 / 60.754 / 60.294           | 60.802 / 60.754 / 60.293          
+stage-1 loop: fu [kHz]                           | 268.5 / 385.7 / 199.4              | 268.5 / 385.7 / 199.4              | 268.5 / 385.7 / 199.4              | 268.5 / 385.7 / 199.4             
+stage-1 loop: PM [deg]                           | 79.17 / 76.40 / 81.08              | 79.17 / 76.40 / 81.08              | 79.17 / 76.40 / 81.08              | 79.17 / 76.40 / 81.08             
+stage-2 OTA + follower: A0 [dB]                  | 59.65 / 60.25 / 58.46              | 60.07 / 60.98 / 58.76              | 60.07 / 60.98 / 58.76              | 58.98 / 59.89 / 57.66             
+stage-2 OTA + follower: GBW [kHz]                | 7.335 / 11.224 / 4.719             | 7.748 / 11.990 / 4.933             | 7.748 / 11.990 / 4.932             | 6.753 / 10.417 / 4.315            
+stage-2: PM at beta = 1 [deg]                    | 87.74 / 87.13 / 88.29              | 87.62 / 86.90 / 88.24              | 87.61 / 86.90 / 88.24              | 88.01 / 87.40 / 88.53             
+stage-2: loop crossover at the real beta [Hz]    | 655.0 / 1002.9 / 421.3             | 692.0 / 1071.5 / 440.3             | 692.0 / 1071.5 / 440.3             | 603.0 / 930.5 / 385.1             
+stage-2: PM at the real beta [deg]               | 90.46 / 90.36 / 90.61              | 90.42 / 90.29 / 90.58              | 90.42 / 90.29 / 90.58              | 90.54 / 90.41 / 90.70             
+supply -> output gain at DC [V/V]                | 0.5131 / 0.5163 / 0.5096           | 0.5133 / 0.5165 / 0.5103           | 0.5133 / 0.5165 / 0.5098           | 0.5133 / 0.5166 / 0.5097          
+supply -> output gain at 50 Hz [V/V]             | 0.5710 / 0.5786 / 0.5658           | 0.5720 / 0.5797 / 0.5669           | 0.5720 / 0.5797 / 0.5669           | 0.5713 / 0.5792 / 0.5655          
+supply -> output gain at 300 Hz [V/V]            | 0.5245 / 0.5566 / 0.4720           | 0.5298 / 0.5602 / 0.4791           | 0.5298 / 0.5602 / 0.4791           | 0.5182 / 0.5541 / 0.4599          
+supply -> output gain at 10 kHz [V/V]            | 0.0543 / 0.0756 / 0.0389           | 0.0526 / 0.0761 / 0.0370           | 0.0525 / 0.0761 / 0.0369           | 0.0748 / 0.0907 / 0.0629          
+# orig = spice/ota2.spice (nfet_06v0_nvt 10u/2u, bulk vss)
+# rvt = spice/ota2_rvt.spice + afe_chc_rvt.spice (nfet_03v3 8 x 10u/1u, isolated p-well, bulk = source)
+# rvt+dio = rvt with the parasitic p-well / deep-n-well junction as diode_pw2dw (area 400 um2, perimeter 80 um, ESTIMATE) from out to vdd at testbench level
+# B_10x10_0p28: B: nfet_03v3 10 x 10u/0.28u (minimum L), bulk vss, NO deep n-well
+# (ngspice reports @m...[id] and [gm] of an instance with m > 1 as the total of all fingers: checked against the sink current)
+# (+dio what-if, noise rows only: the junction is an IDEAL capacitor of 172 fF = its zero-bias value, because .noise returns NaN with the PDK diode card)
+
+jobs: 84, not ok: none
+(the "Error: &g_mid: no such variable" line of the noise testbench is its own known echo problem, a4c_noise.log has it too; a job is "not ok" only on an abort / non-zero exit)

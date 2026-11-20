@@ -1,4 +1,4 @@
-mk_lvs_netlists.py  options: (defaults)
+mk_lvs_netlists.py  options: --dig-netlist AFE/dig/trial/afe_dig.pnl.v
 Sources: 17 simulation netlists + AFE/top/dbs_afe_top.v; rules of AFE/review/AUDIT.md 4.9.3.  Output: AFE/layout/lvs
 
 ELEMENT RULES APPLIED (simulation netlist -> LVS reference)
@@ -81,21 +81,21 @@ CHANNEL CELLS from module afe_ch of AFE/top/dbs_afe_top.v
 
 SUPPLY DEVICES of the top (Decision 44d, AUDIT 4.9.2)
   strap resistor  Xu_rstrap VDD vdd_dac: rm3  width 2 um length 222.2 um = 111.1 squares x 0.09 ohm/sq (typical) = 10.00 ohm  (target 10 ohm, X2 S4)
-  decap           Xu_dcm VDD VSS: cap_nmos_03v3  79 units of 20 x 20 um (c_width x c_length) = 31600 um2, 3.98 fF/um2 at 3.3 V -> 125.86 pF  (asked: 125.0 pF)
-  decap           Xu_dcd vdd_dac VSS: cap_nmos_03v3  63 units of 20 x 20 um (c_width x c_length) = 25200 um2, 3.98 fF/um2 at 3.3 V -> 100.37 pF  (asked: 100.0 pF)
+  decap           Xu_dcm VDD VSS: cap_nmos_03v3  79 units of 20 x 20 um (c_width x c_length) = 31600 um2, 3.98 fF/um2 at 3.3 V -> 125.86 pF  (asked: 125.0 pF; smallest number of units that reaches the capacitance asked)
+  decap           Xu_dcd vdd_dac VSS: cap_nmos_03v3  63 units of 20 x 20 um (c_width x c_length) = 25200 um2, 3.98 fF/um2 at 3.3 V -> 100.37 pF  (asked: 100.0 pF; smallest number of units that reaches the capacitance asked)
 
 TOP dbs_afe_top from AFE/top/dbs_afe_top.v
   41 pins: E[7] E[6] E[5] E[4] E[3] E[2] E[1] E[0] IPG[7] IPG[6] IPG[5] IPG[4] IPG[3] IPG[2] IPG[1] IPG[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
-  instances: 1 x afe_dig, 1 x bias_genc, 8 x afe_ch + 3 supply devices + 15 pad-control ties (0-ohm resistors: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
+  instances: 1 x afe_dig, 1 x bias_genc, 8 x afe_ch + 3 supply devices + 15 pad-control ties (output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
   pad pins that are plain nets of the macro: DOUT_OUT = afe_dig.DOUT, DOUT_OE = afe_dig.DOUT_OE;  top port without a connection inside: DOUT_IN (the pad input is not used, DOUT_IE = 0)
   net census: VDD on 16 channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on 8 channel pins + decap + strap
-  digital macro afe_dig: 273 pins, PROVISIONAL black box (L1d pin list, VDD VSS first)
+  digital macro afe_dig: 288 pins, port order of AFE/dig/trial/afe_dig.pnl.v
     afe_dig pin -> net of the top: VDD -> VDD, VSS -> VSS, CS -> CS, SCLK -> SCLK, DIN -> DIN, RSTN -> RSTN, DOUT -> DOUT_OUT, DOUT_OE -> DOUT_OE, rst_amp_o -> rst_amp_o, sw_rec -> sw_rec[7:0], sw_rec_b -> sw_rec_b[7:0], sw_ipg -> sw_ipg[7:0], sw_ipg_b -> sw_ipg_b[7:0], cmp_q -> cmp_q[7:0], cmp_clk -> cmp_clk[7:0], rst_sw -> rst_sw[7:0], tg_on -> tg_on[7:0], dac_gp -> dac_gp[95:0], dac_gn -> dac_gn[95:0], dac_gdn -> dac_gdn[7:0]
 
 FILES written to AFE/layout/lvs
   afe_chc.spice          74 lines,    56 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch
   adc_ch.spice          250 lines,   220 X lines, subckts: dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch
   bias_genc.spice        24 lines,    17 X lines, subckts: bias_genc
-  dbs_afe_top.spice     460 lines,   312 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc afe_dig dbs_afe_top
+  dbs_afe_top.spice     423 lines,   312 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc dbs_afe_top
 
-FLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch 53, adc_ch 215, afe_ch 272, bias_genc 17; chip without the digital macro: 8 x 272 + 17 + 3 supply devices = 2196 (+ 15 tie resistors)
+FLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch 53, adc_ch 215, afe_ch 272, bias_genc 17; chip without the digital macro: 8 x 272 + 17 + 3 supply devices = 2196 (+ 15 tie pins of afe_dig, no device in the top)

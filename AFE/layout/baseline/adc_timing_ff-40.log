@@ -1,0 +1,8 @@
+== adc_timing  netlist schematic  corner ff-40 (ff, -40 C, 3.6 V)  2026-11-20 07:48
+TIMING ff-40 Vin 1.25455 V code 1392 (ideal 1427): s_k [LSB] -0.01 +0.01 -0.00 +0.00 +0.00 -0.00 +0.00 +0.00 -0.00 -0.00 +0.00 +0.00 | slowest decision 0.94 ns
+TIMING ff-40 Vin 1.35026 V code 1501 (ideal 1536): s_k [LSB] -0.01 +0.06 -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 | slowest decision 0.93 ns
+TIMING ff-40 Vin 1.80026 V code 2011 (ideal 2048): s_k [LSB] -0.00 +0.10 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 +0.00 -0.00 +0.00 | slowest decision 0.94 ns
+TIMING ff-40 Vin 2.07273 V code 2322 (ideal 2358): s_k [LSB] -0.01 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 | slowest decision 0.95 ns
+TIMING ff-40 Vin 2.25026 V code 2523 (ideal 2560): s_k [LSB] -0.47 -0.16 -0.15 -0.12 -0.09 -0.07 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | slowest decision 0.94 ns
+TIMING ff-40 Vin 2.34545 V code 2629 (ideal 2668): s_k [LSB] -1.45 -0.27 -0.22 -0.13 -0.11 -0.09 +0.00 -0.00 +0.00 -0.00 -0.00 +0.00 | slowest decision 0.94 ns
+RESULT adc_timing ff-40: settle_worst_lsb=0.0980281  settle_trial1_lsb=0.00586494  settle_trial2_lsb=0.0980281  settle_top_lsb=1.45483  td_max_ns=0.946453  td_avail_ns=2.66  dac_to_clk_ns=21.41  late=0  failed=0

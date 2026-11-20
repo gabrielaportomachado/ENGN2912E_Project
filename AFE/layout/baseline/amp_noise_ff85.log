@@ -1,0 +1,4 @@
+== amp_noise  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:37
+   job n_sch_ff85_real: exit 0, 0 s
+   job n_sch_ff85_d8: exit 0, 0 s
+RESULT amp_noise ff85: noise_real_uv=1.57984  g_mid_db=60.0605  noise_d8_uv=1.84692
