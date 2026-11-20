@@ -1,5 +1,7 @@
 # Layout plan, phase L0 (2026-11-13). No layout was written. ESTIMATES are marked.
 
+F1 (2026-11-20) updated section 9 (pins, supply straps, 24 pads, LVS references) and the two stale lines of sections 4 and 5 that it replaces; the rest is the L0 text. Later facts: AFE/NOTES.md Decisions 39-45, AFE/review/AUDIT.md.
+
 Inputs read: AFE/NOTES.md (Decisions 1-38), AFE/TAPEOUT.md, AFE/prompts/layout.md, the GF180 rule decks and Magic tech file under /foss/pdks/gf180mcuD,
 the local info.yaml / lvs_config.json drafts. NOT re-read in this session: the padring fork and the two example repos (no network fetch was made);
 every statement about them below comes from the paraphrase in TAPEOUT.md and must be checked against the raw files before L3/L4.
@@ -52,11 +54,11 @@ Pins of afe_ch are as in AFE/amp/spice/afe_chc.spice (record this list in L2). H
 - Eight identical channel cells in two rows of four (or a single column pair), each about 250 x 250 um: Cin (4 x 5 pF MIM, 2 per channel = 0.02 mm2 total, ~100 x 200 um), the OTA pair/load area 12.4k um2 of gate, bias taps and stage 2 beside it. MIM placed on Metal4/5 above the stage-2 and ADC analog circuitry is NOT recommended for Cin (noise coupling); allowed above decap and the digital shift registers.
 - ADC (split DAC ~3.3k um2 drawn, comparator, SAR logic ~0.015 mm2 total, ESTIMATE) abuts each channel on the side towards the digital block; analog input from the amplifier output runs on a short Metal3 line, shielded.
 - Digital macro (dbs_core, shift register, serializer) in one corner next to the SPI pads, with its own p+ guard ring, separated from the channels by a >= 20 um decap/filler strip.
-- Pad connection (31 pads from info.yaml; abutment pins from the organizer's DEF): the 24 analog pads (E, IPG, REC) arrive one per channel on Metal5/Metal4; to keep E/REC/IPG and the amplifier input equal in length per channel, put each channel on the side nearest its pad group (E[i], IPG[i], REC[i] adjacent, which is how info.yaml lists them) and route the supply and digital pins on the other sides.
+- Pad connection (UPDATED in F1: 24 pads, Decision 45; abutment pins from the organizer's DEF): the 17 analog pads (E[7:0], IPG[7:0], REF; no REC pads: REC is internal to each channel) arrive on Metal5/Metal4; put each channel on the side nearest its pad pair (E[i], IPG[i] adjacent, as info.yaml lists them), REF in the middle, and route the supply and digital pins on the other sides.
 - Block size: unchanged from TAPEOUT.md (about 1000 x 1000 um) but now depends on the DAC decision above (big binary DAC would not fit). With the split DAC the ADC area estimate of 0.136 mm2 for 8 ADCs + shared digital stays an upper bound.
 
 ## 5. Supplies, substrate noise, guard rings (Decision 30; single 3.3 V DVDD, one DVDD/DVSS pad pair unless the organizer gives more)
-- On-chip nets: DVDD and DVSS only (no AVDD/AVSS pads exist). Make three SEPARATE straps from the pad pair (star, not a mesh): digital, analog, ADC supply. The ADC strap is the one with the 36 pC / 108 pC charge draw (Decision 37); it carries the decap bank (~0.72 nF ESTIMATE, density 4.6 fF/um2 NOT checked in the PDK: measure it in L1 from a nfet_03v3 gate cap simulation or the model's cox).
+- On-chip nets: DVDD and DVSS only (no AVDD/AVSS pads exist). Make three SEPARATE straps from the pad pair (star, not a mesh). UPDATED in F1 (Decision 44d, AFE/review/AUDIT.md 4.9.2; the L0 text said "digital, analog, ADC supply" with ~0.72 nF at 4.6 fF/um2): analog strap (bias, amplifiers, one-shots, vhalf, Cref switch, TGATE wells), ADC-main strap (comparators + the digital macro, 0.125 nF MOS decap), ADC-DAC strap (the bottom-plate drivers, through a 10 ohm strap resistor, 0.1 nF MOS decap). Total decap 0.225 nF = 56,500 um2 at the PDK-model density of 3.98 fF/um2 (cap_nmos_03v3 at 3.3 V; 0.07 mm2 with spacing). Pin names and the LVS devices: section 9.
 - Ground: p-substrate is common. Analog NMOS in each channel sit in a P+ guard ring tied to the analog VSS strap; the digital macro gets its own P+/N+ ring tied to the digital strap, spaced >= 20 um from the nearest analog device. Optional (cost: area, DN.2b 5.42 um spacing, DN.3 PCOMP ring): put the follower and bias NMOS in LVPWELL inside DNWELL. Recommended only if L2 PEX shows substrate coupling above the 0.5 LSB budget; default is NO deep n-well.
 - Pseudo-resistor, summing node (vn1/vp1), REC node and the 1e-14 A leakage paths (A2/A4a/A4c): the summing node must NOT sit under any MIM top plate other than its own Cin/Cf, with M1 guard around the connection, no other net within 2 um, and the TGATE/park transistors with n-well ring inside their own guard ring (leakage matters more than area; matches the A4c finding that fA leakage decides the DC state).
 - The shared vcm_in / vcm_out taps are a channel-to-channel coupling path (A4b side observation): lay the tap lines as a daisy chain with a 10 pF decoupling cap at each channel input (MIM, 5000 um2 ESTIMATE per channel) or a per-channel RC (decide after L2 PEX).
@@ -86,42 +88,59 @@ Risk: ~12 days for ~25 h of agent work per NOTES.md plus 4-6 DRC/LVS fix loops; 
 4. The raw padring fork and example repos still have to be read once (not done in L0).
 5. Cap names: netlists for LVS use cap_mim_2f0_m4m5_noshield; the simulations used m2m3 (same capacitance numbers, different layers); confirm that the PEX netlist (extracted from Magic) uses the same model parameters.
 
-## 9. FINAL channel pin list (afe_ch) and digital/analog crossings (phase I0, 2026-11-14; source: AFE/top/dbs_afe_top.v, simulated in AFE/top/sim/i0_top.log)
+## 9. FINAL channel pin list (afe_ch) and digital/analog crossings (phase I0, 2026-11-14; UPDATED in F1, 2026-11-20: Decisions 44b, 44d, 45; source: AFE/top/dbs_afe_top.v, simulated in AFE/top/sim/i0_top.log)
 
-`afe_ch` = the cell L2 builds, replicated 8 times. (I1 update, Decision 41: REF pad, per-ADC vhalf cell.) Contents: record TGATE + IPG TGATE (5 V-device macro, TGATE/TGATE.v), REC park (inside afe_chc), amplifier afe_chc (stage 1, stage 2, follower, reset muxes), one-shot fs_oneshot_c (C_T 4 pF),
-2 std cells (OR2 for fs = one-shot OR RST_AMP, INV for samb), the VDD/2 cell `vhalf` (two poly resistors + 1 pF MIM, AFE/adc/spice/vhalf.spice) and the sampled comparator reference `vrefs` (TG + Cref 7 pF MIM, I2: gates tg_on / samb, no new net), ADC analog dac_sw (split 6+6 DAC, plate/M reset switches, sampling TGs, 13 bottom drivers) and the comparator cmp_p.
-The 2 std cells are 7t5v0 cells and need VDD/VSS rails inside (or next to) the cell. Pin order below = the Verilog module port order.
+`afe_ch` = one channel, replicated 8 times (assembled in L3) = the 2 routing TGATEs (record + IPG, 5 V-device macro TGATE/TGATE.gds) + `amp_ch` (L2) + `adc_ch` (L1):
+- `amp_ch` = amplifier afe_chc (stage 1, stage 2, follower, reset muxes, REC park) + one-shot fs_oneshot_c (C_T 4 pF) + the OR2 standard cell (fs = one-shot OR RST_AMP).
+- `adc_ch` = the VDD/2 cell `vhalf` (two ppolyf_u_1k resistors of 250 um x 1 um + 1 pF MIM, AFE/adc/spice/vhalf.spice), the INV standard cell (samb), dac_sw (split 6+6 DAC, plate / M reset switches, 13 sampling TGs, 13 bottom drivers),
+  the sampled comparator reference `vrefs` (TG + Cref 7 pF as ONE MIM plate of 59.07 um, gates tg_on / samb) and the comparator cmp_p (its two preamp capacitors are one 5 x 5 um MIM unit each in the layout).
+The 2 standard cells are 7t5v0 cells; their VDD / VNW go to the analog strap `vdd`, VSS / VPW to `vss`. Pin order below = the Verilog module port order.
+LVS references (never edit by hand): AFE/layout/lvs/{afe_chc.spice (afe_chc, fs_oneshot_c, amp_ch), adc_ch.spice, bias_genc.spice, dbs_afe_top.spice}, written by AFE/layout/scripts/mk_lvs_netlists.py; report AFE/layout/lvs/mk_lvs_netlists.log.
 
 | Pin | Dir | Type | Connects to / meaning |
 |---|---|---|---|
 | e | inout | analog pad | E[i] pad, TGATE IN (both TGATEs) |
 | ipg | inout | analog pad | IPG[i] pad, IPG TGATE OUT |
-| rec | inout | analog pad | REC[i] pad = record TGATE OUT = afe_chc.rec (amplifier input, park node) |
 | ref | inout | analog pad | the ONE shared REF pad -> afe_chc.ref (all 8 channels; Decision 41) |
 | sw_rec | in | digital 3.3 V | dbs_ctrl sw_rec[i]: record TGATE C, park PMOS gate (afe_chc.pkcb), one-shot trig |
 | sw_rec_b | in | digital | dbs_ctrl sw_rec_b[i]: record TGATE CBAR, park NMOS gate (afe_chc.pkc); HIGH = park ON |
 | sw_ipg, sw_ipg_b | in | digital | IPG TGATE C / CBAR |
 | rst_amp | in | digital | adc8_top rst_amp_o (config bit 9), same net to all 8 channels, ORed into fs |
 | rst_sw | in | digital | adc8_top rst_sw[i] -> dac_sw.rst AND dac_sw.rstm (D4 wiring) |
-| tg_on | in | digital | adc8_top tg_on[i] -> dac_sw.sam; local inverter -> dac_sw.samb |
+| tg_on | in | digital | adc8_top tg_on[i] -> dac_sw.sam and vrefs.c; local inverter -> samb (dac_sw.samb, vrefs.cb) |
 | cmp_clk | in | digital | adc8_top cmp_clk[i] -> cmp_p.clk |
-| dac_gdn | in | digital | adc8_top dac_gdn[i] -> dac_sw.gdn (dummy driver NMOS gate); dac_sw.gdp tied to VDD inside |
+| dac_gdn | in | digital | adc8_top dac_gdn[i] -> dac_sw.gdn (dummy driver NMOS gate); dac_sw.gdp is tied to vdd_dac inside the channel |
 | dac_gp[11:0], dac_gn[11:0] | in | digital | adc8_top dac_gp/gn[12i+11 : 12i] -> dac_sw.gp0..gp11 / gn0..gn11 |
 | cmp_q | out | digital | cmp_p.outp -> adc8_top cmp_q[i] (outn left open) |
 | vbn | in | analog bias | bias_genc.vbn -> afe_chc.vbn and fs_oneshot_c.vbn |
-| vcm | in | analog bias | bias_genc.vcm_in (1.6484 V) -> afe_chc.vcm |
+| vcm | in | analog bias | bias_genc.vcm_in (1.6489 V) -> afe_chc.vcm |
 | vg1, vg2, vrs | in | analog bias | bias_genc -> afe_chc |
 | vcmo | in | analog bias | bias_genc.vcm_out -> afe_chc.vcmo |
-| vdd, vss | inout | supply | afe_chc, one-shot, dac_sw, cmp_p, 2 std cells (ADC DAC drivers on the separate strap, section 5) |
+| vdd | inout | supply, analog strap | afe_chc, fs_oneshot_c, OR2, vhalf, Cref switch (vrefs), samb inverter, n-wells of the 13 sampling TGs (dac_sw.vdd), wells of the 2 routing TGATEs |
+| vdd_cmp | inout | supply, ADC-main strap | cmp_p (its only supply pin, named vdd_cmp) |
+| vdd_dac | inout | supply, ADC-DAC strap | the 13 bottom-plate drivers of dac_sw (dac_sw.vdd_dac) and the gate tie of the dummy driver PMOS (gdp) |
+| vss | inout | supply | everything; one ground |
 
-Internal (not pins): vcmd (vhalf.out -> dac_sw.vcm and vrefs.in), vref (vrefs.out -> cmp_p.inp, floating while tg_on = 0; keep it short and shielded: it holds the sampled reference for ~10 us), amp_out (afe_chc.out -> dac_sw.vin), t (DAC plate -> cmp_p.inn), m (DAC mid node), fs_os, fs, samb. One bias cell `bias_genc` (vbn vcm_in vg1 vcm_out vg2 vrs vdd vss) is shared by the 8 channels.
-Top ports (32 pads, info.yaml order): E[7:0] IPG[7:0] REC[7:0] REF CS DIN SCLK RSTN DOUT VDD VSS, plus pad-control outputs DOUT_OE (= dout_oe = ~CS), DOUT_IE/PD/PU/CS/SL/PDRV0/PDRV1 and {CS,DIN,SCLK,RSTN}_{PU,PD} (all tied 0 except RSTN_PD = 1; names and values NOT verified against the organizer template, to be checked in L4).
+Supply straps (Decision 44d = AFE/review/AUDIT.md 4.9.2; supersedes the wording of section 5 and Decision 40e): three metal straps star-connected at the one VDD pad. In the netlist the analog strap and the ADC-main strap are the SAME net (top net VDD:
+`afe_ch.vdd` and `afe_ch.vdd_cmp` both connect to it; keep them as separate metal down to the pad), the ADC-DAC strap is the net `vdd_dac` behind ONE 10 ohm strap resistor (LVS device, default rm3 2 um x 222 um).
+MOS decap (cap_nmos_03v3, 3.98 fF/um2 in the PDK model): 0.125 nF on the ADC-main strap, 0.1 nF on the ADC-DAC strap = 142 units of 20 x 20 um in the reference (56,800 um2); the unit size, the resistor type and their numbers are options of
+mk_lvs_netlists.py (`--decap W,L`, `--rstrap MODEL,W,L`): L3a sets what it draws and runs the script again.
+
+Pins of the two layout cells (from AFE/layout/lvs/mk_lvs_netlists.log; `out` of amp_ch and `vin` of adc_ch are the net amp_out of afe_ch):
+- amp_ch: ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+- adc_ch: rst_sw tg_on cmp_clk dac_gdn dac_gp[11..0] dac_gn[11..0] cmp_q vin vdd vdd_cmp vdd_dac vss
+
+Internal (not pins of afe_ch): rec (record TGATE OUT = afe_chc.rec = amplifier input and park node; NO pad since Decision 45: keep it short, it is a high-impedance node), vcmd (vhalf.out -> dac_sw.vcm and vrefs.in), vref (vrefs.out -> cmp_p.inp, floating while tg_on = 0;
+keep it short and shielded: it holds the sampled reference for ~10 us), amp_out (afe_chc.out -> dac_sw.vin), t (DAC plate -> cmp_p.inn), m (DAC mid node), fs_os, fs, samb, cmp_qn. One bias cell `bias_genc` (vbn vcm_in vg1 vcm_out vg2 vrs vdd vss) is shared by the 8 channels.
+Top ports (24 pads, info.yaml order, Decision 45): E[7:0] IPG[7:0] REF CS DIN SCLK RSTN DOUT VDD VSS. The bidirectional pad DOUT has the two ports DOUT_OUT (to the pad's A) and DOUT_IN (from the pad's Y; unused, the pad input is off) (Decision 44b), plus
+the pad-control outputs DOUT_OE (= dout_oe = ~CS), DOUT_IE/PD/PU/CS/SL/PDRV0/PDRV1 and {CS,DIN,SCLK,RSTN}_{PU,PD} (all tied 0 except RSTN_PD = 1). The NAMES are checked against the organizer template (AFE/review/sim/organizer/template_info.yaml, script
+AFE/review/scripts/xcheck.py); the VALUES are to be confirmed in L4. In the LVS top the 15 constant ties are 0-ohm resistors between the pin and VDD / VSS (see the header of AFE/layout/lvs/dbs_afe_top.spice).
 
 ### Every net that crosses digital <-> analog (N = 8)
 Digital -> analog, per channel (32): sw_rec, sw_rec_b, sw_ipg, sw_ipg_b (4), rst_sw, tg_on, dac_gdn, cmp_clk (4), dac_gp[11:0], dac_gn[11:0] (24).
 Analog -> digital, per channel (2): cmp_q (cmp_p.outp -> SAR capture flop D, clocked by tapw), fs_os (one-shot output -> OR2 inside the channel).
 Digital -> analog through the OR2: fs (1 per channel, OR2 output -> afe_chc.fs). Shared: rst_amp (1 net, fan-out 8 OR2 inputs).
-Total = 8 x (32 + 2 + 1) + 1 = 281 nets (280 per-channel + rst_amp). Constant: dac_gdp tied to VDD, no net. Digital -> analog nets with analog meaning that need care: rst_sw (plate reset, falls BEFORE tg_on, D4 race >= 0.8 ns), cmp_clk (staggered, STA-matched delay chain), tg_on / dac_gdn (opposite phase, sampling), sw_rec / sw_rec_b (also feed the park and the one-shot: C / CBAR skew is one inverter delay).
-Analog nets between blocks (not crossing): amp_out, t, m, the 6 shared bias nets (vbn, vcm, vg1, vg2, vrs, vcmo), vcmd (local to each channel). Pad nets: E, IPG, REC (24) + REF (1, fan-out 8).
+Total = 8 x (32 + 2 + 1) + 1 = 281 nets (280 per-channel + rst_amp). Constant: dac_gdp tied to vdd_dac, no net. Digital -> analog nets with analog meaning that need care: rst_sw (plate reset, falls BEFORE tg_on, D4 race >= 0.8 ns), cmp_clk (staggered, STA-matched delay chain), tg_on / dac_gdn (opposite phase, sampling), sw_rec / sw_rec_b (also feed the park and the one-shot: C / CBAR skew is one inverter delay).
+Analog nets between blocks (not crossing): amp_out, t, m, the 6 shared bias nets (vbn, vcm, vg1, vg2, vrs, vcmo), vcmd (local to each channel), rec (local to each channel). Pad nets: E, IPG (16) + REF (1, fan-out 8).
 
 Stop. No layout file was created.

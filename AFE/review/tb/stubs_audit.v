@@ -7,15 +7,21 @@
 //   afe_chc       AFE/amp/spice/afe_chc.spice     : rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb
 //   fs_oneshot_c  AFE/amp/spice/fs_oneshot_c.spice: trig fs vbn vdd vss
 //   bias_genc     AFE/amp/spice/bias_genc.spice   : vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
-//   dac_sw        AFE/adc/spice/dac_sw.spice      : vin t m vcm vdd vss rst rstm sam samb gp0..gp11 gdp gn0..gn11 gdn
-//   cmp_p         AFE/adc/spice/comparator.spice  : inp inn clk outp outn vdd vss
+//   dac_sw        AFE/adc/spice/dac_sw.spice      : vin t m vcm vdd vdd_dac vss rst rstm sam samb gp0..gp11 gdp gn0..gn11 gdn   (F1: vdd_dac = the 13 bottom-plate drivers, vdd = sampling-TG n-wells)
+//   cmp_p         AFE/adc/spice/comparator.spice  : inp inn clk outp outn vdd_cmp vss                                           (F1: supply pin named vdd_cmp)
 //   vhalf         AFE/adc/spice/vhalf.spice       : out vdd vss
 //   vrefs         AFE/adc/spice/vhalf.spice       : in out c cb vdd vss
+//   afe_rstrap, afe_decap : NO simulation subckt; the 10 ohm strap resistor and the MOS decap banks of the supply network (Decision 44d).  They are devices of the LVS top reference
+//                           (AFE/layout/scripts/mk_lvs_netlists.py); the analog simulations model them in AFE/adc/scripts/x2lib.py supply().
 // Analog nets are 1-bit wires that only carry connectivity.  The signal VALUE travels on SIM-ONLY ports/regs (names sim_*, compiled in only with +define+SIM_STUBS; the real subckts have none):
 //   amp stub reg sim_vin[11:0] (written by the testbench) -> sim_out -> dac_sw sim_vin -> sim_vs, sim_dacv -> cmp_p.  The amplifier stub outputs 12'hAAA while fs = 1 (amplifier held in reset).
 `ifndef GLS
 module gf180mcu_fd_sc_mcu7t5v0__or2_1 (A1, A2, Z); input A1, A2; output Z; assign #0.2 Z = A1 | A2; endmodule
 `endif   // ESTIMATE delay; the real cell is a std cell of the 7t5v0 library
+
+// supply network devices (F1, Decision 44d): in the digital simulation the strap resistor is a short (tran), the decap does nothing
+module afe_rstrap (a, b, vss); inout a, b; input vss; tran (a, b); endmodule
+module afe_decap #(parameter real C_NF = 0.0) (p, n); inout p, n; endmodule
 
 // vhalf (AFE/adc/spice/vhalf.spice): VDD/2 from two equal poly resistors + MIM decap, one per ADC
 module vhalf (out, vdd, vss); output out; input vdd, vss; assign out = 1'b1; endmodule
@@ -56,12 +62,12 @@ module afe_chc (rec, ref, out, vdd, vss, vbn, vcm, vg1, vcmo, vg2, vrs, fs, pkc,
 `endif
 endmodule
 
-module dac_sw (vin, t, m, vcm, vdd, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn
+module dac_sw (vin, t, m, vcm, vdd, vdd_dac, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn
 `ifdef SIM_STUBS
     , sim_vin, sim_vs, sim_dacv
 `endif
 );
-    inout vin, t, m; input vcm, vdd, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn;
+    inout vin, t, m; input vcm, vdd, vdd_dac, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp3, gp4, gp5, gp6, gp7, gp8, gp9, gp10, gp11, gdp, gn0, gn1, gn2, gn3, gn4, gn5, gn6, gn7, gn8, gn9, gn10, gn11, gdn;
     wire [11:0] gp = {gp11, gp10, gp9, gp8, gp7, gp6, gp5, gp4, gp3, gp2, gp1, gp0};
     wire [11:0] gn = {gn11, gn10, gn9, gn8, gn7, gn6, gn5, gn4, gn3, gn2, gn1, gn0};
     integer e_crowbar = 0, e_cont = 0, e_order = 0, e_samb = 0;
@@ -76,12 +82,12 @@ module dac_sw (vin, t, m, vcm, vdd, vss, rst, rstm, sam, samb, gp0, gp1, gp2, gp
     assign vin = 1'bz; assign t = 1'b1; assign m = 1'b1;
 endmodule
 
-module cmp_p (inp, inn, clk, outp, outn, vdd, vss
+module cmp_p (inp, inn, clk, outp, outn, vdd_cmp, vss
 `ifdef SIM_STUBS
     , sim_vs, sim_dacv
 `endif
 );
-    input inp, inn, clk, vdd, vss; output reg outp, outn;
+    input inp, inn, clk, vdd_cmp, vss; output reg outp, outn;
 `ifdef SIM_STUBS
     input [11:0] sim_vs, sim_dacv;
 `endif

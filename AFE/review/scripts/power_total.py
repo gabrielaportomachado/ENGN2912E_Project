@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """AUDIT step 6: power per mode from the static .op currents (review/sim/power_op.log) and the dynamic terms (sources stated per line).
-usage: python3 power_total.py [out.log]"""
+usage: python3 power_total.py [out.log] [static-current log = sim/power_op.log] [variant = 1k_3L]
+The variant column of the static-current log selects the resistor version: 1k_3L = the design since F1 (Decision 44a: ppolyf_u_1k, 3x the squares); 3k = the pre-F1 design.
+The audit log sim/power_total.log was made with the 3k rows; F1 wrote sim/f1_power_total.log from sim/f1_bias_op.log with the 1k_3L rows."""
 import sys, os, re, math
 R = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 out = open(sys.argv[1], 'w') if len(sys.argv) > 1 else sys.stdout
 P = lambda *a: print(*a, file=out)
 # static, uA  [review/sim/power_op.log]: corner -> (channel, bias, vhalf, VDD)
 ST = {}
-for ln in open(os.path.join(R, 'sim', 'power_op.log')):
-    m = re.match(r'(\w+)\s+(-?\d+)\s+([\d.]+) 3k\s+\|\s+[\d.]+(?:\s+[\d.]+){5}\s+\|\s+([\d.]+)\s+[\d.]+\s+[\d.]+\s+\|\s+([\d.]+)\s+([\d.]+)', ln)
+SRC = sys.argv[2] if len(sys.argv) > 2 else os.path.join(R, 'sim', 'power_op.log')
+VAR = sys.argv[3] if len(sys.argv) > 3 else '1k_3L'
+for ln in open(SRC):
+    m = re.match(r'(\w+)\s+(-?\d+)\s+([\d.]+) %s\s+\|' % re.escape(VAR) + r'\s+[\d.]+(?:\s+[\d.]+){5}\s+\|\s+([\d.]+)\s+[\d.]+\s+[\d.]+\s+\|\s+([\d.]+)\s+([\d.]+)', ln)
     if m:
         ST[(m.group(1), int(m.group(2)), float(m.group(3)))] = (float(m.group(4)), float(m.group(5)), float(m.group(6)))
 # digital macro, W at SCLK 2 MHz running continuously, default activity  [AFE/adc/lg/runs/d3/53-openroad-stapostpnr/nom_*/power.rpt]
@@ -19,7 +23,7 @@ Q_DAC = {'typ': 17.8e-12, 'ff': 16.1e-12, 'ss': 19.5e-12}  # C per conversion fr
 FS = 4000.0
 NCLK = 160
 DBS = 1.06                                                 # dbs_ctrl adds 18 flops to 149 + gates: +6 % of the macro (ESTIMATE from the cell areas: 1998 / 31872 um2)
-P('AUDIT step 6: power.  Static currents [review/sim/power_op.log]; digital energy per SCLK cycle = LibreLane power.rpt / 2 MHz (tt 79.6 pJ, ss 125 C 3.0 V 67.5 pJ, ff -40 C 3.6 V 96.2 pJ; default data activity,')
+P('AUDIT step 6: power.  Static currents [%s, rows %s]; digital energy' % (os.path.relpath(SRC, os.path.join(R, '..', '..')), VAR) + ' per SCLK cycle = LibreLane power.rpt / 2 MHz (tt 79.6 pJ, ss 125 C 3.0 V 67.5 pJ, ff -40 C 3.6 V 96.2 pJ; default data activity,')
 P('clock and flop-clock-pin power dominate: 97 %); 160 SCLK per frame, 4000 frames/s.  DOUT pad: C_load ASSUMED, 36 rising edges per frame (144 data bits x 0.25), E = C V^2 per rising edge.')
 P('')
 P('%-22s | %8s %7s %7s | %8s %7s %7s %8s %8s | %8s %8s | %s' % ('corner', 'amps', 'bias', 'vhalf', 'digital', 'cmp', 'DAC', 'DOUT15pF', 'dyn_sum', 'RECORD', 'IDLE', 'uA record (avg from the pad)'))

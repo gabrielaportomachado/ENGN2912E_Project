@@ -237,10 +237,10 @@ if __name__ == '__main__':
     B = {}
     B['afe_chc'] = block(flat(subs, 'afe_chc', {}, genv), P, 'afe_chc = stage 1 (OTA1, Cin x2, Cf x2, pseudo-R) + stage 2 (OTA2, follower) + gate muxes + REC park', pieces={'xcin1': 2, 'xcin2': 2})
     B['oneshot'] = block(flat(subs, 'fs_oneshot_c', {}, genv), P, 'fs_oneshot_c (C_T 4 pF)')
-    B['bias'] = block(flat(subs, 'bias_genc', {}, genv), P, 'bias_genc (one per chip; ladders are ppolyf_u_3k as frozen)')
+    B['bias'] = block(flat(subs, 'bias_genc', {}, genv), P, 'bias_genc (one per chip; ladders are ppolyf_u_1k, 2 x 1650 um x 1 um, since F1 / Decision 44a)')
     B['dac'] = block(flat(subs, 'dac_sw', {}, genv), P, 'dac_sw = 128 MIM units + bridge + 13 drivers + 13 sampling TGs + 2 reset switches')
     B['cmp'] = block(flat(subs, 'cmp_p', {}, genv), P, 'cmp_p (the two 40 fF preamp capacitors are IDEAL in the netlist: not counted; one legal 5x5 um MIM each would add 2 x 46 um2)')
-    B['vhalf'] = block(flat(subs, 'vhalf', {}, genv), P, 'vhalf (2 x 250 kOhm ppolyf_u_3k + 1 pF)')
+    B['vhalf'] = block(flat(subs, 'vhalf', {}, genv), P, 'vhalf (2 x 250 kOhm ppolyf_u_1k = 2 x 250 um x 1 um, + 1 pF)')
     B['vrefs'] = block(flat(subs, 'vrefs', {}, genv), P, 'vrefs (TG + Cref 7 pF: ONE MIM in the netlist; Decision 42 / L1a say 128 x 5x5 um units)')
     # unit-array view of the DAC and of Cref (5 x 5 um units on a 6.8 um pitch = 5 + 2 x 0.6 overlap + 0.6 space, one dummy ring)
     pitch = 6.8
@@ -251,8 +251,10 @@ if __name__ == '__main__':
     tga = float(tg.group(1)) * float(tg.group(2))
     P('  -- TGATE macro (TGATE/TGATE.lef SIZE): %.2f x %.2f um = %.1f um2 each, 2 per channel (std-cell row height: needs VDD / VSS rails and well taps: x3 assumed) = %.0f um2 per channel' % (float(tg.group(1)), float(tg.group(2)), tga, 2 * tga * 3))
     # HRES what-if
-    for var, fac in (('ppolyf_u_1k, same resistance (3x the squares)', 3.0), ('ppolyf_u_1k, same squares (R / 3)', 1.0)):
-        P('  -- HRES option of gf180mcuD (%s): bias ladders %.0f um2, vhalf pair %.0f um2 per ADC' % (var, sum(1 for _ in [0]) * (B['bias']['res'] - 120 * 2.4 * 1.2) * fac + 120 * 2.4 * 1.2, B['vhalf']['res'] * fac))
+    # F1 (Decision 44a): the netlists use ppolyf_u_1k with 3x the squares (same resistance).  The second line is the pre-F1 drawing (one third of the length: ppolyf_u_3k, which gf180mcuD does not have,
+    # or ppolyf_u_1k at R / 3, the rejected alternative).  Rb of the master (2 um x 120 um, footprint 120 x 2.4 x 1.2) is not part of the ladders.
+    for var, fac in (('ppolyf_u_1k, 3x the squares = the design since F1', 1.0), ('one third of the length = the pre-F1 drawing (ppolyf_u_3k) or ppolyf_u_1k at R / 3', 1.0 / 3.0)):
+        P('  -- HRES poly (%s): bias ladders + Rb %.0f um2, vhalf pair %.0f um2 per ADC' % (var, (B['bias']['res'] - 120 * 2.4 * 1.2) * fac + 120 * 2.4 * 1.2, B['vhalf']['res'] * fac))
 
     P('\n2. DIGITAL MACRO (LibreLane run AFE/adc/lg/runs/d3/final/metrics.json = adc8_top only, I1 RTL, no CTS)')
     m = json.load(open(os.path.join(AFE, 'adc', 'lg', 'runs', 'd3', 'final', 'metrics.json')))

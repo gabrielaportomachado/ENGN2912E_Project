@@ -1,13 +1,14 @@
 * vhalf (I1, Decision 41): VDD/2 for ONE ADC (dac_sw.vcm = plate/M reset level, cmp_p.inp): two equal poly resistors from the ADC's VDD / VSS + a local MIM decap.  One per afe_ch.
-* Pins: out vdd vss.  R each 250 kOhm nominal (ppolyf_u_3k, 1 um wide: L = R/3000 sq); static current VDD / (2 R) = 6.6 uA typ (8.8 uA at ff, rsh -25 %).  Decap VH_C (MIM, square, area + perimeter formula of afe_params).
+* Pins: out vdd vss.  R each 250 kOhm nominal (ppolyf_u_1k, 1 um wide: L = R/1000 sq = 250 um; F1 / Decision 44a: was ppolyf_u_3k, L = R/3000, a device that gf180mcuD does not have);
+* static current VDD / (2 R) = 6.4 uA typ, 8.4 uA ff 85 C, 5.0 uA ss -40 C (AFE/review/sim/f1_bias_op.log).  Decap VH_C (MIM, square, area + perimeter formula of afe_params).
 * The two resistors must be drawn as one matched pair (common centroid, same width); a mismatch of x % moves VDD/2 by x/4 % of VDD (= a code shift of the ADC, D1), it does not change the sampled value (plate and comparator share this node).
 .param CAPK_A=1.99e-3 CAPK_P=2.383e-10
 * I1 sized 20 pF for the 0.1 LSB targets (not met); I2 (NOTES "I2 findings"): with the sampled floating reference below (vrefs, Cref 7 pF) the divider decap only has to hold the node between conversions: 1 pF is enough (tested 1 / 10 / 20 pF: same code error)
 .param VH_R=250k VH_C=1p
 .param VH_LC='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*VH_C))/(2*CAPK_A)'
 .subckt vhalf out vdd vss
-Xru vdd out vss ppolyf_u_3k r_length={VH_R/3000*1u} r_width=1u
-Xrd out vss vss ppolyf_u_3k r_length={VH_R/3000*1u} r_width=1u
+Xru vdd out vss ppolyf_u_1k r_length={VH_R/1000*1u} r_width=1u
+Xrd out vss vss ppolyf_u_1k r_length={VH_R/1000*1u} r_width=1u
 Xc out vss cap_mim_2f0_m2m3_noshield c_length={VH_LC} c_width={VH_LC}
 .ends vhalf
 

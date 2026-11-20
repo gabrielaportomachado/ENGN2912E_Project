@@ -3,6 +3,7 @@
 // Scenario: reset -> RST_AMP set / held >= 100 ms / cleared -> record start (config write, mode change) -> amplifier reset pulse (fs one-shot) -> ADC frames on DOUT
 //           -> treat mode -> record again on 4 channels -> RST_AMP during record -> RSTN.  The stub amplifier outputs code 0xAAA while fs = 1, else the code written to u_amp.sim_vin (here vin_all).
 // Also compares REC / IPG with a real `dbs #(8)` instance (rtl/dbs.v) fed with the same mode / en / E.
+// F1 (Decisions 44b, 45): the top has DOUT_OUT / DOUT_IN instead of DOUT and NO REC ports; REC[i] below is the INTERNAL net dut.ch[i].u.rec (record TGATE OUT = amplifier input), read hierarchically.
 module tb_top;
     supply1 vdd_n; supply0 vss_n;
     reg cs = 1, din = 0, sclk = 0, rstn = 0;
@@ -11,7 +12,7 @@ module tb_top;
     assign E = eval;
     wire dout, dout_oe, d_ie, d_pd, d_pu, d_cs, d_sl, d_p0, d_p1, cs_pu, cs_pd, din_pu, din_pd, sclk_pu, sclk_pd, rstn_pu, rstn_pd;
     wire refw; assign refw = 1'b1;
-    dbs_afe_top dut (.E(E), .IPG(IPG), .REC(REC), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT(dout),
+    dbs_afe_top dut (.E(E), .IPG(IPG), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT_OUT(dout), .DOUT_IN(1'b0),
                      .DOUT_OE(dout_oe), .DOUT_IE(d_ie), .DOUT_PD(d_pd), .DOUT_PU(d_pu), .DOUT_CS(d_cs), .DOUT_SL(d_sl), .DOUT_PDRV0(d_p0), .DOUT_PDRV1(d_p1),
                      .CS_PU(cs_pu), .CS_PD(cs_pd), .DIN_PU(din_pu), .DIN_PD(din_pd), .SCLK_PU(sclk_pu), .SCLK_PD(sclk_pd), .RSTN_PU(rstn_pu), .RSTN_PD(rstn_pd),
                      .VDD(vdd_n), .VSS(vss_n));
@@ -32,6 +33,7 @@ module tb_top;
     real t_swi_f [0:7];
     genvar g;
     generate for (g = 0; g < 8; g = g + 1) begin : ob
+        assign REC[g]    = dut.ch[g].u.rec;          // internal net (no REC pad, Decision 45)
         assign fs_v[g]   = dut.ch[g].u.fs;
         assign swr_v[g]  = dut.ch[g].u.sw_rec;
         assign os_n[g]   = dut.ch[g].u.u_os.n_pulses;
@@ -164,6 +166,7 @@ module tb_top;
         chk(DOUT_OE_ok == 1, "DOUT_OE = ~CS at every change");
         chk(e_dout == 0, "DOUT changes only on SCLK falling edges");
         chk(d_ie === 1'b0 && cs_pu === 1'b0 && rstn_pd === 1'b1, "pad control ties");
+        chk(dut.vdd_dac === 1'b1 && dut.ch[0].u.u_dac.vdd_dac === 1'b1 && dut.ch[7].u.u_cmp.vdd_cmp === 1'b1, "supply straps connected: vdd_dac behind the strap resistor, vdd_cmp on VDD");
         $display("e_ref %0d  e_dout %0d  DOUT_OE_ok %0d", e_ref, e_dout, DOUT_OE_ok);
         $display("RESULT %0s errors %0d", errs == 0 ? "PASS" : "FAIL", errs);
         $finish;

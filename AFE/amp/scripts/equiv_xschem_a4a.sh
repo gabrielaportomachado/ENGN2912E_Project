@@ -12,7 +12,7 @@ done
 python3 - "$AMP" >> "$LOG" <<'PY'
 import re, sys
 amp = sys.argv[1]
-MODELS = ('pfet_03v3', 'nfet_03v3', 'nfet_06v0_nvt', 'cap_mim_2f0_m2m3_noshield', 'ppolyf_u_1k', 'ppolyf_u_3k')
+MODELS = ('pfet_03v3', 'nfet_03v3', 'nfet_06v0_nvt', 'cap_mim_2f0_m2m3_noshield', 'ppolyf_u_1k')
 def norm(p):
     txt = re.sub(r'\n\+\s*', ' ', open(p).read())
     dev, sub = {}, None

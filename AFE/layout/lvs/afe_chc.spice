@@ -1,0 +1,74 @@
+* LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: (defaults)
+* MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
+* File afe_chc.spice: the amplifier part of one channel (L2).  Cells: afe_chc (stage 1 + stage 2 + follower + gate muxes + REC park), fs_oneshot_c, the OR2 standard cell,
+* and amp_ch = afe_chc + fs_oneshot_c + OR2 wired as in module afe_ch of AFE/top/dbs_afe_top.v (out = the net amp_out of afe_ch).
+
+.subckt afe_chc rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb
+Xsink1 ibias1 vbn vss vss nfet_03v3 w=16u l=4u m=24
+Xmp1 gm1 fs vg1 vdd pfet_03v3 w=0.5u l=0.5u
+Xmn1 gm1 fs vrs vss nfet_03v3 w=0.5u l=0.5u
+Xmp2 gm2 fs vg2 vdd pfet_03v3 w=0.5u l=0.5u
+Xmn2 gm2 fs vrs vss nfet_03v3 w=0.5u l=0.5u
+Xpkn rec pkc vcm vss nfet_03v3 w=1u l=0.5u
+Xpkp rec pkcb vcm vdd pfet_03v3 w=2u l=0.5u
+Xs1_xota_xmb ibias1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xmt xs1_xota_tail ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xm1 xs1_xota_d1 xs1_vn xs1_xota_tail vdd pfet_03v3 w=50u l=2u m=16
+Xs1_xota_xm2 xs1_xota_o1 xs1_vp xs1_xota_tail vdd pfet_03v3 w=50u l=2u m=16
+Xs1_xota_xm3 xs1_xota_d1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
+Xs1_xota_xm4 xs1_xota_o1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
+Xs1_xota_xm6 v1 xs1_xota_o1 vss vss nfet_03v3 w=50u l=16u m=4
+Xs1_xota_xm7 v1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xcc xs1_xota_o1 v1 cap_mim_2f0_m4m5_noshield c_length=22u c_width=22u
+Xs1_xcin1_1 rec xs1_vn cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin1_2 rec xs1_vn cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin2_1 ref xs1_vp cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcin2_2 ref xs1_vp cap_mim_2f0_m4m5_noshield c_length=70.649028u c_width=70.649028u
+Xs1_xcf1 xs1_vn v1 cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
+Xs1_xcf2 xs1_vp vcm cap_mim_2f0_m4m5_noshield c_length=9.788457u c_width=9.788457u
+Xs1_xr1_xm1 xs1_xr1_m gm1 xs1_vn xs1_vn pfet_03v3 w=0.22u l=0.5u
+Xs1_xr1_xm2 xs1_xr1_m gm1 v1 v1 pfet_03v3 w=0.22u l=0.5u
+Xs1_xr2_xm1 xs1_xr2_m gm1 xs1_vp xs1_vp pfet_03v3 w=0.22u l=0.5u
+Xs1_xr2_xm2 xs1_xr2_m gm1 vcm vcm pfet_03v3 w=0.22u l=0.5u
+Xs2_xota2_xmt xs2_xota2_tail vbn vss vss nfet_03v3 w=1u l=20u
+Xs2_xota2_xm1 xs2_xota2_d1 vcmo xs2_xota2_tail vss nfet_03v3 w=1u l=40u
+Xs2_xota2_xm2 xs2_xota2_o2 xs2_vn2 xs2_xota2_tail vss nfet_03v3 w=1u l=40u
+Xs2_xota2_xm3 xs2_xota2_d1 xs2_xota2_d1 vdd vdd pfet_03v3 w=1u l=20u
+Xs2_xota2_xm4 xs2_xota2_o2 xs2_xota2_d1 vdd vdd pfet_03v3 w=1u l=20u
+Xs2_xota2_xmf vdd xs2_xota2_o2 out vss nfet_06v0_nvt w=10u l=2u
+Xs2_xota2_xms out vbn vss vss nfet_03v3 w=16u l=4u m=6
+Xs2_xota2_xcc xs2_xota2_o2 vss cap_mim_2f0_m4m5_noshield c_length=31.463538u c_width=31.463538u
+Xs2_xcin v1 xs2_vn2 cap_mim_2f0_m4m5_noshield c_length=38.588264u c_width=38.588264u
+Xs2_xcf xs2_vn2 out cap_mim_2f0_m4m5_noshield c_length=11.917642u c_width=11.917642u
+Xs2_xr_xm1 xs2_xr_m gm2 xs2_vn2 xs2_vn2 pfet_03v3 w=0.22u l=0.5u
+Xs2_xr_xm2 xs2_xr_m gm2 out out pfet_03v3 w=0.22u l=0.5u
+.ends afe_chc
+
+.subckt fs_oneshot_c trig fs vbn vdd vss
+Xpu t trig vdd vdd pfet_03v3 w=1u l=0.5u
+Xlt t vbn vss vss nfet_03v3 w=0.28u l=40u
+Xct t vss cap_mim_2f0_m4m5_noshield c_length=44.594726u c_width=44.594726u
+Xnp1 nd trig vdd vdd pfet_03v3 w=1u l=0.5u
+Xnp2 nd t vdd vdd pfet_03v3 w=1u l=0.5u
+Xnn1 nd trig mm vss nfet_03v3 w=1u l=0.5u
+Xnn2 mm t vss vss nfet_03v3 w=1u l=0.5u
+Xop fs nd vdd vdd pfet_03v3 w=2u l=0.5u
+Xon fs nd vss vss nfet_03v3 w=1u l=0.5u
+.ends fs_oneshot_c
+
+* standard cell, copied unchanged from the PDK (gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice)
+.SUBCKT gf180mcu_fd_sc_mcu7t5v0__or2_1 A1 A2 Z VDD VNW VPW VSS
+X_i_2 Z_neg A1 VSS VPW nfet_05v0 W=3.6e-07 L=6e-07
+X_i_3 VSS A2 Z_neg VPW nfet_05v0 W=3.6e-07 L=6e-07
+X_i_0 Z Z_neg VSS VPW nfet_05v0 W=8.2e-07 L=6e-07
+X_i_4 net_0 A1 Z_neg VNW pfet_05v0 W=5.65e-07 L=5e-07
+X_i_5 VDD A2 net_0 VNW pfet_05v0 W=5.65e-07 L=5e-07
+X_i_1 Z Z_neg VDD VNW pfet_05v0 W=1.22e-06 L=5e-07
+.ENDS
+
+.subckt amp_ch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+Xu_os sw_rec fs_os vbn vdd vss fs_oneshot_c
+Xu_or fs_os rst_amp fs vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+Xu_amp rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs sw_rec_b sw_rec afe_chc
+.ends amp_ch

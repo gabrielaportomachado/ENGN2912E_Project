@@ -1,0 +1,6 @@
+EQUIV structure cmp_p: 20 hand devices, 20 xschem devices, differing: none -> PASS
+EQUIV structure cmp_inv: 2 hand devices, 2 xschem devices, differing: none -> PASS
+EQUIV sim [delay typical 27 cmp_p cm=1.65]: 58 numbers, worst relative difference 1.39 % -> PASS (limit 2 %; trip points are quantised to 0.1 mV)
+EQUIV sim [icmr ss -40 cmp_p cm=0.3]: 8 numbers, worst relative difference 0 % -> PASS (limit 2 %; trip points are quantised to 0.1 mV)
+EQUIV sim [icmr ff 85 cmp_p cm=1.2]: 8 numbers, worst relative difference 0 % -> PASS (limit 2 %; trip points are quantised to 0.1 mV)
+EQUIV sim [kick typical 27 cmp_p cm=1.65]: 218 numbers, worst relative difference 0.578 % -> PASS (limit 2 %; trip points are quantised to 0.1 mV)

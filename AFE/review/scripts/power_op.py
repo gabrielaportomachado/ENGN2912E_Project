@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """AUDIT step 6: static supply current per block from .op (no saved log has the per-block split).
 Netlist = AFE/amp/tb/tb_a4c_op.spice (read, includes rewritten to absolute paths; design files untouched): bias_genc + ONE afe_chc; the OPDEV lines give every branch.
-Also: vhalf alone, and the what-if for the HRES option of gf180mcuD (ppolyf_u_3k does not exist there): same drawn squares as ppolyf_u_1k (R/3) and 3x length (same R).
+Also: vhalf alone, and the HRES-poly variants.  gf180mcuD has only ppolyf_u_1k; since F1 (Decision 44a) the design netlists use it with 3x the squares (variant 1k_3L = the netlists as they are).
+The two other variants are rebuilt from the design netlists for comparison: 3k = the pre-F1 netlist (ppolyf_u_3k, L = R/3000: not manufacturable in gf180mcuD, its ngspice model still exists),
+1k_sameL = ppolyf_u_1k at the pre-F1 drawn length (R/3, the rejected alternative of AUDIT P-A1).
 usage: python3 power_op.py [out.log]"""
 import sys, os, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -10,18 +12,28 @@ from ngjob import *
 CORNERS = [('typical', 27, 3.3), ('ff', 85, 3.3), ('ss', -40, 3.3), ('ff', -40, 3.6), ('ss', 125, 3.0)]
 
 
-def tb_op(corner, temp, vdd, variant='3k'):
+def hres_variant(txt, variant):
+    """the design netlist text -> the text of a variant.  Only the ladder / divider lines are touched (the ppolyf_u_1k lines whose length is written as R/1000*1u); Xrb of the master is not."""
+    if variant == '1k_3L':
+        return txt
+    out = []
+    for ln in txt.split('\n'):
+        if 'ppolyf_u_1k' in ln and '/1000*1u}' in ln and not ln.lstrip().startswith('*'):
+            ln = ln.replace('/1000*1u}', '/3000*1u}')                         # the pre-F1 drawn length
+            if variant == '3k':
+                ln = ln.replace('ppolyf_u_1k', 'ppolyf_u_3k')                 # the pre-F1 device
+        out.append(ln)
+    return '\n'.join(out)
+
+
+def tb_op(corner, temp, vdd, variant='1k_3L'):
     t = open(os.path.join(AMP, 'tb', 'tb_a4c_op.spice')).read()
     t = t.replace('../spice/models_typical.spice', '%s/spice/models_%s.spice' % (AMP, corner)).replace('../spice/', AMP + '/spice/')
     t = re.sub(r'^\.temp .*$', '.temp %g' % temp, t, flags=re.M)
     t = re.sub(r'^\.param VSUP=.*$', '.param VSUP=%g' % vdd, t, flags=re.M)
-    if variant != '3k':
-        # what-if: private copy of bias_genc with the D-variant resistor; VDDN is the design value the ladder lengths are computed from
-        b = open(os.path.join(AMP, 'spice', 'bias_genc.spice')).read()
-        if variant == '1k_sameL':
-            b = b.replace('ppolyf_u_3k', 'ppolyf_u_1k')                       # same drawn squares: R / 3
-        elif variant == '1k_3L':
-            b = b.replace('/3000*1u}', '/1000*1u}').replace('ppolyf_u_3k', 'ppolyf_u_1k')   # 3x the squares: same R
+    if variant != '1k_3L':
+        # what-if: private copy of bias_genc with the other resistor variant; VDDN is the design value the ladder lengths are computed from
+        b = hres_variant(open(os.path.join(AMP, 'spice', 'bias_genc.spice')).read(), variant)
         p = os.path.join(PT, 'pwr', 'bias_genc_%s.spice' % variant)
         os.makedirs(os.path.dirname(p), exist_ok=True)
         open(p, 'w').write(b)
@@ -29,12 +41,8 @@ def tb_op(corner, temp, vdd, variant='3k'):
     return t
 
 
-def tb_vhalf(corner, temp, vdd, variant='3k'):
-    v = open(os.path.join(ADC, 'spice', 'vhalf.spice')).read()
-    if variant == '1k_sameL':
-        v = v.replace('ppolyf_u_3k', 'ppolyf_u_1k')
-    elif variant == '1k_3L':
-        v = v.replace('/3000*1u}', '/1000*1u}').replace('ppolyf_u_3k', 'ppolyf_u_1k')
+def tb_vhalf(corner, temp, vdd, variant='1k_3L'):
+    v = hres_variant(open(os.path.join(ADC, 'spice', 'vhalf.spice')).read(), variant)
     p = os.path.join(PT, 'pwr', 'vhalf_%s.spice' % variant)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     open(p, 'w').write(v)
@@ -54,7 +62,7 @@ if __name__ == '__main__':
     res = run_jobs(jobs, 'pwr', log=lambda s: None)
     P('AUDIT step 6: static supply currents from .op (bias_genc + ONE afe_chc, tb_a4c_op.spice; vhalf + vrefs alone).  uA unless stated.  ngspice-46, one thread.')
     P('channel = OTA1 (bias diode + tail + 2nd stage) + stage-2 tail + follower;  bias = master legs + start-up + ladders A and B (ladders = total - all MOS branches).')
-    P('variant 3k = design as frozen (ppolyf_u_3k);  1k_sameL = same drawn squares with ppolyf_u_1k (the only HRES device of gf180mcuD): R/3;  1k_3L = ppolyf_u_1k with 3x the squares.')
+    P('variant 1k_3L = design as frozen since F1 (Decision 44a: ppolyf_u_1k, the only HRES device of gf180mcuD, 3x the squares);  3k = the pre-F1 netlist (ppolyf_u_3k);  1k_sameL = ppolyf_u_1k at the pre-F1 drawn length: R/3.')
     hdr = '%-9s %4s %4s %-9s | %8s %8s %8s %8s %8s %8s | %8s %8s %8s | %8s %8s | %8s %8s %8s %8s'
     P(hdr % ('corner', 'T', 'VDD', 'variant', 'total', 'ota1_b', 'ota1_t', 'ota1_2', 'st2tail', 'follow', 'channel', 'master', 'ladders', 'bias', 'vhalf', 'vcm_in', 'vg1', 'vcm_out', 'vg2'))
     tab = {}

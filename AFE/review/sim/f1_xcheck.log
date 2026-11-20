@@ -1,0 +1,197 @@
+AUDIT step 3: scripted connectivity / interface consistency check (nothing is checked by eye).
+Parses AFE/top/dbs_afe_top.v + stubs_analog.v, AFE/adc/rtl/*.v, rtl/dbs.v, TGATE/*, every SPICE subckt used on the chip, info.yaml, lvs_config.json,
+AFE/layout/PLAN.md section 9 and the organizer's info.yaml template (copy fetched 2026-11-20: AFE/review/sim/organizer/template_info.yaml).
+Prints one row per check: [OK | MISMATCH | NOTE]  id  what  detail.
+
+SUMMARY: 114 checks, 93 OK, 3 MISMATCH, 18 NOTE
+ISSUE ROWS (AUDIT section 2; a row belongs to an issue when its text starts with the id in brackets):
+  B1  OK       2 rows: 2 OK, 0 MISMATCH
+  B2  OK       2 rows: 2 OK, 0 MISMATCH
+  M2  OK       6 rows: 6 OK, 0 MISMATCH
+  M3  OK       10 rows: 10 OK, 0 MISMATCH
+  m7  OK       2 rows: 2 OK, 0 MISMATCH
+  m1  OK       1 rows: 1 OK, 0 MISMATCH
+
+OK       C1   stub afe_chc ports = SPICE subckt ports (order too) :: 14 pins: rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb
+OK       C1   stub fs_oneshot_c ports = SPICE subckt ports (order too) :: 5 pins: trig fs vbn vdd vss
+OK       C1   stub bias_genc ports = SPICE subckt ports (order too) :: 8 pins: vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
+OK       C1   stub dac_sw ports = SPICE subckt ports (order too) :: 37 pins: vin t m vcm vdd vdd_dac vss rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn
+OK       C1   stub cmp_p ports = SPICE subckt ports (order too) :: 7 pins: inp inn clk outp outn vdd_cmp vss
+OK       C1   stub vhalf ports = SPICE subckt ports (order too) :: 3 pins: out vdd vss
+OK       C1   stub vrefs ports = SPICE subckt ports (order too) :: 6 pins: in out c cb vdd vss
+OK       C2   TGATE signal pins agree in .v / .spice / .lef / extracted .cir :: v: IN C CBAR OUT | spice: out c cbar in vdd vss | lef: VDD VSS IN OUT C CBAR | cir: IN OUT C CBAR SUB
+NOTE     C2   TGATE power pins :: SPICE and LEF have VDD / VSS (PMOS bulk = VDD, NMOS bulk = VSS); TGATE.v has none and afe_ch connects none: the 5 V-device macro relies on implicit power in LVS; extracted .cir has only SUB (PMOS bulk is the unnamed net $8): the macro LVS view is not pin-compatible with TGATE.spice
+NOTE     C2   TGATE devices :: pfet_05v0 W=1.22u L=0.6u; nfet_05v0 W=0.565u L=0.6u (5 V devices on the single 3.3 V supply, Decision 30)
+OK       C3   afe_ch.rec_tg (TGATE): every SPICE pin connected by name :: 6 pins (power pins ['vdd', 'vss'] implicit)
+OK       C3   afe_ch.ipg_tg (TGATE): every SPICE pin connected by name :: 6 pins (power pins ['vdd', 'vss'] implicit)
+OK       C3   afe_ch.u_os (fs_oneshot_c): every SPICE pin connected by name :: 5 pins
+OK       C3   afe_ch.u_amp (afe_chc): every SPICE pin connected by name :: 14 pins
+OK       C3   afe_ch.u_vh (vhalf): every SPICE pin connected by name :: 3 pins
+OK       C3   afe_ch.u_dac (dac_sw): every SPICE pin connected by name :: 37 pins
+OK       C3   afe_ch.u_vr (vrefs): every SPICE pin connected by name :: 6 pins
+OK       C3   afe_ch.u_cmp (cmp_p): every SPICE pin connected by name :: 7 pins
+NOTE     C4   afe_ch net cmp_qn :: single connection (open): u_cmp.outn
+NOTE     C4   afe_ch net m :: single connection (open): u_dac.m
+OK       C4   afe_ch: 57 nets, every gate-only pin has a driver or a DC path, no net has two digital drivers :: net table below
+OK       C5   dbs_afe_top generate loop (N = 8): every bit of the 13 per-channel buses is used exactly once :: E[8], IPG[8], sw_rec[8], sw_rec_b[8], sw_ipg[8], sw_ipg_b[8], rst_sw[8], tg_on[8], cmp_clk[8], dac_gdn[8], cmp_q[8], dac_gp[96], dac_gn[96]
+OK       C5   adc8_top instance: net widths = port widths (16 ports, all connected: yes)
+OK       C11  dbs_ctrl #(8): all ports connected; exports sw_rec sw_rec_b sw_ipg sw_ipg_b :: clk = SCLK, rstn = RSTN, mode = mode_o, en = en_o, ready = 1'b1
+OK       C11  consumers of the dbs_ctrl outputs inside afe_ch :: sw_rec -> rec_tg.C u_os.trig u_amp.pkcb; sw_rec_b -> rec_tg.CBAR u_amp.pkc; sw_ipg -> ipg_tg.C; sw_ipg_b -> ipg_tg.CBAR
+OK       C6   polarity tgate.c <- sw_ipg / sw_rec :: gate of n:xm2 | NMOS gate: switch closed when HIGH | RTL: sw_rec = ~sw_rec_b[i]  (= ready & rec_en & en_reg_2)
+OK       C6   polarity tgate.cbar <- sw_ipg_b / sw_rec_b :: gate of p:xm1 | PMOS gate: switch closed when LOW | RTL: sw_rec_b = ~(ready & rec_en & en_reg_2[i])
+OK       C6   polarity afe_chc.pkc <- sw_rec_b :: gate of n:xpkn | park NMOS on when HIGH = routing switch open
+OK       C6   polarity afe_chc.pkcb <- sw_rec :: gate of p:xpkp | park PMOS on when LOW = routing switch open
+OK       C6   polarity afe_chc.fs <- fs :: gate of n:xmn1 n:xmn2 p:xmp1 p:xmp2 | PMOS = normal tap when LOW, NMOS = reset level when HIGH: reset active HIGH
+OK       C6   polarity fs_oneshot_c.trig <- sw_rec :: gate of n:xnn1 p:xnp1 p:xpu | PMOS Xpu holds the timer node while LOW; NAND input: pulse starts on the RISING edge
+OK       C6   polarity dac_sw.rst <- rst_sw :: gate of n:xn | plate reset NMOS closed when HIGH (tracking) | RTL: rst_sw = trk = cs_n | done[i]
+OK       C6   polarity dac_sw.rstm <- rst_sw :: gate of n:xn | M-node reset NMOS closed when HIGH (same net as rst: I0 mismatch 4)
+OK       C6   polarity dac_sw.sam <- tg_on :: gate of n:xn | sampling TG NMOS on when HIGH | RTL: tg_on = dlyd_1(trk)
+OK       C6   polarity dac_sw.samb <- samb :: gate of p:xp | sampling TG PMOS on when LOW
+OK       C6   polarity dac_sw.gp11 <- dac_gp[11] :: gate of p:xp | driver PMOS: bottom to VDD when LOW | RTL: gp = ~({12{en_r}} & code_r)
+OK       C6   polarity dac_sw.gn11 <- dac_gn[11] :: gate of n:xn | driver NMOS: bottom to VSS when HIGH | RTL: gn = {12{en_r}} & ~code_r
+OK       C6   polarity dac_sw.gdp <- vdd_dac :: gate of p:xp | dummy driver PMOS: tied HIGH (to its own source rail vdd_dac) = always off
+OK       C6   polarity dac_sw.gdn <- dac_gdn :: gate of n:xn | dummy bottom grounded when HIGH | RTL: dac_gdn = ~tg_on[i]
+OK       C6   polarity vrefs.c <- tg_on :: gate of n:xn | Cref TG NMOS on when HIGH (tracking)
+OK       C6   polarity vrefs.cb <- samb :: gate of p:xp | Cref TG PMOS on when LOW
+OK       C6   polarity cmp_p.clk <- cmp_clk :: gate of n:xn p:xmp1 p:xmp2 p:xp | precharge PMOS on when LOW, evaluate when HIGH (clkb inverter inside)
+OK       C6   crowbar by construction :: gp = ~({12{en_r}} & code_r), gn = {12{en_r}} & ~code_r: gp LOW and gn HIGH cannot both be true for one bit (en & code vs en & ~code); skew between the two gates is not in the RTL
+OK       C6   comparator sense :: inp = vref (reference), inn = t (plate), outp -> cmp_q: cmp_q = 1 when reference > plate = Vin >= trial (adc_sar_ch convention); outn -> cmp_qn (open)
+OK       C7   REF pad reaches afe_chc.ref of all 8 channels :: dbs_afe_top: afe_ch.ref <- ['REF'] in the generate loop (N = 8); afe_ch: afe_chc.ref <- ['ref']
+OK       C8   one vhalf per ADC (inside afe_ch), its node is local :: net vcmd: u_dac.vcm u_vh.out u_vr.in; not a port of afe_ch: True
+NOTE     C8   bias_genc.vcm_out no longer feeds the ADC :: vcmo consumers in afe_ch: u_amp.vcmo port:vcmo
+OK       C9   info.yaml pin count = 24 (Decision 45: 17 analog + 5 digital + VDD + VSS) :: 24 pins: analog x17, bidirectional x1, ground x1, input_cmos x2, input_schmitt x2, power x1
+OK       C9   pad CS (input_cmos): input port + _PU / _PD driven :: CS_PD = 1'b0, CS_PU = 1'b0
+OK       C9   pad DIN (input_cmos): input port + _PU / _PD driven :: DIN_PD = 1'b0, DIN_PU = 1'b0
+OK       C9   pad SCLK (input_schmitt): input port + _PU / _PD driven :: SCLK_PD = 1'b0, SCLK_PU = 1'b0
+OK       C9   pad RSTN (input_schmitt): input port + _PU / _PD driven :: RSTN_PD = 1'b1, RSTN_PU = 1'b0
+OK       C9   pad DOUT (bidirectional): 8 control pins exist and are driven :: DOUT_PD = 1'b0, DOUT_PU = 1'b0, DOUT_CS = 1'b0, DOUT_SL = 1'b0, DOUT_IE = 1'b0, DOUT_OE = dout_oe, DOUT_PDRV0 = 1'b0, DOUT_PDRV1 = 1'b0
+OK       C9   [B2] pad DOUT (bidirectional): organizer template wants <name>_OUT (-> A) and <name>_IN (<- Y) :: port DOUT: absent; DOUT_OUT: output, DOUT_IN: input  [template_info.yaml lines 42-45]
+OK       C9   [B2] DOUT_OUT has one driver, DOUT_IN is unused :: DOUT_OUT <- u_adc.dout; DOUT_IN loads: none (the pad input buffer is off: DOUT_IE = 1'b0)
+OK       C9   no REC pad / port (Decision 45): rec is an internal net of afe_ch :: top port REC: absent; afe_ch port rec: absent; info.yaml REC entries: 0; net rec inside afe_ch: rec_tg.OUT u_amp.rec
+OK       C9   top-level ports that are neither a pad nor a pad-control pin :: none
+OK       C9   DOUT_OE = ~CS :: dbs_afe_top: DOUT_OE = dout_oe; adc8_top: dout_oe = ~cs_n
+OK       C9   RSTN pull-down on :: RSTN_PD = 1'b1, RSTN_PU = 1'b0
+OK       C9   [m1] stale comment in info.yaml :: none
+NOTE     C9   bracketed pad names :: info.yaml uses E[0] .. IPG[7]; the organizer template uses plain identifiers (vss, reset_n, gpio0 ...): whether bus-bit names are accepted is an organizer question
+NOTE     C9   pad-control values :: DOUT: PDRV1:0 = 00 (4 mA per the template), SL = 0 (fast), CS = 0 (CMOS), IE = 0 (input off): match the template meanings; values still to be confirmed (Decision 41d)
+OK       C9   export-control document named in info.yaml exists :: documents/Export_Control_GF_Rev8.2.docx
+NOTE     C9   info.yaml gf_def_ready :: false
+NOTE     C9   info.yaml ws_def_ready :: false
+NOTE     C9   info.yaml drc_ready :: false
+NOTE     C9   info.yaml lvs_ready :: false
+OK       C10  lvs_config TOP_SOURCE is a module that exists :: dbs_afe_top (defined in AFE/top/dbs_afe_top.v); organizer template uses the macro name they assign (A01_topcell style): name still open
+MISMATCH C10  lvs_config LVS_SPICE_FILES :: $UPRJ_ROOT/spice/$TOP_SOURCE.spice -> DOES NOT EXIST (no spice/, verilog/gl/ directory in the repo yet)
+MISMATCH C10  lvs_config LVS_VERILOG_FILES :: $UPRJ_ROOT/verilog/gl/$TOP_SOURCE.v -> DOES NOT EXIST (no spice/, verilog/gl/ directory in the repo yet)
+OK       C10  lvs_config LAYOUT_FILE :: $UPRJ_ROOT/gds/$TOP_LAYOUT.gds -> exists (178 bytes: the 1000 x 1000 um PR-boundary placeholder of Decision 45, replaced by the layout in L3a)
+OK       C10  [M3] LVS source structure: a SPICE top reference with the digital macro as a black box :: AFE/layout/lvs/dbs_afe_top.spice: afe_ch x8, afe_dig x1, bias_genc x1, cap_nmos_03v3 x2, rm3 x1; afe_dig is an empty .subckt until L1d delivers its powered netlist (mk_lvs_netlists.py --dig-netlist); lvs_config.json still names spice/<top>.spice and verilog/gl/<top>.v: filled in L4
+MISMATCH C10  module afe_dig (L1d macro) exists in the repo :: not yet: AFE/dig/ is created by L1d
+NOTE     C12  device census afe_chc (simulation netlist) :: IDEAL_R x2, cap_mim_2f0_m2m3_noshield x8, nfet_03v3 x11, nfet_06v0_nvt x1, pfet_03v3 x16
+OK       C12  [M3] LVS reference of afe_chc: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/afe_chc.spice: 38 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has the ideal elements rbrk (in xs1), rbrk (in xs2) (removed or replaced by the script)
+NOTE     C12  device census fs_oneshot_c (simulation netlist) :: IDEAL_R x2, cap_mim_2f0_m2m3_noshield x1, nfet_03v3 x4, pfet_03v3 x4
+OK       C12  [M3] LVS reference of fs_oneshot_c: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/afe_chc.spice: 9 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has the ideal elements rmm, rt (removed or replaced by the script)
+NOTE     C12  device census bias_genc (simulation netlist) :: cap_mim_2f0_m2m3_noshield x1, nfet_03v3 x3, pfet_03v3 x6, ppolyf_u_1k x7
+OK       C12  [B1] bias_genc: the high-resistance poly is ppolyf_u_1k (the only HRES device of gf180mcuD) :: ppolyf_u_3k x0, ppolyf_u_1k x7 (KLayout LVS variant D sets poly_res = 1k; netgen setup and the Magic tech know only ppolyf_u_1k; organizer table "Resistor HRES 1k")
+OK       C12  [M3] LVS reference of bias_genc: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/bias_genc.spice: 17 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has no ideal element
+NOTE     C12  device census dac_sw (simulation netlist) :: IDEAL_C x14, cap_mim_2f0_m2m3_noshield x128, nfet_03v3 x28, pfet_03v3 x26
+OK       C12  [M3] LVS reference of dac_sw: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/adc_ch.spice: 182 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has the ideal elements cpb0, cpb1, cpb10, cpb11, cpb2, cpb3, cpb4, cpb5, cpb6, cpb7, cpb8, cpb9, cpbd, cpm (removed or replaced by the script)
+NOTE     C12  device census cmp_p (simulation netlist) :: IDEAL_C x2, nfet_03v3 x11, pfet_03v3 x12
+OK       C12  [M3] LVS reference of cmp_p: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/adc_ch.spice: 25 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has the ideal elements cxa1, cxa2 (removed or replaced by the script)
+NOTE     C12  device census vhalf (simulation netlist) :: cap_mim_2f0_m2m3_noshield x1, ppolyf_u_1k x2
+OK       C12  [B1] vhalf: the high-resistance poly is ppolyf_u_1k (the only HRES device of gf180mcuD) :: ppolyf_u_3k x0, ppolyf_u_1k x2 (KLayout LVS variant D sets poly_res = 1k; netgen setup and the Magic tech know only ppolyf_u_1k; organizer table "Resistor HRES 1k")
+OK       C12  [M3] LVS reference of vhalf: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/adc_ch.spice: 3 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has no ideal element
+NOTE     C12  device census vrefs (simulation netlist) :: cap_mim_2f0_m2m3_noshield x1, nfet_03v3 x1, pfet_03v3 x1
+OK       C12  [M3] LVS reference of vrefs: no ideal element, m4m5 MIM, equal to the simulation netlist under the AUDIT 4.9.3 rules :: AFE/layout/lvs/adc_ch.spice: 3 devices compared terminal by terminal with the flattened simulation netlist, 0 differences; ideal elements left: 0; m2m3 MIM left: 0; same cell text in dbs_afe_top.spice: yes; simulation netlist has no ideal element
+OK       C12  [m7] Cref is ONE MIM plate of 59.07 um side (Decision 44i), not 128 units :: xc 59.070 x 59.070 um = 3489.3 um2, 7000.00 fF
+OK       C12  [m7] each Cin is built from >= 2 MIM pieces <= 10,000 um2 with the simulated capacitance (within 0.1 %) :: xs1_xcin1: 2 x 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF (simulated 20.0000 pF, +0.000 %); xs1_xcin2: 2 x 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF (simulated 20.0000 pF, +0.000 %)
+OK       M2   [M2] afe_ch has the supply pins vdd, vdd_cmp, vdd_dac, vss :: supply ports of afe_ch: vdd vdd_cmp vdd_dac vss
+OK       M2   [M2] dac_sw: vdd_dac = source and n-well of the 13 bottom-plate driver PMOS only; vdd = n-well of the 13 sampling-TG PMOS only :: vdd_dac: 26 terminals (xdv0.xp:b xdv0.xp:s ...); vdd: 13 terminals (xt0.xp:b xt1.xp:b ...)
+OK       M2   [M2] cmp_p: its supply pin is vdd_cmp :: pins: inp inn clk outp outn vdd_cmp vss; 22 device terminals on vdd_cmp (sources / n-wells of the tail, latch, precharge and inverter PMOS)
+OK       M2   [M2] afe_ch wiring = rail table of AUDIT 4.9.2: analog strap vdd; ADC-main strap vdd_cmp (cmp_p); ADC-DAC strap vdd_dac (drivers, gdp) :: u_amp.vdd <- vdd, u_os.vdd <- vdd, u_vh.vdd <- vdd, u_vr.vdd <- vdd, u_dac.vdd <- vdd, u_cmp.vdd_cmp <- vdd_cmp, u_dac.vdd_dac <- vdd_dac, u_dac.gdp <- vdd_dac
+OK       M2   [M2] top netlist: afe_ch.vdd and .vdd_cmp on VDD, .vdd_dac on the net vdd_dac behind ONE strap resistor; one decap cell on each of the two ADC straps :: afe_ch: vdd <- VDD, vdd_cmp <- VDD, vdd_dac <- vdd_dac; afe_rstrap: u_rstrap (VDD - vdd_dac); afe_decap: u_dcm (VDD - VSS), u_dcd (vdd_dac - VSS)
+OK       M2   [M2] LVS top reference: the 10 ohm strap resistor and the MOS decap (0.125 nF main strap, 0.1 nF DAC strap) are devices :: strap: xu_rstrap rm3 between vdd and vdd_dac = 10.00 ohm (typical); cap_nmos_03v3 at 3.98 fF/um2: vdd-vss 125.9 pF, vdd_dac-vss 100.4 pF
+OK       C3   [M3] afe_ch of the LVS top (through amp_ch / adc_ch) = module afe_ch of the Verilog, net by net; TGATE and standard-cell power on the analog strap :: 57 nets, 85 pin connections compared, differing nets: none; 12 implicit power pins (TGATE VDD / VSS, std-cell VDD / VNW / VPW / VSS), wrong: none
+OK       C5   [M3] LVS top = Verilog top: the 8 afe_ch instances pin by pin, the afe_dig black box, the pad-control ties :: 8 x 47 channel pins: equal; afe_dig 273 pins (DOUT -> DOUT_OUT, DOUT_OE -> DOUT_OE, every other pin on the net of its own name): equal; 15 ties (0-ohm resistors) = the 15 constant assigns of the Verilog: equal
+OK       C13  afe_chc internal nets with no DC path / single terminal :: none
+OK       C13  fs_oneshot_c internal nets with no DC path / single terminal :: none
+OK       C13  bias_genc internal nets with no DC path / single terminal :: none
+OK       C13  dac_sw internal nets with no DC path / single terminal :: none
+OK       C13  cmp_p internal nets with no DC path / single terminal :: none
+OK       C13  vhalf internal nets with no DC path / single terminal :: none
+OK       C13  vrefs internal nets with no DC path / single terminal :: none
+OK       C14  AFE/layout/PLAN.md section 9 pin table = afe_ch module ports :: only in PLAN: -; only in afe_ch: -; order in afe_ch: e ipg ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp dac_gn cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
+OK       C14  crossing-net count of PLAN.md section 9 :: afe_ch digital inputs: 33 bits incl. rst_amp (PLAN: 32 per channel + rst_amp), 1 digital output cmp_q; PLAN total 281
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__or2_1 exists :: pins: A1 A2 Z VDD VSS VNW VPW
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__inv_1 exists :: pins: I ZN VDD VSS VNW VPW
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__dlya_1 exists :: pins: I Z VDD VSS VNW VPW
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__dlyc_1 exists :: pins: I Z VDD VSS VNW VPW
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__dlyd_1 exists :: pins: I Z VDD VSS VNW VPW
+OK       C15  std cell gf180mcu_fd_sc_mcu7t5v0__and3_1 exists :: pins: A1 A2 A3 Z VDD VSS VNW VPW
+
+NET TABLE of afe_ch (drv = digital driver or input port, io = channel / passive terminal, gate = MOS gate only (n / p), load = output port)
+  amp_out    OK       drv[] io[u_amp.out u_dac.vin] gate[] load[] 
+  cmp_clk    OK       drv[port:cmp_clk] io[] gate[u_cmp.clk(np)] load[] 
+  cmp_q      OK       drv[] io[u_cmp.outp] gate[] load[port:cmp_q] 
+  cmp_qn     NOTE     drv[] io[u_cmp.outn] gate[] load[] single connection (open)
+  dac_gdn    OK       drv[port:dac_gdn] io[] gate[u_dac.gdn(n)] load[] 
+  dac_gn[0]  OK       drv[port:dac_gn[0]] io[] gate[u_dac.gn0(n)] load[] 
+  dac_gn[10] OK       drv[port:dac_gn[10]] io[] gate[u_dac.gn10(n)] load[] 
+  dac_gn[11] OK       drv[port:dac_gn[11]] io[] gate[u_dac.gn11(n)] load[] 
+  dac_gn[1]  OK       drv[port:dac_gn[1]] io[] gate[u_dac.gn1(n)] load[] 
+  dac_gn[2]  OK       drv[port:dac_gn[2]] io[] gate[u_dac.gn2(n)] load[] 
+  dac_gn[3]  OK       drv[port:dac_gn[3]] io[] gate[u_dac.gn3(n)] load[] 
+  dac_gn[4]  OK       drv[port:dac_gn[4]] io[] gate[u_dac.gn4(n)] load[] 
+  dac_gn[5]  OK       drv[port:dac_gn[5]] io[] gate[u_dac.gn5(n)] load[] 
+  dac_gn[6]  OK       drv[port:dac_gn[6]] io[] gate[u_dac.gn6(n)] load[] 
+  dac_gn[7]  OK       drv[port:dac_gn[7]] io[] gate[u_dac.gn7(n)] load[] 
+  dac_gn[8]  OK       drv[port:dac_gn[8]] io[] gate[u_dac.gn8(n)] load[] 
+  dac_gn[9]  OK       drv[port:dac_gn[9]] io[] gate[u_dac.gn9(n)] load[] 
+  dac_gp[0]  OK       drv[port:dac_gp[0]] io[] gate[u_dac.gp0(p)] load[] 
+  dac_gp[10] OK       drv[port:dac_gp[10]] io[] gate[u_dac.gp10(p)] load[] 
+  dac_gp[11] OK       drv[port:dac_gp[11]] io[] gate[u_dac.gp11(p)] load[] 
+  dac_gp[1]  OK       drv[port:dac_gp[1]] io[] gate[u_dac.gp1(p)] load[] 
+  dac_gp[2]  OK       drv[port:dac_gp[2]] io[] gate[u_dac.gp2(p)] load[] 
+  dac_gp[3]  OK       drv[port:dac_gp[3]] io[] gate[u_dac.gp3(p)] load[] 
+  dac_gp[4]  OK       drv[port:dac_gp[4]] io[] gate[u_dac.gp4(p)] load[] 
+  dac_gp[5]  OK       drv[port:dac_gp[5]] io[] gate[u_dac.gp5(p)] load[] 
+  dac_gp[6]  OK       drv[port:dac_gp[6]] io[] gate[u_dac.gp6(p)] load[] 
+  dac_gp[7]  OK       drv[port:dac_gp[7]] io[] gate[u_dac.gp7(p)] load[] 
+  dac_gp[8]  OK       drv[port:dac_gp[8]] io[] gate[u_dac.gp8(p)] load[] 
+  dac_gp[9]  OK       drv[port:dac_gp[9]] io[] gate[u_dac.gp9(p)] load[] 
+  e          OK       drv[] io[rec_tg.IN ipg_tg.IN port:e] gate[] load[] 
+  fs         OK       drv[u_or.Z] io[] gate[u_amp.fs(np)] load[] 
+  fs_os      OK       drv[] io[u_os.fs] gate[u_or.A1] load[] 
+  ipg        OK       drv[] io[ipg_tg.OUT port:ipg] gate[] load[] 
+  m          NOTE     drv[] io[u_dac.m] gate[] load[] single connection (open)
+  rec        OK       drv[] io[rec_tg.OUT u_amp.rec] gate[] load[] 
+  ref        OK       drv[] io[u_amp.ref port:ref] gate[] load[] 
+  rst_amp    OK       drv[port:rst_amp] io[] gate[u_or.A2] load[] 
+  rst_sw     OK       drv[port:rst_sw] io[] gate[u_dac.rst(n) u_dac.rstm(n)] load[] 
+  samb       OK       drv[u_samb.ZN] io[] gate[u_dac.samb(p) u_vr.cb(p)] load[] 
+  sw_ipg     OK       drv[port:sw_ipg] io[] gate[ipg_tg.C(n)] load[] 
+  sw_ipg_b   OK       drv[port:sw_ipg_b] io[] gate[ipg_tg.CBAR(p)] load[] 
+  sw_rec     OK       drv[port:sw_rec] io[] gate[rec_tg.C(n) u_os.trig(np) u_amp.pkcb(p)] load[] 
+  sw_rec_b   OK       drv[port:sw_rec_b] io[] gate[rec_tg.CBAR(p) u_amp.pkc(n)] load[] 
+  t          OK       drv[] io[u_dac.t] gate[u_cmp.inn(p)] load[] 
+  tg_on      OK       drv[port:tg_on] io[] gate[u_samb.I u_dac.sam(n) u_vr.c(n)] load[] 
+  vbn        OK       drv[port:vbn] io[] gate[u_os.vbn(n) u_amp.vbn(n)] load[] 
+  vcm        OK       drv[port:vcm] io[u_amp.vcm] gate[] load[] 
+  vcmd       OK       drv[] io[u_vh.out u_dac.vcm u_vr.in] gate[] load[] 
+  vcmo       OK       drv[port:vcmo] io[] gate[u_amp.vcmo(n)] load[] 
+  vdd        OK       drv[port:vdd] io[u_os.vdd u_amp.vdd u_vh.vdd] gate[] load[] 
+  vdd_cmp    OK       drv[port:vdd_cmp] io[u_cmp.vdd_cmp] gate[] load[] 
+  vdd_dac    OK       drv[port:vdd_dac] io[u_dac.vdd_dac] gate[u_dac.gdp(p)] load[] 
+  vg1        OK       drv[port:vg1] io[u_amp.vg1] gate[] load[] 
+  vg2        OK       drv[port:vg2] io[u_amp.vg2] gate[] load[] 
+  vref       OK       drv[] io[u_vr.out] gate[u_cmp.inp(p)] load[] 
+  vrs        OK       drv[port:vrs] io[u_amp.vrs] gate[] load[] 
+  vss        OK       drv[port:vss] io[u_os.vss u_amp.vss u_vh.vss u_dac.vss u_vr.vss u_cmp.vss] gate[] load[] 
+
+PORT CLASSES from the flattened SPICE (gate = only MOS gates: needs a driver; types of the gated devices)
+  afe_chc       rec:io  ref:io  out:io  vdd:io  vss:io  vbn:gate(n)  vcm:io  vg1:io  vcmo:gate(n)  vg2:io  vrs:io  fs:gate(np)  pkc:gate(n)  pkcb:gate(p)
+  fs_oneshot_c  trig:gate(np)  fs:io  vbn:gate(n)  vdd:io  vss:io
+  bias_genc     vbn:io(np)  vcm_in:io  vg1:io  vcm_out:io  vg2:io  vrs:io(p)  vdd:io  vss:io
+  dac_sw        vin:io  t:io  m:io  vcm:io  vdd:bulk  vdd_dac:io  vss:io  rst:gate(n)  rstm:gate(n)  sam:gate(n)  samb:gate(p)  gp0:gate(p)  gp1:gate(p)  gp2:gate(p)  gp3:gate(p)  gp4:gate(p)  gp5:gate(p)  gp6:gate(p)  gp7:gate(p)  gp8:gate(p)  gp9:gate(p)  gp10:gate(p)  gp11:gate(p)  gdp:gate(p)  gn0:gate(n)  gn1:gate(n)  gn2:gate(n)  gn3:gate(n)  gn4:gate(n)  gn5:gate(n)  gn6:gate(n)  gn7:gate(n)  gn8:gate(n)  gn9:gate(n)  gn10:gate(n)  gn11:gate(n)  gdn:gate(n)
+  cmp_p         inp:gate(p)  inn:gate(p)  clk:gate(np)  outp:io  outn:io  vdd_cmp:io  vss:io
+  vhalf         out:io  vdd:io  vss:io
+  vrefs         in:io  out:io  c:gate(n)  cb:gate(p)  vdd:bulk  vss:io
+  tgate         out:io  c:gate(n)  cbar:gate(p)  in:io  vdd:bulk  vss:bulk

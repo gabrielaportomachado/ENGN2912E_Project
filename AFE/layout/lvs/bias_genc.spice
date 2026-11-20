@@ -1,0 +1,24 @@
+* LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: (defaults)
+* MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
+* File bias_genc.spice: the shared bias cell (one per chip, L3): beta-multiplier master, start-up, ladders A and B in ppolyf_u_1k, reset-level replica, C_VRS.
+
+.subckt bias_genc vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
+Xmp2 a a vdd vdd pfet_03v3 w=40u l=4u
+Xmp1 vbn a vdd vdd pfet_03v3 w=40u l=4u
+Xmn1 vbn vbn vss vss nfet_03v3 w=16u l=4u
+Xmn2 a vbn r1 vss nfet_03v3 w=16u l=4u m=4
+Xrb r1 vss vss ppolyf_u_1k r_length=120u r_width=2u
+Xs1 s1 s1 vdd vdd pfet_03v3 w=0.5u l=4u
+Xs2 s2 s2 s1 vdd pfet_03v3 w=0.5u l=4u
+Xs3 vbn vbn s2 vdd pfet_03v3 w=0.5u l=4u
+Xra1 vdd vg1 vss ppolyf_u_1k r_length=725u r_width=1u
+Xra2 vg1 vcm_in vss ppolyf_u_1k r_length=100u r_width=1u
+Xra3 vcm_in vss vss ppolyf_u_1k r_length=825u r_width=1u
+Xrep vrs vrs vcm_in vcm_in pfet_03v3 w=0.22u l=0.5u
+Xsr vrs vbn vss vss nfet_03v3 w=0.28u l=40u
+Xcvrs vrs vss cap_mim_2f0_m4m5_noshield c_length=49.886545u c_width=49.886545u
+Xrb1 vdd vg2 vss ppolyf_u_1k r_length=375u r_width=1u
+Xrb2 vg2 vcm_out vss ppolyf_u_1k r_length=450u r_width=1u
+Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
+.ends bias_genc

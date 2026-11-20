@@ -12,12 +12,13 @@ Method per input case: (1) each ADC ALONE with an IDEAL supply (same stagger ind
 Reported per ADC: code vs the reference; dT = shift of the trial-12 transition level (from the measured plate - reference residue just before the comparator clock) [LSB];
 max over the 12 trials of the residue change [LSB]; worst decision-instant droop of the DAC strap (0.3 ns before the comparator clock) and of the main rail (within 2 ns after the clock rise);
 the D2/D4 formula applied to these MEASURED droops for comparison with the superposition estimate.
-usage: x2_s4.py <ff-40|typ|ss125> <fs|mid|alt|all> [SCLK MHz=3] [nodig]     -> sim/x2_s4_<ck>.log (appended), summary lines to sim/x2_s4_summary.log"""
+usage: x2_s4.py <ff-40|typ|ss125> <fs|mid|alt|all> [SCLK MHz=3] [nodig]     -> sim/x2_s4_<ck>.log (appended), summary lines to sim/x2_s4_summary.log  (X2_LOG_PREFIX=<p> writes sim/<p>_s4_* instead)"""
 import sys, os, time, numpy as np
 H = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, H)
 import x2lib as X, x2_adc as A
 MODEL = dict(Rp=0.25, Lp=2e-9, Cm=0.125e-9, Cd=0.1e-9, Rs=10.0, Rd=3.0, Cpad=float(os.environ.get('X2_CPAD', '1e-12'))); QDIG = 1.5e-12; KC = 0.038       # Cpad: see x2lib.supply (1 pF per supply pad to the board ground, ASSUMED)
 TCS = 20e-9
+LOGP = os.environ.get('X2_LOG_PREFIX', 'x2')          # log-file prefix: sim/<prefix>_s4_<corner>.log, <prefix>_s4_summary.log (F1 uses f1_x2 so that the X2 logs stay as they are)
 for _k, _e in (('Cm', 'X2_CM'), ('Cd', 'X2_CD'), ('Lp', 'X2_LP'), ('Rd', 'X2_RD'), ('Rs', 'X2_RS'), ('Rp', 'X2_RP')):       # what-if overrides of the ASSUMED supply model (PROPOSAL evidence); logged in every line
     if os.environ.get(_e): MODEL[_k] = float(os.environ[_e])
 WHATIF = ' '.join(f'{_k}={os.environ[_e]}' for _k, _e in (('Cm', 'X2_CM'), ('Cd', 'X2_CD'), ('Lp', 'X2_LP'), ('Rd', 'X2_RD'), ('Rs', 'X2_RS'), ('Rp', 'X2_RP')) if os.environ.get(_e))
@@ -99,6 +100,6 @@ if __name__ == '__main__':
         ok = worst['dc'] == 0 and worst['dT'] <= 0.5 and (np.isnan(worst['dx']) or worst['dx'] <= 0.5)
         s = (f'RESULT S4 {ck} {case} (SCLK {f:g} MHz, dig {"on" if dig else "off"}{", WHAT-IF supply " + WHATIF if WHATIF else ""}): code changes vs the ADC alone: max {int(worst["dc"])} LSB; max |dT| {worst["dT"]:.3f} LSB; max per-trial residue change {worst["dx"]:.3f} LSB; worst decision-instant droop: DAC strap {worst["dvd"]*1e3:.2f} mV, main rail {worst["dvm"]*1e3:.2f} mV; '
              f'D2/D4 formula on the measured droop {worst["e5"]:.3f} (f=0.5) / {worst["e1"]:.3f} (f=1) LSB vs superposition estimate <= 0.5 | {"PASS" if ok else "FAIL"} (no ADC gains > 0.5 LSB: {ok}); wall {time.time()-tc0:.0f} s')
-        P(s); open(f'{X.ADC}/sim/x2_s4_summary.log', 'a').write(s + '\n')
-    open(f'{X.ADC}/sim/x2_s4_{ck}{"_whatif" if WHATIF else ""}.log', 'a').write('\n'.join(out) + '\n')
-    open(f'{X.ADC}/sim/x2_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s4 {ck} {",".join(cases)} done, wall {time.time()-t00:.0f} s\n')
+        P(s); open(f'{X.ADC}/sim/{LOGP}_s4_summary.log', 'a').write(s + '\n')
+    open(f'{X.ADC}/sim/{LOGP}_s4_{ck}{"_whatif" if WHATIF else ""}.log', 'a').write('\n'.join(out) + '\n')
+    open(f'{X.ADC}/sim/{LOGP}_done.txt', 'a').write(f'{time.strftime("%F %T")} x2_s4 {ck} {",".join(cases)} done, wall {time.time()-t00:.0f} s\n')

@@ -5,8 +5,10 @@ Created 2026-11-12 so ADC sessions (D1-D6) can run alongside amplifier sessions 
 - Write ONLY to AFE/adc/ (including this file). Do not edit AFE/NOTES.md; if a shared decision or an amplifier hand-back is needed, put it under "Hand-back to the amplifier / NOTES.md" below
   and the user or monitoring session merges it.
 - Same rules as AFE/NOTES.md "Rules for every session" (numbers from saved logs, stop at the end of each phase, rule 10 for choices).
-- ADC changes from TAPEOUT.md to apply in D1-D6: 8:1 input mux (not 16:1; frame ID 4 bits, 3 used); aggregate 32 kS/s, frame period 31.25 us, T_ACQ = 31.25 us - 16/f_SCLK;
-  DIN pin and a CS-framed config write (MODE + EN[7:0], 9-bit shift register in a new wrapper); single 3.3 V DVDD, so no 5 V -> 3.3 V level crossings.
+- (SUPERSEDED line of 2026-11-12, kept as history: "8:1 input mux, frame period 31.25 us, T_ACQ = 31.25 us - 16/f_SCLK, 9-bit shift register in a new wrapper".)
+  WHAT HOLDS (Decisions 34, 37, 38, 41): NO input mux: one SAR per channel, all 8 sample at CS falling; frame period 250 us per channel (4 kS/s), 160-clock / 10-word frame, T_ACQ 240-244 us;
+  DIN carries a 10-bit config (RST_AMP + MODE + EN[7:0]) in word 0, held in adc8_top (no separate wrapper), read back in word 1; single 3.3 V DVDD, so no 5 V -> 3.3 V level crossings.
+  Later phases (X2, audit, F1) and the current rules: AFE/NOTES.md Decisions 43-45 and its Environment section; AFE/adc/README.md.
 
 ## Results log (ADC)
 | Date | Phase | Model / effort | Cost (USD) | Result (with path to log) |

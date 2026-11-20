@@ -4,7 +4,9 @@
 * Master: Mn1 (16u/4u, diode, vbn), Mn2 (4 x 16u/4u, source resistor Rb), PMOS mirror Mp1/Mp2; I = 2(1-1/sqrt(4))^2/(beta Rb^2) ~ 0.85 uA at Rb = 60 kOhm (typ 27 C).
 * Start-up: three diode-connected PMOS from vdd to vbn (conduct only while vbn is near 0).
 * Outputs: vbn (NMOS mirror gate bias), vcm_in (stage-1 gate bias, 1.5 V), vg1 (stage-1 pseudo-R gate = vcm_in + VTT), vcm_out (VOUT_CM), vg2 (stage-2 pseudo-R gate = vcm_out + VTT).
-* Ladders: ILAD = 2 uA each, 3k/sq poly (ppolyf_u_3k) width 1u, so L[um] = R/3000.  All taps scale with VDD (ratiometric).
+* Ladders: ILAD = 2 uA each, 1 kOhm/sq high-resistance poly (ppolyf_u_1k, the ONLY HRES poly of gf180mcuD) width 1u, so L[um] = R/1000.  All taps scale with VDD (ratiometric).
+* F1 / Decision 44a (2026-11-20): was ppolyf_u_3k with L = R/3000 (that device does not exist in the D variant: LVS cannot match).  Same resistance = 3x the squares at the same width:
+* ladder A 1650 um, ladder B 1650 um of 1 um poly in total (RA1 725 / RA2 100 / RA3 825 um, RB1 375 / RB2 450 / RB3 825 um).  Check: AFE/review/sim/f1_bias_op.log.
 * Pin order = the order xschem emits (outputs, then inouts).
 .subckt bias_genc vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
 Xmp2 a a vdd vdd pfet_03v3 W=40u L=4u nf=1 ad={DIFF*40u*0.18u} as={DIFF*40u*0.18u} pd={DIFF*2*(40u+0.18u)} ps={DIFF*2*(40u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
@@ -16,9 +18,9 @@ Xs1 s1 s1 vdd vdd pfet_03v3 W=0.5u L=4u nf=1 ad={DIFF*0.5u*0.18u} as={DIFF*0.5u*
 Xs2 s2 s2 s1 vdd pfet_03v3 W=0.5u L=4u nf=1 ad={DIFF*0.5u*0.18u} as={DIFF*0.5u*0.18u} pd={DIFF*2*(0.5u+0.18u)} ps={DIFF*2*(0.5u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
 Xs3 vbn vbn s2 vdd pfet_03v3 W=0.5u L=4u nf=1 ad={DIFF*0.5u*0.18u} as={DIFF*0.5u*0.18u} pd={DIFF*2*(0.5u+0.18u)} ps={DIFF*2*(0.5u+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0
 * ladder A: vdd - RA1 - vg1 - RA2 - vcm_in - RA3 - vss
-XrA1 vdd vg1 vss ppolyf_u_3k r_length={(VDDN-VCM_IN-VTT)/ILAD/3000*1u} r_width=1u
-XrA2 vg1 vcm_in vss ppolyf_u_3k r_length={VTT/ILAD/3000*1u} r_width=1u
-XrA3 vcm_in vss vss ppolyf_u_3k r_length={VCM_IN/ILAD/3000*1u} r_width=1u
+XrA1 vdd vg1 vss ppolyf_u_1k r_length={(VDDN-VCM_IN-VTT)/ILAD/1000*1u} r_width=1u
+XrA2 vg1 vcm_in vss ppolyf_u_1k r_length={VTT/ILAD/1000*1u} r_width=1u
+XrA3 vcm_in vss vss ppolyf_u_1k r_length={VCM_IN/ILAD/1000*1u} r_width=1u
 * A4c RESET-LEVEL REPLICA (output vrs): the ladder-tap version (tap voltage fixed) cannot work: R_reset of the pseudo-R varies 100x over typical / ff 85 / ss -40 at one gate voltage (sim/a4c_prst_*.log) and the
 * stage-1 loop is stable only for R_reset >~ 20 MOhm (sim/a4c_loop_t1.log).  Instead vrs = vcm_in - Vsg(I_REF) of a diode-connected PMOS the SAME size as the pseudo-resistor device, carrying I_REF = a mirror leg
 * of the master (nA: narrow/long NMOS, the same current density as the master).  The pseudo-R pair then has R0 ~ 2 Ut / I_REF at every corner/temperature (tracks the master current).  C_VRS holds the node while the per-channel gate muxes dump charge on it.
@@ -26,7 +28,7 @@ Xrep vrs vrs vcm_in vcm_in pfet_03v3 W={PR1W} L={PR1L} nf=1
 Xsr vrs vbn vss vss nfet_03v3 W={RSW} L={RSL} nf=1 m={RSM}
 Xcvrs vrs vss cap_mim_2f0_m2m3_noshield c_length={LCVRS} c_width={LCVRS}
 * ladder B: vdd - RB1 - vg2 - RB2 - vcm_out - RB3 - vss
-XrB1 vdd vg2 vss ppolyf_u_3k r_length={(VDDN-VOCM-VTT2)/ILAD/3000*1u} r_width=1u
-XrB2 vg2 vcm_out vss ppolyf_u_3k r_length={VTT2/ILAD/3000*1u} r_width=1u
-XrB3 vcm_out vss vss ppolyf_u_3k r_length={VOCM/ILAD/3000*1u} r_width=1u
+XrB1 vdd vg2 vss ppolyf_u_1k r_length={(VDDN-VOCM-VTT2)/ILAD/1000*1u} r_width=1u
+XrB2 vg2 vcm_out vss ppolyf_u_1k r_length={VTT2/ILAD/1000*1u} r_width=1u
+XrB3 vcm_out vss vss ppolyf_u_1k r_length={VOCM/ILAD/1000*1u} r_width=1u
 .ends bias_genc

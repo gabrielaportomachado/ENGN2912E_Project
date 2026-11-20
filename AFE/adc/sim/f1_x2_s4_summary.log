@@ -1,0 +1,1 @@
+RESULT S4 typ fs (SCLK 3 MHz, dig on): code changes vs the ADC alone: max 0 LSB; max |dT| 0.019 LSB; max per-trial residue change 0.113 LSB; worst decision-instant droop: DAC strap 0.13 mV, main rail 2.92 mV; D2/D4 formula on the measured droop 0.182 (f=0.5) / 0.256 (f=1) LSB vs superposition estimate <= 0.5 | PASS (no ADC gains > 0.5 LSB: True); wall 105 s

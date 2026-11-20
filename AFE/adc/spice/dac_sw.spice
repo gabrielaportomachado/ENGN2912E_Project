@@ -1,5 +1,5 @@
 * D2 DAC switch network, 3.3 V devices (pfet_03v3 / nfet_03v3), L = 0.28 u.  Needs spice/dac_units.spice (or a Monte Carlo copy) with subckt dac_units.
-*   per bit: tri-state bottom-plate driver (PMOS to vdd, gate gp; NMOS to vss, gate gn) + sampling transmission gate (vin <-> bottom, gates sam/samb)
+*   per bit: tri-state bottom-plate driver (PMOS to vdd_dac, gate gp; NMOS to vss, gate gn) + sampling transmission gate (vin <-> bottom, gates sam/samb; PMOS n-well on vdd)
 *   sampling: gp = 1, gn = 0 (driver off), TG on.  conversion: TG off; bit = 1: gp = 0, gn = 0; bit = 0: gp = 1, gn = 1.
 *   reset switches (top-plate sampling): NMOS from T to vcm (gate rst) and from M to vcm (gate rstm); opened BEFORE the bottom TGs (bottom-plate sampling).
 * Sizes are .params (defaults here; scripts override with .param lines after the include).
@@ -21,8 +21,10 @@ Xp a cb b vdd pfet_03v3 L={DSW_L} W={DSW_WTP} nf=1 ad={DSW_WTP*0.18u} as={DSW_WT
 .subckt dac_rs a b g vss
 Xn a g b vss nfet_03v3 L={DSW_L} W={DSW_WR} nf=1 ad={DSW_WR*0.18u} as={DSW_WR*0.18u} pd={2*(DSW_WR+0.18u)} ps={2*(DSW_WR+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 .ends dac_rs
-* complete DAC + switches: ports vin t m vcm vdd vss rst rstm sam samb, then gp0..gp11 gdp, gn0..gn11 gdn (dummy bit last)
-.subckt dac_sw vin t m vcm vdd vss rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn
+* complete DAC + switches: ports vin t m vcm vdd vdd_dac vss rst rstm sam samb, then gp0..gp11 gdp, gn0..gn11 gdn (dummy bit last)
+* F1 / Decision 44d (AUDIT 4.9.2 rail table): TWO supply pins.  vdd_dac = source and n-well of the 13 bottom-plate driver PMOS (the ADC-DAC strap: behind ~10 ohm from the ADC-main strap, 0.1 nF decap);
+* vdd = n-well of the 13 sampling-TG PMOS only (no DC current; the analog strap, with vhalf, the Cref switch and the samb inverter).  Single-rail testbenches tie both to one node (D2-D5, I1, I2, X2: electrically the old cell).
+.subckt dac_sw vin t m vcm vdd vdd_dac vss rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn
 Xd t m b0 b1 b2 b3 b4 b5 b6 b7 b8 b9 b10 b11 bd dac_units
 * wiring parasitics to ground (ASSUMED 2 fF per bottom plate node, 2 fF on M; also keeps the floating nodes numerically defined)
 
@@ -42,19 +44,19 @@ Cpb11 b11 vss {DSW_CPAR}
 Cpbd bd vss {DSW_CPAR}
 Xr0 t vcm rst vss dac_rs
 Xr1 m vcm rstm vss dac_rs
-Xdv0 gp0 gn0 b0 vdd vss dac_drv
-Xdv1 gp1 gn1 b1 vdd vss dac_drv
-Xdv2 gp2 gn2 b2 vdd vss dac_drv
-Xdv3 gp3 gn3 b3 vdd vss dac_drv
-Xdv4 gp4 gn4 b4 vdd vss dac_drv
-Xdv5 gp5 gn5 b5 vdd vss dac_drv
-Xdv6 gp6 gn6 b6 vdd vss dac_drv
-Xdv7 gp7 gn7 b7 vdd vss dac_drv
-Xdv8 gp8 gn8 b8 vdd vss dac_drv
-Xdv9 gp9 gn9 b9 vdd vss dac_drv
-Xdv10 gp10 gn10 b10 vdd vss dac_drv
-Xdv11 gp11 gn11 b11 vdd vss dac_drv
-Xdvd gdp gdn bd vdd vss dac_drv
+Xdv0 gp0 gn0 b0 vdd_dac vss dac_drv
+Xdv1 gp1 gn1 b1 vdd_dac vss dac_drv
+Xdv2 gp2 gn2 b2 vdd_dac vss dac_drv
+Xdv3 gp3 gn3 b3 vdd_dac vss dac_drv
+Xdv4 gp4 gn4 b4 vdd_dac vss dac_drv
+Xdv5 gp5 gn5 b5 vdd_dac vss dac_drv
+Xdv6 gp6 gn6 b6 vdd_dac vss dac_drv
+Xdv7 gp7 gn7 b7 vdd_dac vss dac_drv
+Xdv8 gp8 gn8 b8 vdd_dac vss dac_drv
+Xdv9 gp9 gn9 b9 vdd_dac vss dac_drv
+Xdv10 gp10 gn10 b10 vdd_dac vss dac_drv
+Xdv11 gp11 gn11 b11 vdd_dac vss dac_drv
+Xdvd gdp gdn bd vdd_dac vss dac_drv
 Xt0 vin b0 sam samb vdd vss dac_tg
 Xt1 vin b1 sam samb vdd vss dac_tg
 Xt2 vin b2 sam samb vdd vss dac_tg

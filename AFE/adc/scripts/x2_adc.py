@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """X2: ONE ADC analog cell alone (ideal input source, ideal supply), closed-loop PWL replay (x2lib).  Used (a) to calibrate the bit predictor per corner,
 (b) as the transistor-level static transfer of the ADC (code, offset, gain, INL), (c) as the 'same ADC alone, ideal supply' reference of S4.
-usage: x2_adc.py <corner key: typ|ff85|ss-40|ff-40|ss125> <npts | v1,v2,...> [ref=cref|tied|ideal] [T_ns=500]   -> prints per-point lines and a summary; appends to sim/x2_adc.log
+usage: x2_adc.py <corner key: typ|ff85|ss-40|ff-40|ss125> <npts | v1,v2,...> [ref=cref|tied|ideal] [T_ns=500]   -> prints per-point lines and a summary; appends to sim/x2_adc.log (or to $X2_ADC_LOG)
 Metrics per conversion (x_k = plate - reference node 0.1 ns before the comparator clock of trial k, measured):
   code            = the circuit's own 12 decisions (closed loop)
   T [LSB]         = level of the code transition tested at trial 12 minus its ideal value: T = (Vin + (x_12 - theta)/alpha)/LSB - (code | 1); mean T = fixed offset, T - mean = INL of that transition (sub-LSB resolution)
@@ -58,9 +58,9 @@ if __name__ == '__main__':
     else:
         n = int(spec); vins = list(1.15 + (np.arange(n) + 0.37) / n * 1.0 + 0.000217 * np.sin(np.arange(n) * 1.7))     # spread over 1.15-2.15 V with irregular sub-LSB positions
     out = []; P = lambda s: (print(s, flush=True), out.append(s))
-    t0 = time.time(); P(f'# X2 ADC alone, closed-loop replay: corner {ck} {X.COR[ck]}, reference variant {ref}, SCLK {1e3/(T*1e9):.3g} MHz, timing {X.TIM[X.COR[ck][3]]}' + (f', TESTBENCH OVERRIDE (not the design): {os.environ["X2_EXTRA"]}' if os.environ.get('X2_EXTRA') else '') + (f', TESTBENCH TIMING OVERRIDE (not the design): lower bits of trial 1 switched {X.NOV1*1e9:g} ns after the MSB' if os.environ.get('X2_NOV1') else ''))
+    t0 = time.time(); P(f'# X2 ADC alone, closed-loop replay: corner {ck} {X.COR[ck]}, reference variant {ref}, SCLK {1e3/(T*1e9):.3g} MHz, timing {X.TIM[X.COR[ck][3]]}' + (f', TESTBENCH OVERRIDE (not the design): {os.environ["X2_EXTRA"]}' if os.environ.get('X2_EXTRA') else '') + (f', TESTBENCH TIMING OVERRIDE (not the design): lower bits of trial 1 switched {X.NOV1*1e9:g} ns after the MSB' if os.environ.get('X2_NOV1') else '') + (f', ADC CELL NETLIST OVERRIDE (not the design netlists): {" ".join(os.path.relpath(f, X.AFE) for f in X.ADC_INC)}' if X.ADC_INC else ''))
     nfr = int(os.environ.get('X2_NFR', '2'))
     cal, rows, exps = static(ck, vins, ref, T, log=P, nfr=nfr)
     for r, r0 in zip(rows, static.rows0): P(f'ADC {ck} {ref} vin {r[0]:.6f} code {r[1]} ideal {r[2]} diff {r[1]-r[2]:+d} | T {r[3]:+.3f} LSB | x12 {r[4]/cal.lsb:+.2f} LSB | first conversion from the DC op: code {r0[1]}, T {r0[3]:+.3f} | passes {r[5]} unresolved decisions {r[6]}')
     summarize(cal, rows, f'SUMMARY ADC alone {ck} ref={ref} (frame {nfr} of {nfr})', P); P(f'PREDICTOR {ck} ref={ref}: {cal.fitinfo}'); P(f'# wall {time.time()-t0:.0f} s')
-    open(f'{X.ADC}/sim/x2_adc.log', 'a').write('\n'.join(out) + '\n')
+    open(os.environ.get('X2_ADC_LOG', f'{X.ADC}/sim/x2_adc.log'), 'a').write('\n'.join(out) + '\n')          # X2_ADC_LOG: another log file (F1 writes sim/f1_x2_adc.log and leaves the X2 baseline log untouched)

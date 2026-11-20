@@ -1,7 +1,7 @@
 #!/bin/bash
 # D1: netlist xschem/cmp_p.sch + cmp_inv.sch in batch (unset DISPLAY, see AFE/NOTES.md) and check that they match the hand netlist spice/comparator.spice (structure) and simulate identically.
 # usage: bash scripts/equiv_xschem_d1.sh  -> sim/d1_equiv_xschem.log
-ADC="$(cd "$(dirname "$0")/.." && pwd)"; LOG="$ADC/sim/d1_equiv_xschem.log"; : > "$LOG"
+ADC="$(cd "$(dirname "$0")/.." && pwd)"; LOG="$ADC/sim/${TAG:-d1}_equiv_xschem.log"; : > "$LOG"     # TAG=f1 -> sim/f1_equiv_xschem.log (the D1 log is left as it is)
 ( cd "$ADC/xschem" && mkdir -p netlist && unset DISPLAY && for c in cmp_inv cmp_p; do timeout 120 xschem --rcfile xschemrc --tcl 'set top_is_subckt 1' -n -s -q --no_x -o netlist $c.sch < /dev/null; done ) >> "$LOG" 2>&1
 # cmp_p.spice already contains the expanded cmp_inv with its default WN/WP; also adding cmp_inv.spice defined it twice WITHOUT defaults and the xschem netlist errored (first version: every sim 'differed by 100 %' = it never ran)
 grep -v -i -E '^\.end *$' "$ADC/xschem/netlist/cmp_p.spice" > "$ADC/xschem/netlist/comparator_sub.spice"

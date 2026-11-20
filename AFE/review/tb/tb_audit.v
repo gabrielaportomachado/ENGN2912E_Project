@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 // AUDIT step 4 testbench (2026-11-20): extension of AFE/top/tb_top.v (copied idea, original not edited) with one assertion per analog-digital ordering requirement.
-// DUT = dbs_afe_top_ba (AFE/review/tb/top_ba.v: the top wrapper with STA-derived delays) + the ORIGINAL afe_ch, adc8_top (RTL, or the hardened netlist + SDF with +define+GLS), rtl/dbs.v.
+// DUT = dbs_afe_top_ba (AFE/review/tb/top_ba.v: the top wrapper with STA-derived delays) + the ORIGINAL afe_ch, adc8_top (RTL, or the hardened netlist + SDF with +define+GLS), rtl/dbs.v.  F1 (2026-11-20): ports follow the new top (DOUT_OUT / DOUT_IN, no REC ports: REC is read from the internal nets; Decisions 44b / 45); no line added, nothing else changed.
 // Plusargs: +PER=<SCLK period ns> +SCEN=main|noreset|rstlate.   Every line "ASSERT <id> PASS|FAIL | what | measured" is one assertion; SUMMARY at the end.
 `include "audit_delays.vh"
 module tb_audit;
@@ -11,7 +11,7 @@ module tb_audit;
     assign E = eval;
     wire dout, dout_oe, d_ie, d_pd, d_pu, d_cs, d_sl, d_p0, d_p1, cs_pu, cs_pd, din_pu, din_pd, sclk_pu, sclk_pd, rstn_pu, rstn_pd;
     wire refw; assign refw = 1'b1;
-    dbs_afe_top_ba dut (.E(E), .IPG(IPG), .REC(REC), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT(dout),
+    dbs_afe_top_ba dut (.E(E), .IPG(IPG), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT_OUT(dout), .DOUT_IN(1'b0),
                         .DOUT_OE(dout_oe), .DOUT_IE(d_ie), .DOUT_PD(d_pd), .DOUT_PU(d_pu), .DOUT_CS(d_cs), .DOUT_SL(d_sl), .DOUT_PDRV0(d_p0), .DOUT_PDRV1(d_p1),
                         .CS_PU(cs_pu), .CS_PD(cs_pd), .DIN_PU(din_pu), .DIN_PD(din_pd), .SCLK_PU(sclk_pu), .SCLK_PD(sclk_pd), .RSTN_PU(rstn_pu), .RSTN_PD(rstn_pd),
                         .VDD(vdd_n), .VSS(vss_n));
@@ -180,7 +180,7 @@ module tb_audit;
         always @(vin_all[12*g +: 12]) dut.ch[g].u.u_amp.sim_vin = vin_all[12*g +: 12];
     end endgenerate
     wire [7:0] fs_v;
-    generate for (g = 0; g < 8; g = g + 1) begin : fsv assign fs_v[g] = dut.ch[g].u.fs; end endgenerate
+    generate for (g = 0; g < 8; g = g + 1) begin : fsv assign fs_v[g] = dut.ch[g].u.fs; assign REC[g] = dut.ch[g].u.rec; end endgenerate   // F1: REC is the internal net of afe_ch (no REC pad, Decision 45)
     reg [159:0] rx;
     reg [7:0] fs_at_cs;
     reg [9:0] pre_cfg;

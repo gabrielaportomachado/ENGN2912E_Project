@@ -1,11 +1,11 @@
 ** sch_path: /foss/designs/ENGN2912E_Project/AFE/adc/xschem/cmp_p.sch
-.subckt cmp_p inp inn clk outp outn vdd vss
-*.PININFO inp:I inn:I clk:I outp:O outn:O vdd:B vss:B
-Xmt1 tl clkb vdd vdd pfet_03v3 L='CMP_LT' W='CMP_WT' nf=1 ad='CMP_WT*0.18u' as='CMP_WT*0.18u' pd='2*(CMP_WT+0.18u)' ps='2*(CMP_WT+0.18u)'
+.subckt cmp_p inp inn clk outp outn vdd_cmp vss
+*.PININFO inp:I inn:I clk:I outp:O outn:O vdd_cmp:B vss:B
+Xmt1 tl clkb vdd_cmp vdd_cmp pfet_03v3 L='CMP_LT' W='CMP_WT' nf=1 ad='CMP_WT*0.18u' as='CMP_WT*0.18u' pd='2*(CMP_WT+0.18u)' ps='2*(CMP_WT+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xm1 a1 inp tl vdd pfet_03v3 L='CMP_LP' W='CMP_WP' nf=1 ad='CMP_WP*0.18u' as='CMP_WP*0.18u' pd='2*(CMP_WP+0.18u)' ps='2*(CMP_WP+0.18u)'
+Xm1 a1 inp tl vdd_cmp pfet_03v3 L='CMP_LP' W='CMP_WP' nf=1 ad='CMP_WP*0.18u' as='CMP_WP*0.18u' pd='2*(CMP_WP+0.18u)' ps='2*(CMP_WP+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xm2 a2 inn tl vdd pfet_03v3 L='CMP_LP' W='CMP_WP' nf=1 ad='CMP_WP*0.18u' as='CMP_WP*0.18u' pd='2*(CMP_WP+0.18u)' ps='2*(CMP_WP+0.18u)'
+Xm2 a2 inn tl vdd_cmp pfet_03v3 L='CMP_LP' W='CMP_WP' nf=1 ad='CMP_WP*0.18u' as='CMP_WP*0.18u' pd='2*(CMP_WP+0.18u)' ps='2*(CMP_WP+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
 Xmr1 a1 clkb vss vss nfet_03v3 L='CMP_LR' W='CMP_WR' nf=1 ad='CMP_WR*0.18u' as='CMP_WR*0.18u' pd='2*(CMP_WR+0.18u)' ps='2*(CMP_WR+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
@@ -21,19 +21,19 @@ Xmn1 o1 o2 s1 vss nfet_03v3 L='CMP_LN' W='CMP_WN' nf=1 ad='CMP_WN*0.18u' as='CMP
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
 Xmn2 o2 o1 s2 vss nfet_03v3 L='CMP_LN' W='CMP_WN' nf=1 ad='CMP_WN*0.18u' as='CMP_WN*0.18u' pd='2*(CMP_WN+0.18u)' ps='2*(CMP_WN+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xmq1 o1 o2 vdd vdd pfet_03v3 L='CMP_LQ' W='CMP_WQ' nf=1 ad='CMP_WQ*0.18u' as='CMP_WQ*0.18u' pd='2*(CMP_WQ+0.18u)' ps='2*(CMP_WQ+0.18u)'
+Xmq1 o1 o2 vdd_cmp vdd_cmp pfet_03v3 L='CMP_LQ' W='CMP_WQ' nf=1 ad='CMP_WQ*0.18u' as='CMP_WQ*0.18u' pd='2*(CMP_WQ+0.18u)' ps='2*(CMP_WQ+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xmq2 o2 o1 vdd vdd pfet_03v3 L='CMP_LQ' W='CMP_WQ' nf=1 ad='CMP_WQ*0.18u' as='CMP_WQ*0.18u' pd='2*(CMP_WQ+0.18u)' ps='2*(CMP_WQ+0.18u)'
+Xmq2 o2 o1 vdd_cmp vdd_cmp pfet_03v3 L='CMP_LQ' W='CMP_WQ' nf=1 ad='CMP_WQ*0.18u' as='CMP_WQ*0.18u' pd='2*(CMP_WQ+0.18u)' ps='2*(CMP_WQ+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xmp1 o1 clk vdd vdd pfet_03v3 L='CMP_LS' W='CMP_WS' nf=1 ad='CMP_WS*0.18u' as='CMP_WS*0.18u' pd='2*(CMP_WS+0.18u)' ps='2*(CMP_WS+0.18u)'
+Xmp1 o1 clk vdd_cmp vdd_cmp pfet_03v3 L='CMP_LS' W='CMP_WS' nf=1 ad='CMP_WS*0.18u' as='CMP_WS*0.18u' pd='2*(CMP_WS+0.18u)' ps='2*(CMP_WS+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xmp2 o2 clk vdd vdd pfet_03v3 L='CMP_LS' W='CMP_WS' nf=1 ad='CMP_WS*0.18u' as='CMP_WS*0.18u' pd='2*(CMP_WS+0.18u)' ps='2*(CMP_WS+0.18u)'
+Xmp2 o2 clk vdd_cmp vdd_cmp pfet_03v3 L='CMP_LS' W='CMP_WS' nf=1 ad='CMP_WS*0.18u' as='CMP_WS*0.18u' pd='2*(CMP_WS+0.18u)' ps='2*(CMP_WS+0.18u)'
 + nrd=0 nrs=0 sa=0 sb=0 sd=0
-Xic clk clkb vdd vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
-Xb1 o1 b1 vdd vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
-Xb2 b1 outp vdd vss cmp_inv WN='CMP_WB' WP='2*CMP_WB'
-Xb3 o2 b2 vdd vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
-Xb4 b2 outn vdd vss cmp_inv WN='CMP_WB' WP='2*CMP_WB'
+Xic clk clkb vdd_cmp vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
+Xb1 o1 b1 vdd_cmp vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
+Xb2 b1 outp vdd_cmp vss cmp_inv WN='CMP_WB' WP='2*CMP_WB'
+Xb3 o2 b2 vdd_cmp vss cmp_inv WN='CMP_WI' WP='2*CMP_WI'
+Xb4 b2 outn vdd_cmp vss cmp_inv WN='CMP_WB' WP='2*CMP_WB'
 .ends
 
 * expanding   symbol:  cmp_inv.sym # of pins=4

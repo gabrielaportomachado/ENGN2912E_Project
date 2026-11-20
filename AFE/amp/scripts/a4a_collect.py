@@ -15,7 +15,7 @@ def kv(lines, tag=None): return {k: float(v) for l in lines if tag is None or l.
 out = []
 def P(s=''): out.append(s)
 P(('A4a' if TAG == 'a4a' else 'A4b (re-run of the A4a tables with the A4b netlist: native-Vt follower, VCM_IN = 1.65 V, VTT2 per spice/afe_params.spice)') + ' full channel (stage 1 + stage 2 + follower buffer + REAL bias_gen), typical/ff/ss x -40/27/85 C, VDD 3.3 V, VOUT_CM 1.65 V.  Source: sim/' + TAG + '_*.log')
-P('Models: MOS corner + mimcap corner + poly-resistor corner (res_<corner>: 3000/2250/3750 Ohm/sq).  Diffusion real (DIFF=1).  ADC load: ' + ('placeholder 10 pF' if TAG == 'a4a' else '20 fF off-channel mux load only (D0 model; the 17 pF / 1 kOhm sampling event is in a4b_adc.log)') + '.')
+P('Models: MOS corner + mimcap corner + poly-resistor corner (res_<corner>: ppolyf_u_1k 1000/800/1200 Ohm/sq since F1; the saved A4a / A4b tables were made with ppolyf_u_3k, 3000/2250/3750 Ohm/sq).  Diffusion real (DIFF=1).  ADC load: ' + ('placeholder 10 pF' if TAG == 'a4a' else '20 fF off-channel mux load only (D0 model; the 17 pF / 1 kOhm sampling event is in a4b_adc.log)') + '.')
 P()
 op = parse(A + TAG + '_op.log')
 P('== 1. .op: DC levels and bias (every transistor margin = |Vds|-|Vdsat| of the analog devices; criterion >= 0.05 V; start-up/ladder not listed)')

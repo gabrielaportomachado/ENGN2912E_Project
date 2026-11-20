@@ -109,7 +109,7 @@ Vpkcb pkcb 0 {VSUP}
 Coffu outu 0 20f
 Vcmd vcmd 0 {VSUP/2}
 .include @CTRL@
-Xs out t m vcmd vdd 0 rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn dac_sw
+Xs out t m vcmd vdd vdd 0 rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn dac_sw
 Vck ck 0 0
 Xc vcmd t ck outp outn vdd 0 cmp_p
 Cl1 outp 0 5f

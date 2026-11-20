@@ -65,7 +65,7 @@ def build(o):
         L.append(f'Adum{i} [d_tgb{i}] [gdn{i}] dacb')      # dummy-unit bottom: grounded whenever the TG is off (D3 has no dummy-bit driver; added here, see NOTES D4)
         L.append(f'Vgdp{i} gdp{i} 0 {vsup}')
         # DAC
-        L.append(f'Xs{i} vin{i} t{i} m{i} vcm vd 0 rst{i} rst{i} sam{i} samb{i} ' + ' '.join(f'gp{i}_{b}' for b in range(12)) + f' gdp{i} ' + ' '.join(f'gn{i}_{b}' for b in range(12)) + f' gdn{i} dac_sw')
+        L.append(f'Xs{i} vin{i} t{i} m{i} vcm vd vd 0 rst{i} rst{i} sam{i} samb{i} ' + ' '.join(f'gp{i}_{b}' for b in range(12)) + f' gdp{i} ' + ' '.join(f'gn{i}_{b}' for b in range(12)) + f' gdn{i} dac_sw')
         vi = [v[i] if isinstance(v, (list, tuple, np.ndarray)) else v for v in vins]
         pts = [(0, vi[0])]
         for k, tf in enumerate(tfr):

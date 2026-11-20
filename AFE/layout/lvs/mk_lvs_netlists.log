@@ -1,0 +1,100 @@
+mk_lvs_netlists.py  options: (defaults)
+Sources: 17 simulation netlists + AFE/top/dbs_afe_top.v; rules of AFE/review/AUDIT.md 4.9.3.  Output: AFE/layout/lvs
+
+ELEMENT RULES APPLIED (simulation netlist -> LVS reference)
+  stage1c       removed  Rbrk   vng vn 100 noisy=0; net vng joined with vn
+  stage2c       removed  Rbrk   vng2 vn2 100 noisy=0; net vng2 joined with vn2
+  fs_oneshot_c  removed  Rt     t vss 1e13  (ideal element, no layout device)
+  fs_oneshot_c  removed  Rmm    mm vss 1e13  (ideal element, no layout device)
+  dac_sw        removed  Cpm    m vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb0   b0 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb1   b1 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb2   b2 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb3   b3 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb4   b4 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb5   b5 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb6   b6 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb7   b7 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb8   b8 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb9   b9 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb10  b10 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpb11  b11 vss {DSW_CPAR}  (ideal element, no layout device)
+  dac_sw        removed  Cpbd   bd vss {DSW_CPAR}  (ideal element, no layout device)
+  cmp_p         replaced Cxa1 a1 vss {CMP_CA} (= 40.0 fF ideal)  by  XCxa1 a1 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u (54.52 fF, the smallest legal MIM)
+  cmp_p         replaced Cxa2 a2 vss {CMP_CA} (= 40.0 fF ideal)  by  XCxa2 a2 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u (54.52 fF, the smallest legal MIM)
+  stage1c       split    Xcin1 rec vn: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on rec
+  stage1c       split    Xcin2 ref vp: one plate 100.012 x 100.012 um = 10002.3 um2 (> 10,000), 20.0000 pF  ->  2 pieces 70.649 x 70.649 um = 4991.3 um2 each, 20.0000 pF in total (+0.000 %); top plate on ref
+  every cell      cap_mim_2f0_m2m3_noshield -> cap_mim_2f0_m4m5_noshield (same model parameters; the 5-metal stack has the MIM between Metal4 and Metal5)
+
+DEVICE CENSUS per analog cell:  simulation netlist  ->  LVS reference
+  afe_chc       sim: cap_mim_2f0_m2m3_noshield x8, ideal R x2, nfet_03v3 x11, nfet_06v0_nvt x1, pfet_03v3 x16
+                LVS: cap_mim_2f0_m4m5_noshield x10, nfet_03v3 x11, nfet_06v0_nvt x1, pfet_03v3 x16   (38 devices; pins: rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb)
+  fs_oneshot_c  sim: cap_mim_2f0_m2m3_noshield x1, ideal R x2, nfet_03v3 x4, pfet_03v3 x4
+                LVS: cap_mim_2f0_m4m5_noshield x1, nfet_03v3 x4, pfet_03v3 x4   (9 devices; pins: trig fs vbn vdd vss)
+  bias_genc     sim: cap_mim_2f0_m2m3_noshield x1, nfet_03v3 x3, pfet_03v3 x6, ppolyf_u_1k x7
+                LVS: cap_mim_2f0_m4m5_noshield x1, nfet_03v3 x3, pfet_03v3 x6, ppolyf_u_1k x7   (17 devices; pins: vbn vcm_in vg1 vcm_out vg2 vrs vdd vss)
+  dac_sw        sim: cap_mim_2f0_m2m3_noshield x128, ideal C x14, nfet_03v3 x28, pfet_03v3 x26
+                LVS: cap_mim_2f0_m4m5_noshield x128, nfet_03v3 x28, pfet_03v3 x26   (182 devices; pins: vin t m vcm vdd vdd_dac vss rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8 gn9 gn10 gn11 gdn)
+  cmp_p         sim: ideal C x2, nfet_03v3 x11, pfet_03v3 x12
+                LVS: cap_mim_2f0_m4m5_noshield x2, nfet_03v3 x11, pfet_03v3 x12   (25 devices; pins: inp inn clk outp outn vdd_cmp vss)
+  vhalf         sim: cap_mim_2f0_m2m3_noshield x1, ppolyf_u_1k x2
+                LVS: cap_mim_2f0_m4m5_noshield x1, ppolyf_u_1k x2   (3 devices; pins: out vdd vss)
+  vrefs         sim: cap_mim_2f0_m2m3_noshield x1, nfet_03v3 x1, pfet_03v3 x1
+                LVS: cap_mim_2f0_m4m5_noshield x1, nfet_03v3 x1, pfet_03v3 x1   (3 devices; pins: in out c cb vdd vss)
+  tgate         sim: nfet_05v0 x1, pfet_05v0 x1
+                LVS: nfet_05v0 x1, pfet_05v0 x1   (2 devices; pins: out c cbar in vdd vss)
+
+MIM CAPACITORS of the LVS reference (C from the netlists' formula C = 0.00199 W L + 2.383e-10 x 2 (W + L); rule check 25 um2 <= area <= 10,000 um2)
+  afe_chc         4 x  70.649028u x 70.649028u =    4991.3 um2    10000.00 fF each   ok  e.g. Xs1_xcin1_1 (top rec, bottom xs1_vn)
+  afe_chc         1 x  38.588264u x 38.588264u =    1489.1 um2     3000.00 fF each   ok  e.g. Xs2_xcin (top v1, bottom xs2_vn2)
+  afe_chc         1 x  31.463538u x 31.463538u =     990.0 um2     2000.00 fF each   ok  e.g. Xs2_xota2_xcc (top xs2_xota2_o2, bottom vss)
+  afe_chc         1 x        22u x 22u       =     484.0 um2      984.13 fF each   ok  e.g. Xs1_xota_xcc (top xs1_xota_o1, bottom v1)
+  afe_chc         1 x  11.917642u x 11.917642u =     142.0 um2      294.00 fF each   ok  e.g. Xs2_xcf (top xs2_vn2, bottom out)
+  afe_chc         2 x  9.788457u x 9.788457u =      95.8 um2      200.00 fF each   ok  e.g. Xs1_xcf1 (top xs1_vn, bottom v1)
+  fs_oneshot_c    1 x  44.594726u x 44.594726u =    1988.7 um2     4000.00 fF each   ok  e.g. Xct (top t, bottom vss)
+  bias_genc       1 x  49.886545u x 49.886545u =    2488.7 um2     5000.00 fF each   ok  e.g. Xcvrs (top vrs, bottom vss)
+  dac_sw          1 x  5.082993u x 5u        =      25.4 um2       55.38 fF each   ok  e.g. Xd_xcb (top t, bottom m)
+  dac_sw        127 x         5u x 5u        =      25.0 um2       54.52 fF each   ok  e.g. Xd_xc0_0 (top m, bottom b0)
+  cmp_p           2 x         5u x 5u        =      25.0 um2       54.52 fF each   ok  e.g. Xcxa1 (top a1, bottom vss)
+  vhalf           1 x  22.178574u x 22.178574u =     491.9 um2     1000.00 fF each   ok  e.g. Xc (top out, bottom vss)
+  vrefs           1 x  59.070243u x 59.070243u =    3489.3 um2     7000.00 fF each   ok  e.g. Xc (top out, bottom vss)
+
+POLY RESISTORS of the LVS reference (nominal R = 1000 ohm/sq x length / width, PDK typical rsh)
+  bias_genc     Xrb     ppolyf_u_1k  r1 vss vss  width 2u length 120u = 60.0 squares = 60.0 kOhm nominal
+  bias_genc     Xra1    ppolyf_u_1k  vdd vg1 vss  width 1u length 725u = 725.0 squares = 725.0 kOhm nominal
+  bias_genc     Xra2    ppolyf_u_1k  vg1 vcm_in vss  width 1u length 100u = 100.0 squares = 100.0 kOhm nominal
+  bias_genc     Xra3    ppolyf_u_1k  vcm_in vss vss  width 1u length 825u = 825.0 squares = 825.0 kOhm nominal
+  bias_genc     Xrb1    ppolyf_u_1k  vdd vg2 vss  width 1u length 375u = 375.0 squares = 375.0 kOhm nominal
+  bias_genc     Xrb2    ppolyf_u_1k  vg2 vcm_out vss  width 1u length 450u = 450.0 squares = 450.0 kOhm nominal
+  bias_genc     Xrb3    ppolyf_u_1k  vcm_out vss vss  width 1u length 825u = 825.0 squares = 825.0 kOhm nominal
+  vhalf         Xru     ppolyf_u_1k  vdd out vss  width 1u length 250u = 250.0 squares = 250.0 kOhm nominal
+  vhalf         Xrd     ppolyf_u_1k  out vss vss  width 1u length 250u = 250.0 squares = 250.0 kOhm nominal
+
+CHANNEL CELLS from module afe_ch of AFE/top/dbs_afe_top.v
+  amp_ch (L2) = u_os (fs_oneshot_c) + u_or (gf180mcu_fd_sc_mcu7t5v0__or2_1) + u_amp (afe_chc);  pins: ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+  adc_ch (L1) = u_vh (vhalf) + u_samb (gf180mcu_fd_sc_mcu7t5v0__inv_1) + u_dac (dac_sw) + u_vr (vrefs) + u_cmp (cmp_p);  pins: rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vin vdd vdd_cmp vdd_dac vss
+  afe_ch (L3) = rec_tg (TGATE) + ipg_tg (TGATE) + amp_ch + adc_ch;  pins: e ipg ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
+  internal nets of afe_ch: amp_out[u_amp,u_dac] cmp_qn[u_cmp] fs[u_amp,u_or] fs_os[u_or,u_os] m[u_dac] rec[rec_tg,u_amp] samb[u_dac,u_samb,u_vr] t[u_cmp,u_dac] vcmd[u_dac,u_vh,u_vr] vref[u_cmp,u_vr]
+  implicit power (not in the Verilog): TGATE VDD / VSS -> vdd / vss (analog strap); standard cells VDD, VNW -> vdd, VSS, VPW -> vss
+  supply pins of adc_ch: vdd = u_dac.vdd, u_samb.vdd, u_samb.vnw, u_vh.vdd, u_vr.vdd;  vdd_cmp = u_cmp.vdd_cmp;  vdd_dac = u_dac.gdp, u_dac.vdd_dac
+
+SUPPLY DEVICES of the top (Decision 44d, AUDIT 4.9.2)
+  strap resistor  Xu_rstrap VDD vdd_dac: rm3  width 2 um length 222.2 um = 111.1 squares x 0.09 ohm/sq (typical) = 10.00 ohm  (target 10 ohm, X2 S4)
+  decap           Xu_dcm VDD VSS: cap_nmos_03v3  79 units of 20 x 20 um (c_width x c_length) = 31600 um2, 3.98 fF/um2 at 3.3 V -> 125.86 pF  (asked: 125.0 pF)
+  decap           Xu_dcd vdd_dac VSS: cap_nmos_03v3  63 units of 20 x 20 um (c_width x c_length) = 25200 um2, 3.98 fF/um2 at 3.3 V -> 100.37 pF  (asked: 100.0 pF)
+
+TOP dbs_afe_top from AFE/top/dbs_afe_top.v
+  41 pins: E[7] E[6] E[5] E[4] E[3] E[2] E[1] E[0] IPG[7] IPG[6] IPG[5] IPG[4] IPG[3] IPG[2] IPG[1] IPG[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
+  instances: 1 x afe_dig, 1 x bias_genc, 8 x afe_ch + 3 supply devices + 15 pad-control ties (0-ohm resistors: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
+  pad pins that are plain nets of the macro: DOUT_OUT = afe_dig.DOUT, DOUT_OE = afe_dig.DOUT_OE;  top port without a connection inside: DOUT_IN (the pad input is not used, DOUT_IE = 0)
+  net census: VDD on 16 channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on 8 channel pins + decap + strap
+  digital macro afe_dig: 273 pins, PROVISIONAL black box (L1d pin list, VDD VSS first)
+    afe_dig pin -> net of the top: VDD -> VDD, VSS -> VSS, CS -> CS, SCLK -> SCLK, DIN -> DIN, RSTN -> RSTN, DOUT -> DOUT_OUT, DOUT_OE -> DOUT_OE, rst_amp_o -> rst_amp_o, sw_rec -> sw_rec[7:0], sw_rec_b -> sw_rec_b[7:0], sw_ipg -> sw_ipg[7:0], sw_ipg_b -> sw_ipg_b[7:0], cmp_q -> cmp_q[7:0], cmp_clk -> cmp_clk[7:0], rst_sw -> rst_sw[7:0], tg_on -> tg_on[7:0], dac_gp -> dac_gp[95:0], dac_gn -> dac_gn[95:0], dac_gdn -> dac_gdn[7:0]
+
+FILES written to AFE/layout/lvs
+  afe_chc.spice          74 lines,    56 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch
+  adc_ch.spice          250 lines,   220 X lines, subckts: dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch
+  bias_genc.spice        24 lines,    17 X lines, subckts: bias_genc
+  dbs_afe_top.spice     460 lines,   312 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc afe_dig dbs_afe_top
+
+FLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch 53, adc_ch 215, afe_ch 272, bias_genc 17; chip without the digital macro: 8 x 272 + 17 + 3 supply devices = 2196 (+ 15 tie resistors)

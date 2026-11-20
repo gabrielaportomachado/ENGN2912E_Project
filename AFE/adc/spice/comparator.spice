@@ -2,13 +2,14 @@
 * cmp_p : PMOS-input preamp.  Reset: preamp nodes a1/a2 pulled to vss, latch outputs o1/o2 precharged to vdd.  Evaluate: a1/a2 rise at a rate set by the input pair, the
 *         NMOS control devices Mc1/Mc2 (gates a1/a2) start the cross-coupled latch.  inp > inn  ->  o1 = 1, o2 = 0  (outp = 1).  Input common-mode range goes DOWN to 0 V.
 * cmp_n : exact dual (NMOS-input preamp, a1/a2 reset to vdd, latch outputs precharged to vss, PMOS control devices).  inp > inn -> o1 = 1.  ICMR goes UP to vdd.
-* Pin order (as xschem will emit: inputs, outputs, inouts): inp inn clk outp outn vdd vss.   Diffusion: ad = as = W*0.18u, pd = ps = 2*(W+0.18u), nrd = nrs = 0 (A4a Decision-13 recipe).
+* Pin order (as xschem will emit: inputs, outputs, inouts): inp inn clk outp outn vdd_cmp vss (cmp_p; F1 / Decision 44d: the comparator supply pin is named vdd_cmp = the ADC-main strap of AUDIT 4.9.2,
+* same position as the old vdd, so every positional instance is unchanged) / inp inn clk outp outn vdd vss (cmp_n, the unused dual).   Diffusion: ad = as = W*0.18u, pd = ps = 2*(W+0.18u), nrd = nrs = 0 (A4a Decision-13 recipe).
 * All sizes are .params (defaults in comparator_params.spice).  Mismatch: ONE device per transistor (no m>1 on pair/latch/control devices: the PDK mismatch term uses the area of one finger-less W).
-.subckt cmp_p inp inn clk outp outn vdd vss
-Xic clk clkb vdd vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
-Xmt1 tl clkb vdd vdd pfet_03v3 L={CMP_LT} W={CMP_WT} nf=1 ad={CMP_WT*0.18u} as={CMP_WT*0.18u} pd={2*(CMP_WT+0.18u)} ps={2*(CMP_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xm1 a1 inp tl vdd pfet_03v3 L={CMP_LP} W={CMP_WP} nf=1 ad={CMP_WP*0.18u} as={CMP_WP*0.18u} pd={2*(CMP_WP+0.18u)} ps={2*(CMP_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xm2 a2 inn tl vdd pfet_03v3 L={CMP_LP} W={CMP_WP} nf=1 ad={CMP_WP*0.18u} as={CMP_WP*0.18u} pd={2*(CMP_WP+0.18u)} ps={2*(CMP_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+.subckt cmp_p inp inn clk outp outn vdd_cmp vss
+Xic clk clkb vdd_cmp vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
+Xmt1 tl clkb vdd_cmp vdd_cmp pfet_03v3 L={CMP_LT} W={CMP_WT} nf=1 ad={CMP_WT*0.18u} as={CMP_WT*0.18u} pd={2*(CMP_WT+0.18u)} ps={2*(CMP_WT+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xm1 a1 inp tl vdd_cmp pfet_03v3 L={CMP_LP} W={CMP_WP} nf=1 ad={CMP_WP*0.18u} as={CMP_WP*0.18u} pd={2*(CMP_WP+0.18u)} ps={2*(CMP_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xm2 a2 inn tl vdd_cmp pfet_03v3 L={CMP_LP} W={CMP_WP} nf=1 ad={CMP_WP*0.18u} as={CMP_WP*0.18u} pd={2*(CMP_WP+0.18u)} ps={2*(CMP_WP+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 Xmr1 a1 clkb vss vss nfet_03v3 L={CMP_LR} W={CMP_WR} nf=1 ad={CMP_WR*0.18u} as={CMP_WR*0.18u} pd={2*(CMP_WR+0.18u)} ps={2*(CMP_WR+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 Xmr2 a2 clkb vss vss nfet_03v3 L={CMP_LR} W={CMP_WR} nf=1 ad={CMP_WR*0.18u} as={CMP_WR*0.18u} pd={2*(CMP_WR+0.18u)} ps={2*(CMP_WR+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 Cxa1 a1 vss {CMP_CA}
@@ -17,15 +18,15 @@ Xmc1 s1 a1 vss vss nfet_03v3 L={CMP_LC} W={CMP_WC} nf=1 ad={CMP_WC*0.18u} as={CM
 Xmc2 s2 a2 vss vss nfet_03v3 L={CMP_LC} W={CMP_WC} nf=1 ad={CMP_WC*0.18u} as={CMP_WC*0.18u} pd={2*(CMP_WC+0.18u)} ps={2*(CMP_WC+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 Xmn1 o1 o2 s1 vss nfet_03v3 L={CMP_LN} W={CMP_WN} nf=1 ad={CMP_WN*0.18u} as={CMP_WN*0.18u} pd={2*(CMP_WN+0.18u)} ps={2*(CMP_WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 Xmn2 o2 o1 s2 vss nfet_03v3 L={CMP_LN} W={CMP_WN} nf=1 ad={CMP_WN*0.18u} as={CMP_WN*0.18u} pd={2*(CMP_WN+0.18u)} ps={2*(CMP_WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xmq1 o1 o2 vdd vdd pfet_03v3 L={CMP_LQ} W={CMP_WQ} nf=1 ad={CMP_WQ*0.18u} as={CMP_WQ*0.18u} pd={2*(CMP_WQ+0.18u)} ps={2*(CMP_WQ+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xmq2 o2 o1 vdd vdd pfet_03v3 L={CMP_LQ} W={CMP_WQ} nf=1 ad={CMP_WQ*0.18u} as={CMP_WQ*0.18u} pd={2*(CMP_WQ+0.18u)} ps={2*(CMP_WQ+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xmp1 o1 clk vdd vdd pfet_03v3 L={CMP_LS} W={CMP_WS} nf=1 ad={CMP_WS*0.18u} as={CMP_WS*0.18u} pd={2*(CMP_WS+0.18u)} ps={2*(CMP_WS+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
-Xmp2 o2 clk vdd vdd pfet_03v3 L={CMP_LS} W={CMP_WS} nf=1 ad={CMP_WS*0.18u} as={CMP_WS*0.18u} pd={2*(CMP_WS+0.18u)} ps={2*(CMP_WS+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xmq1 o1 o2 vdd_cmp vdd_cmp pfet_03v3 L={CMP_LQ} W={CMP_WQ} nf=1 ad={CMP_WQ*0.18u} as={CMP_WQ*0.18u} pd={2*(CMP_WQ+0.18u)} ps={2*(CMP_WQ+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xmq2 o2 o1 vdd_cmp vdd_cmp pfet_03v3 L={CMP_LQ} W={CMP_WQ} nf=1 ad={CMP_WQ*0.18u} as={CMP_WQ*0.18u} pd={2*(CMP_WQ+0.18u)} ps={2*(CMP_WQ+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xmp1 o1 clk vdd_cmp vdd_cmp pfet_03v3 L={CMP_LS} W={CMP_WS} nf=1 ad={CMP_WS*0.18u} as={CMP_WS*0.18u} pd={2*(CMP_WS+0.18u)} ps={2*(CMP_WS+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
+Xmp2 o2 clk vdd_cmp vdd_cmp pfet_03v3 L={CMP_LS} W={CMP_WS} nf=1 ad={CMP_WS*0.18u} as={CMP_WS*0.18u} pd={2*(CMP_WS+0.18u)} ps={2*(CMP_WS+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1
 * output buffers (two minimum inverters per side: isolate the latch from the SAR logic; outp follows o1, outn follows o2)
-Xb1 o1 b1 vdd vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
-Xb2 b1 outp vdd vss cmp_inv WN={CMP_WB} WP={2*CMP_WB}
-Xb3 o2 b2 vdd vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
-Xb4 b2 outn vdd vss cmp_inv WN={CMP_WB} WP={2*CMP_WB}
+Xb1 o1 b1 vdd_cmp vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
+Xb2 b1 outp vdd_cmp vss cmp_inv WN={CMP_WB} WP={2*CMP_WB}
+Xb3 o2 b2 vdd_cmp vss cmp_inv WN={CMP_WI} WP={2*CMP_WI}
+Xb4 b2 outn vdd_cmp vss cmp_inv WN={CMP_WB} WP={2*CMP_WB}
 .ends cmp_p
 .subckt cmp_inv i o vdd vss WN=1u WP=2u
 Xn o i vss vss nfet_03v3 L=0.28u W={WN} nf=1 ad={WN*0.18u} as={WN*0.18u} pd={2*(WN+0.18u)} ps={2*(WN+0.18u)} nrd=0 nrs=0 sa=0 sb=0 sd=0 m=1

@@ -10,8 +10,9 @@ the "Results log" and "Open questions" sections below with verified numbers only
 - Run inside container `iic-osic-tools_chipathon_xvnc_uid_501`
   (image hpretl/iic-osic-tools:chipathon26). Repo at /foss/designs/ENGN2912E_Project.
 - ngspice-46 and xschem are on PATH. LibreLane is at /usr/local/bin/librelane.
-  ngspice ships the Icarus co-simulation bridge (ivlng.so / ivlng.vpi): check it works
-  before relying on it.
+  ngspice ships the Icarus co-simulation bridge (ivlng.so / ivlng.vpi), but it does NOT work here (D4: no Cosim setup)
+  and the XSPICE gate-level co-simulation gives wrong codes: for any ADC transient use the closed-loop PWL replay
+  of AFE/adc/scripts/x2lib.py (X2; `X2_ADC_INC=<netlist>` swaps in an extracted ADC cell).
 - PDK_ROOT=/foss/pdks, PDK=gf180mcuD.
 - Model setup:
   .include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
@@ -26,10 +27,20 @@ the "Results log" and "Open questions" sections below with verified numbers only
   `(unset DISPLAY; cd AFE/amp/xschem && xschem --rcfile xschemrc --tcl 'set top_is_subckt 1' -n -s -q --no_x -o netlist ota1.sch </dev/null)`.
   Headless SVG/PNG export draws nothing. PDK symbols are referenced as `symbols/pfet_03v3.sym`; the MIM symbol's default model name
   (cap_mim_2f0fF) is overridden with model=cap_mim_2f0_m2m3_noshield.
-- ngspice (A3): nonzero ad/as/pd/ps on the PDK MOSFETs make `.tran` fail ("timestep too small" at ~1 us, UNEXPLAINED): set them to 0 explicitly
-  (the xschem symbols pass them by default). Vectors: `@m.xota.xm1.m0[vds]`, `v.xs1.vbrk#branch`; `.dc` sweeps need explicit `save` of device
+- ngspice (A3, corrected by the Decision 13 answer in A4a): the early `.tran` failure ("timestep too small" at ~1 us) was NOT caused by ad/as/pd/ps. It is nrd / nrs != 0
+  (the xschem symbol default 0.18u/W) together with gmin = 1e-16: keep the real diffusion parameters (`.param DIFF=1`: ad = as = W*0.18u, pd = ps = 2*(W+0.18u)) and set nrd = nrs = 0.
+  Vectors: `@m.xota.xm1.m0[vds]`, `v.xs1.vbrk#branch`; `.dc` sweeps need explicit `save` of device
   parameters; `meas` results and `.param` names are not visible after `setplot` / inside `.control` (carry them with `set v = $&x`); use `cph()`
-  for unwrapped phase. A failed `.tran` prints one enormous line: always pipe ngspice output through `cut -c1-200 | head`.
+  for unwrapped phase. NEVER pipe ngspice through `cut` or truncate its log (Decision 43a): the abort message is on the same carriage-return separated line as the
+  progress values and gets lost (this is how the D5 "abort at 28.8 ms" artifact arose). Keep the whole log and read its "doAnalyses:" line.
+- Simulation rules since X2 (Decision 43a; AFE/prompts/layout_run.md common rule 8): `.options abstol=1e-12` in every transient with switching (keep gmin 1e-16, reltol 1e-4, vntol 1e-7,
+  chgtol 1e-17; abstol 1e-15 or smaller makes ngspice abort on the pA currents of gate-only sources); ONE ngspice thread per job through a job-local `.spiceinit` containing
+  `set num_threads=1` (ngspice reads its working directory first; the system default in this container is 8 threads, 5-35x slower for these netlists. The A4b findings below say
+  "ngspice ignores num_threads": that is true for `.options`, ~/.spiceinit and OMP_NUM_THREADS, which is what was tried then); every supply model with pad inductance gets ~1 pF per pad
+  to the board ground; a driver script re-runs an aborted job once with a slightly different step cap. Runners that do all this: AFE/adc/scripts/x2lib.py, AFE/review/scripts/ngjob.py.
+- Process option (Decision 44a, verified in the PDK decks): gf180mcuD = 5 metals, MIM option B. High-resistance poly is `ppolyf_u_1k` ONLY: `ppolyf_u_3k` has an ngspice model but is not
+  a device of this variant (no LVS, netgen or Magic support): never use it. Layout / LVS MIM device is `cap_mim_2f0_m4m5_noshield`; the simulation netlists keep the m2m3 name (same model)
+  and AFE/layout/scripts/mk_lvs_netlists.py writes the LVS references (AFE/layout/lvs/). Never edit a simulation netlist for LVS.
 
 ## PDK facts (verified)
 - 3.3 V devices: nfet_03v3 / pfet_03v3 (default L=0.28u). Xschem symbols
@@ -38,6 +49,9 @@ the "Results log" and "Open questions" sections below with verified numbers only
 - MIM: cap_mim_2f0_m2m3_noshield (~2 fF/um^2; also 1f0, 1f5 variants), symbol
   cap_mim_2f0fF.sym (params W, L). The model includes r_leak = 1/(gleak*area), which
   matters next to TΩ pseudo-resistors and for the ADC hold node.
+  Rules (Decision 39): minimum 25 um2 (5 x 5 um = 54.5 fF), maximum 10,000 um2 per plate. In the layout device (cap_mim_2f0_m4m5_noshield, Metal4 / Metal5)
+  terminal 1 is the TOP plate and terminal 2 the bottom plate; LVS does not swap them (F1).
+- Resistors: the only high-resistance poly of gf180mcuD is ppolyf_u_1k (1 kOhm/sq typ, 800 / 1200 at ff / ss, tc1 -9.4e-4 per K); MOS decap cap_nmos_03v3 is 3.98 fF/um2 at 3.3 V.
 - Std cells gf180mcu_fd_sc_mcu7t5v0 / mcu9t5v0 have 3.3 V liberty corners
   (e.g. ss_125C_3v00, ff_n40C_3v60; confirm the tt file name). The existing digital
   chip (rtl/dbs.v) was hardened at 5 V corners.
@@ -644,32 +658,154 @@ run_a4c_tbl.sh, run_a4c_prsize.sh, a4c_analyze.py, a4c_lib.py, a4c_ring.py, fs_p
   one ADC at a time (no neighbour-ADC supply interaction, so D4's supply result stands only by superposition); no Monte Carlo of the TG / Cref mismatch (the plate and ref samples are 2-3 ns apart; a systematic difference is the fixed offset). Floating-node leakage on vref over the ~10 us conversion (hand ESTIMATE with the PDK-model ~10 fA junction floor: 10 fA x 10 us / 7 pF = 14 nV) is negligible.
   The 9-job memory limit of this container (ngspice aborts with "memory required ... more than available" above ~6 parallel jobs): scripts save only 4 vectors and pin one job per core.
 
+## F1 findings (2026-11-20; audit fixes of Decision 44 and the 24-pad list of Decision 45; Claude Fable 5.2 / max; NO circuit was resized; logs AFE/review/sim/f1_*.log, AFE/adc/sim/f1_*.log, AFE/{amp,adc}/sim/f1_equiv_xschem.log, AFE/layout/lvs/*.log)
+- NEEDS YOUR ATTENTION.
+  (1) NEW, layout-relevant NOW (L2a draws Cin): the MIM terminals are NOT interchangeable in LVS (the netgen setup has no `permute` for MIM; Magic's tech file defines the device as `csubcircuit cap_mim_2f0_m4m5_noshield *mimcap *m4`, i.e. the top plate is
+      terminal 1: read from the tech file, to be CONFIRMED by the first MIM unit that L2a extracts in its flow check).
+      The simulation netlists put the TOP plate of the input capacitors on the driven side and the BOTTOM plate (the one with the capacitance to the substrate) on the high-impedance summing nodes: stage 1 `Xcin1 rec vn`, `Xcin2 ref vp`,
+      stage 2 `Xcin in vn2` (Cf1, Cf2, Cc, the DAC units, Cref, C_T, C_VRS already have their top plate on the sensitive node). The simulations cannot tell (the MIM model is a symmetric two-terminal C + r_leak).
+      The LVS reference keeps the netlist order by default (nothing was decided); `mk_lvs_netlists.py --cin-top sum` writes the summing nodes on the top plates (stage 1 and stage 2). RECOMMENDED: decide "summing node on the top plate" and regenerate
+      before L2a runs its LVS; otherwise LVS will force the bottom plate onto vn / vp / vn2.
+  (2) Item 1 criterion "currents within 1 %": MET for the supply current (bias + channel: +0.08 / -0.40 / +0.65 % at typ / ff 85 / ss -40), the channel and the master; NOT met for the resistor branches themselves: ladders +1.6 / -8.6 / +11.2 %,
+      vhalf +1.7 / -8.5 / +11.2 %. This is the device, not the edit: ppolyf_u_1k has corners 800 / 1200 ohm/sq (the 3k: 2250 / 3750) and tc1 -9.4e-4 /K (the 3k: -1.67e-3), and is 1.6 % lower at 25 C for 3x the squares. The numbers equal the audit's
+      prediction (power_op.log rows 1k_3L) to the printed digit. No consequence found: taps move <= 0.49 mV, ADC codes identical at typ and ff 85, vhalf <= 8.4 uA (Decision 41b: <= ~10 uA).
+  (3) AREA: the 3x longer resistors add 0.008 mm2 of blocks: 0.874 mm2 = 935 x 935 um at x1.30 (was 0.863), 0.997 mm2 = 998 x 998 um in the pessimistic x1.50 case (was 0.984): NO margin against the 1000 x 1000 um outline given to the organizer
+      in the pessimistic case (review/sim/f1_area.log). First lever: decap under the Cin plates (-0.092 mm2, AUDIT 4.5).
+  (4) LVS rule 3 changes the circuit that is built: the comparator's two ideal 40 fF capacitors become 5 x 5 um MIM units of 54.52 fF. Measured on the design netlists (adc/sim/f1_x2_inl_step.log): code offset +1.5 LSB (typ) / +1.9 LSB (ff 85)
+      (so about -28.5 / -38 LSB instead of the -30 / -40 of Decision 43e), step at code 2048 +1.30 -> +0.80 LSB (typ), +1.55 -> +1.30 LSB (ff 85), step at 1536 -1.08 -> -1.08 (typ), -1.08 -> -0.95 (ff 85): neutral to slightly better. NOT applied to the
+      simulation netlists (CMP_CA stays 40f; L1b extracts the real value).
+  (5) The code offset and the steps depend on junction capacitance: the cells of the LVS reference (same devices, but no ad / as / pd / ps) read another -3.3 LSB (typ) / -5.2 LSB (ff 85) and the 2048 step becomes +0.92 / +1.80 LSB.
+      Expect the offset (and the Decision 43b steps by a few 0.1 LSB) to move after PEX in L1b; the README numbers are pre-layout numbers.
+  (6) Choices that L3a / L1d inherit and may change by re-running the script: strap resistor = Metal3 resistor rm3 2 um x 222 um (10.0 ohm typ, +-13 % corner; the salicided poly ppolyf_s would be 7.3 -> 15 ohm/sq at the slow corner);
+      decap unit 20 x 20 um cap_nmos_03v3 (79 + 63 units; a 20 um gate gives about 3-4 ohm of series resistance per bank, ESTIMATE, the value X2 S4 assumed); the 15 pad-control ties are 0-ohm resistors in the LVS top (or tie cells inside afe_dig, L1d);
+      the afe_dig black box has the L1d pin list in a PROVISIONAL order until `--dig-netlist` is used.
+- ITEM 1, P-A1 / B1 (Decision 44a): ppolyf_u_3k -> ppolyf_u_1k, 3x the squares at 1 um width, in amp/spice/bias_genc.spice, bias_gen.spice and adc/spice/vhalf.spice. Check: review/scripts/f1_bias_op.py -> review/sim/f1_bias_op.log (the pre-F1 netlist is
+  rebuilt from the new files and run again, so the differences have full resolution; it reproduces the audit rows `3k`); adc/scripts/x2_adc.py -> adc/sim/f1_x2_adc.log, f1_x2_compare.log. [typ 27 / ff 85 / ss -40 C, 3.3 V]
+
+  | quantity | before (ppolyf_u_3k) | after (ppolyf_u_1k) | limit | verdict |
+  |---|---|---|---|---|
+  | lengths, 1 um wide | ladder A 241.7 / 33.3 / 275 um, ladder B 125 / 150 / 275 um, vhalf 2 x 83.3 um | A 725 / 100 / 825 um, B 375 / 450 / 825 um (2 x 1650 um), vhalf 2 x 250 um per ADC | - | an LVS device now |
+  | taps vcm_in / vg1 / vcm_out / vg2, change | (typ 1.64842 / 1.84956 / 1.64938 / 2.54960 V) | typ +0.47 / -0.28 / +0.45 / +0.29 mV; ff 85 +0.38 / -0.41 / +0.49 / +0.31 mV; ss -40 +0.47 / -0.19 / +0.39 / +0.25 mV | 0.5 mV | PASS (worst 0.49 mV) |
+  | reset level vrs, mirror bias vbn, amplifier output DC | - | vrs +0.47 / +0.37 / +0.47 mV; vbn 0.000; output +0.46 / +0.46 / +0.39 mV | - | follow the taps |
+  | supply current, bias + one channel | 74.37 / 119.29 / 46.83 uA | 74.43 / 118.81 / 47.13 uA (+0.08 / -0.40 / +0.65 %) | 1 % | PASS |
+  | channel; master | 68.86 / 111.01 / 43.07; 1.683 / 2.683 / 1.049 uA | unchanged (0.00 %) | 1 % | PASS |
+  | ladder current A + B | 3.83 / 5.59 / 2.72 uA | 3.89 / 5.11 / 3.02 uA (+1.6 / -8.6 / +11.2 %) | 1 % | NOT MET (attention 2) |
+  | vhalf current per ADC | 6.31 / 9.18 / 4.47 uA | 6.41 / 8.40 / 4.98 uA (+1.7 / -8.5 / +11.2 %) | 1 % | NOT MET (attention 2) |
+  | audit prediction (power_op.log rows 1k_3L), 5 corners | - | same to the printed digit (0.01 uA, 0.1 mV) | - | PASS |
+  | ADC alone, closed loop, 12 inputs typ | codes 1436 .. 2571, code - ideal -30.33, T +30.05 LSB | the same 12 codes in both frames, -30.33, +30.05 LSB (max change of T 0.003 LSB); ff 85, 8 inputs: same codes (-41.62) | same codes | PASS |
+  | chip static power / record mode | 2.003 / 3.200 / 1.267 mW; 2.084 / 3.283 / 1.351 mW | 2.006 / 3.178 / 1.282 mW; 2.087 / 3.261 / 1.365 mW (review/sim/f1_power_total.log) | - | - |
+  | poly footprint (area.py model) | ladders + Rb 2,194 um2; vhalf pair 280 um2 per ADC | 5,890 um2; 840 um2 per ADC | - | attention 3 |
+
+  Every other reference to the 3k device was updated: xschem bias_gen.sch regenerated by scripts/gen_a4a_sch.py and re-netlisted (xschem == hand netlist: structure PASS for ota1 / ota2 / bias_gen, op / ac / ol2 / noise within 0.0024 %, amp/sim/f1_equiv_xschem.log),
+  the comment of the three models_*.spice, a4a_collect.py, review/scripts/power_op.py (its three variants are now built from the new netlists), area.py, xcheck.py. Left on purpose: the Decisions / findings above and saved logs.
+  Not re-run: bias start-up (the ladders are not in the start-up path; Rb was 1k already), amplifier ac / noise at corners (taps move < 0.5 mV; the typ gain was re-measured in item 4: 60.0559 dB).
+- ITEM 2, P-A2 / B2 + Decision 45 (top/dbs_afe_top.v, stubs_analog.v, tb_top.v, info.yaml, TAPEOUT.md, layout/PLAN.md section 9, adc/README.md; review/tb/{top_ba.v, tb_audit.v, stubs_audit.v}):
+
+  | | before | after |
+  |---|---|---|
+  | pads (info.yaml entries) | 32: 25 analog (E, IPG, REC, REF), CS, DIN, SCLK, RSTN, DOUT, VDD, VSS | 24: 17 analog (E[7:0], IPG[7:0], REF), CS, DIN, SCLK, RSTN, DOUT, VDD, VSS |
+  | data pad on the top | port DOUT | ports DOUT_OUT (= adc8_top.dout, to pad A) and DOUT_IN (from pad Y, unused: DOUT_IE = 0), as the organizer template requires for a bidirectional pad |
+  | pad-control pins | 16, names not verified | the same 16; names checked against review/sim/organizer/template_info.yaml lines 26-66 (_PD _PU _CS _SL _IE _OE _PDRV0 _PDRV1; _PD _PU for inputs): all match, all driven |
+  | REC | top port REC[7:0], afe_ch port rec | internal net `rec` of afe_ch (record TGATE OUT = afe_chc.rec) |
+  | top port bits | 48 | 41 |
+  | info.yaml comment | "tie DOUT_OE=1" | DOUT_OE = ~CS, the values of every control pin |
+  | gds/dbs_afe_top.gds | 1000 x 1000 um PR boundary | untouched |
+  | top simulation top/sim/i0_top.log | PASS, 0 errors | PASS, 0 errors; same log except the line number of $finish; REC is read from the internal nets, one check of the strap nets added |
+
+- ITEM 3, P-A4 / M2 (Decision 44d; adc/spice/dac_sw.spice, comparator.spice; top/dbs_afe_top.v, stubs; adc/scripts/{x2lib, d4lib, d5lib, i1_vhalf, i2_replay}.py, adc/tb/tb_dac_{conv,replay}.spice; adc/xschem/cmp_p):
+
+  | | before | after |
+  |---|---|---|
+  | dac_sw pins | 36: ... vcm vdd vss ... | 37: ... vcm vdd vdd_dac vss ...; vdd_dac = source + n-well of the 13 bottom-plate driver PMOS (26 terminals), vdd = n-well of the 13 sampling-TG PMOS (13 terminals) |
+  | cmp_p supply pin | vdd | vdd_cmp, same position (22 device terminals); cmp_inv and the unused cmp_n unchanged; xschem cmp_p regenerated: structure PASS, 4 simulations within 1.4 % (adc/sim/f1_equiv_xschem.log) |
+  | afe_ch supply ports | vdd, vss | vdd (afe_chc, one-shot, OR2, vhalf, Cref switch, samb inverter, sampling-TG wells, routing-TGATE wells), vdd_cmp (cmp_p), vdd_dac (drivers + the gdp tie), vss |
+  | top netlist | one net VDD, no decap, no strap | VDD = analog strap + ADC-main strap (afe_ch.vdd and .vdd_cmp), vdd_dac behind the cell afe_rstrap; cells afe_decap 0.125 nF (VDD) and 0.1 nF (vdd_dac); stubs for the digital simulation |
+  | devices in the LVS top | none | rm3 2 um x 222.2 um = 10.0 ohm typ between VDD and vdd_dac; cap_nmos_03v3 79 units (125.9 pF) on VDD, 63 units (100.4 pF) on vdd_dac, 20 x 20 um each, 3.98 fF/um2 (56,800 um2) |
+  | S1 ADC alone, typ, 12 inputs | X2 codes | the same 12 codes (run after item 3 and again on the final state) |
+  | X2 S4, 8 ADCs, typ, full scale, 3 MHz | 0 code changes; dT 0.018 LSB; residue 0.113 LSB; droop 0.13 / 2.92 mV | 0; 0.019; 0.113; 0.13 / 2.92 mV (adc/sim/f1_x2_s4_summary.log) |
+
+  x2lib.adc_cell keeps the X2 S4 / S5 partition by default (cmp_p, vhalf and the Cref switch on the main rail; the whole dac_sw incl. the TG wells and gdp on the DAC strap) so that every X2 number stays reproducible; `vana=` / `vtg=` give the chip partition for L3b.
+  Every single-rail testbench ties both dac_sw supplies to its one supply (7 instantiations, each checked for 37 nodes). The untracked scratch testbenches adc/tb/d5_65*.spice (not in git) still have the old pin list.
+- ITEM 4, P-A5 / M3 (Decision 44e): layout/scripts/mk_lvs_netlists.py -> layout/lvs/{afe_chc.spice (afe_chc, fs_oneshot_c, OR2, amp_ch), adc_ch.spice (dac_sw, cmp_p, vhalf, vrefs, INV, adc_ch), bias_genc.spice, dbs_afe_top.spice, mk_lvs_netlists.log}.
+  It reads the simulation netlists and module afe_ch / dbs_afe_top of the Verilog top (no connection is typed twice), evaluates every parameter to a number, writes the analog cells flat (names = the simulation hierarchy with `_`), and STOPS if a rule
+  does not find its elements, if an ideal element is left or if a device is not an LVS device. Options: `--cin N[,W,L]`, `--cin-top rec|sum`, `--decap W,L`, `--rstrap MODEL,W,L`, `--dig-netlist <afe_dig powered netlist>`.
+
+  | rule of AUDIT 4.9.3 | simulation netlist | LVS reference |
+  |---|---|---|
+  | 1 MIM name | cap_mim_2f0_m2m3_noshield (139 per channel + 1 in bias_genc) | cap_mim_2f0_m4m5_noshield; terminal 1 = top plate |
+  | 2 ideal elements | Rbrk x 2 (100 ohm), Rt, Rmm (10 TOhm), Cpm, Cpb0-11, Cpbd (2 fF) | removed; vng joined with vn, vng2 with vn2 |
+  | 3 comparator Cxa1, Cxa2 | ideal 40 fF | one 5 x 5 um MIM unit each, 54.52 fF (attention 4) |
+  | 4 Cin1, Cin2 | one plate 100.012 um = 10,002 um2 each (above the 10,000 um2 limit) | 2 pieces of 70.649 x 70.649 um = 4,991 um2 each, 20.0000 pF per capacitor (ratio to Cf1 stays 100). The audit's 70.72 um keeps the AREA and gives +0.20 % of capacitance (the perimeter term doubles), outside its own 0.1 % |
+  | 5 Cref | one plate 59.07 um | the same, 3,489 um2 (P-A10) |
+  | 6 resistors | ppolyf_u_1k after item 1 | 7 in bias_genc (60 + 2 x 1650 squares), 2 per vhalf (250 squares); ppolyf_u_3k is refused |
+  | 7 top | Verilog: adc8_top + dbs_ctrl + bias_genc + 8 x afe_ch | SPICE: afe_dig black box (273 pins: the L1d list + VDD VSS) + bias_genc + 8 x afe_ch + 3 supply devices + 15 pad-control ties (0-ohm resistors); DOUT_IN is the one unconnected pin |
+  | 8 TGATE, standard cells | no power pins in the Verilog | TGATE VDD / VSS and the OR2 / INV VDD / VNW on the analog strap vdd, VSS / VPW on vss |
+
+  Device lines: afe_chc 38, fs_oneshot_c 9, bias_genc 17, dac_sw 182, cmp_p 25, vhalf 3, vrefs 3; amp_ch 53, adc_ch 215, afe_ch 272; chip without the digital macro 8 x 272 + 17 + 3 = 2196. Checks (layout/scripts/check_lvs_netlists.py -> layout/lvs/check_lvs_netlists.log, and review/scripts/xcheck.py):
+  A. the LVS reference of bias_genc + afe_chc SIMULATES like the design netlists (typ, tb_a4c_op / tb_a4c_ac): against the design netlists without diffusion parameters every DC node within 10 uV, all 20 device currents identical, gain 60.0559 dB,
+     f_lo 0.2023 Hz, f_hi 653.66 Hz identical (with diffusion parameters f_hi is 653.47 Hz): PASS. B. the flat ADC cells convert in the X2 replay (12 inputs, typ): one uniform shift of -1 .. -3 LSB, spread 0.16 LSB: PASS (the shift = Cxa + no Cpb + no
+     diffusion parameters, attention 4 / 5). C. netgen 1.5.318 reads all four files (each top cell matched against a copy): PASS; it keeps the 15 ties as devices of class r. D. xcheck, with its own parser: each LVS cell equals the flattened simulation
+     netlist device by device and terminal by terminal under the rules (38 / 9 / 17 / 182 / 25 / 3 / 3 devices, 0 differences); afe_ch of the LVS top equals module afe_ch net by net (57 nets, 85 connections); the 8 channel instances, the 273 afe_dig pins and
+     the 15 ties equal the Verilog top.
+- ITEM 5, documentation: adc/README.md (supply and reference description, DOUT_OUT / DOUT_IN, accuracy claim of Decision 43c, code offset of 43e, nine protocol rules incl. RSTN only while CS is high / 160-clock frames / first frame after a pause / 300 Hz host filter /
+  no power-down / E and IPG inside 0..VDD with the TGATE Ron / REF connected, power-up with the >= 5 s wait and the 200 LSB check, results rows for offset, steps, INL, top of range, supply, power, board table, decap density, open items 1 / 8 / 9 + LVS + X2_ADC_INC);
+  TAPEOUT.md (CURRENT STATE section with the 24-pad list; 10 older sections marked SUPERSEDED or PARTLY SUPERSEDED, the Decision-30 question marked DECIDED; title no longer "DRAFT"); layout/PLAN.md (section 9 rewritten, the stale lines of sections 4 and 5); adc/NOTES.md header (mux / 31.25 us / 9 bits);
+  this file: Environment (ad/as/pd/ps, `cut`, the X2 simulation rules, the thread statement, the process option), PDK facts (MIM rules and plate order, 1k poly, decap density), Open questions (11 older entries marked answered, accepted or moot; 5 F1 entries added). Also (Decision 43a): the `cut` pipe was
+  removed from adc/scripts/dgrun.sh and amp/scripts/run_a4a.sh (carriage returns become newlines instead). NOT touched: Decisions and findings (Decision 23 still says 13-20 dB: 11.7-18.9 dB today; Decision 42a "128 units": one plate, Decision 44i),
+  the README digital-area row (pre-I1 numbers), other `cut` pipes that only filter .op / .ac logs (amp/scripts/run_a4b_loop.sh, run_a4c_tbl.sh, run_a3_diag.sh), AFE/prompts/*.
+- ITEM 6, regression:
+
+  | run | result |
+  |---|---|
+  | D3 RTL testbench (adc/scripts/run_d3_sim.sh) | exhaustive 4096 frames PASS; 4 edge-case runs PASS; matrix 19 PASS + 1 FAIL = ss 125 C at 4 MHz (known, above the 3 MHz maximum); logs unchanged in git |
+  | top/run_top_sim.sh | RESULT PASS, 0 errors, REC / IPG == dbs |
+  | review/scripts/run_tb_audit.sh (rtl AND gls, 72 runs) | all 72 logs and the summary are byte-identical to the audit's. Failing assertions: X1.contention, X5.word0, X5.after33d (every build), T11.crowbar (gate level), and T2.settle at the MIXED corner only (= M4, accepted by Decision 44f) |
+  | review/scripts/xcheck.py -> review/sim/f1_xcheck.log | 114 checks, 93 OK, 3 MISMATCH, 18 NOTE; rows B1 (2), B2 (2), M2 (6), M3 (10), m7 (2), m1 (1): all OK |
+  | remaining MISMATCH | lvs_config.json LVS_SPICE_FILES and LVS_VERILOG_FILES name spice/<top>.spice and verilog/gl/<top>.v, which do not exist (L4 fills lvs_config.json; the SPICE top is layout/lvs/dbs_afe_top.spice); module afe_dig does not exist yet (L1d) |
+  | remaining NOTEs worth a look | TGATE: the extracted view TGATE_extracted.cir has only a SUB pin and the PMOS bulk on an unnamed net: not pin-compatible with TGATE.spice (L3a); bracketed pad names; pad-control values; the four *_ready flags are false |
+
+- Choices I made (rule 10): (a) the new dac_sw pin sits right after vdd; the sampling-TG n-wells stay on `vdd` = the analog strap, as the L1a pin list implies (X2 S4 had them on the DAC strap: no DC current either way; alternative: one well row with the
+  drivers on vdd_dac, simpler to draw); gdp is tied to vdd_dac, the source rail of the dummy PMOS. (b) cmp_p's pin is RENAMED to vdd_cmp (the alternative, keeping `vdd` and connecting it to vdd_cmp one level up, changes fewer files but leaves the cell pin
+  ambiguous). (c) strap resistor and decap are cells of the Verilog top (afe_rstrap, afe_decap with a capacitance parameter) so that the SPICE top can be generated from the Verilog; in the LVS top they are devices. (d) LVS references flat per analog cell,
+  with the two layout cells amp_ch / adc_ch cut out of module afe_ch by a table (names from PLAN section 3); their pins `out` / `vin` are the net amp_out. (e) Cin pieces sized for equal CAPACITANCE, not equal area. (f) rm3 for the strap, 20 x 20 um decap units,
+  0-ohm ties (attention 6). (g) F1 logs have the prefix f1_ and the audit / X2 logs are left as evidence (x2_adc.py, x2_inl_step.py, x2_s4.py and power_total.py got a log-name option); the tb_audit logs were regenerated in place and did not change.
+  (h) the default plate order of Cin follows the netlists (attention 1).
+- Suggested edits to AFE/prompts/layout_run.md (not made; the monitoring session owns the prompts): L2a / L1a: name the cells amp_ch (file afe_chc.spice) and adc_ch, state the plate order once decided, "re-run mk_lvs_netlists.py --cin N,W,L with the drawn
+  pieces"; L1b: "X2_ADC_INC=<extracted netlist>" and "compare offset and steps with adc/sim/f1_x2_inl_step.log"; L1d: "then run mk_lvs_netlists.py --dig-netlist <powered netlist>; decide whether the 15 pad-control ties live in afe_dig";
+  L3a: "--decap and --rstrap with the drawn sizes; the TGATE extracted view".
+- Not done: ss -40 for the Cxa what-if; the S4 / S5 runs with the chip rail partition (vana / vtg); netgen against a layout (none exists); bias start-up and corner ac / noise re-runs with the 1k poly; nothing under AFE/layout/amp/ or FLOW.md was touched.
+
 ## Open questions
-- (I2) The I1 vhalf question is answered by the sampled floating reference (Cref 7 pF + TG, vhalf decap 1 pF): code error <= 0.47 LSB beyond a fixed -7.6..-12.4 LSB offset at typ / ss 125 / ff -40 (I2 findings); waiting for the monitoring session's decision. The I1 text below is superseded:
-- (I1) vhalf misses the 0.1 LSB targets by 20-100x at any affordable C (a: 1.2-5 LSB, b: 1.5-9.7 LSB at 20-40 pF); options in "I1 findings". Pick one before L2 (the cell area and the comparator sizing depend on it).
-- (I0) Five items need a decision before L2/L3: REF input of afe_chc (mismatch 1: pad or tie to vcm), source of the ADC VDD/2 net (2), word-1 config readback (5), DOUT_OE policy and the pad-control names (6), RSTN held low at power-up (9). The rest of the I0 list is information for L2/L3.
-- (A4c) POWER-UP LATCH: without a reset stage 1 latches at a rail after the VDD ramp (not within 10 mV after 40 s at typ 27 / ff 85 / ss -40; A4b recovered in 10-17 s) and the 2-7 ms one-shot does not clear it (needs >= 30 ms, 100 ms for margin; the bias at ss -40 C takes ~0.6 s). A longer power-up reset is not implemented (options: re-trigger the record start about 10 times, a second slower timer, a digital counter, a larger C_T).
-- (A4c) 100 mV electrode offset: output within 1 mV only after 7.3-9.0 s (target 100 ms not met); the MIM r_leak DC path (v1 static -9.9 mV per 100 mV) sets it, not the reset. 10 mV: 3.4-4.7 s, 1 mV: 0.13-0.27 s.
+- (F1) Plate order of the input MIM capacitors (Cin1 / Cin2 of stage 1, Cin of stage 2): the netlists have the summing nodes on the BOTTOM plates and LVS does not swap MIM terminals. Decide before L2a's LVS; `mk_lvs_netlists.py --cin-top sum` puts them on top ("F1 findings", attention 1).
+- (F1) After layout the comparator's preamp capacitors are 54.5 fF MIM units, not 40 fF: code offset about +1.5 / +1.9 LSB (typ / ff 85), and the offset is sensitive to junction capacitance by several LSB: the offsets of Decision 43e are pre-layout numbers, to be restated after L1b.
+- (F1) Area: 0.874 mm2 at x1.30, 0.997 mm2 (998 x 998 um) at the pessimistic x1.50 against the 1000 x 1000 um outline given to the organizer.
+- (F1) For L3a / L1d: strap-resistor device (rm3 in the reference), decap unit, where the 15 pad-control ties live (0-ohm resistors in the LVS top, or tie cells in afe_dig), the afe_dig port order (`--dig-netlist`), the TGATE extracted view without power pins.
+- (Decision 44k, unchanged) Organizer: macro name / DEF, slot and pad positions, own VDD / VSS pair and double bonding, native-Vt nfet_06v0_nvt, 1k poly only, bond inductance.
+- (I2, ANSWERED by Decision 42: adopted) The I1 vhalf question is answered by the sampled floating reference (Cref 7 pF + TG, vhalf decap 1 pF): code error <= 0.47 LSB beyond a fixed offset at typ / ss 125 / ff -40 (I2 findings; the offset itself was corrected by Decision 43e). The I1 text below is superseded:
+- (I1, ANSWERED by Decision 42) vhalf misses the 0.1 LSB targets by 20-100x at any affordable C (a: 1.2-5 LSB, b: 1.5-9.7 LSB at 20-40 pF); options in "I1 findings". Pick one before L2 (the cell area and the comparator sizing depend on it).
+- (I0, ANSWERED by Decision 41; REC pads later dropped by Decision 45) Five items need a decision before L2/L3: REF input of afe_chc (mismatch 1: pad or tie to vcm), source of the ADC VDD/2 net (2), word-1 config readback (5), DOUT_OE policy and the pad-control names (6), RSTN held low at power-up (9). The rest of the I0 list is information for L2/L3.
+- (A4c, ANSWERED by Decisions 38a / 44c: RST_AMP config bit, host sequence with a >= 5 s wait and a mid-scale check) POWER-UP LATCH: without a reset stage 1 latches at a rail after the VDD ramp (not within 10 mV after 40 s at typ 27 / ff 85 / ss -40; A4b recovered in 10-17 s) and the 2-7 ms one-shot does not clear it (needs >= 30 ms, 100 ms for margin; the bias at ss -40 C takes ~0.6 s). A longer power-up reset is not implemented (options: re-trigger the record start about 10 times, a second slower timer, a digital counter, a larger C_T).
+- (A4c, ACCEPTED by Decision 38b) 100 mV electrode offset: output within 1 mV only after 7.3-9.0 s (target 100 ms not met); the MIM r_leak DC path (v1 static -9.9 mV per 100 mV) sets it, not the reset. 10 mV: 3.4-4.7 s, 1 mV: 0.13-0.27 s.
 - (A4c) The park level vcm_in (1.6484 V) differs from the electrode DC level by an arbitrary amount: the amplifier sees that difference as an offset step at every unpark (1.6 mV in the testbench), which the reset pulse handles.
 - (A4c) Not done: park-injection result at ss -40, all-9-PVT tables of the reset, TGATE + real one-shot in one netlist (aborts), xschem for the changed cells, the replica / mirror mismatch (I_REF spread from device mismatch), an r_leak = 0 counterfactual, area/layout of C_T (~2,000 um2 per channel) and C_VRS (~2,500 um2 once; ESTIMATES).
 - (A4b -> ANSWERED by A4c / Decision 36: the gate-switched reset keeps Cf in the loop, PM 72-76 deg, no ringing; open parts: power-up latch, 100 mV tail, below) Fast-settle as designed (a transmission gate across the feedback elements) makes OTA1 a unity-gain follower, which oscillates after ~1.5 us and leaves stage 1 latched at a rail on release. Options (not implemented): a pulse < 300 ns (works for the pulse alone, probably too short to charge Cin to a 10-100 mV offset); extra compensation
   switched in with the pulse; a gate-switched pseudo-resistor reset (R >~ 20 MOhm keeps the loop stable); or accept recovery times of tens of seconds to minutes. Needs a decision.
 - (A4b, A4c: with the park the open-switch state is benign and a reset pulse leaves the railed state; whether silicon latches is still unknown) The bistable railed state of stage 1 (a DC state held by fA leakage) can be entered by any DC disturbance; with the record-path TGATE attached it is the DC operating point at ff 85 C / ss -40 C in the simulator. Does silicon behave the same? The TGATE-attached recovery / pad-leakage transients could not be simulated reliably.
-- (A4b, A4c: with the park ON leaks of 1 and 10 pA and 10 pF pad capacitance change nothing at typ 27 C; without the park 1 pA rails stage 1) Pad leakage above ~10 fA on the floating REC node rails the amplifier (hand ESTIMATE); the ESD / pad leakage at REC[7:0] (Decision 35) is unknown and must stay below this or the routing switch must never float REC for long.
+- (A4b, A4c: with the park ON leaks of 1 and 10 pA and 10 pF pad capacitance change nothing at typ 27 C; without the park 1 pA rails stage 1. MOOT for the pads since Decision 45: there are no REC pads any more; the E pad leakage (about 200 pA, organizer README) acts through the routing TGATE only in record mode) Pad leakage above ~10 fA on the floating REC node rails the amplifier (hand ESTIMATE); the ESD / pad leakage at REC[7:0] (Decision 35) is unknown and must stay below this or the routing switch must never float REC for long.
 - (A4b) Decisions 24 and 28 are provisional (Decision 34); the follower-sink sweep (KSF 24: +0.41 mW at N = 8) is only needed if the 1.65 V reset and a short acquisition window are kept.
 - (A4b) DBS stimulation artifacts of several volts: out of scope here (user, 2026-11-13); recovery from them is the open item.
-- (D0, ANSWERED by Decision 23) No out-of-band interference requirement exists; the 13-20 dB interferer attenuation at 3.7 kHz is a documented risk. Reopen only if a requirement appears (cure: analog second pole, PLAN.md 5.2).
-- (Decision 27) The ADC's ~27 pC MSB-trial charge draw from VDD (VREF = VDD: 8.2 pF x 3.3 V; on-chip decoupling would need ~336 nF for 0.1 LSB) is a board decoupling and bond-wire inductance risk. Who owns the board decoupling and package, and what supply-pin L/C is realistic? D2/D4 report the supply droop at the decision instants.
-- (Decisions 25-26) Minimum legal MIM unit size/spacing in the GF180 design rules is unknown (D2 must find it); the MIM matching constant is an assumption (0.5 %*um) until a model or silicon data exists.
+- (D0, ANSWERED by Decision 23) No out-of-band interference requirement exists; the 13-20 dB interferer attenuation at 3.7 kHz (11.7-18.9 dB with the A4b / A4c amplifier, AFE/review/AUDIT.md 4.7) is a documented risk. Reopen only if a requirement appears (cure: analog second pole, PLAN.md 5.2).
+- (Decision 27; numbers CORRECTED and the question ANSWERED pre-layout by Decisions 37, 40e, 43f, 44d: 13.6 pC per MSB trial, staggered comparator clocks, three straps with 0.225 nF, 8-ADC run PASS; pad L / R still ASSUMED) The ADC's ~27 pC MSB-trial charge draw from VDD (VREF = VDD: 8.2 pF x 3.3 V; on-chip decoupling would need ~336 nF for 0.1 LSB) is a board decoupling and bond-wire inductance risk. Who owns the board decoupling and package, and what supply-pin L/C is realistic? D2/D4 report the supply droop at the decision instants.
+- (Decisions 25-26; the size part is ANSWERED by Decision 39: 25 um2 minimum, 5 x 5 um units) Minimum legal MIM unit size/spacing in the GF180 design rules is unknown (D2 must find it); the MIM matching constant is an assumption (0.5 %*um) until a model or silicon data exists.
 - (D0) Is the external MCU 3.3 V (assumed)? Which supply pins and board decoupling will the 3.3 V ADC/amp rail have (VREF = VDD makes the ADC code depend on it)?
 - (A4a status) The fast-settle transmission gates exist in the netlists and their DC/AC behaviour is verified (A4a findings); settling time versus pulse width, charge injection and residual offset are A4b.
 - (A2) After each TREAT->REC switch the amp needs ~5 x tau_HPF (about 4-7 s at tau 0.8-1.5 s) to settle. A4 should evaluate a fast-settle switch (shorting the pseudo-resistors for a few ms, driven by REC_EN/READY): charge injection, residual offset, and the settling time versus switch duration.
 - (A2) Is the PDK-model junction floor (4-6 TOhm, T-independent) trustworthy? And a vt generator (+0.2 V gate shift) is needed in A3; PDK pfet noise in the pseudo-R is below 4kT/R: confirm the model with the instructor/PDK docs if the pseudo-R noise is to be claimed.
-- One muxed ADC vs 16 ADCs: OPEN, decided after D0 (Decision 19). (Sample rate, ownership and
+- (ANSWERED by Decision 34: one SAR ADC per channel, N = 8, no mux) One muxed ADC vs 16 ADCs: OPEN, decided after D0 (Decision 19). (Sample rate, ownership and
   reference are settled: Decisions 15–17.)
-- 3.3 V amp input vs the 5 V TGATE REC node: input protection, charge injection when
+- (PARTLY ANSWERED: single 3.3 V supply, Decision 30; park switch and reset, Decision 36; signals must stay inside 0..VDD, AUDIT i4) 3.3 V amp input vs the 5 V TGATE REC node: input protection, charge injection when
   the switch toggles, IPG step-up excursions.
-- Anti-aliasing order vs ADC sample rate.
+- (ANSWERED by Decisions 22 / 23: no oversampling, first-order roll-off accepted as a documented risk) Anti-aliasing order vs ADC sample rate.
 - (A0) Pseudo-R kT/C noise: ESTIMATE ≈1.4 uV rms input-referred (both sides, Cf=200 fF,
   0.5 Hz HPF) before any OTA noise. Lower the HPF, raise Cf, or redefine the band? Measure in A2.
 - (A0) Who drives the SAR sampling cap? A few-nA stage-2 OTA cannot settle it; need a buffer
@@ -700,3 +836,4 @@ One row per phase. The user fills in Cost from the OpenRouter Activity page.
 | 2026-11-14 | I2 (sampled floating reference, true-SAR replay) | Claude Sonnet 5.5 / medium | | Cref 7 pF + TG (tg_on/samb, no RTL change) on cmp_p.inp, vhalf decap 20 -> 1 pF: threshold error <= 0.47 LSB at typ/ss125/ff-40 beyond a fixed -7.6..-12.4 LSB offset (3.5 pF: 0.65 at ff FAILS; I1 vhalf alone: up to 2.8 LSB, 2.3-5.3 LSB spread); Cref settles to 0.0 uV in T_ACQ; ~4,200 um2 per ADC vs 10,500; netlists updated; see "I2 findings"; sim/i2_replay.log, i2_summary.txt, i2_twoframe.log |
 | 2026-11-19 | X2 transistor-level amp -> ADC + 8-ADC run (pre-layout) | Claude Fable 5.2 / max | | Amp->ADC works at transistor level (adds <= 0.08 LSB); D5 abort = abstol 1e-15 (fixed with 1e-12); ENOB FS with amp noise 8.96 / 7.23 / 9.15; 8-ADC supply PASS (<= 0.25 LSB ff -40); crosstalk 0.022 LSB; INL FAIL at ff 85 / top of range, code-dependent threshold steps at 1536 / 2048; Decision 43. See AFE/adc/NOTES.md "X2 findings" |
 | 2026-11-20 | AUDIT pre-layout | Claude Fable 5.2 / max | | Layout GO WITH CONDITIONS, tapeout 11-25 at risk. BLOCKERS: B1 ppolyf_u_3k (6 bias-ladder and 16 vhalf resistors) does not exist in gf180mcuD (only the 1 kOhm/sq HRES poly: LVS / netgen / Magic decks, organizer table); B2 the bidirectional pad needs top ports DOUT_OUT / DOUT_IN (organizer template); B3 organizer macro name / DEF / slot / pad allocation still missing. MAJOR: bias start-up 3.6 s at ss -40 C with 8 channels (README says 1 s); supply straps and decap are in no netlist (2 vs 3 straps); ideal elements in the LVS-reference netlists (the 40 fF comparator capacitors are below the MIM minimum); DAC settling misses by 0.65 LSB when 3.3 V devices are slow and std cells fast; RSTN changed during a frame commits a wrong config; digital macro not sign-off clean (CTS, no KLayout DRC); native-Vt follower device unconfirmed. Area 0.86 mm2 (70 % of the ASSUMED 1110 um slot), power 2.08 mW typ, timing PASS at 5 matched corners at 2 and 3 MHz (RTL + gate level, 72 runs), in-band noise 1.71 / 1.89 / 1.59 uV. Report AFE/review/AUDIT.md (10 proposals P-A1..P-A10), logs AFE/review/sim, scripts AFE/review/scripts |
+| 2026-11-20 | F1 audit fixes (Decision 44) + 24 pads (Decision 45) | Claude Fable 5.2 / max | | No circuit resized. (1) ppolyf_u_3k -> ppolyf_u_1k, 3x the squares (bias_genc, bias_gen, vhalf): taps move <= 0.49 mV, supply / channel / master currents within 0.65 %, ladder and vhalf branch currents +1.6 / -8.5 / +11.2 % (typ / ff 85 / ss -40: the 1k poly's own corner and temperature behaviour, as the audit predicted), ADC codes identical (12 inputs typ, 8 at ff 85). (2) top ports DOUT_OUT / DOUT_IN, REC ports and pads removed (rec internal), 24 pads in info.yaml / TAPEOUT.md / PLAN section 9; pad-control names equal the organizer template. (3) supply pins vdd / vdd_cmp / vdd_dac on dac_sw, cmp_p, afe_ch; strap resistor + MOS decap as cells of the top and devices of the LVS top; X2 scripts updated: S1 ADC-alone codes identical, S4 typ reproduced. (4) layout/scripts/mk_lvs_netlists.py -> layout/lvs/ (afe_chc + fs_oneshot_c + amp_ch, adc_ch, bias_genc, dbs_afe_top with afe_dig as a black box); the generated amplifier / bias reference simulates identically to the design netlists, the ADC cells convert, netgen reads all files, xcheck finds every cell equal to the simulation netlist device by device. (5) adc/README.md, TAPEOUT.md, PLAN.md, NOTES Environment cleaned. (6) D3 RTL PASS, top sim PASS, 72 audit testbench runs byte-identical (only X1.contention, X5.word0, X5.after33d, T11.crowbar and the accepted MIXED-corner T2.settle fail), xcheck rows B1 B2 M2 M3 m7 OK, 3 MISMATCH left (lvs_config paths: L4; afe_dig: L1d). NEW: MIM plate order of Cin is on the wrong plate for the summing nodes in the netlists and LVS will not swap it (decide before L2a's LVS); Cxa as a MIM unit moves the code offset +1.5 / +1.9 LSB; area 0.874 mm2 (0.997 pessimistic). See "F1 findings"; review/sim/f1_bias_op.log, f1_xcheck.log, f1_area.log, f1_power_total.log; adc/sim/f1_x2_compare.log, f1_x2_inl_step.log, f1_x2_s4_summary.log; layout/lvs/mk_lvs_netlists.log, check_lvs_netlists.log |

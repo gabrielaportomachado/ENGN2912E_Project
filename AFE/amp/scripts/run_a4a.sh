@@ -65,7 +65,7 @@ for name, a in {'zero': (0,0,0), 'area': (1,0,0), 'perim': (0,1,0), 'res': (0,0,
 PY
   OPA=".options gmin=1e-16 abstol=1e-20 reltol=1e-4 itl1=500 itl4=500 chgtol=1e-19"
   mk() { sed -e "s#\.\./spice/ota1\.spice#$D/ota_$1.spice#" -e "s#^\.options .*#$2#" -e "s#\.\./spice/#$AMP/spice/#g" -e "s#^\.param TSTOP=.*#.param TSTOP=0.4#" -e "s#^\.param TMAXS=.*#.param TMAXS=0.01#" "$AMP/tb/tb_st1_tran.spice" > "$D/s_$3.spice"; }
-  runone() { { echo "### $2"; (cd $AMP/tb && timeout 280 ngspice -b $D/s_$1.spice 2>&1 | cut -c1-230 | grep -E "RESULT_REC|imestep|Fatal|singular" | head -2); } > $D/r_$1.txt; }
+  runone() { { echo "### $2"; (cd $AMP/tb && timeout 280 ngspice -b $D/s_$1.spice 2>&1 | tr '\r' '\n' | grep -E "RESULT_REC|imestep|Fatal|singular" | head -2); } > $D/r_$1.txt; }
   export -f runone; export D AMP
   mk zero "$OPA" zero_A3opt; mk area "$OPA" area_A3opt; mk perim "$OPA" perim_A3opt; mk res "$OPA" res_A3opt; mk area_perim "$OPA" areaperim_A3opt; mk full "$OPA" full_A3opt
   mk full "* default options (gmin=1e-12)" full_defopt; mk zero "* default options (gmin=1e-12)" zero_defopt

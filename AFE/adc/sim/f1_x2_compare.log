@@ -1,0 +1,67 @@
+F1: ADC alone, closed-loop replay (scripts/x2_adc.py), after the F1 netlist changes, against the X2 baseline sim/x2_adc.log.  Codes are the circuit's own decisions.
+
+RUN: F1 item 1 (2026-11-20): x2_adc.py typ 12 after ppolyf_u_3k -> ppolyf_u_1k in vhalf.spice (supply pins still as X2: before item 3).  Baseline = first block of sim/x2_adc.log
+  Vin [V]   | code X2     code F1     | first X2    first F1    | T X2      T F1      dT [LSB] | codes
+  1.180833  | 1436        1436        | 1435        1435        |   +29.928   +29.925   -0.003 | same
+  1.264382  | 1538        1538        | 1538        1538        |   +29.947   +29.946   -0.001 | same
+  1.347445  | 1642        1642        | 1641        1641        |   +29.917   +29.917   +0.000 | same
+  1.430632  | 1745        1745        | 1745        1745        |   +29.941   +29.941   +0.000 | same
+  1.514274  | 1848        1848        | 1848        1848        |   +29.918   +29.917   -0.001 | same
+  1.597673  | 1952        1952        | 1951        1951        |   +29.944   +29.942   -0.002 | same
+  1.680681  | 2056        2056        | 2055        2055        |   +29.950   +29.949   -0.001 | same
+  1.764033  | 2159        2159        | 2159        2159        |   +29.923   +29.923   +0.000 | same
+  1.847686  | 2263        2263        | 2263        2263        |   +29.939   +29.940   +0.001 | same
+  1.930919  | 2366        2366        | 2366        2366        |   +29.927   +29.927   +0.000 | same
+  2.013958  | 2469        2469        | 2469        2469        |   +30.148   +30.145   -0.003 | same
+  2.097468  | 2571        2571        | 2570        2570        |   +31.097   +31.096   -0.001 | same
+  code - ideal code, mean: X2 -30.33, F1 -30.33;  transition offset T mean: X2 +30.05 LSB, F1 +30.05 LSB;  theta: X2 -29.01, F1 -29.01 LSB
+  12 inputs x 2 frames: 0 code differences, max |dT| 0.003 LSB  -> PASS (identical codes)
+
+RUN: F1 item 3 (2026-11-20): x2_adc.py typ 12 after the supply-pin change (dac_sw: vdd + vdd_dac, cmp_p: vdd_cmp; x2lib ties them as X2 S4 did) AND the item-1 resistors.  Baseline = first block of sim/x2_adc.log
+  Vin [V]   | code X2     code F1     | first X2    first F1    | T X2      T F1      dT [LSB] | codes
+  1.180833  | 1436        1436        | 1435        1435        |   +29.928   +29.925   -0.003 | same
+  1.264382  | 1538        1538        | 1538        1538        |   +29.947   +29.946   -0.001 | same
+  1.347445  | 1642        1642        | 1641        1641        |   +29.917   +29.917   +0.000 | same
+  1.430632  | 1745        1745        | 1745        1745        |   +29.941   +29.941   +0.000 | same
+  1.514274  | 1848        1848        | 1848        1848        |   +29.918   +29.917   -0.001 | same
+  1.597673  | 1952        1952        | 1951        1951        |   +29.944   +29.942   -0.002 | same
+  1.680681  | 2056        2056        | 2055        2055        |   +29.950   +29.949   -0.001 | same
+  1.764033  | 2159        2159        | 2159        2159        |   +29.923   +29.923   +0.000 | same
+  1.847686  | 2263        2263        | 2263        2263        |   +29.939   +29.940   +0.001 | same
+  1.930919  | 2366        2366        | 2366        2366        |   +29.927   +29.927   +0.000 | same
+  2.013958  | 2469        2469        | 2469        2469        |   +30.148   +30.145   -0.003 | same
+  2.097468  | 2571        2571        | 2570        2570        |   +31.097   +31.096   -0.001 | same
+  code - ideal code, mean: X2 -30.33, F1 -30.33;  transition offset T mean: X2 +30.05 LSB, F1 +30.05 LSB;  theta: X2 -29.01, F1 -29.01 LSB
+  12 inputs x 2 frames: 0 code differences, max |dT| 0.003 LSB  -> PASS (identical codes)
+
+RUN: F1 (2026-11-20): x2_adc.py ff85 at the 8 inputs of the X2 block 'ff85 cref' (line 114 of sim/x2_adc.log), after items 1 and 3 (extra corner, not asked: vhalf current changes most at the corners)
+  Vin [V]   | code X2     code F1     | first X2    first F1    | T X2      T F1      dT [LSB] | codes
+  1.750300  | 2133        2133        | 2133        2133        |   +40.097   +40.098   +0.001 | same
+  1.850700  | 2257        2257        | 2257        2257        |   +40.246   +40.245   -0.001 | same
+  1.901100  | 2319        2319        | 2319        2319        |   +40.563   +40.564   +0.001 | same
+  1.951200  | 2381        2381        | 2381        2381        |   +41.179   +41.179   +0.000 | same
+  2.000600  | 2441        2441        | 2441        2441        |   +41.995   +41.993   -0.002 | same
+  2.050900  | 2503        2503        | 2503        2503        |   +42.921   +42.921   +0.000 | same
+  2.100400  | 2562        2562        | 2562        2562        |   +43.840   +43.840   +0.000 | same
+  2.150700  | 2624        2624        | 2624        2624        |   +44.820   +44.820   +0.000 | same
+  code - ideal code, mean: X2 -41.62, F1 -41.62;  transition offset T mean: X2 +41.96 LSB, F1 +41.96 LSB;  theta: X2 -38.97, F1 -38.98 LSB
+  8 inputs x 2 frames: 0 code differences, max |dT| 0.002 LSB  -> PASS (identical codes)
+
+RUN: F1 FINAL STATE (2026-11-20): x2_adc.py typ 12 with the netlists and x2lib.py as committed (items 1 and 3 done; X2_ADC_INC hook present, not set).  Baseline = first block of sim/x2_adc.log
+  Vin [V]   | code X2     code F1     | first X2    first F1    | T X2      T F1      dT [LSB] | codes
+  1.180833  | 1436        1436        | 1435        1435        |   +29.928   +29.925   -0.003 | same
+  1.264382  | 1538        1538        | 1538        1538        |   +29.947   +29.946   -0.001 | same
+  1.347445  | 1642        1642        | 1641        1641        |   +29.917   +29.917   +0.000 | same
+  1.430632  | 1745        1745        | 1745        1745        |   +29.941   +29.941   +0.000 | same
+  1.514274  | 1848        1848        | 1848        1848        |   +29.918   +29.917   -0.001 | same
+  1.597673  | 1952        1952        | 1951        1951        |   +29.944   +29.942   -0.002 | same
+  1.680681  | 2056        2056        | 2055        2055        |   +29.950   +29.949   -0.001 | same
+  1.764033  | 2159        2159        | 2159        2159        |   +29.923   +29.923   +0.000 | same
+  1.847686  | 2263        2263        | 2263        2263        |   +29.939   +29.940   +0.001 | same
+  1.930919  | 2366        2366        | 2366        2366        |   +29.927   +29.927   +0.000 | same
+  2.013958  | 2469        2469        | 2469        2469        |   +30.148   +30.145   -0.003 | same
+  2.097468  | 2571        2571        | 2570        2570        |   +31.097   +31.096   -0.001 | same
+  code - ideal code, mean: X2 -30.33, F1 -30.33;  transition offset T mean: X2 +30.05 LSB, F1 +30.05 LSB;  theta: X2 -29.01, F1 -29.01 LSB
+  12 inputs x 2 frames: 0 code differences, max |dT| 0.003 LSB  -> PASS (identical codes)
+
+RESULT F1 ADC-alone replay: PASS: identical codes in every run

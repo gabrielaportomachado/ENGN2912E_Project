@@ -13,6 +13,6 @@ vins = list((B + off + 5 * k + 2.5 + 0.31 * np.sin(1.3 * k)) * lsb); out = []
 def P(s): print(s, flush=True); out.append(s)
 t0 = time.time(); cal, rows, _ = A.static(ck, vins, log=lambda s: None, tag=f'step_{ck}')
 r = np.array([(a[0], a[1]) for a in rows]); v, c = r[:, 0], r[:, 1]; e = c + 0.5 - v / lsb; lo = c < B
-P(f'INLSTEP {ck} "{label}" extra "{os.environ.get("X2_EXTRA", "")}": boundary {B}: {lo.sum()} codes below ({int(c[lo].min())}..{int(c[lo].max())}), {(~lo).sum()} above ({int(c[~lo].min())}..{int(c[~lo].max())}) | code offset e mean {e.mean():+.2f} LSB | '
+P(f'INLSTEP {ck} "{label}" extra "{os.environ.get("X2_EXTRA", "")}"' + (f' ADC cell netlists {" ".join(os.path.relpath(f, X.AFE) for f in X.ADC_INC)}' if X.ADC_INC else '') + f': boundary {B}: {lo.sum()} codes below ({int(c[lo].min())}..{int(c[lo].max())}), {(~lo).sum()} above ({int(c[~lo].min())}..{int(c[~lo].max())}) | code offset e mean {e.mean():+.2f} LSB | '
   f'e below {e[lo].mean():+.2f} (+-{e[lo].std()/np.sqrt(lo.sum()):.2f}), above {e[~lo].mean():+.2f} (+-{e[~lo].std()/np.sqrt((~lo).sum()):.2f}) -> STEP {e[~lo].mean()-e[lo].mean():+.2f} LSB | predictor: {cal.fitinfo[:230]} | wall {time.time()-t0:.0f} s')
-open(f'{X.ADC}/sim/x2_inl_step.log', 'a').write('\n'.join(out) + '\n')
+open(os.environ.get('X2_INLSTEP_LOG', f'{X.ADC}/sim/x2_inl_step.log'), 'a').write('\n'.join(out) + '\n')          # X2_INLSTEP_LOG: another log file (F1 uses sim/f1_x2_inl_step.log)

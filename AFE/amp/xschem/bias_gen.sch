@@ -140,55 +140,55 @@ C {lab_pin.sym} -220 -30 0 1 {name=p29 sig_type=std_logic lab=s2}
 C {lab_pin.sym} -220 30 0 1 {name=p30 sig_type=std_logic lab=vbn}
 C {lab_pin.sym} -260 0 0 0 {name=p31 sig_type=std_logic lab=vbn}
 C {lab_pin.sym} -220 0 0 1 {name=p32 sig_type=std_logic lab=vdd}
-C {symbols/ppolyf_u_3k.sym} 0 100 0 0 {name=ra1
+C {symbols/ppolyf_u_1k.sym} 0 100 0 0 {name=ra1
 W='1u'
-L='(VDDN-VCM_IN-VTT)/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='(VDDN-VCM_IN-VTT)/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 0 70 3 0 {name=p33 sig_type=std_logic lab=vdd}
 C {lab_pin.sym} 0 130 1 0 {name=p34 sig_type=std_logic lab=vg1}
 C {lab_pin.sym} -20 100 0 0 {name=p35 sig_type=std_logic lab=vss}
-C {symbols/ppolyf_u_3k.sym} 120 100 0 0 {name=ra2
+C {symbols/ppolyf_u_1k.sym} 120 100 0 0 {name=ra2
 W='1u'
-L='VTT/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='VTT/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 120 70 3 0 {name=p36 sig_type=std_logic lab=vg1}
 C {lab_pin.sym} 120 130 1 0 {name=p37 sig_type=std_logic lab=vcm_in}
 C {lab_pin.sym} 100 100 0 0 {name=p38 sig_type=std_logic lab=vss}
-C {symbols/ppolyf_u_3k.sym} 240 100 0 0 {name=ra3
+C {symbols/ppolyf_u_1k.sym} 240 100 0 0 {name=ra3
 W='1u'
-L='VCM_IN/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='VCM_IN/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 240 70 3 0 {name=p39 sig_type=std_logic lab=vcm_in}
 C {lab_pin.sym} 240 130 1 0 {name=p40 sig_type=std_logic lab=vss}
 C {lab_pin.sym} 220 100 0 0 {name=p41 sig_type=std_logic lab=vss}
-C {symbols/ppolyf_u_3k.sym} 360 100 0 0 {name=rb1
+C {symbols/ppolyf_u_1k.sym} 360 100 0 0 {name=rb1
 W='1u'
-L='(VDDN-VOCM-VTT2)/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='(VDDN-VOCM-VTT2)/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 360 70 3 0 {name=p42 sig_type=std_logic lab=vdd}
 C {lab_pin.sym} 360 130 1 0 {name=p43 sig_type=std_logic lab=vg2}
 C {lab_pin.sym} 340 100 0 0 {name=p44 sig_type=std_logic lab=vss}
-C {symbols/ppolyf_u_3k.sym} 480 100 0 0 {name=rb2
+C {symbols/ppolyf_u_1k.sym} 480 100 0 0 {name=rb2
 W='1u'
-L='VTT2/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='VTT2/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 480 70 3 0 {name=p45 sig_type=std_logic lab=vg2}
 C {lab_pin.sym} 480 130 1 0 {name=p46 sig_type=std_logic lab=vcm_out}
 C {lab_pin.sym} 460 100 0 0 {name=p47 sig_type=std_logic lab=vss}
-C {symbols/ppolyf_u_3k.sym} 600 100 0 0 {name=rb3
+C {symbols/ppolyf_u_1k.sym} 600 100 0 0 {name=rb3
 W='1u'
-L='VOCM/ILAD/3000*1u'
-model=ppolyf_u_3k
+L='VOCM/ILAD/1000*1u'
+model=ppolyf_u_1k
 spiceprefix=X
 m=1}
 C {lab_pin.sym} 600 70 3 0 {name=p48 sig_type=std_logic lab=vcm_out}

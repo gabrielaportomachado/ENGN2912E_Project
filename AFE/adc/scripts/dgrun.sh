@@ -15,5 +15,7 @@ for kv in "$@"; do
   if grep -q -E "^\.param ${n}=" "$tmp"; then sed -i -E "s#^(\.param ${n}=)[^ ]*#\1${v}#" "$tmp"
   else sed -i -E "s#^(\.temp .*)\$#\1\n.param ${n}=${v}#" "$tmp"; fi
 done
-cd "$ADC/tb" && timeout "${TMO:-1800}" ngspice -b "$tmp" 2>&1 | cut -c1-300
+# F1 / Decision 43a: the output is NOT cut to 300 columns any more (ngspice writes its progress values and the abort message on ONE carriage-return separated line;
+# `cut` kept the first progress values and lost the abort: the D5 "28.8 ms" artifact).  Carriage returns become newlines so that the "doAnalyses:" line stands alone.
+cd "$ADC/tb" && timeout "${TMO:-1800}" ngspice -b "$tmp" 2>&1 | tr '\r' '\n'
 rm -f "$tmp"
