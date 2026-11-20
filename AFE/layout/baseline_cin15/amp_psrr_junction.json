@@ -1,0 +1,47 @@
+{
+ "check": "amp_psrr_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 22:16",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_junction_ff85.log",
+   "values": {
+    "supply_gain_1khz": 0.424188,
+    "supply_gain_300hz": 0.557914,
+    "supply_gain_50hz": 0.579815,
+    "supply_gain_60hz": 0.579522
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 22:16",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_junction_ss-40.log",
+   "values": {
+    "supply_gain_1khz": 0.244666,
+    "supply_gain_300hz": 0.473197,
+    "supply_gain_50hz": 0.56718,
+    "supply_gain_60hz": 0.565589
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 22:16",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline_cin15/amp_psrr_junction_typ.log",
+   "values": {
+    "supply_gain_1khz": 0.334932,
+    "supply_gain_300hz": 0.525843,
+    "supply_gain_50hz": 0.57226,
+    "supply_gain_60hz": 0.571589
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_psrr_junction.py"
+}

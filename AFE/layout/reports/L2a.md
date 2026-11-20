@@ -70,7 +70,8 @@ the channel is wider than the slot anyway, so L3a re-places the pin wires (ACCEP
 4. The native-Vt device is unconfirmed by the organizer (ladder N).
 
 ## 9. REVIEW.md items handled
-None (REVIEW.md had no item when L2a ran and none when this conversion was written).
+- **R1** (8-channel closure plan, order of work): read and followed (R2 merged first; R4 run in its own worktree branch worktree-r4-amp-cin15; simulations before layout, as R4 asks). Its checkpoint rule applies and stopped this line: see R4.
+- **R4** (Cin 20 -> 15 pF, then amp_ch <= 222 x 285 um): **step 1 done, STOPPED by the checkpoint: a Decision 1 target fails, AFE/layout/BLOCKED.md written.** CF1V = 150f: gain 60.05 dB (no trim), f_lo 0.246 / 0.281 / 0.288 Hz, f_hi 653 / 998 / 422 Hz, PM 79.6 / 76.9 / 81.4 deg, THD, PSRR, power-up, reset all as before; **noise_d8 = 1.890 / 2.139 / 1.732 uV (typ / ff 85 / ss -40): limit 2.0 uV FAILS at ff 85** (20 pF: 1.668 / 1.847 / 1.540; ladder R-3 allows only 2.05 uV at ff 85, for layout parasitics). Steps 2 - 3 (LVS reference `--cin 2,W,L`, amp_ch re-layout) were NOT started; the baselines in AFE/layout/baseline/ and afe_params.spice were NOT replaced (the 15 pF results are in AFE/layout/baseline_cin15/), so this report's sections 1 - 8 and the committed amp_ch.gds (20 pF, 218.75 x 309.25 um) are unchanged and **the L2a gate stays FAIL on the slot check (the same single FAIL as before)**. The decision that unblocks it is the question at the end of BLOCKED.md.
 
 ## 10. Files changed and commit
 AFE/layout/amp/ (mk_amp_ch.py, amplib.py, blocks_amp.py, router.py, amp_ch.gds, amp_ch.build.json, check_amp.py / .json / .log, mk_flowtest.py, mk_mimtest.py, drcsum.py, shapes_at.py, flow/, flowtest/, pex_feasibility/, gate_flow/, drc.log, lvs.log),

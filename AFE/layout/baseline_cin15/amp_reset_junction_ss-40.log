@@ -1,0 +1,6 @@
+== amp_reset_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 22:17
+   job rs_schprdiff_ss-40_0: exit 0, 5 s
+   job rs_schprdiff_ss-40_1m: exit 0, 5 s
+   job rs_schprdiff_ss-40_10m: exit 0, 10 s
+   job rs_schprdiff_ss-40_100m: exit 0, 21 s
+RESULT amp_reset_junction ss-40: t_fs_ms_os0=5.82749  peak_mv_os0=1.71705  rel_step_mv_os0=-0.00118  t_1mv_s_os0=0.00701016  final_v_os0=1.64848  drift_mv_s_os0=-0.0271415  resid_end_mv_os0=0.00418544  t_fs_ms_os1m=5.78721  peak_mv_os1m=34.7349  rel_step_mv_os1m=-0.00168  t_1mv_s_os1m=4.74622  final_v_os1m=1.65468  drift_mv_s_os1m=0.887115  resid_end_mv_os1m=0.134976  t_fs_ms_os10m=5.80563  peak_mv_os10m=106.366  rel_step_mv_os10m=0.00131  t_1mv_s_os10m=nan  final_v_os10m=1.75017  drift_mv_s_os10m=8.67806  resid_end_mv_os10m=2.57176  t_fs_ms_os100m=5.91974  peak_mv_os100m=1299.29  rel_step_mv_os100m=-3.33851  t_1mv_s_os100m=32.8997  final_v_os100m=2.93171  drift_mv_s_os100m=86.5949  resid_end_mv_os100m=0.0715843
