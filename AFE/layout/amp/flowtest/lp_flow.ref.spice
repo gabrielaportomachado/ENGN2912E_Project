@@ -1,0 +1,8 @@
+* LVS reference of the L2a flow test cell lp_flow (written by mk_flowtest.py)
+.subckt lp_flow S1 D1 G1 S2 D2 G2 TOPNET BOTNET ND NG NS DD GG GS VSS
+X1 D1 G1 S1 S1 pfet_03v3 w=0.22u l=0.5u
+X2 D2 G2 S2 S2 pfet_03v3 w=0.22u l=0.5u
+X3 TOPNET BOTNET cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X4 ND NG NS VSS nfet_06v0_nvt w=10u l=2u
+X5 DD GG GS VSS nfet_03v3 w=2u l=1u
+.ends

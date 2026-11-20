@@ -1,0 +1,231 @@
+Netgen 1.5.318 compiled on Thu Apr 16 09:08:04 PM CEST 2026
+Warning: netgen command 'format' use fully-qualified name '::netgen::format'
+Warning: netgen command 'global' use fully-qualified name '::netgen::global'
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.spice adc_ch
+Call to undefined subcircuit pfet_03v3
+Creating placeholder cell definition.
+Call to undefined subcircuit cap_mim_2f0_m4m5_noshield
+Creating placeholder cell definition.
+Call to undefined subcircuit nfet_03v3
+Creating placeholder cell definition.
+Call to undefined subcircuit ppolyf_u_1k
+Creating placeholder cell definition.
+Call to undefined subcircuit pfet_05v0
+Creating placeholder cell definition.
+Call to undefined subcircuit nfet_05v0
+Creating placeholder cell definition.
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/lvs/adc_ch.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/lvs/adc_ch.spice adc_ch
+Call to undefined subcircuit cap_mim_2f0_m4m5_noshield
+Creating placeholder cell definition.
+Call to undefined subcircuit nfet_03v3
+Creating placeholder cell definition.
+Call to undefined subcircuit pfet_03v3
+Creating placeholder cell definition.
+Call to undefined subcircuit ppolyf_u_1k
+Creating placeholder cell definition.
+Call to undefined subcircuit nfet_05v0
+Creating placeholder cell definition.
+Call to undefined subcircuit pfet_05v0
+Creating placeholder cell definition.
+
+Reading setup file /foss/pdks/gf180mcuD/libs.tech/netgen/gf180mcuD_setup.tcl
+
+Model ppolyf_u_1k pin 1 == 2
+No property par1 found for device ppolyf_u_1k
+No property pm found for device ppolyf_u_1k
+No property par found for device ppolyf_u_1k
+No property r found for device ppolyf_u_1k
+Model ppolyf_u_1k pin 1 == 2
+No property par1 found for device ppolyf_u_1k
+No property pm found for device ppolyf_u_1k
+No property par found for device ppolyf_u_1k
+No property r found for device ppolyf_u_1k
+Model nfet_03v3 pin 1 == 3
+No property par1 found for device nfet_03v3
+No property NRD found for device nfet_03v3
+No property NRS found for device nfet_03v3
+No property par found for device nfet_03v3
+No property sa found for device nfet_03v3
+No property sb found for device nfet_03v3
+No property sd found for device nfet_03v3
+No property par found for device nfet_03v3
+No property dtemp found for device nfet_03v3
+No property nf found for device nfet_03v3
+No property $D found for device nfet_03v3
+No property $X found for device nfet_03v3
+No property $Y found for device nfet_03v3
+Model nfet_03v3 pin 1 == 3
+No property par1 found for device nfet_03v3
+No property NRD found for device nfet_03v3
+No property NRS found for device nfet_03v3
+No property par found for device nfet_03v3
+No property sa found for device nfet_03v3
+No property sb found for device nfet_03v3
+No property sd found for device nfet_03v3
+No property par found for device nfet_03v3
+No property dtemp found for device nfet_03v3
+No property nf found for device nfet_03v3
+No property as found for device nfet_03v3
+No property ad found for device nfet_03v3
+No property ps found for device nfet_03v3
+No property pd found for device nfet_03v3
+No property $D found for device nfet_03v3
+No property $X found for device nfet_03v3
+No property $Y found for device nfet_03v3
+Model pfet_03v3 pin 1 == 3
+No property par1 found for device pfet_03v3
+No property NRD found for device pfet_03v3
+No property NRS found for device pfet_03v3
+No property par found for device pfet_03v3
+No property sa found for device pfet_03v3
+No property sb found for device pfet_03v3
+No property sd found for device pfet_03v3
+No property par found for device pfet_03v3
+No property dtemp found for device pfet_03v3
+No property nf found for device pfet_03v3
+No property $D found for device pfet_03v3
+No property $X found for device pfet_03v3
+No property $Y found for device pfet_03v3
+Model pfet_03v3 pin 1 == 3
+No property par1 found for device pfet_03v3
+No property NRD found for device pfet_03v3
+No property NRS found for device pfet_03v3
+No property par found for device pfet_03v3
+No property sa found for device pfet_03v3
+No property sb found for device pfet_03v3
+No property sd found for device pfet_03v3
+No property par found for device pfet_03v3
+No property dtemp found for device pfet_03v3
+No property nf found for device pfet_03v3
+No property as found for device pfet_03v3
+No property ad found for device pfet_03v3
+No property ps found for device pfet_03v3
+No property pd found for device pfet_03v3
+No property $D found for device pfet_03v3
+No property $X found for device pfet_03v3
+No property $Y found for device pfet_03v3
+Model nfet_05v0 pin 1 == 3
+No property par1 found for device nfet_05v0
+No property NRD found for device nfet_05v0
+No property NRS found for device nfet_05v0
+No property par found for device nfet_05v0
+No property sa found for device nfet_05v0
+No property sb found for device nfet_05v0
+No property sd found for device nfet_05v0
+No property par found for device nfet_05v0
+No property dtemp found for device nfet_05v0
+No property nf found for device nfet_05v0
+No property $D found for device nfet_05v0
+No property $X found for device nfet_05v0
+No property $Y found for device nfet_05v0
+Model nfet_05v0 pin 1 == 3
+No property par1 found for device nfet_05v0
+No property NRD found for device nfet_05v0
+No property NRS found for device nfet_05v0
+No property par found for device nfet_05v0
+No property sa found for device nfet_05v0
+No property sb found for device nfet_05v0
+No property sd found for device nfet_05v0
+No property par found for device nfet_05v0
+No property dtemp found for device nfet_05v0
+No property nf found for device nfet_05v0
+No property as found for device nfet_05v0
+No property ad found for device nfet_05v0
+No property ps found for device nfet_05v0
+No property pd found for device nfet_05v0
+No property $D found for device nfet_05v0
+No property $X found for device nfet_05v0
+No property $Y found for device nfet_05v0
+Model pfet_05v0 pin 1 == 3
+No property par1 found for device pfet_05v0
+No property NRD found for device pfet_05v0
+No property NRS found for device pfet_05v0
+No property par found for device pfet_05v0
+No property sa found for device pfet_05v0
+No property sb found for device pfet_05v0
+No property sd found for device pfet_05v0
+No property par found for device pfet_05v0
+No property dtemp found for device pfet_05v0
+No property nf found for device pfet_05v0
+No property $D found for device pfet_05v0
+No property $X found for device pfet_05v0
+No property $Y found for device pfet_05v0
+Model pfet_05v0 pin 1 == 3
+No property par1 found for device pfet_05v0
+No property NRD found for device pfet_05v0
+No property NRS found for device pfet_05v0
+No property par found for device pfet_05v0
+No property sa found for device pfet_05v0
+No property sb found for device pfet_05v0
+No property sd found for device pfet_05v0
+No property par found for device pfet_05v0
+No property dtemp found for device pfet_05v0
+No property nf found for device pfet_05v0
+No property as found for device pfet_05v0
+No property ad found for device pfet_05v0
+No property ps found for device pfet_05v0
+No property pd found for device pfet_05v0
+No property $D found for device pfet_05v0
+No property $X found for device pfet_05v0
+No property $Y found for device pfet_05v0
+No property par1 found for device cap_mim_2f0_m4m5_noshield
+No property par1 found for device cap_mim_2f0_m4m5_noshield
+Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out" enabled
+Circuit cap_mim_2f0_m4m5_noshield contains no devices.
+Circuit nfet_03v3 contains no devices.
+Circuit pfet_03v3 contains no devices.
+Circuit ppolyf_u_1k contains no devices.
+Circuit pfet_05v0 contains no devices.
+Circuit nfet_05v0 contains no devices.
+
+Contents of circuit 1:  Circuit: 'adc_ch'
+Circuit adc_ch contains 239 device instances.
+  Class: pfet_05v0             instances:   1
+  Class: cap_mim_2f0_m4m5_noshield instances: 132
+  Class: nfet_03v3             instances:  40
+  Class: nfet_05v0             instances:   1
+  Class: ppolyf_u_1k           instances:  20
+  Class: pfet_03v3             instances:  45
+Circuit contains 81 nets.
+Contents of circuit 2:  Circuit: 'adc_ch'
+Circuit adc_ch contains 215 device instances.
+  Class: pfet_05v0             instances:   1
+  Class: cap_mim_2f0_m4m5_noshield instances: 132
+  Class: nfet_03v3             instances:  40
+  Class: nfet_05v0             instances:   1
+  Class: ppolyf_u_1k           instances:   2
+  Class: pfet_03v3             instances:  39
+Circuit contains 63 nets.
+
+Circuit was modified by parallel/series device merging.
+New circuit summary:
+
+Contents of circuit 1:  Circuit: 'adc_ch'
+Circuit adc_ch contains 101 device instances.
+  Class: pfet_05v0             instances:   1
+  Class: cap_mim_2f0_m4m5_noshield instances:  18
+  Class: nfet_03v3             instances:  40
+  Class: nfet_05v0             instances:   1
+  Class: ppolyf_u_1k           instances:   2
+  Class: pfet_03v3             instances:  39
+Circuit contains 63 nets.
+Contents of circuit 2:  Circuit: 'adc_ch'
+Circuit adc_ch contains 101 device instances.
+  Class: pfet_05v0             instances:   1
+  Class: cap_mim_2f0_m4m5_noshield instances:  18
+  Class: nfet_03v3             instances:  40
+  Class: nfet_05v0             instances:   1
+  Class: ppolyf_u_1k           instances:   2
+  Class: pfet_03v3             instances:  39
+Circuit contains 63 nets.
+
+Circuit 1 contains 101 devices, Circuit 2 contains 101 devices.
+Circuit 1 contains 63 nets,    Circuit 2 contains 63 nets.
+
+
+Final result: 
+Circuits match uniquely.
+.
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l1a-adc/AFE/layout/sim/flow/adc_ch.lvs.out" disabled
+LVS Done.

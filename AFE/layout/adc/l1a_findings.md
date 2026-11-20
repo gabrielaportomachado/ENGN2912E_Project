@@ -1,0 +1,54 @@
+## L1a findings (2026-11-20; adc_ch layout up to DRC + LVS; Claude Sonnet 5.5 / high; files AFE/layout/adc/{mk_adc_ch.py, dac_lib.py, cmp_lib.py, cmp_top.py, vhalf_lib.py, rlib.py, adclib.py, router.py, adc_ch.gds, adc_ch.build.json, dac_sites.log, keepout.log, FLOW_ADC.md, test/}; reports AFE/layout/reports/{L1a,L2a}.md; logs AFE/layout/sim/flow/adc_ch.{drc,lvs}.json)
+
+**Summary**
+- **adc_ch: DRC 0 violations (official gf180mcuD deck, variant D), LVS "Circuits match uniquely." against subckt adc_ch of AFE/layout/lvs/adc_ch.spice (reference NOT regenerated; 34 pins, all by name; netgen flattens the hierarchical cmp_p / dac_sw / vhalf / vrefs / inv_1 of the reference against the flat layout).** GDS AFE/layout/adc/adc_ch.gds, sha1 in the report. Cref keep-out PASS (nothing below Metal4 inside the 59.07 um plate footprint).
+- **Gate L1a: FAIL, one line: the slot. adc_ch as built is 265.85 x 126.25 um = 33,564 um2 against the slot 220 x 104 = 22,880 um2 (+47 %) and the F1 estimate 14,911 um2 (+125 %).** adc_ch is also wider than the 235 um channel pitch. The size is the sum of the parts (table below), see "Area". ACCEPT.md ladder A has no entry that helps an ADC of this size (A-2 `adc_h` 104 -> 100 goes the wrong way); the decision belongs to the floorplan (section "What the next phase must know").
+- The L2a FAIL (amp_ch 84,466 um2 against 57,860 um2) was merged with this report (reports/L2a.md, "L2a findings" above).
+- Three facts of SPEC.md 3.3 that do not hold (details in AFE/layout/adc/FLOW_ADC.md section 3): (1) the DAC unit pitch of 6.8 um is not legal: neighbours of different nets need top plates 2.4 um apart (MIMTM.1, bottom plates 1.2 um apart) = pitch 7.4 um; same-net neighbours can be 1.0 um apart (pitch 6.0 um, one merged bottom plate);
+  (2) a dummy MIM with both plates on vss is extracted as a shorted cap_mim device that netgen does not drop: the dummy rows are plain Metal4 / Metal5 bars; (3) the 20 um keep-out band between the driver row and the DAC array cannot hold the driver rows of a real layout (two rows of 11 and 14 um + routing = 29 um).
+
+**What was built** (generated, nothing drawn by hand; run `bash AFE/layout/scripts/kl.sh AFE/layout/adc/mk_adc_ch.py out=AFE/layout/adc/adc_ch.gds`)
+- DAC: 127 units 5 x 5 um + bridge 5.085 x 5 um on two halves of 8 rows (LSB half west, node m; MSB half east, node t), every bit in point-symmetric pairs about the centre of its half (rows 0, 1, 6, 7 = the largest bit, rows 2 and 5 the next, rows 3 and 4 the small bits, row 4 = point reflection of row 3);
+  units of one run are 6.0 um apart and share ONE Metal4 bottom-plate polygon, different nets 7.4 um; a 6 um channel between rows 3 and 4 carries the pads of the small bits; one plain-metal dummy row (vss) south and north of the array; Metal5 top-plate bars per row joined by a trunk outside the array
+  (t east, m west), the bridge's bottom plate (m) leaves through a Via4 pad in the channel and a short (about 10 um) Metal5 strap to the east end of the LSB row 4 bar. Site of every unit: AFE/layout/adc/dac_sites.log (128 units: b11 32, b10 16, b9 8, b8 4, b7 2, b6 1, bridge 1, b5 32, b4 16, b3 8, b2 4, b1 2, b0 1, bd 1).
+  Centroids: every bit with more than one unit has its centroid within 0.02 um of the centre of its half; the single units b0 / bd and b6 / bridge sit at the row ends (+-23.1 um, +-5.5 um: they are each other's point-symmetric partner, ESTIMATE of the effect: 1 unit x 0.02 % per 23 um at 1 %/mm gradient, negligible).
+- Drivers: 13 bottom-plate drivers (pfet 2u/0.28u + nfet 1u/0.28u, bd driver with its pfet gate tied to vdd_dac) and 13 sampling TGs in three rows of single-finger tiles (nfet row 110 x 11 um in a P+ ring, driver pfets 60 x 14 um in the vdd_dac well, TG pfets in the vdd well), sources tied to the rings in Metal1;
+  the two reset switches (nfet 0.5u/0.28u) sit next to the lower ends of the t / m trunks, rst_sw and rstm are one net. Supplies as SPEC.md 3.3: vdd analog (TG / Cref switch / inverter wells), vdd_dac (driver wells), vdd_cmp (comparator wells), one vss.
+- Comparator cmp_p: two MIRROR-IMAGE halves (one routed cell of 51 x 39 um, the second instance placed with a mirror about the axis x = 0: pair 4 x 20u/0.5u = 80u/0.5u each, preamp MIM units Cxa (5 x 5 um, top a1 / a2, bottom vss), reset and mc devices, latch halves, output inverters) + a centre column (tail pfet mt1, clock inverter ic);
+  vref enters on the east edge, t on the west edge, both on Metal5 over a Metal3-Metal5 via stack; routed centre nets: tl 38 um, clkb 61 um, cmp_clk 66 um, o1 / o2 24 um each (equal), vss 54, vdd_cmp 57 um (ESTIMATE, grid nodes x 1 um). The two latch nets cross in the centre column on different tracks (exact mirror symmetry of that crossing is impossible).
+- vhalf: the two 250 um x 1 um ppolyf_u_1k resistors as ONE serpentine of 20 segments of 25 um in the order A B A B ... (chain A rows 0, 2, .. 18: vdd to vcmd, chain B rows 19, 17, .. 1: vcmd to vss), same orientation, plain poly dummy lines at both ends, jumpers on Metal2 lanes (A at the head, B one um further out via a Metal1 strip), the 22.18 um MIM (top vcmd, bottom vss).
+  netgen sums the series segments: 2 ppolyf_u_1k devices after flattening, W = 1.0, L = 250 each.
+- Cref: ONE 59.07 um MIM, top plate = vref (Metal5 strap 23.5 um to the comparator pad), bottom plate vss through a Metal4 tab and pad; nothing below Metal4 in its footprint (no Metal1-Metal3 of this cell, the router is kept out; gate.py: PASS). Cref switch (nfet 1u + pfet 2u) and the inverter samb = not tg_on (inv_1 drawn from the 5 V pcells, netgen flattens the reference to the same two devices) sit between the comparator and Cref.
+- Pins: control pins Metal2 at the inner edge at x = 12 15 18 21 24 (rst_sw tg_on dac_gdn cmp_clk cmp_q), dac_gp / dac_gn from x = 27 at 3 um pitch (dac_gp[11] 27, dac_gn[11] 30, .., dac_gn[0] 96), vdd_cmp 110-130, vdd_dac 140-160, vss 170-210 (Metal4, inner edge), vin Metal3 at the outer (top) edge x = 4, vdd Metal4 at the east edge (y 48-54).
+
+**Area, W x H (as built, bounding boxes; F1 numbers from AFE/review/sim/f1_area.log)**
+| block | as built W x H (um) | um2 | F1 estimate (um2) |
+|---|---|---|---|
+| DAC array + trunks + pads (core 104.9 x 72.4 um) | 116.2 x 73.6 | 8,553 | 8,416 (12 x 11 sites at 6.8 um) |
+| driver rows (13 drivers + 13 TG + 2 resets, with the routing space between the rows) | 123 x 29 | 3,567 | 391 (MOS footprint x 2.5) |
+| comparator cmp_p | 118.0 x 40.6 | 4,791 | 877 |
+| vhalf serpentine + 22.18 um capacitor | 34 x 64 + 27 x 23 | 2,176 + 637 | 1,415 |
+| Cref (plate 59.07 um + tab / pad) | 63.2 x 60.3 | 3,811 | 3,720 |
+| Cref switch + inverter (four small blocks) | 4 x about 11 x 12 | 563 | 6 |
+| **adc_ch bounding box** | **265.85 x 126.25** | **33,564** | **14,911 (slot 22,880)** |
+The array and Cref match F1; the rest does not: the F1 factor 2.5 on small devices missed the real overhead of rings, landing pads and routing (the comparator is 5.5 x its estimate, the driver rows 9 x), and the poly resistors and the capacitor of vhalf need 2 x. The sum of the block bounding boxes alone (24.1k um2) already exceeds the slot (22.9k um2).
+**8-channel extrapolation (ESTIMATE): 8 x 33,564 = 0.269 mm2 for adc_ch + 8 x 84,466 = 0.676 mm2 for amp_ch (L2a) + afe_dig slot 0.090 mm2 + bias_genc slot 0.014 mm2 = 1.049 mm2 BEFORE corridors, rings and the 30 um pin ring, against the 1.000 mm2 outline: eight channels do not fit with the two cells as built.**
+
+**Keep-outs and wire lengths** (AFE/layout/adc/keepout.log, adc_ch.build.json; ESTIMATES from grid nodes x 1 um)
+- control wires to DAC top plates / vref / Cref (limit 20 um, SPEC.md 3.3 rule 6): cmp_clk 44.0 um, dac_gn[*] 43 um, dac_gdn 43.2 um, dac_gp[*] 26.0 um; **tg_on 5.2 um (at the Cref switch it drives: allowed as "the last 10 um at the device") and rst_sw 12.0 um (at the reset switch next to the t trunk: same exception)**.
+- t node: Metal5 trunk + row straps + strap to the comparator pad about 114 um, m node about 94 um, vref strap 23.5 um (Metal5, < 30 um) + 36 um of Metal2-Metal4 router wire to the Cref switch drains; the bottom-plate nets b0 .. b11 / bd are 164 - 379 um of Metal2 / Metal3 / Metal4 (about 40 ohm for 220 um of 0.5 um wire: negligible against the driver, but check in L1b: Q-2 / Q-5).
+- Over / under the DAC: Metal2 / Metal3 only in the 6 um channel strip; Metal4 keeps 1.2 um from every plate; the t / m trunks cross the Metal4 exit tabs of the rows (about 1 um2 each).
+
+**Rules / deviations** (all in the generator)
+1. DAC unit pitch 7.4 um (different nets) / 6.0 um (same net) instead of 6.8 um; array 104.9 x 72.4 um core instead of 122.4 x 68 um; the ring of dummy units is a plain-metal row south and north only (the west / east sides carry the exits); no dummy MIM units (netgen would count them).
+2. bd driver: its pfet gate is tied to vdd_dac (reference: gdp = vdd_dac); b0 / bd and b6 / bridge at the row ends (see above).
+3. Reset switches next to the trunks, Cref switch next to Cref (the SPEC keeps all switches in the driver row; vref < 30 um needs the switch at Cref).
+4. Power: the driver sources are tied to their rings in Metal1; the rings are joined by the router (supplies routed like signals, 77 - 506 um of wire per rail; L3a replaces them by straps).
+5. Cell outline 265.85 x 126.25 um; origin of the GDS bbox x = 3.75 um (the vin pin and the margin wires start at x = 3.75): the slot test uses width and height.
+
+**Ladder entries used**: D-1 / D-4 style fixes inside the generator (M1.2a stub spacing of narrow devices, Via4 sea pitch, 5 V marker snapping, plain-metal dummies: FLOW_ADC.md sections 3 and 4); L: none needed (pin matching failed once because the comparator block was named cmp_p: renamed); A (area): A-1 (rotate) does not help (126 um wide x 266 um tall in a channel that is 375 um tall for amp_ch + adc_ch), A-2 gains nothing; the rest of ladder A belongs to the amplifier or to the whole floorplan.
+
+**What the next phase must know**
+- L1b (PEX + post-layout simulations of the ADC) can start on this GDS: DRC / LVS clean, PEX port order by name. The sites of the units for the bridge check are in dac_sites.log.
+- **The floorplan needs a decision before L3a**: the two cells together are 1.049 mm2 (with 8 channels) in a 1.000 mm2 outline. Options with their cost: (A-6) N = 4 channels in one row: adc_ch (266 um wide) is wider than the 235 um pitch, so adc_ch must be re-packed to <= 235 um (taller; there is room in the 4-channel floorplan) or the pitch widened; (re-pack for 8) amp_ch to about 60 % of its area (the levers in the L2a findings) and adc_ch to about 70 %
+  (comparator in one column with Cref above it, drivers in one row of multi-finger devices, vhalf pitch 2.2 um): needs about one more L2a-type and L1a-type iteration each, and is still on the edge; (A-7) N = 2.

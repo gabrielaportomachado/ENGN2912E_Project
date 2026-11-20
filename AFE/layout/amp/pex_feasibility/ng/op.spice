@@ -1,0 +1,26 @@
+* L2a: feasibility only (PEX is phase L2b): the Magic PEX netlist of amp_ch (flow.py pex, MIM correction) loads in ngspice and one .op runs.  Bias levels are rough guesses, not the design bias.
+.include /foss/pdks/gf180mcuD/libs.tech/ngspice/design.ngspice
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice typical
+.lib /foss/pdks/gf180mcuD/libs.tech/ngspice/sm141064.ngspice mimcap_typical
+.include ../amp_ch.pex.spice
+Vdd vdd 0 3.3
+Vref ref 0 1.65
+Vrec rec 0 1.65
+Vsw sw_rec 0 3.3
+Vswb sw_rec_b 0 0
+Vrst rst_amp 0 0
+Vbn vbn 0 0.8
+Vcm vcm 0 1.65
+Vg1 vg1 0 0.5
+Vcmo vcmo 0 1.65
+Vg2 vg2 0 0.9
+Vrs vrs 0 1.65
+Rout out 0 1meg
+Xdut rec ref vbn vcm vg1 vcmo vg2 vrs out sw_rec sw_rec_b rst_amp vdd 0 amp_ch
+.control
+op
+print v(out) i(Vdd)
+echo DONE
+quit
+.endc
+.end

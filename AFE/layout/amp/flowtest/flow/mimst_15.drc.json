@@ -1,0 +1,24 @@
+{
+ "antenna": false,
+ "databases": [
+  "AFE/layout/amp/flowtest/flow/drc_mimst_15/mimst_15_main.lyrdb"
+ ],
+ "date": "2026-11-20 18:01",
+ "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
+ "density": false,
+ "gds": "AFE/layout/amp/flowtest/mimst_15.gds",
+ "gds_sha1": "09ba3471f1ac0404ef9949b4ad53074746e8cf9b",
+ "log": "AFE/layout/amp/flowtest/flow/mimst_15.drc.log",
+ "maxrss_mb": 462,
+ "mode": "flat",
+ "offgrid": true,
+ "ran": true,
+ "rules": {
+  "MIMTM.1": 1
+ },
+ "tool": "klayout DRC",
+ "top": "mimst_15",
+ "total": 1,
+ "variant": "D",
+ "wall_s": 2.4
+}

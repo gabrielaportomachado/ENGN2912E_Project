@@ -1,0 +1,19 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * l2a step 1: the magic pex netlist of lp_flow (flow.py pex, mim correction on) loads in ngspice and gives one .op
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 1
+i(vd1) = 5.688715e-06
+i(vd2) = 5.688715e-06
+v(ns) = 6.997236e-01
+i(vdd) = -7.72157e-06
+v(gs) = 7.629726e-02
+i(vtop) = -4.75500e-17
+DONE
+ngspice-46 done

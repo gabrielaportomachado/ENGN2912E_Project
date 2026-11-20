@@ -1,0 +1,22 @@
+{
+ "antenna": false,
+ "databases": [
+  "AFE/layout/sim/flow/drc_adc_ch/adc_ch_main.lyrdb"
+ ],
+ "date": "2026-11-20 19:45",
+ "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
+ "density": false,
+ "gds": "AFE/layout/adc/adc_ch.gds",
+ "gds_sha1": "dc4f6d023c97ebe2b5ff54ff877295d392a43ee8",
+ "log": "AFE/layout/sim/flow/adc_ch.drc.log",
+ "maxrss_mb": 471,
+ "mode": "flat",
+ "offgrid": true,
+ "ran": true,
+ "rules": {},
+ "tool": "klayout DRC",
+ "top": "adc_ch",
+ "total": 0,
+ "variant": "D",
+ "wall_s": 4.6
+}

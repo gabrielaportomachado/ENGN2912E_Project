@@ -1,0 +1,63 @@
+{
+ "bytes": 1181,
+ "c_total_fF": 8.165,
+ "census_equal_lvs": true,
+ "cthresh_fF": 0.01,
+ "date": "2026-11-20 17:47",
+ "devices": {
+  "cap_mim_2f0_m4m5_noshield": 1,
+  "nfet_03v3": 1,
+  "nfet_06v0_nvt": 1,
+  "pfet_03v3": 2
+ },
+ "devices_lvs_extraction": {
+  "cap_mim_2f0_m4m5_noshield": 1,
+  "nfet_03v3": 1,
+  "nfet_06v0_nvt": 1,
+  "pfet_03v3": 2
+ },
+ "gds": "AFE/layout/amp/flowtest/lp_flow.gds",
+ "gds_sha1": "7e0389dc2bd6c3bda554249076d976f6993aa994",
+ "log": "AFE/layout/amp/flowtest/flow/lp_flow.pex.log",
+ "maxrss_mb": 68,
+ "mim_fix": {
+  "c_total_fixed_fF": 8.165,
+  "c_total_stock_fF": 8.165,
+  "moved_fF": {
+   "TOPNET": 0.19
+  },
+  "top_plate_nets": {
+   "TOPNET": {
+    "BOTNET": 25.0
+   }
+  },
+  "unexplained_fF": 0.0
+ },
+ "mode": "c",
+ "n_cap": 25,
+ "n_res": 0,
+ "netlist": "AFE/layout/amp/flowtest/flow/lp_flow.pex.spice",
+ "netlist_stock": "AFE/layout/amp/flowtest/flow/lp_flow.pex_stock.spice",
+ "ports": [
+  "S1",
+  "D1",
+  "G1",
+  "S2",
+  "D2",
+  "G2",
+  "ND",
+  "NS",
+  "NG",
+  "VSS",
+  "DD",
+  "GS",
+  "GG",
+  "BOTNET",
+  "TOPNET"
+ ],
+ "ran": true,
+ "tool": "magic PEX",
+ "top": "lp_flow",
+ "unknown_models": [],
+ "wall_s": 0.4
+}

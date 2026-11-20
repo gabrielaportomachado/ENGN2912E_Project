@@ -1,0 +1,2 @@
+PEX amp_ch (c): 121 devices {'cap_mim_2f0_m4m5_noshield': 11, 'nfet_03v3': 50, 'nfet_05v0': 3, 'nfet_06v0_nvt': 1, 'pfet_03v3': 53, 'pfet_05v0': 3}, 383 C (2993.3 fF), 0 R, ports rec ref vbn vcm vg1 vcmo vg2 vrs out sw_rec sw_rec_b rst_amp vdd vss; census vs LVS extraction: None; MIM correction moved a_10638_8600# 8.9 fF, a_20838_8600# 16.4 fF, a_8438_27702# 3.8 fF, w_22220_9696# 78.1 fF, w_24820_9696# 78.2 fF, w_27420_9696# 13.8 fF  (1 s, 69 MB) -> AFE/layout/amp/pex_feasibility/amp_ch.pex.spice
+exit 0

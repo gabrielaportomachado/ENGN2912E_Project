@@ -1,0 +1,22 @@
+{
+ "antenna": false,
+ "databases": [
+  "AFE/layout/amp/flowtest/flow/drc_lp_flow/lp_flow_main.lyrdb"
+ ],
+ "date": "2026-11-20 17:46",
+ "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
+ "density": false,
+ "gds": "AFE/layout/amp/flowtest/lp_flow.gds",
+ "gds_sha1": "7e0389dc2bd6c3bda554249076d976f6993aa994",
+ "log": "AFE/layout/amp/flowtest/flow/lp_flow.drc.log",
+ "maxrss_mb": 462,
+ "mode": "flat",
+ "offgrid": true,
+ "ran": true,
+ "rules": {},
+ "tool": "klayout DRC",
+ "top": "lp_flow",
+ "total": 0,
+ "variant": "D",
+ "wall_s": 2.6
+}

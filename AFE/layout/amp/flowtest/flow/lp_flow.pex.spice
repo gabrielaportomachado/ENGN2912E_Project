@@ -1,0 +1,35 @@
+* NGSPICE file created from lp_flow (flattened) - technology: gf180mcuD
+* MIM correction of flow.py pex: capacitance to the layers below that Magic attached to MIM TOP plates was moved to the bottom plates:
+*   TOPNET: 0.19 fF -> BOTNET
+.subckt lp_flow S1 D1 G1 S2 D2 G2 ND NS NG VSS DD GS GG BOTNET TOPNET
+X0 D2 G2 S2 S2 pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.5u
+X1 TOPNET BOTNET cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X2 GS GG DD VSS nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=1u
+X3 NS NG ND VSS nfet_06v0_nvt ad=5.7p pd=21.14u as=5.7p ps=21.14u w=10u l=2u
+X4 D1 G1 S1 S1 pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.5u
+C0 BOTNET TOPNET 0.33458f
+C1 BOTNET VSS 1.2336f
+C2 D1 S1 0.09147f
+C3 D1 VSS 0.01433f
+C4 D2 S2 0.09147f
+C5 D2 VSS 0.01433f
+C6 DD GG 0.02835f
+C7 DD GS 0.04743f
+C8 DD VSS 0.10882f
+C9 G1 S1 0.29971f
+C10 G1 VSS 0.15298f
+C11 G2 S2 0.29971f
+C12 G2 VSS 0.15298f
+C13 GG GS 0.02835f
+C14 GG VSS 0.38584f
+C15 GS VSS 0.0975f
+C16 ND NG 0.28224f
+C17 ND NS 0.18748f
+C18 ND VSS 0.39967f
+C19 NG NS 0.28224f
+C20 NG VSS 0.78112f
+C21 NS VSS 0.39991f
+C22 S1 VSS 0.94017f
+C23 S2 VSS 0.94017f
+C24 TOPNET VSS 0.57097f
+.ends
