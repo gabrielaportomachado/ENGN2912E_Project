@@ -1,20 +1,20 @@
 afe_dig hardening summary (AFE/dig/scripts/collect_dig.py).  Run directory: /tmp/lp_dig/design/runs/final
 PINS: 286 signal pins as built, 286 planned (AFE/dig/pins_plan.json); not at the planned place: 0 []; not planned: 0  -> PASS
       N edge 132 pins on Metal2; S edge 132 pins on Metal2; W edge 22 pins on Metal3
-      VDD: 21 shapes on Metal4, x = 36.16-37.76 153.76-155.36 271.36-272.96 388.96-390.56 506.56-508.16 624.16-625.76 741.76-743.36 um, y = 0.00 .. 109.76 um
-      VSS: 21 shapes on Metal4, x = 39.46-41.06 157.06-158.66 274.66-276.26 392.26-393.86 509.86-511.46 627.46-629.06 745.06-746.66 um, y = 0.00 .. 109.76 um
-DIE 0.0 0.0 819.84 109.76 um, core 6.72 3.92 813.12 105.84 um, std cells 1706 (35365 um2, utilisation 43.0 %), flops 167, repair buffers 18, clock option: no CTS + ck.u_ckbuf (Decision 44h), routing up to Metal4
-ROUTE drc errors 0, wirelength 82705 um, antenna violating nets 0; Magic DRC 0; LVS errors 0; XOR differences 0; KLayout DRC: not run by the flow (see reports/klayout_drc.log)
+      VDD: 21 shapes on Metal4, x = 36.16-37.76 153.76-155.36 271.36-272.96 388.96-390.56 506.56-508.16 624.16-625.76 741.76-743.36 um, y = 0.00 .. 101.92 um
+      VSS: 21 shapes on Metal4, x = 39.46-41.06 157.06-158.66 274.66-276.26 392.26-393.86 509.86-511.46 627.46-629.06 745.06-746.66 um, y = 0.00 .. 101.92 um
+DIE 0.0 0.0 819.84 101.92 um, core 6.72 3.92 813.12 98.0 um, std cells 1661 (35167 um2, utilisation 46.4 %), flops 167, repair buffers 18, clock option: no CTS + ck.u_ckbuf (Decision 44h), routing up to Metal4
+ROUTE drc errors 0, wirelength 84804 um, antenna violating nets 0; Magic DRC 0; LVS errors 0; XOR differences 0; KLayout DRC: not run by the flow (see reports/klayout_drc.log)
 STA after place and route (extracted nom SPEF, period 500 ns, clock uncertainty 0.5 ns):
   corner               setup ws   hold ws  setup vio  hold vio   slew   cap  fanout
-  nom_ff_n40C_3v60       96.965     0.229          0         0      0     0       0
-  nom_ff_125C_3v60       96.046     0.519          0         0      0     0       0
-  nom_tt_025C_3v30       95.361     0.760          0         0      0     0       0
-  nom_ss_n40C_3v00       93.778     1.305          0         0      0     0       0
-  nom_ss_125C_3v00       91.689     2.010          0         0      0     0       0
+  nom_ff_n40C_3v60       96.917     0.245          0         0      0     0       0
+  nom_ff_125C_3v60       95.958     0.553          0         0      0     0       0
+  nom_tt_025C_3v30       95.239     0.803          0         0      0     0       0
+  nom_ss_n40C_3v00       93.594     1.356          0         0      0     0       0
+  nom_ss_125C_3v00       91.406     2.137          0         0      0     0       0
   worst corner: max-slew violations 0, max-cap violations 0 (D3 macro: 16 / 3); setup violations 0, hold violations 0
-POWER from the flow (default activity, NOT used; see reports/power_dig.log): 303.1 uW
-RUN wall time 0:53.80, peak RSS 548 MB, run directory 184 MB (LibreLane v3.0.2)
+POWER from the flow (default activity, NOT used; see reports/power_dig.log): 305.6 uW
+RUN wall time 1:07.59, peak RSS 562 MB, run directory 183 MB (LibreLane v3.0.2)
 STRUCTURE of the hand-instantiated cells in final/nl/afe_dig.nl.v:
   OK   delay cells dlyd_1: 49 in the comparator chain (want 49), 8 utg (want 8); other dlyd_* cells: 0
   OK   delay cells dlyc_1 8 (want 8), dlya_1 2 (want 2) in the chain

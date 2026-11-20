@@ -5,10 +5,10 @@ Clock Skew (Setup)
 ======================= nom_ss_n40C_3v00 Corner ===================================
 
 Clock sclk
-212.826965 source latency _1420_/CLK ^
--1.516417 target latency _1419_/CLK ^
+212.991791 source latency _1420_/CLK ^
+-1.525277 target latency _1410_/CLK ^
 0.500000 clock uncertainty
 0.000000 CRPR
 --------------
-211.810547 setup skew
+211.966507 setup skew
 
