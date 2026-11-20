@@ -51,13 +51,13 @@ their skew is unchanged); the amplifier inputs are at the far end, more than 100
 
 | cell | slot | estimate | slot / estimate - 1 |
 |---|---|---|---|
-| amp_ch | 222 x 285 = 63,270 um2 | 51,626 um2 (20 pF Cin; R4 reduces Cin to 15 pF) | **+23 %** |
+| amp_ch | 222 x 285 = 63,270 um2 | 51,626 um2 (20 pF Cin; Cin is 15 pF since Decision 50, as-built 220.25 x 284.25 um = 62,606 um2) | **+23 %** |
 | adc_ch | 222 x 104 = 23,088 um2 | 14,911 um2 | +55 % (the 20 um keep-out band between the driver row and the DAC array is inside) |
 | bias_genc | 108 x 110 = 11,880 um2 | 9,966 um2 | +19 % |
 | afe_dig | 820 x 80 = 65,600 um2 | 35,292 um2 of cells in the trial (estimate 33,661) | 51 % utilisation (estimate), 54 % with the trial cells |
 
 The outline allows a top-level factor of 1.62 on the F1 block sum without decap (618,660 um2); F1's pessimistic case needed 1.50 WITH the decap as its own block.
-The tight items are amp_ch (+23 %, as-built L2a cell 218.75 x 309.25 um = 67,650 um2: R4 reworks it) and adc_ch (as-built 265.85 x 126.25: R5 re-packs it). When L2a's real W x H is known: `floorplan.py check --gds amp_ch=<gds>`; if it does not fit, ACCEPT.md ladder "A (area)" applies (rotate, corridor / macro
+The tight items are amp_ch (+23 %; as-built after R6 220.25 x 284.25 um = 62,606 um2, 98.9 % of the slot area; the 20 pF L2a cell was 218.75 x 309.25) and adc_ch (as-built after R5 219.50 x 103.67 um, the slot is full). When L2a's real W x H is known: `floorplan.py check --gds amp_ch=<gds>`; if it does not fit, ACCEPT.md ladder "A (area)" applies (rotate, corridor / macro
 height parameters, regenerate the amplifier with another aspect ratio, last resort N = 2).
 
 ## 2. Chip pins (41 port bits = 24 pads, Decision 45)
@@ -110,9 +110,9 @@ L2a ran before this file existed. If its cell has a pin on another side, L2b or 
 pin side as a parameter; no device changes (ACCEPT.md ladder G-5).
 
 Matching and leakage rules (PLAN.md sections 1.2 and 5; Decisions 39, 46a, 46c; LP findings):
-1. Input capacitors: Cin1 (rec to vn) and Cin2 (ref to vp) = 2 pieces each of 70.65 x 70.65 um (the reference says 70.649028: off grid; the 1 % LVS tolerance covers the rounding), placed as a
+1. Input capacitors: Cin1 (rec to vn) and Cin2 (ref to vp) = 2 pieces each of 61.15 x 61.15 um = 7.4995 pF (15 pF per input, Decision 50; the 20 pF layout had 70.65 um, the reference of that time 70.649028: off grid; the 1 % LVS tolerance covers the rounding), placed as a
    2 x 2 checkerboard (Cin1 / Cin2 on the diagonals) so that both inputs see the same gradient. **Top plate (FuseTop / Metal5) = summing node, bottom plate (Metal4) = rec / ref** (Decision 46a;
-   Magic terminal 1 = top plate, check_env.sh C3). Cf1 pieces (9.79 um) next to the Cin block, same orientation; ratio Cin : Cf1 = 100.
+   Magic terminal 1 = top plate, check_env.sh C3). Cf1 pieces (8.45 um = 150.15 fF; 9.79 um at 20 pF) next to the Cin block, same orientation; ratio Cin : Cf1 = 100 (as drawn 99.90).
 2. Under the four Cin pieces: no device, no poly, no Metal1-3 of amp_ch (Decision 46c). The baseline floorplan does NOT put decap there (section 4); the area is the reserve.
 3. OTA-1 input pair 2 x 16 x 50u/2u: common centroid (ABBA rows) with dummies at both ends; loads 8 x 50u/16u next to it.
 4. **Pseudo-resistor transistors (6 x pfet_03v3 0.22u/0.5u): minimum drain / source area (no shared or extended diffusion), all six drawn identically, their n-wells as small as the rules allow.**

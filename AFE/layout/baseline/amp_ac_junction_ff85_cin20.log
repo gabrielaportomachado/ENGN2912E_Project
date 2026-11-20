@@ -1,0 +1,3 @@
+== amp_ac_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:39
+   job ac_schprdiff_ff85: exit 0, 0 s
+RESULT amp_ac_junction ff85: idd_ua=118.811  vout_v=1.65164  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=60.0551  g_pk_db=60.0555  f_lo_hz=0.0528959  f_hi_hz=997.541  g_300_db=59.6811  g_0p5_db=60.0085  v1_v=1.64862  g1_mid_db=39.9869  hf_1k=-3.01013  hf_3k=-10.0009  hf_10k=-20.0535  hf_30k=-29.6401  hf_100k=-40.9017  hf_300k=-53.4756  hf_1M=-64.9702

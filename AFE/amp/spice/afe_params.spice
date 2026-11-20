@@ -29,7 +29,7 @@
 .param CF2V=0.294p
 .param CC2=2.0p
 * Stage 1 feedback capacitor (CIN_RATIO x CF1V = Cin); A3 used 200f, the pseudo-R/switch parasitic is absorbed by trimming CF1V.
-.param CF1V=200f
+.param CF1V=150f
 .param CIN_RATIO=100
 * MIM side lengths from the requested capacitances (square, typical formula C = A L^2 + 4 P L)
 .param LCC2='(-4*CAPK_P+sqrt(16*CAPK_P*CAPK_P+4*CAPK_A*CC2))/(2*CAPK_A)'

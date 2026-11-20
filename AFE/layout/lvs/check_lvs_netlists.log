@@ -10,21 +10,21 @@ A. bias_genc + afe_chc: LVS reference against the simulation netlists, ngspice-4
         vg2_V                2.549890       2.549890       2.549890 |    +0.000000    +0.000000 V
         i_supply_A          74.430000      74.430000      74.430000 |    +0.000000    +0.000000 uA
         ibias1_A            21.187500      21.187500      21.187500 |    +0.000000    +0.000000 uA
-        v1_V                 1.648890       1.648900       1.648890 |    -0.000010    +0.000010 V
-        vn1_V                1.648990       1.648990       1.648990 |    +0.000000    +0.000000 V
-        vp1_V                1.648990       1.648990       1.648990 |    +0.000000    +0.000000 V
+        v1_V                 1.648890       1.648880       1.648890 |    +0.000010    -0.000010 V
+        vn1_V                1.648970       1.648970       1.648970 |    +0.000000    +0.000000 V
+        vp1_V                1.648970       1.648970       1.648970 |    +0.000000    +0.000000 V
         vn2_V                1.650610       1.650610       1.650610 |    +0.000000    +0.000000 V
         o2_V                 1.681020       1.681020       1.681020 |    +0.000000    +0.000000 V
-        drain currents of 20 transistors (every MOS of bias_genc and afe_chc with a DC current): LVS vs SIM0 worst 0.00e+00 relative (xch.xsink1); SIM0 vs SIM worst 9.46e-06 (xch.xs1.xota.xm1); missing in the LVS run: none
+        drain currents of 20 transistors (every MOS of bias_genc and afe_chc with a DC current): LVS vs SIM0 worst 0.00e+00 relative (xch.xsink1); SIM0 vs SIM worst 3.62e-06 (xch.xs2.xota2.xm4); missing in the LVS run: none
   .ac   quantity                  SIM           SIM0            LVS |   LVS - SIM0   SIM0 - SIM
-        g_mid_dB             60.05590       60.05590       60.05590 |     +0.00000     +0.00000
-        g1_mid_dB            39.99060       39.99060       39.99060 |     +0.00000     +0.00000
-        f_lo_Hz               0.20230        0.20230        0.20230 |     +0.00000     +0.00000
-        f_hi_Hz             653.46600      653.65900      653.65900 |     +0.00000     +0.19300
-        ph_mid_deg            0.12593        0.12627        0.12627 |     +0.00000     +0.00034
-        g_300_dB             59.22880       59.22920       59.22920 |     +0.00000     +0.00040
-        g_0p5_dB             59.48260       59.48260       59.48260 |     +0.00000     +0.00000
-  RESULT A: LVS reference vs the design netlists without diffusion parameters: DC nodes within 10.0 uV, supply / bias currents within 0.00e+00, device currents within 0.00e+00, gains within 0.0000 dB, corner frequencies within 0.00 %  -> PASS (limits 100 uV, 1e-3, 1e-3, 0.01 dB, 1 %)
+        g_mid_dB             60.05300       60.05300       60.05250 |     -0.00050     +0.00000
+        g1_mid_dB            39.98770       39.98770       39.98720 |     -0.00050     +0.00000
+        f_lo_Hz               0.24642        0.24642        0.24643 |     +0.00001     +0.00000
+        f_hi_Hz             653.55700      653.75000      653.75000 |     +0.00000     +0.19300
+        ph_mid_deg            0.36620        0.36654        0.36659 |     +0.00005     +0.00034
+        g_300_dB             59.22650       59.22690       59.22640 |     -0.00050     +0.00040
+        g_0p5_dB             59.19790       59.19790       59.19730 |     -0.00060     +0.00000
+  RESULT A: LVS reference vs the design netlists without diffusion parameters: DC nodes within 10.0 uV, supply / bias currents within 0.00e+00, device currents within 0.00e+00, gains within 0.0006 dB, corner frequencies within 0.00 %  -> PASS (limits 100 uV, 1e-3, 1e-3, 0.01 dB, 1 %)
 
 B. ADC cells of the LVS reference (adc_ch.spice: dac_sw, cmp_p, vhalf, vrefs) in the X2 closed-loop replay, ADC alone, typ 27 C, 12 inputs (x2_adc.py typ 12, X2_ADC_INC)
   Vin [V]   | code SIM   code LVS   diff   | T SIM     T LVS     dT [LSB]

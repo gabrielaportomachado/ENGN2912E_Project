@@ -75,7 +75,7 @@ Post-layout values (baseline = schematic, post = extracted; the same script and 
 | amp_ac | L2b | idd_ua | all | x / baseline 0.95 .. 1.05 |  | a layout does not change the bias current: more than 5 % means a device or extraction error |
 | amp_ac | L2b | vout_v | all | 1.6 .. 1.7 |  | mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c) |
 | amp_ac | L2b | hf_dev_db | all | <= 2 |  | port-level stand-in for the stage-1 loop margin: 2 dB = about 8 deg (calibration in baseline/amp_loop.json); baseline 76-81 deg, Decision 12 wants >= 60 deg |
-| amp_noise | L2b | noise_d8_post_uv | all | <= 2 |  | Decisions 1, 4, 8: <= 2 uV rms in 0.5-300 Hz at typical flicker, pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline 1.668 / 1.847 / 1.540 uV |
+| amp_noise | L2b | noise_d8_post_uv | typ / ss-40 / ff85 | <= 2 / <= 2 / <= 2.2 |  | Decisions 1, 4, 8, 50: <= 2 uV rms in 0.5-300 Hz at typical flicker (ff 85 C <= 2.2 uV, Decision 50), pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline (Cin 15 pF) 1.890 / 2.139 / 1.732 uV (typ / ff 85 / ss -40) |
 | amp_loop | L2b | pm_deg | all | >= 60 |  | Decision 12 / 21b: stage-1 loop phase margin >= 60 deg with the real stage-2 load (baseline 79.2 / 76.4 / 81.1); nan = no anchor, then hf_dev_db of amp_ac decides |
 | amp_psrr | L2b | supply_gain_50hz | all | 0.38 .. 0.62 |  | the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579) |
 | amp_thd | L2b | thd_pct | typ / ss-40 / ff85 | <= 0.5 / <= 0.5 / <= 4.5 |  | no target; typ / ss -40 baseline 0.04-0.05 %; ff 85 C clips at the bottom, accepted by Decision 28 (baseline of this script 2.5-3.7 %) |
@@ -204,9 +204,9 @@ Digital macro afe_dig (L1d; numbers of the LP trial: AFE/dig/LP_STEP5.md, AFE/di
   over or beside the Cf1 plates; the top-plate wiring of vn / vp adds to Cf if it runs along v1.
 - R-2 f_hi < 300 Hz (baseline ss -40: 422 Hz): parasitic on o2 / vn2 of stage 2. Layout fix: shorten those nets. If f_hi(ss -40) is 280 .. 300 Hz after the fix: PRE-APPROVED degradation (gain at
   300 Hz is then -3.0 .. -3.3 dB instead of -1.8 dB; same class as the accepted f_hi spread of Decision 22). Below 280 Hz: BLOCKED.md.
-- R-3 Noise (noise_d8_post_uv) > 2.0 uV: parasitic capacitance on the summing nodes (each 1 % of 20 pF adds about 1 %). Layout fix: shorter vn / vp wiring, keep the top plates as the summing node,
-  no shield plane under vn wiring other than the Cin bottom plates. PRE-APPROVED degradation: up to 2.05 uV at ff 85 C only (typ and ss -40 <= 2.0; the audit already has 2.04 .. 2.23 uV for
-  unfiltered codes, m5). Above: BLOCKED.md.
+- R-3 Noise (noise_d8_post_uv) > limit (2.0 uV typ / ss -40, 2.2 uV ff 85 C, Decision 50): parasitic capacitance on the summing nodes (each 1 % of 15 pF adds about 1 %). Layout fix: shorter vn / vp wiring, keep the top plates as the summing node,
+  no shield plane under vn wiring other than the Cin bottom plates. The ff 85 C limit 2.2 uV replaces the former 2.05 uV R-3 allowance (REVIEW.md R6; the 15 pF schematic is already at 2.139 uV, so only about 3 % remain for layout parasitics); no other degradation is pre-approved
+  (the audit already has 2.04 .. 2.23 uV for unfiltered codes, m5). Above: BLOCKED.md.
 - R-4 Loop margin: pm_deg < 60 or hf_dev_db > 2 dB: parasitic on v1 or o1. Layout fix: shorten v1 (stage 1 to stage 2 Cin), keep Cc1 next to the OTA. PRE-APPROVED: pm_deg 55 .. 60 with hf_dev_db
   <= 3 dB (A3 measured 54 deg at 10 pF of stage-2 input capacitance as still stable). Below 55: BLOCKED.md.
 - R-5 THD / swing: out_min above the limit at typ or ss -40: the follower or its sink is wrong (LVS should have caught it): re-check the extraction. ff 85 C up to 4.5 % / 1.25 V is accepted

@@ -1,0 +1,3 @@
+== amp_pwrup  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:37
+   job pu_sch_ss-40: exit 0, 1 s
+RESULT amp_pwrup ss-40: t_wait_s=1.5  vout_before_v=1.80549  vout_100ms_v=1.6486  vout_1s_v=1.64938  err_1s_mv=0.62438  codes_from_mid_1s=0.774988  vbn_end_v=0.804863  vrs_end_v=0.81515

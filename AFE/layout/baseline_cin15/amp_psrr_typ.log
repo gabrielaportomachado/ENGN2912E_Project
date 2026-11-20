@@ -1,0 +1,3 @@
+== amp_psrr  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-20 22:15
+   job psrr_sch_typ: exit 0, 0 s
+RESULT amp_psrr typ: supply_gain_50hz=0.572389  supply_gain_60hz=0.571718  supply_gain_300hz=0.525936  supply_gain_1khz=0.334957

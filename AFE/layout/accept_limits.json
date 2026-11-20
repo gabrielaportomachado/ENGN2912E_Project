@@ -86,8 +86,12 @@
    "noise_d8_post_uv": [
     {
      "kind": "max",
-     "limit": 2.0,
-     "why": "Decisions 1, 4, 8: <= 2 uV rms in 0.5-300 Hz at typical flicker, pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline 1.668 / 1.847 / 1.540 uV"
+     "limit": {
+      "typ": 2.0,
+      "ss-40": 2.0,
+      "ff85": 2.2
+     },
+     "why": "Decisions 1, 4, 8, 50: <= 2 uV rms in 0.5-300 Hz at typical flicker (ff 85 C <= 2.2 uV, Decision 50), pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline (Cin 15 pF) 1.890 / 2.139 / 1.732 uV (typ / ff 85 / ss -40)"
     }
    ],
    "noise_real_uv": [

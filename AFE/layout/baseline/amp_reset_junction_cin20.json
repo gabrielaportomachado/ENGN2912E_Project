@@ -1,0 +1,122 @@
+{
+ "check": "amp_reset_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:41",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_reset_junction_ff85_cin20.log",
+   "values": {
+    "drift_mv_s_os0": 0.15904436600000516,
+    "drift_mv_s_os100m": 80.8555122989999,
+    "drift_mv_s_os10m": 2.2443407835001095,
+    "drift_mv_s_os1m": 0.19272967000005803,
+    "final_v_os0": 1.646978121005996,
+    "final_v_os100m": 1.9496104858564143,
+    "final_v_os10m": 1.6770346081272909,
+    "final_v_os1m": 1.6530896420852763,
+    "peak_mv_os0": 2.2570189940041008,
+    "peak_mv_os100m": 771.3153658564142,
+    "peak_mv_os10m": 24.458838127290772,
+    "peak_mv_os1m": 1.8718320852764148,
+    "rel_step_mv_os0": -0.9315988765938865,
+    "rel_step_mv_os100m": -470.11963746360294,
+    "rel_step_mv_os10m": 3.2270601161576984,
+    "rel_step_mv_os1m": 1.02674396399971,
+    "resid_end_mv_os0": 0.019538994004086874,
+    "resid_end_mv_os100m": 1.943445856414261,
+    "resid_end_mv_os10m": 0.16388812729095648,
+    "resid_end_mv_os1m": 0.02268791472359588,
+    "t_1mv_s_os0": 0.12499764000000002,
+    "t_1mv_s_os100m": NaN,
+    "t_1mv_s_os10m": 9.4350327,
+    "t_1mv_s_os1m": 1.6232072999999998,
+    "t_fs_ms_os0": 1.658982000000031,
+    "t_fs_ms_os100m": 1.5633630000000398,
+    "t_fs_ms_os10m": 1.5810880000000083,
+    "t_fs_ms_os1m": 1.629287999999951
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:41",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_reset_junction_ss-40_cin20.log",
+   "values": {
+    "drift_mv_s_os0": 0.0017215832499584138,
+    "drift_mv_s_os100m": 86.6657345745,
+    "drift_mv_s_os10m": 8.673835226500003,
+    "drift_mv_s_os1m": 0.8848499999999371,
+    "final_v_os0": 1.648601582011992,
+    "final_v_os100m": 2.9315179382851717,
+    "final_v_os10m": 1.750475565361546,
+    "final_v_os1m": 1.6537036784077284,
+    "peak_mv_os0": 0.8958879880081039,
+    "peak_mv_os100m": 1471.5010082851716,
+    "peak_mv_os10m": 101.41678536154598,
+    "peak_mv_os1m": 8.407858407728286,
+    "rel_step_mv_os0": -0.2520343005729675,
+    "rel_step_mv_os100m": 0.02057999999993676,
+    "rel_step_mv_os10m": 0.011229999999917695,
+    "rel_step_mv_os1m": 0.38408142857471184,
+    "resid_end_mv_os0": 0.006457988008135018,
+    "resid_end_mv_os100m": 0.11330171482848428,
+    "resid_end_mv_os10m": 2.5773246384539483,
+    "resid_end_mv_os1m": 0.13281159227163108,
+    "t_1mv_s_os0": 0.0068701999999998264,
+    "t_1mv_s_os100m": 34.250773099999996,
+    "t_1mv_s_os10m": NaN,
+    "t_1mv_s_os1m": 4.712488540000001,
+    "t_fs_ms_os0": 5.895199999999878,
+    "t_fs_ms_os100m": 5.855809999999906,
+    "t_fs_ms_os10m": 5.818129999999755,
+    "t_fs_ms_os1m": 5.880079999999843
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:40",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_reset_junction_typ_cin20.log",
+   "values": {
+    "drift_mv_s_os0": 0.02592805299994616,
+    "drift_mv_s_os100m": 95.09484982400008,
+    "drift_mv_s_os10m": 9.540367732499998,
+    "drift_mv_s_os1m": 1.0008350000000332,
+    "final_v_os0": 1.6494279397268488,
+    "final_v_os100m": 2.7387296786551345,
+    "final_v_os10m": 1.7592623246317893,
+    "final_v_os1m": 1.654652570799467,
+    "peak_mv_os0": 4.067779726848686,
+    "peak_mv_os100m": 1078.6406186551344,
+    "peak_mv_os10m": 111.62554463178931,
+    "peak_mv_os1m": 10.314930799466993,
+    "rel_step_mv_os0": -5.394832816599582,
+    "rel_step_mv_os100m": 10.746401848399367,
+    "rel_step_mv_os10m": 7.830899566904526,
+    "rel_step_mv_os1m": -7.813032971100586,
+    "resid_end_mv_os0": 0.0015197268488087445,
+    "resid_end_mv_os100m": 0.014928655134305302,
+    "resid_end_mv_os10m": 2.8268753682105796,
+    "resid_end_mv_os1m": 0.1489692005329779,
+    "t_1mv_s_os0": 0.004425341999999999,
+    "t_1mv_s_os100m": 12.5887035,
+    "t_1mv_s_os10m": NaN,
+    "t_1mv_s_os1m": 4.84322643,
+    "t_fs_ms_os0": 2.984902999999983,
+    "t_fs_ms_os100m": 3.024237999999957,
+    "t_fs_ms_os10m": 3.1120079999999994,
+    "t_fs_ms_os1m": 3.0822769999999666
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_reset_junction.py"
+}

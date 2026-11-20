@@ -1,0 +1,56 @@
+{
+ "check": "amp_thd",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 08:11",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_thd_ff85_cin20.log",
+   "values": {
+    "gain_db": 59.89513002679449,
+    "hd2_dbc": -35.39049328848223,
+    "hd3_dbc": -37.08797553347129,
+    "out_max_v": 2.18553075,
+    "out_mean_v": 1.6854512693611992,
+    "out_min_v": 1.21903759,
+    "thd_pct": 2.627490931205914
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 08:11",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_thd_ss-40_cin20.log",
+   "values": {
+    "gain_db": 60.03702886941099,
+    "hd2_dbc": -91.25012584645205,
+    "hd3_dbc": -66.90933801331836,
+    "out_max_v": 2.14963767,
+    "out_mean_v": 1.6473080023894946,
+    "out_min_v": 1.14499788,
+    "thd_pct": 0.045679844355026575
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 08:11",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/amp_thd_typ_cin20.log",
+   "values": {
+    "gain_db": 60.0523649730107,
+    "hd2_dbc": -83.0625026139566,
+    "hd3_dbc": -69.3986965886737,
+    "out_max_v": 2.15123118,
+    "out_mean_v": 1.6479937012188246,
+    "out_min_v": 1.14483133,
+    "thd_pct": 0.035025302981178716
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_amp_thd.py"
+}

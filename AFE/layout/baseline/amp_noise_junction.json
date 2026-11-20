@@ -2,37 +2,37 @@
  "check": "amp_noise_junction",
  "corners": {
   "ff85": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_junction_ff85.log",
    "values": {
-    "g_mid_db": 60.0551,
-    "noise_real_uv": 1.5963511639062737
+    "g_mid_db": 60.0512,
+    "noise_real_uv": 1.7633052945147136
    }
   },
   "ss-40": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_junction_ss-40.log",
    "values": {
-    "g_mid_db": 60.0356,
-    "noise_real_uv": 1.3325870487075884
+    "g_mid_db": 60.0324,
+    "noise_real_uv": 1.4035347748792395
    }
   },
   "typ": {
-   "date": "2026-11-20 07:39",
+   "date": "2026-11-20 22:16",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_junction_typ.log",
    "values": {
-    "g_mid_db": 60.0504,
-    "noise_real_fn1_uv": 4.665400255459153,
-    "noise_real_uv": 1.4271448991910243
+    "g_mid_db": 60.0468,
+    "noise_real_fn1_uv": 4.924256258639425,
+    "noise_real_uv": 1.5096639037436106
    }
   }
  },

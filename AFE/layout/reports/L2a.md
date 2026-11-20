@@ -1,43 +1,57 @@
-# L2a report (2026-11-20; Claude Sonnet 5.5 / high; converted from AFE/layout/NOTES_L2.md, AFE/layout/FLOW.md and AFE/layout/amp/gate_L2a.log by phase L1a, common rule 7)
+# L2a report (2026-11-20; Claude Sonnet 5.5 / high; first written by L1a from NOTES_L2.md, FLOW.md and gate_L2a.log; reworked 2026-11-20 by REVIEW.md items R4 / R6 for Cin = 15 pF, Decision 50)
 
-Everything below is copied or condensed from the L2a session's own notes; no number is new. The "L2a findings" section and the Results-log row were copied unchanged into AFE/NOTES.md.
+The L2a cell of 20 pF (218.75 x 309.25 um, slot FAIL) is replaced by the Cin = 15 pF cell of R6 (220.25 x 284.25 um, gate PASS). The 20 pF facts are kept where a later phase may need them (marked "20 pF"). Native-Vt status and MIM terminal order are unchanged from L2a.
 
 ## 1. Summary and verdict
-- amp_ch (afe_chc + fs_oneshot_c + OR2): **DRC 0 violations (official deck, variant D), LVS "Circuits match uniquely."** against subckt amp_ch of AFE/layout/lvs/afe_chc.spice (46 devices, 35 nets, 14 pins; reference NOT regenerated).
-- **Gate verdict at the end of L2a: FAIL (1 FAIL), the slot: amp_ch as built is 219.25 x 385.25 um = 84,466 um2 against the slot 220 x 263 = 57,860 um2 (+46 %) and the F1 estimate 51,626 um2 (+64 %).** ACCEPT.md ladder A applies (open, see section 8).
-- Native-Vt follower nfet_06v0_nvt (10u / 2u): passes DRC and LVS in the test cell and in amp_ch; the organizer has not confirmed it (ladder N if refused).
-- MIM terminal order: terminal 1 of cap_mim_2f0_m4m5_noshield = TOP plate (Metal5 / FuseTop), as F1 assumed (check_env C3 and the Step-1 test cell), no `--cin-top rec` needed.
+- **Verdict: gate L2a PASS (R6).** amp_ch (afe_chc + fs_oneshot_c + OR2) at Cin1 = Cin2 = 15 pF: **220.25 x 284.25 um = 62,606 um2 in the slot 222 x 285 = 63,270 um2** (20 pF cell: 218.75 x 309.25 = 67,648 um2, -7.5 %); **DRC variant D 0 violations; LVS "Circuits match uniquely."** against the regenerated reference subckt amp_ch of AFE/layout/lvs/afe_chc.spice (`mk_lvs_netlists.py --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v --cin 2,61.15,61.15`); `under_cin_clean` true; floorplan.py check 17 PASS, 0 FAIL.
+- Circuit change (Decision 50, R4 step 1 simulations, branch worktree-r4-amp-cin15): `.param CF1V=150f`; schematic noise_d8 1.890 / 2.139 / 1.732 uV (typ / ff 85 / ss -40): **the ff 85 C value misses the old 2.0 uV limit by 7 %; the user accepted it (Decision 50): new limit 2.2 uV at ff 85 C** (accept_limits.json + ACCEPT.md, schematic and post-layout). Everything else passes at 15 pF (section 4).
+- Native-Vt follower nfet_06v0_nvt: unchanged (DRC / LVS clean; the organizer has not confirmed it, ladder N). MIM terminal 1 = top plate (no `--cin-top rec`).
+- For L2b: only 2.8 % of noise headroom at ff 85 C (2.139 -> 2.2 uV) and the vn2 clearance (0.5 um with 3 nodes closer than 2 um) are the first things to look at; the cell has 0.75 um of height margin (section 8).
 
 ## 2. What was built
-amp_ch.gds (sha1 b9407198f235d12f32265702ff358816556814b0, 3.0 MB) by AFE/layout/amp/mk_amp_ch.py (+ amplib.py, blocks_amp.py, router.py). Cin = 2 x 2 checkerboard of four 70.65 um pieces (summing nodes vn / vp on the TOP plates, nothing under the plates);
-input pair ABBA 2 x (16 x 50u/2u) with poly-only dummies; P+ / N+ rings around every NMOS / PMOS block; the six pseudo-resistor transistors (pfet_03v3 0.22u/0.5u) drawn identically, minimum junction area, each with its own n-well; stage 2, follower
-(nfet_06v0_nvt in a P+ ring), park TGATE, gate muxes, one-shot with C_T and the OR2 with filltie. Area table (um2): Cin block 27,554; pair + tail 9,705; mirror + xm6 10,244; stage 2 + sinks 7,018; MIM outside Cin 6,416; small devices 1,423; sum of the blocks 62,361;
-cell bbox 84,466. The flow notes are in AFE/layout/FLOW.md.
+- amp_ch.gds (sha1 in AFE/layout/sim/flow/amp_ch.drc.json) by AFE/layout/amp/mk_amp_ch.py `lay=5` (+ amplib.py, blocks_amp.py, router.py; build data AFE/layout/amp/amp_ch.build.json, facts AFE/layout/amp/check_amp.json). Cin = 2 x 2 checkerboard of four 61.15 um pieces (7.4995 pF each, summing nodes vn / vp on the TOP plates, nothing under the plates); Cf1 pieces 8.45 um (150.15 fF; Cin : Cf1 = 99.90); the rest of the cell is the L2a cell (pair ABBA 2 x 16 x 50u/2u with poly-only dummies, six identical minimum-area pseudo-R transistors, P+ / N+ rings, native-Vt follower in its ring, park TGATE, one-shot, OR2).
+- Packing `lay=5` (FLOW.md section 8): Cin block 143.7 x 143.3 um (20 pF: 164.7 x 167.3); xm6 stands directly above sink1 (7 um lower); east column compacted (Cf2 + pseudo-R 3 beside Cin2); the lanes above the Cin block tightened (vp 2.5 um, ref 5.5 um, rec via 3 um, margin 1 um); Cf1 strip unchanged (24 um).
+- Block table (um2, check_amp.json; 20 pF -> 15 pF; F1 estimate 51,626 for the whole cell): Cin block 27,554 -> **20,592**; OTA pair + tail 8,499 -> 8,499; stage-1 mirror + xm6 9,628 -> 9,628; stage 2 + sinks 6,589 -> 6,589; MIM outside the Cin block 6,416 -> 6,336; small devices (pseudo-R, one-shot, OR2) 1,185 -> 1,185; sum of the blocks 59,871 -> **52,829**; cell bounding box 67,648 -> **62,606** (slot 63,270). 8 channels of amp_ch alone: 0.501 mm2 = 50 % of the 1000 x 1000 um outline (20 pF: 0.541 mm2).
+- Other files of the item: AFE/amp/spice/afe_params.spice (CF1V), AFE/layout/baseline/amp_*.json (15 pF) and *_cin20.json (20 pF, kept), AFE/layout/lvs/ (all five files regenerated, header "Options of this run" and the Cin lines changed), AFE/layout/accept_limits.json + ACCEPT.md (limit, R-3 text), README.md + AFE/adc/README.md (noise / Cin statements), AFE/layout/SPEC.md (Cin and Cf1 sizes, area line), AFE/layout/FLOW.md (section 8).
 
 ## 3. Commands run
-As in AFE/layout/FLOW.md section 2 (test cells mk_flowtest.py, flow.py drc / lvs / pex on them, mk_amp_ch.py, flow.py drc --gds AFE/layout/amp/amp_ch.gds --top amp_ch --out AFE/layout/amp/flow, flow.py lvs ... --ref AFE/layout/lvs/afe_chc.spice, check_amp.py,
-PEX feasibility run, gate.py L2a --gds AFE/layout/amp/amp_ch.gds --run).
+(repository root = the worktree .claude/worktrees/r6-amp-cin15 of branch worktree-r6-amp-cin15; R6 steps in the order of REVIEW.md)
+1. `git merge worktree-r4-amp-cin15` (conflicts in AFE/NOTES.md only: both findings sections and both Results-log rows kept; R5 was already on main, c3daf55).
+2. Step 1: `.param CF1V=150f` in AFE/amp/spice/afe_params.spice; `git mv AFE/layout/baseline/amp_* -> amp_*_cin20.*`, copy of AFE/layout/baseline_cin15/amp_* into AFE/layout/baseline/ (the `log` paths of the JSON files rewritten to AFE/layout/baseline/), `git rm AFE/layout/BLOCKED.md`.
+3. Step 2: noise limit in AFE/layout/accept_limits.json (`{"typ": 2.0, "ss-40": 2.0, "ff85": 2.2}`), `python3 AFE/layout/tb/compare.py --write-accept`, `--check-accept` ("equals"), `python3 AFE/layout/tb/compare.py --phase L2b --selftest` -> "93 PASS, 0 WARN, 0 FAIL, 0 missing"; text edits in ACCEPT.md ladder R-3, README.md, AFE/adc/README.md.
+4. R4 step 2: `python3 AFE/layout/scripts/mk_lvs_netlists.py --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v --cin 2,61.15,61.15` ("2 pieces 61.150 x 61.150 um, 14.9991 pF in total (-0.006 %)"), `python3 AFE/layout/scripts/check_lvs_netlists.py` -> "SUMMARY: A PASS, B PASS, C PASS".
+5. R4 step 3: `bash AFE/layout/scripts/kl.sh AFE/layout/amp/mk_amp_ch.py out=AFE/layout/amp gds=amp_ch.gds > AFE/layout/amp/mk_amp_ch.log 2>&1`; `python3 AFE/layout/scripts/flow.py drc --gds AFE/layout/amp/amp_ch.gds --top amp_ch`; `python3 AFE/layout/scripts/flow.py lvs --gds AFE/layout/amp/amp_ch.gds --top amp_ch --ref AFE/layout/lvs/afe_chc.spice`; `bash AFE/layout/scripts/kl.sh AFE/layout/amp/check_amp.py gds=AFE/layout/amp/amp_ch.gds build=AFE/layout/amp/amp_ch.build.json outjson=AFE/layout/amp/check_amp.json`; `python3 AFE/layout/scripts/floorplan.py check --gds amp_ch=AFE/layout/amp/amp_ch.gds` (17 PASS); `python3 AFE/layout/scripts/gate.py L2a`.
+6. Scratch trials (generator + DRC + LVS in $CLAUDE_JOB_DIR/tmp, not committed): `lay=3` with the new Cin block: 218.75 x 305.4 um, one net (t) unrouted (the 184 um high east column, not the Cin block, drove the height); `lay=5` first try with the column 1 um from pseudo-R 2: 16 DRC violations at one spot + LVS pin mismatch (fixed by `xgap` = 3 um); `lay=5` second try: DRC 0, LVS match.
+Failed or unrun on purpose: no PEX and no post-layout simulation (L2b), no `--run` of gate.py needed (DRC / LVS were run with flow.py on the final GDS).
 
 ## 4. Results
 | check | value | limit | PASS / WARN / FAIL | source log |
 |---|---|---|---|---|
-| DRC amp_ch (variant D) | 0 violations | 0 | PASS | AFE/layout/amp/flow/amp_ch.drc.json |
-| LVS amp_ch | Circuits match uniquely (46 devices, 14 pins) | match | PASS | AFE/layout/amp/flow/amp_ch.lvs.json |
-| slot (floorplan.py check item 5) | 219.25 x 385.25 um = 84,466 um2 | 220 x 263 um | **FAIL** | AFE/layout/amp/gate_L2a.log |
+| DRC amp_ch (variant D) | 0 violations | 0 | PASS | AFE/layout/sim/flow/amp_ch.drc.json |
+| LVS amp_ch | Circuits match uniquely (reference regenerated, Cin 2 x 61.15 um) | match | PASS | AFE/layout/sim/flow/amp_ch.lvs.json |
+| LVS references | A / B / C PASS | PASS | PASS | AFE/layout/lvs/check_lvs_netlists.log |
+| slot (floorplan.py check item 5) | 220.25 x 284.25 um = 62,606 um2 | 222 x 285 um | PASS | AFE/layout/sim/gate_L2a.log |
 | nothing under the four Cin plates | under_cin_clean true | clean | PASS | AFE/layout/amp/check_amp.json |
-| Cin : Cf1 ratio (formula of the netlists, ESTIMATE) | 99.972 | 100.0000 | PASS (within 0.03 %) | AFE/layout/amp/amp_ch.build.json |
+| Cin : Cf1 ratio (PDK formula of the netlists, ESTIMATE) | 99.90 (Cin 14.9991 pF, Cf1 150.15 fF) | 100 | PASS (-0.10 %, gain +0.009 dB) | build of the reference, AFE/layout/lvs/mk_lvs_netlists.log |
+| schematic gain 15 pF (typ / ff 85 / ss -40) | 60.05 / 60.06 / 60.04 dB | 60 +- 1 dB | PASS (no CF1V trim, change 0.00 dB) | AFE/layout/baseline/amp_ac.json |
+| schematic f_lo / f_hi | 0.246 / 0.281 / 0.288 Hz; 653 / 998 / 422 Hz | <= 0.5; >= 300 | PASS | AFE/layout/baseline/amp_ac.json |
+| schematic noise_d8 (0.5-300 Hz) | 1.890 / 2.139 / 1.732 uV | 2.0 / **2.2** / 2.0 | PASS (ff 85 C is the accepted miss of Decision 50) | AFE/layout/baseline/amp_noise.json |
+| schematic loop PM, THD, PSRR 50 Hz, power-up, reset | 79.6 / 76.9 / 81.4 deg; 0.042 / 2.40 / 0.057 %; 0.572 / 0.580 / 0.567; 0.24 / 0.10 / 0.62 mV; 2.97 / 1.72 / 5.79 ms | as ACCEPT.md section 3 | PASS | AFE/layout/baseline/amp_*.json |
+| compare.py --phase L2b --selftest (baseline vs itself) | 93 PASS, 0 WARN, 0 FAIL | 0 FAIL | PASS | AFE/layout/sim/post/compare_L2b_selftest.md (not committed) |
+| amp -> ADC at 15 pF (x2_s1 typ) | gain 999.28 V/V (-0.07 %), amp -> ADC +0.07 LSB; |INL| < 2.05 V 0.75 LSB | Decision 43 | PASS (whole-range INL 2.78 LSB = the known top-of-range effect) | AFE/adc/sim/x2_s1_typ_cin15.log |
+| wires of the summing nodes (um, 20 pF -> 15 pF) | vn 131 -> 131, vp 157 -> 158, vn2 124 -> 132, rec 21 -> 28, v1 401 -> 360, out 258 -> 295 | report | info | AFE/layout/amp/amp_ch.build.json |
+| clearance of the sensitive nets | vn 0.5 um (28 / 67 nodes < 2 um), vp 1.5 um (10 / 104), vn2 0.5 um (3 / 74; 20 pF 2.5 um, none) | report | WARN (vn2) | AFE/layout/amp/amp_ch.build.json |
 | native-Vt follower | DRC 0, LVS match | accepted by the organizer? unknown | open (ladder N) | AFE/layout/amp/flowtest/flow/lp_flow.*.json |
 | MIM terminal 1 | top plate | top plate | PASS | AFE/layout/amp/flowtest/flow/lp_flow.pex.spice |
-| PEX feasibility (L2b owns the real run) | 121 devices, 383 C, loads and runs one .op | runs | PASS | AFE/layout/amp/pex_feasibility.log |
 
 ## 5. Gate output
-Verbatim copy of AFE/layout/amp/gate_L2a.log (run by L2a on the final GDS; the floorplan line is the only FAIL):
+Verbatim output of `python3 AFE/layout/scripts/gate.py L2a` (after the final commit of the files below):
 ```
-gate.py L2a  (L2a --gds AFE/layout/amp/amp_ch.gds --run)
+gate.py L2a  (L2a)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-INFO  no open REVIEW.md item for L2a or an earlier phase
+PASS  open REVIEW.md items for L2a or an earlier phase (R1) are listed as handled in section 9 of a phase report
 PASS  "## L2a findings" section in AFE/layout/NOTES_L2.md
 PASS  Results-log row for L2a in AFE/layout/NOTES_L2.md
 --- amp_ch layout: AFE/layout/amp/amp_ch.gds
@@ -48,30 +62,38 @@ PASS  LVS report belongs to the current GDS (sha1)
 PASS  LVS reference AFE/layout/lvs/afe_chc.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
 PASS  LVS amp_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
-FAIL  floorplan.py check --gds amp_ch=AFE/layout/amp/amp_ch.gds: floorplan.py check: 16 PASS, 1 FAIL
-      -> DO: ACCEPT.md ladder A (area) or G-5 (pin side); failing lines: FAIL  5  as-built amp_ch 219.25 x 385.25 um fits its slot 220.00 x 263.00 um  see AFE/layout/ACCEPT.md ladder "area"
-GATE L2a: FAIL  (1 FAIL)
+PASS  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/r6-amp-cin15/AFE/layout/amp/amp_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
+GATE L2a: PASS  (0 FAIL)
 ```
 
 ## 6. Ladder decisions
-D-1 (off-grid shapes of the PDK pcells: snapped in the generator, FLOW.md section 4.1), L-1 (property error on the stage-2 pair and the 0.28u one-shot device: fixed in the drawing, `con_bet_fin=0` and four 0.5u/40u units). A (area): NOT applied, left to the next phase (the prompt of L2a allowed the FAIL).
-G-3 not needed (terminal order as F1 assumed).
+- **BLOCKED.md of R4 (content kept here, file removed by R6):** R4 step 1 simulated Cin = 15 pF (CF1V = 150f) before any layout and found one Decision 1 target missed: noise_d8 at ff 85 C 2.139 uV against 2.0 uV (typ 1.890, ss -40 1.732 pass); ladder R-3 only allowed 2.05 uV and only as a layout degradation, so no entry applied and R4 stopped (REVIEW.md R1 checkpoint). The options were: keep 15 pF and accept the miss (+7 %, area closes with a small re-pack), Cin about 17.5 pF (amp_ch about 300 um tall, 10 um from adc_h, second re-pack) or N = 4. The noise scales as 1 / sqrt(Cin) (noise_d8^2 = b / Cin, b = 69.8 uV^2 pF at ff 85), not the "few %" of Decision 48. **The user chose option 1 (Decision 50, REVIEW.md R6).** Evidence: AFE/layout/baseline_cin15/ (kept) and AFE/layout/baseline/ (same files).
+- **R-3 changed by REVIEW.md R6, not applied by the agent:** the ff 85 C noise limit is 2.2 uV (schematic and post-layout); the 2.05 uV allowance is gone. Cost: the hot-corner noise spec of Decision 1 is missed by about 7 % (accepted).
+- Ladder A (area): A-3 again (another packing of the same generator, `lay=5`); A-2 (adc_h 104 -> 100) was not available (adc_ch uses 103.67 um), A-1 (rotation) does not fit either way. No A-6 / A-7.
+- D, L, P, N: none. No other entry applied.
 
 ## 7. Deviations
-Pins: rec / ref on Metal5 at the top edge, vbn .. vrs on Metal3 at the top-left corner, sw_rec / sw_rec_b / rst_amp Metal2 on the west edge, vdd / vss Metal4 3 x 3 um at the top-right, out Metal3 on the bottom (inner) edge; Metal2 / Metal3 pins are 0.5 um wide;
-the channel is wider than the slot anyway, so L3a re-places the pin wires (ACCEPT.md G-5). Not drawn: the Metal1 vss guard around the summing-node connections (the router has no guard feature), two-dimensional centroid of the input pair (ABBA rows only), diffusion dummies
-(poly-only dummy lines instead: a dummy transistor is a device for netgen). `Bulk Tie` pcell option unusable (coerces W >= 0.42 um): own N+ / P+ ties. Full list: AFE/layout/FLOW.md section 4.
+- Pins as in the L2a cell (rec / ref Metal5 and bias pins at the top edge, sw_rec / sw_rec_b / rst_amp Metal2 on the west edge, vdd / vss Metal4 3 x 3 um at the east edge, out Metal3 on the bottom edge); `floorplan.py check` has no pin-side check for the cell, L3a places the pin wires inside the 2 um slot margin (ACCEPT.md G-5). Cell width 220.25 um leaves 1.75 um in the slot.
+- Cf1 is drawn 8.45 um (reference 8.445791 um, +0.05 %), the Cin pieces 61.15 um (reference 61.15): inside the 1 % LVS tolerance.
+- The lanes above the Cin block are closer than in the 20 pF cell (vp lane 2.5 um above the block, 2.0 um from the vn top plate A2; ref lane 5.5 um; rec via 3 um above the ref lane); DRC variant D accepts them. SPEC.md 3.2 item 5 (no other net within 2 um of vn / vp / vn2, Metal1 guard around the summing-node connections) is met for vn / vp only as before (vn 0.5 um at 28 nodes, the router has no guard feature): see section 8.
+- Not drawn (as in L2a): the Metal1 vss guard around the summing-node connections, a two-dimensional centroid of the input pair (ABBA rows only), diffusion dummies (poly-only dummy lines). Unchanged: `Bulk Tie` pcell option unusable, own N+ / P+ ties.
+- The 20 pF cell is no longer reproducible bit for bit by the committed generator (strip x positions changed by 1 um): `lay=3 cint=70.65 xd1=35 xd2=111 lanex=4.5 laney=9.5 lanet=4.0 capt=2` is its closest setting. The 20 pF GDS is in git history (commit 343eb85^ and earlier, 36cb8d8).
+- Documentation numbers that were NOT re-simulated at 15 pF: the ADC-inclusive noise figures of AFE/adc/README.md (1.71 / 1.89 / 1.59 uV, unfiltered codes 2.04 / 2.23 / 1.92 uV) are 20 pF numbers (marked ESTIMATE +15 % there); README.md quotes the Decision-8 figures of Decision 50.
 
 ## 8. Open issues and risks
-1. **Area**: 84,466 um2 vs the slot 57,860 um2; 8 channels of amp_ch alone = 0.676 mm2 = 68 % of the 1000 x 1000 um outline; the levers named in NOTES_L2.md (finger width 25 um instead of 50 um for xm3 / xm4 / xm6 / the pair, the 3 um gate landing pads and rings, the 60 um of white space right of row 4,
-   the stage-2 MIM column that is only 75 % full) are not used yet. See also the L1a report (section 8): with adc_ch at 33,564 um2 the chip does not fit even with perfect packing.
-2. Wire lengths of the summing nodes (ESTIMATE): vn about 290 um, vp 280, vn2 550 um (s2pair is on the other side of the cell from the stage-2 capacitor column), rec 280, v1 540: the first suspects if L2b misses f_hi / noise / PSRR (ladder R-2, R-3, R-6, R-8).
-3. vdd / vss are routed like signals (about 560 / 860 um of 0.5 um wire): IR drop for L2b; L3a replaces them by straps.
-4. The native-Vt device is unconfirmed by the organizer (ladder N).
+1. **L2b noise headroom at ff 85 C: 2.139 -> 2.2 uV = 2.8 %**. Each 1 % of parasitic capacitance on vn / vp adds about 1 % of noise (15 pF Cin: a 150 fF wire / ring capacitance is 1 %). The wires of vn / vp are as long as at 20 pF (131 / 158 um) but the capacitor is 25 % smaller, so the same wires cost 33 % more noise: if the post-layout noise misses, shorten vn / vp first (ladder R-3); there is NO height left to trade (item 3).
+2. **vn2**: 132 um of wire (124 um at 20 pF) and clearance 0.5 um with 3 nodes closer than 2 um to another net because Cin2, Cf2 and pseudo-R 3 now stand side by side in the compact east column. First suspect if L2b misses f_hi (ladder R-2: 300 .. 280 Hz pre-approved at ss -40, baseline 422 Hz) or the stage-2 noise.
+3. **The cell is full**: 284.25 of 285 um height (0.75 um), 220.25 of 222 um width. Layout fixes found by L2b must come from the lane stack above the Cin block (2.5 / 5.5 / 3 um offsets, DRC-minimum not explored), the 24 um strip under it (22 / 23 um fail `under_cin_clean`) or the east column; R3's final afe_dig height (80 um) is already in the floorplan, adc_ch (R5) has no height to give.
+4. Coupling vp - vn: the vp north lane is 2.0 um above the top plate A2 of Cin1 (vn) and the ref lane 2 .. 3 um above the vp lane: ask the PEX coupling table of L2b for these (a fraction of a fF per um; Cin 15 pF).
+5. vdd / vss are routed like signals (383 / 783 um of 0.5 um wire): IR drop for L2b; L3a replaces them by straps. The native-Vt device is unconfirmed (ladder N). The baselines are now the 15 pF ones; the 20 pF ones are *_cin20 (do not mix them in compare.py).
+6. L2b / L1b must run on THIS cell (REVIEW.md R1: not on the old cells); R3 (afe_dig 820 x 80 um) is the other item still open before L3a.
 
 ## 9. REVIEW.md items handled
-None (REVIEW.md had no item when L2a ran and none when this conversion was written).
+- **R1** (8-channel closure plan, all phases): order followed, no L2b / L1b / L3a work on the old amp_ch; the CHECKPOINT of R1 (a cell that misses its budget by more than 3 %, or R4's simulations failing a Decision 1 target) applied once (R4's BLOCKED.md, resolved by R6) and no further re-pack was needed: amp_ch fits its slot after the first attempt of R6.
+- **R4** (Cin 20 -> 15 pF, then amp_ch <= 222 x 285 um): step 1 (simulations before layout) by the R4 session (branch worktree-r4-amp-cin15, merged here: AFE/layout/baseline_cin15/, AFE/adc/sim/x2_s1_typ_cin15.log, results in section 4); step 2 (LVS reference) and step 3 (re-layout) by R6; the amp baselines of AFE/layout/baseline/ were replaced by the 15 pF ones (20 pF kept as *_cin20.json), afe_params.spice CF1V = 150f, noise statements updated. Protected files changed by this item: AFE/amp/spice/afe_params.spice, AFE/layout/accept_limits.json, AFE/layout/ACCEPT.md (see R6).
+- **R6** (Cin 15 pF adopted, ff 85 C noise 2.2 uV, Decision 50): 1. R4's branch merged on top of main (R5 already merged); CF1V = 150f; 20 pF baselines moved to *_cin20.json, AFE/layout/baseline_cin15/ copied into AFE/layout/baseline/ with the `log` paths fixed; BLOCKED.md removed, its content is in section 6. 2. Limits: noise_d8_post_uv 2.0 / 2.0 / 2.2 (typ / ss -40 / ff 85) in AFE/layout/accept_limits.json and the same table in AFE/layout/ACCEPT.md (`--write-accept`, `--check-accept` equal); ladder R-3 text updated. 3. R4 step 2 (`mk_lvs_netlists.py ... --cin 2,61.15,61.15`, 61.15 um is the 5 nm grid value of the formula, `check_lvs_netlists.py` PASS) and step 3 (amp_ch 220.25 x 284.25 um, the Cf1 strip was NOT the lever: it stayed at 24 um; the levers were the Cin block, xm6 7 um lower, the compact east column and the tighter lanes). 4. Noise statements: README.md and AFE/adc/README.md (Cin 15 pF, 1.89 / 2.14 / 1.73 uV, ff 85 C accepted by Decision 50); info.yaml quotes none. Files changed by this item that are protected: AFE/amp/spice/afe_params.spice, AFE/layout/accept_limits.json, AFE/layout/ACCEPT.md; baselines: AFE/layout/baseline/amp_*.
+- R2, R3, R5: not items of this phase (R2 and R5 are closed; R3 open for L1d).
 
 ## 10. Files changed and commit
-AFE/layout/amp/ (mk_amp_ch.py, amplib.py, blocks_amp.py, router.py, amp_ch.gds, amp_ch.build.json, check_amp.py / .json / .log, mk_flowtest.py, mk_mimtest.py, drcsum.py, shapes_at.py, flow/, flowtest/, pex_feasibility/, gate_flow/, drc.log, lvs.log),
-AFE/layout/FLOW.md, AFE/layout/NOTES_L2.md. Commits 16fe280 (checkpoint) and 1b3076a (L2a final) on branch worktree-l2a-amp = main at the start of L1a. This report was written by L1a (commit 36cb8d8 on branch worktree-l1a-adc).
+AFE/layout/amp/ (mk_amp_ch.py, blocks_amp.py, amp_ch.gds, amp_ch.build.json, check_amp.json, mk_amp_ch.log, flow/), AFE/layout/sim/flow/amp_ch.* (DRC / LVS reports of the final GDS), AFE/layout/sim/gate_L2a.log, AFE/layout/lvs/ (5 files + logs), AFE/layout/baseline/amp_* (15 pF) and amp_*_cin20.* (20 pF), AFE/layout/baseline_cin15/ and AFE/adc/sim/x2_s1_typ_cin15.* (from R4's branch), AFE/amp/spice/afe_params.spice, AFE/layout/accept_limits.json, AFE/layout/ACCEPT.md, AFE/layout/SPEC.md, AFE/layout/FLOW.md (section 8), AFE/layout/reports/L2a.md, AFE/NOTES.md (R4 + R6 findings, Results-log rows), README.md, AFE/adc/README.md; AFE/layout/BLOCKED.md removed.
+Commits on branch worktree-r6-amp-cin15: 40a3faf (merge of R4), 1cffa5e (adoption, limits, READMEs), 343eb85 (re-layout), b08021f (LVS references), 33f08fc (documentation, this report with the gate output; the commit that adds this hash follows it).

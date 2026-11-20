@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 22:16
+   job pu_schprdiff_ff85: exit 0, 0 s
+RESULT amp_pwrup_junction ff85: t_wait_s=0.2  vout_before_v=1.14144  vout_100ms_v=1.64918  vout_1s_v=1.64906  err_1s_mv=0.94002  codes_from_mid_1s=1.16676  vbn_end_v=0.508889  vrs_end_v=1.22329

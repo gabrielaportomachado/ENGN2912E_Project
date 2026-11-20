@@ -2,41 +2,41 @@
  "check": "amp_noise",
  "corners": {
   "ff85": {
-   "date": "2026-11-20 07:37",
+   "date": "2026-11-20 22:15",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_ff85.log",
    "values": {
-    "g_mid_db": 60.0605,
-    "noise_d8_uv": 1.8469224709033947,
-    "noise_real_uv": 1.5798375137365896
+    "g_mid_db": 60.0574,
+    "noise_d8_uv": 2.1392073241846115,
+    "noise_real_uv": 1.7322744952203895
    }
   },
   "ss-40": {
-   "date": "2026-11-20 07:37",
+   "date": "2026-11-20 22:15",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_ss-40.log",
    "values": {
-    "g_mid_db": 60.0413,
-    "noise_d8_uv": 1.5398193962887723,
-    "noise_real_uv": 1.321790136198119
+    "g_mid_db": 60.0382,
+    "noise_d8_uv": 1.7320751045708722,
+    "noise_real_uv": 1.3864888802105961
    }
   },
   "typ": {
-   "date": "2026-11-20 07:37",
+   "date": "2026-11-20 22:15",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/baseline/amp_noise_typ.log",
    "values": {
-    "g_mid_db": 60.0559,
-    "noise_d8_fn1_uv": 4.719500099929376,
-    "noise_d8_uv": 1.6675278287543658,
-    "noise_real_fn1_uv": 4.636772773435678,
-    "noise_real_uv": 1.4182431427712643
+    "g_mid_db": 60.053,
+    "noise_d8_fn1_uv": 5.015191961799018,
+    "noise_d8_uv": 1.8903923371998417,
+    "noise_real_fn1_uv": 4.879206791856152,
+    "noise_real_uv": 1.4953675955900854
    }
   }
  },

@@ -1,0 +1,10 @@
+== amp_loop  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:37
+   job loop_sch_ss-40: exit 0, 0 s
+   job loop_sch_ss-40_cx2: exit 0, 0 s
+   job loop_sch_ss-40_cx5: exit 0, 0 s
+   job loop_sch_ss-40_cx10: exit 0, 0 s
+   job hf_sch_ss-40_cx0: exit 0, 0 s
+   job hf_sch_ss-40_cx2: exit 0, 0 s
+   job hf_sch_ss-40_cx5: exit 0, 0 s
+   job hf_sch_ss-40_cx10: exit 0, 0 s
+RESULT amp_loop ss-40: t_100hz_db=60.2938  fu_hz=199394  pm_deg=81.0839  pm_cx2p_deg=74.9991  hfdev_cx2p_db=2.27664  pm_cx5p_deg=67.3551  hfdev_cx5p_db=6.09373  pm_cx10p_deg=58.2137  hfdev_cx10p_db=10.6519
