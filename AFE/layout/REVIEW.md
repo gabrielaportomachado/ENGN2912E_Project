@@ -15,6 +15,24 @@ The monitoring session sets `Status: closed` once it has seen the item handled.
 
 ## Items
 
-(none yet)
+### R1 (2026-11-20) to all: 8-channel closure plan (Decision 48), order of work
+Status: open
+The as-built cells do not fit 8 channels in the 1000 x 1000 um outline (L1a report section 8: amp_ch 218.75 x 309.25, adc_ch 265.85 x 126.25 against the 235 x 375 um channel slot). The user keeps N = 8 (Decision 48). Do the items in this order, one phase session each, gate + report + push after each: R2 (floorplan) -> R3 (afe_dig re-harden) -> R4 (Cin 15 pF, then amp_ch rework) -> R5 (adc_ch re-pack) -> then L2b and L1b on the NEW cells -> L3a. Do not run L2b / L1b / L3a on the current cells (wasted PEX). CHECKPOINT: if after R4 or R5 a cell still misses its budget by more than 3 % in either dimension, or R4's simulations fail a Decision 1 target, write AFE/layout/BLOCKED.md with the as-built sizes / numbers and stop that line (the user decides between more rework and N = 4, ladder A-6); the other items may continue.
+
+### R2 (2026-11-20) to L3a: tightened floorplan for 8 channels
+Status: open
+Run `python3 AFE/layout/scripts/floorplan.py build --set ring=26 bias_corr=12 strap_corr=25 dig_h=80 ch_pitch=237 adc_h=104` (checked by the monitoring session: channel slot 237 x 397 um, amp_ch <= 222 x 285, adc_ch <= 222 x 104, afe_dig 820 x 80 at 51 % utilisation, bias_genc <= 108 x 110; `floorplan.py check` gives 15 PASS and ONE FAIL: 3e, pins DOUT_IN / VDD touch on the west edge). Fix 3e by changing only the west pin parameters (pin_pitch_w / pin_y0_w or the pin order inside the organizer template rules) until `floorplan.py check` is all PASS; update SPEC.md to the new numbers; commit floorplan.json + SPEC.md. The amp / adc split of the 389 um (amp_h + adc_h) may be moved by up to 10 um between the two cells (`adc_h`) once R4 / R5 know their real heights; the outline stays 1000 x 1000 um.
+
+### R3 (2026-11-20) to L1d: re-harden afe_dig at 820 x 80 um
+Status: open
+Re-run the frozen L1d recipe with the macro height 80 um (die 820 x 80, pins per the new floorplan.json from R2). All L1d checks again: STA at 5 corners, tap-delay limits (a) >= 21.0 ns, (b)/(c) >= 20.0 ns, max-slew / max-cap 0, KLayout DRC variant D 0, run_tb_audit.sh gls (only the 4 known assertions), LVS, regenerate the LVS top with --dig-netlist. If the routing fails at 80 um, try 85 / 90 um and report; each 10 um above 80 must come out of adc_h or amp_h (tell R5 / R4 in the report). Merge branch worktree-l1d-dig into main first if it is not merged.
+
+### R4 (2026-11-20) to L2a (then L2b): Cin 20 pF -> 15 pF, then amp_ch to <= 222 x 285 um
+Status: open
+Decision 48 (circuit change approved by the user): in AFE/amp/spice/afe_params.spice set `.param CF1V=150f` (was 200f); CIN_RATIO stays 100, so Cin1 = Cin2 = 15 pF and the stage-1 gain stays 100 (60 dB channel). Nothing else in the circuit changes. Step 1, simulate BEFORE any layout (schematic, typ 27 / ff 85 / ss -40, common rule 8, the golden testbenches AFE/layout/tb/tb_amp_*.py with --netlist schematic): gain (60 +- 1 dB; if the parasitic absorbed by CF1V moves it by more than 0.3 dB, trim CF1V in 5 fF steps and say so), f_lo <= 0.5 Hz, f_hi >= 300 Hz, noise <= 2 uV (0.5-300 Hz), PM, THD, PSRR, reset recovery with the one-shot, power-up with RST_AMP 100 ms, and AFE/adc/scripts/x2_s1.py typ (amp -> ADC). Write the new numbers next to the 20 pF baselines; then REPLACE the amp baselines in AFE/layout/baseline/ with the 15 pF ones (keep the old files as *_cin20.json) so that compare.py / gate.py use them. Update the noise / f_lo statements in AFE/adc/README.md and info.yaml / README.md if they quote them. If any Decision 1 target fails: stop, BLOCKED.md (checkpoint of R1). Step 2: regenerate the LVS reference with `mk_lvs_netlists.py --cin 2,W,L` for two pieces of 7.5 pF each on the 5 nm grid (W = L chosen for capacitance, as F1 did; state it), re-run check_lvs_netlists.py. Step 3: re-run the amp_ch generator with the smaller Cin block and the full cell width 222 um (ladder A-3), target <= 222 x 285 um, DRC 0, LVS match; keep all L2a rules (summing nodes on the top plates, nothing under the plates, identical minimum-area pseudo-R devices, ABBA pair with dummies). Report the block table vs the old one.
+
+### R5 (2026-11-20) to L1a: adc_ch re-pack to <= 222 x 104 um
+Status: open
+Re-pack adc_ch (no circuit change) to the budget of the new floorplan (R2; 222 x 104 um, or the adc_h that R2 / R3 / R4 report). The DAC array (about 8.5k um2) and Cref (about 3.6-3.8k um2) are at their estimate; the overshoot is in the driver rows (3,567 um2 vs F1 391), the comparator (4,791 vs 877) and vhalf (2,813 vs 1,415), plus packing: use the L1a report's own proposals (multi-finger driver rows, the column below Cref, vhalf pitch 2.2 um instead of 3 um, cell width = 222 um) and keep the comparator symmetric. DRC 0, LVS match against AFE/layout/lvs/adc_ch.spice, all L1a keep-outs. Report the block table vs the L1a one.
 
 
