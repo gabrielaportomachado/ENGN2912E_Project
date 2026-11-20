@@ -279,7 +279,7 @@ class Block:
 M2, M3, M4 = 0, 1, 2
 
 
-def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=None, wide_ring=False):
+def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=None, g_net=None, bulk_net=None, ring=True, dummies=False, params=None, ring_gap=None, wide_ring=False, multi=False):
     if ring_gap is None:
         ring_gap = KNOB['rg']
     """one multi-finger transistor array (nf >= 2) as a block.
@@ -304,7 +304,8 @@ def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=N
     nd = len(Dn)
     if isinstance(d_nets, str):
         d_nets = [d_nets] * nd
-    assert len(d_nets) == nd and len(set(d_nets)) == 1, 'dev_block: one drain net per block'
+    # multi=True (L2a rework, tail-group merge): every drain strip may have its OWN net; each stub then ends in its own Metal2 pad on an integer x (no common rail)
+    assert len(d_nets) == nd and (multi or len(set(d_nets)) == 1), 'dev_block: one drain net per block (multi=True for distinct nets)'
     dnet = d_nets[0]
     # S rail
     rail_y1, rail_y2 = cb - 2.0, cb - 0.5
@@ -326,21 +327,29 @@ def dev_block(ly, name, kind, w, l, nf, x_origin_hint=0.0, s_net='vss', d_nets=N
     # drains: Via1 pad at the strip top, Metal2 stub up to the rail
     ry = bc + 1.0
     first = True
-    for d in Dn:
+    for di, d in enumerate(Dn):
         xc = (d[0] + d[2]) / 2.0
         yv = d[3] - 0.45
         B.rect('metal1', xc - 0.25, yv - 0.25, xc + 0.25, yv + 0.25)
         k.rect(B.cell, 'via1', xc - 0.13, yv - 0.13, xc + 0.13, yv + 0.13)
         B.rect('metal2', xc - 0.25, yv - 0.25, xc + 0.25, ry + 0.25)
-        B.fixed_shape(M2, (xc - 0.25, yv - 0.25, xc + 0.25, ry + 0.25), dnet)
-    xa = (Dn[0][0] + Dn[0][2]) / 2.0 - 0.25
-    xb = (Dn[-1][0] + Dn[-1][2]) / 2.0 + 0.25
-    if xb - xa < 3.0:
-        xm = (xa + xb) / 2.0
-        xa, xb = xm - 1.5, xm + 1.5
-    B.rect('metal2', xa, ry - 0.25, xb, ry + 0.25)
-    B.fixed_shape(M2, (xa, ry - 0.25, xb, ry + 0.25), dnet)
-    B.term(dnet, 'metal2', (xa, ry - 0.25, xb, ry + 0.25))
+        B.fixed_shape(M2, (xc - 0.25, yv - 0.25, xc + 0.25, ry + 0.25), d_nets[di] if multi else dnet)
+        if multi:
+            xi = rint(xc)
+            B.rect('metal2', min(xc, xi) - 0.25, ry - 0.25, max(xc, xi) + 0.25, ry + 0.25)
+            B.fixed_shape(M2, (min(xc, xi) - 0.25, ry - 0.25, max(xc, xi) + 0.25, ry + 0.25), d_nets[di])
+            B.term(d_nets[di], 'metal2', (xi - 0.25, ry - 0.25, xi + 0.25, ry + 0.25))
+    if not multi:
+        xa = (Dn[0][0] + Dn[0][2]) / 2.0 - 0.25
+        xb = (Dn[-1][0] + Dn[-1][2]) / 2.0 + 0.25
+        if xb - xa < 3.0:
+            xm = (xa + xb) / 2.0
+            xa, xb = xm - 1.5, xm + 1.5
+        B.rect('metal2', xa, ry - 0.25, xb, ry + 0.25)
+        B.fixed_shape(M2, (xa, ry - 0.25, xb, ry + 0.25), dnet)
+        B.term(dnet, 'metal2', (xa, ry - 0.25, xb, ry + 0.25))
+    else:
+        xb = max(d[2] for d in Dn)
     # dummy poly lines at both ends (poly only, over field oxide: not devices)
     if dummies:
         pl = min(D.info.params.get('l_gate', l), 2.0)
