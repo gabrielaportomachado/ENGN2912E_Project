@@ -1,0 +1,10 @@
+== amp_loop  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job loop_sch_rl8811b8_ss-40: exit 0, 0 s
+   job loop_sch_rl8811b8_ss-40_cx2: exit 0, 0 s
+   job loop_sch_rl8811b8_ss-40_cx5: exit 0, 0 s
+   job loop_sch_rl8811b8_ss-40_cx10: exit 0, 0 s
+   job hf_sch_rl8811b8_ss-40_cx0: exit 0, 0 s
+   job hf_sch_rl8811b8_ss-40_cx2: exit 0, 0 s
+   job hf_sch_rl8811b8_ss-40_cx5: exit 0, 0 s
+   job hf_sch_rl8811b8_ss-40_cx10: exit 0, 0 s
+RESULT amp_loop ss-40: t_100hz_db=58.5294  fu_hz=189495  pm_deg=81.3742  pm_cx2p_deg=75.631  hfdev_cx2p_db=2.27419  pm_cx5p_deg=68.3933  hfdev_cx5p_db=6.09515  pm_cx10p_deg=59.6349  hfdev_cx10p_db=10.6575

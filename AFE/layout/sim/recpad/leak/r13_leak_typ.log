@@ -1,0 +1,3 @@
+== r13_leak  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job leak_typ: exit 0, 0 s
+RESULT r13_leak typ: i_rec_to_pad_0v_pa=-0.000596967  i_d2_0v_pa=-5.96967e-23  i_d3_0v_pa=-0.000596967  i_rec_to_pad_1.65v_pa=-0.110134  i_d2_1.65v_pa=-0.00101022  i_d3_1.65v_pa=-0.000431966  i_rec_to_pad_3.3v_pa=-0.0923706  i_d2_3.3v_pa=-0.00117523  i_d3_3.3v_pa=-4.14205e-17  cap_1hz_pf=2.87506  cap_100hz_pf=2.87506

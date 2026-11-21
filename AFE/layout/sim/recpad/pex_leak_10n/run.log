@@ -1,0 +1,166 @@
+### 07:03:10 AFE/layout/tb/tb_amp_ac.py
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 0 s
+RESULT amp_ac typ: idd_ua=74.44  vout_v=1.65064  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=59.8393  g_pk_db=59.8395  f_lo_hz=0.241395  f_hi_hz=634.431  g_300_db=58.9617  g_0p5_db=59.0164  v1_v=1.64885  g1_mid_db=39.8465  hf_1k=-5.40276  hf_3k=-13.6595  hf_10k=-23.9724  hf_30k=-33.7473  hf_100k=-46.1477  hf_300k=-58.9084  hf_1M=-66.6452
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac.json
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 0 s
+RESULT amp_ac ff85: idd_ua=118.821  vout_v=1.65096  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=59.8202  g_pk_db=59.8202  f_lo_hz=0.275664  f_hi_hz=972.498  g_300_db=59.4195  g_0p5_db=58.7421  v1_v=1.64857  g1_mid_db=39.8304  hf_1k=-3.12205  hf_3k=-10.1935  hf_10k=-20.2724  hf_30k=-29.9324  hf_100k=-41.7422  hf_300k=-54.7279  hf_1M=-65.2227
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac.json
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 0 s
+RESULT amp_ac ss-40: idd_ua=47.1427  vout_v=1.65008  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8436  g_pk_db=59.8442  f_lo_hz=0.28324  f_hi_hz=408.493  g_300_db=57.9767  g_0p5_db=58.7354  v1_v=1.64908  g1_mid_db=39.8584  hf_1k=-8.42545  hf_3k=-17.3778  hf_10k=-27.8087  hf_30k=-37.7267  hf_100k=-50.7101  hf_300k=-61.7746  hf_1M=-66.7478
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac.json
+### 07:03:14 AFE/layout/tb/tb_amp_noise.py
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job n_pex83fcca1f2cac_rl4d8c35_typ_real: exit 0, 0 s
+   job n_pex83fcca1f2cac_rl4d8c35_typ_real_fn1: exit 0, 0 s
+RESULT amp_noise typ: noise_real_uv=1.50442  g_mid_db=59.8393  noise_real_fn1_uv=4.90999
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_noise.json
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job n_pex83fcca1f2cac_rl4d8c35_ff85_real: exit 0, 0 s
+RESULT amp_noise ff85: noise_real_uv=1.74353  g_mid_db=59.8202
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_noise.json
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job n_pex83fcca1f2cac_rl4d8c35_ss-40_real: exit 0, 0 s
+RESULT amp_noise ss-40: noise_real_uv=1.39409  g_mid_db=59.8434
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_noise.json
+### 07:03:14 AFE/layout/tb/tb_amp_psrr.py
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job psrr_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 0 s
+RESULT amp_psrr typ: supply_gain_50hz=0.637396  supply_gain_60hz=0.636536  supply_gain_300hz=0.581848  supply_gain_1khz=0.361693
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_psrr.json
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job psrr_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 0 s
+RESULT amp_psrr ff85: supply_gain_50hz=0.666192  supply_gain_60hz=0.665768  supply_gain_300hz=0.639082  supply_gain_1khz=0.478104
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_psrr.json
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job psrr_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 0 s
+RESULT amp_psrr ss-40: supply_gain_50hz=0.618901  supply_gain_60hz=0.616975  supply_gain_300hz=0.509491  supply_gain_1khz=0.256396
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_psrr.json
+### 07:03:15 AFE/layout/tb/tb_amp_thd.py
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job thd_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 3 s
+RESULT amp_thd typ: thd_pct=0.0398353  out_max_v=2.1655  out_min_v=1.18038  gain_db=59.8201  hd2_dbc=-72.6527  hd3_dbc=-69.8672  out_mean_v=1.67286
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_thd.json
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job thd_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 3 s
+RESULT amp_thd ff85: thd_pct=0.943651  out_max_v=2.20529  out_min_v=1.23729  gain_db=59.7511  hd2_dbc=-44.6902  hd3_dbc=-46.2607  out_mean_v=1.71371
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_thd.json
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job thd_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 3 s
+RESULT amp_thd ss-40: thd_pct=0.0518808  out_max_v=2.16351  out_min_v=1.17853  gain_db=59.8217  hd2_dbc=-73.8579  hd3_dbc=-66.4689  out_mean_v=1.67095
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_thd.json
+### 07:03:23 AFE/layout/tb/tb_amp_loop.py
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job loop_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 1 s
+RESULT amp_loop typ: t_100hz_db=48.1676  fu_hz=250067  pm_deg=439.303
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_loop.json
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job loop_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 0 s
+RESULT amp_loop ff85: t_100hz_db=46.9421  fu_hz=356938  pm_deg=436.631
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_loop.json
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job loop_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 1 s
+RESULT amp_loop ss-40: t_100hz_db=48.5983  fu_hz=187065  pm_deg=441.133
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_loop.json
+### 07:03:25 AFE/layout/tb/tb_amp_pwrup.py
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 2 s
+RESULT amp_pwrup typ: t_wait_s=0.2  vout_before_v=2.7374  vout_100ms_v=1.49197  vout_1s_v=1.61994  err_1s_mv=30.0597  codes_from_mid_1s=37.3104  vbn_end_v=0.647681  vrs_end_v=1.02961
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup.json
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pex83fcca1f2cac_rl4d8c35_ff85: exit 0, 1 s
+RESULT amp_pwrup ff85: t_wait_s=0.2  vout_before_v=1.14933  vout_100ms_v=1.49065  vout_1s_v=1.63191  err_1s_mv=18.0925  codes_from_mid_1s=22.4566  vbn_end_v=0.508889  vrs_end_v=1.22373
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup.json
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pex83fcca1f2cac_rl4d8c35_ss-40: exit 0, 1 s
+RESULT amp_pwrup ss-40: t_wait_s=1.5  vout_before_v=2.80545  vout_100ms_v=1.50749  vout_1s_v=1.6303  err_1s_mv=19.7043  codes_from_mid_1s=24.4573  vbn_end_v=0.804863  vrs_end_v=0.81561
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup.json
+### 07:03:29 AFE/layout/tb/tb_amp_reset.py
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_1m: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_0: exit 0, 9 s
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_10m: exit 0, 15 s
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_100m: exit 0, 40 s
+RESULT amp_reset typ: t_fs_ms_os0=2.96506  peak_mv_os0=272.269  rel_step_mv_os0=-204.41  t_1mv_s_os0=4.82677  final_v_os0=1.64938  drift_mv_s_os0=1.32071  resid_end_mv_os0=0.110164  t_fs_ms_os1m=2.99632  peak_mv_os1m=255.158  rel_step_mv_os1m=-192.515  t_1mv_s_os1m=5.001  final_v_os1m=1.64906  drift_mv_s_os1m=1.71903  resid_end_mv_os1m=0.134583  t_fs_ms_os10m=3.06147  peak_mv_os10m=275.392  rel_step_mv_os10m=-254.112  t_1mv_s_os10m=5.89026  final_v_os10m=1.65062  drift_mv_s_os10m=0.919  resid_end_mv_os10m=0.000526828  t_fs_ms_os100m=3.13188  peak_mv_os100m=222.282  rel_step_mv_os100m=-127.542  t_1mv_s_os100m=7.21753  final_v_os100m=1.65074  drift_mv_s_os100m=-8.70824  resid_end_mv_os100m=0.00110906
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset.json
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:04  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_0: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_1m: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_10m: exit 0, 14 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_100m: exit 0, 41 s
+RESULT amp_reset ff85: t_fs_ms_os0=1.69878  peak_mv_os0=292.351  rel_step_mv_os0=-297.176  t_1mv_s_os0=4.47069  final_v_os0=1.65009  drift_mv_s_os0=0.897223  resid_end_mv_os0=0.0749828  t_fs_ms_os1m=1.71188  peak_mv_os1m=288.277  rel_step_mv_os1m=-292.909  t_1mv_s_os1m=4.61009  final_v_os1m=1.64997  drift_mv_s_os1m=1.09432  resid_end_mv_os1m=0.0872708  t_fs_ms_os10m=1.66062  peak_mv_os10m=291.776  rel_step_mv_os10m=-291.322  t_1mv_s_os10m=2.93337  final_v_os10m=1.65098  drift_mv_s_os10m=-0.507644  resid_end_mv_os10m=0.00442518  t_fs_ms_os100m=1.68462  peak_mv_os100m=323.507  rel_step_mv_os100m=-325.664  t_1mv_s_os100m=7.37772  final_v_os100m=1.65109  drift_mv_s_os100m=-5.28818  resid_end_mv_os100m=0.00142428
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset.json
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:05  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_0: exit 0, 10 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_1m: exit 0, 10 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_10m: exit 0, 16 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_100m: exit 0, 43 s
+RESULT amp_reset ss-40: t_fs_ms_os0=6.00124  peak_mv_os0=238.966  rel_step_mv_os0=-54.131  t_1mv_s_os0=3.0858  final_v_os0=1.64996  drift_mv_s_os0=0.416269  resid_end_mv_os0=0.0241891  t_fs_ms_os1m=6.01894  peak_mv_os1m=247.444  rel_step_mv_os1m=-54.1138  t_1mv_s_os1m=2.87999  final_v_os1m=1.64998  drift_mv_s_os1m=0.39409  resid_end_mv_os1m=0.0209294  t_fs_ms_os10m=5.88262  peak_mv_os10m=245.702  rel_step_mv_os10m=0.00294  t_1mv_s_os10m=1.60808  final_v_os10m=1.6502  drift_mv_s_os10m=0.308544  resid_end_mv_os10m=0.000126138  t_fs_ms_os100m=6.01205  peak_mv_os100m=235.087  rel_step_mv_os100m=-41.346  t_1mv_s_os100m=6.12749  final_v_os100m=1.65026  drift_mv_s_os100m=-4.25629  resid_end_mv_os100m=0.000450417
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset.json
+### 07:06:01 AFE/layout/tb/tb_amp_reset.py --os 10m,100m --host-rst 0.1
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:06  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_10m: exit 0, 15 s
+   job rs_pex83fcca1f2cac_rl4d8c35_typ_100m: exit 0, 42 s
+RESULT amp_reset_host typ: t_fs_ms_os10m=2.98898  peak_mv_os10m=171.366  rel_step_mv_os10m=-169.251  t_1mv_s_os10m=7.6351  final_v_os10m=1.65073  drift_mv_s_os10m=-3.87279  resid_end_mv_os10m=0.0149998  t_fs_ms_os100m=3.01174  peak_mv_os100m=171.265  rel_step_mv_os100m=-169.182  t_1mv_s_os100m=9.14847  final_v_os100m=1.65074  drift_mv_s_os100m=-11.4925  resid_end_mv_os100m=0.0014993
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host.json
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:06  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_10m: exit 0, 14 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_100m: exit 0, 43 s
+RESULT amp_reset_host ff85: t_fs_ms_os10m=1.69423  peak_mv_os10m=189.606  rel_step_mv_os10m=-189.431  t_1mv_s_os10m=7.43424  final_v_os10m=1.65107  drift_mv_s_os10m=-3.82964  resid_end_mv_os10m=0.0104344  t_fs_ms_os100m=1.72672  peak_mv_os100m=189.495  rel_step_mv_os100m=-189.335  t_1mv_s_os100m=9.13851  final_v_os100m=1.65109  drift_mv_s_os100m=-10.7241  resid_end_mv_os100m=0.000320299
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host.json
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:07  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_10m: exit 0, 16 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ss-40_100m: exit 0, 44 s
+RESULT amp_reset_host ss-40: t_fs_ms_os10m=5.90695  peak_mv_os10m=164.018  rel_step_mv_os10m=-154.837  t_1mv_s_os10m=6.5025  final_v_os10m=1.65023  drift_mv_s_os10m=-3.57531  resid_end_mv_os10m=0.000731916  t_fs_ms_os100m=5.83732  peak_mv_os100m=165.25  rel_step_mv_os100m=-156.351  t_1mv_s_os100m=7.65059  final_v_os100m=1.65026  drift_mv_s_os100m=-9.22408  resid_end_mv_os100m=0.0027132
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host.json
+### 07:08:10 AFE/layout/tb/tb_amp_ac.py --junction
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pexe3100c69eb97_rl4d8c35_typ: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl4d8c35_typ: exit 0, 0 s
+RESULT amp_ac_junction typ: idd_ua=74.4758  vout_v=1.90481  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=59.8105  g_pk_db=59.8123  f_lo_hz=nan  f_hi_hz=636.161  g_300_db=58.9436  g_0p5_db=59.8123  v1_v=1.61699  g1_mid_db=39.8338  hf_1k=-5.38749  hf_3k=-13.6422  hf_10k=-23.9548  hf_30k=-33.7296  hf_100k=-46.1295  hf_300k=-58.8842  hf_1M=-66.6026
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac_junction.json
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pexe3100c69eb97_rl4d8c35_ff85: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl4d8c35_ff85: exit 0, 0 s
+RESULT amp_ac_junction ff85: idd_ua=118.821  vout_v=1.65115  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=59.789  g_pk_db=59.7925  f_lo_hz=0.095239  f_hi_hz=975.117  g_300_db=59.3984  g_0p5_db=59.6495  v1_v=1.64851  g1_mid_db=39.8156  hf_1k=-3.10683  hf_3k=-10.1736  hf_10k=-20.2515  hf_30k=-29.9113  hf_100k=-41.7205  hf_300k=-54.7023  hf_1M=-65.1894
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac_junction.json
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job settle_pexe3100c69eb97_rl4d8c35_ss-40: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl4d8c35_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=47.1796  vout_v=1.95945  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8162  g_pk_db=59.8242  f_lo_hz=nan  f_hi_hz=408.991  g_300_db=57.9604  g_0p5_db=59.8204  v1_v=1.6131  g1_mid_db=39.848  hf_1k=-8.40875  hf_3k=-17.3598  hf_10k=-27.7905  hf_30k=-37.7081  hf_100k=-50.6895  hf_300k=-61.7306  hf_1M=-66.6768
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_ac_junction.json
+### 07:08:14 AFE/layout/tb/tb_amp_pwrup.py --junction
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pexe3100c69eb97_rl4d8c35_typ: exit 0, 1 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.45686  vout_100ms_v=1.46716  vout_1s_v=1.46917  err_1s_mv=180.831  codes_from_mid_1s=224.45  vbn_end_v=0.647681  vrs_end_v=1.02961
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pexe3100c69eb97_rl4d8c35_ff85: exit 0, 1 s
+RESULT amp_pwrup_junction ff85: t_wait_s=0.2  vout_before_v=1.14921  vout_100ms_v=1.47277  vout_1s_v=1.55444  err_1s_mv=95.5627  codes_from_mid_1s=118.614  vbn_end_v=0.508889  vrs_end_v=1.22373
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pexe3100c69eb97_rl4d8c35_ss-40: exit 0, 1 s
+RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=2.79672  vout_100ms_v=1.46881  vout_1s_v=1.47003  err_1s_mv=179.966  codes_from_mid_1s=223.376  vbn_end_v=0.804863  vrs_end_v=0.81561
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_pwrup_junction.json
+### 07:08:18 AFE/layout/tb/tb_amp_reset.py --junction --os 10m,100m --host-rst 0.1
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pexe3100c69eb97_rl4d8c35_typ_10m: exit 0, 15 s
+   job rs_pexe3100c69eb97_rl4d8c35_typ_100m: exit 0, 42 s
+RESULT amp_reset_host_junction typ: t_fs_ms_os10m=2.97257  peak_mv_os10m=122.424  rel_step_mv_os10m=-183.15  t_1mv_s_os10m=nan  final_v_os10m=1.58771  drift_mv_s_os10m=10.1933  resid_end_mv_os10m=2.99482  t_fs_ms_os100m=3.01538  peak_mv_os100m=1272.44  rel_step_mv_os100m=-183.128  t_1mv_s_os100m=15.0838  final_v_os100m=2.73784  drift_mv_s_os100m=92.8983  resid_end_mv_os100m=0.0308956
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:09  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pexe3100c69eb97_rl4d8c35_ff85_10m: exit 0, 14 s
+   job rs_pexe3100c69eb97_rl4d8c35_ff85_100m: exit 0, 42 s
+RESULT amp_reset_host_junction ff85: t_fs_ms_os10m=1.71383  peak_mv_os10m=203.282  rel_step_mv_os10m=-191.162  t_1mv_s_os10m=10.8427  final_v_os10m=1.66301  drift_mv_s_os10m=11.2329  resid_end_mv_os10m=0.341028  t_fs_ms_os100m=1.75102  peak_mv_os100m=204.953  rel_step_mv_os100m=-191.093  t_1mv_s_os100m=nan  final_v_os100m=1.66476  drift_mv_s_os100m=18.9523  resid_end_mv_os100m=1.24199
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:09  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pexe3100c69eb97_rl4d8c35_ss-40_10m: exit 0, 16 s
+   job rs_pexe3100c69eb97_rl4d8c35_ss-40_100m: exit 0, 43 s
+RESULT amp_reset_host_junction ss-40: t_fs_ms_os10m=6.02611  peak_mv_os10m=109.887  rel_step_mv_os10m=-168.124  t_1mv_s_os10m=nan  final_v_os10m=1.58164  drift_mv_s_os10m=9.20486  resid_end_mv_os10m=2.74281  t_fs_ms_os100m=5.95333  peak_mv_os100m=1523.74  rel_step_mv_os100m=-229.02  t_1mv_s_os100m=35.1101  final_v_os100m=2.93127  drift_mv_s_os100m=85.0864  resid_end_mv_os100m=0.158964
+   -> AFE/layout/sim/recpad/pex_leak_10n/amp_reset_host_junction.json
+### 07:10:25 DONE pex leak_10n

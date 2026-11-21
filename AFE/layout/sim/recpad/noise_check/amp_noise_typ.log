@@ -1,0 +1,6 @@
+== amp_noise  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 16:18  REC pad load AFE/layout/sim/recpad/models/pad_check_nodiodes.spice
+   job n_sch_rl9197df_typ_real: exit 0, 0 s
+   job n_sch_rl9197df_typ_d8: exit 0, 0 s
+   job n_sch_rl9197df_typ_real_fn1: exit 0, 0 s
+   job n_sch_rl9197df_typ_d8_fn1: exit 0, 0 s
+RESULT amp_noise typ: noise_real_uv=1.49537  g_mid_db=60.053  noise_d8_uv=1.89041  noise_real_fn1_uv=4.87921  noise_d8_fn1_uv=5.0152

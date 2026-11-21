@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:08  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job pu_pexe3100c69eb97_rl4d8c35_typ: exit 0, 1 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.45686  vout_100ms_v=1.46716  vout_1s_v=1.46917  err_1s_mv=180.831  codes_from_mid_1s=224.45  vbn_end_v=0.647681  vrs_end_v=1.02961

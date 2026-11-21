@@ -1,0 +1,4 @@
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:04  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job rs_pexe3100c69eb97_rl8811b8_typ_10m: exit 0, 16 s
+   job rs_pexe3100c69eb97_rl8811b8_typ_100m: exit 0, 44 s
+RESULT amp_reset_host_junction typ: t_fs_ms_os10m=3.01467  peak_mv_os10m=115.113  rel_step_mv_os10m=-183.003  t_1mv_s_os10m=nan  final_v_os10m=1.58033  drift_mv_s_os10m=9.60748  resid_end_mv_os10m=2.82118  t_fs_ms_os100m=2.98656  peak_mv_os100m=1272.27  rel_step_mv_os100m=-182.94  t_1mv_s_os100m=15.1861  final_v_os100m=2.7376  drift_mv_s_os100m=92.3065  resid_end_mv_os100m=0.028458

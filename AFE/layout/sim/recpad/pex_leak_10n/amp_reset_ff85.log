@@ -1,0 +1,6 @@
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 07:04  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_0: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_1m: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_10m: exit 0, 14 s
+   job rs_pex83fcca1f2cac_rl4d8c35_ff85_100m: exit 0, 41 s
+RESULT amp_reset ff85: t_fs_ms_os0=1.69878  peak_mv_os0=292.351  rel_step_mv_os0=-297.176  t_1mv_s_os0=4.47069  final_v_os0=1.65009  drift_mv_s_os0=0.897223  resid_end_mv_os0=0.0749828  t_fs_ms_os1m=1.71188  peak_mv_os1m=288.277  rel_step_mv_os1m=-292.909  t_1mv_s_os1m=4.61009  final_v_os1m=1.64997  drift_mv_s_os1m=1.09432  resid_end_mv_os1m=0.0872708  t_fs_ms_os10m=1.66062  peak_mv_os10m=291.776  rel_step_mv_os10m=-291.322  t_1mv_s_os10m=2.93337  final_v_os10m=1.65098  drift_mv_s_os10m=-0.507644  resid_end_mv_os10m=0.00442518  t_fs_ms_os100m=1.68462  peak_mv_os100m=323.507  rel_step_mv_os100m=-325.664  t_1mv_s_os100m=7.37772  final_v_os100m=1.65109  drift_mv_s_os100m=-5.28818  resid_end_mv_os100m=0.00142428

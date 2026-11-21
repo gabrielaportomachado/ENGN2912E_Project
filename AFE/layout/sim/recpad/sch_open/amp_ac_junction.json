@@ -1,0 +1,111 @@
+{
+ "check": "amp_ac_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:27",
+   "info": {
+    "operating_point": "power-up sequence + wrnodev",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_ac_junction_ff85.log",
+   "values": {
+    "f_hi_hz": 997.5798056710036,
+    "f_lo_hz": 0.07006260954490834,
+    "g1_mid_db": 39.98304282041339,
+    "g_0p5_db": 59.968685217383594,
+    "g_300_db": 59.67729163346298,
+    "g_mid_db": 60.05119283078476,
+    "g_pk_db": 60.0514835,
+    "hf_100k": -40.92635703078476,
+    "hf_10k": -20.05381363078476,
+    "hf_1M": -65.48240896078475,
+    "hf_1k": -3.0101126307847537,
+    "hf_300k": -53.65094781508431,
+    "hf_30k": -29.642366116176156,
+    "hf_3k": -10.000899770951683,
+    "idd_ua": 118.81099999999999,
+    "v1_v": 1.6486,
+    "vbn_v": 0.508889,
+    "vcm_v": 1.64861,
+    "vcmo_v": 1.64985,
+    "vg1_v": 1.849,
+    "vg2_v": 2.5499,
+    "vout_v": 1.65162,
+    "vrs_v": 1.2221
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:27",
+   "info": {
+    "operating_point": "power-up sequence + wrnodev",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_ac_junction_ss-40.log",
+   "values": {
+    "f_hi_hz": 421.73869595077997,
+    "f_lo_hz": NaN,
+    "g1_mid_db": 39.985701999707345,
+    "g_0p5_db": 60.036424851499795,
+    "g_300_db": 58.26496011875078,
+    "g_mid_db": 60.032487528791236,
+    "g_pk_db": 60.0365157,
+    "hf_100k": -49.383656028791236,
+    "hf_10k": -27.507216328791237,
+    "hf_1M": -66.71777834879124,
+    "hf_1k": -8.18782152879124,
+    "hf_300k": -61.31590719002142,
+    "hf_30k": -37.2458401640142,
+    "hf_3k": -17.103449156441265,
+    "idd_ua": 47.136399999999995,
+    "v1_v": 1.64636,
+    "vbn_v": 0.804863,
+    "vcm_v": 1.64911,
+    "vcmo_v": 1.64977,
+    "vg1_v": 1.84956,
+    "vg2_v": 2.54986,
+    "vout_v": 1.68249,
+    "vrs_v": 0.814347
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:27",
+   "info": {
+    "operating_point": "power-up sequence + wrnodev",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_ac_junction_typ.log",
+   "values": {
+    "f_hi_hz": 653.2419875428957,
+    "f_lo_hz": NaN,
+    "g1_mid_db": 39.9846772878727,
+    "g_0p5_db": 60.048886330899876,
+    "g_300_db": 59.221047047704104,
+    "g_mid_db": 60.04709444885691,
+    "g_pk_db": 60.0489549,
+    "hf_100k": -45.06822264885691,
+    "hf_10k": -23.710572248856913,
+    "hf_1M": -66.73734006885691,
+    "hf_1k": -5.225062148856914,
+    "hf_300k": -58.09064523282428,
+    "hf_30k": -33.37125299240146,
+    "hf_3k": -13.420989328276633,
+    "idd_ua": 74.4336,
+    "v1_v": 1.64755,
+    "vbn_v": 0.647681,
+    "vcm_v": 1.64889,
+    "vcmo_v": 1.64983,
+    "vg1_v": 1.84928,
+    "vg2_v": 2.54989,
+    "vout_v": 1.67833,
+    "vrs_v": 1.02818
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_open.spice",
+ "written_by": "AFE/layout/tb/tb_amp_ac_junction.py"
+}

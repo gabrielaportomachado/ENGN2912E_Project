@@ -1,0 +1,3 @@
+== amp_thd  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job thd_sch_rlf7521c_typ: exit 0, 1 s
+RESULT amp_thd typ: thd_pct=0.0422331  out_max_v=2.14859  out_min_v=1.14374  gain_db=60.0396  hd2_dbc=-81.3391  hd3_dbc=-67.7531  out_mean_v=1.64613

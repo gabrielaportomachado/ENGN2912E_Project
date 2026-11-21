@@ -1,0 +1,60 @@
+{
+ "check": "amp_pwrup",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 07:14",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_ctl_1f/amp_pwrup_ff85.log",
+   "values": {
+    "codes_from_mid_1s": 22.563064242424044,
+    "err_1s_mv": 18.178249999999842,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.508888549,
+    "vout_100ms_v": 1.4907456327228,
+    "vout_1s_v": 1.63182175,
+    "vout_before_v": 1.149384598832,
+    "vrs_end_v": 1.22329238
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 07:15",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_ctl_1f/amp_pwrup_ss-40.log",
+   "values": {
+    "codes_from_mid_1s": 24.59754744242425,
+    "err_1s_mv": 19.817360000000008,
+    "t_wait_s": 1.5,
+    "vbn_end_v": 0.804862487,
+    "vout_100ms_v": 1.507420646465,
+    "vout_1s_v": 1.63018264,
+    "vout_before_v": 2.4735319945911214,
+    "vrs_end_v": 0.815149038
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 07:14",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_ctl_1f/amp_pwrup_typ.log",
+   "values": {
+    "codes_from_mid_1s": 37.57842928484851,
+    "err_1s_mv": 30.27559000000002,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.647681036,
+    "vout_100ms_v": 1.491899711095,
+    "vout_1s_v": 1.61972441,
+    "vout_before_v": 2.4660238718934795,
+    "vrs_end_v": 1.02915805
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_ctl_1f.spice",
+ "written_by": "AFE/layout/tb/tb_amp_pwrup.py"
+}

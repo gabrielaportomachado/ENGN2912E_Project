@@ -1,0 +1,3 @@
+== r13_leak  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job leak_ff85: exit 0, 0 s
+RESULT r13_leak ff85: i_rec_to_pad_0v_pa=-0.769707  i_d2_0v_pa=-4.52754e-14  i_d3_0v_pa=-0.769707  i_rec_to_pad_1.65v_pa=1.02673  i_d2_1.65v_pa=-1.91472  i_d3_1.65v_pa=-0.769536  i_rec_to_pad_3.3v_pa=1.27187  i_d2_3.3v_pa=-1.9149  i_d3_3.3v_pa=-1.32057e-13  cap_1hz_pf=2.80585  cap_100hz_pf=2.80585

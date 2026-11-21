@@ -1,0 +1,57 @@
+{
+ "check": "amp_thd",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:41",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_thd_ff85.log",
+   "values": {
+    "gain_db": 59.74182242007407,
+    "hd2_dbc": -44.79780271049628,
+    "hd3_dbc": -46.37734750860609,
+    "out_max_v": 2.20461665,
+    "out_mean_v": 1.713578962126539,
+    "out_min_v": 1.23750339,
+    "thd_pct": 0.9312590572656047
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:41",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_thd_ss-40.log",
+   "values": {
+    "gain_db": 59.81179983668609,
+    "hd2_dbc": -73.89844929895804,
+    "hd3_dbc": -66.47478194934841,
+    "out_max_v": 2.16281572,
+    "out_mean_v": 1.6708211958398587,
+    "out_min_v": 1.17897088,
+    "thd_pct": 0.051813914688574284
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:41",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_thd_typ.log",
+   "values": {
+    "gain_db": 59.8101188701619,
+    "hd2_dbc": -72.74104134930803,
+    "hd3_dbc": -69.86533155564189,
+    "out_max_v": 2.16483651,
+    "out_mean_v": 1.6727663774141552,
+    "out_min_v": 1.18085359,
+    "thd_pct": 0.03970639224842407
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe_ac.spice",
+ "written_by": "AFE/layout/tb/tb_amp_thd.py"
+}

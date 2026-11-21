@@ -1,0 +1,3 @@
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:55  REC pad load AFE/layout/sim/recpad/models/pad_leak_1n.spice
+   job n_pex83fcca1f2cac_rl721726_ff85_real: exit 0, 0 s
+RESULT amp_noise ff85: noise_real_uv=1.74357  g_mid_db=59.8202

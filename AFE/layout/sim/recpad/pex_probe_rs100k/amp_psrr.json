@@ -1,0 +1,48 @@
+{
+ "check": "amp_psrr",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:48",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_rs100k/amp_psrr_ff85.log",
+   "values": {
+    "supply_gain_1khz": 0.477753,
+    "supply_gain_300hz": 0.638603,
+    "supply_gain_50hz": 0.66601,
+    "supply_gain_60hz": 0.665524
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:48",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_rs100k/amp_psrr_ss-40.log",
+   "values": {
+    "supply_gain_1khz": 0.256249,
+    "supply_gain_300hz": 0.509172,
+    "supply_gain_50hz": 0.618832,
+    "supply_gain_60hz": 0.616851
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:48",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_rs100k/amp_psrr_typ.log",
+   "values": {
+    "supply_gain_1khz": 0.361451,
+    "supply_gain_300hz": 0.581432,
+    "supply_gain_50hz": 0.637223,
+    "supply_gain_60hz": 0.636305
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe_rs100k.spice",
+ "written_by": "AFE/layout/tb/tb_amp_psrr.py"
+}

@@ -1,0 +1,4 @@
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:53  REC pad load AFE/layout/sim/recpad/models/pad_probe_rs100k.spice
+   job settle_pexe3100c69eb97_rl11021d_ss-40: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl11021d_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=46.9545  vout_v=0.402014  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=-1.83515  g_pk_db=13.178  f_lo_hz=10199.9  f_hi_hz=220903  g_300_db=-1.73025  g_0p5_db=-1.84662  v1_v=2.15527  g1_mid_db=39.881  hf_1k=0.967754  hf_3k=4.92961  hf_10k=11.9203  hf_30k=14.8425  hf_100k=14.3966  hf_300k=10.354  hf_1M=-0.785148

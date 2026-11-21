@@ -1,0 +1,4 @@
+* VALIDATION model of R13 (no diodes): 2.87 pF to ground on rec; see AFE/layout/sim/recpad/noise_check.md
+.subckt recpad rec vdd vss
+Ccheck rec 0 2.87p
+.ends

@@ -1,0 +1,59 @@
+{
+ "check": "r13_park",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:31",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_park_nopad/r13_park_ff85.log",
+   "values": {
+    "out_drift_mv_s": -0.6618203017999758,
+    "out_end_v": 1.6511264,
+    "out_err_mv_1s": 20.143621036399885,
+    "out_err_mv_end": 1.126400000000194,
+    "rec_minus_vcm_uv_before_rst": 18.04000000005246,
+    "rec_minus_vcm_uv_end": 18.04000000005246,
+    "rec_v_end": 1.64981278,
+    "vcm_v_end": 1.64979474
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:31",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_park_nopad/r13_park_ss-40.log",
+   "values": {
+    "out_drift_mv_s": -0.4727821286500067,
+    "out_end_v": 1.650246,
+    "out_err_mv_1s": 20.23454978814998,
+    "out_err_mv_end": 0.2460000000001905,
+    "rec_minus_vcm_uv_before_rst": 12.124705125460267,
+    "rec_minus_vcm_uv_end": 15.609999999943724,
+    "rec_v_end": 1.6499247,
+    "vcm_v_end": 1.64990909
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:31",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_park_nopad/r13_park_typ.log",
+   "values": {
+    "out_drift_mv_s": -0.8690232903199924,
+    "out_end_v": 1.65082154,
+    "out_err_mv_1s": 31.502404933999806,
+    "out_err_mv_end": 0.8215400000000095,
+    "rec_minus_vcm_uv_before_rst": 13.760000000084815,
+    "rec_minus_vcm_uv_end": 13.760000000084815,
+    "rec_v_end": 1.64988266,
+    "vcm_v_end": 1.6498689
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "written_by": "AFE/layout/tb/tb_r13_park.py"
+}

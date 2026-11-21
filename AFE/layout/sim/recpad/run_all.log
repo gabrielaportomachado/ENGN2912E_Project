@@ -1,0 +1,168 @@
+### 06:17:16 start
+### 06:24:28 matrix pex probe done
+### 06:28:08 matrix sch open done
+### 06:31:41 matrix sch probe done
+== r13_leak  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:31  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job leak_typ: exit 0, 0 s MSG Error: &cp[0]: no such variable. | Error: &cp[2]: no such variable.
+Traceback (most recent call last):
+  File "/foss/designs/ENGN2912E_Project/.claude/worktrees/r13-recpad/AFE/layout/sim/recpad/r13_extra.py", line 125, in <module>
+    sys.exit(cli('r13_' + mode, __doc__, AMP_CORNERS, run))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/foss/designs/ENGN2912E_Project/.claude/worktrees/r13-recpad/AFE/layout/sim/recpad/../../tb/lptb.py", line 709, in cli
+    vals, info = run(a.netlist, c, a, log)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/foss/designs/ENGN2912E_Project/.claude/worktrees/r13-recpad/AFE/layout/sim/recpad/r13_extra.py", line 124, in run
+    return fun(a, corner, log)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/foss/designs/ENGN2912E_Project/.claude/worktrees/r13-recpad/AFE/layout/sim/recpad/r13_extra.py", line 43, in leak
+    v['cap_1hz_pf'] = o[0]['cap_1hz'] * 1e12
+                      ~~~~~~~~~~~~~~~~^~~~~~
+TypeError: can't multiply sequence by non-int of type 'float'
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:31
+   job park_pex83fcca1f2cac_typ: exit 0, 1 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=13.76  rec_minus_vcm_uv_before_rst=13.76  rec_v_end=1.64988  vcm_v_end=1.64987  out_end_v=1.65082  out_err_mv_end=0.82154  out_err_mv_1s=31.5024  out_drift_mv_s=-0.869023
+   -> AFE/layout/sim/recpad/pex_park_nopad/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:31
+   job park_pex83fcca1f2cac_ff85: exit 0, 1 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=18.04  rec_minus_vcm_uv_before_rst=18.04  rec_v_end=1.64981  vcm_v_end=1.64979  out_end_v=1.65113  out_err_mv_end=1.1264  out_err_mv_1s=20.1436  out_drift_mv_s=-0.66182
+   -> AFE/layout/sim/recpad/pex_park_nopad/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:31
+   job park_pex83fcca1f2cac_ss-40: exit 0, 2 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=15.61  rec_minus_vcm_uv_before_rst=12.1247  rec_v_end=1.64992  vcm_v_end=1.64991  out_end_v=1.65025  out_err_mv_end=0.246  out_err_mv_1s=20.2345  out_drift_mv_s=-0.472782
+   -> AFE/layout/sim/recpad/pex_park_nopad/r13_park.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:31
+   job settle_pex83fcca1f2cac_typ: exit 0, 0 s
+   job recac_pex83fcca1f2cac_typ: exit 0, 2 s
+RESULT r13_recac typ: g_mid_db=35.5465  f_lo_hz=0.350377  f_hi_hz=81.3371  noise_tgate_real_uv=14.8262  vrec_dc_v=1.64998  vout_dc_v=0.431154  vrec_minus_vrece_dc_uv=-20  rec_node_gain_12hz_db=-0.000179303  rec_node_gain_300hz_db=-0.00155454  f_rec_3db_hz=5.55468e+06
+   -> AFE/layout/sim/recpad/pex_recac_nopad/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:31
+   job settle_pex83fcca1f2cac_ff85: exit 0, 1 s
+   job recac_pex83fcca1f2cac_ff85: exit 0, 2 s
+RESULT r13_recac ff85: g_mid_db=35.7566  f_lo_hz=0.0889176  f_hi_hz=1230.5  noise_tgate_real_uv=24.5418  vrec_dc_v=1.65039  vout_dc_v=0.595994  vrec_minus_vrece_dc_uv=350  rec_node_gain_12hz_db=0.00153445  rec_node_gain_300hz_db=0.00126794  f_rec_3db_hz=7.43451e+06
+   -> AFE/layout/sim/recpad/pex_recac_nopad/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:31
+   job settle_pex83fcca1f2cac_ss-40: exit 0, 1 s
+   job recac_pex83fcca1f2cac_ss-40: exit 0, 2 s
+RESULT r13_recac ss-40: g_mid_db=35.9994  f_lo_hz=0.00472914  f_hi_hz=61.7517  noise_tgate_real_uv=101.024  vrec_dc_v=1.64998  vout_dc_v=0.705653  vrec_minus_vrece_dc_uv=-20  rec_node_gain_12hz_db=-0.000280996  rec_node_gain_300hz_db=-0.00457135  f_rec_3db_hz=3.24069e+06
+   -> AFE/layout/sim/recpad/pex_recac_nopad/r13_recac.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:31  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_pex83fcca1f2cac_rl8811b8_typ: exit 0, 3 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=13.76  rec_minus_vcm_uv_before_rst=13.76  rec_v_end=1.64988  vcm_v_end=1.64987  out_end_v=1.65083  out_err_mv_end=0.82605  out_err_mv_1s=30.2079  out_drift_mv_s=-0.891654  i_rec_to_pad_pa=-7.99361
+   -> AFE/layout/sim/recpad/pex_park_open/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:31  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_pex83fcca1f2cac_rl8811b8_ff85: exit 0, 2 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=18.05  rec_minus_vcm_uv_before_rst=18.05  rec_v_end=1.64981  vcm_v_end=1.64979  out_end_v=1.65114  out_err_mv_end=1.13729  out_err_mv_1s=17.6785  out_drift_mv_s=-0.706068  i_rec_to_pad_pa=-33.7508
+   -> AFE/layout/sim/recpad/pex_park_open/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:31  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_pex83fcca1f2cac_rl8811b8_ss-40: exit 0, 2 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=9.4  rec_minus_vcm_uv_before_rst=12.119  rec_v_end=1.64993  vcm_v_end=1.64992  out_end_v=1.65024  out_err_mv_end=0.24482  out_err_mv_1s=20.6889  out_drift_mv_s=-0.471993  i_rec_to_pad_pa=10.4361
+   -> AFE/layout/sim/recpad/pex_park_open/r13_park.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_pex83fcca1f2cac_rl8811b8_typ: exit 0, 12 s
+RESULT r13_recac typ: g_mid_db=16.806  f_lo_hz=1.04014  f_hi_hz=12.6446  noise_tgate_real_uv=442.341  vrec_dc_v=1.65  vout_dc_v=0.374499  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=-75.8133  rec_node_gain_300hz_db=-75.8146  f_rec_3db_hz=nan
+   -> AFE/layout/sim/recpad/pex_recac_open/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_pex83fcca1f2cac_rl8811b8_ff85: exit 0, 1 s
+RESULT r13_recac ff85: g_mid_db=59.8202  f_lo_hz=0.275646  f_hi_hz=972.497  noise_tgate_real_uv=1.75821  vrec_dc_v=1.65  vout_dc_v=1.65097  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=5.28657e-08  rec_node_gain_300hz_db=2.97998e-06  f_rec_3db_hz=395217
+   -> AFE/layout/sim/recpad/pex_recac_open/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_pex83fcca1f2cac_rl8811b8_ss-40: exit 0, 21 s
+RESULT r13_recac ss-40: g_mid_db=30.8395  f_lo_hz=nan  f_hi_hz=2.54351  noise_tgate_real_uv=17.1594  vrec_dc_v=1.64999  vout_dc_v=0.65656  vrec_minus_vrece_dc_uv=-10  rec_node_gain_12hz_db=-12.081  rec_node_gain_300hz_db=-12.0818  f_rec_3db_hz=5.79176e+06
+   -> AFE/layout/sim/recpad/pex_recac_open/r13_recac.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_pex83fcca1f2cac_rlf7521c_typ: exit 0, 2 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=-89.93  rec_minus_vcm_uv_before_rst=-89.92  rec_v_end=1.64239  vcm_v_end=1.64248  out_end_v=1.6509  out_err_mv_end=0.9006  out_err_mv_1s=35.5473  out_drift_mv_s=-0.76643  i_rec_to_pad_pa=164036
+   -> AFE/layout/sim/recpad/pex_park_probe/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_pex83fcca1f2cac_rlf7521c_ff85: exit 0, 1 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=-90.1  rec_minus_vcm_uv_before_rst=-90.13  rec_v_end=1.64256  vcm_v_end=1.64265  out_end_v=1.65122  out_err_mv_end=1.22469  out_err_mv_1s=22.4557  out_drift_mv_s=-0.598501  i_rec_to_pad_pa=164384
+   -> AFE/layout/sim/recpad/pex_park_probe/r13_park.json
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_pex83fcca1f2cac_rlf7521c_ss-40: exit 0, 1 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=-96.88  rec_minus_vcm_uv_before_rst=-100.829  rec_v_end=1.64225  vcm_v_end=1.64235  out_end_v=1.65032  out_err_mv_end=0.32114  out_err_mv_1s=22.3022  out_drift_mv_s=-0.439018  i_rec_to_pad_pa=164161
+   -> AFE/layout/sim/recpad/pex_park_probe/r13_park.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_pex83fcca1f2cac_rlf7521c_typ: exit 0, 0 s
+RESULT r13_recac typ: g_mid_db=59.8177  f_lo_hz=0.242043  f_hi_hz=635.599  noise_tgate_real_uv=1.58655  vrec_dc_v=1.63956  vout_dc_v=1.65062  vrec_minus_vrece_dc_uv=-2080  rec_node_gain_12hz_db=-0.0235105  rec_node_gain_300hz_db=-0.0235084  f_rec_3db_hz=243615
+   -> AFE/layout/sim/recpad/pex_recac_probe/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_pex83fcca1f2cac_rlf7521c_ff85: exit 0, 0 s
+RESULT r13_recac ff85: g_mid_db=59.8031  f_lo_hz=0.27748  f_hi_hz=974.05  noise_tgate_real_uv=1.78029  vrec_dc_v=1.64012  vout_dc_v=1.65096  vrec_minus_vrece_dc_uv=-1520  rec_node_gain_12hz_db=-0.0144787  rec_node_gain_300hz_db=-0.0144765  f_rec_3db_hz=353631
+   -> AFE/layout/sim/recpad/pex_recac_probe/r13_recac.json
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_pex83fcca1f2cac_rlf7521c_ss-40: exit 0, 0 s
+RESULT r13_recac ss-40: g_mid_db=59.8018  f_lo_hz=0.283662  f_hi_hz=409.379  noise_tgate_real_uv=1.73415  vrec_dc_v=1.63828  vout_dc_v=1.65019  vrec_minus_vrece_dc_uv=-3360  rec_node_gain_12hz_db=-0.0638925  rec_node_gain_300hz_db=-0.0638917  f_rec_3db_hz=148565
+   -> AFE/layout/sim/recpad/pex_recac_probe/r13_recac.json
+== r13_park  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32
+   job park_sch_typ: exit 0, 1 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=13.75  rec_minus_vcm_uv_before_rst=13.75  rec_v_end=1.64988  vcm_v_end=1.64987  out_end_v=1.65061  out_err_mv_end=0.60717  out_err_mv_1s=1.22917  out_drift_mv_s=0.0237651
+   -> AFE/layout/sim/recpad/sch_park_nopad/r13_park.json
+== r13_park  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32
+   job park_sch_ff85: exit 0, 1 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=18.04  rec_minus_vcm_uv_before_rst=18.04  rec_v_end=1.64981  vcm_v_end=1.64979  out_end_v=1.65093  out_err_mv_end=0.93066  out_err_mv_1s=0.0924845  out_drift_mv_s=0.018798
+   -> AFE/layout/sim/recpad/sch_park_nopad/r13_park.json
+== r13_park  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32
+   job park_sch_ss-40: exit 0, 1 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=12.25  rec_minus_vcm_uv_before_rst=12.1142  rec_v_end=1.64993  vcm_v_end=1.64991  out_end_v=1.65019  out_err_mv_end=0.19381  out_err_mv_1s=1.03637  out_drift_mv_s=0.012922
+   -> AFE/layout/sim/recpad/sch_park_nopad/r13_park.json
+== r13_recac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32
+   job recac_sch_typ: exit 0, 1 s
+RESULT r13_recac typ: g_mid_db=35.4604  f_lo_hz=0.0280887  f_hi_hz=37.478  noise_tgate_real_uv=12.282  vrec_dc_v=1.64997  vout_dc_v=0.336991  vrec_minus_vrece_dc_uv=-30  rec_node_gain_12hz_db=-0.000199158  rec_node_gain_300hz_db=-0.0014889  f_rec_3db_hz=5.96195e+06
+   -> AFE/layout/sim/recpad/sch_recac_nopad/r13_recac.json
+== r13_recac  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32
+   job recac_sch_ff85: exit 0, 1 s
+RESULT r13_recac ff85: g_mid_db=60.0571  f_lo_hz=0.281366  f_hi_hz=997.665  noise_tgate_real_uv=1.74705  vrec_dc_v=1.65  vout_dc_v=1.65097  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=3.7619e-09  rec_node_gain_300hz_db=-3.5625e-06  f_rec_3db_hz=405648
+   -> AFE/layout/sim/recpad/sch_recac_nopad/r13_recac.json
+== r13_recac  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32
+   job recac_sch_ss-40: exit 0, 1 s
+RESULT r13_recac ss-40: g_mid_db=36.9369  f_lo_hz=0.00223745  f_hi_hz=171.863  noise_tgate_real_uv=113.619  vrec_dc_v=1.64996  vout_dc_v=0.577567  vrec_minus_vrece_dc_uv=-60  rec_node_gain_12hz_db=-0.000894635  rec_node_gain_300hz_db=-0.00571329  f_rec_3db_hz=3.46873e+06
+   -> AFE/layout/sim/recpad/sch_recac_nopad/r13_recac.json
+== r13_park  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_sch_rl8811b8_typ: exit 0, 1 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=13.76  rec_minus_vcm_uv_before_rst=13.7536  rec_v_end=1.64988  vcm_v_end=1.64987  out_end_v=1.65061  out_err_mv_end=0.6139  out_err_mv_1s=1.17603  out_drift_mv_s=0.0250915  i_rec_to_pad_pa=0.666134
+   -> AFE/layout/sim/recpad/sch_park_open/r13_park.json
+== r13_park  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_sch_rl8811b8_ff85: exit 0, 1 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=18.04  rec_minus_vcm_uv_before_rst=18.04  rec_v_end=1.64981  vcm_v_end=1.64979  out_end_v=1.65093  out_err_mv_end=0.93495  out_err_mv_1s=1.60357  out_drift_mv_s=0.0437105  i_rec_to_pad_pa=1.11022
+   -> AFE/layout/sim/recpad/sch_park_open/r13_park.json
+== r13_park  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_sch_rl8811b8_ss-40: exit 0, 1 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=12.25  rec_minus_vcm_uv_before_rst=12.1156  rec_v_end=1.64993  vcm_v_end=1.64991  out_end_v=1.6502  out_err_mv_end=0.19543  out_err_mv_1s=1.04468  out_drift_mv_s=0.011876  i_rec_to_pad_pa=-1.11022
+   -> AFE/layout/sim/recpad/sch_park_open/r13_park.json
+== r13_recac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_sch_rl8811b8_typ: exit 0, 4 s
+RESULT r13_recac typ: g_mid_db=33.0439  f_lo_hz=0.00227897  f_hi_hz=109.377  noise_tgate_real_uv=37.0133  vrec_dc_v=1.64998  vout_dc_v=0.435622  vrec_minus_vrece_dc_uv=-20  rec_node_gain_12hz_db=-2.63099  rec_node_gain_300hz_db=-2.63222  f_rec_3db_hz=3.39936e+06
+   -> AFE/layout/sim/recpad/sch_recac_open/r13_recac.json
+== r13_recac  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_sch_rl8811b8_ff85: exit 0, 3 s
+RESULT r13_recac ff85: g_mid_db=33.6039  f_lo_hz=0.323006  f_hi_hz=2673.36  noise_tgate_real_uv=37.7999  vrec_dc_v=1.65021  vout_dc_v=0.597119  vrec_minus_vrece_dc_uv=190  rec_node_gain_12hz_db=-1.75983  rec_node_gain_300hz_db=-1.76036  f_rec_3db_hz=4.2859e+06
+   -> AFE/layout/sim/recpad/sch_recac_open/r13_recac.json
+== r13_recac  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job recac_sch_rl8811b8_ss-40: exit 0, 1 s
+RESULT r13_recac ss-40: g_mid_db=34.6125  f_lo_hz=nan  f_hi_hz=77.9265  noise_tgate_real_uv=11.055  vrec_dc_v=1.64999  vout_dc_v=0.539535  vrec_minus_vrece_dc_uv=-10  rec_node_gain_12hz_db=-2.85702  rec_node_gain_300hz_db=-2.85744  f_rec_3db_hz=2.07542e+06
+   -> AFE/layout/sim/recpad/sch_recac_open/r13_recac.json
+== r13_park  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_sch_rlf7521c_typ: exit 0, 1 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=-89.92  rec_minus_vcm_uv_before_rst=-89.92  rec_v_end=1.64239  vcm_v_end=1.64248  out_end_v=1.65071  out_err_mv_end=0.70596  out_err_mv_1s=3.22981  out_drift_mv_s=0.0984796  i_rec_to_pad_pa=164239
+   -> AFE/layout/sim/recpad/sch_park_probe/r13_park.json
+== r13_park  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_sch_rlf7521c_ff85: exit 0, 1 s
+RESULT r13_park ff85: rec_minus_vcm_uv_end=-90.12  rec_minus_vcm_uv_before_rst=-90.1245  rec_v_end=1.64256  vcm_v_end=1.64265  out_end_v=1.65104  out_err_mv_end=1.04099  out_err_mv_1s=2.19991  out_drift_mv_s=0.0837822  i_rec_to_pad_pa=164255
+   -> AFE/layout/sim/recpad/sch_park_probe/r13_park.json
+== r13_park  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_sch_rlf7521c_ss-40: exit 0, 1 s
+RESULT r13_park ss-40: rec_minus_vcm_uv_end=-100.71  rec_minus_vcm_uv_before_rst=-100.84  rec_v_end=1.64225  vcm_v_end=1.64236  out_end_v=1.65027  out_err_mv_end=0.27012  out_err_mv_1s=2.08252  out_drift_mv_s=0.038717  i_rec_to_pad_pa=164224
+   -> AFE/layout/sim/recpad/sch_park_probe/r13_park.json
+== r13_recac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_sch_rlf7521c_typ: exit 0, 0 s
+RESULT r13_recac typ: g_mid_db=60.0315  f_lo_hz=0.246617  f_hi_hz=654.46  noise_tgate_real_uv=1.57806  vrec_dc_v=1.63956  vout_dc_v=1.65062  vrec_minus_vrece_dc_uv=-2080  rec_node_gain_12hz_db=-0.0235107  rec_node_gain_300hz_db=-0.0235199  f_rec_3db_hz=244371
+   -> AFE/layout/sim/recpad/sch_recac_probe/r13_recac.json
+== r13_recac  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_sch_rlf7521c_ff85: exit 0, 0 s
+RESULT r13_recac ff85: g_mid_db=60.0402  f_lo_hz=0.283502  f_hi_hz=998.606  noise_tgate_real_uv=1.76921  vrec_dc_v=1.64012  vout_dc_v=1.65094  vrec_minus_vrece_dc_uv=-1520  rec_node_gain_12hz_db=-0.0144788  rec_node_gain_300hz_db=-0.0144831  f_rec_3db_hz=355149
+   -> AFE/layout/sim/recpad/sch_recac_probe/r13_recac.json
+== r13_recac  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job recac_sch_rlf7521c_ss-40: exit 0, 0 s
+RESULT r13_recac ss-40: g_mid_db=59.9967  f_lo_hz=0.288657  f_hi_hz=422.92  noise_tgate_real_uv=1.72856  vrec_dc_v=1.63828  vout_dc_v=1.65027  vrec_minus_vrece_dc_uv=-3360  rec_node_gain_12hz_db=-0.0638927  rec_node_gain_300hz_db=-0.0639148  f_rec_3db_hz=148921
+   -> AFE/layout/sim/recpad/sch_recac_probe/r13_recac.json
+### 06:33:01 DONE

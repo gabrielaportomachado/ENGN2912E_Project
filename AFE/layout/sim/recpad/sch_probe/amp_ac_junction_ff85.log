@@ -1,0 +1,4 @@
+== amp_ac_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_ff85: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_ac_junction ff85: idd_ua=118.811  vout_v=1.65109  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=60.0413  g_pk_db=60.0451  f_lo_hz=0.0737377  f_hi_hz=998.903  g_300_db=59.6766  g_0p5_db=59.9383  v1_v=1.65065  g1_mid_db=39.9731  hf_1k=-3.00085  hf_3k=-9.99163  hf_10k=-20.0445  hf_30k=-29.6332  hf_100k=-40.9177  hf_300k=-53.6459  hf_1M=-65.4925

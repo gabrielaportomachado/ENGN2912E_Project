@@ -1,0 +1,3 @@
+== amp_thd  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:24  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job thd_sch_rl8811b8_ss-40: exit 0, 1 s
+RESULT amp_thd ss-40: thd_pct=0.0568104  out_max_v=2.14945  out_min_v=1.14501  gain_db=60.0341  hd2_dbc=-90.4355  hd3_dbc=-64.9945  out_mean_v=1.64722
