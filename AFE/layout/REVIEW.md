@@ -45,7 +45,7 @@ Unblocks R4 (BLOCKED.md of branch worktree-r4-amp-cin15). The user accepts Cin =
 List R6 and R4 in report L2a.md section 9; run `python3 AFE/layout/scripts/gate.py L2a` until PASS; commit and push.
 
 ### R7 (2026-11-21) to L3a: close the 8-channel floorplan with the as-built cells
-Status: open
+Status: closed (user 2026-11-21: overtaken; no action for L3a. After R6b (amp_ch 220.75 x 273.25 um) the as-built cells fit: on main c02aa48 `floorplan.py check --gds amp_ch=... adc_ch=... --dig-pins ...` 20 PASS, 0 FAIL with afe_dig 819.84 x 101.92 um; levers (a)-(d) not used; the >= 0.5 um margin rule is waived for the as-built cells: adc_ch 0.33 um, amp_ch 0.79 um of height margin)
 Problem: the as-built cells do not fit together. afe_dig 819.84 x 101.92 um (R3: nothing below 98 um routes, GRT-0116), amp_ch 220.25 x 284.25 um (R6, built against the R2 budget 285), adc_ch 219.50 x 103.67 um (R5, budget 104, no slack). With dig_h 101.92 the channel slot loses ~11 um per row (R3 set amp_h <= 274.04): about 10.2 um per row (~22 um in total) is missing. Do NOT re-lay out amp_ch, adc_ch or afe_dig unless every floorplan lever below fails.
 First: merge worktree-r3-dig and worktree-r6-amp-cin15 into main (both regenerated AFE/layout/lvs/: the second merge re-runs `mk_lvs_netlists.py` with BOTH the --dig-netlist of R3 and the --cin of R6 plus --decap-n, then check_lvs_netlists.py PASS). Expect `floorplan.py check --gds amp_ch=... adc_ch=... afe_dig=...` to FAIL on height until this item is done.
 Levers, in this order, pre-approved (ACCEPT.md A-2 / A-4 / A-5 and Decision 46c), until `floorplan.py check --gds` with all three as-built cells is ALL PASS with >= 0.5 um margin in every slot:
@@ -85,7 +85,7 @@ Everything passes except linearity at three corners (cause: uneven coupling of t
 | adc_steps step_2048_lsb ff 85 | 2.295 LSB | <= 2.0 | <= 2.5 (ladder Q-2, already pre-approved) |
 README / Decision 43c claim becomes INL <= 1.1 LSB (typ 0.95) below 2.0 V, ff 85 C noted separately.
 
-#### Draft correction to R7 (L3a): the cells now fit
+#### Correction to R7 (L3a): the cells now fit - DONE: R7 closed by the user 2026-11-21 (margin rule waived for the as-built cells)
 R7 was written before the merges of R3 / R6 / R6b. On main 6a969a0: amp_ch 220.75 x 273.25 in 222 x 274.04, adc_ch 219.50 x 103.67 in 222 x 104, afe_dig 819.84 x 101.92;
 `floorplan.py check --gds amp_ch=... adc_ch=... --dig-pins ...` 20 PASS, 0 FAIL. Levers (a)-(d) are not needed. Only open point: R7's ">= 0.5 um margin in every slot" (adc_ch has 0.33 um height):
 proposed: accept 0.3 um, or use lever (b) bias_corr 12 -> 10 to give adc_h the room. (The paused 98 um macro attempt, worktree r3-dig98, uncommitted, would free 3.92 um but is not needed.)
