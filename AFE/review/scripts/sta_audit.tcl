@@ -27,20 +27,23 @@ proc rep {tag args} {
   puts "@@ $tag"
   eval report_checks $args -unconstrained -digits 3 -format end
 }
+# number of channels of the netlist: env NCH (R14: 4 for the afe_dig of Decision 54; default 8 = the D3 macro adc8_top and the 8-channel afe_dig)
+set NCH 8
+if {[info exists ::env(NCH)]} { set NCH $::env(NCH) }
 proc capflop {i} {
   global PFX
   set n [get_nets "${PFX}ch\[$i\].u.cap_r"]
   foreach p [get_pins -of_objects $n] { if {[get_property $p direction] == "output"} { return [get_full_name [get_cells -of_objects $p]] } }
 }
 # 1. comparator clock windows
-for {set i 0} {$i < 8} {incr i} {
+for {set i 0} {$i < $NCH} {incr i} {
   rep "CMPCLK $i RISE MAX" -path_delay max -rise_from [get_ports [P sclk]] -rise_to [get_ports cmp_clk[$i]]
   rep "CMPCLK $i RISE MIN" -path_delay min -rise_from [get_ports [P sclk]] -rise_to [get_ports cmp_clk[$i]]
   rep "CMPCLK $i FALL MAX" -path_delay max -rise_from [get_ports [P sclk]] -fall_to [get_ports cmp_clk[$i]]
   rep "CMPCLK $i FALL MIN" -path_delay min -rise_from [get_ports [P sclk]] -fall_to [get_ports cmp_clk[$i]]
 }
 # 2. DAC driver gates (all 96 + 96), worst and best arrival after the SCLK rising edge (flop launched) and after CS rising (async release)
-for {set k 0} {$k < 96} {incr k} {
+for {set k 0} {$k < [expr 12 * $NCH]} {incr k} {
   rep "GP $k MAX" -path_delay max -from [get_clocks sclk] -to [get_ports dac_gp[$k]]
   rep "GP $k MIN" -path_delay min -from [get_clocks sclk] -to [get_ports dac_gp[$k]]
   rep "GN $k MAX" -path_delay max -from [get_clocks sclk] -to [get_ports dac_gn[$k]]
@@ -49,7 +52,7 @@ for {set k 0} {$k < 96} {incr k} {
   rep "GNCS $k MAX" -path_delay max -rise_from [get_ports [P cs_n]] -to [get_ports dac_gn[$k]]
 }
 # 3. tracking switches: CS falling (sample), CS rising (abort), SCLK (done flop)
-for {set i 0} {$i < 8} {incr i} {
+for {set i 0} {$i < $NCH} {incr i} {
   foreach p {rst_sw tg_on dac_gdn} {
     rep "TRKF $p $i MAX" -path_delay max -fall_from [get_ports [P cs_n]] -to [get_ports ${p}[$i]]
     rep "TRKF $p $i MIN" -path_delay min -fall_from [get_ports [P cs_n]] -to [get_ports ${p}[$i]]
@@ -67,10 +70,10 @@ rep "DOUTOE MAX" -path_delay max -to [get_ports [P dout_oe]]
 rep "RSTAMP MAX" -path_delay max -to [get_ports rst_amp_o]
 if {![info exists ::env(NOCFG)]} {
 rep "MODE MAX" -path_delay max -to [get_ports mode_o]
-for {set i 0} {$i < 8} {incr i} { rep "EN $i MAX" -path_delay max -to [get_ports en_o[$i]] }
+for {set i 0} {$i < $NCH} {incr i} { rep "EN $i MAX" -path_delay max -to [get_ports en_o[$i]] }
 }
 # 5. capture flop: clock arrival (tapw) and the cap -> code setup slack at 2 and 3 MHz
-for {set i 0} {$i < 8} {incr i} {
+for {set i 0} {$i < $NCH} {incr i} {
   set f [capflop $i]
   foreach P {500 333.333} {
     create_clock -name sclk -period $P [get_ports [P sclk]]
@@ -93,7 +96,7 @@ puts "@@ MINPULSE"
 report_check_types -min_pulse_width -digits 3
 if {[info exists ::env(EXTRA_DIG)]} {
   # 7. routing-switch outputs of the macro (dbs_ctrl is inside): arrival after the SCLK rising edge, per output edge
-  for {set i 0} {$i < 8} {incr i} {
+  for {set i 0} {$i < $NCH} {incr i} {
     foreach p {sw_rec sw_rec_b sw_ipg sw_ipg_b} {
       rep "SW $p $i RISE MAX" -path_delay max -from [get_clocks sclk] -rise_to [get_ports ${p}[$i]]
       rep "SW $p $i RISE MIN" -path_delay min -from [get_clocks sclk] -rise_to [get_ports ${p}[$i]]

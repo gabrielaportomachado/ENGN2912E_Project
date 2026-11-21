@@ -1,5 +1,5 @@
 * LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
-* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,30 --cin 2,61.15,61.15
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,30 --cin 2,61.15,61.15 --dig-netlist AFE/dig/final/afe_dig.pnl.v
 * MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
 * File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 4 x afe_ch + supply devices; the 15 pad-control constants are pins of afe_dig;
 * afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.
@@ -359,39 +359,25 @@ Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
 .ends bias_genc
 
 * ---------------- digital macro
-* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top, hardened in L1d) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first and the 15 pad-control tie pins last.
-* When the powered gate-level netlist exists, run this script with --dig-netlist <file>: the instance then follows the port order of that file and this empty definition is not written
-* (the netlist itself goes into LVS_VERILOG_FILES, as in the organizer's mixed-signal example).
-.subckt afe_dig VDD VSS CS SCLK DIN RSTN DOUT DOUT_OE rst_amp_o sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1]
-+ sw_rec_b[0] sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0] sw_ipg_b[3] sw_ipg_b[2] sw_ipg_b[1] sw_ipg_b[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] cmp_clk[3]
-+ cmp_clk[2] cmp_clk[1] cmp_clk[0] rst_sw[3] rst_sw[2] rst_sw[1] rst_sw[0] tg_on[3] tg_on[2] tg_on[1] tg_on[0] dac_gp[47] dac_gp[46] dac_gp[45]
-+ dac_gp[44] dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gp[35] dac_gp[34] dac_gp[33] dac_gp[32]
-+ dac_gp[31] dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gp[23] dac_gp[22] dac_gp[21] dac_gp[20] dac_gp[19]
-+ dac_gp[18] dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5]
-+ dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[47] dac_gn[46] dac_gn[45] dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39]
-+ dac_gn[38] dac_gn[37] dac_gn[36] dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26]
-+ dac_gn[25] dac_gn[24] dac_gn[23] dac_gn[22] dac_gn[21] dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13]
-+ dac_gn[12] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] dac_gdn[3]
-+ dac_gdn[2] dac_gdn[1] dac_gdn[0] DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU
-+ RSTN_PD
-.ends afe_dig
+* afe_dig: the digital macro (dbs_ctrl N = 4 + adc_top N = 4, Decision 54).  Its definition is the powered gate-level netlist AFE/dig/final/afe_dig.pnl.v (LVS_VERILOG_FILES);
+* the instance below lists the nets in the port order of that file.
 
 * ---------------- top
 .subckt dbs_afe_top E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REC[3] REC[2] REC[1] REC[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE
 + DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
 * digital macro
-Xdig VDD VSS CS SCLK DIN RSTN DOUT_OUT DOUT_OE rst_amp_o sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1] sw_rec_b[0]
-+ sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0] sw_ipg_b[3] sw_ipg_b[2] sw_ipg_b[1] sw_ipg_b[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] cmp_clk[3] cmp_clk[2]
-+ cmp_clk[1] cmp_clk[0] rst_sw[3] rst_sw[2] rst_sw[1] rst_sw[0] tg_on[3] tg_on[2] tg_on[1] tg_on[0] dac_gp[47] dac_gp[46] dac_gp[45] dac_gp[44]
+Xdig CS CS_PD CS_PU DIN DIN_PD DIN_PU DOUT_OUT DOUT_CS DOUT_IE DOUT_OE DOUT_PD DOUT_PDRV0 DOUT_PDRV1 DOUT_PU DOUT_SL RSTN RSTN_PD RSTN_PU SCLK SCLK_PD
++ SCLK_PU rst_amp_o VDD VSS cmp_clk[3] cmp_clk[2] cmp_clk[1] cmp_clk[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] dac_gdn[3] dac_gdn[2] dac_gdn[1]
++ dac_gdn[0] dac_gn[47] dac_gn[46] dac_gn[45] dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38] dac_gn[37] dac_gn[36]
++ dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] dac_gn[23]
++ dac_gn[22] dac_gn[21] dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] dac_gn[11] dac_gn[10]
++ dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] dac_gp[47] dac_gp[46] dac_gp[45] dac_gp[44]
 + dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gp[35] dac_gp[34] dac_gp[33] dac_gp[32] dac_gp[31]
 + dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gp[23] dac_gp[22] dac_gp[21] dac_gp[20] dac_gp[19] dac_gp[18]
 + dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4]
-+ dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[47] dac_gn[46] dac_gn[45] dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39]
-+ dac_gn[38] dac_gn[37] dac_gn[36] dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26]
-+ dac_gn[25] dac_gn[24] dac_gn[23] dac_gn[22] dac_gn[21] dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13]
-+ dac_gn[12] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] dac_gdn[3]
-+ dac_gdn[2] dac_gdn[1] dac_gdn[0] DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU
-+ RSTN_PD afe_dig
++ dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] rst_sw[3] rst_sw[2] rst_sw[1] rst_sw[0] sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0] sw_ipg_b[3] sw_ipg_b[2]
++ sw_ipg_b[1] sw_ipg_b[0] sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1] sw_rec_b[0] tg_on[3] tg_on[2] tg_on[1] tg_on[0]
++ afe_dig
 * shared bias and the 4 channels
 Xu_bias vbn vcm vg1 vcmo vg2 vrs VDD VSS bias_genc
 Xch0 E[0] IPG[0] REC[0] REF sw_rec[0] sw_rec_b[0] sw_ipg[0] sw_ipg_b[0] rst_amp_o rst_sw[0] tg_on[0] cmp_clk[0] dac_gdn[0] dac_gp[11] dac_gp[10]

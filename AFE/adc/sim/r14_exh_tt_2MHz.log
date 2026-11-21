@@ -1,0 +1,3 @@
+EVENTS frames 4096 decisions 49152 49152 49152 49152
+RESULT PASS PER 500.00 frames 4096 errors 0 e_dout 0 e_oe 0 e_cfgt 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 dummy-driver errors 0
+tb/tb_adc_top.v:241: $finish called at 167526500000 (1ps)

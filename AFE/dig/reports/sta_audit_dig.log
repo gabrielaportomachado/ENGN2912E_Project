@@ -1,4 +1,4 @@
-LP step 5 / L1d: OpenSTA (AFE/review/scripts/sta_audit.py --dig) on the hardened afe_dig netlist /tmp/lp_dig/design/runs/final/final/nl/afe_dig.nl.v + extracted SPEF; SCLK propagated from the pin.
+LP step 5 / L1d: OpenSTA (AFE/review/scripts/sta_audit.py --dig) on the hardened afe_dig netlist /tmp/r14_dig/design/runs/final/final/nl/afe_dig.nl.v + extracted SPEF; SCLK propagated from the pin.
 All times in ns after the SCLK rising edge at the macro pin (or after the CS edge at the pin where stated).  nom SPEF unless stated; [min..max SPEF] in brackets.
 Options: output load none (pins unloaded, as in AFE/review/sim/sta_audit.log), input transition of SCLK / CS / RSTN ideal (0).  Not in this netlist: the pad cells, the wires from the macro pins to the analog cells.
 Compare with AFE/review/sim/sta_audit.log (the D3 macro adc8_top, no clock buffer) and the D3 table in AFE/adc/NOTES.md.
@@ -6,135 +6,115 @@ Compare with AFE/review/sim/sta_audit.log (the D3 macro adc8_top, no clock buffe
 1. COMPARATOR CLOCK WINDOWS  (rise = evaluate start, end = evaluate end, cap = capture-flop clock (tapw) arrival)
   == ff_n40C_3v60
   ADC   rise    end      W     cap   Delta   cap->code slack @333.3 / @500
-  0     26.36   30.31  3.95   29.50      -     301.74 /   468.41
-  1     33.71   37.46  3.74   36.64   7.36     294.77 /   461.44
-  2     40.61   44.11  3.49   43.59   6.90     287.44 /   454.11
-  3     48.08   51.43  3.35   50.93   7.47     280.43 /   447.10
-  4     55.91   59.76  3.85   59.03   7.83     271.19 /   437.86
-  5     63.41   67.09  3.68   66.31   7.50     264.58 /   431.25
-  6     70.44   73.97  3.53   73.40   7.03     257.70 /   424.37
-  7     77.62   80.85  3.23   80.42   7.18     250.67 /   417.34
+  0     25.47   29.04  3.57   28.50      -     302.59 /   469.25
+  1     32.80   36.00  3.19   35.56   7.33     295.65 /   462.31
+  2     40.38   43.94  3.56   43.40   7.58     287.66 /   454.32
+  3     47.61   51.09  3.48   50.67   7.23     280.21 /   446.87
   == ff_125C_3v60
   ADC   rise    end      W     cap   Delta   cap->code slack @333.3 / @500
-  0     38.72   44.40  5.68   43.30      -     287.02 /   453.69
-  1     49.60   55.00  5.40   53.89  10.88     276.61 /   443.27
-  2     59.88   64.93  5.06   64.23  10.27     265.69 /   432.36
-  3     70.90   75.77  4.87   75.09  11.03     255.32 /   421.99
-  4     82.41   87.95  5.54   86.96  11.51     241.90 /   408.57
-  5     93.48   98.79  5.31   97.73  11.07     232.01 /   398.68
-  6    103.93  109.04  5.11  108.26  10.45     221.74 /   388.41
-  7    114.57  119.28  4.71  118.69  10.64     211.27 /   377.93
+  0     37.56   42.72  5.16   41.99      -     288.10 /   454.76
+  1     48.41   53.07  4.66   52.48  10.85     277.79 /   444.45
+  2     59.58   64.73  5.15   63.99  11.17     266.07 /   432.74
+  3     70.29   75.33  5.04   74.77  10.71     255.03 /   421.69
   == tt_025C_3v30
   ADC   rise    end      W     cap   Delta   cap->code slack @333.3 / @500
-  0     48.41   55.55  7.14   54.17      -     275.48 /   442.15
-  1     62.06   68.84  6.79   67.47  13.64     262.49 /   429.15
-  2     74.96   81.34  6.38   80.45  12.90     248.89 /   415.56
-  3     88.78   94.93  6.15   94.07  13.82     235.82 /   402.49
-  4    103.19  110.16  6.97  108.91  14.41     219.05 /   385.72
-  5    117.06  123.75  6.68  122.43  13.87     206.67 /   373.34
-  6    130.17  136.62  6.44  135.64  13.11     193.82 /   360.48
-  7    143.52  149.47  5.95  148.73  13.35     180.70 /   347.37
+  0     46.98   53.49  6.51   52.57      -     276.85 /   443.52
+  1     60.59   66.48  5.89   65.73  13.60     263.91 /   430.57
+  2     74.59   81.09  6.50   80.16  14.00     249.21 /   415.88
+  3     88.03   94.39  6.37   93.66  13.44     235.42 /   402.08
   == ss_n40C_3v00
   ADC   rise    end      W     cap   Delta   cap->code slack @333.3 / @500
-  0     69.09   79.34 10.25   77.29      -     250.73 /   417.39
-  1     88.61   98.37  9.76   96.36  19.52     232.15 /   398.81
-  2    107.15  116.32  9.17  115.01  18.54     212.68 /   379.35
-  3    126.92  135.76  8.84  134.52  19.77     193.87 /   360.54
-  4    147.48  157.49 10.01  155.64  20.56     170.08 /   336.75
-  5    167.32  176.93  9.61  175.01  19.84     152.34 /   319.01
-  6    186.14  195.39  9.26  193.96  18.82     133.90 /   300.57
-  7    205.27  213.81  8.54  212.75  19.13     115.16 /   281.83
+  0     67.16   76.50  9.34   75.14      -     252.62 /   419.29
+  1     86.64   95.11  8.47   94.03  19.48     234.06 /   400.73
+  2    106.65  115.99  9.33  114.61  20.02     213.05 /   379.72
+  3    125.91  135.04  9.13  133.96  19.26     193.35 /   360.02
   == ss_125C_3v00
   ADC   rise    end      W     cap   Delta   cap->code slack @333.3 / @500
-  0    100.72  115.34 14.62  112.65      -     213.20 /   379.87
-  1    129.30  143.26 13.96  140.60  28.58     185.85 /   352.52
-  2    156.51  169.73 13.22  167.97  27.21     157.37 /   324.04
-  3    185.44  198.21 12.77  196.52  28.92     129.81 /   296.48
-  4    215.46  229.76 14.30  227.32  30.02      95.33 /   262.00
-  5    244.47  258.23 13.76  255.69  29.01      69.17 /   235.83
-  6    272.07  285.39 13.32  283.46  27.60      42.03 /   208.70
-  7    300.09  312.47 12.38  311.02  28.02      14.47 /   181.13
+  0     98.08  111.52 13.44  109.70      -     215.72 /   382.39
+  1    126.59  138.86 12.28  137.40  28.51     188.49 /   355.16
+  2    155.86  169.29 13.43  167.44  29.27     157.90 /   324.56
+  3    184.05  197.24 13.19  195.78  28.19     129.03 /   295.70
 
 2. SUMMARY PER CORNER
-  corner                T0     Delta         W  ADC7rise   lastend    m@3MHz    m@2MHz gp/gn min gp/gn max DAC->cmp0 DAC->cmp7
-  ff_n40C_3v60       26.36      7.32      3.95     77.62     80.85    252.49    419.15      1.49      4.40     22.03     74.26
-  ff_125C_3v60       38.72     10.83      5.68    114.57    119.28    214.05    380.72      2.07      6.07     32.76    109.91
-  tt_025C_3v30       48.41     13.59      7.14    143.52    149.47    183.87    350.53      2.51      7.34     41.20    137.89
-  ss_n40C_3v00       69.09     19.45     10.25    205.27    213.81    119.52    286.19      3.53     10.19     59.05    197.43
-  ss_125C_3v00      100.72     28.48     14.62    300.09    312.47     20.86    187.53      4.89     14.13     86.82    289.14
+  corner                T0     Delta         W ADClastrise   lastend    m@3MHz    m@2MHz gp/gn min gp/gn max DAC->cmp0 DAC->cmpN
+  ff_n40C_3v60       25.47      7.38      3.57     47.61     51.09    282.24    448.90      1.18      3.23     22.24     44.62
+  ff_125C_3v60       37.56     10.91      5.16     70.29     75.33    258.00    424.67      1.65      4.51     33.05     66.12
+  tt_025C_3v30       46.98     13.68      6.51     88.03     94.39    238.94    405.61      2.01      5.44     41.55     82.98
+  ss_n40C_3v00       67.16     19.58      9.34    125.91    135.04    198.29    364.96      2.83      7.55     59.60    118.87
+  ss_125C_3v00       98.08     28.66     13.44    184.05    197.24    136.09    302.76      3.94     10.55     87.53    174.22
   (m@3MHz / m@2MHz = SCLK period minus the end of the last window; DAC->cmp_i = rise_i minus the LATEST gp/gn arrival of ADC i = the time the DAC has to settle before its comparator fires)
   SPEF spread [min .. max] of T0 / last end:
-  ff_n40C_3v60   T0 26.21 .. 26.53   last end 80.68 .. 81.04   gp/gn max 4.19 .. 4.66
-  ff_125C_3v60   T0 38.53 .. 38.95   last end 119.06 .. 119.54   gp/gn max 5.78 .. 6.41
-  tt_025C_3v30   T0 48.18 .. 48.70   last end 149.19 .. 149.80   gp/gn max 6.99 .. 7.75
-  ss_n40C_3v00   T0 68.76 .. 69.47   last end 213.41 .. 214.28   gp/gn max 9.71 .. 10.76
-  ss_125C_3v00   T0 100.28 .. 101.25   last end 311.95 .. 313.10   gp/gn max 13.48 .. 14.88
+  ff_n40C_3v60   T0 25.41 .. 25.54   last end 50.97 .. 51.25   gp/gn max 3.16 .. 3.33
+  ff_125C_3v60   T0 37.48 .. 37.66   last end 75.17 .. 75.54   gp/gn max 4.41 .. 4.63
+  tt_025C_3v30   T0 46.89 .. 47.10   last end 94.19 .. 94.65   gp/gn max 5.31 .. 5.59
+  ss_n40C_3v00   T0 67.02 .. 67.32   last end 134.74 .. 135.41   gp/gn max 7.38 .. 7.76
+  ss_125C_3v00   T0 97.89 .. 98.30   last end 196.82 .. 197.73   gp/gn max 10.33 .. 10.83
 
-3. SAMPLING (CS falling at the port -> switch gates at the macro pins), min / max over the 8 ADCs
+3. SAMPLING (CS falling at the port -> switch gates at the macro pins), min / max over the ADCs
   corner         rst_sw fall        tg_on fall         dac_gdn rise       tg_on - rst_sw (worst = min tg - max rst)
-  ff_n40C_3v60     0.46 .. 0.61       2.21 .. 2.39       2.29 .. 2.48       1.59
-  ff_125C_3v60     0.65 .. 0.86       3.23 .. 3.48       3.35 .. 3.61       2.37
-  tt_025C_3v30     0.78 .. 1.06       4.05 .. 4.37       4.20 .. 4.54       3.00
-  ss_n40C_3v00     1.08 .. 1.48       5.80 .. 6.27       6.01 .. 6.50       4.32
-  ss_125C_3v00     1.54 .. 2.10       8.45 .. 9.10       8.74 .. 9.42       6.35
-  sampling skew between the 8 channels = spread of rst_sw fall (max - min):
-  ff_n40C_3v60   0.157 ns
-  ff_125C_3v60   0.213 ns
-  tt_025C_3v30   0.273 ns
-  ss_n40C_3v00   0.400 ns
-  ss_125C_3v00   0.556 ns
+  ff_n40C_3v60     0.45 .. 0.56       2.20 .. 2.34       2.28 .. 2.42       1.64
+  ff_125C_3v60     0.64 .. 0.80       3.22 .. 3.42       3.34 .. 3.53       2.42
+  tt_025C_3v30     0.77 .. 0.99       4.04 .. 4.30       4.19 .. 4.44       3.06
+  ss_n40C_3v00     1.07 .. 1.39       5.79 .. 6.17       6.00 .. 6.37       4.40
+  ss_125C_3v00     1.52 .. 1.99       8.44 .. 8.99       8.72 .. 9.27       6.45
+  sampling skew between the channels = spread of rst_sw fall (max - min):
+  ff_n40C_3v60   0.117 ns
+  ff_125C_3v60   0.166 ns
+  tt_025C_3v30   0.218 ns
+  ss_n40C_3v00   0.326 ns
+  ss_125C_3v00   0.466 ns
 
 4. RESUME OF TRACKING after the done flop (SCLK edge 14+i -> gates), and ABORT (CS rising in mid-conversion)
   corner         rst_sw rise (SCLK)   tg_on rise (SCLK)    | tg_on rise (CS^) min gp/gn release (CS^) max per-ADC worst overlap  CONTENTION = release - tg_on
-  ff_n40C_3v60     1.78 .. 2.05         3.53 .. 3.78       | 2.01                 3.24                   1.24                   YES 1.24 ns
-  ff_125C_3v60     2.48 .. 2.85         5.09 .. 5.41       | 2.95                 4.41                   1.46                   YES 1.46 ns
-  tt_025C_3v30     3.01 .. 3.50         6.28 .. 6.72       | 3.68                 5.25                   1.57                   YES 1.57 ns
-  ss_n40C_3v00     4.23 .. 4.97         8.93 .. 9.59       | 5.23                 7.31                   2.08                   YES 2.08 ns
-  ss_125C_3v00     5.90 .. 6.92        12.80 .. 13.68      | 7.63                 9.75                   2.12                   YES 2.12 ns
+  ff_n40C_3v60     1.52 .. 1.65         3.24 .. 3.41       | 2.00                 2.12                   0.12                   YES 0.12 ns
+  ff_125C_3v60     2.13 .. 2.33         4.72 .. 4.90       | 2.94                 2.87                   -0.08                  no
+  tt_025C_3v30     2.60 .. 2.84         5.84 .. 6.12       | 3.67                 3.47                   -0.20                  no
+  ss_n40C_3v00     3.67 .. 4.03         8.33 .. 8.76       | 5.22                 4.86                   -0.36                  no
+  ss_125C_3v00     5.15 .. 5.64        12.00 .. 12.57      | 7.62                 6.53                   -1.10                  no
   (normal frame: the drivers are released one whole SCLK period before the done flop, so there is no contention; the abort case is CS rising while drv_en = 1)
 
 5. SERIAL / CONFIG OUTPUTS
   corner         DOUT after SCLK fall   DOUT after CS^ DOUT_OE      cfg outputs (rst_amp/mode/en) after SCLK 33
-  ff_n40C_3v60     1.42 .. 1.70         1.43           0.03         2.00          
-  ff_125C_3v60     1.98 .. 2.43         1.97           0.04         2.76          
-  tt_025C_3v30     2.40 .. 2.92         2.30           0.05         3.36          
-  ss_n40C_3v00     3.41 .. 4.16         3.18           0.07         4.67          
-  ss_125C_3v00     4.66 .. 5.79         4.26           0.09         6.53          
+  ff_n40C_3v60     1.19 .. 1.21         1.15           0.03         1.48          
+  ff_125C_3v60     1.65 .. 1.69         1.61           0.04         2.08          
+  tt_025C_3v30     2.02 .. 2.05         1.93           0.05         2.53          
+  ss_n40C_3v00     2.86 .. 2.92         2.75           0.07         3.57          
+  ss_125C_3v00     3.97 .. 4.02         3.73           0.09         5.02          
 
 6. CS FALLING -> FIRST SCLK RISING (recovery of the frame flops; required t = 500 - slack with input delay 0), and min pulse width
-  ff_n40C_3v60   CS fall -> RN arrival 1.46 ns, recovery slack 499.36 -> CS must fall >= 0.64 ns before the first SCLK rising edge;  min pulse ('_1420_/CLK', 'low', 0.324, 245.005)
-  ff_125C_3v60   CS fall -> RN arrival 1.50 ns, recovery slack 498.89 -> CS must fall >= 1.11 ns before the first SCLK rising edge;  min pulse ('_1420_/CLK', 'low', 0.458, 243.477)
-  tt_025C_3v30   CS fall -> RN arrival 2.47 ns, recovery slack 498.95 -> CS must fall >= 1.05 ns before the first SCLK rising edge;  min pulse ('_1420_/CLK', 'low', 0.597, 240.868)
-  ss_n40C_3v00   CS fall -> RN arrival 3.38 ns, recovery slack 498.71 -> CS must fall >= 1.29 ns before the first SCLK rising edge;  min pulse ('_1420_/CLK', 'low', 0.877, 235.645)
-  ss_125C_3v00   CS fall -> RN arrival 4.84 ns, recovery slack 497.96 -> CS must fall >= 2.04 ns before the first SCLK rising edge;  min pulse ('_1420_/CLK', 'low', 1.254, 230.49)
+  ff_n40C_3v60   CS fall -> RN arrival 0.78 ns, recovery slack 499.56 -> CS must fall >= 0.44 ns before the first SCLK rising edge;  min pulse ('_788_/CLK', 'low', 0.324, 246.91)
+  ff_125C_3v60   CS fall -> RN arrival 1.15 ns, recovery slack 499.16 -> CS must fall >= 0.84 ns before the first SCLK rising edge;  min pulse ('_788_/CLK', 'low', 0.458, 245.985)
+  tt_025C_3v30   CS fall -> RN arrival 1.34 ns, recovery slack 499.28 -> CS must fall >= 0.72 ns before the first SCLK rising edge;  min pulse ('_788_/CLK', 'low', 0.597, 244.318)
+  ss_n40C_3v00   CS fall -> RN arrival 1.76 ns, recovery slack 499.28 -> CS must fall >= 0.72 ns before the first SCLK rising edge;  min pulse ('_788_/CLK', 'low', 0.877, 241.032)
+  ss_125C_3v00   CS fall -> RN arrival 2.64 ns, recovery slack 498.55 -> CS must fall >= 1.45 ns before the first SCLK rising edge;  min pulse ('_788_/CLK', 'low', 1.254, 237.821)
 
-7. ROUTING-SWITCH OUTPUTS (dbs_ctrl + the output pairs of afe_dig), arrival after the SCLK rising edge at the macro pins, min .. max over the 8 channels and both SPEF bounds
+7. ROUTING-SWITCH OUTPUTS (dbs_ctrl + the output pairs of afe_dig), arrival after the SCLK rising edge at the macro pins, min .. max over the channels and both SPEF bounds
   skew = |t(sw_x edge) - t(sw_x_b opposite edge)| of the SAME channel, worst channel.  close = sw_x rises / sw_x_b falls, open = sw_x falls / sw_x_b rises (I0 mismatch 8)
   corner         sw_rec rise       sw_rec_b fall     sw_rec fall       sw_rec_b rise     | rec skew close / open  ipg skew close / open 
-  ff_n40C_3v60    1.79 .. 3.84      1.96 .. 4.07      0.69 .. 3.15      0.88 .. 3.36     |  0.231 / 0.213          0.216 / 0.217        
-  ff_125C_3v60    2.55 .. 5.24      2.79 .. 5.56      0.92 .. 4.30      1.18 .. 4.61     |  0.327 / 0.311          0.314 / 0.315        
-  tt_025C_3v30    3.09 .. 6.40      3.38 .. 6.78      1.11 .. 5.11      1.41 .. 5.47     |  0.391 / 0.359          0.370 / 0.363        
-  ss_n40C_3v00    4.36 .. 8.91      4.77 .. 9.46      1.49 .. 7.12      1.91 .. 7.62     |  0.563 / 0.519          0.531 / 0.528        
-  ss_125C_3v00    6.16 .. 12.37     6.73 .. 13.11     2.06 .. 9.61      2.62 .. 10.27    |  0.776 / 0.691          0.745 / 0.708        
+  ff_n40C_3v60    1.56 .. 2.31      1.73 .. 2.49      0.64 .. 1.93      0.83 .. 2.12     |  0.190 / 0.186          0.196 / 0.193        
+  ff_125C_3v60    2.24 .. 3.22      2.48 .. 3.49      0.87 .. 2.67      1.13 .. 2.93     |  0.268 / 0.264          0.286 / 0.277        
+  tt_025C_3v30    2.70 .. 3.92      2.98 .. 4.24      1.05 .. 3.21      1.36 .. 3.52     |  0.324 / 0.313          0.338 / 0.327        
+  ss_n40C_3v00    3.81 .. 5.50      4.21 .. 5.96      1.42 .. 4.49      1.86 .. 4.93     |  0.472 / 0.448          0.483 / 0.462        
+  ss_125C_3v00    5.39 .. 7.71      5.96 .. 8.36      1.99 .. 6.16      2.59 .. 6.75     |  0.652 / 0.605          0.679 / 0.627        
 
 8. CLOCK LATENCY (insertion delay): SCLK pin -> register clock pins, and -> the input of the comparator delay chain (rising edge)
   corner         flops on the SCLK net: n, min .. max spread       chain in   chain - flops (min..max) worst clock slew   net of the chain input / of the flops
-  ff_n40C_3v60   159   0.555 .. 0.629          0.074        0.612      -0.016 .. +0.058       0.741              sclk_i / sclk_i
-  ff_125C_3v60   159   0.764 .. 0.839          0.075        0.823      -0.017 .. +0.058       1.025              sclk_i / sclk_i
-  tt_025C_3v30   159   0.920 .. 0.995          0.075        0.978      -0.017 .. +0.058       1.190              sclk_i / sclk_i
-  ss_n40C_3v00   159   1.243 .. 1.317          0.074        1.300      -0.016 .. +0.057       1.516              sclk_i / sclk_i
-  ss_125C_3v00   159   1.745 .. 1.820          0.075        1.803      -0.017 .. +0.058       2.204              sclk_i / sclk_i
+  ff_n40C_3v60    87   0.366 .. 0.393          0.027        0.374      -0.019 .. +0.008       0.387              sclk_i / sclk_i
+  ff_125C_3v60    87   0.505 .. 0.533          0.027        0.514      -0.019 .. +0.008       0.546              sclk_i / sclk_i
+  tt_025C_3v30    87   0.605 .. 0.632          0.027        0.613      -0.019 .. +0.008       0.632              sclk_i / sclk_i
+  ss_n40C_3v00    87   0.825 .. 0.852          0.027        0.833      -0.019 .. +0.008       0.804              sclk_i / sclk_i
+  ss_125C_3v00    87   1.148 .. 1.175          0.027        1.156      -0.019 .. +0.008       1.176              sclk_i / sclk_i
   (same node: "chain - flops" is only the wire-delay difference inside one net.  Every ns of flop latency that the chain input does not share comes off the DAC -> comparator time
    at ff and is added to the margin of the last window at ss: AFE/review/AUDIT.md 4.4.5.)
 
 9. THE TWO L1d LIMITS (AFE/prompts/layout_run.md L1d; AFE/review/AUDIT.md 4.9.4 edit 7), nom SPEF and worst of the min / max SPEF
-  (a) DAC edge -> comparator clock of ADC 0 at ff_n40C_3v60:                       22.03 ns (min over SPEF 21.99)   limit >= 21.0 ns   PASS
-  (b) last comparator window end -> next SCLK edge AT THE PIN (333.3 ns), ss_125C_3v00:  20.86 ns (min over SPEF 20.23)   limit >= 20.0 ns   PASS
-  (c) the same against the next SCLK edge AT THE FLOP CLOCK PINS (333.3 ns + clock latency 1.74 ns):  22.61 ns (min over SPEF 22.05)   limit >= 20.0 ns   PASS
-      setup slack of the captured decision of ADC 7 into the code register at 3 MHz, ss_125C_3v00: 14.47 ns (min over SPEF 13.69); the D3 macro had 14.25 ns
+  (a) DAC edge -> comparator clock of ADC 0 at ff_n40C_3v60:                       22.24 ns (min over SPEF 22.22)   limit >= 21.0 ns   PASS
+  (b) last comparator window end -> next SCLK edge AT THE PIN (333.3 ns), ss_125C_3v00: 136.09 ns (min over SPEF 135.60)   limit >= 20.0 ns   PASS
+  (c) the same against the next SCLK edge AT THE FLOP CLOCK PINS (333.3 ns + clock latency 1.15 ns): 137.24 ns (min over SPEF 136.78)   limit >= 20.0 ns   PASS
+      setup slack of the captured decision of the last ADC into the code register at 3 MHz, ss_125C_3v00: 129.03 ns (min over SPEF 128.32); the D3 macro had 14.25 ns
       (b) counts the delay of the clock buffer / tree against the window although the next DAC edge is launched through the same buffer; (c) is the physical margin (AUDIT 4.4.5).
       The D3 macro without a clock buffer had (b) = (c) = 22.4 ns.
-  worst DAC edge -> comparator clock over the 8 ADCs at ff_n40C_3v60 (nom): 22.03 ns (ADC 0)
-  L1D_LIMITS dac_cmp0_ff_n40=21.99 window_pin_ss_125=20.23 window_flop_ss_125=22.05 cap_code_slack_3MHz_ss_125=13.69   (worst of the three SPEF sets)
+  worst DAC edge -> comparator clock over the ADCs at ff_n40C_3v60 (nom): 22.24 ns (ADC 0)
+  L1D_LIMITS dac_cmp0_ff_n40=22.22 window_pin_ss_125=135.60 window_flop_ss_125=136.78 cap_code_slack_3MHz_ss_125=128.32   (worst of the three SPEF sets)
   RESULT L1d limits, window against the SCLK pin  (a) and (b): PASS
   RESULT L1d limits, window against the flop clock (a) and (c): PASS

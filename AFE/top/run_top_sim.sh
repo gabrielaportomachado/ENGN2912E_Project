@@ -1,6 +1,6 @@
 #!/bin/bash
 # I0 whole-digital-part simulation (Icarus).  usage: bash run_top_sim.sh   (from anywhere) -> sim/i0_top.log
-#   bash run_top_sim.sh dig   (LP step 5 / L1d): the SAME testbench on the variant top with ONE afe_dig macro instance (AFE/dig/afe_dig.v) in place of adc8_top + dbs_ctrl + the 15
+#   bash run_top_sim.sh dig   (LP step 5 / L1d): the SAME testbench on the variant top with ONE afe_dig macro instance (AFE/dig/afe_dig.v) in place of adc_top #(4) + dbs_ctrl #(4) + the 15
 #                             pad-control ties.  The variant top AFE/dig/dbs_afe_top_dig.v is generated from dbs_afe_top.v by AFE/dig/mk_top_dig.py.  Log: AFE/dig/sim/top_dig.log
 #                             (sim/i0_top.log is NOT touched); the two logs are compared line by line (only the `$finish` line may differ) and all 15 pad-control constants are checked.
 T="$(cd "$(dirname "$0")" && pwd)"; R="$T/../.."; cd "$T"

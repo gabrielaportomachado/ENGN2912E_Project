@@ -25,8 +25,19 @@ def read_netlist(path):
     return out
 
 
+def n_channels():
+    """number of channels of the macro = params.n_ch of AFE/layout/floorplan.json (8 if absent)"""
+    try:
+        return int(json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'layout', 'floorplan.json'))).get('params', {}).get('n_ch', 8))
+    except Exception:
+        return 8
+
+
 def chain_check(cells, L):
     ok = True
+    NC = n_channels()
+    # delay-cell counts of adc_clkgen defaults: T0 = 13 dlyd + 2 dlya, DT = 4 dlyd, W = 1 dlyd + 1 dlyc per channel
+    n_dlyd = 13 + 4 * (NC - 1) + NC
 
     def need(cond, msg):
         nonlocal ok
@@ -36,15 +47,15 @@ def chain_check(cells, L):
     for typ, name, pins in cells:
         by.setdefault(typ, []).append((name, pins))
     cnt = lambda typ, rx: sum(1 for n, _ in by.get(typ, []) if re.search(rx, n))
-    need(cnt('dlyd_1', r'ckg.*\.u$') == 49 and cnt('dlyd_1', r'\.utg$') == 8, 'delay cells dlyd_1: %d in the comparator chain (want 49), %d utg (want 8); other dlyd_* cells: %d' % (
-        cnt('dlyd_1', r'ckg.*\.u$'), cnt('dlyd_1', r'\.utg$'), sum(len(v) for t, v in by.items() if t.startswith('dlyd')) - cnt('dlyd_1', r'ckg.*\.u$') - cnt('dlyd_1', r'\.utg$')))
-    need(cnt('dlyc_1', r'ckg.*\.u$') == 8 and cnt('dlya_1', r'ckg.*\.u$') == 2, 'delay cells dlyc_1 %d (want 8), dlya_1 %d (want 2) in the chain' % (cnt('dlyc_1', r'ckg.*\.u$'), cnt('dlya_1', r'ckg.*\.u$')))
-    need(cnt('inv_1', r'ckg.*\.ui$') == 8, 'tapw inverters ...ckg.t[i].ui: %d inv_1 (want 8)' % cnt('inv_1', r'ckg.*\.ui$'))
+    need(cnt('dlyd_1', r'ckg.*\.u$') == n_dlyd and cnt('dlyd_1', r'\.utg$') == NC, 'delay cells dlyd_1: %d in the comparator chain (want %d), %d utg (want %d); other dlyd_* cells: %d' % (
+        cnt('dlyd_1', r'ckg.*\.u$'), n_dlyd, cnt('dlyd_1', r'\.utg$'), NC, sum(len(v) for t, v in by.items() if t.startswith('dlyd')) - cnt('dlyd_1', r'ckg.*\.u$') - cnt('dlyd_1', r'\.utg$')))
+    need(cnt('dlyc_1', r'ckg.*\.u$') == NC and cnt('dlya_1', r'ckg.*\.u$') == 2, 'delay cells dlyc_1 %d (want %d), dlya_1 %d (want 2) in the chain' % (cnt('dlyc_1', r'ckg.*\.u$'), NC, cnt('dlya_1', r'ckg.*\.u$')))
+    need(cnt('inv_1', r'ckg.*\.ui$') == NC, 'tapw inverters ...ckg.t[i].ui: %d inv_1 (want %d)' % (cnt('inv_1', r'ckg.*\.ui$'), NC))
     ug = [(t, n) for t, v in by.items() for n, _ in v if re.search(r'ckg.*\.ug$', n)]
-    need(len(ug) == 8 and all(t == 'and3_1' for t, _ in ug), 'comparator-clock gates ...ckg.t[i].ug (not dont-touch): %s (want 8 x and3_1)' % ', '.join(sorted(set('%s' % t for t, _ in ug))))
+    need(len(ug) == NC and all(t == 'and3_1' for t, _ in ug), 'comparator-clock gates ...ckg.t[i].ug (not dont-touch): %d x %s (want %d x and3_1)' % (len(ug), ', '.join(sorted(set('%s' % t for t, _ in ug))), NC))
     need(cnt(CKBUF, r'^ck\.u_ckbuf$') <= 1, 'clock buffer ck.u_ckbuf (%s): %d' % (CKBUF, cnt(CKBUF, r'^ck\.u_ckbuf$')))
-    need(cnt('clkinv_4', r'^sw\[\d\]\.u_(rec|ipg)$') == 16 and cnt('clkbuf_8', r'^sw\[\d\]\.u_(rec|ipg)_b$') == 16, 'switch output pairs: %d clkinv_4 + %d clkbuf_8 (want 16 + 16)' % (
-        cnt('clkinv_4', r'^sw\[\d\]\.u_(rec|ipg)$'), cnt('clkbuf_8', r'^sw\[\d\]\.u_(rec|ipg)_b$')))
+    need(cnt('clkinv_4', r'^sw\[\d\]\.u_(rec|ipg)$') == 2 * NC and cnt('clkbuf_8', r'^sw\[\d\]\.u_(rec|ipg)_b$') == 2 * NC, 'switch output pairs: %d clkinv_4 + %d clkbuf_8 (want %d + %d)' % (
+        cnt('clkinv_4', r'^sw\[\d\]\.u_(rec|ipg)$'), cnt('clkbuf_8', r'^sw\[\d\]\.u_(rec|ipg)_b$'), 2 * NC, 2 * NC))
     oe = [pins for n, pins in by.get('clkinv_20', []) if n == 'u_oe']
     need(len(oe) == 1 and oe[0].get('I') == 'CS' and oe[0].get('ZN') == 'DOUT_OE', 'DOUT_OE driver u_oe: %d clkinv_20 from CS to DOUT_OE (want 1)' % len(oe))
     tl = sorted(n[len('u_tie_'):] for n, _ in by.get('tiel', []) if n.startswith('u_tie_'))

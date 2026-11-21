@@ -44,8 +44,8 @@ PARAMS = {
     'rstrap': ['rm3', 2.0, 222.2],
     'pin_source': 'DEFAULT (no organizer DEF yet): positions chosen by LP so that no pin wire crosses another; replace with `floorplan.py build --pins-def <organizer.def>` when the DEF arrives',
 }
-EST = {'amp_ch': 51626.0, 'adc_ch': 14911.0, 'bias_genc': 9966.0, 'afe_dig_cells': 33661.0, 'tgates': 199.0, 'decap_gate': 56533.0}
-EST_SRC = ('AFE/review/sim/f1_area.log: afe_chc 49,312 + fs_oneshot_c 2,314 = 51,626 um2 (amp_ch); ADC analog part 14,911; bias_genc 9,966; digital cells 31,872 + dbs_ctrl 1,789 = 33,661; '
+EST = {'amp_ch': 51626.0, 'adc_ch': 14911.0, 'bias_genc': 9966.0, 'afe_dig_cells': 18879.0, 'tgates': 199.0, 'decap_gate': 56533.0}
+EST_SRC = ('AFE/review/sim/f1_area.log: afe_chc 49,312 + fs_oneshot_c 2,314 = 51,626 um2 (amp_ch); ADC analog part 14,911; bias_genc 9,966; digital cells of the N = 8 logic 31,872 + dbs_ctrl 1,789 = 33,661, REPLACED by the AS-BUILT 4-channel macro of REVIEW R14 (AFE/dig/reports/flow_summary.rpt: 855 std cells = 18,879 um2); '
            '2 TGATE + OR2 + INV 199; decap 0.225 nF = 56,533 um2 of gate (all ESTIMATE, the layout model is at the top of that log)')
 CH_DIG = ['sw_rec', 'sw_rec_b', 'sw_ipg', 'sw_ipg_b', 'rst_sw', 'tg_on', 'dac_gdn', 'cmp_clk', 'cmp_q'] + [x for b in range(11, -1, -1) for x in ('dac_gp%d' % b, 'dac_gn%d' % b)]
 W_PINS = ['RSTN_PD', 'RSTN_PU', 'RSTN', 'SCLK_PD', 'SCLK_PU', 'SCLK', 'DIN_PD', 'DIN_PU', 'DIN', 'CS_PD', 'CS_PU', 'CS', 'DOUT', 'DOUT_OE', 'DOUT_IE', 'DOUT_PD', 'DOUT_PU', 'DOUT_CS',

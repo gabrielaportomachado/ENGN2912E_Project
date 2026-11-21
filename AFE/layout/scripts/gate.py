@@ -30,7 +30,7 @@ GDS_DEFAULT = {'amp_ch': ['AFE/layout/amp/amp_ch.gds', 'AFE/layout/amp/gds/amp_c
 REF = {'amp_ch': ['AFE/layout/amp/lvs/afe_chc.spice', 'AFE/layout/lvs/afe_chc.spice'], 'adc_ch': ['AFE/layout/adc/lvs/adc_ch.spice', 'AFE/layout/lvs/adc_ch.spice'],
        'dbs_afe_top': ['AFE/layout/lvs/dbs_afe_top.spice']}
 PROTECTED = ['AFE/layout/accept_limits.json', 'AFE/layout/ACCEPT.md', 'AFE/amp/spice', 'AFE/adc/spice', 'rtl', 'AFE/adc/rtl', 'AFE/top/dbs_afe_top.v', 'TGATE/TGATE.spice']
-DIG_ALLOWED = {'X1.contention', 'X5.word0', 'X5.after33d', 'T11.crowbar'}          # Decision 44f / AUDIT 4.4.6; MIXED corner also T2.settle
+DIG_ALLOWED = {'X1.contention', 'X5.word0', 'X5.after17d', 'T11.crowbar'}          # Decision 44f / AUDIT 4.4.6; MIXED corner also T2.settle
 DECAP_PF = 1.593                                                                     # one cap_nmos_03v3 20 x 20 um unit at 3.3 V (SPEC.md section 4)
 OUT = []
 NF = [0]
@@ -309,7 +309,14 @@ def phase_dig(a):
       'see the lines of flow_summary.rpt; CTS problems: ladder C-1; congestion: C-3')
     m = re.search(r'DIE 0\.0 0\.0 ([\d.]+) ([\d.]+) um', fs)
     if m:
-        R(float(m.group(1)) <= 820 and float(m.group(2)) <= 110, 'die %s x %s um <= the slot 820 x 110 um' % m.groups(), 'ladder C-3 (then floorplan.py build --set dig_h=...)')
+        # the slot of the macro = floorplan.json cells.afe_dig w x h (R14: 425 x dig_h for N = 4; it was 820 x 110 for N = 8)
+        sw, sh = 820.0, 110.0
+        try:
+            slot = json.load(open(os.path.join(LAY, 'floorplan.json')))['cells']['afe_dig']
+            sw, sh = float(slot['w']), float(slot['h'])
+        except Exception:
+            pass
+        R(float(m.group(1)) <= sw + 1e-6 and float(m.group(2)) <= sh + 1e-6, 'die %s x %s um <= the slot %g x %g um of floorplan.json' % (m.group(1), m.group(2), sw, sh), 'ladder C-3 (then floorplan.py build --set dig_h=...)')
     kd = open(os.path.join(rp, 'klayout_drc.log')).read() if os.path.exists(os.path.join(rp, 'klayout_drc.log')) else ''
     gsz = os.path.getsize(os.path.join(F, 'afe_dig.gds')) if not miss else -1
     m = re.search(r'\((\d+) bytes\)', kd)

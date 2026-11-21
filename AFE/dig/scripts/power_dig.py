@@ -26,7 +26,7 @@ for c, vdd in CORN:
                                                                               tot * T_NS * 1e-9 * 1e12, val[c], 100 * g['Clock'][3] / tot))
 if 'nom_tt_025C_3v30' in val and 'nom_ff_n40C_3v60' in val:
     L.append('FOR L3b (x2_s4.py digital charge): %.1f pC per SCLK cycle at tt 3.3 V, %.1f pC at ff -40 C 3.6 V (the D3 macro: 24 / 27 pC; X2 S4 assumed 12 pC).' % (val['nom_tt_025C_3v30'], val['nom_ff_n40C_3v60']))
-    L.append('The increase over D3 is the clock buffer driving the 1 pF clock net (160 pins), 18 more flops (dbs_ctrl), and the output loads; it is drawn from the ADC-main strap.')
-    L.append('At 4 kS/s per channel a frame has 160 SCLK cycles: average digital power = pJ/cycle x 160 x 4000 = %.1f uW at tt (+ the DOUT pad).' % (val['nom_tt_025C_3v30'] * 3.3 * 160 * 4000 * 1e-6))
+    L.append("The increase over D3 is the clock buffer driving the clock net of the 4-channel macro (87 flop clock pins) and the output loads; it is drawn from the ADC-main strap (the 8-channel macro: 24 / 27 pC).")
+    L.append('At 4 kS/s per channel a frame has 80 SCLK cycles: average digital power = pJ/cycle x 80 x 4000 = %.1f uW at tt (+ the DOUT pad).' % (val['nom_tt_025C_3v30'] * 3.3 * 80 * 4000 * 1e-6))
 open(OUT, 'w').write('\n'.join(L) + '\n')
 print('\n'.join(L))

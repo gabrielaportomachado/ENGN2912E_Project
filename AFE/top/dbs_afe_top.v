@@ -1,9 +1,8 @@
 `timescale 1ns/1ps
-// dbs_afe_top: chip top level for the Chipathon macro (I0, 2026-11-14; Decision 52, 2026-11-21: 4 channels).  Digital part = rtl/dbs.v (dbs_ctrl, N = 8, read only) + AFE/adc/rtl/adc8_top
-// (SPI frame, config word, 8 SAR logics): the 8-channel LOGIC is kept unchanged (Decision 52c); only channels 0-3 exist; the comparator inputs cmp_q[7:4] of the unused SAR logics are tied low
-// and their outputs are left open (in silicon both happen inside the afe_dig wrapper).  Words 6-9 of the 160-SCLK frame carry IDs 4-7 with a constant code; EN[7:4] has no effect.
+// dbs_afe_top: chip top level for the Chipathon macro (I0, 2026-11-14; Decision 52, 2026-11-21: 4 channels; Decision 54, 2026-11-21 / REVIEW R14: real 4-channel digital part).  Digital part = rtl/dbs.v
+// (dbs_ctrl #(.N(4)), read only) + AFE/adc/rtl/adc_top.v #(.N(4)) (SPI frame of 80 SCLK edges: config word with WR, status word with the sync pattern, 4 x {ID, flags, code}; 4 SAR logics).  The
+// vectors are 4 bits wide: no channel goes nowhere (the N = 8 logic with cmp_q[7:4] tied low of Decision 52c is gone).  Frame: AFE/adc/SPI_FRAME.md.  The 8-channel version of this file is in git tag checkpoint-n8-final.
 // analog part = 4 x afe_ch (routing TGATEs + REC park + amplifier + fs one-shot + ADC DAC/comparator) + 1 x bias_genc.  Single 3.3 V supply (Decision 30).  READY is tied high (Decision 35).
-// The 8-channel version of this file is in git tag checkpoint-n8-final.
 //
 // WHY dbs_ctrl + TGATE and not the dbs module: dbs wraps dbs_ctrl + the 2N TGATEs but does not bring sw_rec / sw_rec_b out, and the amplifier reset trigger and the REC park need exactly those two nets.
 // The TGATEs therefore sit inside afe_ch; the wiring is the same as dbs.v lines 99-106 (rec_tg: C = sw_rec, CBAR = sw_rec_b; ipg_tg: C = sw_ipg, CBAR = sw_ipg_b).  tb_top.v compares REC / IPG against a real `dbs #(8)` instance.
@@ -26,24 +25,23 @@ module dbs_afe_top (
     output       CS_PU, CS_PD, DIN_PU, DIN_PD, SCLK_PU, SCLK_PD, RSTN_PU, RSTN_PD,
     inout        VDD, VSS
 );
-    // ---- pad glue: DOUT drives only while CS is low (adc8_top dout_oe); input pads get no pull ----
+    // ---- pad glue: DOUT drives only while CS is low (adc_top dout_oe); input pads get no pull ----
     wire dout_oe;
     assign DOUT_OE = dout_oe;                       // = ~CS: tri-state while CS is high (the MCU may share the MISO line), Decision 41d
     assign DOUT_IE = 1'b0; assign DOUT_PD = 1'b0; assign DOUT_PU = 1'b0; assign DOUT_CS = 1'b0; assign DOUT_SL = 1'b0; assign DOUT_PDRV0 = 1'b0; assign DOUT_PDRV1 = 1'b0;   // input off, no pull, CMOS, fast, 4 mA: values to be confirmed in L4
     assign CS_PU = 1'b0; assign CS_PD = 1'b0; assign DIN_PU = 1'b0; assign DIN_PD = 1'b0; assign SCLK_PU = 1'b0; assign SCLK_PD = 1'b0; assign RSTN_PU = 1'b0; assign RSTN_PD = 1'b1;   // RSTN pull-down ON (Decision 41, mismatch 9): the chip comes up in reset if the host does not drive RSTN
 
-    // ---- serial interface, config word, 8 SAR logics (channels 4-7 unused, Decision 52c) ----
+    // ---- serial interface, config word (WR), status word, 4 SAR logics (Decision 54) ----
     wire        mode_o, rst_amp_o;
-    wire [7:0]  en_o, cmp_q, cmp_clk, rst_sw, tg_on, dac_gdn;
-    wire [95:0] dac_gp, dac_gn;
-    assign cmp_q[7:4] = 4'b0000;                   // unused SAR logics 4-7: comparator input tied low (inside the afe_dig wrapper in silicon); their outputs stay open
-    adc8_top u_adc (.cs_n(CS), .sclk(SCLK), .din(DIN), .rstn(RSTN), .dout(DOUT_OUT), .dout_oe(dout_oe),
+    wire [3:0]  en_o, cmp_q, cmp_clk, rst_sw, tg_on, dac_gdn;
+    wire [47:0] dac_gp, dac_gn;
+    adc_top #(.N(4)) u_adc (.cs_n(CS), .sclk(SCLK), .din(DIN), .rstn(RSTN), .dout(DOUT_OUT), .dout_oe(dout_oe),
                     .rst_amp_o(rst_amp_o), .mode_o(mode_o), .en_o(en_o),
                     .cmp_q(cmp_q), .cmp_clk(cmp_clk), .rst_sw(rst_sw), .tg_on(tg_on), .dac_gp(dac_gp), .dac_gn(dac_gn), .dac_gdn(dac_gdn));
 
     // ---- routing control (rtl/dbs.v), clocked by SCLK (no CLK pad, Decision 37), READY tied high ----
-    wire [7:0] sw_rec, sw_rec_b, sw_ipg, sw_ipg_b;
-    dbs_ctrl #(.N(8)) u_dbs (.clk(SCLK), .rstn(RSTN), .mode(mode_o), .en(en_o), .ready(1'b1),
+    wire [3:0] sw_rec, sw_rec_b, sw_ipg, sw_ipg_b;
+    dbs_ctrl #(.N(4)) u_dbs (.clk(SCLK), .rstn(RSTN), .mode(mode_o), .en(en_o), .ready(1'b1),
                              .sw_rec(sw_rec), .sw_rec_b(sw_rec_b), .sw_ipg(sw_ipg), .sw_ipg_b(sw_ipg_b));
 
     // ---- shared bias (one per chip) ----
@@ -79,9 +77,9 @@ module afe_ch (
     inout        rec,                               // REC pad (Decision 53): record TGATE OUT = amplifier input (afe_chc.rec) = park node
     inout        ref,                               // REF pad: shared reference electrode (afe_chc.ref)
     input        sw_rec, sw_rec_b, sw_ipg, sw_ipg_b,// routing switch controls from dbs_ctrl (C / CBAR of the two TGATEs)
-    input        rst_amp,                           // RST_AMP config bit level (adc8_top rst_amp_o), common to all channels
-    input        rst_sw, tg_on, cmp_clk, dac_gdn,   // adc8_top bit i
-    input  [11:0] dac_gp, dac_gn,                   // adc8_top bits 12*i+11 .. 12*i
+    input        rst_amp,                           // RST_AMP config bit level (adc_top rst_amp_o), common to all channels
+    input        rst_sw, tg_on, cmp_clk, dac_gdn,   // adc_top bit i
+    input  [11:0] dac_gp, dac_gn,                   // adc_top bits 12*i+11 .. 12*i
     output       cmp_q,
     input        vbn, vcm, vg1, vcmo, vg2, vrs,
     input        vdd, vdd_cmp, vdd_dac, vss         // vdd = analog strap; vdd_cmp = ADC-main strap (cmp_p); vdd_dac = ADC-DAC strap (the 13 bottom-plate drivers); AUDIT 4.9.2

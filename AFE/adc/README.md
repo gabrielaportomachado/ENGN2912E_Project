@@ -11,33 +11,33 @@ amp[i] -> sampling TG -> split 6+6 MIM DAC (127 x 5x5 um units, plate 3.49 pF, b
                               |cmp_q
                          SAR (12 code flops, shared one-hot token decode)
    adc_clkgen: one dont-touch std-cell delay chain, comparator clock of ADC i = T0 + i*Delta (staggered)
-   8 code regs -> one 96-bit shift chain -> DOUT (negedge flop, driven only while CS low)
-   DIN -> 10-bit shift (RST_AMP + MODE + EN[7:0]) -> hold register (commit at SCLK 33)      VREF = VDD = 3.3 V
+   N code regs (N = 4 since Decision 54: adc_top; the 8-channel adc8_top is the history) -> one 12 x N-bit shift chain -> DOUT (negedge flop, driven only while CS low)
+   DIN -> 7-bit shift (WR + RST_AMP + MODE + EN[3:0]) -> hold register (commit at SCLK 17 if WR = 1)      VREF = VDD = 3.3 V
    vhalf (2 x 250 kOhm ppolyf_u_1k + 1 pF, one per ADC) -> TG (closed while tracking) -> Cref 7 pF -> cmp_p.inp      x8
 ```
 Comparator: inn = DAC plate, inp = the SAMPLED FLOATING REFERENCE (Decision 42): Cref 7 pF (one MIM plate) is charged to VDD/2 from the per-ADC divider `vhalf` through a transmission gate that is closed while tracking and open during the conversion. The plate reset level is the same `vhalf` node.
 Supply (Decision 44d, `../review/AUDIT.md` 4.9.2): three straps from the one pad pair: analog (amplifiers, bias, vhalf, Cref switch; pin `vdd`), ADC-main (comparators `vdd_cmp` + the digital macro, 0.125 nF MOS decap), ADC-DAC (the 13 bottom-plate drivers per ADC, pin `vdd_dac`, behind a 10 ohm strap resistor, 0.1 nF MOS decap). 0.225 nF in total = 56,500 um2 at 3.98 fF/um2.
 
 ## Interface
-Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN` (the bidirectional pad DOUT is the top-cell port pair `DOUT_OUT` / `DOUT_IN`, Decision 44b; `DOUT_IN` is not used). Frame = 160 SCLK = 10 x 16-bit words.
+Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN` (the bidirectional pad DOUT is the top-cell port pair `DOUT_OUT` / `DOUT_IN`, Decision 44b; `DOUT_IN` is not used). Frame = 80 SCLK = 5 x 16-bit words (Decision 54, REVIEW R14; the normative description with the worked example is **`SPI_FRAME.md`** in this directory).
 
 | SCLK | Content |
 |---|---|
-| 1-16 (word 0) | DIN = {6 x 0, RST_AMP, MODE, EN[7:0]} (RST_AMP added in I0, Decision 38); config commits at SCLK 33 (frames < 33 clocks change nothing); RST_AMP is a level, held until the next config frame or RSTN |
-| 1-19 | the 8 conversions, ADC i runs trial k-i at SCLK k (CS falling = simultaneous sample) |
-| 17-32 (word 1) | DOUT = held config {6 x 0, RST_AMP, MODE, EN[7:0]} of the PREVIOUS frame (committed at its SCLK 33; 0 after RSTN); DIN ignored |
-| 33-160 (words 2-9) | channel 0..7, `{0, ID[2:0], code[11:0]}`, same-frame data |
+| 1-16 (word 0) | DIN = config word {WR, RST_AMP, MODE, 9 x 0 (reserved), EN[3:0]}; the config commits at SCLK 17 only if WR = 1 (WR = 0 and frames < 17 clocks change nothing); RST_AMP is a level, held until the next WR = 1 frame or RSTN. DOUT = status word {1010, RST_AMP, MODE, EN[3:0], 0 x 6} = the config held BEFORE this frame (DOUT bit 15 is valid at edge 1) |
+| 1-16 | the 4 conversions, ADC i runs trial k-i at SCLK k (CS falling = simultaneous sample); all codes complete at SCLK 16 |
+| 17-80 (words 1-4) | DIN ignored; DOUT = channel 0..3, `{ID[1:0], 2'b00, code[11:0]}`, same-frame data (first code bit after SCLK 20) |
+| 81- | edges ignored, DOUT = 0 |
 
 SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input = the amplifier output, 1.15-2.15 V.
 Accuracy claim (Decision 43c; restated after the post-layout L1b run by REVIEW R9: INL <= 1.1 LSB, typ 0.95, ff -40 1.10, ss 125 1.05, ff 85 C 3.1 LSB at the 1.99 V point): INL <= 1 LSB (pre-layout) beyond a fixed code offset for amplifier outputs <= 2.0 V (typ) / <= 1.9 V (ff 85 C); above that the plate error grows to +2.1 / +4.4 LSB at 2.15 V (typ / ff 85).
 Fixed code offset (Decisions 43e, 46d; restated by L1b from the extracted adc_ch, AFE/layout/sim/post/adc_codes.json): -32.6 / -42.2 / -23.4 LSB (typ 27 / ff 85 / ss -40 C; pre-layout -30.2 / -40.1 / -22.0) = -26 / -34 / -19 uV at the electrode; a pure code shift (the signal is AC coupled).
 
 ### Protocol rules for the host (Decisions 43d, 44g; `../review/AUDIT.md` M5, m4, m5, i2, i3, i4)
-1. Change RSTN only while CS is HIGH. A release or a pulse of RSTN while CS is low restarts the frame counter in mid-frame: the 16 DIN bits that follow are taken as word 0 and committed 33 edges later (a wrong routing / reset state until the next complete frame).
-2. Every frame has exactly 160 SCLK. Never raise CS early: a frame shorter than 33 clocks commits nothing, one of 33-34 clocks commits the config but lets the routing change during the conversions of the next frame, and on an aborted frame the sampling switch closes 2.4-5.6 ns before the DAC drivers release (a short kick on the amplifier output).
+1. Change RSTN only while CS is HIGH. A release or a pulse of RSTN while CS is low restarts the frame counter in mid-frame: the 16 DIN bits that follow are taken as word 0 and committed at the 17th edge after the restart if their WR bit is 1 (a wrong routing / reset state until the next complete frame).
+2. Every frame has exactly 80 SCLK. Never raise CS early: a frame shorter than 17 clocks commits nothing, one of 17-18 clocks commits the config but lets the routing change during the conversions of the next frame, and on an aborted frame the sampling switch closes 2.4-5.6 ns before the DAC drivers release (a short kick on the amplifier output).
 3. Discard the first frame after any pause in the conversions (it reads +0.36 / +0.03 / +0.33 LSB differently). More frames are invalid after power-up, an amplifier reset or a record start: see the power-up sequence.
-4. CS falling is the sampling instant of all 8 channels: drive CS from a hardware timer (jitter <= 85 ns rms) and let it fall >= 100 ns before the first SCLK edge (the chip needs >= 13 ns). SCLK may run while CS is high (shared bus).
-5. The sample rate is set only by the host: 4 kS/s = one frame every 250 us (the chip accepts back-to-back frames: 12.4 kS/s at 2 MHz, about 18.5 kS/s at 3 MHz).
+4. CS falling is the sampling instant of all 4 channels: drive CS from a hardware timer (jitter <= 85 ns rms) and let it fall >= 100 ns before the first SCLK edge (the chip needs >= 13 ns). SCLK may run while CS is high (shared bus).
+5. The sample rate is set only by the host: 4 kS/s = one frame every 250 us (the chip accepts back-to-back frames: about 24 kS/s at 2 MHz, about 36 kS/s at 3 MHz).
 6. Noise: with Cin = 15 pF (Decision 50) the amplifier noise in 0.5-300 Hz (Decision-8 figure) is 1.89 / 2.14 / 1.73 uV at the electrode (typ / ff 85 / ss -40): typ and ss -40 meet the 2 uV figure, the ff 85 C value misses it by 7 % and is accepted by Decision 50 (limit 2.2 uV at ff 85 C). The earlier 20 pF figures (1.71 / 1.89 / 1.59 uV amplifier + aliasing + switch + ADC; unfiltered codes 2.04 / 2.23 / 1.92 uV) were not re-simulated for 15 pF (ESTIMATE: about +15 %). The host must low-pass the code stream to 300 Hz.
 7. There is NO power-down: EN only gates the routing switches; about 2.0 mW flows in every mode (record, stimulate, reset, idle).
 8. Signals on E and IPG must stay inside 0..VDD. The routing TGATE (5 V devices on 3.3 V) has Ron 4-21 kOhm typ over 0-3.3 V, up to 34 kOhm at ss -40 C (65 kOhm at 3.0 V); leakage < 1 pA inside the rails, 0.55 nA at VDD + 0.4 V. The stimulation path is a bench demonstration (tens of uA), not for real stimulation or connection to a person.
@@ -64,9 +64,9 @@ Fixed code offset (Decisions 43e, 46d; restated by L1b from the extracted adc_ch
 ## Host power-up sequence and test plan (Decisions 38, 41, 44c)
 1. Hold RSTN LOW while VDD ramps (the chip has no power-on reset: config and routing flops are cleared only by RSTN; the RSTN pad has its pull-down enabled, so an undriven RSTN also means "in reset"). All routing switches stay open, every REC node (internal, no pad) is parked at VCM_IN.
 2. Release RSTN while CS is HIGH. Wait >= 5 s after VDD is stable: the shared bias needs 3.7 ms (typ), 1.0 ms (ff 85 C) but 3.6 s (ss -40 C) to start with 8 channels on it (`../review/sim/bias_startup.log`; the earlier "1 s" was measured with one channel). Wait >= 30 s only if the board supply is below 3.1 V at -40 C (23 s at 3.0 V).
-3. Write a config frame with RST_AMP = 1 (word 0 = 0x0200, MODE = 0, EN = 0); keep it set for >= 100 ms (>= 30 ms needed); write a config frame with RST_AMP = 0. RST_AMP is a level held in the chip, it needs no clock while held.
+3. Write a config frame with RST_AMP = 1 (word 0 = 0xC000: WR = 1, RST_AMP = 1, MODE = 0, EN = 0); keep it set for >= 100 ms (>= 30 ms needed); write a config frame with RST_AMP = 0. RST_AMP is a level held in the chip, it needs no clock while held.
 4. Read frames for 1 s. Every channel must then read within 200 LSB of mid-scale (codes 1848-2248; a settled channel reads about 2018 = 2048 minus the code offset). If one does not, its amplifier is still latched at a rail: repeat step 3.
-5. Write the working config (word 0 = {RST_AMP 0, MODE, EN}); read it back in word 1 of the NEXT frame. After a record start each enabled channel takes a reset pulse (about 3.6 ms typ, 1.9-6.9 ms over corners = 8-28 frames) and the amplifier then needs 0.13-0.27 s (1 mV electrode step) to 9 s (100 mV step) to settle: discard those frames.
+5. Write the working config (word 0 = {WR 1, RST_AMP 0, MODE, 0 x 9, EN}, e.g. 0xA00F); read it back in the status word 0 of the NEXT frame (check the sync nibble 1010 and the channel IDs of every frame). After a record start each enabled channel takes a reset pulse (about 3.6 ms typ, 1.9-6.9 ms over corners = 8-28 frames) and the amplifier then needs 0.13-0.27 s (1 mV electrode step) to 9 s (100 mV step) to settle: discard those frames.
 Pad controls: DOUT drives only while CS is low (DOUT_OE = ~CS); RSTN pull-down on; the pad-control pin NAMES are checked against the organizer template (F1, `../review/scripts/xcheck.py`), the values (4 mA, fast, CMOS input off) are confirmed in L4.
 
 ## Results
@@ -106,7 +106,7 @@ Note on end-to-end ENOB: NOTES gives raw ENOB 7.13 (typ); with the NOTES FS conv
 | Power-up | host sequence above: RSTN low during the VDD ramp, >= 5 s wait, RST_AMP >= 100 ms, check every channel within 200 LSB of mid-scale |
 | Frames to discard | the first frame after any pause (Decision 43d); the frames during and after an amplifier reset (8-28 frames of reset pulse + settling) |
 | Host filter | low-pass the codes to 300 Hz for the 2 uV noise figure |
-| Protocol | RSTN changes only while CS is high; always 160 clocks per frame; CS never raised early |
+| Protocol | RSTN changes only while CS is high; always 80 clocks per frame; CS never raised early; sync nibble and IDs checked in every frame; WR = 1 only to change the config |
 | E, IPG, REF | E / IPG signals inside 0..VDD; REF connected |
 
 ## IDEAL / ASSUMED / HYBRID / ESTIMATE
