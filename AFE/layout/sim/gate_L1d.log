@@ -10,6 +10,7 @@ PASS  "## L1d findings" section in AFE/NOTES.md
 PASS  Results-log row for L1d in AFE/NOTES.md
 PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
 PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
 --- afe_dig
 PASS  AFE/dig/final/ has afe_dig.gds, afe_dig.pnl.v, afe_dig.lef, afe_dig_pins.json
 PASS  AFE/dig/reports/flow_summary.rpt VERDICT all PASS
@@ -23,5 +24,5 @@ PASS  gate-level testbench on the hardened netlist: only accepted assertion fail
 PASS  run_top_sim.sh dig: EQUIV PASS (afe_dig equals the two RTL instances + ties)
 PASS  check_lvs_netlists.py SUMMARY A, B, C PASS
 PASS  the LVS top was written from AFE/dig/final/afe_dig.pnl.v (header of AFE/layout/lvs/dbs_afe_top.spice)
-PASS  floorplan.py check --dig-pins /foss/designs/ENGN2912E_Project/.claude/worktrees/r14-rtl4/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 18 PASS, 0 FAIL
+PASS  floorplan.py check --dig-pins /foss/designs/ENGN2912E_Project/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 18 PASS, 0 FAIL
 GATE L1d: PASS  (0 FAIL)
