@@ -1,0 +1,3 @@
+== amp_pwrup  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:24  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job pu_sch_rl8811b8_typ: exit 0, 0 s
+RESULT amp_pwrup typ: t_wait_s=0.2  vout_before_v=2.46036  vout_100ms_v=1.64915  vout_1s_v=1.64974  err_1s_mv=0.26267  codes_from_mid_1s=0.326029  vbn_end_v=0.647681  vrs_end_v=1.02916

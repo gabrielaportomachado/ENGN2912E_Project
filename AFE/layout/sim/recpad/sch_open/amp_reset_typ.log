@@ -1,0 +1,6 @@
+== amp_reset  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:24  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job rs_sch_rl8811b8_typ_1m: exit 0, 4 s
+   job rs_sch_rl8811b8_typ_0: exit 0, 5 s
+   job rs_sch_rl8811b8_typ_10m: exit 0, 7 s
+   job rs_sch_rl8811b8_typ_100m: exit 0, 21 s
+RESULT amp_reset typ: t_fs_ms_os0=3.0112  peak_mv_os0=5.83717  rel_step_mv_os0=6.35995  t_1mv_s_os0=1.48244  final_v_os0=1.65057  drift_mv_s_os0=0.148982  resid_end_mv_os0=0.0186313  t_fs_ms_os1m=3.03588  peak_mv_os1m=1.42401  rel_step_mv_os1m=-1.41275  t_1mv_s_os1m=0.212877  final_v_os1m=1.65064  drift_mv_s_os1m=0.0110073  resid_end_mv_os1m=0.00349422  t_fs_ms_os10m=3.08455  peak_mv_os10m=6.51617  rel_step_mv_os10m=-7.63736  t_1mv_s_os10m=3.72002  final_v_os10m=1.65066  drift_mv_s_os10m=-0.518809  resid_end_mv_os10m=0.00405241  t_fs_ms_os100m=3.0467  peak_mv_os100m=38.6404  rel_step_mv_os100m=-0.487148  t_1mv_s_os100m=7.88387  final_v_os100m=1.65075  drift_mv_s_os100m=-7.04867  resid_end_mv_os100m=0.00112871

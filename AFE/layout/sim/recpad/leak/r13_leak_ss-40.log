@@ -1,0 +1,3 @@
+== r13_leak  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job leak_ss-40: exit 0, 0 s
+RESULT r13_leak ss-40: i_rec_to_pad_0v_pa=-0.00033  i_d2_0v_pa=-3.3e-23  i_d3_0v_pa=-0.00033  i_rec_to_pad_1.65v_pa=-0.110134  i_d2_1.65v_pa=-0.000165001  i_d3_1.65v_pa=-0.000165  i_rec_to_pad_3.3v_pa=-0.0923706  i_d2_3.3v_pa=-0.000330001  i_d3_3.3v_pa=-3.9973e-19  cap_1hz_pf=2.92789  cap_100hz_pf=2.92789

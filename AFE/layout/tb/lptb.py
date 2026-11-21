@@ -60,6 +60,60 @@ class TbError(Exception):
     pass
 
 
+# ------------------------------------------------------------------------------------------------ REC pad load (REVIEW.md R13, Decision 53)
+REC_LOAD = {'file': None}        # --rec-load <spice file>: subckt `recpad rec vdd vss` that hangs on the amplifier input node `rec`; None (default) = nothing is added, every netlist is unchanged
+
+
+def set_rec_load(path):
+    """--rec-load: the pad model on the `rec` node of the amplifier benches (amp_bench, ampch_bench, tb_amp_loop).  Default none = unchanged behaviour (baselines and gates byte-identical)."""
+    if not path:
+        REC_LOAD['file'] = None
+        return
+    f = os.path.abspath(path)
+    if not os.path.isfile(f) or not re.search(r'(?im)^\.subckt\s+recpad\s', open(f, errors='replace').read()):
+        raise TbError('--rec-load %s: no such file or it does not define `.subckt recpad rec vdd vss`' % path)
+    REC_LOAD['file'] = f
+
+
+def rec_models(corner):
+    """model lines of the pad (PDK diodes of the corner, MOS-capacitor corner) + the include of the pad file; [] without --rec-load"""
+    if not REC_LOAD['file']:
+        return []
+    c = CORNERS[corner][0]
+    return ['.lib %s/sm141064.ngspice diode_%s' % (PDKNG, c), '.lib %s/sm141064.ngspice moscap_%s' % (PDKNG, c), '.include %s' % REC_LOAD['file']]
+
+
+def rec_inst(node='rec', inst='Xrecpad', vdd='vdd'):
+    """the pad on the amplifier input: chip VDD / VSS (= 0) as pad supplies; [] without --rec-load"""
+    return ['%s %s %s 0 recpad' % (inst, node, vdd)] if REC_LOAD['file'] else []
+
+
+def rec_patch(net):
+    """tb_amp_loop.py builds its own bench (two channel copies, rec1 / rec2): with --rec-load both copies get the pad.  Any other netlist is returned unchanged."""
+    if REC_LOAD['file'] and 'vo=$&onoise_total' in net:
+        # ngspice 46 returns onoise_total = nan as soon as a PDK diode is in the circuit (its spectrum is finite: checked); integrate the spectrum instead (log trapezoid, 100 points per
+        # decade as in `noise ... dec 100`; vo_ng keeps the simulator's own total, finite without diodes: AFE/layout/sim/recpad/noise_check.md)
+        net = net.replace('setplot noise2\necho RESULT gm_db=$&ac1.gm vo=$&onoise_total',
+                          'setplot noise1\nlet s2 = onoise_spectrum*onoise_spectrum*frequency\nlet n2 = length(s2)\n'
+                          'let vint = sqrt((mean(s2)*n2 - 0.5*(s2[0] + s2[n2-1]))*ln(10)/100)\necho RESULT gm_db=$&ac1.gm vo=$&vint vo_ng=$&noise2.onoise_total')
+        return net
+    if not REC_LOAD['file'] or 'stage-1 loop gain' not in net.split('\n', 1)[0] or 'Xrecpad' in net:
+        return net
+    corner = re.search(r'\[(typ|ff85|ss-40)\]', net.split('\n', 1)[0]).group(1)
+    out = []
+    for ln in net.split('\n'):
+        out.append(ln)
+        if ln.startswith('Xch2 '):
+            out += rec_inst('rec1', 'Xrecpad') + rec_inst('rec2', 'Xrecpad_2')
+        if ln.startswith('* LP golden testbench') and 'sm141064.ngspice diode_' not in net:        # the schematic loop bench gets the models through amp_includes already
+            out += rec_models(corner)
+    return '\n'.join(out)
+
+
+def rec_tag():
+    return ('_rl' + sha(REC_LOAD['file'])[:6]) if REC_LOAD['file'] else ''
+
+
 # ------------------------------------------------------------------------------------------------ SPICE text helpers
 def logical(path):
     out, cur = [], ''
@@ -206,6 +260,7 @@ def amp_dut(netlist, prdiff=False):
     d.convention = 'junction' if prdiff else 'design'
     if d.prdiff:
         d.tag = 'schprdiff'
+    d.tag += rec_tag()
     return d
 
 
@@ -367,7 +422,7 @@ def amp_includes(corner, dut, more=()):
     L = model_lines(corner, dut.models) + ['.include %s/spice/%s.spice' % (AMP, f) for f in files]
     if getattr(dut, 'prdiff', False):
         L = [('.include ' + pseudo_r_with_diffusion()) if x.endswith('/pseudoR.spice') else x for x in L]
-    return L + dut.wrapper()
+    return L + rec_models(corner) + dut.wrapper()
 
 
 STD_SPICE = os.path.join(os.environ.get('PDK_ROOT', '/foss/pdks'), os.environ.get('PDK', 'gf180mcuD'), 'libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice')
@@ -392,6 +447,7 @@ def ampch_dut(netlist, prdiff=False):
     d.level = 'amp_ch'
     if d.prdiff:
         d.tag = 'schprdiff'
+    d.tag += rec_tag()
     return d
 
 
@@ -421,7 +477,7 @@ def ampch_bench(corner, dut, title, vdd='Vdd vdd 0 {VSUP}', rst='Vrst rst_amp 0 
     L = ['* LP golden testbench (amp_ch level): %s  [%s, %s]' % (title, corner, 'schematic' if not dut.pex else dut.netlist)] + ampch_includes(corner, dut)
     L += ['.options gmin=1e-16 %s reltol=1e-4 itl1=500 itl4=500' % opts, '.temp %g' % T] + ['.param %s=%s' % kv for kv in p.items()]
     L += [vdd, 'Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc', rst, sw[0], sw[1], 'Vtis tis 0 1.65', vd, vos[0], vos[1], 'Xsrc vd tis rec ref vosr vosf src_randles',
-          'Xch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd 0 amp_ch_tb', load] + list(extra)
+          'Xch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd 0 amp_ch_tb', load] + rec_inst() + list(extra)
     tp = {}
     for n in probes:
         h = ampch_node(dut, n)
@@ -454,7 +510,7 @@ def amp_bench(corner, dut, title, params=None, vdd=None, fs='Vfs fs 0 0', vd='Vd
     L += ['.options gmin=1e-16 %s reltol=1e-4 itl1=500 itl4=500' % opts, '.temp %g' % (T if temp is None else temp)] + ['.param %s=%s' % kv for kv in p.items()]
     L += [vdd or 'Vdd vdd 0 {VSUP}', 'Xbias vbn vcm vg1 vcmo vg2 vrs vdd 0 bias_genc', fs, 'Vtis tis 0 1.65', vd, vos[0], vos[1], 'Xsrc vd tis rec ref vosr vosf src_randles']
     L += list(park or ['Vpkc pkc 0 0', 'Vpkcb pkcb 0 {VSUP}'])
-    L += ['Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb afe_chc', load] + list(extra)
+    L += ['Xch rec ref out vdd 0 vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb afe_chc', load] + rec_inst() + list(extra)
     if nodeset == 'native':
         if dut.pex:
             raise TbError('the native node guesses only exist for the schematic')
@@ -477,6 +533,7 @@ def run_ng(jobs, tag, npar=3, wall=7200.0, retry=None, log=None):
         while todo and len(run) < npar:
             name, net = todo.pop(0)
             fn, lg = os.path.join(d, name + '.spice'), os.path.join(d, name + '.log')
+            net = rec_patch(net)
             open(fn, 'w').write(net)
             sl = Slot()
             sl.__enter__()
@@ -542,7 +599,7 @@ SETTLE_T = {'typ': (0.05, 0.6), 'ff85': (0.05, 0.6), 'ss-40': (1.2, 0.8)}       
 def settle(corner, dut, log=None, extra=(), load='CADC out 0 20f', key=''):
     """host power-up sequence -> .nodeset text for the instance names of amp_bench (xch, xbias, xsrc).  Cached in the scratch directory."""
     tb0, tset = SETTLE_T.get(corner, (1.2, 0.8))
-    cache = os.path.join(SCRATCH, 'tb', 'settle_%s_%s_%s.ns' % (dut.tag, corner, hashlib.sha1((key + load + ''.join(extra)).encode()).hexdigest()[:8]))
+    cache = os.path.join(SCRATCH, 'tb', 'settle_%s_%s_%s.ns' % (dut.tag, corner, hashlib.sha1((key + load + ''.join(extra) + rec_tag()).encode()).hexdigest()[:8]))
     if os.path.exists(cache):
         return open(cache).read()
     trel = tb0 + 0.1
@@ -586,9 +643,14 @@ def save(check, netlist, corner, values, logtext, out=None, info=None, limits_no
         except ValueError:
             pass
     nl = 'schematic' if netlist == 'schematic' else os.path.relpath(os.path.abspath(netlist), REPO)
-    if doc.get('netlist') not in (None, nl):
-        doc['corners'] = {}                                # another netlist: start over
+    rl = os.path.relpath(REC_LOAD['file'], REPO) if REC_LOAD['file'] else None
+    if doc.get('netlist') not in (None, nl) or doc.get('rec_load') != rl:
+        doc['corners'] = {}                                # another netlist (or another REC pad load): start over
     doc.update(check=check, netlist=nl, netlist_sha1=(None if netlist == 'schematic' else sha(netlist)), written_by='AFE/layout/tb/tb_%s.py' % check)
+    if rl:
+        doc['rec_load'] = rl
+    else:
+        doc.pop('rec_load', None)
     lf = os.path.join(d, '%s_%s.log' % (check, corner))
     open(lf, 'w').write(logtext)
     ent = {'values': values, 'log': os.path.relpath(lf, REPO), 'date': time.strftime('%Y-%m-%d %H:%M')}
@@ -615,9 +677,16 @@ def cli(check, doc, corners_default, run, extra_args=None):
     ap.add_argument('--junction', dest='prdiff', action='store_true',
                     help='amplifier checks: the JUNCTION convention for the six pseudo-resistor transistors (area / perimeter present: added to the schematic, kept as extracted in a PEX '
                          'netlist).  Default = the DESIGN convention (none, as AFE/amp/spice/pseudoR.spice: stripped from a PEX netlist).  Results go to <check>_junction.json')
+    ap.add_argument('--rec-load', dest='rec_load', default=None,
+                    help='amplifier checks (REVIEW.md R13): SPICE file defining `.subckt recpad rec vdd vss` = the pad model that hangs on the amplifier input node rec (AFE/layout/sim/recpad/pad_*.spice). '
+                         'Default none = nothing added, results identical to before.  Use --out with it: results must not go to baseline / sim/post')
     if extra_args:
         extra_args(ap)
     a = ap.parse_args()
+    if a.rec_load:
+        if not a.out:
+            ap.error('--rec-load needs --out DIR (outside AFE/layout/baseline and AFE/layout/sim/post)')
+        set_rec_load(a.rec_load)
     if a.prdiff:
         check = check + '_junction'
     cs = []
@@ -634,7 +703,8 @@ def cli(check, doc, corners_default, run, extra_args=None):
             s = ' '.join(str(q) for q in x)
             lines.append(s)
             print(s, flush=True)
-        log('== %s  netlist %s  corner %s (%s, %g C, %g V)  %s' % (check, a.netlist, c, CORNERS[c][0], CORNERS[c][1], CORNERS[c][2], time.strftime('%Y-%m-%d %H:%M')))
+        log('== %s  netlist %s  corner %s (%s, %g C, %g V)  %s' % (check, a.netlist, c, CORNERS[c][0], CORNERS[c][1], CORNERS[c][2], time.strftime('%Y-%m-%d %H:%M')) +
+            (('  REC pad load %s' % os.path.relpath(REC_LOAD['file'], REPO)) if REC_LOAD['file'] else ''))
         try:
             vals, info = run(a.netlist, c, a, log)
         except TbError as e:

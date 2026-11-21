@@ -1,0 +1,60 @@
+{
+ "check": "amp_pwrup_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:30",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction_ff85.log",
+   "values": {
+    "codes_from_mid_1s": 8.340573090908947,
+    "err_1s_mv": 6.719699999999884,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.50888855,
+    "vout_100ms_v": 1.64862746664,
+    "vout_1s_v": 1.6432803,
+    "vout_before_v": 1.1414293580311323,
+    "vrs_end_v": 1.21615192
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:30",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction_ss-40.log",
+   "values": {
+    "codes_from_mid_1s": 10.099755442424243,
+    "err_1s_mv": 8.13701,
+    "t_wait_s": 1.5,
+    "vbn_end_v": 0.804862655,
+    "vout_100ms_v": 1.647864274304,
+    "vout_1s_v": 1.64186299,
+    "vout_before_v": 0.3989780226362055,
+    "vrs_end_v": 0.807597374
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:30",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction_typ.log",
+   "values": {
+    "codes_from_mid_1s": 10.040003490908985,
+    "err_1s_mv": 8.088869999999915,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.647681035,
+    "vout_100ms_v": 1.64834189829866,
+    "vout_1s_v": 1.64191113,
+    "vout_before_v": 2.4320562285353096,
+    "vrs_end_v": 1.02177773
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe.spice",
+ "written_by": "AFE/layout/tb/tb_amp_pwrup_junction.py"
+}

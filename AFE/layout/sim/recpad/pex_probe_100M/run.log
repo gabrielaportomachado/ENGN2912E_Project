@@ -1,0 +1,166 @@
+### 06:34:28 AFE/layout/tb/tb_amp_ac.py
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 0 s
+RESULT amp_ac typ: idd_ua=74.43  vout_v=1.65063  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=59.8382  g_pk_db=59.8383  f_lo_hz=0.241457  f_hi_hz=634.577  g_300_db=58.9615  g_0p5_db=59.0142  v1_v=1.64895  g1_mid_db=39.8454  hf_1k=-5.40189  hf_3k=-13.6586  hf_10k=-23.9715  hf_30k=-33.7464  hf_100k=-46.1475  hf_300k=-58.9112  hf_1M=-66.6637
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac.json
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 0 s
+RESULT amp_ac ff85: idd_ua=118.811  vout_v=1.65096  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=59.8191  g_pk_db=59.8191  f_lo_hz=0.275812  f_hi_hz=972.694  g_300_db=59.4193  g_0p5_db=58.7393  v1_v=1.64866  g1_mid_db=39.8293  hf_1k=-3.12119  hf_3k=-10.1926  hf_10k=-20.2716  hf_30k=-29.9316  hf_100k=-41.742  hf_300k=-54.7313  hf_1M=-65.2412
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac.json
+== amp_ac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 1 s
+   job ac_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 0 s
+RESULT amp_ac ss-40: idd_ua=47.1327  vout_v=1.65019  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8424  g_pk_db=59.8427  f_lo_hz=0.283064  f_hi_hz=408.63  g_300_db=57.9766  g_0p5_db=58.7343  v1_v=1.64916  g1_mid_db=39.8574  hf_1k=-8.424  hf_3k=-17.3763  hf_10k=-27.8072  hf_30k=-37.7252  hf_100k=-50.7093  hf_300k=-61.7765  hf_1M=-66.7668
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac.json
+### 06:34:32 AFE/layout/tb/tb_amp_noise.py
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job n_pex83fcca1f2cac_rl3b8a53_typ_real: exit 0, 0 s
+   job n_pex83fcca1f2cac_rl3b8a53_typ_real_fn1: exit 0, 0 s
+RESULT amp_noise typ: noise_real_uv=1.50461  g_mid_db=59.8382  noise_real_fn1_uv=4.9106
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_noise.json
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job n_pex83fcca1f2cac_rl3b8a53_ff85_real: exit 0, 0 s
+RESULT amp_noise ff85: noise_real_uv=1.74385  g_mid_db=59.8191
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_noise.json
+== amp_noise  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job n_pex83fcca1f2cac_rl3b8a53_ss-40_real: exit 0, 0 s
+RESULT amp_noise ss-40: noise_real_uv=1.39427  g_mid_db=59.8423
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_noise.json
+### 06:34:32 AFE/layout/tb/tb_amp_psrr.py
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job psrr_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 0 s
+RESULT amp_psrr typ: supply_gain_50hz=0.63741  supply_gain_60hz=0.636548  supply_gain_300hz=0.581847  supply_gain_1khz=0.361693
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_psrr.json
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job psrr_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 0 s
+RESULT amp_psrr ff85: supply_gain_50hz=0.666201  supply_gain_60hz=0.665775  supply_gain_300hz=0.639082  supply_gain_1khz=0.478104
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_psrr.json
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job psrr_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 0 s
+RESULT amp_psrr ss-40: supply_gain_50hz=0.618918  supply_gain_60hz=0.616989  supply_gain_300hz=0.509491  supply_gain_1khz=0.256396
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_psrr.json
+### 06:34:33 AFE/layout/tb/tb_amp_thd.py
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job thd_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 3 s
+RESULT amp_thd typ: thd_pct=0.0396235  out_max_v=2.16518  out_min_v=1.1802  gain_db=59.819  hd2_dbc=-72.7859  hd3_dbc=-69.8697  out_mean_v=1.67261
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_thd.json
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job thd_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 3 s
+RESULT amp_thd ff85: thd_pct=0.94255  out_max_v=2.20522  out_min_v=1.23731  gain_db=59.7501  hd2_dbc=-44.6975  hd3_dbc=-46.2725  out_mean_v=1.71369
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_thd.json
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job thd_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 3 s
+RESULT amp_thd ss-40: thd_pct=0.0517552  out_max_v=2.16309  out_min_v=1.17827  gain_db=59.8207  hd2_dbc=-73.9948  hd3_dbc=-66.469  out_mean_v=1.67061
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_thd.json
+### 06:34:42 AFE/layout/tb/tb_amp_loop.py
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job loop_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 0 s
+RESULT amp_loop typ: t_100hz_db=48.1675  fu_hz=250134  pm_deg=439.3
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_loop.json
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job loop_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 0 s
+RESULT amp_loop ff85: t_100hz_db=46.9419  fu_hz=357137  pm_deg=436.621
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_loop.json
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job loop_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 0 s
+RESULT amp_loop ss-40: t_100hz_db=48.5981  fu_hz=187093  pm_deg=441.131
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_loop.json
+### 06:34:43 AFE/layout/tb/tb_amp_pwrup.py
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pex83fcca1f2cac_rl3b8a53_typ: exit 0, 1 s
+RESULT amp_pwrup typ: t_wait_s=0.2  vout_before_v=2.56708  vout_100ms_v=1.49179  vout_1s_v=1.61936  err_1s_mv=30.6361  codes_from_mid_1s=38.0259  vbn_end_v=0.647681  vrs_end_v=1.02842
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup.json
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pex83fcca1f2cac_rl3b8a53_ff85: exit 0, 1 s
+RESULT amp_pwrup ff85: t_wait_s=0.2  vout_before_v=1.14884  vout_100ms_v=1.49044  vout_1s_v=1.63135  err_1s_mv=18.6484  codes_from_mid_1s=23.1466  vbn_end_v=0.508889  vrs_end_v=1.22258
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup.json
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pex83fcca1f2cac_rl3b8a53_ss-40: exit 0, 1 s
+RESULT amp_pwrup ss-40: t_wait_s=1.5  vout_before_v=1.64074  vout_100ms_v=1.50725  vout_1s_v=1.62948  err_1s_mv=20.5176  codes_from_mid_1s=25.4667  vbn_end_v=0.804862  vrs_end_v=0.81439
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup.json
+### 06:34:46 AFE/layout/tb/tb_amp_reset.py
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:34  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_0: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_1m: exit 0, 8 s
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_10m: exit 0, 14 s
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_100m: exit 0, 43 s
+RESULT amp_reset typ: t_fs_ms_os0=3.04181  peak_mv_os0=835.418  rel_step_mv_os0=-271.349  t_1mv_s_os0=nan  final_v_os0=1.66836  drift_mv_s_os0=-3.99943  resid_end_mv_os0=1.44617  t_fs_ms_os1m=3.02008  peak_mv_os1m=835.925  rel_step_mv_os1m=-272.469  t_1mv_s_os1m=nan  final_v_os1m=1.66852  drift_mv_s_os1m=-4.07166  resid_end_mv_os1m=1.45536  t_fs_ms_os10m=3.06591  peak_mv_os10m=817.484  rel_step_mv_os10m=-262.332  t_1mv_s_os10m=9.98246  final_v_os10m=1.65114  drift_mv_s_os10m=-5.81914  resid_end_mv_os10m=0.0904625  t_fs_ms_os100m=2.98282  peak_mv_os100m=842.647  rel_step_mv_os100m=-305.917  t_1mv_s_os100m=12.0778  final_v_os100m=1.65074  drift_mv_s_os100m=8.03825  resid_end_mv_os100m=0.00355761
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset.json
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:35  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_0: exit 0, 9 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_1m: exit 0, 9 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_10m: exit 0, 17 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_100m: exit 0, 46 s
+RESULT amp_reset ff85: t_fs_ms_os0=1.72348  peak_mv_os0=474.817  rel_step_mv_os0=-296.281  t_1mv_s_os0=5.68352  final_v_os0=1.66093  drift_mv_s_os0=-11.9551  resid_end_mv_os0=0.845222  t_fs_ms_os1m=1.67475  peak_mv_os1m=476.433  rel_step_mv_os1m=-329.518  t_1mv_s_os1m=5.68746  final_v_os1m=1.6612  drift_mv_s_os1m=-12.2162  resid_end_mv_os1m=0.870105  t_fs_ms_os10m=1.63586  peak_mv_os10m=467.062  rel_step_mv_os10m=-338.224  t_1mv_s_os10m=9.30632  final_v_os10m=1.65129  drift_mv_s_os10m=-12.2466  resid_end_mv_os10m=0.053232  t_fs_ms_os100m=1.59051  peak_mv_os100m=477.37  rel_step_mv_os100m=-453.1  t_1mv_s_os100m=10.1032  final_v_os100m=1.65109  drift_mv_s_os100m=-13.313  resid_end_mv_os100m=9.32577e-05
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset.json
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:36  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_0: exit 0, 10 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_1m: exit 0, 10 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_10m: exit 0, 16 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_100m: exit 0, 44 s
+RESULT amp_reset ss-40: t_fs_ms_os0=5.83576  peak_mv_os0=748.482  rel_step_mv_os0=0.00941  t_1mv_s_os0=5.69344  final_v_os0=1.65896  drift_mv_s_os0=-9.32824  resid_end_mv_os0=0.900321  t_fs_ms_os1m=5.85488  peak_mv_os1m=747.411  rel_step_mv_os1m=0.00856  t_1mv_s_os1m=5.69705  final_v_os1m=1.65918  drift_mv_s_os1m=-9.66594  resid_end_mv_os1m=0.919434  t_fs_ms_os10m=5.85294  peak_mv_os10m=709.11  rel_step_mv_os10m=-0.00019  t_1mv_s_os10m=8.60918  final_v_os10m=1.65031  drift_mv_s_os10m=-10.0291  resid_end_mv_os10m=0.0216484  t_fs_ms_os100m=6.00432  peak_mv_os100m=722.495  rel_step_mv_os100m=-34.647  t_1mv_s_os100m=9.59969  final_v_os100m=1.65026  drift_mv_s_os100m=-17.212  resid_end_mv_os100m=0.00455716
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset.json
+### 06:37:26 AFE/layout/tb/tb_amp_reset.py --os 10m,100m --host-rst 0.1
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:37  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_10m: exit 0, 14 s
+   job rs_pex83fcca1f2cac_rl3b8a53_typ_100m: exit 0, 42 s
+RESULT amp_reset_host typ: t_fs_ms_os10m=2.9901  peak_mv_os10m=171.629  rel_step_mv_os10m=-169.49  t_1mv_s_os10m=7.61893  final_v_os10m=1.65072  drift_mv_s_os10m=-3.76537  resid_end_mv_os10m=0.0139933  t_fs_ms_os100m=3.06862  peak_mv_os100m=171.549  rel_step_mv_os100m=-169.39  t_1mv_s_os100m=9.13289  final_v_os100m=1.65074  drift_mv_s_os100m=-11.3584  resid_end_mv_os100m=0.00800197
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host.json
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:38  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_10m: exit 0, 15 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ff85_100m: exit 0, 42 s
+RESULT amp_reset_host ff85: t_fs_ms_os10m=1.73587  peak_mv_os10m=189.776  rel_step_mv_os10m=-189.604  t_1mv_s_os10m=7.40923  final_v_os10m=1.65106  drift_mv_s_os10m=-3.73949  resid_end_mv_os10m=0.0114807  t_fs_ms_os100m=1.57106  peak_mv_os100m=189.701  rel_step_mv_os100m=-189.526  t_1mv_s_os100m=9.12431  final_v_os100m=1.65109  drift_mv_s_os100m=-10.6119  resid_end_mv_os100m=0.00222959
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host.json
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:38  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_10m: exit 0, 15 s
+   job rs_pex83fcca1f2cac_rl3b8a53_ss-40_100m: exit 0, 43 s
+RESULT amp_reset_host ss-40: t_fs_ms_os10m=5.89323  peak_mv_os10m=162.68  rel_step_mv_os10m=-153.539  t_1mv_s_os10m=6.4971  final_v_os10m=1.65022  drift_mv_s_os10m=-3.54869  resid_end_mv_os10m=0.00358458  t_fs_ms_os100m=5.94825  peak_mv_os100m=195.201  rel_step_mv_os100m=-183.897  t_1mv_s_os100m=7.75072  final_v_os100m=1.65026  drift_mv_s_os100m=-9.62907  resid_end_mv_os100m=0.00588352
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host.json
+### 06:39:33 AFE/layout/tb/tb_amp_ac.py --junction
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pexe3100c69eb97_rl3b8a53_typ: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl3b8a53_typ: exit 0, 0 s
+RESULT amp_ac_junction typ: idd_ua=74.3808  vout_v=1.30704  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=59.8063  g_pk_db=59.8071  f_lo_hz=nan  f_hi_hz=636.561  g_300_db=58.9407  g_0p5_db=59.807  v1_v=1.6971  g1_mid_db=39.8326  hf_1k=-5.38558  hf_3k=-13.6399  hf_10k=-23.9525  hf_30k=-33.7272  hf_100k=-46.1263  hf_300k=-58.8833  hf_1M=-66.6415
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac_junction.json
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pexe3100c69eb97_rl3b8a53_ff85: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl3b8a53_ff85: exit 0, 0 s
+RESULT amp_ac_junction ff85: idd_ua=118.811  vout_v=1.65113  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=59.788  g_pk_db=59.7906  f_lo_hz=0.0954629  f_hi_hz=975.515  g_300_db=59.3982  g_0p5_db=59.6466  v1_v=1.64875  g1_mid_db=39.8146  hf_1k=-3.10599  hf_3k=-10.1727  hf_10k=-20.2507  hf_30k=-29.9105  hf_100k=-41.7203  hf_300k=-54.7058  hf_1M=-65.2079
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac_junction.json
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job settle_pexe3100c69eb97_rl3b8a53_ss-40: exit 0, 1 s
+   job ac_pexe3100c69eb97_rl3b8a53_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=47.0744  vout_v=1.16452  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8134  g_pk_db=59.8204  f_lo_hz=nan  f_hi_hz=408.84  g_300_db=57.956  g_0p5_db=59.8164  v1_v=1.70848  g1_mid_db=39.8468  hf_1k=-8.41387  hf_3k=-17.3658  hf_10k=-27.7966  hf_30k=-37.7145  hf_100k=-50.6965  hf_300k=-61.7756  hf_1M=-66.7916
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_ac_junction.json
+### 06:39:37 AFE/layout/tb/tb_amp_pwrup.py --junction
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pexe3100c69eb97_rl3b8a53_typ: exit 0, 1 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.7476  vout_100ms_v=1.46698  vout_1s_v=1.468  err_1s_mv=182.003  codes_from_mid_1s=225.904  vbn_end_v=0.647681  vrs_end_v=1.02842
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pexe3100c69eb97_rl3b8a53_ff85: exit 0, 1 s
+RESULT amp_pwrup_junction ff85: t_wait_s=0.2  vout_before_v=1.14916  vout_100ms_v=1.47264  vout_1s_v=1.55351  err_1s_mv=96.4947  codes_from_mid_1s=119.77  vbn_end_v=0.508889  vrs_end_v=1.22258
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job pu_pexe3100c69eb97_rl3b8a53_ss-40: exit 0, 1 s
+RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=1.60222  vout_100ms_v=1.48399  vout_1s_v=1.48322  err_1s_mv=166.782  codes_from_mid_1s=207.011  vbn_end_v=0.804862  vrs_end_v=0.81439
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_pwrup_junction.json
+### 06:39:40 AFE/layout/tb/tb_amp_reset.py --junction --os 10m,100m --host-rst 0.1
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:39  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pexe3100c69eb97_rl3b8a53_typ_10m: exit 0, 14 s
+   job rs_pexe3100c69eb97_rl3b8a53_typ_100m: exit 0, 41 s
+RESULT amp_reset_host_junction typ: t_fs_ms_os10m=3.00594  peak_mv_os10m=102.992  rel_step_mv_os10m=-183.221  t_1mv_s_os10m=nan  final_v_os10m=1.56805  drift_mv_s_os10m=8.63793  resid_end_mv_os10m=2.5328  t_fs_ms_os100m=2.97717  peak_mv_os100m=1272  rel_step_mv_os100m=-183.055  t_1mv_s_os100m=15.3699  final_v_os100m=2.73718  drift_mv_s_os100m=91.2677  resid_end_mv_os100m=0.0275391
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:40  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pexe3100c69eb97_rl3b8a53_ff85_10m: exit 0, 14 s
+   job rs_pexe3100c69eb97_rl3b8a53_ff85_100m: exit 0, 41 s
+RESULT amp_reset_host_junction ff85: t_fs_ms_os10m=1.64586  peak_mv_os10m=202.348  rel_step_mv_os10m=-191.338  t_1mv_s_os10m=10.7493  final_v_os10m=1.66192  drift_mv_s_os10m=11.3261  resid_end_mv_os10m=0.309367  t_fs_ms_os100m=1.67931  peak_mv_os100m=204.446  rel_step_mv_os100m=-191.246  t_1mv_s_os100m=nan  final_v_os100m=1.6641  drift_mv_s_os100m=18.7755  resid_end_mv_os100m=1.1773
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:41  REC pad load AFE/layout/sim/recpad/models/pad_probe_100M.spice
+   job rs_pexe3100c69eb97_rl3b8a53_ss-40_10m: exit 0, 15 s
+   job rs_pexe3100c69eb97_rl3b8a53_ss-40_100m: exit 0, 42 s
+RESULT amp_reset_host_junction ss-40: t_fs_ms_os10m=5.96332  peak_mv_os10m=90.9597  rel_step_mv_os10m=-173.546  t_1mv_s_os10m=nan  final_v_os10m=1.55569  drift_mv_s_os10m=7.61653  resid_end_mv_os10m=2.26555  t_fs_ms_os100m=5.93947  peak_mv_os100m=1473.85  rel_step_mv_os100m=-181.012  t_1mv_s_os100m=35.1963  final_v_os100m=2.93121  drift_mv_s_os100m=83.2641  resid_end_mv_os100m=0.166482
+   -> AFE/layout/sim/recpad/pex_probe_100M/amp_reset_host_junction.json
+### 06:41:45 DONE pex probe_100M

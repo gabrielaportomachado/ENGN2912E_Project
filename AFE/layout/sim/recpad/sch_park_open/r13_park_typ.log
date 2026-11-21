@@ -1,0 +1,3 @@
+== r13_park  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job park_sch_rl8811b8_typ: exit 0, 1 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=13.76  rec_minus_vcm_uv_before_rst=13.7536  rec_v_end=1.64988  vcm_v_end=1.64987  out_end_v=1.65061  out_err_mv_end=0.6139  out_err_mv_1s=1.17603  out_drift_mv_s=0.0250915  i_rec_to_pad_pa=0.666134

@@ -1,0 +1,65 @@
+{
+ "check": "r13_recac",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:36",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_recac_nopad/r13_recac_ff85.log",
+   "values": {
+    "f_hi_hz": 997.6654678091588,
+    "f_lo_hz": 0.28137197105659334,
+    "f_rec_3db_hz": 405647.8934444027,
+    "g_mid_db": 60.0571,
+    "noise_tgate_real_uv": 1.7470373525626364,
+    "rec_node_gain_12hz_db": 3.764026864405136e-09,
+    "rec_node_gain_300hz_db": -3.5625023324493702e-06,
+    "vout_dc_v": 1.65098,
+    "vrec_dc_v": 1.65,
+    "vrec_minus_vrece_dc_uv": 0.0
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:36",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_recac_nopad/r13_recac_ss-40.log",
+   "values": {
+    "f_hi_hz": 422.102559974821,
+    "f_lo_hz": 0.28780749637191533,
+    "f_rec_3db_hz": 168768.99517511803,
+    "g_mid_db": 60.0382,
+    "noise_tgate_real_uv": 1.4104632104098431,
+    "rec_node_gain_12hz_db": -3.06772456716456e-09,
+    "rec_node_gain_300hz_db": -1.8375531766275093e-05,
+    "vout_dc_v": 1.6502,
+    "vrec_dc_v": 1.65,
+    "vrec_minus_vrece_dc_uv": 0.0
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:36",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_recac_nopad/r13_recac_typ.log",
+   "values": {
+    "f_hi_hz": 653.4973510785504,
+    "f_lo_hz": 0.24588988803854836,
+    "f_rec_3db_hz": 278324.50502784614,
+    "g_mid_db": 60.0531,
+    "noise_tgate_real_uv": 1.5143737267915391,
+    "rec_node_gain_12hz_db": 2.008952132921102e-10,
+    "rec_node_gain_300hz_db": -7.808633721711796e-06,
+    "vout_dc_v": 1.65064,
+    "vrec_dc_v": 1.65,
+    "vrec_minus_vrece_dc_uv": 0.0
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_r13_recac.py"
+}

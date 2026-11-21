@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:04  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job pu_pexe3100c69eb97_rl8811b8_ff85: exit 0, 1 s
+RESULT amp_pwrup_junction ff85: t_wait_s=0.2  vout_before_v=1.14935  vout_100ms_v=1.47272  vout_1s_v=1.55408  err_1s_mv=95.9228  codes_from_mid_1s=119.061  vbn_end_v=0.508889  vrs_end_v=1.22329

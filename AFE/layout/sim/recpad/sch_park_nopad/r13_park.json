@@ -1,0 +1,59 @@
+{
+ "check": "r13_park",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:32",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_nopad/r13_park_ff85.log",
+   "values": {
+    "out_drift_mv_s": 0.018797987039986808,
+    "out_end_v": 1.65093066,
+    "out_err_mv_1s": 0.09248449374998913,
+    "out_err_mv_end": 0.9306600000000831,
+    "rec_minus_vcm_uv_before_rst": 18.04000000005246,
+    "rec_minus_vcm_uv_end": 18.04000000005246,
+    "rec_v_end": 1.64981277,
+    "vcm_v_end": 1.64979473
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:32",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_nopad/r13_park_ss-40.log",
+   "values": {
+    "out_drift_mv_s": 0.012921999999981892,
+    "out_end_v": 1.65019381,
+    "out_err_mv_1s": 1.0363700000000087,
+    "out_err_mv_end": 0.19381000000007198,
+    "rec_minus_vcm_uv_before_rst": 12.114165456100778,
+    "rec_minus_vcm_uv_end": 12.250000000157968,
+    "rec_v_end": 1.64992511,
+    "vcm_v_end": 1.64991286
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:32",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_nopad/r13_park_typ.log",
+   "values": {
+    "out_drift_mv_s": 0.023765059939995226,
+    "out_end_v": 1.65060717,
+    "out_err_mv_1s": 1.2291718075998492,
+    "out_err_mv_end": 0.6071700000001012,
+    "rec_minus_vcm_uv_before_rst": 13.749999999923546,
+    "rec_minus_vcm_uv_end": 13.75000000014559,
+    "rec_v_end": 1.64988266,
+    "vcm_v_end": 1.64986891
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_r13_park.py"
+}

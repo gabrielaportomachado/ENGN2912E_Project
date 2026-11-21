@@ -1,0 +1,4 @@
+* CONTROL model of R13: 1 fF on rec = the smallest possible change of the circuit (how much do the long reset transients move by themselves)
+.subckt recpad rec vdd vss
+Cctl rec 0 1f
+.ends

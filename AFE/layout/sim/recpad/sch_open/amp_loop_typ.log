@@ -1,0 +1,10 @@
+== amp_loop  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job loop_sch_rl8811b8_typ: exit 0, 0 s
+   job loop_sch_rl8811b8_typ_cx2: exit 0, 0 s
+   job loop_sch_rl8811b8_typ_cx5: exit 0, 0 s
+   job loop_sch_rl8811b8_typ_cx10: exit 0, 0 s
+   job hf_sch_rl8811b8_typ_cx0: exit 0, 0 s
+   job hf_sch_rl8811b8_typ_cx2: exit 0, 0 s
+   job hf_sch_rl8811b8_typ_cx5: exit 0, 0 s
+   job hf_sch_rl8811b8_typ_cx10: exit 0, 0 s
+RESULT amp_loop typ: t_100hz_db=58.8776  fu_hz=253771  pm_deg=79.5715  pm_cx2p_deg=72.2536  hfdev_cx2p_db=2.03127  pm_cx5p_deg=63.6354  hfdev_cx5p_db=5.8973  pm_cx10p_deg=54.2095  hfdev_cx10p_db=10.5817

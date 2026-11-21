@@ -1,0 +1,63 @@
+{
+ "check": "r13_park",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:32",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_probe/r13_park_ff85.log",
+   "values": {
+    "i_rec_to_pad_pa": 164255.276,
+    "out_drift_mv_s": 0.0837822428600088,
+    "out_end_v": 1.65104099,
+    "out_err_mv_1s": 2.1999112142998545,
+    "out_err_mv_end": 1.0409900000001304,
+    "rec_minus_vcm_uv_before_rst": -90.12451077561323,
+    "rec_minus_vcm_uv_end": -90.12000000008236,
+    "rec_v_end": 1.64256005,
+    "vcm_v_end": 1.64265017
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_probe/r13_park_ss-40.log",
+   "values": {
+    "i_rec_to_pad_pa": 164223.746,
+    "out_drift_mv_s": 0.03871700000002143,
+    "out_end_v": 1.65027012,
+    "out_err_mv_1s": 2.0825200000000876,
+    "out_err_mv_end": 0.27012000000015135,
+    "rec_minus_vcm_uv_before_rst": -100.83999999999094,
+    "rec_minus_vcm_uv_end": -100.71000000011487,
+    "rec_v_end": 1.64225446,
+    "vcm_v_end": 1.64235517
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:32",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_park_probe/r13_park_typ.log",
+   "values": {
+    "i_rec_to_pad_pa": 164238.845,
+    "out_drift_mv_s": 0.09847964579998703,
+    "out_end_v": 1.65070596,
+    "out_err_mv_1s": 3.2298142128999174,
+    "out_err_mv_end": 0.7059600000001165,
+    "rec_minus_vcm_uv_before_rst": -89.92000000018763,
+    "rec_minus_vcm_uv_end": -89.92000000018763,
+    "rec_v_end": 1.64239389,
+    "vcm_v_end": 1.64248381
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe.spice",
+ "written_by": "AFE/layout/tb/tb_r13_park.py"
+}

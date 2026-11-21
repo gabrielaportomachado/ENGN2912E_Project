@@ -1,0 +1,4 @@
+== r13_recac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:36  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job settletg_sch_rl8811b8_typ: exit 0, 0 s
+   job recac_sch_rl8811b8_typ: exit 0, 0 s
+RESULT r13_recac typ: g_mid_db=60.053  f_lo_hz=0.245913  f_hi_hz=653.494  noise_tgate_real_uv=1.51439  vrec_dc_v=1.65  vout_dc_v=1.65064  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=1.49863e-08  rec_node_gain_300hz_db=-8.01548e-06  f_rec_3db_hz=271997

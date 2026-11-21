@@ -1,0 +1,4 @@
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:36  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job settletg_pex83fcca1f2cac_rl8811b8_ss-40: exit 0, 2 s
+   job recac_pex83fcca1f2cac_rl8811b8_ss-40: exit 0, 0 s
+RESULT r13_recac ss-40: g_mid_db=59.8435  f_lo_hz=0.283008  f_hi_hz=408.729  noise_tgate_real_uv=1.41774  vrec_dc_v=1.65  vout_dc_v=1.65026  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=2.60819e-07  rec_node_gain_300hz_db=4.39478e-06  f_rec_3db_hz=164201

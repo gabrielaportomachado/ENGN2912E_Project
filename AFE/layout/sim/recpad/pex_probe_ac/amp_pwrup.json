@@ -1,0 +1,60 @@
+{
+ "check": "amp_pwrup",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:42",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_pwrup_ff85.log",
+   "values": {
+    "codes_from_mid_1s": 1106.805033890909,
+    "err_1s_mv": 891.71304,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.508888548,
+    "vout_100ms_v": 1.9480441758384002,
+    "vout_1s_v": 2.54171304,
+    "vout_before_v": 1.1489104896732871,
+    "vrs_end_v": 1.22130489
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:42",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_pwrup_ss-40.log",
+   "values": {
+    "codes_from_mid_1s": 548.3018922666666,
+    "err_1s_mv": 441.74712999999997,
+    "t_wait_s": 1.5,
+    "vbn_end_v": 0.804862839,
+    "vout_100ms_v": 1.6438056485720003,
+    "vout_1s_v": 2.09174713,
+    "vout_before_v": 1.0653411152529126,
+    "vrs_end_v": 0.814573531
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:42",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_ac/amp_pwrup_typ.log",
+   "values": {
+    "codes_from_mid_1s": 1473.0542483393942,
+    "err_1s_mv": 1186.7868700000001,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.647681035,
+    "vout_100ms_v": 1.97324819898272,
+    "vout_1s_v": 2.83678687,
+    "vout_before_v": 2.5505458756563524,
+    "vrs_end_v": 1.02710332
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe_ac.spice",
+ "written_by": "AFE/layout/tb/tb_amp_pwrup.py"
+}

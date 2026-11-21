@@ -1,0 +1,3 @@
+== r13_park  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:32  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job park_pex83fcca1f2cac_rlf7521c_typ: exit 0, 2 s
+RESULT r13_park typ: rec_minus_vcm_uv_end=-89.93  rec_minus_vcm_uv_before_rst=-89.92  rec_v_end=1.64239  vcm_v_end=1.64248  out_end_v=1.6509  out_err_mv_end=0.9006  out_err_mv_1s=35.5473  out_drift_mv_s=-0.76643  i_rec_to_pad_pa=164036

@@ -1,0 +1,10 @@
+== amp_loop  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:33  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job loop_sch_rlf7521c_ff85: exit 0, 0 s
+   job loop_sch_rlf7521c_ff85_cx2: exit 0, 0 s
+   job loop_sch_rlf7521c_ff85_cx5: exit 0, 0 s
+   job loop_sch_rlf7521c_ff85_cx10: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx0: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx2: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx5: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx10: exit 0, 0 s
+RESULT amp_loop ff85: t_100hz_db=58.7002  fu_hz=363289  pm_deg=76.9221  pm_cx2p_deg=67.4352  hfdev_cx2p_db=1.47164  pm_cx5p_deg=57.4291  hfdev_cx5p_db=5.31157  pm_cx10p_deg=47.7867  hfdev_cx10p_db=10.1809

@@ -1,0 +1,69 @@
+{
+ "check": "r13_leak",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "pad_file": "AFE/layout/sim/recpad/models/pad_open.spice"
+   },
+   "log": "AFE/layout/sim/recpad/leak/r13_leak_ff85.log",
+   "values": {
+    "cap_100hz_pf": 2.80585,
+    "cap_1hz_pf": 2.80585,
+    "i_d2_0v_pa": -4.5275376599999997e-14,
+    "i_d2_1.65v_pa": -1.91471638,
+    "i_d2_3.3v_pa": -1.91489864,
+    "i_d3_0v_pa": -0.769707072,
+    "i_d3_1.65v_pa": -0.769536046,
+    "i_d3_3.3v_pa": -1.3205693e-13,
+    "i_rec_to_pad_0v_pa": -0.769707072,
+    "i_rec_to_pad_1.65v_pa": 1.02673425,
+    "i_rec_to_pad_3.3v_pa": 1.2718715
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "pad_file": "AFE/layout/sim/recpad/models/pad_open.spice"
+   },
+   "log": "AFE/layout/sim/recpad/leak/r13_leak_ss-40.log",
+   "values": {
+    "cap_100hz_pf": 2.92789,
+    "cap_1hz_pf": 2.92789,
+    "i_d2_0v_pa": -3.30000253e-23,
+    "i_d2_1.65v_pa": -0.000165001494,
+    "i_d2_3.3v_pa": -0.000330001494,
+    "i_d3_0v_pa": -0.000330000253,
+    "i_d3_1.65v_pa": -0.00016500025300000002,
+    "i_d3_3.3v_pa": -3.99730407e-19,
+    "i_rec_to_pad_0v_pa": -0.000330000253,
+    "i_rec_to_pad_1.65v_pa": -0.110134124,
+    "i_rec_to_pad_3.3v_pa": -0.0923705556
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "pad_file": "AFE/layout/sim/recpad/models/pad_open.spice"
+   },
+   "log": "AFE/layout/sim/recpad/leak/r13_leak_typ.log",
+   "values": {
+    "cap_100hz_pf": 2.87506,
+    "cap_1hz_pf": 2.87506,
+    "i_d2_0v_pa": -5.9696721e-23,
+    "i_d2_1.65v_pa": -0.0010102223700000001,
+    "i_d2_3.3v_pa": -0.00117522686,
+    "i_d3_0v_pa": -0.00059696721,
+    "i_d3_1.65v_pa": -0.00043196597999999996,
+    "i_d3_3.3v_pa": -4.14205184e-17,
+    "i_rec_to_pad_0v_pa": -0.00059696721,
+    "i_rec_to_pad_1.65v_pa": -0.110134124,
+    "i_rec_to_pad_3.3v_pa": -0.0923705556
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_open.spice",
+ "written_by": "AFE/layout/tb/tb_r13_leak.py"
+}

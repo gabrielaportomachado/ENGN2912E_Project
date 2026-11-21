@@ -1,0 +1,3 @@
+== amp_psrr  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job psrr_sch_rlf7521c_ss-40: exit 0, 0 s
+RESULT amp_psrr ss-40: supply_gain_50hz=0.568801  supply_gain_60hz=0.567225  supply_gain_300hz=0.474535  supply_gain_1khz=0.245382
