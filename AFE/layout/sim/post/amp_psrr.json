@@ -2,46 +2,46 @@
  "check": "amp_psrr",
  "corners": {
   "ff85": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_ff85.log",
    "values": {
-    "supply_gain_1khz": 0.477004,
-    "supply_gain_300hz": 0.637815,
-    "supply_gain_50hz": 0.664953,
-    "supply_gain_60hz": 0.664512
+    "supply_gain_1khz": 0.476651,
+    "supply_gain_300hz": 0.637323,
+    "supply_gain_50hz": 0.664387,
+    "supply_gain_60hz": 0.663956
    }
   },
   "ss-40": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_ss-40.log",
    "values": {
-    "supply_gain_1khz": 0.255622,
-    "supply_gain_300hz": 0.508224,
-    "supply_gain_50hz": 0.617479,
-    "supply_gain_60hz": 0.615536
+    "supply_gain_1khz": 0.25547,
+    "supply_gain_300hz": 0.50788,
+    "supply_gain_50hz": 0.617005,
+    "supply_gain_60hz": 0.615072
    }
   },
   "typ": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_typ.log",
    "values": {
-    "supply_gain_1khz": 0.360707,
-    "supply_gain_300hz": 0.580526,
-    "supply_gain_50hz": 0.636051,
-    "supply_gain_60hz": 0.635173
+    "supply_gain_1khz": 0.360466,
+    "supply_gain_300hz": 0.580104,
+    "supply_gain_50hz": 0.635541,
+    "supply_gain_60hz": 0.634673
    }
   }
  },
  "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
- "netlist_sha1": "e3100c69eb97",
+ "netlist_sha1": "ab3b5dd21745",
  "written_by": "AFE/layout/tb/tb_amp_psrr.py"
 }

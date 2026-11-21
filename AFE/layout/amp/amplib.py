@@ -493,7 +493,7 @@ def group_block(ly, name, tiles, ring_kind=None, ring_net=None, gap=None, extra_
     return B
 
 
-def pr_block(ly, name, s1, s2, mnet, gnet):
+def pr_block(ly, name, s1, s2, mnet, gnet, gup=False):
     """two pseudo-resistor transistors in series (pfet_03v3 0.22u / 0.5u, drains on mnet, gates on gnet).  Each has its OWN n-well, tied to its source net (s1 / s2) by an N+ tie of
     the minimum size (0.42 x 0.5 um comp): the junction area on the summing node is the minimum the rules allow (SPEC.md 3.2 item 4); both drawn identically."""
     B = Block(ly, name)
@@ -529,7 +529,19 @@ def pr_block(ly, name, s1, s2, mnet, gnet):
         B.term(mnet, 'metal1', pad_rect(x0 + 2, yd))
         B.rect('metal1', gb[0], yd - 0.25, gb[2], gb[1] + 0.02)
         B.rect('metal1', x0 - 0.25, yd - 0.25, gb[2], yd + 0.25)
-        B.term(gnet, 'metal1', pad_rect(x0, yd))
+        if gup:
+            # antenna fix (L3a, ACCEPT.md ladder D-5): the gate leaves the Metal1 pad through via1 + a Metal2 pad + via2 to a Metal3 pad; the long wires of the net start on Metal3,
+            # so that only the 0.5 x 0.5 um Metal2 pad is connected to the 0.11 um2 gate at the Metal2 stage of the antenna check
+            gp = pad_rect(x0, yd)
+            B.rect('metal2', *gp)
+            B.rect('metal3', *gp)
+            cuts(B.cell, 'via1', gp[0] + 0.12, gp[1] + 0.12, gp[2] - 0.12, gp[3] - 0.12, inset=0.0)
+            cuts(B.cell, 'via2', gp[0] + 0.12, gp[1] + 0.12, gp[2] - 0.12, gp[3] - 0.12, inset=0.0)
+            B.term(gnet, 'metal3', gp)
+            B.fixed_shape(M2, gp, '_stk_' + gnet, 0.3)          # an obstacle for every net (also gnet): the net must not run on Metal2 from this pad (antenna)
+            B.fixed_shape(M3, gp, gnet, 0.0)
+        else:
+            B.term(gnet, 'metal1', pad_rect(x0, yd))
         B.grow(x0 - 0.25, yd - 0.25, x0 + 2.7, ty + 0.25)
     B.size = (B.bbox[2] - B.bbox[0], B.bbox[3] - B.bbox[1])
     return B

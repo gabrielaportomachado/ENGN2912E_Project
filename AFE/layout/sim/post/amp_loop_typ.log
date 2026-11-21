@@ -1,3 +1,3 @@
-== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:04
-   job loop_pex4af2778fd894_typ: exit 0, 0 s
-RESULT amp_loop typ: t_100hz_db=48.1674  fu_hz=250043  pm_deg=439.305
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 18:57
+   job loop_pex2c8e9afc7dda_typ: exit 0, 0 s
+RESULT amp_loop typ: t_100hz_db=48.179  fu_hz=250044  pm_deg=439.306

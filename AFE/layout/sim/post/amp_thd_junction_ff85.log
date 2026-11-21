@@ -1,3 +1,3 @@
-== amp_thd_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 01:13
-   job thd_pexe3100c69eb97_ff85: exit 0, 4 s
-RESULT amp_thd_junction ff85: thd_pct=1.71529  out_max_v=2.18117  out_min_v=1.22967  gain_db=59.6854  hd2_dbc=-39.5355  hd3_dbc=-40.9106  out_mean_v=1.6935
+== amp_thd_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 19:04
+   job thd_pexab3b5dd21745_ff85: exit 0, 3 s
+RESULT amp_thd_junction ff85: thd_pct=1.71374  out_max_v=2.18121  out_min_v=1.22968  gain_db=59.6856  hd2_dbc=-39.5441  hd3_dbc=-40.9188  out_mean_v=1.69354

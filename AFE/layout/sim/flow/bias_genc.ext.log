@@ -1,0 +1,74 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/run.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: LIB
+Reading "bg_nfet__5".
+Reading "bg_pfet__4".
+Reading "bg_pfet__3".
+Reading "bg_res_2_60".
+Reading "bg_cap_mim__6".
+Reading "bg_xsr".
+Reading "bg_rep".
+Reading "bg_su".
+Reading "bg_nfet__2".
+Reading "bg_nfet__1".
+Reading "bg_pfet__0".
+Reading "bg_rb_res".
+Reading "bg_res_1_25".
+CIF file read warning: CIF style import: units rescaled by factor of 5 / 1
+CIF file read warning: Input off lambda grid by 1/5; snapped to grid.
+Reading "bg_rep_rot".
+Reading "bg_su_rot".
+Reading "bg_xsr_rot".
+Reading "bg_rb_rot".
+Reading "bg_cvrs".
+Reading "bg_n1".
+Reading "bg_n2".
+Reading "bg_pg".
+Reading "bg_lad_b".
+Reading "bg_lad_a".
+Reading "bias_genc".
+Extracting bg_res_1_25 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_res_1_25.ext:
+Extracting bg_lad_b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_lad_b.ext:
+Extracting bg_lad_a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_lad_a.ext:
+Extracting bg_cap_mim__6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_cap_mim__6.ext:
+Extracting bg_cvrs into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_cvrs.ext:
+Extracting bg_nfet__5 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_nfet__5.ext:
+Extracting bg_xsr into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_xsr.ext:
+Extracting bg_xsr_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_xsr_rot.ext:
+Extracting bg_pfet__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_pfet__3.ext:
+Extracting bg_su into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_su.ext:
+Extracting bg_su_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_su_rot.ext:
+Extracting bg_pfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_pfet__0.ext:
+Extracting bg_pg into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_pg.ext:
+Extracting bg_nfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_nfet__1.ext:
+Extracting bg_n2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_n2.ext:
+Extracting bg_nfet__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_nfet__2.ext:
+Extracting bg_n1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_n1.ext:
+Extracting bg_pfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_pfet__4.ext:
+Extracting bg_rep into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_rep.ext:
+Extracting bg_rep_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_rep_rot.ext:
+Extracting bg_res_2_60 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_res_2_60.ext:
+Extracting bg_rb_res into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_rb_res.ext:
+Extracting bg_rb_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bg_rb_rot.ext:
+Extracting bias_genc into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_bias_genc/bias_genc.ext:
+exttospice finished.
+FLOW_EXT_DONE

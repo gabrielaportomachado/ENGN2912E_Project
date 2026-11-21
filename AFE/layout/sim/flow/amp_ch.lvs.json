@@ -1,5 +1,5 @@
 {
- "date": "2026-11-21 00:49",
+ "date": "2026-11-21 18:57",
  "devices_layout": {
   "cc1": 1,
   "cc2": 1,
@@ -30,7 +30,7 @@
  "extract_ok": true,
  "final": "Circuits match uniquely.",
  "gds": "AFE/layout/amp/amp_ch.gds",
- "gds_sha1": "2bb1643e489bbf16b13b4bd32ea71b36d5b12c9b",
+ "gds_sha1": "230ee25cdcf722e9f1f066d13e576a6da05d9619",
  "layout_netlist": "AFE/layout/sim/flow/amp_ch.lvs.spice",
  "match": true,
  "maxrss_mb": 83,
@@ -52,6 +52,7 @@
   "vss"
  ],
  "ports_ref": [
+  "rec",
   "ref",
   "sw_rec",
   "sw_rec_b",
@@ -62,7 +63,6 @@
   "vcmo",
   "vg2",
   "vrs",
-  "rec",
   "out",
   "vdd",
   "vss"
@@ -71,11 +71,12 @@
  "property_errors": false,
  "ran": true,
  "ref": "AFE/layout/lvs/afe_chc.spice",
+ "ref_verilog": [],
  "refcell": "amp_ch",
  "report": "AFE/layout/sim/flow/amp_ch.lvs.out",
  "setup": "../../../../../pdks/gf180mcuD/libs.tech/netgen/gf180mcuD_setup.tcl",
  "timeout": false,
  "tool": "magic + netgen",
  "top": "amp_ch",
- "wall_s": 4.3
+ "wall_s": 1.0
 }

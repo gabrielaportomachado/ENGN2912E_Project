@@ -1,0 +1,3 @@
+== tgate  netlist AFE/layout/sim/flow/TGATE.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 18:56
+   job tg_pexdbd77f5b17cc_ff85: exit 0, 0 s
+RESULT tgate ff85: ron_max_kohm=15.6032  ron_min_kohm=4.05339  ron_1v65_kohm=9.25069  v_at_ron_max=2.3  i_off_pa=0.010649

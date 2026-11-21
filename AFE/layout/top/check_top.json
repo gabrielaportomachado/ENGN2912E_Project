@@ -1,0 +1,42 @@
+{
+ "outline_um": [
+  605.0,
+  1110.0
+ ],
+ "pins_bad": [],
+ "plates_um2": {
+  "amp": 80777,
+  "adc": 28927
+ },
+ "adc_control_wires": 116,
+ "keepout_um": {
+  "macro_to_plates": 61.0,
+  "adc_control_wires_to_plates": 36.01,
+  "straps_to_plates": 39.7,
+  "pad_wires_to_digital": 448.39,
+  "bias_to_macro": 21.03
+ },
+ "skew": {
+  "0": {
+   "sw_rec_um": 550.6,
+   "sw_rec_b_um": 559.2,
+   "difference_um": 8.6
+  },
+  "1": {
+   "sw_rec_um": 550.4,
+   "sw_rec_b_um": 559.0,
+   "difference_um": 8.6
+  },
+  "2": {
+   "sw_rec_um": 550.6,
+   "sw_rec_b_um": 559.2,
+   "difference_um": 8.6
+  },
+  "3": {
+   "sw_rec_um": 550.4,
+   "sw_rec_b_um": 559.0,
+   "difference_um": 8.6
+  }
+ },
+ "decap_instances": 104
+}

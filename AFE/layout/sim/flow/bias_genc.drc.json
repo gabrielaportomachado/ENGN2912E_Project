@@ -1,0 +1,22 @@
+{
+ "antenna": false,
+ "databases": [
+  "AFE/layout/sim/flow/drc_bias_genc/bias_genc_main.lyrdb"
+ ],
+ "date": "2026-11-21 18:29",
+ "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
+ "density": false,
+ "gds": "AFE/layout/top/bias_genc.gds",
+ "gds_sha1": "21cf5730f947ab57e98a798a9e4dd38a32000356",
+ "log": "AFE/layout/sim/flow/bias_genc.drc.log",
+ "maxrss_mb": 457,
+ "mode": "flat",
+ "offgrid": true,
+ "ran": true,
+ "rules": {},
+ "tool": "klayout DRC",
+ "top": "bias_genc",
+ "total": 0,
+ "variant": "D",
+ "wall_s": 3.4
+}

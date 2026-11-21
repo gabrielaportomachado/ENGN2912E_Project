@@ -2,46 +2,46 @@
  "check": "amp_psrr_junction",
  "corners": {
   "ff85": {
-   "date": "2026-11-21 01:13",
+   "date": "2026-11-21 19:04",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_junction_ff85.log",
    "values": {
-    "supply_gain_1khz": 0.477247,
-    "supply_gain_300hz": 0.637785,
-    "supply_gain_50hz": 0.664625,
-    "supply_gain_60hz": 0.664238
+    "supply_gain_1khz": 0.47688,
+    "supply_gain_300hz": 0.637273,
+    "supply_gain_50hz": 0.664083,
+    "supply_gain_60hz": 0.663698
    }
   },
   "ss-40": {
-   "date": "2026-11-21 01:13",
+   "date": "2026-11-21 19:04",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_junction_ss-40.log",
    "values": {
-    "supply_gain_1khz": 0.255834,
-    "supply_gain_300hz": 0.508315,
-    "supply_gain_50hz": 0.617064,
-    "supply_gain_60hz": 0.615178
+    "supply_gain_1khz": 0.255676,
+    "supply_gain_300hz": 0.507956,
+    "supply_gain_50hz": 0.616619,
+    "supply_gain_60hz": 0.614734
    }
   },
   "typ": {
-   "date": "2026-11-21 01:13",
+   "date": "2026-11-21 19:04",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_psrr_junction_typ.log",
    "values": {
-    "supply_gain_1khz": 0.360985,
-    "supply_gain_300hz": 0.58059,
-    "supply_gain_50hz": 0.635753,
-    "supply_gain_60hz": 0.634931
+    "supply_gain_1khz": 0.360732,
+    "supply_gain_300hz": 0.58015,
+    "supply_gain_50hz": 0.635265,
+    "supply_gain_60hz": 0.634444
    }
   }
  },
  "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
- "netlist_sha1": "e3100c69eb97",
+ "netlist_sha1": "ab3b5dd21745",
  "written_by": "AFE/layout/tb/tb_amp_psrr_junction.py"
 }

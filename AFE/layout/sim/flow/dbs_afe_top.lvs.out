@@ -1,0 +1,868 @@
+
+Circuit 1 cell cap_mim_2f0_m4m5_noshield and Circuit 2 cell cap_mim_2f0_m4m5_noshield are black boxes.
+
+Subcircuit pins:
+Circuit 1: cap_mim_2f0_m4m5_noshield       |Circuit 2: cap_mim_2f0_m4m5_noshield       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cap_mim_2f0_m4m5_noshield and cap_mim_2f0_m4m5_noshield are equivalent.
+
+Circuit 1 cell nfet_03v3 and Circuit 2 cell nfet_03v3 are black boxes.
+
+Subcircuit pins:
+Circuit 1: nfet_03v3                       |Circuit 2: nfet_03v3                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_03v3 and nfet_03v3 are equivalent.
+
+Circuit 1 cell pfet_03v3 and Circuit 2 cell pfet_03v3 are black boxes.
+
+Subcircuit pins:
+Circuit 1: pfet_03v3                       |Circuit 2: pfet_03v3                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pfet_03v3 and pfet_03v3 are equivalent.
+
+Circuit 1 cell pfet_05v0 and Circuit 2 cell pfet_05v0 are black boxes.
+
+Subcircuit pins:
+Circuit 1: pfet_05v0                       |Circuit 2: pfet_05v0                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pfet_05v0 and pfet_05v0 are equivalent.
+
+Circuit 1 cell nfet_05v0 and Circuit 2 cell nfet_05v0 are black boxes.
+
+Subcircuit pins:
+Circuit 1: nfet_05v0                       |Circuit 2: nfet_05v0                       
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_05v0 and nfet_05v0 are equivalent.
+
+Circuit 1 cell nfet_06v0_nvt and Circuit 2 cell nfet_06v0_nvt are black boxes.
+
+Subcircuit pins:
+Circuit 1: nfet_06v0_nvt                   |Circuit 2: nfet_06v0_nvt                   
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+4                                          |4                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes nfet_06v0_nvt and nfet_06v0_nvt are equivalent.
+
+Circuit 1 cell ppolyf_u_1k and Circuit 2 cell ppolyf_u_1k are black boxes.
+
+Subcircuit pins:
+Circuit 1: ppolyf_u_1k                     |Circuit 2: ppolyf_u_1k                     
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+3                                          |3                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes ppolyf_u_1k and ppolyf_u_1k are equivalent.
+
+Subcircuit summary:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1  
+-------------------------------------------|-------------------------------------------
+pfet_05v0 (3)                              |pfet_05v0 (3)                              
+nfet_05v0 (3)                              |nfet_05v0 (3)                              
+Number of devices: 6                       |Number of devices: 6                       
+Number of nets: 9                          |Number of nets: 9                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1  
+-------------------------------------------|-------------------------------------------
+a_47_93#                                   |VSS **Mismatch**                           
+VSUBS                                      |VPW **Mismatch**                           
+w_n86_352#                                 |VNW **Mismatch**                           
+a_135_48#                                  |A1 **Mismatch**                            
+a_359_48#                                  |A2 **Mismatch**                            
+a_731_472#                                 |Z **Mismatch**                             
+a_459_603#                                 |VDD **Mismatch**                           
+---------------------------------------------------------------------------------------
+Cell pin lists for gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1 altered to match.
+Device classes gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1 are equivalent.
+
+Subcircuit summary:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1[ 
+-------------------------------------------|-------------------------------------------
+pfet_05v0 (3)                              |pfet_05v0 (3)                              
+nfet_05v0 (3)                              |nfet_05v0 (3)                              
+Number of devices: 6                       |Number of devices: 6                       
+Number of nets: 9                          |Number of nets: 9                          
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: gf180mcu_fd_sc_mcu7t5v0__or2_1  |Circuit 2: gf180mcu_fd_sc_mcu7t5v0__or2_1[ 
+-------------------------------------------|-------------------------------------------
+a_47_93#                                   |VSS **Mismatch**                           
+VSUBS                                      |VPW **Mismatch**                           
+w_n86_352#                                 |VNW **Mismatch**                           
+a_135_48#                                  |A1 **Mismatch**                            
+a_359_48#                                  |A2 **Mismatch**                            
+a_731_472#                                 |Z **Mismatch**                             
+a_459_603#                                 |VDD **Mismatch**                           
+---------------------------------------------------------------------------------------
+Cell pin lists for gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1[[0]] altered to match.
+Device classes gf180mcu_fd_sc_mcu7t5v0__or2_1 and gf180mcu_fd_sc_mcu7t5v0__or2_1[[0]] are equivalent.
+
+Circuit 1 cell cap_nmos_03v3 and Circuit 2 cell cap_nmos_03v3 are black boxes.
+
+Subcircuit pins:
+Circuit 1: cap_nmos_03v3                   |Circuit 2: cap_nmos_03v3                   
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes cap_nmos_03v3 and cap_nmos_03v3 are equivalent.
+Flattening unmatched subcell sp_os in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__15 in circuit amp_ch (0)(3 instances)
+Flattening unmatched subcell pfet__14 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cin2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__19 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sink1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__4 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell or2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell ct in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__22 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cin_blk in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__23 in circuit amp_ch (0)(4 instances)
+Flattening unmatched subcell cc1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__17 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pr3 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell cf1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__18 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell xms in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__5 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sp_a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__13 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell pfet__14 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell fol in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet_06v0_nvt__10 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pr1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell s2p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__9 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell ota_p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_a2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_b2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_a1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell tail6 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pair_b1 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__0 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell xm6 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__3 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cf1p in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__18 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sn_os in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__12 in circuit amp_ch (0)(3 instances)
+Flattening unmatched subcell cc2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__20 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cf2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__21 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell s2tail in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__7 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__8 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pr2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell pfet__16 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell s2pair_r in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell s2pair in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__6 in circuit amp_ch (0)(4 instances)
+Flattening unmatched subcell mir in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m4a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m3b in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m4b in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell m3a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__2 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell sn_a in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell nfet__11 in circuit amp_ch (0)(2 instances)
+Flattening unmatched subcell nfet__12 in circuit amp_ch (0)(1 instance)
+Flattening unmatched subcell fs_oneshot_c in circuit amp_ch (1)(1 instance)
+Flattening unmatched subcell afe_chc in circuit amp_ch (1)(1 instance)
+
+Class amp_ch (0):  Merged 70 parallel devices.
+Class amp_ch (1):  Merged 2 parallel devices.
+Subcircuit summary:
+Circuit 1: amp_ch                          |Circuit 2: amp_ch                          
+-------------------------------------------|-------------------------------------------
+pfet_03v3 (53->20)                         |pfet_03v3 (53->20)                         
+cap_mim_2f0_m4m5_noshield (11->9)          |cap_mim_2f0_m4m5_noshield (11->9)          
+nfet_03v3 (50->15)                         |nfet_03v3 (48->15)                         
+gf180mcu_fd_sc_mcu7t5v0__or2_1 (1)         |gf180mcu_fd_sc_mcu7t5v0__or2_1[[0]] (1)    
+nfet_06v0_nvt (1)                          |nfet_06v0_nvt (1)                          
+Number of devices: 46                      |Number of devices: 46                      
+Number of nets: 35                         |Number of nets: 35                         
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: amp_ch                          |Circuit 2: amp_ch                          
+-------------------------------------------|-------------------------------------------
+vrs                                        |vrs                                        
+rst_amp                                    |rst_amp                                    
+ref                                        |ref                                        
+vg1                                        |vg1                                        
+vcmo                                       |vcmo                                       
+vg2                                        |vg2                                        
+sw_rec_b                                   |sw_rec_b                                   
+vss                                        |vss                                        
+rec                                        |rec                                        
+out                                        |out                                        
+vcm                                        |vcm                                        
+sw_rec                                     |sw_rec                                     
+vbn                                        |vbn                                        
+vdd                                        |vdd                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes amp_ch and amp_ch are equivalent.
+Flattening unmatched subcell sw_p in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1$1 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell dac in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__2 in circuit adc_ch (0)(127 instances)
+Flattening unmatched subcell cap_mim__3 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell sw_n in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__0 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell vhalf_res in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell vh_seg in circuit adc_ch (0)(8 instances)
+Flattening unmatched subcell row_b2 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1$1 in circuit adc_ch (0)(13 instances)
+Flattening unmatched subcell vh_cap in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__11 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell row_a in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__0 in circuit adc_ch (0)(26 instances)
+Flattening unmatched subcell iv_p in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__10 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell xr0 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__13 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell iv_n in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__9 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell row_b1 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1$1 in circuit adc_ch (0)(13 instances)
+Flattening unmatched subcell cmp_blk in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cmp_side in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell cxa_x in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell cap_mim__2 in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell cn_x in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell nfet__7$1 in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell nfet__0 in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell nfet__6$1 in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell nfet__5$1 in circuit adc_ch (0)(4 instances)
+Flattening unmatched subcell cp_x in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell pfet__8 in circuit adc_ch (0)(4 instances)
+Flattening unmatched subcell pfet__1$1 in circuit adc_ch (0)(4 instances)
+Flattening unmatched subcell pair_x in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell pfet__4 in circuit adc_ch (0)(2 instances)
+Flattening unmatched subcell cc_p in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__8 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell pfet__1$1 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cc_n in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__0 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell xr1 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell nfet__13 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cref in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell cap_mim__12 in circuit adc_ch (0)(1 instance)
+Flattening unmatched subcell vhalf in circuit adc_ch (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__inv_1[[0]] in circuit adc_ch (1)(1 instance)
+Flattening unmatched subcell dac_sw in circuit adc_ch (1)(1 instance)
+Flattening unmatched subcell vrefs in circuit adc_ch (1)(1 instance)
+Flattening unmatched subcell cmp_p in circuit adc_ch (1)(1 instance)
+
+Class adc_ch (0):  Merged 122 parallel devices.
+Class adc_ch (0):  Merged 6 series devices.
+Class adc_ch (1):  Merged 114 parallel devices.
+Subcircuit summary:
+Circuit 1: adc_ch                          |Circuit 2: adc_ch                          
+-------------------------------------------|-------------------------------------------
+pfet_03v3 (47->39)                         |pfet_03v3 (39)                             
+cap_mim_2f0_m4m5_noshield (132->18)        |cap_mim_2f0_m4m5_noshield (132->18)        
+nfet_03v3 (40)                             |nfet_03v3 (40)                             
+ppolyf_u_1k (8->2)                         |ppolyf_u_1k (2)                            
+pfet_05v0 (1)                              |pfet_05v0 (1)                              
+nfet_05v0 (1)                              |nfet_05v0 (1)                              
+Number of devices: 101                     |Number of devices: 101                     
+Number of nets: 63                         |Number of nets: 63                         
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: adc_ch                          |Circuit 2: adc_ch                          
+-------------------------------------------|-------------------------------------------
+vdd_cmp                                    |vdd_cmp                                    
+vdd_dac                                    |vdd_dac                                    
+rst_sw                                     |rst_sw                                     
+cmp_q                                      |cmp_q                                      
+dac_gp[1]                                  |dac_gp[1]                                  
+dac_gp[0]                                  |dac_gp[0]                                  
+dac_gp[2]                                  |dac_gp[2]                                  
+dac_gp[3]                                  |dac_gp[3]                                  
+dac_gp[4]                                  |dac_gp[4]                                  
+dac_gp[5]                                  |dac_gp[5]                                  
+dac_gp[6]                                  |dac_gp[6]                                  
+dac_gp[7]                                  |dac_gp[7]                                  
+dac_gp[8]                                  |dac_gp[8]                                  
+dac_gp[9]                                  |dac_gp[9]                                  
+dac_gp[10]                                 |dac_gp[10]                                 
+dac_gp[11]                                 |dac_gp[11]                                 
+dac_gdn                                    |dac_gdn                                    
+dac_gn[5]                                  |dac_gn[5]                                  
+dac_gn[3]                                  |dac_gn[3]                                  
+dac_gn[1]                                  |dac_gn[1]                                  
+dac_gn[4]                                  |dac_gn[4]                                  
+dac_gn[2]                                  |dac_gn[2]                                  
+dac_gn[0]                                  |dac_gn[0]                                  
+dac_gn[9]                                  |dac_gn[9]                                  
+dac_gn[7]                                  |dac_gn[7]                                  
+dac_gn[10]                                 |dac_gn[10]                                 
+dac_gn[6]                                  |dac_gn[6]                                  
+dac_gn[8]                                  |dac_gn[8]                                  
+dac_gn[11]                                 |dac_gn[11]                                 
+vin                                        |vin                                        
+vss                                        |vss                                        
+vdd                                        |vdd                                        
+tg_on                                      |tg_on                                      
+cmp_clk                                    |cmp_clk                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes adc_ch and adc_ch are equivalent.
+
+Subcircuit summary:
+Circuit 1: TGATE                           |Circuit 2: TGATE                           
+-------------------------------------------|-------------------------------------------
+pfet_05v0 (1)                              |pfet_05v0 (1)                              
+nfet_05v0 (1)                              |nfet_05v0 (1)                              
+Number of devices: 2                       |Number of devices: 2                       
+Number of nets: 6                          |Number of nets: 6                          
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: TGATE                           |Circuit 2: TGATE                           
+-------------------------------------------|-------------------------------------------
+CBAR                                       |cbar                                       
+VDD                                        |vdd                                        
+C                                          |c                                          
+VSS                                        |vss                                        
+IN                                         |in                                         
+OUT                                        |out                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes TGATE and TGATE are equivalent.
+
+Subcircuit summary:
+Circuit 1: afe_ch                          |Circuit 2: afe_ch                          
+-------------------------------------------|-------------------------------------------
+amp_ch (1)                                 |amp_ch (1)                                 
+adc_ch (1)                                 |adc_ch (1)                                 
+TGATE (2)                                  |TGATE (2)                                  
+Number of devices: 4                       |Number of devices: 4                       
+Number of nets: 49                         |Number of nets: 49                         
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: afe_ch                          |Circuit 2: afe_ch                          
+-------------------------------------------|-------------------------------------------
+vdd                                        |vdd                                        
+vss                                        |vss                                        
+ipg                                        |ipg                                        
+sw_ipg                                     |sw_ipg                                     
+sw_ipg_b                                   |sw_ipg_b                                   
+ref                                        |ref                                        
+rst_amp                                    |rst_amp                                    
+vbn                                        |vbn                                        
+vcm                                        |vcm                                        
+vg1                                        |vg1                                        
+vcmo                                       |vcmo                                       
+vg2                                        |vg2                                        
+vrs                                        |vrs                                        
+rst_sw                                     |rst_sw                                     
+tg_on                                      |tg_on                                      
+cmp_clk                                    |cmp_clk                                    
+dac_gdn                                    |dac_gdn                                    
+dac_gp[11]                                 |dac_gp[11]                                 
+dac_gp[10]                                 |dac_gp[10]                                 
+dac_gp[9]                                  |dac_gp[9]                                  
+dac_gp[8]                                  |dac_gp[8]                                  
+dac_gp[7]                                  |dac_gp[7]                                  
+dac_gp[6]                                  |dac_gp[6]                                  
+dac_gp[5]                                  |dac_gp[5]                                  
+dac_gp[4]                                  |dac_gp[4]                                  
+dac_gp[3]                                  |dac_gp[3]                                  
+dac_gp[2]                                  |dac_gp[2]                                  
+dac_gp[1]                                  |dac_gp[1]                                  
+dac_gp[0]                                  |dac_gp[0]                                  
+dac_gn[11]                                 |dac_gn[11]                                 
+dac_gn[10]                                 |dac_gn[10]                                 
+dac_gn[9]                                  |dac_gn[9]                                  
+dac_gn[8]                                  |dac_gn[8]                                  
+dac_gn[7]                                  |dac_gn[7]                                  
+dac_gn[6]                                  |dac_gn[6]                                  
+dac_gn[5]                                  |dac_gn[5]                                  
+dac_gn[4]                                  |dac_gn[4]                                  
+dac_gn[3]                                  |dac_gn[3]                                  
+dac_gn[2]                                  |dac_gn[2]                                  
+dac_gn[1]                                  |dac_gn[1]                                  
+dac_gn[0]                                  |dac_gn[0]                                  
+cmp_q                                      |cmp_q                                      
+vdd_cmp                                    |vdd_cmp                                    
+vdd_dac                                    |vdd_dac                                    
+rec                                        |rec                                        
+sw_rec                                     |sw_rec                                     
+sw_rec_b                                   |sw_rec_b                                   
+e                                          |e                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes afe_ch and afe_ch are equivalent.
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_8$1 in circuit afe_dig (0)(98 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_4$1 in circuit afe_dig (0)(164 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand2_1$1 in circuit afe_dig (0)(94 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor3_1$1 in circuit afe_dig (0)(20 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_64$1 in circuit afe_dig (0)(23 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_1$1 in circuit afe_dig (0)(103 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_32$1 in circuit afe_dig (0)(40 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_16$1 in circuit afe_dig (0)(78 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffrnq_1$1 in circuit afe_dig (0)(85 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai211_1$1 in circuit afe_dig (0)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi211_1$1 in circuit afe_dig (0)(17 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__tiel$1 in circuit afe_dig (0)(14 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__and3_1$1 in circuit afe_dig (0)(10 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai221_1$1 in circuit afe_dig (0)(12 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi21_1$1 in circuit afe_dig (0)(14 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__and2_1$1 in circuit afe_dig (0)(7 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand3_1$1 in circuit afe_dig (0)(20 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai21_1$1 in circuit afe_dig (0)(17 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__or3_1$1 in circuit afe_dig (0)(11 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__or2_1$2 in circuit afe_dig (0)(11 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi22_1$1 in circuit afe_dig (0)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_4$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai32_1$1 in circuit afe_dig (0)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_1$1 in circuit afe_dig (0)(22 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_4$1 in circuit afe_dig (0)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffq_1$1 in circuit afe_dig (0)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi221_1$1 in circuit afe_dig (0)(6 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlyd_1$1 in circuit afe_dig (0)(33 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkbuf_8$1 in circuit afe_dig (0)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__xnor2_1$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__inv_1$1 in circuit afe_dig (0)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai22_1$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__xor2_1$1 in circuit afe_dig (0)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor4_1$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__mux2_2$1 in circuit afe_dig (0)(16 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai31_1$1 in circuit afe_dig (0)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlyc_1$1 in circuit afe_dig (0)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand4_1$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand3_4$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__or2_2$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__tieh$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlya_1$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_2$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffsnq_1$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_20$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor3_4$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi222_1$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__buf_2$1 in circuit afe_dig (0)(3 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__buf_3$1 in circuit afe_dig (0)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkbuf_20$1 in circuit afe_dig (0)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_4 in circuit afe_dig (1)(164 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_8 in circuit afe_dig (1)(98 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_16 in circuit afe_dig (1)(78 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_32 in circuit afe_dig (1)(40 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__fillcap_64 in circuit afe_dig (1)(23 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_1 in circuit afe_dig (1)(22 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_1 in circuit afe_dig (1)(103 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__or2_2 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_4 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__and2_1 in circuit afe_dig (1)(7 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor3_1 in circuit afe_dig (1)(20 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__or3_1 in circuit afe_dig (1)(11 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand2_1 in circuit afe_dig (1)(94 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand3_1 in circuit afe_dig (1)(20 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand4_1 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai21_1 in circuit afe_dig (1)(17 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi211_1 in circuit afe_dig (1)(17 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__xor2_1 in circuit afe_dig (1)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai32_1 in circuit afe_dig (1)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__and3_1 in circuit afe_dig (1)(10 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nand3_4 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai211_1 in circuit afe_dig (1)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__mux2_2 in circuit afe_dig (1)(16 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi21_1 in circuit afe_dig (1)(14 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__xnor2_1 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor2_2 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi221_1 in circuit afe_dig (1)(6 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi222_1 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor3_4 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai221_1 in circuit afe_dig (1)(12 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai31_1 in circuit afe_dig (1)(5 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__aoi22_1 in circuit afe_dig (1)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__nor4_1 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__oai22_1 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffrnq_1 in circuit afe_dig (1)(85 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffq_1 in circuit afe_dig (1)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dffsnq_1 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__buf_3 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__buf_2 in circuit afe_dig (1)(3 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkbuf_20 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlyc_1 in circuit afe_dig (1)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_4 in circuit afe_dig (1)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkbuf_8 in circuit afe_dig (1)(8 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlyd_1 in circuit afe_dig (1)(33 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__dlya_1 in circuit afe_dig (1)(2 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__inv_1 in circuit afe_dig (1)(4 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__clkinv_20 in circuit afe_dig (1)(1 instance)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__tiel in circuit afe_dig (1)(14 instances)
+Flattening unmatched subcell gf180mcu_fd_sc_mcu7t5v0__tieh in circuit afe_dig (1)(1 instance)
+
+Flattening instances of gf180mcu_fd_sc_mcu7t5v0__or2_1 in cell afe_dig (1) makes a better match
+Making another compare attempt.
+
+Class afe_dig (0):  Merged 378 parallel devices.
+Class afe_dig (1):  Merged 378 parallel devices.
+Subcircuit summary:
+Circuit 1: afe_dig                         |Circuit 2: afe_dig                         
+-------------------------------------------|-------------------------------------------
+pfet_05v0 (4611->4421)                     |pfet_05v0 (4611->4421)                     
+nfet_05v0 (4601->4413)                     |nfet_05v0 (4601->4413)                     
+Number of devices: 8834                    |Number of devices: 8834                    
+Number of nets: 5966                       |Number of nets: 5966                       
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Resolving symmetries by net name.
+Netlists match with 16 symmetries.
+
+Subcircuit pins:
+Circuit 1: afe_dig                         |Circuit 2: afe_dig                         
+-------------------------------------------|-------------------------------------------
+DIN                                        |DIN                                        
+cmp_q[3]                                   |cmp_q[3]                                   
+cmp_q[1]                                   |cmp_q[1]                                   
+cmp_q[0]                                   |cmp_q[0]                                   
+cmp_q[2]                                   |cmp_q[2]                                   
+SCLK                                       |SCLK                                       
+sw_rec[2]                                  |sw_rec[2]                                  
+sw_rec[0]                                  |sw_rec[0]                                  
+sw_rec[1]                                  |sw_rec[1]                                  
+sw_rec[3]                                  |sw_rec[3]                                  
+sw_ipg[2]                                  |sw_ipg[2]                                  
+sw_ipg[3]                                  |sw_ipg[3]                                  
+sw_ipg[0]                                  |sw_ipg[0]                                  
+sw_ipg[1]                                  |sw_ipg[1]                                  
+rst_sw[0]                                  |rst_sw[0]                                  
+rst_sw[1]                                  |rst_sw[1]                                  
+rst_sw[2]                                  |rst_sw[2]                                  
+rst_sw[3]                                  |rst_sw[3]                                  
+dac_gdn[3]                                 |dac_gdn[3]                                 
+dac_gdn[2]                                 |dac_gdn[2]                                 
+dac_gdn[1]                                 |dac_gdn[1]                                 
+dac_gdn[0]                                 |dac_gdn[0]                                 
+sw_ipg_b[2]                                |sw_ipg_b[2]                                
+sw_ipg_b[0]                                |sw_ipg_b[0]                                
+sw_ipg_b[1]                                |sw_ipg_b[1]                                
+sw_ipg_b[3]                                |sw_ipg_b[3]                                
+sw_rec_b[0]                                |sw_rec_b[0]                                
+sw_rec_b[1]                                |sw_rec_b[1]                                
+sw_rec_b[3]                                |sw_rec_b[3]                                
+sw_rec_b[2]                                |sw_rec_b[2]                                
+DOUT                                       |DOUT                                       
+cmp_clk[3]                                 |cmp_clk[3]                                 
+cmp_clk[2]                                 |cmp_clk[2]                                 
+cmp_clk[0]                                 |cmp_clk[0]                                 
+cmp_clk[1]                                 |cmp_clk[1]                                 
+DOUT_OE                                    |DOUT_OE                                    
+CS                                         |CS                                         
+RSTN_PD                                    |RSTN_PD                                    
+DOUT_PDRV0                                 |DOUT_PDRV0                                 
+DOUT_SL                                    |DOUT_SL                                    
+CS_PD                                      |CS_PD                                      
+DIN_PU                                     |DIN_PU                                     
+RSTN_PU                                    |RSTN_PU                                    
+DOUT_PD                                    |DOUT_PD                                    
+SCLK_PD                                    |SCLK_PD                                    
+DOUT_CS                                    |DOUT_CS                                    
+DIN_PD                                     |DIN_PD                                     
+CS_PU                                      |CS_PU                                      
+DOUT_PU                                    |DOUT_PU                                    
+SCLK_PU                                    |SCLK_PU                                    
+DOUT_IE                                    |DOUT_IE                                    
+DOUT_PDRV1                                 |DOUT_PDRV1                                 
+rst_amp_o                                  |rst_amp_o                                  
+RSTN                                       |RSTN                                       
+tg_on[1]                                   |tg_on[1]                                   
+tg_on[2]                                   |tg_on[2]                                   
+tg_on[0]                                   |tg_on[0]                                   
+tg_on[3]                                   |tg_on[3]                                   
+dac_gn[16]                                 |dac_gn[16]                                 
+dac_gn[18]                                 |dac_gn[18]                                 
+dac_gn[19]                                 |dac_gn[19]                                 
+dac_gn[13]                                 |dac_gn[13]                                 
+dac_gn[14]                                 |dac_gn[14]                                 
+dac_gn[12]                                 |dac_gn[12]                                 
+dac_gn[15]                                 |dac_gn[15]                                 
+dac_gn[17]                                 |dac_gn[17]                                 
+dac_gn[20]                                 |dac_gn[20]                                 
+dac_gn[21]                                 |dac_gn[21]                                 
+dac_gn[22]                                 |dac_gn[22]                                 
+dac_gn[23]                                 |dac_gn[23]                                 
+dac_gn[29]                                 |dac_gn[29]                                 
+dac_gn[31]                                 |dac_gn[31]                                 
+dac_gn[3]                                  |dac_gn[3]                                  
+dac_gn[5]                                  |dac_gn[5]                                  
+dac_gn[7]                                  |dac_gn[7]                                  
+dac_gn[32]                                 |dac_gn[32]                                 
+dac_gn[34]                                 |dac_gn[34]                                 
+dac_gn[6]                                  |dac_gn[6]                                  
+dac_gn[8]                                  |dac_gn[8]                                  
+dac_gn[9]                                  |dac_gn[9]                                  
+dac_gn[10]                                 |dac_gn[10]                                 
+dac_gn[11]                                 |dac_gn[11]                                 
+dac_gn[25]                                 |dac_gn[25]                                 
+dac_gn[26]                                 |dac_gn[26]                                 
+dac_gn[24]                                 |dac_gn[24]                                 
+dac_gn[27]                                 |dac_gn[27]                                 
+dac_gn[35]                                 |dac_gn[35]                                 
+dac_gn[28]                                 |dac_gn[28]                                 
+dac_gn[30]                                 |dac_gn[30]                                 
+dac_gn[4]                                  |dac_gn[4]                                  
+dac_gn[0]                                  |dac_gn[0]                                  
+dac_gn[1]                                  |dac_gn[1]                                  
+dac_gn[33]                                 |dac_gn[33]                                 
+dac_gn[2]                                  |dac_gn[2]                                  
+dac_gp[42]                                 |dac_gp[42]                                 
+dac_gp[44]                                 |dac_gp[44]                                 
+dac_gp[46]                                 |dac_gp[46]                                 
+dac_gp[39]                                 |dac_gp[39]                                 
+dac_gp[41]                                 |dac_gp[41]                                 
+dac_gp[43]                                 |dac_gp[43]                                 
+dac_gp[45]                                 |dac_gp[45]                                 
+dac_gp[47]                                 |dac_gp[47]                                 
+dac_gp[36]                                 |dac_gp[36]                                 
+dac_gp[37]                                 |dac_gp[37]                                 
+dac_gp[40]                                 |dac_gp[40]                                 
+dac_gp[38]                                 |dac_gp[38]                                 
+dac_gp[16]                                 |dac_gp[16]                                 
+dac_gp[18]                                 |dac_gp[18]                                 
+dac_gp[19]                                 |dac_gp[19]                                 
+dac_gp[13]                                 |dac_gp[13]                                 
+dac_gp[14]                                 |dac_gp[14]                                 
+dac_gp[12]                                 |dac_gp[12]                                 
+dac_gp[15]                                 |dac_gp[15]                                 
+dac_gp[17]                                 |dac_gp[17]                                 
+dac_gp[20]                                 |dac_gp[20]                                 
+dac_gp[21]                                 |dac_gp[21]                                 
+dac_gp[22]                                 |dac_gp[22]                                 
+dac_gp[23]                                 |dac_gp[23]                                 
+dac_gp[32]                                 |dac_gp[32]                                 
+dac_gp[29]                                 |dac_gp[29]                                 
+dac_gp[3]                                  |dac_gp[3]                                  
+dac_gp[31]                                 |dac_gp[31]                                 
+dac_gp[5]                                  |dac_gp[5]                                  
+dac_gp[7]                                  |dac_gp[7]                                  
+dac_gp[0]                                  |dac_gp[0]                                  
+dac_gp[1]                                  |dac_gp[1]                                  
+dac_gp[33]                                 |dac_gp[33]                                 
+dac_gp[2]                                  |dac_gp[2]                                  
+dac_gp[34]                                 |dac_gp[34]                                 
+dac_gp[6]                                  |dac_gp[6]                                  
+dac_gp[8]                                  |dac_gp[8]                                  
+dac_gp[9]                                  |dac_gp[9]                                  
+dac_gp[10]                                 |dac_gp[10]                                 
+dac_gp[11]                                 |dac_gp[11]                                 
+dac_gp[25]                                 |dac_gp[25]                                 
+dac_gp[26]                                 |dac_gp[26]                                 
+dac_gp[24]                                 |dac_gp[24]                                 
+dac_gp[27]                                 |dac_gp[27]                                 
+dac_gp[35]                                 |dac_gp[35]                                 
+dac_gp[28]                                 |dac_gp[28]                                 
+dac_gp[4]                                  |dac_gp[4]                                  
+dac_gp[30]                                 |dac_gp[30]                                 
+dac_gn[42]                                 |dac_gn[42]                                 
+dac_gn[44]                                 |dac_gn[44]                                 
+dac_gn[46]                                 |dac_gn[46]                                 
+dac_gn[36]                                 |dac_gn[36]                                 
+dac_gn[41]                                 |dac_gn[41]                                 
+dac_gn[39]                                 |dac_gn[39]                                 
+dac_gn[38]                                 |dac_gn[38]                                 
+dac_gn[43]                                 |dac_gn[43]                                 
+dac_gn[45]                                 |dac_gn[45]                                 
+dac_gn[47]                                 |dac_gn[47]                                 
+dac_gn[40]                                 |dac_gn[40]                                 
+dac_gn[37]                                 |dac_gn[37]                                 
+VSS                                        |VSS                                        
+VDD                                        |VDD                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes afe_dig and afe_dig are equivalent.
+Flattening unmatched subcell bg_pg in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_pfet__0 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_xsr_rot in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_xsr in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_nfet__5 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_su_rot in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_su in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_pfet__3 in circuit bias_genc (0)(3 instances)
+Flattening unmatched subcell bg_n2 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_nfet__1 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_lad_b in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_res_1_25 in circuit bias_genc (0)(66 instances)
+Flattening unmatched subcell bg_rep_rot in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_rep in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_pfet__4 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_rb_rot in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_rb_res in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_res_2_60 in circuit bias_genc (0)(2 instances)
+Flattening unmatched subcell bg_n1 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_nfet__2 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_cvrs in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_cap_mim__6 in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_lad_a in circuit bias_genc (0)(1 instance)
+Flattening unmatched subcell bg_res_1_25 in circuit bias_genc (0)(66 instances)
+
+Class bias_genc (0):  Merged 11 parallel devices.
+Class bias_genc (0):  Merged 127 series devices.
+Subcircuit summary:
+Circuit 1: bias_genc                       |Circuit 2: bias_genc                       
+-------------------------------------------|-------------------------------------------
+pfet_03v3 (12->6)                          |pfet_03v3 (6)                              
+nfet_03v3 (8->3)                           |nfet_03v3 (6->3)                           
+ppolyf_u_1k (134->7)                       |ppolyf_u_1k (7)                            
+cap_mim_2f0_m4m5_noshield (1)              |cap_mim_2f0_m4m5_noshield (1)              
+Number of devices: 17                      |Number of devices: 17                      
+Number of nets: 12                         |Number of nets: 12                         
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: bias_genc                       |Circuit 2: bias_genc                       
+-------------------------------------------|-------------------------------------------
+vg1                                        |vg1                                        
+vg2                                        |vg2                                        
+vcm_out                                    |vcm_out                                    
+vss                                        |vss                                        
+vdd                                        |vdd                                        
+vbn                                        |vbn                                        
+vcm_in                                     |vcm_in                                     
+vrs                                        |vrs                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes bias_genc and bias_genc are equivalent.
+
+Circuit 1 cell rm3 and Circuit 2 cell rm3 are black boxes.
+
+Subcircuit pins:
+Circuit 1: rm3                             |Circuit 2: rm3                             
+-------------------------------------------|-------------------------------------------
+1                                          |1                                          
+2                                          |2                                          
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes rm3 and rm3 are equivalent.
+Flattening unmatched subcell cap_nmos in circuit dbs_afe_top (0)(104 instances)
+
+Cell dbs_afe_top (0) disconnected node: DOUT_IN
+Cell dbs_afe_top (1) disconnected node: DOUT_IN
+Class dbs_afe_top (0):  Merged 102 parallel devices.
+Cell dbs_afe_top (0) disconnected node: DOUT_IN
+Cell dbs_afe_top (1) disconnected node: DOUT_IN
+Subcircuit summary:
+Circuit 1: dbs_afe_top                     |Circuit 2: dbs_afe_top                     
+-------------------------------------------|-------------------------------------------
+cap_nmos_03v3 (104->2)                     |cap_nmos_03v3 (104->2)                     
+afe_ch (4)                                 |afe_ch (4)                                 
+afe_dig (1)                                |afe_dig (1)                                
+bias_genc (1)                              |bias_genc (1)                              
+rm3 (1)                                    |rm3 (1)                                    
+Number of devices: 9                       |Number of devices: 9                       
+Number of nets: 176                        |Number of nets: 176                        
+---------------------------------------------------------------------------------------
+Netlists match uniquely.
+
+Subcircuit pins:
+Circuit 1: dbs_afe_top                     |Circuit 2: dbs_afe_top                     
+-------------------------------------------|-------------------------------------------
+REF                                        |REF                                        
+CS                                         |CS                                         
+CS_PD                                      |CS_PD                                      
+CS_PU                                      |CS_PU                                      
+DIN                                        |DIN                                        
+DIN_PD                                     |DIN_PD                                     
+DIN_PU                                     |DIN_PU                                     
+DOUT_OUT                                   |DOUT_OUT                                   
+DOUT_CS                                    |DOUT_CS                                    
+DOUT_IE                                    |DOUT_IE                                    
+DOUT_OE                                    |DOUT_OE                                    
+DOUT_PD                                    |DOUT_PD                                    
+DOUT_PDRV0                                 |DOUT_PDRV0                                 
+DOUT_PDRV1                                 |DOUT_PDRV1                                 
+DOUT_PU                                    |DOUT_PU                                    
+DOUT_SL                                    |DOUT_SL                                    
+RSTN                                       |RSTN                                       
+RSTN_PD                                    |RSTN_PD                                    
+RSTN_PU                                    |RSTN_PU                                    
+SCLK                                       |SCLK                                       
+SCLK_PD                                    |SCLK_PD                                    
+SCLK_PU                                    |SCLK_PU                                    
+E[1]                                       |E[1]                                       
+E[3]                                       |E[3]                                       
+E[0]                                       |E[0]                                       
+E[2]                                       |E[2]                                       
+IPG[1]                                     |IPG[1]                                     
+IPG[3]                                     |IPG[3]                                     
+IPG[0]                                     |IPG[0]                                     
+IPG[2]                                     |IPG[2]                                     
+REC[1]                                     |REC[1]                                     
+REC[3]                                     |REC[3]                                     
+REC[0]                                     |REC[0]                                     
+REC[2]                                     |REC[2]                                     
+VSS                                        |VSS                                        
+VDD                                        |VDD                                        
+DOUT_IN                                    |DOUT_IN                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes dbs_afe_top and dbs_afe_top are equivalent.
+
+Final result: Circuits match uniquely.
+.

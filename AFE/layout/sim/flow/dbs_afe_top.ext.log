@@ -1,0 +1,403 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/run.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: LIB
+Reading "$$$CONTEXT_INFO$$$".
+Saving contents of cell $$$CONTEXT_INFO$$$
+Reading "nfet__0".
+Reading "pfet__1$1".
+Reading "cap_mim__2".
+Reading "pfet__4".
+Reading "nfet__5$1".
+Reading "nfet__6$1".
+Reading "nfet__7$1".
+Reading "pfet__8".
+Reading "pair_x".
+Reading "cn_x".
+Reading "cp_x".
+Reading "cxa_x".
+Reading "pfet__0".
+Reading "pfet__1".
+Reading "nfet__2".
+Reading "nfet__6".
+Reading "bg_res_2_60".
+Reading "bg_pfet__3".
+Reading "bg_pfet__4".
+Reading "bg_nfet__5".
+Reading "cap_mim__3".
+Reading "cmp_side".
+Reading "cc_p".
+Reading "cc_n".
+Reading "nfet__9".
+Reading "pfet__10".
+Reading "cap_mim__11".
+Reading "cap_mim__12".
+Reading "vh_seg".
+CIF file read warning: CIF style import: units rescaled by factor of 5 / 1
+CIF file read warning: Input off lambda grid by 1/5; snapped to grid.
+Reading "nfet__13".
+Reading "pair_a1".
+Reading "pair_b1".
+Reading "pair_b2".
+Reading "pair_a2".
+Reading "tail6".
+Reading "m3a".
+Reading "m4a".
+Reading "m4b".
+Reading "m3b".
+Reading "nfet__3".
+Reading "nfet__4".
+Reading "nfet__5".
+Reading "s2pair".
+Reading "nfet__7".
+Reading "nfet__8".
+Reading "pfet__9".
+Reading "nfet_06v0_nvt__10".
+Reading "nfet__11".
+Reading "nfet__12".
+Reading "pfet__13".
+Reading "pfet__14".
+Reading "pfet__15".
+Reading "gf180mcu_fd_sc_mcu7t5v0__or2_1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__filltie".
+Reading "pfet__16".
+Reading "cap_mim__17".
+Reading "cap_mim__18".
+Reading "cap_mim__19".
+Reading "cap_mim__20".
+Reading "cap_mim__21".
+Reading "cap_mim__22".
+Reading "cap_mim__23".
+Reading "bg_res_1_25".
+Reading "bg_rb_res".
+Reading "bg_pfet__0".
+Reading "bg_nfet__1".
+Reading "bg_nfet__2".
+Reading "bg_su".
+Reading "bg_rep".
+Reading "bg_xsr".
+Reading "bg_cap_mim__6".
+Reading "row_a".
+Reading "row_b1".
+Reading "row_b2".
+Reading "dac".
+Reading "cmp_blk".
+Reading "sw_n".
+Reading "sw_p".
+Reading "iv_n".
+Reading "iv_p".
+Reading "vh_cap".
+Reading "cref".
+Reading "vhalf_res".
+Reading "xr0".
+Reading "xr1".
+Reading "ota_p".
+Reading "mir".
+Reading "xm6".
+Reading "sink1".
+Reading "xms".
+Reading "s2tail".
+Reading "s2p".
+Reading "fol".
+Reading "sn_a".
+Reading "sn_os".
+Reading "sp_a".
+Reading "sp_os".
+Reading "or2".
+Reading "pr1".
+Reading "pr2".
+Reading "pr3".
+Reading "cc1".
+Reading "cf1".
+Reading "cf1p".
+Reading "cin2".
+Reading "cc2".
+Reading "cf2".
+Reading "ct".
+Reading "cin_blk".
+Reading "s2pair_r".
+Reading "bg_lad_a".
+Reading "bg_lad_b".
+Reading "bg_pg".
+Reading "bg_n2".
+Reading "bg_n1".
+Reading "bg_cvrs".
+Reading "bg_rb_rot".
+Reading "bg_xsr_rot".
+Reading "bg_su_rot".
+Reading "bg_rep_rot".
+Reading "gf180mcu_fd_sc_mcu7t5v0__buf_3$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__aoi222_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__or2_2$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor2_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dlya_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__clkinv_20$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nand4_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__clkbuf_20$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dffsnq_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor3_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nand3_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai211_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor2_2$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor4_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dlyc_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__inv_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai32_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__aoi22_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__aoi221_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__and2_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__and3_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai22_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__aoi21_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai31_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__mux2_2$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai221_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__tieh$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fillcap_64$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__buf_2$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__xnor2_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dffq_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__tiel$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__or2_1$2".
+Reading "gf180mcu_fd_sc_mcu7t5v0__or3_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__oai21_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__xor2_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nand3_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor3_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__aoi211_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dffrnq_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fillcap_8$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fillcap_32$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__dlyd_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fillcap_16$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nor2_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fill_2$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__clkinv_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__filltie$2".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fill_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__fillcap_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__endcap$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__nand2_1$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__clkinv_4$1".
+Reading "gf180mcu_fd_sc_mcu7t5v0__clkbuf_8$1".
+Reading "TGATE".
+Reading "adc_ch".
+Reading "amp_ch".
+Reading "cap_nmos".
+Reading "bias_genc".
+Reading "afe_dig".
+Reading "afe_ch".
+Reading "dbs_afe_top".
+Extracting cap_nmos into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_nmos.ext:
+Extracting TGATE into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/TGATE.ext:
+Extracting cap_mim__20 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__20.ext:
+Extracting cc2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cc2.ext:
+cc2: 6 errors
+Extracting pfet__14 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__14.ext:
+Extracting pfet__15 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__15.ext:
+Extracting sp_os into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sp_os.ext:
+Extracting nfet__12 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__12.ext:
+Extracting sn_os into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sn_os.ext:
+Extracting pfet__16 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__16.ext:
+Extracting pr3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pr3.ext:
+Extracting cap_mim__21 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__21.ext:
+Extracting cf2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cf2.ext:
+cf2: 6 errors
+Extracting cap_mim__22 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__22.ext:
+Extracting ct into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/ct.ext:
+ct: 6 errors
+Extracting nfet__6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__6.ext:
+Extracting s2pair into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/s2pair.ext:
+Extracting s2pair_r into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/s2pair_r.ext:
+Extracting cap_mim__19 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__19.ext:
+Extracting cin2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cin2.ext:
+cin2: 6 errors
+Extracting nfet__8 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__8.ext:
+Extracting nfet__7 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__7.ext:
+Extracting s2tail into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/s2tail.ext:
+Extracting pr2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pr2.ext:
+Extracting cap_mim__18 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__18.ext:
+Extracting cf1p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cf1p.ext:
+cf1p: 4 errors
+Extracting pfet__13 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__13.ext:
+Extracting sp_a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sp_a.ext:
+Extracting nfet__11 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__11.ext:
+Extracting sn_a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sn_a.ext:
+Extracting cf1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cf1.ext:
+cf1: 4 errors
+Extracting pr1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pr1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__filltie into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__filltie.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__or2_1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__or2_1.ext:
+Extracting or2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/or2.ext:
+Extracting cap_mim__23 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__23.ext:
+Extracting cin_blk into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cin_blk.ext:
+cin_blk: 12 errors
+Extracting nfet__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__3.ext:
+Extracting xm6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/xm6.ext:
+Extracting pfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__1.ext:
+Extracting tail6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/tail6.ext:
+Extracting pfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__0.ext:
+Extracting pair_a2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pair_a2.ext:
+Extracting pair_b2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pair_b2.ext:
+Extracting pair_b1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pair_b1.ext:
+Extracting pair_a1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pair_a1.ext:
+Extracting ota_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/ota_p.ext:
+Extracting nfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__4.ext:
+Extracting sink1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sink1.ext:
+Extracting pfet__9 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__9.ext:
+Extracting s2p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/s2p.ext:
+Extracting cap_mim__17 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__17.ext:
+Extracting cc1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cc1.ext:
+cc1: 4 errors
+Extracting nfet_06v0_nvt__10 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet_06v0_nvt__10.ext:
+Extracting fol into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/fol.ext:
+Extracting nfet__5 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__5.ext:
+Extracting xms into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/xms.ext:
+Extracting nfet__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__2.ext:
+Extracting m3b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/m3b.ext:
+Extracting m4b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/m4b.ext:
+Extracting m4a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/m4a.ext:
+Extracting m3a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/m3a.ext:
+Extracting mir into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/mir.ext:
+Extracting amp_ch into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/amp_ch.ext:
+Extracting nfet__13 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__13.ext:
+Extracting xr1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/xr1.ext:
+Extracting xr0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/xr0.ext:
+Extracting vh_seg into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/vh_seg.ext:
+Extracting vhalf_res into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/vhalf_res.ext:
+Extracting cap_mim__12 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__12.ext:
+Extracting cref into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cref.ext:
+Extracting cap_mim__11 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__11.ext:
+Extracting vh_cap into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/vh_cap.ext:
+Extracting pfet__10 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__10.ext:
+Extracting iv_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/iv_p.ext:
+Extracting nfet__9 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__9.ext:
+Extracting iv_n into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/iv_n.ext:
+Extracting pfet__1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__1$1.ext:
+Extracting sw_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sw_p.ext:
+Extracting nfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__0.ext:
+Extracting sw_n into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/sw_n.ext:
+Extracting cc_n into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cc_n.ext:
+Extracting pfet__8 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__8.ext:
+Extracting cc_p into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cc_p.ext:
+Extracting cap_mim__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__2.ext:
+Extracting cxa_x into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cxa_x.ext:
+Extracting pfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pfet__4.ext:
+Extracting pair_x into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/pair_x.ext:
+Extracting cp_x into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cp_x.ext:
+Extracting nfet__5$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__5$1.ext:
+Extracting nfet__7$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__7$1.ext:
+Extracting nfet__6$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/nfet__6$1.ext:
+Extracting cn_x into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cn_x.ext:
+Extracting cmp_side into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cmp_side.ext:
+Extracting cmp_blk into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cmp_blk.ext:
+Extracting cap_mim__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/cap_mim__3.ext:
+Extracting dac into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/dac.ext:
+Extracting row_b2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/row_b2.ext:
+Extracting row_b1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/row_b1.ext:
+Extracting row_a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/row_a.ext:
+Extracting adc_ch into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/adc_ch.ext:
+Extracting afe_ch into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/afe_ch.ext:
+Extracting bg_pfet__4 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_pfet__4.ext:
+Extracting bg_rep into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_rep.ext:
+Extracting bg_rep_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_rep_rot.ext:
+Extracting bg_res_2_60 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_res_2_60.ext:
+Extracting bg_rb_res into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_rb_res.ext:
+Extracting bg_rb_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_rb_rot.ext:
+Extracting bg_pfet__3 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_pfet__3.ext:
+Extracting bg_su into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_su.ext:
+Extracting bg_su_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_su_rot.ext:
+Extracting bg_nfet__5 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_nfet__5.ext:
+Extracting bg_xsr into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_xsr.ext:
+Extracting bg_xsr_rot into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_xsr_rot.ext:
+Extracting bg_nfet__2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_nfet__2.ext:
+Extracting bg_n1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_n1.ext:
+Extracting bg_nfet__1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_nfet__1.ext:
+Extracting bg_n2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_n2.ext:
+Extracting bg_pfet__0 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_pfet__0.ext:
+Extracting bg_pg into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_pg.ext:
+Extracting bg_cap_mim__6 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_cap_mim__6.ext:
+Extracting bg_cvrs into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_cvrs.ext:
+Extracting bg_res_1_25 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_res_1_25.ext:
+Extracting bg_lad_a into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_lad_a.ext:
+Extracting bg_lad_b into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bg_lad_b.ext:
+Extracting bias_genc into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/bias_genc.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nand2_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nand2_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fill_2$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fill_2$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fillcap_32$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fillcap_32$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__filltie$2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__filltie$2.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor2_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor2_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dffrnq_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dffrnq_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__clkinv_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__clkinv_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fill_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fill_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fillcap_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fillcap_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__xor2_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__xor2_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nand3_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nand3_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fillcap_16$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fillcap_16$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__xnor2_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__xnor2_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__aoi21_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__aoi21_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor3_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor3_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__aoi211_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__aoi211_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fillcap_8$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fillcap_8$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai31_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai31_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__mux2_2$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__mux2_2$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai221_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai221_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__or3_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__or3_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__aoi22_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__aoi22_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__or2_1$2 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__or2_1$2.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__and2_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__and2_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__and3_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__and3_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai21_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai21_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__inv_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__inv_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai32_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai32_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nand3_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nand3_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dffq_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dffq_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__clkbuf_8$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__clkbuf_8$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__endcap$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__endcap$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__clkinv_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__clkinv_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__tiel$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__tiel$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dlyd_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dlyd_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__buf_2$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__buf_2$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__tieh$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__tieh$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__fillcap_64$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__fillcap_64$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dlyc_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dlyc_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__clkinv_20$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__clkinv_20$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__or2_2$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__or2_2$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__buf_3$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__buf_3$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__aoi222_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__aoi222_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__aoi221_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__aoi221_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor4_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor4_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai211_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai211_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dffsnq_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dffsnq_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nand4_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nand4_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__oai22_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__oai22_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor3_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor3_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor2_2$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor2_2$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__dlya_1$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__dlya_1$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__nor2_4$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__nor2_4$1.ext:
+Extracting gf180mcu_fd_sc_mcu7t5v0__clkbuf_20$1 into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/gf180mcu_fd_sc_mcu7t5v0__clkbuf_20$1.ext:
+Extracting afe_dig into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/afe_dig.ext:
+Extracting dbs_afe_top into /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/.ptmp/ext_dbs_afe_top/dbs_afe_top.ext:
+Total of 48 errors (check feedback entries).
+exttospice finished.
+FLOW_EXT_DONE

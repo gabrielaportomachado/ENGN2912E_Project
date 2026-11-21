@@ -2,41 +2,41 @@
  "check": "amp_noise",
  "corners": {
   "ff85": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_noise_ff85.log",
    "values": {
     "g_mid_db": 59.8202,
-    "noise_real_uv": 1.7435611404142044
+    "noise_real_uv": 1.743571349573964
    }
   },
   "ss-40": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_noise_ss-40.log",
    "values": {
-    "g_mid_db": 59.8437,
-    "noise_real_uv": 1.3940104543365808
+    "g_mid_db": 59.8436,
+    "noise_real_uv": 1.3940774120326618
    }
   },
   "typ": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_noise_typ.log",
    "values": {
-    "g_mid_db": 59.8395,
-    "noise_real_fn1_uv": 4.909974610455611,
-    "noise_real_uv": 1.5044136617947375
+    "g_mid_db": 59.8393,
+    "noise_real_fn1_uv": 4.909985800752668,
+    "noise_real_uv": 1.504417742393863
    }
   }
  },
  "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
- "netlist_sha1": "e3100c69eb97",
+ "netlist_sha1": "ab3b5dd21745",
  "written_by": "AFE/layout/tb/tb_amp_noise.py"
 }

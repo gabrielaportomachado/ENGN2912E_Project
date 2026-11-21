@@ -1,3 +1,3 @@
-== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:11
-   job pu_pexe3100c69eb97_ss-40: exit 0, 1 s
-RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=2.45787  vout_100ms_v=1.46777  vout_1s_v=1.46834  err_1s_mv=181.663  codes_from_mid_1s=225.482  vbn_end_v=0.804862  vrs_end_v=0.815149
+== amp_pwrup_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 19:02
+   job pu_pexab3b5dd21745_ss-40: exit 0, 1 s
+RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=2.45733  vout_100ms_v=1.46887  vout_1s_v=1.46993  err_1s_mv=180.07  codes_from_mid_1s=223.506  vbn_end_v=0.804863  vrs_end_v=0.81515

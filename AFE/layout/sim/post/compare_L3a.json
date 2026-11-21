@@ -1,0 +1,110 @@
+{
+ "title": "L3a: AFE/layout/sim/post against AFE/layout/baseline",
+ "verdict": "PASS",
+ "n_pass": 9,
+ "n_warn": 0,
+ "n_fail": 0,
+ "missing": [],
+ "rows": [
+  {
+   "check": "tgate",
+   "corner": "ff85",
+   "value": "ron_max_kohm",
+   "baseline": 15.6051176,
+   "post": 15.6032343,
+   "change": -0.001883299999999366,
+   "limit": "<= 133",
+   "status": "PASS",
+   "why": "A4b: more than 133 kOhm in series breaks the 2 uV noise budget (baseline 21 / 16 / 34 kOhm)"
+  },
+  {
+   "check": "tgate",
+   "corner": "ff85",
+   "value": "ron_max_kohm",
+   "baseline": 15.6051176,
+   "post": 15.6032343,
+   "change": -0.001883299999999366,
+   "limit": "x / baseline 0.9 .. 1.1",
+   "status": "PASS",
+   "why": "same devices: 10 %"
+  },
+  {
+   "check": "tgate",
+   "corner": "ff85",
+   "value": "i_off_pa",
+   "baseline": 0.012011899999999999,
+   "post": 0.010648999999999999,
+   "change": -0.0013629000000000002,
+   "limit": "<= 1",
+   "status": "PASS",
+   "why": "off leakage below 1 pA inside the rails (audit i4)"
+  },
+  {
+   "check": "tgate",
+   "corner": "ss-40",
+   "value": "ron_max_kohm",
+   "baseline": 34.2334866,
+   "post": 34.2318133,
+   "change": -0.0016733000000002107,
+   "limit": "<= 133",
+   "status": "PASS",
+   "why": "A4b: more than 133 kOhm in series breaks the 2 uV noise budget (baseline 21 / 16 / 34 kOhm)"
+  },
+  {
+   "check": "tgate",
+   "corner": "ss-40",
+   "value": "ron_max_kohm",
+   "baseline": 34.2334866,
+   "post": 34.2318133,
+   "change": -0.0016733000000002107,
+   "limit": "x / baseline 0.9 .. 1.1",
+   "status": "PASS",
+   "why": "same devices: 10 %"
+  },
+  {
+   "check": "tgate",
+   "corner": "ss-40",
+   "value": "i_off_pa",
+   "baseline": 0.00807674,
+   "post": 0.00840052,
+   "change": 0.0003237799999999992,
+   "limit": "<= 1",
+   "status": "PASS",
+   "why": "off leakage below 1 pA inside the rails (audit i4)"
+  },
+  {
+   "check": "tgate",
+   "corner": "typ",
+   "value": "ron_max_kohm",
+   "baseline": 21.0207078,
+   "post": 21.018917000000002,
+   "change": -0.001790799999998427,
+   "limit": "<= 133",
+   "status": "PASS",
+   "why": "A4b: more than 133 kOhm in series breaks the 2 uV noise budget (baseline 21 / 16 / 34 kOhm)"
+  },
+  {
+   "check": "tgate",
+   "corner": "typ",
+   "value": "ron_max_kohm",
+   "baseline": 21.0207078,
+   "post": 21.018917000000002,
+   "change": -0.001790799999998427,
+   "limit": "x / baseline 0.9 .. 1.1",
+   "status": "PASS",
+   "why": "same devices: 10 %"
+  },
+  {
+   "check": "tgate",
+   "corner": "typ",
+   "value": "i_off_pa",
+   "baseline": 0.0102972,
+   "post": 0.0100418,
+   "change": -0.0002553999999999994,
+   "limit": "<= 1",
+   "status": "PASS",
+   "why": "off leakage below 1 pA inside the rails (audit i4)"
+  }
+ ],
+ "limits_file": "AFE/layout/accept_limits.json"
+}
