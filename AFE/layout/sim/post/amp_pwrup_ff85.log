@@ -1,0 +1,3 @@
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 01:04
+   job pu_pex4af2778fd894_ff85: exit 0, 1 s
+RESULT amp_pwrup ff85: t_wait_s=0.2  vout_before_v=1.14938  vout_100ms_v=1.49073  vout_1s_v=1.63181  err_1s_mv=18.1923  codes_from_mid_1s=22.5806  vbn_end_v=0.508889  vrs_end_v=1.22329

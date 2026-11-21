@@ -1,0 +1,35 @@
+gate.py L2b  (L2b)
+--- common
+PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
+PASS  AFE/layout/REVIEW.md not edited by this phase
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit e94677f
+PASS  open REVIEW.md items for L2b or an earlier phase (R1) are listed as handled in section 9 of a phase report
+INFO  AFE/layout/BLOCKED.md exists: # BLOCKED: phase L2b (amp_ch post-layout), 2026-11-21
+FAIL  AFE/layout/BLOCKED.md does not block L2b (its first lines do not name it)
+      -> DO: this phase is blocked: continue with a phase that does not depend on it (RUNBOOK.md "what blocks what"); the answer arrives through REVIEW.md
+PASS  phase report AFE/layout/reports/L2b.md with all 10 sections
+PASS  "## L2b findings" section in AFE/NOTES.md
+PASS  Results-log row for L2b in AFE/NOTES.md
+PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
+PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
+--- amp_ch layout: AFE/layout/amp/amp_ch.gds
+--- layout still clean (the PEX is of the layout that passed DRC / LVS)
+PASS  DRC report belongs to the current GDS (sha1)
+PASS  DRC ran with the official deck, variant D
+PASS  DRC amp_ch: 0 violations
+PASS  LVS report belongs to the current GDS (sha1)
+PASS  LVS reference AFE/layout/lvs/afe_chc.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
+PASS  LVS amp_ch: Circuits match uniquely.
+PASS  the reference was written by mk_lvs_netlists.py (header)
+--- PEX
+PASS  PEX report belongs to the current GDS (sha1)
+PASS  PEX ran (c mode)
+PASS  PEX device census equals the LVS extraction
+PASS  MIM top-plate correction applied (moved a_28022_1954# 8.7 fF, a_40238_24600# 16.2 fF, a_6838_13302# 4.2 fF, w_28620_25696# 59.3 fF)
+PASS  no unknown device model in the PEX netlist 
+--- post-layout limits
+FAIL  compare.py --phase L2b: FAIL (71 PASS, 0 WARN, 22 FAIL, 0 missing)
+      -> DO: AFE/layout/sim/post/compare_L2b.md lists every FAIL; apply the ACCEPT.md ladder entry of that check (R amplifier, Q ADC, S supply, X crosstalk)
+PASS  post-layout results were simulated on extracted netlists
+GATE L2b: FAIL  (2 FAIL)

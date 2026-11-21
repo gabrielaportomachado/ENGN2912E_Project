@@ -1,0 +1,3 @@
+== amp_thd_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:13
+   job thd_pexe3100c69eb97_ss-40: exit 0, 3 s
+RESULT amp_thd_junction ss-40: thd_pct=0.00275003  out_max_v=2.14877  out_min_v=1.16974  gain_db=59.816  hd2_dbc=-93.4915  hd3_dbc=-95.2207  out_mean_v=1.65925

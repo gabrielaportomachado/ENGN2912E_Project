@@ -48,7 +48,7 @@ TGATE_PINS = ['out', 'c', 'cbar', 'in', 'vdd', 'vss']
 MIM = 'cap_mim_2f0_m4m5_noshield'
 # anchor = (probe name, MIM side um (drawn on the 5 nm grid; 1 % tolerance), which terminal [0 = top plate, 1 = bottom plate], optional condition on the OTHER terminal)
 ANCHORS = {
-    'amp_ch': [('vn', 70.65, 0, 'rec'), ('vp', 70.65, 0, 'ref'), ('vn2', 38.59, 0, None), ('v1', 38.59, 1, None), ('o1', 22.0, 0, None), ('o2', 31.465, 0, None), ('ct', 44.595, 0, None)],
+    'amp_ch': [('vn', 61.15, 0, 'rec'), ('vp', 61.15, 0, 'ref'), ('vn2', 38.59, 0, None), ('v1', 38.59, 1, None), ('o1', 22.0, 0, None), ('o2', 31.465, 0, None), ('ct', 44.595, 0, None)],
     'adc_ch': [('t', (5.085, 5.0), 0, None), ('m', (5.085, 5.0), 1, None), ('vref', 59.07, 0, None), ('vcmd', 22.18, 0, None)],
     'bias_genc': [],
     'tgate': [],

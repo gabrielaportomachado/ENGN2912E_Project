@@ -1,0 +1,4 @@
+== amp_reset_host  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:08
+   job rs_pex4af2778fd894_typ_10m: exit 0, 19 s
+   job rs_pex4af2778fd894_typ_100m: exit 0, 54 s
+RESULT amp_reset_host typ: t_fs_ms_os10m=3.14555  peak_mv_os10m=171.332  rel_step_mv_os10m=-169.249  t_1mv_s_os10m=7.62874  final_v_os10m=1.65072  drift_mv_s_os10m=-3.83083  resid_end_mv_os10m=0.0143111  t_fs_ms_os100m=3.12138  peak_mv_os100m=171.242  rel_step_mv_os100m=-169.198  t_1mv_s_os100m=9.14323  final_v_os100m=1.65074  drift_mv_s_os100m=-11.4483  resid_end_mv_os100m=4.25857e-06

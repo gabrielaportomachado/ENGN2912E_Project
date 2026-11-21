@@ -1,0 +1,44 @@
+{
+ "check": "amp_loop",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 01:04",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/amp_loop_ff85.log",
+   "values": {
+    "fu_hz": 356882.0,
+    "pm_deg": 436.634,
+    "t_100hz_db": 46.9421
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 01:04",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/amp_loop_ss-40.log",
+   "values": {
+    "fu_hz": 187047.0,
+    "pm_deg": 441.134,
+    "t_100hz_db": 48.598
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 01:04",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/amp_loop_typ.log",
+   "values": {
+    "fu_hz": 250043.0,
+    "pm_deg": 439.305,
+    "t_100hz_db": 48.1674
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "written_by": "AFE/layout/tb/tb_amp_loop.py"
+}
