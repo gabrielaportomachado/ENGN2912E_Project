@@ -2,7 +2,8 @@ gate.py L1a  (L1a)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 66b21d4
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 11da446
+WARN  protected files changed by REVIEW.md items (named in report section 9): AFE/adc/rtl/adc_clkgen.v AFE/adc/rtl/adc_top.v AFE/top/dbs_afe_top.v
 PASS  open REVIEW.md items for L1a or an earlier phase (R1) are listed as handled in section 9 of a phase report
 PASS  phase report AFE/layout/reports/L1a.md with all 10 sections
 PASS  "## L1a findings" section in AFE/NOTES.md
@@ -20,5 +21,5 @@ PASS  LVS adc_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
 PASS  Cref plate found: 1 MIM top plate(s) of 59.07 x 59.07 um in adc_ch
 PASS  Cref keep-out: nothing below Metal4 inside the Cref bottom-plate footprint (L3a puts 4 decap units there)
-PASS  floorplan.py check --gds adc_ch=/foss/designs/ENGN2912E_Project/AFE/layout/adc/adc_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
+PASS  floorplan.py check --gds adc_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/r14-rtl4/AFE/layout/adc/adc_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
 GATE L1a: PASS  (0 FAIL)

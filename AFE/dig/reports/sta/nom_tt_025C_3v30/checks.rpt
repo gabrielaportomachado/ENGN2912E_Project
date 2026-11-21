@@ -5,7 +5,7 @@ report_checks -unconstrained
 ======================= nom_tt_025C_3v30 Corner ===================================
 
 Startpoint: CS (input port clocked by sclk)
-Endpoint: _1428_ (recovery check against falling-edge clock sclk)
+Endpoint: _792_ (recovery check against falling-edge clock sclk)
 Path Group: asynchronous
 Path Type: max
 
@@ -14,37 +14,34 @@ Fanout         Cap        Slew       Delay        Time   Description
                                   0.000000    0.000000   clock sclk (rise edge)
                                   0.000000    0.000000   clock network delay (propagated)
                                 125.000000  125.000000 v input external delay
-    10    0.278279    1.000000    0.000000  125.000000 v CS (in)
+     6    0.167374    1.000000    0.000000  125.000000 v CS (in)
                                                          CS (net)
-                      1.062968    0.025750  125.025757 v _0661_/A1 (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
-     8    0.126297    2.877285    1.995502  127.021255 ^ _0661_/ZN (gf180mcu_fd_sc_mcu7t5v0__nor2_2)
+                      1.017113    0.007006  125.007011 v _360_/A1 (gf180mcu_fd_sc_mcu7t5v0__nor2_4)
+    16    0.191829    2.229025    1.606097  126.613106 ^ _360_/ZN (gf180mcu_fd_sc_mcu7t5v0__nor2_4)
                                                          u_adc.ch[0].u.frame_rn (net)
-                      2.877397    0.010090  127.031349 ^ max_cap10/I (gf180mcu_fd_sc_mcu7t5v0__buf_8)
-    18    0.247558    0.767539    0.695124  127.726471 ^ max_cap10/Z (gf180mcu_fd_sc_mcu7t5v0__buf_8)
-                                                         net10 (net)
-                      0.769158    0.019085  127.745552 ^ _1428_/RN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-                                            127.745552   data arrival time
+                      2.229121    0.008185  126.621292 ^ _792_/SETN (gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4)
+                                            126.621292   data arrival time
 
                                 250.000000  250.000000   clock sclk (fall edge)
                                   0.000000  250.000000   clock source latency
-     1    0.111342    1.000000    0.000000  250.000000 v SCLK (in)
+     1    0.073847    1.000000    0.000000  250.000000 v SCLK (in)
                                                          SCLK (net)
-                      1.029887    0.012221  250.012222 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
-   160    0.985161    1.024573    1.152046  251.164276 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+                      1.011899    0.004860  250.004868 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+    88    0.497939    0.560884    0.881556  250.886429 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
                                                          sclk_i (net)
-                      1.026370    0.024102  251.188370 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-                                 -0.500000  250.688385   clock uncertainty
-                                  0.000000  250.688385   clock reconvergence pessimism
-                                  0.788456  251.476822   library recovery time
-                                            251.476822   data required time
+                      0.563660    0.022396  250.908813 v _792_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4)
+                                 -0.500000  250.408829   clock uncertainty
+                                  0.000000  250.408829   clock reconvergence pessimism
+                                 -0.377978  250.030838   library recovery time
+                                            250.030838   data required time
 ---------------------------------------------------------------------------------------------
-                                            251.476822   data required time
-                                           -127.745552   data arrival time
+                                            250.030838   data required time
+                                           -126.621292   data arrival time
 ---------------------------------------------------------------------------------------------
-                                            123.731270   slack (MET)
+                                            123.409554   slack (MET)
 
 
-Startpoint: _1428_ (falling edge-triggered flip-flop clocked by sclk)
+Startpoint: _792_ (falling edge-triggered flip-flop clocked by sclk)
 Endpoint: DOUT (output port clocked by sclk)
 Path Group: sclk
 Path Type: max
@@ -53,16 +50,16 @@ Fanout         Cap        Slew       Delay        Time   Description
 ---------------------------------------------------------------------------------------------
                                 250.000000  250.000000   clock sclk (fall edge)
                                   0.000000  250.000000   clock source latency
-     1    0.111342    1.000000    0.000000  250.000000 v SCLK (in)
+     1    0.073847    1.000000    0.000000  250.000000 v SCLK (in)
                                                          SCLK (net)
-                      1.029887    0.012221  250.012222 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
-   160    0.985161    1.024573    1.152046  251.164276 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+                      1.011899    0.004860  250.004868 v ck.u_ckbuf/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
+    88    0.497939    0.560884    0.881556  250.886429 v ck.u_ckbuf/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_20)
                                                          sclk_i (net)
-                      1.026370    0.024102  251.188370 v _1428_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
-     1    0.365318    2.178404    3.023160  254.211533 ^ _1428_/Q (gf180mcu_fd_sc_mcu7t5v0__dffnrnq_4)
+                      0.563660    0.022396  250.908813 v _792_/CLKN (gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4)
+     1    0.313686    1.865627    2.463480  253.372299 ^ _792_/Q (gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4)
                                                          DOUT (net)
-                      2.181865    0.049084  254.260620 ^ DOUT (out)
-                                            254.260620   data arrival time
+                      1.865948    0.013841  253.386139 ^ DOUT (out)
+                                            253.386139   data arrival time
 
                                 500.000000  500.000000   clock sclk (rise edge)
                                   0.000000  500.000000   clock network delay (propagated)
@@ -72,9 +69,9 @@ Fanout         Cap        Slew       Delay        Time   Description
                                             349.500000   data required time
 ---------------------------------------------------------------------------------------------
                                             349.500000   data required time
-                                           -254.260620   data arrival time
+                                           -253.386139   data arrival time
 ---------------------------------------------------------------------------------------------
-                                             95.239388   slack (MET)
+                                             96.113869   slack (MET)
 
 
 
@@ -109,34 +106,22 @@ max cap violation count 0
 ===========================================================================
 check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
 ===========================================================================
-Warning: There are 9 input ports missing set_input_delay.
+Warning: There are 5 input ports missing set_input_delay.
   RSTN
   cmp_q[0]
   cmp_q[1]
   cmp_q[2]
   cmp_q[3]
-  cmp_q[4]
-  cmp_q[5]
-  cmp_q[6]
-  cmp_q[7]
-Warning: There are 266 unconstrained endpoints.
+Warning: There are 134 unconstrained endpoints.
   DOUT_OE
   cmp_clk[0]
   cmp_clk[1]
   cmp_clk[2]
   cmp_clk[3]
-  cmp_clk[4]
-  cmp_clk[5]
-  cmp_clk[6]
-  cmp_clk[7]
   dac_gdn[0]
   dac_gdn[1]
   dac_gdn[2]
   dac_gdn[3]
-  dac_gdn[4]
-  dac_gdn[5]
-  dac_gdn[6]
-  dac_gdn[7]
   dac_gn[0]
   dac_gn[10]
   dac_gn[11]
@@ -179,59 +164,11 @@ Warning: There are 266 unconstrained endpoints.
   dac_gn[45]
   dac_gn[46]
   dac_gn[47]
-  dac_gn[48]
-  dac_gn[49]
   dac_gn[4]
-  dac_gn[50]
-  dac_gn[51]
-  dac_gn[52]
-  dac_gn[53]
-  dac_gn[54]
-  dac_gn[55]
-  dac_gn[56]
-  dac_gn[57]
-  dac_gn[58]
-  dac_gn[59]
   dac_gn[5]
-  dac_gn[60]
-  dac_gn[61]
-  dac_gn[62]
-  dac_gn[63]
-  dac_gn[64]
-  dac_gn[65]
-  dac_gn[66]
-  dac_gn[67]
-  dac_gn[68]
-  dac_gn[69]
   dac_gn[6]
-  dac_gn[70]
-  dac_gn[71]
-  dac_gn[72]
-  dac_gn[73]
-  dac_gn[74]
-  dac_gn[75]
-  dac_gn[76]
-  dac_gn[77]
-  dac_gn[78]
-  dac_gn[79]
   dac_gn[7]
-  dac_gn[80]
-  dac_gn[81]
-  dac_gn[82]
-  dac_gn[83]
-  dac_gn[84]
-  dac_gn[85]
-  dac_gn[86]
-  dac_gn[87]
-  dac_gn[88]
-  dac_gn[89]
   dac_gn[8]
-  dac_gn[90]
-  dac_gn[91]
-  dac_gn[92]
-  dac_gn[93]
-  dac_gn[94]
-  dac_gn[95]
   dac_gn[9]
   dac_gp[0]
   dac_gp[10]
@@ -275,114 +212,38 @@ Warning: There are 266 unconstrained endpoints.
   dac_gp[45]
   dac_gp[46]
   dac_gp[47]
-  dac_gp[48]
-  dac_gp[49]
   dac_gp[4]
-  dac_gp[50]
-  dac_gp[51]
-  dac_gp[52]
-  dac_gp[53]
-  dac_gp[54]
-  dac_gp[55]
-  dac_gp[56]
-  dac_gp[57]
-  dac_gp[58]
-  dac_gp[59]
   dac_gp[5]
-  dac_gp[60]
-  dac_gp[61]
-  dac_gp[62]
-  dac_gp[63]
-  dac_gp[64]
-  dac_gp[65]
-  dac_gp[66]
-  dac_gp[67]
-  dac_gp[68]
-  dac_gp[69]
   dac_gp[6]
-  dac_gp[70]
-  dac_gp[71]
-  dac_gp[72]
-  dac_gp[73]
-  dac_gp[74]
-  dac_gp[75]
-  dac_gp[76]
-  dac_gp[77]
-  dac_gp[78]
-  dac_gp[79]
   dac_gp[7]
-  dac_gp[80]
-  dac_gp[81]
-  dac_gp[82]
-  dac_gp[83]
-  dac_gp[84]
-  dac_gp[85]
-  dac_gp[86]
-  dac_gp[87]
-  dac_gp[88]
-  dac_gp[89]
   dac_gp[8]
-  dac_gp[90]
-  dac_gp[91]
-  dac_gp[92]
-  dac_gp[93]
-  dac_gp[94]
-  dac_gp[95]
   dac_gp[9]
   rst_amp_o
   rst_sw[0]
   rst_sw[1]
   rst_sw[2]
   rst_sw[3]
-  rst_sw[4]
-  rst_sw[5]
-  rst_sw[6]
-  rst_sw[7]
   sw_ipg[0]
   sw_ipg[1]
   sw_ipg[2]
   sw_ipg[3]
-  sw_ipg[4]
-  sw_ipg[5]
-  sw_ipg[6]
-  sw_ipg[7]
   sw_ipg_b[0]
   sw_ipg_b[1]
   sw_ipg_b[2]
   sw_ipg_b[3]
-  sw_ipg_b[4]
-  sw_ipg_b[5]
-  sw_ipg_b[6]
-  sw_ipg_b[7]
   sw_rec[0]
   sw_rec[1]
   sw_rec[2]
   sw_rec[3]
-  sw_rec[4]
-  sw_rec[5]
-  sw_rec[6]
-  sw_rec[7]
   sw_rec_b[0]
   sw_rec_b[1]
   sw_rec_b[2]
   sw_rec_b[3]
-  sw_rec_b[4]
-  sw_rec_b[5]
-  sw_rec_b[6]
-  sw_rec_b[7]
   tg_on[0]
   tg_on[1]
   tg_on[2]
   tg_on[3]
-  tg_on[4]
-  tg_on[5]
-  tg_on[6]
-  tg_on[7]
-  _1420_/D
-  _1421_/D
-  _1422_/D
-  _1423_/D
-  _1424_/D
-  _1425_/D
-  _1426_/D
-  _1427_/D
+  _788_/D
+  _789_/D
+  _790_/D
+  _791_/D

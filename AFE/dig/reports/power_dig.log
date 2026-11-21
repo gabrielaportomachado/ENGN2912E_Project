@@ -1,10 +1,10 @@
 LP step 5: afe_dig supply charge per SCLK cycle (OpenSTA report_power of the sign-off STA; SCLK free-running, period 500 ns; default data activity; SDC output loads).
 corner               VDD |    seq uW   comb uW  clock uW  total uW |   pJ/cycle   pC/cycle | clock network share
-nom_tt_025C_3v30     3.3 |     101.9      10.4     112.1     224.4 |      112.2       34.0 | 50 %
-nom_ff_n40C_3v60     3.6 |     128.9      13.2     137.1     279.2 |      139.6       38.8 | 49 %
-nom_ff_125C_3v60     3.6 |     142.4      16.1     147.1     305.6 |      152.8       42.5 | 48 %
-nom_ss_n40C_3v00     3.0 |      77.8       7.8      87.4     173.0 |       86.5       28.8 | 51 %
-nom_ss_125C_3v00     3.0 |      83.7       8.6      93.1     185.4 |       92.7       30.9 | 50 %
-FOR L3b (x2_s4.py digital charge): 34.0 pC per SCLK cycle at tt 3.3 V, 38.8 pC at ff -40 C 3.6 V (the D3 macro: 24 / 27 pC; X2 S4 assumed 12 pC).
-The increase over D3 is the clock buffer driving the 1 pF clock net (160 pins), 18 more flops (dbs_ctrl), and the output loads; it is drawn from the ADC-main strap.
-At 4 kS/s per channel a frame has 160 SCLK cycles: average digital power = pJ/cycle x 160 x 4000 = 71.8 uW at tt (+ the DOUT pad).
+nom_tt_025C_3v30     3.3 |      47.6       3.5      60.8     112.0 |       56.0       17.0 | 54 %
+nom_ff_n40C_3v60     3.6 |      58.3       4.5      74.9     137.7 |       68.8       19.1 | 54 %
+nom_ff_125C_3v60     3.6 |      63.1       5.7      80.4     149.1 |       74.6       20.7 | 54 %
+nom_ss_n40C_3v00     3.0 |      37.9       2.7      47.2      87.8 |       43.9       14.6 | 54 %
+nom_ss_125C_3v00     3.0 |      39.9       3.0      50.3      93.3 |       46.6       15.5 | 54 %
+FOR L3b (x2_s4.py digital charge): 17.0 pC per SCLK cycle at tt 3.3 V, 19.1 pC at ff -40 C 3.6 V (the D3 macro: 24 / 27 pC; X2 S4 assumed 12 pC).
+The increase over D3 is the clock buffer driving the clock net of the 4-channel macro (87 flop clock pins) and the output loads; it is drawn from the ADC-main strap (the 8-channel macro: 24 / 27 pC).
+At 4 kS/s per channel a frame has 80 SCLK cycles: average digital power = pJ/cycle x 80 x 4000 = 17.9 uW at tt (+ the DOUT pad).

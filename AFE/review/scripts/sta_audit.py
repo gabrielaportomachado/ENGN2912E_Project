@@ -103,7 +103,7 @@ def table(d):
     r['cap'] = [d['cap'].get((i, '500', 'clk')) for i in range(NCH)]
     r['slack333'] = [d['cap'].get((i, '333.333', 'slack')) for i in range(NCH)]
     r['slack500'] = [d['cap'].get((i, '500', 'slack')) for i in range(NCH)]
-    g = lambda pre, mm: [d['%s %d %s' % (pre, k, mm)] for k in range(96)]
+    g = lambda pre, mm: [d['%s %d %s' % (pre, k, mm)] for k in range(12 * NCH)]
     r['gpgn_max'] = max(g('GP', 'MAX') + g('GN', 'MAX'))
     r['gpgn_min'] = min(g('GP', 'MIN') + g('GN', 'MIN'))
     r['gpgn_ch_max'] = [max([d['GP %d MAX' % k] for k in range(12 * i, 12 * i + 12)] + [d['GN %d MAX' % k] for k in range(12 * i, 12 * i + 12)]) for i in range(NCH)]
@@ -193,7 +193,7 @@ if __name__ == '__main__':
         arr = max(x[2] for x in rr) if rr else float('nan')
         P('  %-14s CS fall -> RN arrival %.2f ns, recovery slack %.2f -> CS must fall >= %.2f ns before the first SCLK rising edge;  min pulse %s' % (c, arr, w, 500 - w, t['minpulse']))
     if DIG:
-        P('\n7. ROUTING-SWITCH OUTPUTS (dbs_ctrl + the output pairs of afe_dig), arrival after the SCLK rising edge at the macro pins, min .. max over the 8 channels and both SPEF bounds')
+        P('\n7. ROUTING-SWITCH OUTPUTS (dbs_ctrl + the output pairs of afe_dig), arrival after the SCLK rising edge at the macro pins, min .. max over the channels and both SPEF bounds')
         P('  skew = |t(sw_x edge) - t(sw_x_b opposite edge)| of the SAME channel, worst channel.  close = sw_x rises / sw_x_b falls, open = sw_x falls / sw_x_b rises (I0 mismatch 8)')
         P('  %-14s %-17s %-17s %-17s %-17s | %-22s %-22s' % ('corner', 'sw_rec rise', 'sw_rec_b fall', 'sw_rec fall', 'sw_rec_b rise', 'rec skew close / open', 'ipg skew close / open'))
         for c in CORN:

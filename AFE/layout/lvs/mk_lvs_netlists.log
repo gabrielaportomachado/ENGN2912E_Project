@@ -1,4 +1,4 @@
-mk_lvs_netlists.py  options: --decap-n 74,30 --cin 2,61.15,61.15
+mk_lvs_netlists.py  options: --decap-n 74,30 --cin 2,61.15,61.15 --dig-netlist AFE/dig/final/afe_dig.pnl.v
 Sources: 17 simulation netlists + AFE/top/dbs_afe_top.v; rules of AFE/review/AUDIT.md 4.9.3.  Output: AFE/layout/lvs
 
 ELEMENT RULES APPLIED (simulation netlist -> LVS reference)
@@ -89,13 +89,13 @@ TOP dbs_afe_top from AFE/top/dbs_afe_top.v
   instances: 1 x afe_dig, 1 x bias_genc, 4 x afe_ch + 3 supply devices + 15 pad-control ties (output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
   pad pins that are plain nets of the macro: DOUT_OUT = afe_dig.DOUT, DOUT_OE = afe_dig.DOUT_OE;  top port without a connection inside: DOUT_IN (the pad input is not used, DOUT_IE = 0)
   net census: VDD on 8 channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on 4 channel pins + decap + strap
-  digital macro afe_dig: 156 pins, PROVISIONAL black box (L1d pin list, VDD VSS first)
+  digital macro afe_dig: 156 pins, port order of AFE/dig/final/afe_dig.pnl.v
     afe_dig pin -> net of the top: VDD -> VDD, VSS -> VSS, CS -> CS, SCLK -> SCLK, DIN -> DIN, RSTN -> RSTN, DOUT -> DOUT_OUT, DOUT_OE -> DOUT_OE, rst_amp_o -> rst_amp_o, sw_rec -> sw_rec[3:0], sw_rec_b -> sw_rec_b[3:0], sw_ipg -> sw_ipg[3:0], sw_ipg_b -> sw_ipg_b[3:0], cmp_q -> cmp_q[3:0], cmp_clk -> cmp_clk[3:0], rst_sw -> rst_sw[3:0], tg_on -> tg_on[3:0], dac_gp -> dac_gp[47:0], dac_gn -> dac_gn[47:0], dac_gdn -> dac_gdn[3:0]
 
 FILES written to AFE/layout/lvs
   afe_chc.spice          74 lines,    56 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch
   adc_ch.spice          250 lines,   220 X lines, subckts: dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch
   bias_genc.spice        24 lines,    17 X lines, subckts: bias_genc
-  dbs_afe_top.spice     418 lines,   308 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc afe_dig dbs_afe_top
+  dbs_afe_top.spice     404 lines,   308 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc dbs_afe_top
 
 FLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch 53, adc_ch 215, afe_ch 272, bias_genc 17; chip without the digital macro: 4 x 272 + 17 + 3 supply devices = 1108 (+ 15 tie pins of afe_dig, no device in the top)

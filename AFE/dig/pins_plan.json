@@ -1,7 +1,7 @@
 {
  "_comment": "PLANNED pin table of afe_dig, written by AFE/dig/mk_dig_cfg.py (the as-built table is trial/afe_dig_pins.json). x / y = pin centre on the die edge, um, origin = SW corner of the macro; floorplan_um = the coordinate asked by AFE/layout/floorplan.json (or the default) before snapping to the 0.56 um track grid.",
- "die_w_um": 819.84,
- "die_h_um": 101.92,
+ "die_w_um": 424.48,
+ "die_h_um": 86.24,
  "max_snap_um": 0.28,
  "pin_len_um": 2.0,
  "pin_width_um": 0.56,
@@ -10,7 +10,7 @@
    "name": "sw_rec[0]",
    "layer": "Metal2",
    "x_um": 8.12,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 8.0
   },
@@ -18,7 +18,7 @@
    "name": "sw_rec_b[0]",
    "layer": "Metal2",
    "x_um": 10.92,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 11.0
   },
@@ -26,7 +26,7 @@
    "name": "sw_ipg[0]",
    "layer": "Metal2",
    "x_um": 13.72,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 14.0
   },
@@ -34,7 +34,7 @@
    "name": "sw_ipg_b[0]",
    "layer": "Metal2",
    "x_um": 17.08,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 17.0
   },
@@ -42,7 +42,7 @@
    "name": "rst_sw[0]",
    "layer": "Metal2",
    "x_um": 19.88,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 20.0
   },
@@ -50,7 +50,7 @@
    "name": "tg_on[0]",
    "layer": "Metal2",
    "x_um": 23.24,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 23.0
   },
@@ -58,7 +58,7 @@
    "name": "dac_gdn[0]",
    "layer": "Metal2",
    "x_um": 26.04,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 26.0
   },
@@ -66,7 +66,7 @@
    "name": "cmp_clk[0]",
    "layer": "Metal2",
    "x_um": 28.84,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 29.0
   },
@@ -74,7 +74,7 @@
    "name": "cmp_q[0]",
    "layer": "Metal2",
    "x_um": 32.2,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 32.0
   },
@@ -82,7 +82,7 @@
    "name": "dac_gp[11]",
    "layer": "Metal2",
    "x_um": 35.0,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 35.0
   },
@@ -90,7 +90,7 @@
    "name": "dac_gn[11]",
    "layer": "Metal2",
    "x_um": 37.8,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 38.0
   },
@@ -98,7 +98,7 @@
    "name": "dac_gp[10]",
    "layer": "Metal2",
    "x_um": 41.16,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 41.0
   },
@@ -106,7 +106,7 @@
    "name": "dac_gn[10]",
    "layer": "Metal2",
    "x_um": 43.96,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 44.0
   },
@@ -114,7 +114,7 @@
    "name": "dac_gp[9]",
    "layer": "Metal2",
    "x_um": 46.76,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 47.0
   },
@@ -122,7 +122,7 @@
    "name": "dac_gn[9]",
    "layer": "Metal2",
    "x_um": 50.12,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 50.0
   },
@@ -130,7 +130,7 @@
    "name": "dac_gp[8]",
    "layer": "Metal2",
    "x_um": 52.92,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 53.0
   },
@@ -138,7 +138,7 @@
    "name": "dac_gn[8]",
    "layer": "Metal2",
    "x_um": 55.72,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 56.0
   },
@@ -146,7 +146,7 @@
    "name": "dac_gp[7]",
    "layer": "Metal2",
    "x_um": 59.08,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 59.0
   },
@@ -154,7 +154,7 @@
    "name": "dac_gn[7]",
    "layer": "Metal2",
    "x_um": 61.88,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 62.0
   },
@@ -162,7 +162,7 @@
    "name": "dac_gp[6]",
    "layer": "Metal2",
    "x_um": 65.24,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 65.0
   },
@@ -170,7 +170,7 @@
    "name": "dac_gn[6]",
    "layer": "Metal2",
    "x_um": 68.04,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 68.0
   },
@@ -178,7 +178,7 @@
    "name": "dac_gp[5]",
    "layer": "Metal2",
    "x_um": 70.84,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 71.0
   },
@@ -186,7 +186,7 @@
    "name": "dac_gn[5]",
    "layer": "Metal2",
    "x_um": 74.2,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 74.0
   },
@@ -194,7 +194,7 @@
    "name": "dac_gp[4]",
    "layer": "Metal2",
    "x_um": 77.0,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 77.0
   },
@@ -202,7 +202,7 @@
    "name": "dac_gn[4]",
    "layer": "Metal2",
    "x_um": 79.8,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 80.0
   },
@@ -210,7 +210,7 @@
    "name": "dac_gp[3]",
    "layer": "Metal2",
    "x_um": 83.16,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 83.0
   },
@@ -218,7 +218,7 @@
    "name": "dac_gn[3]",
    "layer": "Metal2",
    "x_um": 85.96,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 86.0
   },
@@ -226,7 +226,7 @@
    "name": "dac_gp[2]",
    "layer": "Metal2",
    "x_um": 88.76,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 89.0
   },
@@ -234,7 +234,7 @@
    "name": "dac_gn[2]",
    "layer": "Metal2",
    "x_um": 92.12,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 92.0
   },
@@ -242,7 +242,7 @@
    "name": "dac_gp[1]",
    "layer": "Metal2",
    "x_um": 94.92,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 95.0
   },
@@ -250,7 +250,7 @@
    "name": "dac_gn[1]",
    "layer": "Metal2",
    "x_um": 97.72,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 98.0
   },
@@ -258,7 +258,7 @@
    "name": "dac_gp[0]",
    "layer": "Metal2",
    "x_um": 101.08,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 101.0
   },
@@ -266,7 +266,7 @@
    "name": "dac_gn[0]",
    "layer": "Metal2",
    "x_um": 103.88,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 104.0
   },
@@ -274,7 +274,7 @@
    "name": "sw_rec[1]",
    "layer": "Metal2",
    "x_um": 245.0,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 245.0
   },
@@ -282,7 +282,7 @@
    "name": "sw_rec_b[1]",
    "layer": "Metal2",
    "x_um": 247.8,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 248.0
   },
@@ -290,7 +290,7 @@
    "name": "sw_ipg[1]",
    "layer": "Metal2",
    "x_um": 251.16,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 251.0
   },
@@ -298,7 +298,7 @@
    "name": "sw_ipg_b[1]",
    "layer": "Metal2",
    "x_um": 253.96,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 254.0
   },
@@ -306,7 +306,7 @@
    "name": "rst_sw[1]",
    "layer": "Metal2",
    "x_um": 256.76,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 257.0
   },
@@ -314,7 +314,7 @@
    "name": "tg_on[1]",
    "layer": "Metal2",
    "x_um": 260.12,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 260.0
   },
@@ -322,7 +322,7 @@
    "name": "dac_gdn[1]",
    "layer": "Metal2",
    "x_um": 262.92,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 263.0
   },
@@ -330,7 +330,7 @@
    "name": "cmp_clk[1]",
    "layer": "Metal2",
    "x_um": 265.72,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 266.0
   },
@@ -338,7 +338,7 @@
    "name": "cmp_q[1]",
    "layer": "Metal2",
    "x_um": 269.08,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 269.0
   },
@@ -346,7 +346,7 @@
    "name": "dac_gp[23]",
    "layer": "Metal2",
    "x_um": 271.88,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 272.0
   },
@@ -354,7 +354,7 @@
    "name": "dac_gn[23]",
    "layer": "Metal2",
    "x_um": 275.24,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 275.0
   },
@@ -362,7 +362,7 @@
    "name": "dac_gp[22]",
    "layer": "Metal2",
    "x_um": 278.04,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 278.0
   },
@@ -370,7 +370,7 @@
    "name": "dac_gn[22]",
    "layer": "Metal2",
    "x_um": 280.84,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 281.0
   },
@@ -378,7 +378,7 @@
    "name": "dac_gp[21]",
    "layer": "Metal2",
    "x_um": 284.2,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 284.0
   },
@@ -386,7 +386,7 @@
    "name": "dac_gn[21]",
    "layer": "Metal2",
    "x_um": 287.0,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 287.0
   },
@@ -394,7 +394,7 @@
    "name": "dac_gp[20]",
    "layer": "Metal2",
    "x_um": 289.8,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 290.0
   },
@@ -402,7 +402,7 @@
    "name": "dac_gn[20]",
    "layer": "Metal2",
    "x_um": 293.16,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 293.0
   },
@@ -410,7 +410,7 @@
    "name": "dac_gp[19]",
    "layer": "Metal2",
    "x_um": 295.96,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 296.0
   },
@@ -418,7 +418,7 @@
    "name": "dac_gn[19]",
    "layer": "Metal2",
    "x_um": 298.76,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 299.0
   },
@@ -426,7 +426,7 @@
    "name": "dac_gp[18]",
    "layer": "Metal2",
    "x_um": 302.12,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 302.0
   },
@@ -434,7 +434,7 @@
    "name": "dac_gn[18]",
    "layer": "Metal2",
    "x_um": 304.92,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 305.0
   },
@@ -442,7 +442,7 @@
    "name": "dac_gp[17]",
    "layer": "Metal2",
    "x_um": 308.28,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 308.0
   },
@@ -450,7 +450,7 @@
    "name": "dac_gn[17]",
    "layer": "Metal2",
    "x_um": 311.08,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 311.0
   },
@@ -458,7 +458,7 @@
    "name": "dac_gp[16]",
    "layer": "Metal2",
    "x_um": 313.88,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 314.0
   },
@@ -466,7 +466,7 @@
    "name": "dac_gn[16]",
    "layer": "Metal2",
    "x_um": 317.24,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 317.0
   },
@@ -474,7 +474,7 @@
    "name": "dac_gp[15]",
    "layer": "Metal2",
    "x_um": 320.04,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 320.0
   },
@@ -482,7 +482,7 @@
    "name": "dac_gn[15]",
    "layer": "Metal2",
    "x_um": 322.84,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 323.0
   },
@@ -490,7 +490,7 @@
    "name": "dac_gp[14]",
    "layer": "Metal2",
    "x_um": 326.2,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 326.0
   },
@@ -498,7 +498,7 @@
    "name": "dac_gn[14]",
    "layer": "Metal2",
    "x_um": 329.0,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 329.0
   },
@@ -506,7 +506,7 @@
    "name": "dac_gp[13]",
    "layer": "Metal2",
    "x_um": 331.8,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 332.0
   },
@@ -514,7 +514,7 @@
    "name": "dac_gn[13]",
    "layer": "Metal2",
    "x_um": 335.16,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 335.0
   },
@@ -522,7 +522,7 @@
    "name": "dac_gp[12]",
    "layer": "Metal2",
    "x_um": 337.96,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 338.0
   },
@@ -530,540 +530,12 @@
    "name": "dac_gn[12]",
    "layer": "Metal2",
    "x_um": 340.76,
-   "y_um": 101.92,
+   "y_um": 86.24,
    "side": "N",
    "floorplan_um": 341.0
   },
   {
    "name": "sw_rec[2]",
-   "layer": "Metal2",
-   "x_um": 481.88,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 482.0
-  },
-  {
-   "name": "sw_rec_b[2]",
-   "layer": "Metal2",
-   "x_um": 485.24,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 485.0
-  },
-  {
-   "name": "sw_ipg[2]",
-   "layer": "Metal2",
-   "x_um": 488.04,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 488.0
-  },
-  {
-   "name": "sw_ipg_b[2]",
-   "layer": "Metal2",
-   "x_um": 490.84,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 491.0
-  },
-  {
-   "name": "rst_sw[2]",
-   "layer": "Metal2",
-   "x_um": 494.2,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 494.0
-  },
-  {
-   "name": "tg_on[2]",
-   "layer": "Metal2",
-   "x_um": 497.0,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 497.0
-  },
-  {
-   "name": "dac_gdn[2]",
-   "layer": "Metal2",
-   "x_um": 499.8,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 500.0
-  },
-  {
-   "name": "cmp_clk[2]",
-   "layer": "Metal2",
-   "x_um": 503.16,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 503.0
-  },
-  {
-   "name": "cmp_q[2]",
-   "layer": "Metal2",
-   "x_um": 505.96,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 506.0
-  },
-  {
-   "name": "dac_gp[35]",
-   "layer": "Metal2",
-   "x_um": 508.76,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 509.0
-  },
-  {
-   "name": "dac_gn[35]",
-   "layer": "Metal2",
-   "x_um": 512.12,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 512.0
-  },
-  {
-   "name": "dac_gp[34]",
-   "layer": "Metal2",
-   "x_um": 514.92,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 515.0
-  },
-  {
-   "name": "dac_gn[34]",
-   "layer": "Metal2",
-   "x_um": 517.72,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 518.0
-  },
-  {
-   "name": "dac_gp[33]",
-   "layer": "Metal2",
-   "x_um": 521.08,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 521.0
-  },
-  {
-   "name": "dac_gn[33]",
-   "layer": "Metal2",
-   "x_um": 523.88,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 524.0
-  },
-  {
-   "name": "dac_gp[32]",
-   "layer": "Metal2",
-   "x_um": 527.24,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 527.0
-  },
-  {
-   "name": "dac_gn[32]",
-   "layer": "Metal2",
-   "x_um": 530.04,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 530.0
-  },
-  {
-   "name": "dac_gp[31]",
-   "layer": "Metal2",
-   "x_um": 532.84,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 533.0
-  },
-  {
-   "name": "dac_gn[31]",
-   "layer": "Metal2",
-   "x_um": 536.2,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 536.0
-  },
-  {
-   "name": "dac_gp[30]",
-   "layer": "Metal2",
-   "x_um": 539.0,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 539.0
-  },
-  {
-   "name": "dac_gn[30]",
-   "layer": "Metal2",
-   "x_um": 541.8,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 542.0
-  },
-  {
-   "name": "dac_gp[29]",
-   "layer": "Metal2",
-   "x_um": 545.16,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 545.0
-  },
-  {
-   "name": "dac_gn[29]",
-   "layer": "Metal2",
-   "x_um": 547.96,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 548.0
-  },
-  {
-   "name": "dac_gp[28]",
-   "layer": "Metal2",
-   "x_um": 550.76,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 551.0
-  },
-  {
-   "name": "dac_gn[28]",
-   "layer": "Metal2",
-   "x_um": 554.12,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 554.0
-  },
-  {
-   "name": "dac_gp[27]",
-   "layer": "Metal2",
-   "x_um": 556.92,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 557.0
-  },
-  {
-   "name": "dac_gn[27]",
-   "layer": "Metal2",
-   "x_um": 560.28,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 560.0
-  },
-  {
-   "name": "dac_gp[26]",
-   "layer": "Metal2",
-   "x_um": 563.08,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 563.0
-  },
-  {
-   "name": "dac_gn[26]",
-   "layer": "Metal2",
-   "x_um": 565.88,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 566.0
-  },
-  {
-   "name": "dac_gp[25]",
-   "layer": "Metal2",
-   "x_um": 569.24,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 569.0
-  },
-  {
-   "name": "dac_gn[25]",
-   "layer": "Metal2",
-   "x_um": 572.04,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 572.0
-  },
-  {
-   "name": "dac_gp[24]",
-   "layer": "Metal2",
-   "x_um": 574.84,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 575.0
-  },
-  {
-   "name": "dac_gn[24]",
-   "layer": "Metal2",
-   "x_um": 578.2,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 578.0
-  },
-  {
-   "name": "sw_rec[3]",
-   "layer": "Metal2",
-   "x_um": 718.76,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 719.0
-  },
-  {
-   "name": "sw_rec_b[3]",
-   "layer": "Metal2",
-   "x_um": 722.12,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 722.0
-  },
-  {
-   "name": "sw_ipg[3]",
-   "layer": "Metal2",
-   "x_um": 724.92,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 725.0
-  },
-  {
-   "name": "sw_ipg_b[3]",
-   "layer": "Metal2",
-   "x_um": 728.28,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 728.0
-  },
-  {
-   "name": "rst_sw[3]",
-   "layer": "Metal2",
-   "x_um": 731.08,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 731.0
-  },
-  {
-   "name": "tg_on[3]",
-   "layer": "Metal2",
-   "x_um": 733.88,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 734.0
-  },
-  {
-   "name": "dac_gdn[3]",
-   "layer": "Metal2",
-   "x_um": 737.24,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 737.0
-  },
-  {
-   "name": "cmp_clk[3]",
-   "layer": "Metal2",
-   "x_um": 740.04,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 740.0
-  },
-  {
-   "name": "cmp_q[3]",
-   "layer": "Metal2",
-   "x_um": 742.84,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 743.0
-  },
-  {
-   "name": "dac_gp[47]",
-   "layer": "Metal2",
-   "x_um": 746.2,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 746.0
-  },
-  {
-   "name": "dac_gn[47]",
-   "layer": "Metal2",
-   "x_um": 749.0,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 749.0
-  },
-  {
-   "name": "dac_gp[46]",
-   "layer": "Metal2",
-   "x_um": 751.8,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 752.0
-  },
-  {
-   "name": "dac_gn[46]",
-   "layer": "Metal2",
-   "x_um": 755.16,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 755.0
-  },
-  {
-   "name": "dac_gp[45]",
-   "layer": "Metal2",
-   "x_um": 757.96,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 758.0
-  },
-  {
-   "name": "dac_gn[45]",
-   "layer": "Metal2",
-   "x_um": 760.76,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 761.0
-  },
-  {
-   "name": "dac_gp[44]",
-   "layer": "Metal2",
-   "x_um": 764.12,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 764.0
-  },
-  {
-   "name": "dac_gn[44]",
-   "layer": "Metal2",
-   "x_um": 766.92,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 767.0
-  },
-  {
-   "name": "dac_gp[43]",
-   "layer": "Metal2",
-   "x_um": 769.72,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 770.0
-  },
-  {
-   "name": "dac_gn[43]",
-   "layer": "Metal2",
-   "x_um": 773.08,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 773.0
-  },
-  {
-   "name": "dac_gp[42]",
-   "layer": "Metal2",
-   "x_um": 775.88,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 776.0
-  },
-  {
-   "name": "dac_gn[42]",
-   "layer": "Metal2",
-   "x_um": 779.24,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 779.0
-  },
-  {
-   "name": "dac_gp[41]",
-   "layer": "Metal2",
-   "x_um": 782.04,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 782.0
-  },
-  {
-   "name": "dac_gn[41]",
-   "layer": "Metal2",
-   "x_um": 784.84,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 785.0
-  },
-  {
-   "name": "dac_gp[40]",
-   "layer": "Metal2",
-   "x_um": 788.2,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 788.0
-  },
-  {
-   "name": "dac_gn[40]",
-   "layer": "Metal2",
-   "x_um": 791.0,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 791.0
-  },
-  {
-   "name": "dac_gp[39]",
-   "layer": "Metal2",
-   "x_um": 793.8,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 794.0
-  },
-  {
-   "name": "dac_gn[39]",
-   "layer": "Metal2",
-   "x_um": 797.16,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 797.0
-  },
-  {
-   "name": "dac_gp[38]",
-   "layer": "Metal2",
-   "x_um": 799.96,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 800.0
-  },
-  {
-   "name": "dac_gn[38]",
-   "layer": "Metal2",
-   "x_um": 802.76,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 803.0
-  },
-  {
-   "name": "dac_gp[37]",
-   "layer": "Metal2",
-   "x_um": 806.12,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 806.0
-  },
-  {
-   "name": "dac_gn[37]",
-   "layer": "Metal2",
-   "x_um": 808.92,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 809.0
-  },
-  {
-   "name": "dac_gp[36]",
-   "layer": "Metal2",
-   "x_um": 812.28,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 812.0
-  },
-  {
-   "name": "dac_gn[36]",
-   "layer": "Metal2",
-   "x_um": 815.08,
-   "y_um": 101.92,
-   "side": "N",
-   "floorplan_um": 815.0
-  },
-  {
-   "name": "sw_rec[4]",
    "layer": "Metal2",
    "x_um": 8.12,
    "y_um": 0.0,
@@ -1071,7 +543,7 @@
    "floorplan_um": 8.0
   },
   {
-   "name": "sw_rec_b[4]",
+   "name": "sw_rec_b[2]",
    "layer": "Metal2",
    "x_um": 10.92,
    "y_um": 0.0,
@@ -1079,7 +551,7 @@
    "floorplan_um": 11.0
   },
   {
-   "name": "sw_ipg[4]",
+   "name": "sw_ipg[2]",
    "layer": "Metal2",
    "x_um": 13.72,
    "y_um": 0.0,
@@ -1087,7 +559,7 @@
    "floorplan_um": 14.0
   },
   {
-   "name": "sw_ipg_b[4]",
+   "name": "sw_ipg_b[2]",
    "layer": "Metal2",
    "x_um": 17.08,
    "y_um": 0.0,
@@ -1095,7 +567,7 @@
    "floorplan_um": 17.0
   },
   {
-   "name": "rst_sw[4]",
+   "name": "rst_sw[2]",
    "layer": "Metal2",
    "x_um": 19.88,
    "y_um": 0.0,
@@ -1103,7 +575,7 @@
    "floorplan_um": 20.0
   },
   {
-   "name": "tg_on[4]",
+   "name": "tg_on[2]",
    "layer": "Metal2",
    "x_um": 23.24,
    "y_um": 0.0,
@@ -1111,7 +583,7 @@
    "floorplan_um": 23.0
   },
   {
-   "name": "dac_gdn[4]",
+   "name": "dac_gdn[2]",
    "layer": "Metal2",
    "x_um": 26.04,
    "y_um": 0.0,
@@ -1119,7 +591,7 @@
    "floorplan_um": 26.0
   },
   {
-   "name": "cmp_clk[4]",
+   "name": "cmp_clk[2]",
    "layer": "Metal2",
    "x_um": 28.84,
    "y_um": 0.0,
@@ -1127,7 +599,7 @@
    "floorplan_um": 29.0
   },
   {
-   "name": "cmp_q[4]",
+   "name": "cmp_q[2]",
    "layer": "Metal2",
    "x_um": 32.2,
    "y_um": 0.0,
@@ -1135,7 +607,7 @@
    "floorplan_um": 32.0
   },
   {
-   "name": "dac_gp[59]",
+   "name": "dac_gp[35]",
    "layer": "Metal2",
    "x_um": 35.0,
    "y_um": 0.0,
@@ -1143,7 +615,7 @@
    "floorplan_um": 35.0
   },
   {
-   "name": "dac_gn[59]",
+   "name": "dac_gn[35]",
    "layer": "Metal2",
    "x_um": 37.8,
    "y_um": 0.0,
@@ -1151,7 +623,7 @@
    "floorplan_um": 38.0
   },
   {
-   "name": "dac_gp[58]",
+   "name": "dac_gp[34]",
    "layer": "Metal2",
    "x_um": 41.16,
    "y_um": 0.0,
@@ -1159,7 +631,7 @@
    "floorplan_um": 41.0
   },
   {
-   "name": "dac_gn[58]",
+   "name": "dac_gn[34]",
    "layer": "Metal2",
    "x_um": 43.96,
    "y_um": 0.0,
@@ -1167,7 +639,7 @@
    "floorplan_um": 44.0
   },
   {
-   "name": "dac_gp[57]",
+   "name": "dac_gp[33]",
    "layer": "Metal2",
    "x_um": 46.76,
    "y_um": 0.0,
@@ -1175,7 +647,7 @@
    "floorplan_um": 47.0
   },
   {
-   "name": "dac_gn[57]",
+   "name": "dac_gn[33]",
    "layer": "Metal2",
    "x_um": 50.12,
    "y_um": 0.0,
@@ -1183,7 +655,7 @@
    "floorplan_um": 50.0
   },
   {
-   "name": "dac_gp[56]",
+   "name": "dac_gp[32]",
    "layer": "Metal2",
    "x_um": 52.92,
    "y_um": 0.0,
@@ -1191,7 +663,7 @@
    "floorplan_um": 53.0
   },
   {
-   "name": "dac_gn[56]",
+   "name": "dac_gn[32]",
    "layer": "Metal2",
    "x_um": 55.72,
    "y_um": 0.0,
@@ -1199,7 +671,7 @@
    "floorplan_um": 56.0
   },
   {
-   "name": "dac_gp[55]",
+   "name": "dac_gp[31]",
    "layer": "Metal2",
    "x_um": 59.08,
    "y_um": 0.0,
@@ -1207,7 +679,7 @@
    "floorplan_um": 59.0
   },
   {
-   "name": "dac_gn[55]",
+   "name": "dac_gn[31]",
    "layer": "Metal2",
    "x_um": 61.88,
    "y_um": 0.0,
@@ -1215,7 +687,7 @@
    "floorplan_um": 62.0
   },
   {
-   "name": "dac_gp[54]",
+   "name": "dac_gp[30]",
    "layer": "Metal2",
    "x_um": 65.24,
    "y_um": 0.0,
@@ -1223,7 +695,7 @@
    "floorplan_um": 65.0
   },
   {
-   "name": "dac_gn[54]",
+   "name": "dac_gn[30]",
    "layer": "Metal2",
    "x_um": 68.04,
    "y_um": 0.0,
@@ -1231,7 +703,7 @@
    "floorplan_um": 68.0
   },
   {
-   "name": "dac_gp[53]",
+   "name": "dac_gp[29]",
    "layer": "Metal2",
    "x_um": 70.84,
    "y_um": 0.0,
@@ -1239,7 +711,7 @@
    "floorplan_um": 71.0
   },
   {
-   "name": "dac_gn[53]",
+   "name": "dac_gn[29]",
    "layer": "Metal2",
    "x_um": 74.2,
    "y_um": 0.0,
@@ -1247,7 +719,7 @@
    "floorplan_um": 74.0
   },
   {
-   "name": "dac_gp[52]",
+   "name": "dac_gp[28]",
    "layer": "Metal2",
    "x_um": 77.0,
    "y_um": 0.0,
@@ -1255,7 +727,7 @@
    "floorplan_um": 77.0
   },
   {
-   "name": "dac_gn[52]",
+   "name": "dac_gn[28]",
    "layer": "Metal2",
    "x_um": 79.8,
    "y_um": 0.0,
@@ -1263,7 +735,7 @@
    "floorplan_um": 80.0
   },
   {
-   "name": "dac_gp[51]",
+   "name": "dac_gp[27]",
    "layer": "Metal2",
    "x_um": 83.16,
    "y_um": 0.0,
@@ -1271,7 +743,7 @@
    "floorplan_um": 83.0
   },
   {
-   "name": "dac_gn[51]",
+   "name": "dac_gn[27]",
    "layer": "Metal2",
    "x_um": 85.96,
    "y_um": 0.0,
@@ -1279,7 +751,7 @@
    "floorplan_um": 86.0
   },
   {
-   "name": "dac_gp[50]",
+   "name": "dac_gp[26]",
    "layer": "Metal2",
    "x_um": 88.76,
    "y_um": 0.0,
@@ -1287,7 +759,7 @@
    "floorplan_um": 89.0
   },
   {
-   "name": "dac_gn[50]",
+   "name": "dac_gn[26]",
    "layer": "Metal2",
    "x_um": 92.12,
    "y_um": 0.0,
@@ -1295,7 +767,7 @@
    "floorplan_um": 92.0
   },
   {
-   "name": "dac_gp[49]",
+   "name": "dac_gp[25]",
    "layer": "Metal2",
    "x_um": 94.92,
    "y_um": 0.0,
@@ -1303,7 +775,7 @@
    "floorplan_um": 95.0
   },
   {
-   "name": "dac_gn[49]",
+   "name": "dac_gn[25]",
    "layer": "Metal2",
    "x_um": 97.72,
    "y_um": 0.0,
@@ -1311,7 +783,7 @@
    "floorplan_um": 98.0
   },
   {
-   "name": "dac_gp[48]",
+   "name": "dac_gp[24]",
    "layer": "Metal2",
    "x_um": 101.08,
    "y_um": 0.0,
@@ -1319,7 +791,7 @@
    "floorplan_um": 101.0
   },
   {
-   "name": "dac_gn[48]",
+   "name": "dac_gn[24]",
    "layer": "Metal2",
    "x_um": 103.88,
    "y_um": 0.0,
@@ -1327,7 +799,7 @@
    "floorplan_um": 104.0
   },
   {
-   "name": "sw_rec[5]",
+   "name": "sw_rec[3]",
    "layer": "Metal2",
    "x_um": 245.0,
    "y_um": 0.0,
@@ -1335,7 +807,7 @@
    "floorplan_um": 245.0
   },
   {
-   "name": "sw_rec_b[5]",
+   "name": "sw_rec_b[3]",
    "layer": "Metal2",
    "x_um": 247.8,
    "y_um": 0.0,
@@ -1343,7 +815,7 @@
    "floorplan_um": 248.0
   },
   {
-   "name": "sw_ipg[5]",
+   "name": "sw_ipg[3]",
    "layer": "Metal2",
    "x_um": 251.16,
    "y_um": 0.0,
@@ -1351,7 +823,7 @@
    "floorplan_um": 251.0
   },
   {
-   "name": "sw_ipg_b[5]",
+   "name": "sw_ipg_b[3]",
    "layer": "Metal2",
    "x_um": 253.96,
    "y_um": 0.0,
@@ -1359,7 +831,7 @@
    "floorplan_um": 254.0
   },
   {
-   "name": "rst_sw[5]",
+   "name": "rst_sw[3]",
    "layer": "Metal2",
    "x_um": 256.76,
    "y_um": 0.0,
@@ -1367,7 +839,7 @@
    "floorplan_um": 257.0
   },
   {
-   "name": "tg_on[5]",
+   "name": "tg_on[3]",
    "layer": "Metal2",
    "x_um": 260.12,
    "y_um": 0.0,
@@ -1375,7 +847,7 @@
    "floorplan_um": 260.0
   },
   {
-   "name": "dac_gdn[5]",
+   "name": "dac_gdn[3]",
    "layer": "Metal2",
    "x_um": 262.92,
    "y_um": 0.0,
@@ -1383,7 +855,7 @@
    "floorplan_um": 263.0
   },
   {
-   "name": "cmp_clk[5]",
+   "name": "cmp_clk[3]",
    "layer": "Metal2",
    "x_um": 265.72,
    "y_um": 0.0,
@@ -1391,7 +863,7 @@
    "floorplan_um": 266.0
   },
   {
-   "name": "cmp_q[5]",
+   "name": "cmp_q[3]",
    "layer": "Metal2",
    "x_um": 269.08,
    "y_um": 0.0,
@@ -1399,7 +871,7 @@
    "floorplan_um": 269.0
   },
   {
-   "name": "dac_gp[71]",
+   "name": "dac_gp[47]",
    "layer": "Metal2",
    "x_um": 271.88,
    "y_um": 0.0,
@@ -1407,7 +879,7 @@
    "floorplan_um": 272.0
   },
   {
-   "name": "dac_gn[71]",
+   "name": "dac_gn[47]",
    "layer": "Metal2",
    "x_um": 275.24,
    "y_um": 0.0,
@@ -1415,7 +887,7 @@
    "floorplan_um": 275.0
   },
   {
-   "name": "dac_gp[70]",
+   "name": "dac_gp[46]",
    "layer": "Metal2",
    "x_um": 278.04,
    "y_um": 0.0,
@@ -1423,7 +895,7 @@
    "floorplan_um": 278.0
   },
   {
-   "name": "dac_gn[70]",
+   "name": "dac_gn[46]",
    "layer": "Metal2",
    "x_um": 280.84,
    "y_um": 0.0,
@@ -1431,7 +903,7 @@
    "floorplan_um": 281.0
   },
   {
-   "name": "dac_gp[69]",
+   "name": "dac_gp[45]",
    "layer": "Metal2",
    "x_um": 284.2,
    "y_um": 0.0,
@@ -1439,7 +911,7 @@
    "floorplan_um": 284.0
   },
   {
-   "name": "dac_gn[69]",
+   "name": "dac_gn[45]",
    "layer": "Metal2",
    "x_um": 287.0,
    "y_um": 0.0,
@@ -1447,7 +919,7 @@
    "floorplan_um": 287.0
   },
   {
-   "name": "dac_gp[68]",
+   "name": "dac_gp[44]",
    "layer": "Metal2",
    "x_um": 289.8,
    "y_um": 0.0,
@@ -1455,7 +927,7 @@
    "floorplan_um": 290.0
   },
   {
-   "name": "dac_gn[68]",
+   "name": "dac_gn[44]",
    "layer": "Metal2",
    "x_um": 293.16,
    "y_um": 0.0,
@@ -1463,7 +935,7 @@
    "floorplan_um": 293.0
   },
   {
-   "name": "dac_gp[67]",
+   "name": "dac_gp[43]",
    "layer": "Metal2",
    "x_um": 295.96,
    "y_um": 0.0,
@@ -1471,7 +943,7 @@
    "floorplan_um": 296.0
   },
   {
-   "name": "dac_gn[67]",
+   "name": "dac_gn[43]",
    "layer": "Metal2",
    "x_um": 298.76,
    "y_um": 0.0,
@@ -1479,7 +951,7 @@
    "floorplan_um": 299.0
   },
   {
-   "name": "dac_gp[66]",
+   "name": "dac_gp[42]",
    "layer": "Metal2",
    "x_um": 302.12,
    "y_um": 0.0,
@@ -1487,7 +959,7 @@
    "floorplan_um": 302.0
   },
   {
-   "name": "dac_gn[66]",
+   "name": "dac_gn[42]",
    "layer": "Metal2",
    "x_um": 304.92,
    "y_um": 0.0,
@@ -1495,7 +967,7 @@
    "floorplan_um": 305.0
   },
   {
-   "name": "dac_gp[65]",
+   "name": "dac_gp[41]",
    "layer": "Metal2",
    "x_um": 308.28,
    "y_um": 0.0,
@@ -1503,7 +975,7 @@
    "floorplan_um": 308.0
   },
   {
-   "name": "dac_gn[65]",
+   "name": "dac_gn[41]",
    "layer": "Metal2",
    "x_um": 311.08,
    "y_um": 0.0,
@@ -1511,7 +983,7 @@
    "floorplan_um": 311.0
   },
   {
-   "name": "dac_gp[64]",
+   "name": "dac_gp[40]",
    "layer": "Metal2",
    "x_um": 313.88,
    "y_um": 0.0,
@@ -1519,7 +991,7 @@
    "floorplan_um": 314.0
   },
   {
-   "name": "dac_gn[64]",
+   "name": "dac_gn[40]",
    "layer": "Metal2",
    "x_um": 317.24,
    "y_um": 0.0,
@@ -1527,7 +999,7 @@
    "floorplan_um": 317.0
   },
   {
-   "name": "dac_gp[63]",
+   "name": "dac_gp[39]",
    "layer": "Metal2",
    "x_um": 320.04,
    "y_um": 0.0,
@@ -1535,7 +1007,7 @@
    "floorplan_um": 320.0
   },
   {
-   "name": "dac_gn[63]",
+   "name": "dac_gn[39]",
    "layer": "Metal2",
    "x_um": 322.84,
    "y_um": 0.0,
@@ -1543,7 +1015,7 @@
    "floorplan_um": 323.0
   },
   {
-   "name": "dac_gp[62]",
+   "name": "dac_gp[38]",
    "layer": "Metal2",
    "x_um": 326.2,
    "y_um": 0.0,
@@ -1551,7 +1023,7 @@
    "floorplan_um": 326.0
   },
   {
-   "name": "dac_gn[62]",
+   "name": "dac_gn[38]",
    "layer": "Metal2",
    "x_um": 329.0,
    "y_um": 0.0,
@@ -1559,7 +1031,7 @@
    "floorplan_um": 329.0
   },
   {
-   "name": "dac_gp[61]",
+   "name": "dac_gp[37]",
    "layer": "Metal2",
    "x_um": 331.8,
    "y_um": 0.0,
@@ -1567,7 +1039,7 @@
    "floorplan_um": 332.0
   },
   {
-   "name": "dac_gn[61]",
+   "name": "dac_gn[37]",
    "layer": "Metal2",
    "x_um": 335.16,
    "y_um": 0.0,
@@ -1575,7 +1047,7 @@
    "floorplan_um": 335.0
   },
   {
-   "name": "dac_gp[60]",
+   "name": "dac_gp[36]",
    "layer": "Metal2",
    "x_um": 337.96,
    "y_um": 0.0,
@@ -1583,540 +1055,12 @@
    "floorplan_um": 338.0
   },
   {
-   "name": "dac_gn[60]",
+   "name": "dac_gn[36]",
    "layer": "Metal2",
    "x_um": 340.76,
    "y_um": 0.0,
    "side": "S",
    "floorplan_um": 341.0
-  },
-  {
-   "name": "sw_rec[6]",
-   "layer": "Metal2",
-   "x_um": 481.88,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 482.0
-  },
-  {
-   "name": "sw_rec_b[6]",
-   "layer": "Metal2",
-   "x_um": 485.24,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 485.0
-  },
-  {
-   "name": "sw_ipg[6]",
-   "layer": "Metal2",
-   "x_um": 488.04,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 488.0
-  },
-  {
-   "name": "sw_ipg_b[6]",
-   "layer": "Metal2",
-   "x_um": 490.84,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 491.0
-  },
-  {
-   "name": "rst_sw[6]",
-   "layer": "Metal2",
-   "x_um": 494.2,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 494.0
-  },
-  {
-   "name": "tg_on[6]",
-   "layer": "Metal2",
-   "x_um": 497.0,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 497.0
-  },
-  {
-   "name": "dac_gdn[6]",
-   "layer": "Metal2",
-   "x_um": 499.8,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 500.0
-  },
-  {
-   "name": "cmp_clk[6]",
-   "layer": "Metal2",
-   "x_um": 503.16,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 503.0
-  },
-  {
-   "name": "cmp_q[6]",
-   "layer": "Metal2",
-   "x_um": 505.96,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 506.0
-  },
-  {
-   "name": "dac_gp[83]",
-   "layer": "Metal2",
-   "x_um": 508.76,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 509.0
-  },
-  {
-   "name": "dac_gn[83]",
-   "layer": "Metal2",
-   "x_um": 512.12,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 512.0
-  },
-  {
-   "name": "dac_gp[82]",
-   "layer": "Metal2",
-   "x_um": 514.92,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 515.0
-  },
-  {
-   "name": "dac_gn[82]",
-   "layer": "Metal2",
-   "x_um": 517.72,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 518.0
-  },
-  {
-   "name": "dac_gp[81]",
-   "layer": "Metal2",
-   "x_um": 521.08,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 521.0
-  },
-  {
-   "name": "dac_gn[81]",
-   "layer": "Metal2",
-   "x_um": 523.88,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 524.0
-  },
-  {
-   "name": "dac_gp[80]",
-   "layer": "Metal2",
-   "x_um": 527.24,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 527.0
-  },
-  {
-   "name": "dac_gn[80]",
-   "layer": "Metal2",
-   "x_um": 530.04,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 530.0
-  },
-  {
-   "name": "dac_gp[79]",
-   "layer": "Metal2",
-   "x_um": 532.84,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 533.0
-  },
-  {
-   "name": "dac_gn[79]",
-   "layer": "Metal2",
-   "x_um": 536.2,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 536.0
-  },
-  {
-   "name": "dac_gp[78]",
-   "layer": "Metal2",
-   "x_um": 539.0,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 539.0
-  },
-  {
-   "name": "dac_gn[78]",
-   "layer": "Metal2",
-   "x_um": 541.8,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 542.0
-  },
-  {
-   "name": "dac_gp[77]",
-   "layer": "Metal2",
-   "x_um": 545.16,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 545.0
-  },
-  {
-   "name": "dac_gn[77]",
-   "layer": "Metal2",
-   "x_um": 547.96,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 548.0
-  },
-  {
-   "name": "dac_gp[76]",
-   "layer": "Metal2",
-   "x_um": 550.76,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 551.0
-  },
-  {
-   "name": "dac_gn[76]",
-   "layer": "Metal2",
-   "x_um": 554.12,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 554.0
-  },
-  {
-   "name": "dac_gp[75]",
-   "layer": "Metal2",
-   "x_um": 556.92,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 557.0
-  },
-  {
-   "name": "dac_gn[75]",
-   "layer": "Metal2",
-   "x_um": 560.28,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 560.0
-  },
-  {
-   "name": "dac_gp[74]",
-   "layer": "Metal2",
-   "x_um": 563.08,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 563.0
-  },
-  {
-   "name": "dac_gn[74]",
-   "layer": "Metal2",
-   "x_um": 565.88,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 566.0
-  },
-  {
-   "name": "dac_gp[73]",
-   "layer": "Metal2",
-   "x_um": 569.24,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 569.0
-  },
-  {
-   "name": "dac_gn[73]",
-   "layer": "Metal2",
-   "x_um": 572.04,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 572.0
-  },
-  {
-   "name": "dac_gp[72]",
-   "layer": "Metal2",
-   "x_um": 574.84,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 575.0
-  },
-  {
-   "name": "dac_gn[72]",
-   "layer": "Metal2",
-   "x_um": 578.2,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 578.0
-  },
-  {
-   "name": "sw_rec[7]",
-   "layer": "Metal2",
-   "x_um": 718.76,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 719.0
-  },
-  {
-   "name": "sw_rec_b[7]",
-   "layer": "Metal2",
-   "x_um": 722.12,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 722.0
-  },
-  {
-   "name": "sw_ipg[7]",
-   "layer": "Metal2",
-   "x_um": 724.92,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 725.0
-  },
-  {
-   "name": "sw_ipg_b[7]",
-   "layer": "Metal2",
-   "x_um": 728.28,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 728.0
-  },
-  {
-   "name": "rst_sw[7]",
-   "layer": "Metal2",
-   "x_um": 731.08,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 731.0
-  },
-  {
-   "name": "tg_on[7]",
-   "layer": "Metal2",
-   "x_um": 733.88,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 734.0
-  },
-  {
-   "name": "dac_gdn[7]",
-   "layer": "Metal2",
-   "x_um": 737.24,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 737.0
-  },
-  {
-   "name": "cmp_clk[7]",
-   "layer": "Metal2",
-   "x_um": 740.04,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 740.0
-  },
-  {
-   "name": "cmp_q[7]",
-   "layer": "Metal2",
-   "x_um": 742.84,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 743.0
-  },
-  {
-   "name": "dac_gp[95]",
-   "layer": "Metal2",
-   "x_um": 746.2,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 746.0
-  },
-  {
-   "name": "dac_gn[95]",
-   "layer": "Metal2",
-   "x_um": 749.0,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 749.0
-  },
-  {
-   "name": "dac_gp[94]",
-   "layer": "Metal2",
-   "x_um": 751.8,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 752.0
-  },
-  {
-   "name": "dac_gn[94]",
-   "layer": "Metal2",
-   "x_um": 755.16,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 755.0
-  },
-  {
-   "name": "dac_gp[93]",
-   "layer": "Metal2",
-   "x_um": 757.96,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 758.0
-  },
-  {
-   "name": "dac_gn[93]",
-   "layer": "Metal2",
-   "x_um": 760.76,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 761.0
-  },
-  {
-   "name": "dac_gp[92]",
-   "layer": "Metal2",
-   "x_um": 764.12,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 764.0
-  },
-  {
-   "name": "dac_gn[92]",
-   "layer": "Metal2",
-   "x_um": 766.92,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 767.0
-  },
-  {
-   "name": "dac_gp[91]",
-   "layer": "Metal2",
-   "x_um": 769.72,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 770.0
-  },
-  {
-   "name": "dac_gn[91]",
-   "layer": "Metal2",
-   "x_um": 773.08,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 773.0
-  },
-  {
-   "name": "dac_gp[90]",
-   "layer": "Metal2",
-   "x_um": 775.88,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 776.0
-  },
-  {
-   "name": "dac_gn[90]",
-   "layer": "Metal2",
-   "x_um": 779.24,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 779.0
-  },
-  {
-   "name": "dac_gp[89]",
-   "layer": "Metal2",
-   "x_um": 782.04,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 782.0
-  },
-  {
-   "name": "dac_gn[89]",
-   "layer": "Metal2",
-   "x_um": 784.84,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 785.0
-  },
-  {
-   "name": "dac_gp[88]",
-   "layer": "Metal2",
-   "x_um": 788.2,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 788.0
-  },
-  {
-   "name": "dac_gn[88]",
-   "layer": "Metal2",
-   "x_um": 791.0,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 791.0
-  },
-  {
-   "name": "dac_gp[87]",
-   "layer": "Metal2",
-   "x_um": 793.8,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 794.0
-  },
-  {
-   "name": "dac_gn[87]",
-   "layer": "Metal2",
-   "x_um": 797.16,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 797.0
-  },
-  {
-   "name": "dac_gp[86]",
-   "layer": "Metal2",
-   "x_um": 799.96,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 800.0
-  },
-  {
-   "name": "dac_gn[86]",
-   "layer": "Metal2",
-   "x_um": 802.76,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 803.0
-  },
-  {
-   "name": "dac_gp[85]",
-   "layer": "Metal2",
-   "x_um": 806.12,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 806.0
-  },
-  {
-   "name": "dac_gn[85]",
-   "layer": "Metal2",
-   "x_um": 808.92,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 809.0
-  },
-  {
-   "name": "dac_gp[84]",
-   "layer": "Metal2",
-   "x_um": 812.28,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 812.0
-  },
-  {
-   "name": "dac_gn[84]",
-   "layer": "Metal2",
-   "x_um": 815.08,
-   "y_um": 0.0,
-   "side": "S",
-   "floorplan_um": 815.0
   },
   {
    "name": "RSTN_PD",

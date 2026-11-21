@@ -9,7 +9,7 @@
   "bias_corr": 12,
   "strap_corr": 25,
   "dig_w": 425,
-  "dig_h": 194,
+  "dig_h": 86.24,
   "ch_pitch": 237,
   "ctl_corr": 8.0,
   "spur_corr": 7.0,
@@ -140,7 +140,7 @@
    "name": "spare_ne",
    "rect": [
     500.0,
-    677.0,
+    623.12,
     579.0,
     1072.0
    ],
@@ -153,7 +153,7 @@
     500.0,
     38.0,
     579.0,
-    433.0
+    486.88
    ],
    "what": "east of the south channel row: not assigned (as spare_ne)",
    "layers": "any"
@@ -162,9 +162,9 @@
    "name": "strap_corr_n",
    "rect": [
     26.0,
-    652.0,
+    598.12,
     461.0,
-    677.0
+    623.12
    ],
    "what": "strap corridor north: ADC-main strap (VDD), ADC-DAC strap (vdd_dac), vss; DAC-strap decap row; macro <-> adc_ch control wires cross it",
    "layers": "straps Metal5 over vss Metal4; decap comp/poly/Metal1; crossings Metal2; rm3 strap resistor Metal3"
@@ -173,9 +173,9 @@
    "name": "strap_corr_s",
    "rect": [
     26.0,
-    433.0,
+    486.88,
     461.0,
-    458.0
+    511.88
    ],
    "what": "strap corridor south, same as north (no strap resistor)",
    "layers": "as strap_corr_n"
@@ -185,9 +185,9 @@
   "afe_dig": {
    "what": "digital macro (LibreLane): dbs_ctrl N = 8 + adc8_top + 15 pad-control tie cells; channels 0-3 brought out to pins, 4-7 tied off inside the wrapper (Decision 52)",
    "w": 425,
-   "h": 194,
+   "h": 86.24,
    "x": 26,
-   "y": 458.0,
+   "y": 511.88,
    "orient": "R0",
    "rail": "ADC-main strap (net VDD), vss",
    "guard": "P+ substrate ring on vss and N-well ring on VDD around the macro, inside the strap corridors (2 um each); >= 20 um to any analog device",
@@ -956,13 +956,13 @@
   "afe_ch": {
    "what": "one channel slot = control corridor | amp_ch + adc_ch + TGATE zone | analog spur corridor",
    "w": 237,
-   "h": 395.0,
+   "h": 448.88,
    "sub": {
     "ctl_corr": [
      0.0,
      0.0,
      8.0,
-     395.0
+     448.88
     ],
     "adc_ch": [
      8.0,
@@ -974,19 +974,19 @@
      8.0,
      104,
      230.0,
-     387.0
+     440.88
     ],
     "tg_zone": [
      8.0,
-     387.0,
+     440.88,
      230.0,
-     395.0
+     448.88
     ],
     "spur_corr": [
      230.0,
      0.0,
      237,
-     395.0
+     448.88
     ]
    },
    "note": "slot coordinates are those of a NORTH-row channel: y = 0 is the ADC end (next to the strap corridor), y = h the amplifier end. South-row channels are the same cell mirrored about the x axis (MX)."
@@ -1001,7 +1001,7 @@
   "amp_ch": {
    "what": "amplifier part (L2a): afe_chc + fs_oneshot_c + OR2",
    "w_max": 222.0,
-   "h_max": 283.0,
+   "h_max": 336.88,
    "estimate_um2": 51626.0,
    "ref": "AFE/layout/lvs/afe_chc.spice subckt amp_ch",
    "rotation": "the cell may be placed R0 or R90 (all 4 channels the same way) if its W x H fits only one way"
@@ -1009,9 +1009,9 @@
   "bias_genc": {
    "what": "shared bias (L3a): beta multiplier, start-up, ladders A / B in ppolyf_u_1k, reset-level replica, C_VRS",
    "x": 471.0,
-   "y": 443.0,
+   "y": 496.88,
    "w_max": 108.0,
-   "h_max": 224.0,
+   "h_max": 116.24,
    "estimate_um2": 9966.0,
    "ref": "AFE/layout/lvs/bias_genc.spice",
    "rail": "analog strap",
@@ -1023,42 +1023,42 @@
    "inst": "u_dig",
    "cell": "afe_dig",
    "x": 26,
-   "y": 458.0,
+   "y": 511.88,
    "w": 425,
-   "h": 194,
+   "h": 86.24,
    "orient": "R0"
   },
   {
    "inst": "u_bias",
    "cell": "bias_genc",
    "x": 471.0,
-   "y": 443.0,
+   "y": 496.88,
    "w": 108.0,
-   "h": 224.0,
+   "h": 116.24,
    "orient": "R0"
   },
   {
    "inst": "ch0",
    "cell": "afe_ch",
    "x": 26.0,
-   "y": 677.0,
+   "y": 623.12,
    "w": 237,
-   "h": 395.0,
+   "h": 448.88,
    "orient": "R0",
    "row": "N",
-   "adc_end_y": 677.0,
+   "adc_end_y": 623.12,
    "amp_end_y": 1072.0
   },
   {
    "inst": "ch1",
    "cell": "afe_ch",
    "x": 263.0,
-   "y": 677.0,
+   "y": 623.12,
    "w": 237,
-   "h": 395.0,
+   "h": 448.88,
    "orient": "R0",
    "row": "N",
-   "adc_end_y": 677.0,
+   "adc_end_y": 623.12,
    "amp_end_y": 1072.0
   },
   {
@@ -1067,10 +1067,10 @@
    "x": 26.0,
    "y": 38.0,
    "w": 237,
-   "h": 395.0,
+   "h": 448.88,
    "orient": "MX",
    "row": "S",
-   "adc_end_y": 433.0,
+   "adc_end_y": 486.88,
    "amp_end_y": 38.0
   },
   {
@@ -1079,10 +1079,10 @@
    "x": 263.0,
    "y": 38.0,
    "w": 237,
-   "h": 395.0,
+   "h": 448.88,
    "orient": "MX",
    "row": "S",
-   "adc_end_y": 433.0,
+   "adc_end_y": 486.88,
    "amp_end_y": 38.0
   }
  ],
@@ -1222,7 +1222,7 @@
    "pad": "RSTN",
    "side": "W",
    "x": 0.0,
-   "y": 461.0,
+   "y": 514.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.RSTN_PD (straight wire across the west ring)"
@@ -1232,7 +1232,7 @@
    "pad": "RSTN",
    "side": "W",
    "x": 0.0,
-   "y": 464.5,
+   "y": 518.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.RSTN_PU (straight wire across the west ring)"
@@ -1242,7 +1242,7 @@
    "pad": "RSTN",
    "side": "W",
    "x": 0.0,
-   "y": 468.0,
+   "y": 521.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.RSTN (straight wire across the west ring)"
@@ -1252,7 +1252,7 @@
    "pad": "SCLK",
    "side": "W",
    "x": 0.0,
-   "y": 471.5,
+   "y": 525.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.SCLK_PD (straight wire across the west ring)"
@@ -1262,7 +1262,7 @@
    "pad": "SCLK",
    "side": "W",
    "x": 0.0,
-   "y": 475.0,
+   "y": 528.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.SCLK_PU (straight wire across the west ring)"
@@ -1272,7 +1272,7 @@
    "pad": "SCLK",
    "side": "W",
    "x": 0.0,
-   "y": 478.5,
+   "y": 532.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.SCLK (straight wire across the west ring)"
@@ -1282,7 +1282,7 @@
    "pad": "DIN",
    "side": "W",
    "x": 0.0,
-   "y": 482.0,
+   "y": 535.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DIN_PD (straight wire across the west ring)"
@@ -1292,7 +1292,7 @@
    "pad": "DIN",
    "side": "W",
    "x": 0.0,
-   "y": 485.5,
+   "y": 539.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DIN_PU (straight wire across the west ring)"
@@ -1302,7 +1302,7 @@
    "pad": "DIN",
    "side": "W",
    "x": 0.0,
-   "y": 489.0,
+   "y": 542.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DIN (straight wire across the west ring)"
@@ -1312,7 +1312,7 @@
    "pad": "CS",
    "side": "W",
    "x": 0.0,
-   "y": 492.5,
+   "y": 546.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.CS_PD (straight wire across the west ring)"
@@ -1322,7 +1322,7 @@
    "pad": "CS",
    "side": "W",
    "x": 0.0,
-   "y": 496.0,
+   "y": 549.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.CS_PU (straight wire across the west ring)"
@@ -1332,7 +1332,7 @@
    "pad": "CS",
    "side": "W",
    "x": 0.0,
-   "y": 499.5,
+   "y": 553.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.CS (straight wire across the west ring)"
@@ -1342,7 +1342,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 503.0,
+   "y": 556.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT (straight wire across the west ring)"
@@ -1352,7 +1352,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 506.5,
+   "y": 560.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_OE (straight wire across the west ring)"
@@ -1362,7 +1362,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 510.0,
+   "y": 563.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_IE (straight wire across the west ring)"
@@ -1372,7 +1372,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 513.5,
+   "y": 567.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_PD (straight wire across the west ring)"
@@ -1382,7 +1382,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 517.0,
+   "y": 570.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_PU (straight wire across the west ring)"
@@ -1392,7 +1392,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 520.5,
+   "y": 574.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_CS (straight wire across the west ring)"
@@ -1402,7 +1402,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 524.0,
+   "y": 577.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_SL (straight wire across the west ring)"
@@ -1412,7 +1412,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 527.5,
+   "y": 581.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_PDRV0 (straight wire across the west ring)"
@@ -1422,7 +1422,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 531.0,
+   "y": 584.88,
    "layer": "Metal3",
    "w": 0.6,
    "to": "afe_dig.DOUT_PDRV1 (straight wire across the west ring)"
@@ -1432,7 +1432,7 @@
    "pad": "DOUT",
    "side": "W",
    "x": 0.0,
-   "y": 534.5,
+   "y": 588.38,
    "layer": "Metal3",
    "w": 0.6,
    "to": "not connected inside (the pad input buffer is off, DOUT_IE = 0); the pin exists because the organizer template requires it"
@@ -1442,7 +1442,7 @@
    "pad": "VDD",
    "side": "W",
    "x": 0.0,
-   "y": 666.0,
+   "y": 612.12,
    "layer": "Metal5",
    "w": 20.0,
    "to": "star point: ADC-main strap, analog strap, strap resistor -> ADC-DAC strap"
@@ -1452,7 +1452,7 @@
    "pad": "VSS",
    "side": "W",
    "x": 0.0,
-   "y": 444.0,
+   "y": 497.88,
    "layer": "Metal4",
    "w": 20.0,
    "to": "star point of the vss straps (one ground; the substrate is common)"
@@ -1503,29 +1503,29 @@
   "outline_um2": 671550,
   "core_um2": 585074.0,
   "slots_um2": {
-   "amp_ch": 62826.0,
+   "amp_ch": 74787.36,
    "adc_ch": 23088.0,
-   "afe_ch": 93615.0,
-   "bias_genc": 24192.0,
-   "afe_dig": 82450.0
+   "afe_ch": 106384.56,
+   "bias_genc": 12553.92,
+   "afe_dig": 36652.0
   },
   "estimates_um2": {
    "amp_ch": 51626.0,
    "adc_ch": 14911.0,
    "bias_genc": 9966.0,
-   "afe_dig_cells": 33661.0,
+   "afe_dig_cells": 18879.0,
    "tgates": 199.0,
    "decap_gate": 56533.0
   },
-  "estimates_source": "AFE/review/sim/f1_area.log: afe_chc 49,312 + fs_oneshot_c 2,314 = 51,626 um2 (amp_ch); ADC analog part 14,911; bias_genc 9,966; digital cells 31,872 + dbs_ctrl 1,789 = 33,661; 2 TGATE + OR2 + INV 199; decap 0.225 nF = 56,533 um2 of gate (all ESTIMATE, the layout model is at the top of that log)",
+  "estimates_source": "AFE/review/sim/f1_area.log: afe_chc 49,312 + fs_oneshot_c 2,314 = 51,626 um2 (amp_ch); ADC analog part 14,911; bias_genc 9,966; digital cells of the N = 8 logic 31,872 + dbs_ctrl 1,789 = 33,661, REPLACED by the AS-BUILT 4-channel macro of REVIEW R14 (AFE/dig/reports/flow_summary.rpt: 855 std cells = 18,879 um2); 2 TGATE + OR2 + INV 199; decap 0.225 nF = 56,533 um2 of gate (all ESTIMATE, the layout model is at the top of that log)",
   "margin": {
-   "amp_ch": 0.217,
+   "amp_ch": 0.449,
    "adc_ch": 0.548,
-   "bias_genc": 1.427,
-   "afe_dig_utilisation": 0.408
+   "bias_genc": 0.26,
+   "afe_dig_utilisation": 0.515
   },
-  "blocks_placed_um2": 481102.0,
-  "overhead_um2": 190448.0,
+  "blocks_placed_um2": 474744.16,
+  "overhead_um2": 196805.84,
   "statement": "slot / estimate - 1 (the estimates already contain block factors 1.5 / 2.5 on transistor groups and MIM spacing). Decap needs NO area of its own in this plan (strap corridors, west ring, under Cref, under Cin); the top-level factor that the outline allows on the F1 block sum without decap (618,660 um2 for 8 channels; scaled by 4 / 8 for 4 channels, ESTIMATE) is 2.17"
  },
  "rules": {
