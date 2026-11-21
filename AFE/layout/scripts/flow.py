@@ -477,6 +477,8 @@ def cmd_pex(a):
         wall, rss = wall + wall2, max(rss, rss2)
     else:
         shutil.copy(raw, net)
+    nfl = bleed_floating(net, a.top)
+    res['floating_nodes'] = nfl
     dev, nc, nr, ctot, ports = census(net, a.top)
     res.update(ran=True, devices=dev, n_cap=nc, n_res=nr, c_total_fF=round(ctot, 3), ports=ports, bytes=os.path.getsize(net), wall_s=round(wall, 1), maxrss_mb=round(rss))
     lvsnet = a.lvsnet or os.path.join(a.out, a.top + '.lvs.spice')
@@ -494,6 +496,38 @@ def cmd_pex(a):
         a.top, a.mode, sum(dev.values()), dict(sorted(dev.items())), nc, ctot, nr, ' '.join(ports or []), res['census_equal_lvs'],
         ('; MIM correction moved ' + ', '.join('%s %.1f fF' % kv for kv in sorted(mf['moved_fF'].items()))) if mf else '', wall, rss, rel(net)))
     return 0 if (res['census_equal_lvs'] is not False and not unknown) else 1
+
+
+def bleed_floating(net, top):
+    """L2b: nodes that only have capacitors (dummy poly lines, unconnected metal: no device terminal, no resistor) make ngspice's DC operating point singular and it falls back to
+    a wrong transient start.  Each such node gets a 1 Tohm resistor to ground (Rfloat_<n>, 1e-12 S: no effect on any signal; gmin of the testbenches is 1e-16 S).  Returns the node list."""
+    L = open(net, errors='replace').read().split('\n')
+    inside, dev, cap = False, set(), set()
+    for ln in L:
+        t = ln.split()
+        if not t:
+            continue
+        if t[0].lower() == '.subckt':
+            inside = t[1] == top
+        elif t[0].lower() == '.ends':
+            inside = False
+        elif inside and t[0][0] in 'xXrRdDmM':
+            nodes = [x for x in t[1:] if '=' not in x]
+            dev |= set(nodes[:-1] if t[0][0] in 'xX' else nodes[:2])
+        elif inside and t[0][0] in 'cC':
+            cap |= set(t[1:3])
+    fl = sorted(cap - dev - {'0', 'gnd', 'vss', 'vdd'})
+    if not fl:
+        return []
+    out, done = [], False
+    for ln in L:
+        if not done and ln.lower().startswith('.ends'):
+            out += ['* L2b (flow.py bleed_floating): capacitor-only nodes (dummy poly) get 1 Tohm to ground, otherwise the DC operating point is singular']
+            out += ['Rfloat_%d %s 0 1e12' % (i, n) for i, n in enumerate(fl)]
+            done = True
+        out.append(ln)
+    open(net, 'w').write('\n'.join(out))
+    return fl
 
 
 def census_flat(path, top):

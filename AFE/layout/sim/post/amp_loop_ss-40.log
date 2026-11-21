@@ -1,0 +1,3 @@
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:04
+   job loop_pex4af2778fd894_ss-40: exit 0, 0 s
+RESULT amp_loop ss-40: t_100hz_db=48.598  fu_hz=187047  pm_deg=441.134

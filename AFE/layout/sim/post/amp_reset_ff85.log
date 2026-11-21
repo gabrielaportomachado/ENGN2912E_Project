@@ -1,0 +1,6 @@
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 01:05
+   job rs_pex4af2778fd894_ff85_0: exit 0, 13 s
+   job rs_pex4af2778fd894_ff85_1m: exit 0, 13 s
+   job rs_pex4af2778fd894_ff85_10m: exit 0, 22 s
+   job rs_pex4af2778fd894_ff85_100m: exit 0, 53 s
+RESULT amp_reset ff85: t_fs_ms_os0=1.59596  peak_mv_os0=333.059  rel_step_mv_os0=-327.912  t_1mv_s_os0=5.5168  final_v_os0=1.65563  drift_mv_s_os0=-6.55718  resid_end_mv_os0=0.399835  t_fs_ms_os1m=1.63542  peak_mv_os1m=317.47  rel_step_mv_os1m=-311.953  t_1mv_s_os1m=5.53784  final_v_os1m=1.65597  drift_mv_s_os1m=-7.20161  resid_end_mv_os1m=0.43002  t_fs_ms_os10m=1.63791  peak_mv_os10m=318.301  rel_step_mv_os10m=-315.07  t_1mv_s_os10m=8.50583  final_v_os10m=1.65115  drift_mv_s_os10m=-8.36831  resid_end_mv_os10m=0.0292213  t_fs_ms_os100m=1.69266  peak_mv_os100m=220.35  rel_step_mv_os100m=253.873  t_1mv_s_os100m=7.52102  final_v_os100m=1.65109  drift_mv_s_os100m=-2.90876  resid_end_mv_os100m=3.51765e-06

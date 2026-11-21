@@ -1,0 +1,3 @@
+== amp_psrr  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:04
+   job psrr_pex4af2778fd894_ss-40: exit 0, 0 s
+RESULT amp_psrr ss-40: supply_gain_50hz=0.617479  supply_gain_60hz=0.615536  supply_gain_300hz=0.508224  supply_gain_1khz=0.255622

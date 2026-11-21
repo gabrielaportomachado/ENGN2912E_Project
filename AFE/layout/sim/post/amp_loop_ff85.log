@@ -1,0 +1,3 @@
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 01:04
+   job loop_pex4af2778fd894_ff85: exit 0, 0 s
+RESULT amp_loop ff85: t_100hz_db=46.9421  fu_hz=356882  pm_deg=436.634

@@ -1,0 +1,3 @@
+== amp_pwrup  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:04
+   job pu_pex4af2778fd894_typ: exit 0, 1 s
+RESULT amp_pwrup typ: t_wait_s=0.2  vout_before_v=2.46339  vout_100ms_v=1.49193  vout_1s_v=1.61973  err_1s_mv=30.2653  codes_from_mid_1s=37.5656  vbn_end_v=0.647681  vrs_end_v=1.02916

@@ -1,5 +1,5 @@
 {
- "date": "2026-11-21 00:25",
+ "date": "2026-11-21 00:49",
  "devices_layout": {
   "cc1": 1,
   "cc2": 1,
@@ -77,5 +77,5 @@
  "timeout": false,
  "tool": "magic + netgen",
  "top": "amp_ch",
- "wall_s": 1.4
+ "wall_s": 4.3
 }

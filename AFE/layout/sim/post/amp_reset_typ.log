@@ -1,0 +1,6 @@
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:04
+   job rs_pex4af2778fd894_typ_0: exit 0, 13 s
+   job rs_pex4af2778fd894_typ_1m: exit 0, 13 s
+   job rs_pex4af2778fd894_typ_10m: exit 0, 22 s
+   job rs_pex4af2778fd894_typ_100m: exit 0, 57 s
+RESULT amp_reset typ: t_fs_ms_os0=3.1504  peak_mv_os0=301.1  rel_step_mv_os0=-258.497  t_1mv_s_os0=5.59194  final_v_os0=1.65667  drift_mv_s_os0=-7.08571  resid_end_mv_os0=0.530349  t_fs_ms_os1m=3.08028  peak_mv_os1m=305.201  rel_step_mv_os1m=-262.075  t_1mv_s_os1m=5.58147  final_v_os1m=1.65643  drift_mv_s_os1m=-6.66886  resid_end_mv_os1m=0.508633  t_fs_ms_os10m=3.02456  peak_mv_os10m=288.886  rel_step_mv_os10m=-253.633  t_1mv_s_os10m=8.57061  final_v_os10m=1.6508  drift_mv_s_os10m=-7.7247  resid_end_mv_os10m=0.0279343  t_fs_ms_os100m=3.07599  peak_mv_os100m=272.145  rel_step_mv_os100m=-234.399  t_1mv_s_os100m=9.46537  final_v_os100m=1.65074  drift_mv_s_os100m=-12.976  resid_end_mv_os100m=1.24148e-05

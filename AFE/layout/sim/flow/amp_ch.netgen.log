@@ -1,7 +1,7 @@
 Netgen 1.5.318 compiled on Thu Apr 16 09:08:04 PM CEST 2026
 Warning: netgen command 'format' use fully-qualified name '::netgen::format'
 Warning: netgen command 'global' use fully-qualified name '::netgen::global'
-Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/sim/flow/amp_ch.lvs.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/sim/flow/amp_ch.lvs.spice amp_ch
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/sim/flow/amp_ch.lvs.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/sim/flow/amp_ch.lvs.spice amp_ch
 Call to undefined subcircuit pfet_03v3
 Creating placeholder cell definition.
 Call to undefined subcircuit cap_mim_2f0_m4m5_noshield
@@ -14,7 +14,7 @@ Call to undefined subcircuit nfet_05v0
 Creating placeholder cell definition.
 Call to undefined subcircuit nfet_06v0_nvt
 Creating placeholder cell definition.
-Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/lvs/afe_chc.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/lvs/afe_chc.spice amp_ch
+Reading netlist file /foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/lvs/afe_chc.spice for /foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/lvs/afe_chc.spice amp_ch
 Call to undefined subcircuit nfet_03v3
 Creating placeholder cell definition.
 Call to undefined subcircuit pfet_03v3
@@ -192,8 +192,8 @@ No property $X found for device nfet_06v0_nvt
 No property $Y found for device nfet_06v0_nvt
 No property par1 found for device cap_mim_2f0_m4m5_noshield
 No property par1 found for device cap_mim_2f0_m4m5_noshield
-Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/sim/flow/amp_ch.lvs.out
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/sim/flow/amp_ch.lvs.out" enabled
+Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/sim/flow/amp_ch.lvs.out
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/sim/flow/amp_ch.lvs.out" enabled
 Circuit pfet_03v3 contains no devices.
 Circuit nfet_03v3 contains no devices.
 Circuit cap_mim_2f0_m4m5_noshield contains no devices.
@@ -260,5 +260,5 @@ Circuit 1 contains 35 nets,    Circuit 2 contains 35 nets.
 Final result: 
 Circuits match uniquely.
 .
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/sim/flow/amp_ch.lvs.out" disabled
+Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l2b/AFE/layout/sim/flow/amp_ch.lvs.out" disabled
 LVS Done.
