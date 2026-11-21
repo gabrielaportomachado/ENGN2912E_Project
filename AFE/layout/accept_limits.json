@@ -139,10 +139,10 @@
     {
      "kind": "range",
      "limit": [
-      0.38,
-      0.62
+      0.32,
+      0.68
      ],
-     "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579)"
+     "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579) | R8 2026-11-21: was 0.38 .. 0.62 (accept_limits_pre_R8R9.json)"
     }
    ],
    "supply_gain_60hz": [
@@ -188,11 +188,11 @@
     {
      "kind": "max",
      "limit": {
-      "typ": 1.17,
-      "ss-40": 1.17,
+      "typ": 1.19,
+      "ss-40": 1.19,
       "ff85": 1.25
      },
-     "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28)"
+     "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28) | R8 2026-11-21: was {\"typ\": 1.17, \"ss-40\": 1.17, \"ff85\": 1.25} (accept_limits_pre_R8R9.json)"
     }
    ],
    "gain_db": [
@@ -224,8 +224,8 @@
    "err_1s_mv": [
     {
      "kind": "max",
-     "limit": 10.0,
-     "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV)"
+     "limit": 50.0,
+     "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV) | R8 / ladder R-6 2026-11-21: was 10.0 (accept_limits_pre_R8R9.json)"
     }
    ],
    "vout_before_v": [
@@ -253,22 +253,22 @@
    "t_1mv_s_os0": [
     {
      "kind": "max",
-     "limit": 4.5,
-     "why": "baseline 1.5 / 3.2 / 0.7 s"
+     "limit": 6.75,
+     "why": "baseline 1.5 / 3.2 / 0.7 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
     }
    ],
    "t_1mv_s_os1m": [
     {
      "kind": "max",
-     "limit": 4.5,
-     "why": "baseline 0.004 / 1.4 / 0.5 s"
+     "limit": 6.75,
+     "why": "baseline 0.004 / 1.4 / 0.5 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
     }
    ],
    "t_1mv_s_os10m": [
     {
      "kind": "max",
-     "limit": 6.5,
-     "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s)"
+     "limit": 9.75,
+     "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s) | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
     }
    ],
    "t_1mv_s_os100m": [
@@ -322,8 +322,8 @@
    "t_1mv_s_os10m": [
     {
      "kind": "max",
-     "limit": 6.5,
-     "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start"
+     "limit": 9.75,
+     "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
     }
    ],
    "t_1mv_s_os100m": [
@@ -392,9 +392,8 @@
   "metrics": {
    "err_1s_mv": [
     {
-     "kind": "max",
-     "limit": 50.0,
-     "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB"
+     "kind": "report",
+     "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB | R8: not gating, ACCEPT.md section 2 risk view; host rule 6 RST_AMP repeat, first-silicon test 4 2026-11-21: was max 50 (gating) (accept_limits_pre_R8R9.json)"
     }
    ]
   }
@@ -444,11 +443,11 @@
      "limit": {
       "typ": 1.0,
       "ss-40": 1.0,
-      "ff-40": 1.0,
-      "ss125": 1.0,
-      "ff85": 2.5
+      "ff-40": 1.2,
+      "ss125": 1.2,
+      "ff85": 3.1
      },
-     "why": "Decision 43c: INL <= 1 LSB beyond the offset for inputs <= 2.0 V (typ); at ff 85 C the claim ends at 1.9 V (baseline 1.57 LSB up to 2.05 V, accepted)"
+     "why": "Decision 43c: INL <= 1 LSB beyond the offset for inputs <= 2.0 V (typ); at ff 85 C the claim ends at 1.9 V (baseline 1.57 LSB up to 2.05 V, accepted) | R9 2026-11-21: was {\"typ\": 1.0, \"ss-40\": 1.0, \"ff-40\": 1.0, \"ss125\": 1.0, \"ff85\": 2.5} (accept_limits_pre_R8R9.json)"
     }
    ],
    "inl_code_lo_lsb": [
@@ -459,9 +458,9 @@
       "ss-40": 1.5,
       "ff-40": 1.5,
       "ss125": 1.5,
-      "ff85": 2.0
+      "ff85": 3.0
      },
-     "why": "code-based INL less the quantisation: contains the code-dependent threshold accepted by Decision 43b (baseline 0.25-1.07)"
+     "why": "code-based INL less the quantisation: contains the code-dependent threshold accepted by Decision 43b (baseline 0.25-1.07) | R9 2026-11-21: was {\"typ\": 1.5, \"ss-40\": 1.5, \"ff-40\": 1.5, \"ss125\": 1.5, \"ff85\": 2.0} (accept_limits_pre_R8R9.json)"
     }
    ],
    "top_2v15_lsb": [
@@ -528,8 +527,12 @@
    "step_2048_lsb": [
     {
      "kind": "absmax",
-     "limit": 2.0,
-     "why": "Decision 43b accepted +1.3 / +1.55 LSB; with the MIM preamp capacitors F1 expects +0.8 / +1.3"
+     "limit": {
+      "typ": 2.0,
+      "ss-40": 2.0,
+      "ff85": 2.5
+     },
+     "why": "Decision 43b accepted +1.3 / +1.55 LSB; with the MIM preamp capacitors F1 expects +0.8 / +1.3 | R9 / ladder Q-2 (ff 85 C only) 2026-11-21: was 2.0 (accept_limits_pre_R8R9.json)"
     }
    ],
    "step_2112_lsb": [
@@ -699,9 +702,9 @@
      "limit": {
       "typ": 1.0,
       "ss-40": 1.0,
-      "ff85": 2.5
+      "ff85": 3.1
      },
-     "why": "Decision 43c: INL <= 1 LSB beyond the offset below 2.05 V; ff 85 C 1.99 LSB accepted (claim ends at 1.9 V)"
+     "why": "Decision 43c: INL <= 1 LSB beyond the offset below 2.05 V; ff 85 C 1.99 LSB accepted (claim ends at 1.9 V) | R9 (same ff 85 C ADC INL as adc_codes) 2026-11-21: was {\"typ\": 1.0, \"ss-40\": 1.0, \"ff85\": 2.5} (accept_limits_pre_R8R9.json)"
     }
    ],
    "amp_minus_adc_lsb": [

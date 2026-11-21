@@ -29,7 +29,7 @@ Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN` (the bidirectional pad DOUT is the top
 | 33-160 (words 2-9) | channel 0..7, `{0, ID[2:0], code[11:0]}`, same-frame data |
 
 SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input = the amplifier output, 1.15-2.15 V.
-Accuracy claim (Decision 43c): INL <= 1 LSB beyond a fixed code offset for amplifier outputs <= 2.0 V (typ) / <= 1.9 V (ff 85 C); above that the plate error grows to +2.1 / +4.4 LSB at 2.15 V (typ / ff 85).
+Accuracy claim (Decision 43c; restated after the post-layout L1b run by REVIEW R9: INL <= 1.1 LSB, typ 0.95, ff -40 1.10, ss 125 1.05, ff 85 C 3.1 LSB at the 1.99 V point): INL <= 1 LSB (pre-layout) beyond a fixed code offset for amplifier outputs <= 2.0 V (typ) / <= 1.9 V (ff 85 C); above that the plate error grows to +2.1 / +4.4 LSB at 2.15 V (typ / ff 85).
 Fixed code offset (Decisions 43e, 46d; restated by L1b from the extracted adc_ch, AFE/layout/sim/post/adc_codes.json): -32.6 / -42.2 / -23.4 LSB (typ 27 / ff 85 / ss -40 C; pre-layout -30.2 / -40.1 / -22.0) = -26 / -34 / -19 uV at the electrode; a pure code shift (the signal is AC coupled).
 
 ### Protocol rules for the host (Decisions 43d, 44g; `../review/AUDIT.md` M5, m4, m5, i2, i3, i4)

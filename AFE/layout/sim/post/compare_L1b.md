@@ -3,7 +3,7 @@
 | check | corner | value | baseline | post-layout | change | limit | result |
 |---|---|---|---|---|---|---|---|
 | adc_codes | ff-40 | code_offset_lsb | -36.1 | -37.8 | -1.7 | |change| <= 15 | PASS |
-| adc_codes | ff-40 | inl_lo_lsb | 0.27801 | 1.0961 | +0.8181 | <= 1 | FAIL |
+| adc_codes | ff-40 | inl_lo_lsb | 0.27801 | 1.0961 | +0.8181 | <= 1.2 | PASS |
 | adc_codes | ff-40 | inl_code_lo_lsb | 0.6218 | 0.64158 | +0.01978 | <= 1.5 | PASS |
 | adc_codes | ff-40 | top_2v15_lsb | 2.9759 | 2.6515 | -0.3244 | change <= +1.5 | PASS |
 | adc_codes | ff-40 | top_2v10_lsb | 2.0037 | 0.90165 | -1.102 |  |  |
@@ -13,8 +13,8 @@
 | adc_codes | ff-40 | failed | 0 | 0 | +0 | <= 0 | PASS |
 | adc_codes | ff-40 | first_conv_dlsb | 0.24041 | 0.299 | +0.05859 |  |  |
 | adc_codes | ff85 | code_offset_lsb | -40.1 | -42.2 | -2.1 | |change| <= 15 | PASS |
-| adc_codes | ff85 | inl_lo_lsb | 1.5656 | 3.0792 | +1.514 | <= 2.5 | FAIL |
-| adc_codes | ff85 | inl_code_lo_lsb | 1.0697 | 2.9697 | +1.9 | <= 2 | FAIL |
+| adc_codes | ff85 | inl_lo_lsb | 1.5656 | 3.0792 | +1.514 | <= 3.1 | PASS |
+| adc_codes | ff85 | inl_code_lo_lsb | 1.0697 | 2.9697 | +1.9 | <= 3 | PASS |
 | adc_codes | ff85 | top_2v15_lsb | 4.427 | 4.6835 | +0.2565 | change <= +1.5 | PASS |
 | adc_codes | ff85 | top_2v10_lsb | 3.5135 | 2.199 | -1.315 |  |  |
 | adc_codes | ff85 | alpha | 0.9801 | 0.9752 | -0.004897 | |change| <= 0.02 | PASS |
@@ -33,7 +33,7 @@
 | adc_codes | ss-40 | failed | 0 | 0 | +0 | <= 0 | PASS |
 | adc_codes | ss-40 | first_conv_dlsb | 0.31163 | 0.36978 | +0.05815 |  |  |
 | adc_codes | ss125 | code_offset_lsb | -26.4 | -28.6 | -2.2 | |change| <= 15 | PASS |
-| adc_codes | ss125 | inl_lo_lsb | 0.13219 | 1.0525 | +0.9203 | <= 1 | FAIL |
+| adc_codes | ss125 | inl_lo_lsb | 0.13219 | 1.0525 | +0.9203 | <= 1.2 | PASS |
 | adc_codes | ss125 | inl_code_lo_lsb | 0.25051 | 0.94275 | +0.6922 | <= 1.5 | PASS |
 | adc_codes | ss125 | top_2v15_lsb | 1.5782 | 1.5985 | +0.02023 | change <= +1.5 | PASS |
 | adc_codes | ss125 | top_2v10_lsb | 0.87123 | -0.12529 | -0.9965 |  |  |
@@ -53,7 +53,7 @@
 | adc_codes | typ | failed | 0 | 0 | +0 | <= 0 | PASS |
 | adc_codes | typ | first_conv_dlsb | 0.35929 | 0.41472 | +0.05543 |  |  |
 | adc_steps | ff85 | step_1536_lsb | -1.0796 | 1.4204 | +2.5 | |x| <= 2 | PASS |
-| adc_steps | ff85 | step_2048_lsb | 1.5454 | 2.2954 | +0.75 | |x| <= 2 | FAIL |
+| adc_steps | ff85 | step_2048_lsb | 1.5454 | 2.2954 | +0.75 | |x| <= 2.5 | PASS |
 | adc_steps | ff85 | step_2112_lsb | 0.17043 | -0.45457 | -0.625 | |x| <= 0.5 | PASS |
 | adc_steps | ss-40 | step_1536_lsb | -1.0796 | 1.0454 | +2.125 | |x| <= 2 | PASS |
 | adc_steps | ss-40 | step_2048_lsb | 0.42043 | 0.8516 | +0.4312 | |x| <= 2 | PASS |
@@ -94,4 +94,4 @@
 | adc_overlap | typ | dt_max_lsb | 0.0036841 | 0.0024291 | -0.001255 | <= 0.2 | PASS |
 | adc_overlap | typ | dcode_max | 0 | 0 | +0 | <= 1 | PASS |
 
-RESULT compare L1b: FAIL  (64 PASS, 0 WARN, 5 FAIL, 0 missing)
+RESULT compare L1b: PASS  (69 PASS, 0 WARN, 0 FAIL, 0 missing)

@@ -62,7 +62,7 @@ Dedicated 3.3 V LDO with <= about 1 mV rms ripple (the ADC is ratiometric, 0.6 L
 2. Short E[k] and REF to a mid-supply source: every channel near code 2018 (= 2048 + code offset -30 typ); noise of the codes in 0.5-300 Hz (expect <= 2 uV rms at the electrode at 27 C and -40 C, 2.14 uV at 85 C: Cin = 15 pF, Decision 50).
 3. Gain and bandwidth: 0.45 mV pk sine from 0.1 Hz to 2 kHz on E[k]: 60 dB, high-pass corner (design 0.25-0.29 Hz at Cin 15 pF), low-pass corner (0.42-1.0 kHz).
 4. **Measure first on every channel**: the high-pass corner and the drift after RST_AMP with a known DC offset (10 mV and 100 mV) on E[k]: this decides between the two pseudo-resistor models of ACCEPT.md section 2 and the RST_AMP repeat interval of rule 6.
-5. ADC linearity with a slow ramp (amplifier output 1.15-2.0 V): INL <= 1 LSB beyond the fixed offset (Decision 43c); crosstalk: one channel driven to full scale, the neighbours quiet.
+5. ADC linearity with a slow ramp (amplifier output 1.15-2.0 V): INL <= 1.1 LSB beyond the fixed offset (Decision 43c as restated by REVIEW R9: post-layout 0.95 LSB typ, 1.10 / 1.05 LSB at ff -40 / ss 125, 3.1 LSB at ff 85 C near 2.0 V); crosstalk: one channel driven to full scale, the neighbours quiet.
 6. Routing: stimulation mode with a bench IPG (tens of uA) on IPG[k]; record mode afterwards (rule 7).
 
 ## Files of the submission

@@ -1,0 +1,32 @@
+gate.py L1b  (L1b)
+--- common
+PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
+PASS  AFE/layout/REVIEW.md not edited by this phase
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit b6c91de
+WARN  protected files changed by REVIEW.md items (named in report section 9): AFE/layout/ACCEPT.md AFE/layout/accept_limits.json
+PASS  open REVIEW.md items for L1b or an earlier phase (R1 R8 R9) are listed as handled in section 9 of a phase report
+PASS  phase report AFE/layout/reports/L1b.md with all 10 sections
+PASS  "## L1b findings" section in AFE/NOTES.md
+PASS  Results-log row for L1b in AFE/NOTES.md
+PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
+PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
+--- adc_ch layout: AFE/layout/adc/adc_ch.gds
+--- layout still clean (the PEX is of the layout that passed DRC / LVS)
+PASS  DRC report belongs to the current GDS (sha1)
+PASS  DRC ran with the official deck, variant D
+PASS  DRC adc_ch: 0 violations
+PASS  LVS report belongs to the current GDS (sha1)
+PASS  LVS reference AFE/layout/lvs/adc_ch.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
+PASS  LVS adc_ch: Circuits match uniquely.
+PASS  the reference was written by mk_lvs_netlists.py (header)
+--- PEX
+PASS  PEX report belongs to the current GDS (sha1)
+PASS  PEX ran (c mode)
+PASS  PEX device census equals the LVS extraction
+PASS  MIM top-plate correction applied (moved a_1094_7200# 13.2 fF, a_21494_7200# 13.5 fF, a_23316_2302# 0.3 fF, a_26694_9400# 26.7 fF)
+PASS  no unknown device model in the PEX netlist 
+--- post-layout limits
+PASS  compare.py --phase L1b: PASS (69 PASS, 0 WARN, 0 FAIL, 0 missing)
+PASS  post-layout results were simulated on extracted netlists
+GATE L1b: PASS  (0 FAIL)
