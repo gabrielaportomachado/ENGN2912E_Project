@@ -4,9 +4,11 @@ Written from 2026-11-12 on by the monitoring session as a running log. The decis
 (Decisions 29-45), which is the reference. Numbers marked ESTIMATE are not simulated. F1 (2026-11-20) added the CURRENT STATE section below and marked every
 older section that no longer holds as SUPERSEDED (the old text is kept as history; do not take numbers from a SUPERSEDED section).
 
-## CURRENT STATE (2026-11-20, after Decisions 44 and 45; kept up to date by the phases)
+## CURRENT STATE (2026-11-20, after Decisions 44 and 45; kept up to date by the phases; the SPI frame text was updated on 2026-11-21 for Decision 54)
+NOTE 2026-11-21: Decisions 52-54 changed the chip to N = 4 channels, 20 pads (E[3:0], IPG[3:0], REC[3:0], REF + 5 digital + VDD, VSS), a 605 x 1110 um outline and an 80-SCLK frame. Only the SPI-frame statements of this section are updated so far (the host interface is AFE/adc/SPI_FRAME.md). Everything below that still says N = 8, 24 pads, REC[7:0] not being pads, a 1000 x 1000 um outline, the area, the power and the decap numbers is the N = 8 state and is NOT current: use Decisions 52-54 of AFE/NOTES.md and AFE/layout/SPEC.md until the pad / outline / power text is updated.
 - Chip: N = 8 channels (Decision 29); per channel: routing TGATEs, LFP amplifier (60 dB, 0.2-650 Hz), its own 12-bit SAR ADC (Decision 34), simultaneous sampling at CS falling, 4 kS/s per channel
-  (host timed), one SPI port: 160-clock frame, word 0 = config {RST_AMP, MODE, EN[7:0]} on DIN, word 1 = config readback, words 2-9 = {ID, code} of channel 0-7 on DOUT (Decisions 37, 38, 41).
+  (host timed), one SPI port: 80-clock frame (Decision 54; 160 clocks in the N = 8 design): word 0 = config {WR, RST_AMP, MODE, EN[3:0]} on DIN and, at the same time, the status word {1010, RST_AMP, MODE, EN[3:0], 0} (the held config) on DOUT,
+  words 1-4 = {ID[1:0], 00, code[11:0]} of channel 0-3 on DOUT; the config commits at SCLK edge 17 and only if WR = 1; SPI mode 0, MSB first; full spec AFE/adc/SPI_FRAME.md (Decisions 37, 38, 41, 54).
   Single 3.3 V supply (Decision 30), no CLK / READY / MODE / EN pads (routing control clocked by SCLK, READY tied high inside), no 5 V domain, no analog mux.
 - Pads: 24 (Decision 45; the TA asked for fewer pads and a smaller block: REC pads dropped, fallback N = 2). Pin list for info.yaml:
 
@@ -15,11 +17,11 @@ older section that no longer holds as SUPERSEDED (the old text is kept as histor
 | E[7:0] | analog (8) | E[7:0] | electrode contacts (to the record and IPG routing TGATEs) |
 | IPG[7:0] | analog (8) | IPG[7:0] | stimulation side; signals must stay inside 0..VDD |
 | REF | analog (1) | REF | shared reference electrode -> amplifier `ref` input of all 8 channels (Decision 41) |
-| CS | input_cmos | CS, CS_PU = 0, CS_PD = 0 | SPI chip select; falling edge = sampling instant of all 8 channels |
-| DIN | input_cmos | DIN, DIN_PU = 0, DIN_PD = 0 | config word 0 |
+| CS | input_cmos | CS, CS_PU = 0, CS_PD = 0 | SPI chip select, low for the whole 80-clock frame; falling edge = sampling instant of all channels (all 8 in the N = 8 table, all 4 since Decision 52) |
+| DIN | input_cmos | DIN, DIN_PU = 0, DIN_PD = 0 | config word 0 = {WR, RST_AMP, MODE, EN[3:0]} (edges 1-16; the rest of the frame is ignored) |
 | SCLK | input_schmitt | SCLK, SCLK_PU = 0, SCLK_PD = 0 | 2 MHz nominal, 3 MHz maximum; the only clock of the chip |
 | RSTN | input_schmitt | RSTN, RSTN_PU = 0, RSTN_PD = 1 | asynchronous reset, pad pull-down ON |
-| DOUT | bidirectional | DOUT_OUT (to pad A), DOUT_IN (from pad Y, unused), DOUT_OE = ~CS, DOUT_IE = DOUT_PD = DOUT_PU = DOUT_CS = DOUT_SL = DOUT_PDRV0 = DOUT_PDRV1 = 0 | serial data out; drives only while CS is low (Decisions 41d, 44b) |
+| DOUT | bidirectional | DOUT_OUT (to pad A), DOUT_IN (from pad Y, unused), DOUT_OE = ~CS, DOUT_IE = DOUT_PD = DOUT_PU = DOUT_CS = DOUT_SL = DOUT_PDRV0 = DOUT_PDRV1 = 0 | serial data out: status word, then the 4 channel words; drives only while CS is low (Decisions 41d, 44b, 54) |
 | VDD | power | VDD | one 3.3 V pad |
 | VSS | ground | VSS | one ground pad |
 
@@ -30,7 +32,7 @@ older section that no longer holds as SUPERSEDED (the old text is kept as histor
 - Power: 2.09 mW typ in record mode (3.26 mW ff 85 C, 1.37 mW ss -40 C), 0.63 mA; no power-down (AFE/review/sim/f1_power_total.log).
 - Supply: one pad pair, three straps (analog; ADC-main with 0.125 nF MOS decap; ADC-DAC behind 10 ohm with 0.1 nF), 0.225 nF = 0.057-0.071 mm2 (Decision 44d). SCLK 0.64 MHz minimum, 2 MHz nominal, 3 MHz maximum (Decision 40c).
 - Layout / LVS inputs: AFE/layout/PLAN.md section 9 (pins), AFE/layout/lvs/ (LVS references written by AFE/layout/scripts/mk_lvs_netlists.py), AFE/prompts/layout_run.md (phases).
-- Host rules, power-up sequence, test plan: AFE/adc/README.md.
+- Host interface (frame, bit by bit): AFE/adc/SPI_FRAME.md. Host rules, power-up sequence, test plan: AFE/adc/README.md.
 - OPEN with the organizer (Decision 44k): macro name and DEF, slot size and pad positions, whether the VDD / VSS pair is ours alone and can be double bonded, native-Vt nfet_06v0_nvt allowed
   (the follower uses it), high-resistance poly 1 kOhm/sq only (the netlists use only ppolyf_u_1k since F1), bond-wire inductance. Fallback if 8 channels are refused: N = 2 (Decision 45).
 
@@ -196,7 +198,7 @@ D0b (AFE/adc/PLAN.md section D0b): 8 ADCs + shared digital = 0.136 mm2 (agrees w
 the decap density 4.6 fF/um2 is NOT checked in the PDK, the 2 nH package inductance is ASSUMED. Block total with decap: ~0.8-1.0 mm2 (0.65-0.85 above + 0.16) -> report ~1000 x 1000 um (range 900-1150) against a ~1110 x 1110 um slot (1.23 mm2): TIGHT.
 Levers for L0 (in order of cost): (1) place the MOS decap UNDER the MIM capacitors (the MIM sits in upper metal; ~0.16 mm2 of Cin MIM exists), check the GF180 MIM/decap stacking rules and the noise coupling; (2) monotonic / energy-saving DAC switching
 (2-4x less supply charge, ESTIMATE from the literature, evaluate first in D2); (3) N = 4 (~0.45-0.6 mm2, ~700 x 700 um); (4) a bigger slot from the organizer.
-Frame/pin consequences from D0b: DIN carries config in word 0 of a 160-SCLK frame; DOUT carries 8 x 16-bit words; dbs is clocked by SCLK (no CLK pad), SCLK 1-5 MHz recommended (0.64 MHz minimum); CS from an MCU hardware timer (jitter <= 85 ns rms). Pad list unchanged (31).
+Frame/pin consequences from D0b (SUPERSEDED by Decision 54: the frame is now 80 SCLK, see CURRENT STATE and AFE/adc/SPI_FRAME.md): DIN carries config in word 0 of a 160-SCLK frame; DOUT carries 8 x 16-bit words; dbs is clocked by SCLK (no CLK pad), SCLK 1-5 MHz recommended (0.64 MHz minimum); CS from an MCU hardware timer (jitter <= 85 ns rms). Pad list unchanged (31).
 
 ## UPDATE 2026-11-14 (phase I1, Decision 41): 32 pads
 **PARTLY SUPERSEDED**: the REF pad and the RSTN pull-down stand; the count is 24 since Decision 45 (no REC pads), so the REC fallbacks below are moot.

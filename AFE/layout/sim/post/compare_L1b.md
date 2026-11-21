@@ -61,34 +61,34 @@
 | adc_steps | typ | step_1536_lsb | -1.0796 | 1.0454 | +2.125 | |x| <= 2 | PASS |
 | adc_steps | typ | step_2048_lsb | 1.2954 | 1.2643 | -0.03113 | |x| <= 2 | PASS |
 | adc_steps | typ | step_2112_lsb | 0.045432 | -0.20457 | -0.25 | |x| <= 0.5 | PASS |
-| adc_timing | ff-40 | settle_worst_lsb | 0.098028 | 0.14446 | +0.04643 | <= 0.5 | PASS |
+| adc_timing | ff-40 | settle_worst_lsb | 0.098028 | 0.14336 | +0.04533 | <= 0.5 | PASS |
 | adc_timing | ff-40 | late | 0 | 0 | +0 | <= 0 | PASS |
 | adc_timing | ff-40 | failed | 0 | 0 | +0 | <= 0 | PASS |
-| adc_timing | ff-40 | td_max_ns | 0.94645 | 1.394 | +0.4475 |  |  |
-| adc_timing | ff-40 | settle_trial1_lsb | 0.0058649 | 0.010717 | +0.004852 |  |  |
-| adc_timing | ff-40 | settle_trial2_lsb | 0.098028 | 0.14446 | +0.04643 |  |  |
-| adc_timing | ff-40 | settle_top_lsb | 1.4548 | 1.4088 | -0.04603 | change <= +0.5 | PASS |
-| adc_timing | ss-40x | settle_worst_lsb | 0.64952 | 0.80349 | +0.154 | <= 1 | PASS |
+| adc_timing | ff-40 | td_max_ns | 0.94645 | 1.3888 | +0.4423 |  |  |
+| adc_timing | ff-40 | settle_trial1_lsb | 0.0058649 | 0.0095649 | +0.0037 |  |  |
+| adc_timing | ff-40 | settle_trial2_lsb | 0.098028 | 0.14336 | +0.04533 |  |  |
+| adc_timing | ff-40 | settle_top_lsb | 1.4548 | 1.403 | -0.05184 | change <= +0.5 | PASS |
+| adc_timing | ss-40x | settle_worst_lsb | 0.64952 | 0.72825 | +0.07874 | <= 1 | PASS |
 | adc_timing | ss-40x | late | 0 | 0 | +0 | <= 0 | PASS |
 | adc_timing | ss-40x | failed | 0 | 0 | +0 | <= 0 | PASS |
-| adc_timing | ss-40x | td_max_ns | 1.5485 | 2.1398 | +0.5913 |  |  |
-| adc_timing | ss-40x | settle_trial1_lsb | 0.64952 | 0.80349 | +0.154 |  |  |
-| adc_timing | ss-40x | settle_trial2_lsb | 0.42611 | 0.57579 | +0.1497 |  |  |
-| adc_timing | ss-40x | settle_top_lsb | 0.74646 | 0.86992 | +0.1235 | change <= +0.5 | PASS |
-| adc_timing | ss125 | settle_worst_lsb | 0.11297 | 0.10951 | -0.003466 | <= 0.5 | PASS |
+| adc_timing | ss-40x | td_max_ns | 1.5485 | 2.1429 | +0.5945 |  |  |
+| adc_timing | ss-40x | settle_trial1_lsb | 0.64952 | 0.72825 | +0.07874 |  |  |
+| adc_timing | ss-40x | settle_trial2_lsb | 0.42611 | 0.51825 | +0.09214 |  |  |
+| adc_timing | ss-40x | settle_top_lsb | 0.74646 | 0.78537 | +0.0389 | change <= +0.5 | PASS |
+| adc_timing | ss125 | settle_worst_lsb | 0.11297 | 0.10897 | -0.004008 | <= 0.5 | PASS |
 | adc_timing | ss125 | late | 0 | 0 | +0 | <= 0 | PASS |
 | adc_timing | ss125 | failed | 0 | 0 | +0 | <= 0 | PASS |
-| adc_timing | ss125 | td_max_ns | 2.643 | 3.8003 | +1.157 |  |  |
-| adc_timing | ss125 | settle_trial1_lsb | 0.0013209 | 0.0012969 | -2.392e-05 |  |  |
-| adc_timing | ss125 | settle_trial2_lsb | 0.11297 | 0.10951 | -0.003466 |  |  |
-| adc_timing | ss125 | settle_top_lsb | 0.279 | 0.26826 | -0.01073 | change <= +0.5 | PASS |
-| adc_timing | typ | settle_worst_lsb | 0.073943 | 0.10253 | +0.02859 | <= 0.5 | PASS |
+| adc_timing | ss125 | td_max_ns | 2.643 | 3.7986 | +1.156 |  |  |
+| adc_timing | ss125 | settle_trial1_lsb | 0.0013209 | 0.0012916 | -2.931e-05 |  |  |
+| adc_timing | ss125 | settle_trial2_lsb | 0.11297 | 0.10897 | -0.004008 |  |  |
+| adc_timing | ss125 | settle_top_lsb | 0.279 | 0.26734 | -0.01166 | change <= +0.5 | PASS |
+| adc_timing | typ | settle_worst_lsb | 0.073943 | 0.1023 | +0.02835 | <= 0.5 | PASS |
 | adc_timing | typ | late | 0 | 0 | +0 | <= 0 | PASS |
 | adc_timing | typ | failed | 0 | 0 | +0 | <= 0 | PASS |
-| adc_timing | typ | td_max_ns | 1.5331 | 2.153 | +0.6199 |  |  |
-| adc_timing | typ | settle_trial1_lsb | 0.0012661 | 0.00051137 | -0.0007547 |  |  |
-| adc_timing | typ | settle_trial2_lsb | 0.073943 | 0.10253 | +0.02859 |  |  |
-| adc_timing | typ | settle_top_lsb | 0.65249 | 0.60576 | -0.04673 | change <= +0.5 | PASS |
+| adc_timing | typ | td_max_ns | 1.5331 | 2.1505 | +0.6175 |  |  |
+| adc_timing | typ | settle_trial1_lsb | 0.0012661 | 0.00042561 | -0.0008404 |  |  |
+| adc_timing | typ | settle_trial2_lsb | 0.073943 | 0.1023 | +0.02835 |  |  |
+| adc_timing | typ | settle_top_lsb | 0.65249 | 0.60428 | -0.04821 | change <= +0.5 | PASS |
 | adc_overlap | ff-40 | dt_max_lsb | 0.0041409 | 0.0064314 | +0.00229 | <= 0.2 | PASS |
 | adc_overlap | ff-40 | dcode_max | 0 | 0 | +0 | <= 1 | PASS |
 | adc_overlap | typ | dt_max_lsb | 0.0036841 | 0.0024291 | -0.001255 | <= 0.2 | PASS |

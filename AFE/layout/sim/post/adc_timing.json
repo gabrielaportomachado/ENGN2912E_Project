@@ -2,79 +2,79 @@
  "check": "adc_timing",
  "corners": {
   "ff-40": {
-   "date": "2026-11-21 01:30",
+   "date": "2026-11-21 16:59",
    "info": {
     "timing": "a_ff_n40",
     "warnings": []
    },
    "log": "AFE/layout/sim/post/adc_timing_ff-40.log",
    "values": {
-    "dac_to_clk_ns": 21.960000000000004,
+    "dac_to_clk_ns": 22.24,
     "failed": 0.0,
     "late": 0.0,
-    "settle_top_lsb": 1.4087958840904473,
-    "settle_trial1_lsb": 0.010717076128862068,
-    "settle_trial2_lsb": 0.14445816627345368,
-    "settle_worst_lsb": 0.14445816627345368,
-    "td_avail_ns": 3.420000000000001,
-    "td_max_ns": 1.393985866082921
+    "settle_top_lsb": 1.4029867333427621,
+    "settle_trial1_lsb": 0.00956486622297032,
+    "settle_trial2_lsb": 0.14335723213055948,
+    "settle_worst_lsb": 0.14335723213055948,
+    "td_avail_ns": 3.04,
+    "td_max_ns": 1.388765539795788
    }
   },
   "ss-40x": {
-   "date": "2026-11-21 01:33",
+   "date": "2026-11-21 17:00",
    "info": {
     "timing": "a_ff_n40",
     "warnings": []
    },
    "log": "AFE/layout/sim/post/adc_timing_ss-40x.log",
    "values": {
-    "dac_to_clk_ns": 21.960000000000004,
+    "dac_to_clk_ns": 22.24,
     "failed": 0.0,
     "late": 0.0,
-    "settle_top_lsb": 0.8699230072781776,
-    "settle_trial1_lsb": 0.8034852368919271,
-    "settle_trial2_lsb": 0.5757943905934503,
-    "settle_worst_lsb": 0.8034852368919271,
-    "td_avail_ns": 3.420000000000001,
-    "td_max_ns": 2.1398081125468917
+    "settle_top_lsb": 0.7853652140772738,
+    "settle_trial1_lsb": 0.7282521916431506,
+    "settle_trial2_lsb": 0.5182518397027202,
+    "settle_worst_lsb": 0.7282521916431506,
+    "td_avail_ns": 3.04,
+    "td_max_ns": 2.142937892998624
    }
   },
   "ss125": {
-   "date": "2026-11-21 01:31",
+   "date": "2026-11-21 16:59",
    "info": {
     "timing": "a_ss_125",
     "warnings": []
    },
    "log": "AFE/layout/sim/post/adc_timing_ss125.log",
    "values": {
-    "dac_to_clk_ns": 86.59,
+    "dac_to_clk_ns": 87.53,
     "failed": 0.0,
     "late": 0.0,
-    "settle_top_lsb": 0.2682641135039224,
-    "settle_trial1_lsb": 0.0012969383915712267,
-    "settle_trial2_lsb": 0.10950761412717232,
-    "settle_worst_lsb": 0.10950761412717232,
-    "td_avail_ns": 13.33,
-    "td_max_ns": 3.800266610187904
+    "settle_top_lsb": 0.2673365275988999,
+    "settle_trial1_lsb": 0.0012915556714384973,
+    "settle_trial2_lsb": 0.1089660459820152,
+    "settle_worst_lsb": 0.1089660459820152,
+    "td_avail_ns": 12.15,
+    "td_max_ns": 3.798596405740068
    }
   },
   "typ": {
-   "date": "2026-11-21 01:27",
+   "date": "2026-11-21 16:58",
    "info": {
     "timing": "a_tt",
     "warnings": []
    },
    "log": "AFE/layout/sim/post/adc_timing_typ.log",
    "values": {
-    "dac_to_clk_ns": 41.07,
+    "dac_to_clk_ns": 41.54,
     "failed": 0.0,
     "late": 0.0,
-    "settle_top_lsb": 0.6057580341706109,
-    "settle_trial1_lsb": 0.0005113697622591369,
-    "settle_trial2_lsb": 0.10252974126077871,
-    "settle_worst_lsb": 0.10252974126077871,
-    "td_avail_ns": 6.369999999999999,
-    "td_max_ns": 2.152977170242348
+    "settle_top_lsb": 0.6042824659909292,
+    "settle_trial1_lsb": 0.0004256130832662338,
+    "settle_trial2_lsb": 0.10229695322943207,
+    "settle_worst_lsb": 0.10229695322943207,
+    "td_avail_ns": 5.739999999999999,
+    "td_max_ns": 2.150542961049627
    }
   }
  },

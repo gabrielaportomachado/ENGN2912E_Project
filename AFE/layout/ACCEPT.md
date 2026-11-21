@@ -146,20 +146,20 @@ Changed 2026-11-21 by REVIEW.md R8 / R9 (user / team: as-built amp_ch / adc_ch p
 | top_stim | L3b | t_1mv_s | all | <= 4.5 |  | as amp_reset without offset (baseline 0.8 s) |
 <!-- LIMITS END -->
 
-Digital macro afe_dig (L1d; numbers of the LP trial: AFE/dig/LP_STEP5.md, AFE/dig/reports/flow_summary.rpt, sta_audit_dig.log, klayout_drc.log, AFE/dig/sim/tb_audit_dig_summary.log):
+Digital macro afe_dig (L1d; the limits are unchanged by Decision 54, the `trial` column is restated for the 4-channel macro with the 80-SCLK frame (REVIEW R14, 2026-11-21: AFE/dig/reports/flow_summary.rpt, sta_audit_dig.log, klayout_drc.log, AFE/dig/sim/tb_audit_dig_summary.log, sta_taps.json); the 8-channel LP trial / L1d numbers are given in brackets):
 
 | item | limit | trial | why |
 |---|---|---|---|
-| setup / hold at the 5 corners, 2 MHz clock (500 ns), 0.5 ns uncertainty | 0 violations | 0 / 0 (setup ws 91.69 ns ss_125, hold ws 0.229 ns ff_n40) | STA sign-off |
+| setup / hold at the 5 corners, 2 MHz clock (500 ns), 0.5 ns uncertainty | 0 violations | 0 / 0 (setup ws 93.18 ns ss_125, hold ws 0.172 ns ff_n40) [8 ch: 91.69 / 0.229 ns] | STA sign-off |
 | max-slew / max-cap violations | 0 | 0 / 0 (D3 macro: 16 / 3) | audit M6 |
-| DAC edge -> comparator clock of ADC 0, ff_n40C_3v60 (worst SPEF) | >= 21.0 ns | 22.14 ns | DAC settling at the fast corner 15.1 ns + margin (AUDIT 4.4.3) |
-| last comparator window end -> next SCLK edge at the register clock pins, ss_125C_3v00, 3 MHz | >= 20.0 ns | 22.39 ns | the next DAC edge is launched through the same clock buffer, so this is the physical margin (AUDIT 4.4.5). Against the SCLK PIN the trial has 20.59 ns: reported, not a limit |
-| captured decision -> code register slack at 3 MHz, ss_125 | >= 10 ns | 13.75 ns (D3: 14.25) | STA |
-| sw_rec / sw_rec_b skew at the macro pins | <= 3 ns | <= 0.78 ns (ss_125) | harmless (<= 8 fC for 100 mV, AUDIT 4.4.3); a larger value means a missing buffer |
-| gate-level testbench `run_tb_audit.sh` on the hardened netlist, 5 matched corners + MIXED, 2 and 3 MHz, 3 scenarios | failing assertions only X1.contention, X5.word0, X5.after33d, T11.crowbar, and T2.settle at MIXED | as required | audit 4.4.6; Decision 44f |
+| DAC edge -> comparator clock of ADC 0, ff_n40C_3v60 (worst SPEF) | >= 21.0 ns | 22.22 ns [8 ch: 22.14 ns] | DAC settling at the fast corner 15.1 ns + margin (AUDIT 4.4.3); unchanged by N = 4: ADC 0 keeps the first taps of the chain |
+| last comparator window end -> next SCLK edge at the register clock pins, ss_125C_3v00, 3 MHz | >= 20.0 ns | 136.78 ns [8 ch: 22.39 ns] | the next DAC edge is launched through the same clock buffer, so this is the physical margin (AUDIT 4.4.5). With 4 comparator-clock taps instead of 8 the last window ends about 4 x 28.7 ns (ss_125) earlier, which is why the margin grew; against the SCLK PIN 135.60 ns [8 ch: 20.59 ns]: reported, not a limit |
+| captured decision -> code register slack at 3 MHz, ss_125 | >= 10 ns | 128.32 ns [8 ch: 13.75 ns] | STA (same reason as the row above) |
+| sw_rec / sw_rec_b skew at the macro pins | <= 3 ns | <= 0.679 ns (ss_125) [8 ch: 0.78 ns] | harmless (<= 8 fC for 100 mV, AUDIT 4.4.3); a larger value means a missing buffer |
+| gate-level testbench `run_tb_audit.sh` on the hardened netlist, 5 matched corners + MIXED, 2 and 3 MHz, 3 scenarios | failing assertions only X1.contention, X5.word0, X5.after17d, T11.crowbar, and T2.settle at MIXED | as required | audit 4.4.6; Decision 44f. X5.after17d = X5.after33d of the 160-SCLK frame, renamed with the new commit edge (Decision 54: the config commits at edge 17, not 33): a RSTN pulse after the commit edge followed by DIN data restarts the frame counter and the restarted frame commits that data (the accepted hazard: RSTN changes only while CS is high, host rule); X1.a20 / X1.a40 became a16 / a20 |
 | KLayout DRC variant D on the macro GDS | 0 | 0 (3:36 wall, 645 MB) | the D3 flow skipped it (M6) |
 | pins | `floorplan.py check --dig-pins`: side and position per floorplan.json | PASS | SPEC.md 3.5 |
-| die | <= 820 x 110 um | 819.84 x 109.76 um | floorplan slot |
+| die | <= the macro slot of floorplan.json (425 x 86.24 um since R14; 820 x 110 um for the 8-channel macro) | 424.48 x 86.24 um [8 ch: 819.84 x 109.76 um] | floorplan slot; 58.6 % utilisation (A-4 allows up to 60 %) |
 
 ## 4. Decision ladder (find the failing item; apply the first entry that fits; each entry says how often to try before the next one)
 
@@ -252,8 +252,7 @@ Ranked, cheapest first; apply in this order, re-run `floorplan.py check` after e
 - A-3 Re-run the amplifier generator with another aspect ratio (Cin block 2 x 2 or 1 x 4, OTA beside or below it). Cost: one L2a-type iteration (DRC + LVS + L2b again).
 - A-4 Digital macro at higher utilisation (up to 60 %): -0.019 mm2 (AUDIT 4.5 lever 3). Cost: routing effort in L1d.
 - A-5 (AUDIT 4.5 lever 1 = Decision 46c) decap under the Cin plates: already not needed for area in this floorplan (decap has no area of its own); it is the reserve for the supply ladder S.
-- A-6 N = 4 (channels 0-3 only, one row; the south row stays empty; the unused ADC inputs `cmp_q[7:4]` of afe_dig tied to vss at the top, same SPI frame, words 6-9 read 0): -0.33 mm2.
-  Cost: 4 channels. PRE-APPROVED only if A-1 .. A-4 are exhausted AND the amplifier still does not fit.
+- A-6 N = 4: DONE, it is the design (Decisions 52 and 54): 4 channels in two rows of two in the 605 x 1110 um outline, a real 4-channel digital part (`adc_top #(.N(4))`, `dbs_ctrl #(.N(4))`, macro vectors 4 wide, no tied-off channels) and the 80-SCLK frame of AFE/adc/SPI_FRAME.md (config word with WR, status word with the sync pattern, 4 channel words). The old form (8-channel logic with `cmp_q[7:4]` tied low, 160-SCLK frame, words 6-9 reading 0) no longer exists.
 - A-7 N = 2 (Decision 45 fallback: E[1:0], IPG[1:0], REF; 700 x 600 um): PRE-APPROVED only if the organizer REFUSES the 1000 x 1000 um slot or the 24 pads in writing (then also update
   info.yaml and the README by the same rule). Never by the agent's own judgment of area.
 - Not available before tapeout: Cin 20 -> 10 pF (noise, full re-simulation), a shared ADC (Decision 34).
