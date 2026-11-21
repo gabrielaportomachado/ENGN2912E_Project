@@ -1,0 +1,272 @@
+* NGSPICE file created from bias_genc.ext - technology: gf180mcuD
+
+.subckt bg_pfet__0 a_3550_0# a_838_0# a_5462_n60# a_2750_n60# a_7166_0# w_n180_n88#
++ a_4454_0# a_38_n60# a_4558_n60# a_n92_0# a_1742_0# a_1846_n60# a_5358_0# a_6366_n60#
++ a_6262_0# a_3654_n60# a_2646_0# a_942_n60#
+X0 a_3550_0# a_2750_n60# a_2646_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+X1 a_6262_0# a_5462_n60# a_5358_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+X2 a_4454_0# a_3654_n60# a_3550_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+X3 a_7166_0# a_6366_n60# a_6262_0# w_n180_n88# pfet_03v3 ad=6.5p pd=21.3u as=2.6p ps=10.52u w=10u l=4u
+X4 a_1742_0# a_942_n60# a_838_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+X5 a_838_0# a_38_n60# a_n92_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=6.5p ps=21.3u w=10u l=4u
+X6 a_2646_0# a_1846_n60# a_1742_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+X7 a_5358_0# a_4558_n60# a_4454_0# w_n180_n88# pfet_03v3 ad=2.6p pd=10.52u as=2.6p ps=10.52u w=10u l=4u
+.ends
+
+.subckt bg_pg m1_6264_1718# m1_n500_1900# m1_4456_1718# w_n1060_n1060# m1_n84_n498#
++ m1_2648_1718# m1_840_1718#
+Xbg_pfet__0_0 m1_n84_n498# m1_840_1718# m1_n500_1900# m1_n500_1900# m1_n84_n498# w_n1060_n1060#
++ m1_4456_1718# m1_n500_1900# m1_n500_1900# m1_n84_n498# m1_n84_n498# m1_n500_1900#
++ m1_n84_n498# m1_n500_1900# m1_6264_1718# m1_n500_1900# m1_2648_1718# m1_n500_1900#
++ bg_pfet__0
+.ends
+
+.subckt bg_nfet__5 a_8038_0# a_38_n60# a_n84_n10# VSUBS
+X0 a_8038_0# a_38_n60# a_n84_n10# VSUBS nfet_03v3 ad=0.2128p pd=1.98u as=0.2128p ps=1.98u w=0.28u l=40u
+.ends
+
+.subckt bg_xsr bg_nfet__5_0/VSUBS m1_8080_n11# m1_150_186#
+Xbg_nfet__5_0 m1_8080_n11# m1_150_186# bg_nfet__5_0/VSUBS bg_nfet__5_0/VSUBS bg_nfet__5
+.ends
+
+.subckt bg_xsr_rot bg_xsr_0/m1_150_186# bg_xsr_0/m1_8080_n11# VSUBS
+Xbg_xsr_0 VSUBS bg_xsr_0/m1_8080_n11# bg_xsr_0/m1_150_186# bg_xsr
+.ends
+
+.subckt bg_pfet__3 a_838_0# w_n180_n88# a_38_n60# a_n92_0#
+X0 a_838_0# a_38_n60# a_n92_0# w_n180_n88# pfet_03v3 ad=0.325p pd=2.3u as=0.325p ps=2.3u w=0.5u l=4u
+.ends
+
+.subckt bg_su m1_884_11# m1_3684_11# m1_2550_11# m1_2284_11# m1_1150_11# m1_1550_232#
++ w_n860_n660# m1_150_232# m1_2950_232#
+Xbg_pfet__3_0 m1_3684_11# w_n860_n660# m1_2950_232# m1_2550_11# bg_pfet__3
+Xbg_pfet__3_1 m1_2284_11# w_n860_n660# m1_1550_232# m1_1150_11# bg_pfet__3
+Xbg_pfet__3_2 m1_884_11# w_n860_n660# m1_150_232# w_n860_n660# bg_pfet__3
+.ends
+
+.subckt bg_su_rot bg_su_0/m1_2550_11# bg_su_0/m1_3684_11# bg_su_0/m1_2284_11# bg_su_0/m1_1150_11#
++ bg_su_0/m1_1550_232# bg_su_0/m1_150_232# bg_su_0/w_n860_n660# bg_su_0/m1_2950_232#
++ bg_su_0/m1_884_11#
+Xbg_su_0 bg_su_0/m1_884_11# bg_su_0/m1_3684_11# bg_su_0/m1_2550_11# bg_su_0/m1_2284_11#
++ bg_su_0/m1_1150_11# bg_su_0/m1_1550_232# bg_su_0/w_n860_n660# bg_su_0/m1_150_232#
++ bg_su_0/m1_2950_232# bg_su
+.ends
+
+.subckt bg_nfet__1 a_3550_0# a_838_0# a_2750_n60# a_4454_0# a_38_n60# a_1742_0# a_n84_0#
++ a_1846_n60# a_3654_n60# a_2646_0# a_942_n60# VSUBS
+X0 a_3550_0# a_2750_n60# a_2646_0# VSUBS nfet_03v3 ad=3.328p pd=13.32u as=3.328p ps=13.32u w=12.8u l=4u
+X1 a_4454_0# a_3654_n60# a_3550_0# VSUBS nfet_03v3 ad=7.808p pd=26.82u as=3.328p ps=13.32u w=12.8u l=4u
+X2 a_1742_0# a_942_n60# a_838_0# VSUBS nfet_03v3 ad=3.328p pd=13.32u as=3.328p ps=13.32u w=12.8u l=4u
+X3 a_838_0# a_38_n60# a_n84_0# VSUBS nfet_03v3 ad=3.328p pd=13.32u as=7.808p ps=26.82u w=12.8u l=4u
+X4 a_2646_0# a_1846_n60# a_1742_0# VSUBS nfet_03v3 ad=3.328p pd=13.32u as=3.328p ps=13.32u w=12.8u l=4u
+.ends
+
+.subckt bg_n2 m1_840_2346# bg_nfet__1_0/VSUBS m1_n500_2500# m1_n80_n456#
+Xbg_nfet__1_0 m1_n80_n456# m1_840_2346# m1_n500_2500# m1_840_2346# m1_n500_2500# m1_n80_n456#
++ m1_n80_n456# m1_n500_2500# m1_n500_2500# m1_840_2346# m1_n500_2500# bg_nfet__1_0/VSUBS
++ bg_nfet__1
+.ends
+
+.subckt bg_res_1_25 a_5000_0# a_n128_0# VSUBS
+X0 a_n128_0# a_5000_0# VSUBS ppolyf_u_1k r_width=1u r_length=25u
+.ends
+
+.subckt bg_lad_b a_1072_8700# m1_17042_3150# a_6472_8700# m1_550_n50# m1_550_350#
++ m1_17042_7950# a_11872_8700# VSUBS
+Xbg_res_1_25_0 m1_17042_7950# m1_11642_8350# VSUBS bg_res_1_25
+Xbg_res_1_25_2 m1_6242_8350# m1_858_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_1 m1_11642_8350# m1_6242_8350# VSUBS bg_res_1_25
+Xbg_res_1_25_3 m1_17042_7950# m1_11642_7950# VSUBS bg_res_1_25
+Xbg_res_1_25_4 m1_11642_7950# m1_6242_7950# VSUBS bg_res_1_25
+Xbg_res_1_25_5 m1_6242_7950# m1_1058_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_6 m1_17042_6750# m1_11642_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_7 m1_11642_7550# m1_6242_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_60 m1_17042_350# m1_11642_350# VSUBS bg_res_1_25
+Xbg_res_1_25_8 m1_6242_7550# m1_858_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_61 m1_11642_350# m1_6242_350# VSUBS bg_res_1_25
+Xbg_res_1_25_50 m1_6242_1950# m1_858_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_9 m1_17042_6350# m1_11642_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_62 m1_6242_350# m1_550_350# VSUBS bg_res_1_25
+Xbg_res_1_25_51 m1_17042_1550# m1_11642_1550# VSUBS bg_res_1_25
+Xbg_res_1_25_40 m1_11642_3150# m1_6242_3150# VSUBS bg_res_1_25
+Xbg_res_1_25_63 m1_17042_n50# m1_11642_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_52 m1_11642_1550# m1_6242_1550# VSUBS bg_res_1_25
+Xbg_res_1_25_41 m1_6242_3150# m1_1058_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_30 m1_17042_3550# m1_11642_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_64 m1_11642_n50# m1_6242_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_53 m1_6242_1550# m1_1058_750# VSUBS bg_res_1_25
+Xbg_res_1_25_42 m1_17042_1950# m1_11642_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_31 m1_11642_4350# m1_6242_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_20 m1_6242_5950# m1_858_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_65 m1_6242_n50# m1_550_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_55 m1_11642_1150# m1_6242_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_54 m1_17042_350# m1_11642_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_44 m1_6242_2750# m1_858_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_43 m1_11642_2750# m1_6242_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_33 m1_17042_3150# m1_11642_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_32 m1_6242_4350# m1_858_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_22 m1_11642_5550# m1_6242_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_21 m1_17042_4750# m1_11642_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_11 m1_6242_7150# m1_1058_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_10 m1_11642_7150# m1_6242_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_56 m1_6242_1150# m1_858_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_45 m1_17042_1550# m1_11642_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_34 m1_11642_3950# m1_6242_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_23 m1_6242_5550# m1_1058_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_12 m1_17042_6750# m1_11642_6750# VSUBS bg_res_1_25
+Xbg_res_1_25_57 m1_17042_n50# m1_11642_750# VSUBS bg_res_1_25
+Xbg_res_1_25_46 m1_11642_2350# m1_6242_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_35 m1_6242_3950# m1_1058_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_24 m1_17042_5150# m1_11642_5150# VSUBS bg_res_1_25
+Xbg_res_1_25_13 m1_11642_6750# m1_6242_6750# VSUBS bg_res_1_25
+Xbg_res_1_25_58 m1_11642_750# m1_6242_750# VSUBS bg_res_1_25
+Xbg_res_1_25_47 m1_6242_2350# m1_1058_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_36 m1_17042_3550# m1_11642_3550# VSUBS bg_res_1_25
+Xbg_res_1_25_25 m1_11642_5150# m1_6242_5150# VSUBS bg_res_1_25
+Xbg_res_1_25_14 m1_6242_6750# m1_858_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_59 m1_6242_750# m1_1058_750# VSUBS bg_res_1_25
+Xbg_res_1_25_48 m1_17042_1950# m1_11642_1950# VSUBS bg_res_1_25
+Xbg_res_1_25_37 m1_11642_3550# m1_6242_3550# VSUBS bg_res_1_25
+Xbg_res_1_25_26 m1_6242_5150# m1_858_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_15 m1_17042_6350# m1_11642_6350# VSUBS bg_res_1_25
+Xbg_res_1_25_49 m1_11642_1950# m1_6242_1950# VSUBS bg_res_1_25
+Xbg_res_1_25_38 m1_6242_3550# m1_858_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_27 m1_17042_4750# m1_11642_4750# VSUBS bg_res_1_25
+Xbg_res_1_25_16 m1_11642_6350# m1_6242_6350# VSUBS bg_res_1_25
+Xbg_res_1_25_39 m1_17042_3150# m1_11642_3150# VSUBS bg_res_1_25
+Xbg_res_1_25_28 m1_11642_4750# m1_6242_4750# VSUBS bg_res_1_25
+Xbg_res_1_25_17 m1_6242_6350# m1_1058_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_29 m1_6242_4750# m1_1058_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_18 m1_17042_5150# m1_11642_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_19 m1_11642_5950# m1_6242_5950# VSUBS bg_res_1_25
+.ends
+
+.subckt bg_pfet__4 w_n180_n104# a_n92_n16# a_138_0# a_38_n136#
+X0 a_138_0# a_38_n136# a_n92_n16# w_n180_n104# pfet_03v3 ad=0.2166p pd=2.06u as=0.2166p ps=2.06u w=0.22u l=0.5u
+.ends
+
+.subckt bg_rep m1_184_n450# m1_n50_n450# w_n20_n104#
+Xbg_pfet__4_0 w_n20_n104# w_n20_n104# m1_184_n450# m1_n50_n450# bg_pfet__4
+.ends
+
+.subckt bg_rep_rot bg_rep_0/m1_184_n450# bg_rep_0/m1_n50_n450# bg_rep_0/w_n20_n104#
+Xbg_rep_0 bg_rep_0/m1_184_n450# bg_rep_0/m1_n50_n450# bg_rep_0/w_n20_n104# bg_rep
+.ends
+
+.subckt bg_res_2_60 a_n128_0# a_12000_0# VSUBS
+X0 a_n128_0# a_12000_0# VSUBS ppolyf_u_1k r_width=2u r_length=60u
+.ends
+
+.subckt bg_rb_res m1_150_750# m1_150_150# VSUBS
+Xbg_res_2_60_0 m1_150_750# m1_12854_60# VSUBS bg_res_2_60
+Xbg_res_2_60_1 m1_150_150# m1_12854_60# VSUBS bg_res_2_60
+.ends
+
+.subckt bg_rb_rot bg_rb_res_0/m1_150_750# bg_rb_res_0/m1_150_150# VSUBS
+Xbg_rb_res_0 bg_rb_res_0/m1_150_750# bg_rb_res_0/m1_150_150# VSUBS bg_rb_res
+.ends
+
+.subckt bg_nfet__2 a_838_0# a_38_n60# a_1742_0# a_n84_0# a_942_n60# VSUBS
+X0 a_1742_0# a_942_n60# a_838_0# VSUBS nfet_03v3 ad=4.88p pd=17.22u as=2.08p ps=8.52u w=8u l=4u
+X1 a_838_0# a_38_n60# a_n84_0# VSUBS nfet_03v3 ad=2.08p pd=8.52u as=4.88p ps=17.22u w=8u l=4u
+.ends
+
+.subckt bg_n1 m1_n80_n496# m1_840_1316# m1_n500_1500# bg_nfet__2_0/VSUBS
+Xbg_nfet__2_0 m1_840_1316# m1_n500_1500# m1_n80_n496# m1_n80_n496# m1_n500_1500# bg_nfet__2_0/VSUBS
++ bg_nfet__2
+.ends
+
+.subckt bg_cap_mim__6 m4_n120_n120# m4_0_0#
+X0 m4_0_0# m4_n120_n120# cap_mim_2f0_m4m5_noshield c_width=49.885u c_length=49.885u
+.ends
+
+.subckt bg_cvrs m4_10480_680# m4_10077_100#
+Xbg_cap_mim__6_0 m4_10077_100# m4_10480_680# bg_cap_mim__6
+.ends
+
+.subckt bg_lad_a m1_6242_7150# a_11872_n500# a_1072_n500# m1_550_n50# m1_550_350#
++ m1_17042_7950# a_6472_n500# VSUBS
+Xbg_res_1_25_0 m1_17042_7950# m1_11642_8350# VSUBS bg_res_1_25
+Xbg_res_1_25_2 m1_6242_8350# m1_858_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_1 m1_11642_8350# m1_6242_8350# VSUBS bg_res_1_25
+Xbg_res_1_25_3 m1_17042_7950# m1_11642_7950# VSUBS bg_res_1_25
+Xbg_res_1_25_4 m1_11642_7950# m1_6242_7950# VSUBS bg_res_1_25
+Xbg_res_1_25_5 m1_6242_7950# m1_1058_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_6 m1_17042_6750# m1_11642_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_7 m1_11642_7550# m1_6242_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_60 m1_17042_350# m1_11642_350# VSUBS bg_res_1_25
+Xbg_res_1_25_8 m1_6242_7550# m1_858_7550# VSUBS bg_res_1_25
+Xbg_res_1_25_61 m1_11642_350# m1_6242_350# VSUBS bg_res_1_25
+Xbg_res_1_25_50 m1_6242_1950# m1_858_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_9 m1_17042_6350# m1_11642_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_62 m1_6242_350# m1_550_350# VSUBS bg_res_1_25
+Xbg_res_1_25_51 m1_17042_1550# m1_11642_1550# VSUBS bg_res_1_25
+Xbg_res_1_25_40 m1_11642_3150# m1_6242_3150# VSUBS bg_res_1_25
+Xbg_res_1_25_63 m1_17042_n50# m1_11642_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_52 m1_11642_1550# m1_6242_1550# VSUBS bg_res_1_25
+Xbg_res_1_25_41 m1_6242_3150# m1_1058_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_30 m1_17042_3550# m1_11642_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_64 m1_11642_n50# m1_6242_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_53 m1_6242_1550# m1_1058_750# VSUBS bg_res_1_25
+Xbg_res_1_25_42 m1_17042_1950# m1_11642_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_31 m1_11642_4350# m1_6242_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_20 m1_6242_5950# m1_858_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_65 m1_6242_n50# m1_550_n50# VSUBS bg_res_1_25
+Xbg_res_1_25_55 m1_11642_1150# m1_6242_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_54 m1_17042_350# m1_11642_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_44 m1_6242_2750# m1_858_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_43 m1_11642_2750# m1_6242_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_33 m1_17042_3150# m1_11642_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_32 m1_6242_4350# m1_858_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_22 m1_11642_5550# m1_6242_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_21 m1_17042_4750# m1_11642_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_11 m1_6242_7150# m1_1058_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_10 m1_11642_7150# m1_6242_7150# VSUBS bg_res_1_25
+Xbg_res_1_25_56 m1_6242_1150# m1_858_1150# VSUBS bg_res_1_25
+Xbg_res_1_25_45 m1_17042_1550# m1_11642_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_34 m1_11642_3950# m1_6242_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_23 m1_6242_5550# m1_1058_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_12 m1_17042_6750# m1_11642_6750# VSUBS bg_res_1_25
+Xbg_res_1_25_57 m1_17042_n50# m1_11642_750# VSUBS bg_res_1_25
+Xbg_res_1_25_46 m1_11642_2350# m1_6242_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_35 m1_6242_3950# m1_1058_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_24 m1_17042_5150# m1_11642_5150# VSUBS bg_res_1_25
+Xbg_res_1_25_13 m1_11642_6750# m1_6242_6750# VSUBS bg_res_1_25
+Xbg_res_1_25_58 m1_11642_750# m1_6242_750# VSUBS bg_res_1_25
+Xbg_res_1_25_47 m1_6242_2350# m1_1058_2350# VSUBS bg_res_1_25
+Xbg_res_1_25_36 m1_17042_3550# m1_11642_3550# VSUBS bg_res_1_25
+Xbg_res_1_25_25 m1_11642_5150# m1_6242_5150# VSUBS bg_res_1_25
+Xbg_res_1_25_14 m1_6242_6750# m1_858_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_59 m1_6242_750# m1_1058_750# VSUBS bg_res_1_25
+Xbg_res_1_25_48 m1_17042_1950# m1_11642_1950# VSUBS bg_res_1_25
+Xbg_res_1_25_37 m1_11642_3550# m1_6242_3550# VSUBS bg_res_1_25
+Xbg_res_1_25_26 m1_6242_5150# m1_858_4350# VSUBS bg_res_1_25
+Xbg_res_1_25_15 m1_17042_6350# m1_11642_6350# VSUBS bg_res_1_25
+Xbg_res_1_25_49 m1_11642_1950# m1_6242_1950# VSUBS bg_res_1_25
+Xbg_res_1_25_38 m1_6242_3550# m1_858_2750# VSUBS bg_res_1_25
+Xbg_res_1_25_27 m1_17042_4750# m1_11642_4750# VSUBS bg_res_1_25
+Xbg_res_1_25_16 m1_11642_6350# m1_6242_6350# VSUBS bg_res_1_25
+Xbg_res_1_25_39 m1_17042_3150# m1_11642_3150# VSUBS bg_res_1_25
+Xbg_res_1_25_28 m1_11642_4750# m1_6242_4750# VSUBS bg_res_1_25
+Xbg_res_1_25_17 m1_6242_6350# m1_1058_5550# VSUBS bg_res_1_25
+Xbg_res_1_25_29 m1_6242_4750# m1_1058_3950# VSUBS bg_res_1_25
+Xbg_res_1_25_18 m1_17042_5150# m1_11642_5950# VSUBS bg_res_1_25
+Xbg_res_1_25_19 m1_11642_5950# m1_6242_5950# VSUBS bg_res_1_25
+.ends
+
+.subckt bias_genc vdd vss vcm_in vg1 vbn vcm_out vg2 vrs
+Xbg_pg_0 m1_800_21870# m1_800_21870# vbn vdd vdd vbn m1_800_21870# bg_pg
+Xbg_xsr_rot_0 vbn vrs vss bg_xsr_rot
+Xbg_su_rot_0 m1_18600_12470# vbn m1_18600_12470# m1_18600_11070# m1_18600_12470# m1_18600_11070#
++ vdd vbn m1_18600_11070# bg_su_rot
+Xbg_n2_0 m1_800_21870# vss vbn m1_13800_19270# bg_n2
+Xbg_lad_b_0 bg_lad_b_0/a_1072_8700# vg2 bg_lad_b_0/a_6472_8700# vdd vss vcm_out bg_lad_b_0/a_11872_8700#
++ vss bg_lad_b
+Xbg_rep_rot_0 vrs vrs vcm_in bg_rep_rot
+Xbg_rb_rot_0 vss m1_13800_19270# vss bg_rb_rot
+Xbg_n1_0 vss vbn vbn vss bg_n1
+Xbg_cvrs_0 vrs vss bg_cvrs
+Xbg_lad_a_0 vg1 bg_lad_b_0/a_11872_8700# bg_lad_b_0/a_1072_8700# vdd vss vcm_in bg_lad_b_0/a_6472_8700#
++ vss bg_lad_a
+.ends
+

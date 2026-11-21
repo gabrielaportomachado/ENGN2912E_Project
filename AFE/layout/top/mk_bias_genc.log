@@ -1,0 +1,26 @@
+block LA  bbox [2.5, -2.6, 88.5, 44.6] size [86.0, 47.2]
+block LB  bbox [2.5, -2.6, 88.5, 44.6] size [86.0, 47.2]
+block RB  bbox [0.5, -0.5, 65.5, 5.5] size [65.0, 6.0]
+block PG  bbox [-5.3, -5.3, 39.3, 14.3] size [42, 17]
+block N2  bbox [-4.5, -4.5, 24.5, 16.5] size [28, 20]
+block N1  bbox [-4.5, -4.5, 11.5, 11.5] size [15, 15]
+block SU  bbox [-4.3, -3.3, 22.3, 6.3] size [24, 7]
+block REP bbox [-0.9, -2.25, 2.7, 2.25] size [3.6, 4.5]
+block XSR bbox [-3.5, -2.5, 43.5, 5.5] size [46, 7]
+block CV  bbox [-0.6, -0.6, 53.6, 50.48] size [54.2, 51.09]
+placed LB  x 1.5 .. 87.5  y 0.4 .. 47.6
+placed LA  x 1.5 .. 87.5  y 46.4 .. 93.6
+placed CV  x 31.4 .. 85.6  y 0.4 .. 51.5
+placed PG  x 1.7 .. 46.3  y 94.7 .. 114.3
+placed N2  x 48.5 .. 77.5  y 94.5 .. 115.5
+placed N1  x 79.5 .. 95.5  y 94.5 .. 110.5
+placed XSR x 90.5 .. 98.5  y 1.5 .. 48.5
+placed SU  x 90.7 .. 100.3  y 50.7 .. 77.3
+placed RB  x 100.5 .. 106.5  y 1.5 .. 66.5
+placed REP x 100.8 .. 105.2  y 68.1 .. 71.7
+nets: vdd(6), vss(9), vcm_out(2), vg2(2), vcm_in(3), vg1(2), vrs(5), a(4), vbn(9), r1(2), s1(3), s2(3)
+routing: 12 nets, 0 failed: []
+cell bbox 0.000 .. 107.250 x 0.000 .. 115.100  =  107.250 x 115.100 um (limit 108 x 116.24)  area 12344.5 um2
+labels on the top cell: [('vdd', 106.25, 111.6), ('vss', 106.25, 102.6), ('vcm_in', 106.25, 90.6), ('vg1', 106.25, 81.6), ('vbn', 106.25, 69.6), ('vcm_out', 106.25, 43.6), ('vg2', 106.25, 18.6), ('vrs', 106.25, 7.6)]
+block areas (bbox, um2): LB 4059, LA 4059, CV 2769, PG 874, N2 609, N1 256, XSR 376, SU 255, RB 390, REP 16
+tie rings (comp 0.42 um wide, centre-line perimeter): PG 49.6, N2 40.3, N1 25.2, XSR 44.5, SU 26.0 um2, total 185.6
