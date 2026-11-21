@@ -117,6 +117,11 @@ def build(cell, x0=0.0, y0=0.0, pad_x_w=None, pad_x_e=None, dummies=True):
     return D
 
 
+TRIM_NET = 'b11'
+TRIM_LEN = 100.0
+TRIM_W = float(__import__('os').environ.get('TRIM_W', '1.6'))
+
+
 def m4(cell, x1, y1, x2, y2):
     k.rect(cell, 'metal4', x1, y1, x2, y2)
 
@@ -201,6 +206,30 @@ def exits(cell, D):
     m5(cell, D.xT_t - 0.5, ylo, D.xT_t + 0.5, yhi)
     D.tr_m = (D.xT_m, ylo, yhi)
     D.tr_t = (D.xT_t, ylo, yhi)
+    # L1b trim (module variable TRIM_NET / TRIM_LEN): Metal4 strips of one bit net under the t trunk, grown from its tabs, to compensate the
+    # bit-dependent coupling of the bottom-plate wiring to the top plate (the weights of the MSB half are not binary after PEX)
+    if TRIM_LEN > 0:
+        xs, xe = D.xT_t - TRIM_W / 2.0, D.xT_t + TRIM_W / 2.0
+        cross = sorted((r[1], r[3]) for (n, r) in D.tabs if r[0] < xe and r[2] > xs)
+        for (n, r) in list(D.tabs):
+            if n != TRIM_NET or not (r[0] < xe and r[2] > xs):
+                continue
+            for sgn in (+1, -1):
+                y0 = r[3] if sgn > 0 else r[1]
+                lim = yhi - 0.5 if sgn > 0 else ylo + 0.5
+                for (c0, c1) in cross:
+                    if (c0, c1) == (r[1], r[3]):
+                        continue
+                    if sgn > 0 and c0 - 0.8 > y0 - 1e-9:
+                        lim = min(lim, c0 - 0.8)
+                    if sgn < 0 and c1 + 0.8 < y0 + 1e-9:
+                        lim = max(lim, c1 + 0.8)
+                y1 = y0 + sgn * TRIM_LEN
+                y1 = min(y1, lim) if sgn > 0 else max(y1, lim)
+                ya, yb = min(r[3] if sgn > 0 else r[1], y1), max(r[3] if sgn > 0 else r[1], y1)
+                if yb - ya > 0.5:
+                    m4(cell, xs, ya, xe, yb)
+                    D.tabs.append((TRIM_NET, (xs, ya, xe, yb)))
     # bridge: its bottom plate (net m) goes through its Via4 pad in the channel to a Metal5 strap to the east end of the LSB row 4 bar
     br = [p for p in D.pads if p[0] == 'br'][0]
     xb, yb = br[3], br[4]

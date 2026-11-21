@@ -1,0 +1,8 @@
+== adc_overlap  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ff-40 (ff, -40 C, 3.6 V)  2026-11-21 01:27
+OVERLAP ff-40 Vin 1.25455: code 1388 -> 1388, T +39.058 -> +39.059 LSB
+OVERLAP ff-40 Vin 1.35026: code 1497 -> 1497, T +38.931 -> +38.931 LSB
+OVERLAP ff-40 Vin 1.80026: code 2008 -> 2008, T +38.505 -> +38.503 LSB
+OVERLAP ff-40 Vin 2.07273: code 2320 -> 2320, T +37.308 -> +37.304 LSB
+OVERLAP ff-40 Vin 2.25026: code 2519 -> 2519, T +39.755 -> +39.749 LSB
+OVERLAP ff-40 Vin 2.18182: code 2443 -> 2443, T +38.230 -> +38.230 LSB
+RESULT adc_overlap ff-40: dt_max_lsb=0.00643144  dcode_max=0  t_offset_nom_lsb=38.6312  t_offset_ovl_lsb=38.6291  overlap_ns=0.21  n=6

@@ -1,0 +1,5 @@
+== adc_steps  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:09
+STEP ss-40 boundary 1536: 8 below (1496..1530), 8 above (1537..1572): e below -24.20, above -23.28 -> step +0.92 LSB
+STEP ss-40 boundary 2048: 8 below (2008..2041), 8 above (2050..2084): e below -24.95, above -22.78 -> step +2.17 LSB
+STEP ss-40 boundary 2112: 8 below (2073..2107), 8 above (2113..2148): e below -23.20, above -23.28 -> step -0.08 LSB
+RESULT adc_steps ss-40: step_1536_lsb=0.920432  offset_1536_lsb=-23.741  n_1536=16  step_2048_lsb=2.17043  offset_2048_lsb=-23.866  n_2048=16  step_2112_lsb=-0.0795683  offset_2112_lsb=-23.241  n_2112=16

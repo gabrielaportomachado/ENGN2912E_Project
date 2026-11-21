@@ -1,0 +1,8 @@
+== adc_overlap  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:24
+OVERLAP typ Vin 1.15000: code 1395 -> 1395, T +32.568 -> +32.569 LSB
+OVERLAP typ Vin 1.23774: code 1504 -> 1504, T +32.474 -> +32.475 LSB
+OVERLAP typ Vin 1.65024: code 2015 -> 2015, T +32.286 -> +32.285 LSB
+OVERLAP typ Vin 1.90000: code 2326 -> 2326, T +31.421 -> +31.421 LSB
+OVERLAP typ Vin 2.06274: code 2526 -> 2526, T +33.520 -> +33.522 LSB
+OVERLAP typ Vin 2.00000: code 2450 -> 2450, T +31.667 -> +31.669 LSB
+RESULT adc_overlap typ: dt_max_lsb=0.00242907  dcode_max=0  t_offset_nom_lsb=32.3226  t_offset_ovl_lsb=32.3236  overlap_ns=0.21  n=6

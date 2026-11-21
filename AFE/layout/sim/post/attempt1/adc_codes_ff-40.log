@@ -1,0 +1,17 @@
+== adc_codes  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ff-40 (ff, -40 C, 3.6 V)  2026-11-21 01:02
+   pass 1: 12 runs in 52 s, still open 12, failed 0; disk 28.0 GB, RAM 4956 MB free
+   pass 2: 12 runs in 43 s, still open 7, failed 0; disk 28.0 GB, RAM 4967 MB free | predictor: 132 decisions within 8 LSB of the threshold: misclassified by a constant threshold 8, by the bit-dependent threshold 0; theta0 -36.91 LSB, per-bit shift b11..b0 [LSB] -0.22 +0.22 -0.23 -0.19 +0.03 -0.41 +0.19 +0.23 -0.02 -0.01 +0.16 +0.12
+   pass 3: 7 runs in 25 s, still open 0, failed 0; disk 28.2 GB, RAM 5028 MB free | predictor: 202 decisions within 8 LSB of the threshold: misclassified by a constant threshold 10, by the bit-dependent threshold 0; theta0 -36.81 LSB, per-bit shift b11..b0 [LSB] -0.17 +0.17 -0.29 -0.16 +0.10 -0.43 +0.22 +0.19 -0.02 +0.01 +0.03 +0.18
+ADC ff-40 vin 1.290873 code 1430 ideal 1468 diff -38 | T +38.569 LSB | passes 3 unresolved 0
+ADC ff-40 vin 1.389289 code 1543 ideal 1580 diff -37 | T +37.615 LSB | passes 3 unresolved 0
+ADC ff-40 vin 1.487176 code 1652 ideal 1692 diff -40 | T +39.345 LSB | passes 2 unresolved 0
+ADC ff-40 vin 1.585199 code 1764 ideal 1803 diff -39 | T +39.332 LSB | passes 3 unresolved 0
+ADC ff-40 vin 1.683717 code 1876 ideal 1915 diff -39 | T +38.757 LSB | passes 3 unresolved 0
+ADC ff-40 vin 1.781971 code 1987 ideal 2027 diff -40 | T +38.938 LSB | passes 2 unresolved 0
+ADC ff-40 vin 1.879798 code 2101 ideal 2138 diff -37 | T +37.424 LSB | passes 3 unresolved 0
+ADC ff-40 vin 1.977999 code 2213 ideal 2250 diff -37 | T +37.400 LSB | passes 3 unresolved 0
+ADC ff-40 vin 2.076531 code 2325 ideal 2362 diff -37 | T +36.799 LSB | passes 2 unresolved 0
+ADC ff-40 vin 2.174603 code 2437 ideal 2474 diff -37 | T +37.052 LSB | passes 3 unresolved 0
+ADC ff-40 vin 2.290909 code 2567 ideal 2606 diff -39 | T +38.109 LSB | passes 2 unresolved 0
+ADC ff-40 vin 2.345455 code 2627 ideal 2668 diff -41 | T +39.934 LSB | passes 2 unresolved 0
+RESULT adc_codes ff-40: code_offset_lsb=-38.1  t_offset_lsb=38.1231  inl_lo_lsb=1.32385  inl_code_lo_lsb=1.34158  top_2v10_lsb=-0.0144767  top_2v15_lsb=1.8106  gain_err_pct=0.187938  alpha=0.975551  theta_lsb=-36.8105  unresolved=0  failed=0  first_conv_dlsb=0.29751  n_inputs=12

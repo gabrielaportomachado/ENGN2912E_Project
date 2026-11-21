@@ -30,7 +30,7 @@ Pins: `CS`, `SCLK`, `DIN`, `DOUT`, `RSTN` (the bidirectional pad DOUT is the top
 
 SCLK 2 MHz nominal, 3 MHz max (0.64 MHz min). T_ACQ = 240-244 us. Input = the amplifier output, 1.15-2.15 V.
 Accuracy claim (Decision 43c): INL <= 1 LSB beyond a fixed code offset for amplifier outputs <= 2.0 V (typ) / <= 1.9 V (ff 85 C); above that the plate error grows to +2.1 / +4.4 LSB at 2.15 V (typ / ff 85).
-Fixed code offset (Decision 43e): -30 / -40 / -22 LSB (typ 27 / ff 85 / ss -40 C) = -24 / -33 / -18 uV at the electrode; a pure code shift (the signal is AC coupled).
+Fixed code offset (Decisions 43e, 46d; restated by L1b from the extracted adc_ch, AFE/layout/sim/post/adc_codes.json): -32.6 / -42.2 / -23.4 LSB (typ 27 / ff 85 / ss -40 C; pre-layout -30.2 / -40.1 / -22.0) = -26 / -34 / -19 uV at the electrode; a pure code shift (the signal is AC coupled).
 
 ### Protocol rules for the host (Decisions 43d, 44g; `../review/AUDIT.md` M5, m4, m5, i2, i3, i4)
 1. Change RSTN only while CS is HIGH. A release or a pulse of RSTN while CS is low restarts the frame counter in mid-frame: the 16 DIN bits that follow are taken as word 0 and committed 33 edges later (a wrong routing / reset state until the next complete frame).

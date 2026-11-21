@@ -1,0 +1,62 @@
+{
+ "check": "adc_steps",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 01:40",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_steps_ff85.log",
+   "values": {
+    "n_1536": 16.0,
+    "n_2048": 16.0,
+    "n_2112": 16.0,
+    "offset_1536_lsb": -41.89103913783855,
+    "offset_2048_lsb": -42.45353913783853,
+    "offset_2112_lsb": -42.07853913783853,
+    "step_1536_lsb": 1.4204317417208188,
+    "step_2048_lsb": 2.2954317417207335,
+    "step_2112_lsb": -0.4545682582792665
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 01:44",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_steps_ss-40.log",
+   "values": {
+    "n_1536": 16.0,
+    "n_2048": 16.0,
+    "n_2112": 16.0,
+    "offset_1536_lsb": -23.303539137838428,
+    "offset_2048_lsb": -23.92853913783847,
+    "offset_2112_lsb": -23.92853913783844,
+    "step_1536_lsb": 1.0454317417208188,
+    "step_2048_lsb": 0.851603258170055,
+    "step_2112_lsb": -0.2045682582792665
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 01:35",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_steps_typ.log",
+   "values": {
+    "n_1536": 16.0,
+    "n_2048": 16.0,
+    "n_2112": 16.0,
+    "offset_1536_lsb": -31.8785391378385,
+    "offset_2048_lsb": -32.50353913783873,
+    "offset_2112_lsb": -32.503539137838715,
+    "step_1536_lsb": 1.045431741720762,
+    "step_2048_lsb": 1.264301670868445,
+    "step_2112_lsb": -0.2045682582792665
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/adc_ch.pex.spice",
+ "netlist_sha1": "8e94b167844c",
+ "written_by": "AFE/layout/tb/tb_adc_steps.py"
+}

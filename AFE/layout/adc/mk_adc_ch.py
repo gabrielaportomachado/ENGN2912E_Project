@@ -114,6 +114,8 @@ X0L = 13.0
 YS_MIN = WIRE_TOP + KO - DL.U - DL.GAP_D
 YS = math.ceil(YS_MIN - 0.8) + 0.8                                    # y0 = n + 0.8  ->  channel centre y = y0 + 36.2 integer
 cellD = ly.create_cell('dac')
+DL.TRIM_LEN = float(globals().get('trim', DL.TRIM_LEN))
+DL.TRIM_NET = globals().get('trimnet', DL.TRIM_NET)
 D = DL.build(cellD, X0L, YS, dummies=False)
 k.put(TOP, cellD, 0, 0)
 print('DAC: x %.1f .. %.1f  y %.1f .. %.1f  channel centre %.1f' % (D.xl0, D.xm1, D.ylo, D.top, D.ych))

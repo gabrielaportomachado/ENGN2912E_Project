@@ -1,0 +1,84 @@
+{
+ "check": "adc_timing",
+ "corners": {
+  "ff-40": {
+   "date": "2026-11-21 00:57",
+   "info": {
+    "timing": "a_ff_n40",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_timing_ff-40.log",
+   "values": {
+    "dac_to_clk_ns": 21.960000000000004,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 1.4090528847562684,
+    "settle_trial1_lsb": 0.010165109924350367,
+    "settle_trial2_lsb": 0.1442619481434172,
+    "settle_worst_lsb": 0.1442619481434172,
+    "td_avail_ns": 3.420000000000001,
+    "td_max_ns": 1.33248863462207
+   }
+  },
+  "ss-40x": {
+   "date": "2026-11-21 01:01",
+   "info": {
+    "timing": "a_ff_n40",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_timing_ss-40x.log",
+   "values": {
+    "dac_to_clk_ns": 21.960000000000004,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.8619178288545805,
+    "settle_trial1_lsb": 0.7939396757358786,
+    "settle_trial2_lsb": 0.5711925261930951,
+    "settle_worst_lsb": 0.7939396757358786,
+    "td_avail_ns": 3.420000000000001,
+    "td_max_ns": 2.25603789518131
+   }
+  },
+  "ss125": {
+   "date": "2026-11-21 01:00",
+   "info": {
+    "timing": "a_ss_125",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_timing_ss125.log",
+   "values": {
+    "dac_to_clk_ns": 86.59,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.26840185430470836,
+    "settle_trial1_lsb": 0.001326047622266439,
+    "settle_trial2_lsb": 0.10939923247027157,
+    "settle_worst_lsb": 0.10939923247027157,
+    "td_avail_ns": 13.33,
+    "td_max_ns": 3.7055525281244965
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 00:53",
+   "info": {
+    "timing": "a_tt",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_timing_typ.log",
+   "values": {
+    "dac_to_clk_ns": 41.07,
+    "failed": 0.0,
+    "late": 0.0,
+    "settle_top_lsb": 0.605964422801125,
+    "settle_trial1_lsb": 0.0004958059199343096,
+    "settle_trial2_lsb": 0.10227441638273212,
+    "settle_worst_lsb": 0.10227441638273212,
+    "td_avail_ns": 6.369999999999999,
+    "td_max_ns": 2.0957538015664405
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/adc_ch.pex.spice",
+ "netlist_sha1": "5f8fbd3523ab",
+ "written_by": "AFE/layout/tb/tb_adc_timing.py"
+}

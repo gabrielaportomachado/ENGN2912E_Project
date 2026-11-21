@@ -1,0 +1,8 @@
+== adc_timing  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ss-40x (ss, -40 C, 3.6 V)  2026-11-21 01:00
+TIMING ss-40x Vin 1.25455 V code 1400 (ideal 1427): s_k [LSB] -0.79 +0.51 +0.00 -0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 | slowest decision 2.12 ns
+TIMING ss-40x Vin 1.35026 V code 1509 (ideal 1536): s_k [LSB] -0.78 +0.51 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | slowest decision 2.26 ns
+TIMING ss-40x Vin 1.80026 V code 2021 (ideal 2048): s_k [LSB] -0.78 +0.54 +0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 -0.00 +0.00 | slowest decision 2.09 ns
+TIMING ss-40x Vin 2.07273 V code 2333 (ideal 2358): s_k [LSB] -0.78 +0.57 -0.42 -0.07 +0.01 -0.01 +0.02 -0.04 +0.00 -0.00 -0.00 +0.00 | slowest decision 2.07 ns
+TIMING ss-40x Vin 2.25026 V code 2534 (ideal 2560): s_k [LSB] -0.78 +0.57 -0.42 -0.07 +0.01 +0.00 +0.03 -0.01 +0.01 +0.00 -0.00 -0.00 | slowest decision 2.09 ns
+TIMING ss-40x Vin 2.34545 V code 2642 (ideal 2668): s_k [LSB] -0.86 +0.53 -0.47 -0.01 -0.05 -0.04 +0.03 -0.04 +0.00 -0.00 +0.00 +0.00 | slowest decision 2.10 ns
+RESULT adc_timing ss-40x: settle_worst_lsb=0.79394  settle_trial1_lsb=0.79394  settle_trial2_lsb=0.571193  settle_top_lsb=0.861918  td_max_ns=2.25604  td_avail_ns=3.42  dac_to_clk_ns=21.96  late=0  failed=0
