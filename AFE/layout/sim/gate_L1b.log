@@ -2,8 +2,7 @@ gate.py L1b  (L1b)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 11da446
-WARN  protected files changed by REVIEW.md items (named in report section 9): AFE/adc/rtl/adc_clkgen.v AFE/adc/rtl/adc_top.v AFE/top/dbs_afe_top.v
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 79e833c
 PASS  open REVIEW.md items for L1b or an earlier phase (R1) are listed as handled in section 9 of a phase report
 PASS  phase report AFE/layout/reports/L1b.md with all 10 sections
 PASS  "## L1b findings" section in AFE/NOTES.md
