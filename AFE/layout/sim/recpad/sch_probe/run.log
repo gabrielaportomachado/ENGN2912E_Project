@@ -1,0 +1,186 @@
+### 06:28:08 AFE/layout/tb/tb_amp_ac.py
+== amp_ac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job ac_sch_rlf7521c_typ: exit 0, 0 s
+RESULT amp_ac typ: idd_ua=74.4299  vout_v=1.65064  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=60.0432  g_pk_db=60.046  f_lo_hz=0.246634  f_hi_hz=654.467  g_300_db=59.2273  g_0p5_db=59.1765  v1_v=1.64951  g1_mid_db=39.9778  hf_1k=-5.2166  hf_3k=-13.4133  hf_10k=-23.703  hf_30k=-33.3638  hf_100k=-45.0617  hf_300k=-58.0896  hf_1M=-66.7568
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac.json
+== amp_ac  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job ac_sch_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_ac ff85: idd_ua=118.811  vout_v=1.65095  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=60.0474  g_pk_db=60.0528  f_lo_hz=0.283232  f_hi_hz=998.614  g_300_db=59.6845  g_0p5_db=58.9075  v1_v=1.64916  g1_mid_db=39.9762  hf_1k=-3.00058  hf_3k=-9.99261  hf_10k=-20.0458  hf_30k=-29.6345  hf_100k=-40.9193  hf_300k=-53.6493  hf_1M=-65.5005
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac.json
+== amp_ac  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job ac_sch_rlf7521c_ss-40: exit 0, 0 s
+RESULT amp_ac ss-40: idd_ua=47.1326  vout_v=1.65019  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=60.0283  g_pk_db=60.0292  f_lo_hz=0.288525  f_hi_hz=422.94  g_300_db=58.2707  g_0p5_db=58.8722  v1_v=1.64959  g1_mid_db=39.9779  hf_1k=-8.18012  hf_3k=-17.0963  hf_10k=-27.5002  hf_30k=-37.2389  hf_100k=-49.3781  hf_300k=-61.3172  hf_1M=-66.7408
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac.json
+### 06:28:09 AFE/layout/tb/tb_amp_noise.py
+== amp_noise  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job n_sch_rlf7521c_typ_real: exit 0, 0 s
+   job n_sch_rlf7521c_typ_d8: exit 0, 0 s
+   job n_sch_rlf7521c_typ_real_fn1: exit 0, 0 s
+   job n_sch_rlf7521c_typ_d8_fn1: exit 0, 0 s
+RESULT amp_noise typ: noise_real_uv=1.49706  g_mid_db=60.0432  noise_d8_uv=1.89255  noise_real_fn1_uv=4.88472  noise_d8_fn1_uv=5.02086
+   -> AFE/layout/sim/recpad/sch_probe/amp_noise.json
+== amp_noise  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job n_sch_rlf7521c_ff85_real: exit 0, 0 s
+   job n_sch_rlf7521c_ff85_d8: exit 0, 0 s
+RESULT amp_noise ff85: noise_real_uv=1.73449  g_mid_db=60.0474  noise_d8_uv=2.14167
+   -> AFE/layout/sim/recpad/sch_probe/amp_noise.json
+== amp_noise  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job n_sch_rlf7521c_ss-40_real: exit 0, 0 s
+   job n_sch_rlf7521c_ss-40_d8: exit 0, 0 s
+RESULT amp_noise ss-40: noise_real_uv=1.38808  g_mid_db=60.0283  noise_d8_uv=1.73407
+   -> AFE/layout/sim/recpad/sch_probe/amp_noise.json
+### 06:28:10 AFE/layout/tb/tb_amp_psrr.py
+== amp_psrr  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job psrr_sch_rlf7521c_typ: exit 0, 0 s
+RESULT amp_psrr typ: supply_gain_50hz=0.573782  supply_gain_60hz=0.573128  supply_gain_300hz=0.527233  supply_gain_1khz=0.335856
+   -> AFE/layout/sim/recpad/sch_probe/amp_psrr.json
+== amp_psrr  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job psrr_sch_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_psrr ff85: supply_gain_50hz=0.581202  supply_gain_60hz=0.580926  supply_gain_300hz=0.559239  supply_gain_1khz=0.425178
+   -> AFE/layout/sim/recpad/sch_probe/amp_psrr.json
+== amp_psrr  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job psrr_sch_rlf7521c_ss-40: exit 0, 0 s
+RESULT amp_psrr ss-40: supply_gain_50hz=0.568801  supply_gain_60hz=0.567225  supply_gain_300hz=0.474535  supply_gain_1khz=0.245382
+   -> AFE/layout/sim/recpad/sch_probe/amp_psrr.json
+### 06:28:10 AFE/layout/tb/tb_amp_thd.py
+== amp_thd  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job thd_sch_rlf7521c_typ: exit 0, 1 s
+RESULT amp_thd typ: thd_pct=0.0422331  out_max_v=2.14859  out_min_v=1.14374  gain_db=60.0396  hd2_dbc=-81.3391  hd3_dbc=-67.7531  out_mean_v=1.64613
+   -> AFE/layout/sim/recpad/sch_probe/amp_thd.json
+== amp_thd  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job thd_sch_rlf7521c_ff85: exit 0, 1 s
+RESULT amp_thd ff85: thd_pct=2.38776  out_max_v=2.18872  out_min_v=1.22041  gain_db=59.8987  hd2_dbc=-36.3057  hd3_dbc=-37.9662  out_mean_v=1.68911
+   -> AFE/layout/sim/recpad/sch_probe/amp_thd.json
+== amp_thd  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job thd_sch_rlf7521c_ss-40: exit 0, 1 s
+RESULT amp_thd ss-40: thd_pct=0.0571627  out_max_v=2.14661  out_min_v=1.14352  gain_db=60.0243  hd2_dbc=-82.4529  hd3_dbc=-65.0059  out_mean_v=1.64505
+   -> AFE/layout/sim/recpad/sch_probe/amp_thd.json
+### 06:28:14 AFE/layout/tb/tb_amp_loop.py
+== amp_loop  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job loop_sch_rlf7521c_typ: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_typ_cx2: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_typ_cx5: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_typ_cx10: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job hf_sch_rlf7521c_typ_cx0: exit 0, 0 s
+   job hf_sch_rlf7521c_typ_cx2: exit 0, 0 s
+   job hf_sch_rlf7521c_typ_cx5: exit 0, 0 s
+   job hf_sch_rlf7521c_typ_cx10: exit 0, 0 s
+ERROR loop-gain run failed: Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+== amp_loop  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job loop_sch_rlf7521c_ff85: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ff85_cx2: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ff85_cx5: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ff85_cx10: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job hf_sch_rlf7521c_ff85_cx0: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx2: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx5: exit 0, 0 s
+   job hf_sch_rlf7521c_ff85_cx10: exit 0, 0 s
+ERROR loop-gain run failed: Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+== amp_loop  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job loop_sch_rlf7521c_ss-40: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ss-40_cx2: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ss-40_cx5: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job loop_sch_rlf7521c_ss-40_cx10: exit 1, 0 s MSG Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+   job hf_sch_rlf7521c_ss-40_cx0: exit 0, 0 s
+   job hf_sch_rlf7521c_ss-40_cx2: exit 0, 0 s
+   job hf_sch_rlf7521c_ss-40_cx5: exit 0, 0 s
+   job hf_sch_rlf7521c_ss-40_cx10: exit 0, 0 s
+ERROR loop-gain run failed: Error in netlist line no. 364, new internal line no. 8: | Error in netlist line no. 364, new internal line no. 8: | ERROR: fatal error in ngspice, exit(1)
+### FAILED exit 2 : AFE/layout/tb/tb_amp_loop.py
+### 06:28:16 AFE/layout/tb/tb_amp_pwrup.py
+== amp_pwrup  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_sch_rlf7521c_typ: exit 0, 0 s
+RESULT amp_pwrup typ: t_wait_s=0.2  vout_before_v=2.69339  vout_100ms_v=1.64854  vout_1s_v=1.64704  err_1s_mv=2.95645  codes_from_mid_1s=3.66958  vbn_end_v=0.647681  vrs_end_v=1.02178
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup.json
+== amp_pwrup  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_sch_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_pwrup ff85: t_wait_s=0.2  vout_before_v=1.14142  vout_100ms_v=1.64889  vout_1s_v=1.64746  err_1s_mv=2.53984  codes_from_mid_1s=3.15248  vbn_end_v=0.508889  vrs_end_v=1.21615
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup.json
+== amp_pwrup  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_sch_rlf7521c_ss-40: exit 0, 1 s
+RESULT amp_pwrup ss-40: t_wait_s=1.5  vout_before_v=0.399229  vout_100ms_v=1.64799  vout_1s_v=1.64723  err_1s_mv=2.77495  codes_from_mid_1s=3.4443  vbn_end_v=0.804863  vrs_end_v=0.807597
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup.json
+### 06:28:18 AFE/layout/tb/tb_amp_reset.py
+== amp_reset  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_typ_0: exit 0, 4 s
+   job rs_sch_rlf7521c_typ_1m: exit 0, 4 s
+   job rs_sch_rlf7521c_typ_10m: exit 0, 7 s
+   job rs_sch_rlf7521c_typ_100m: exit 0, 21 s
+RESULT amp_reset typ: t_fs_ms_os0=2.93167  peak_mv_os0=906.225  rel_step_mv_os0=-9.45305  t_1mv_s_os0=nan  final_v_os0=1.68582  drift_mv_s_os0=310.975  resid_end_mv_os0=22.4477  t_fs_ms_os1m=3.10032  peak_mv_os1m=868.6  rel_step_mv_os1m=-848.944  t_1mv_s_os1m=nan  final_v_os1m=1.64795  drift_mv_s_os1m=289.105  resid_end_mv_os1m=25.086  t_fs_ms_os10m=2.94375  peak_mv_os10m=880.939  rel_step_mv_os10m=-854.505  t_1mv_s_os10m=nan  final_v_os10m=1.66011  drift_mv_s_os10m=290.255  resid_end_mv_os10m=1.69338  t_fs_ms_os100m=3.11558  peak_mv_os100m=871.257  rel_step_mv_os100m=-182.86  t_1mv_s_os100m=16.929  final_v_os100m=1.65073  drift_mv_s_os100m=418.467  resid_end_mv_os100m=0.0052742
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset.json
+== amp_reset  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:28  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_ff85_1m: exit 0, 4 s
+   job rs_sch_rlf7521c_ff85_0: exit 0, 4 s
+   job rs_sch_rlf7521c_ff85_10m: exit 0, 7 s
+   job rs_sch_rlf7521c_ff85_100m: exit 0, 20 s
+RESULT amp_reset ff85: t_fs_ms_os0=1.5595  peak_mv_os0=508.677  rel_step_mv_os0=-245.924  t_1mv_s_os0=5.65157  final_v_os0=1.65922  drift_mv_s_os0=-8.49097  resid_end_mv_os0=0.703422  t_fs_ms_os1m=1.61129  peak_mv_os1m=506.548  rel_step_mv_os1m=-280.531  t_1mv_s_os1m=5.58223  final_v_os1m=1.65692  drift_mv_s_os1m=-4.6861  resid_end_mv_os1m=0.519226  t_fs_ms_os10m=1.69959  peak_mv_os10m=500.283  rel_step_mv_os10m=421.834  t_1mv_s_os10m=9.43345  final_v_os10m=1.6513  drift_mv_s_os10m=-12.4793  resid_end_mv_os10m=0.0591879  t_fs_ms_os100m=1.55618  peak_mv_os100m=500.802  rel_step_mv_os100m=-291.211  t_1mv_s_os100m=10.4376  final_v_os100m=1.65108  drift_mv_s_os100m=-16.3334  resid_end_mv_os100m=0.000473119
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset.json
+== amp_reset  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:29  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_ss-40_0: exit 0, 5 s
+   job rs_sch_rlf7521c_ss-40_1m: exit 0, 5 s
+   job rs_sch_rlf7521c_ss-40_10m: exit 0, 8 s
+   job rs_sch_rlf7521c_ss-40_100m: exit 0, 21 s
+RESULT amp_reset ss-40: t_fs_ms_os0=5.94692  peak_mv_os0=1224.7  rel_step_mv_os0=-3.19647  t_1mv_s_os0=nan  final_v_os0=0.421098  drift_mv_s_os0=3.30516  resid_end_mv_os0=5.45174  t_fs_ms_os1m=5.8408  peak_mv_os1m=1209.9  rel_step_mv_os1m=0.07082  t_1mv_s_os1m=nan  final_v_os1m=0.419163  drift_mv_s_os1m=3.10918  resid_end_mv_os1m=4.50362  t_fs_ms_os10m=5.82014  peak_mv_os10m=1393.81  rel_step_mv_os10m=0.10409  t_1mv_s_os10m=nan  final_v_os10m=1.79332  drift_mv_s_os10m=3.91139  resid_end_mv_os10m=8.68754  t_fs_ms_os100m=5.8068  peak_mv_os100m=1250.92  rel_step_mv_os100m=-0.53323  t_1mv_s_os100m=20.7796  final_v_os100m=1.65026  drift_mv_s_os100m=4.15698  resid_end_mv_os100m=0.000226172
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset.json
+### 06:29:32 AFE/layout/tb/tb_amp_reset.py --os 10m,100m --host-rst 0.1
+== amp_reset_host  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:29  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_typ_10m: exit 0, 7 s
+   job rs_sch_rlf7521c_typ_100m: exit 0, 20 s
+RESULT amp_reset_host typ: t_fs_ms_os10m=3.06827  peak_mv_os10m=10.5157  rel_step_mv_os10m=-1.80935  t_1mv_s_os10m=1.19661  final_v_os10m=1.65064  drift_mv_s_os10m=-0.208138  resid_end_mv_os10m=0.000460526  t_fs_ms_os100m=3.01615  peak_mv_os100m=33.4763  rel_step_mv_os100m=-1.75934  t_1mv_s_os100m=7.90468  final_v_os100m=1.65073  drift_mv_s_os100m=-6.79711  resid_end_mv_os100m=0.00338355
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host.json
+== amp_reset_host  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:29  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_ff85_10m: exit 0, 7 s
+   job rs_sch_rlf7521c_ff85_100m: exit 0, 21 s
+RESULT amp_reset_host ff85: t_fs_ms_os10m=1.71367  peak_mv_os10m=10.5102  rel_step_mv_os10m=-1.96521  t_1mv_s_os10m=1.06987  final_v_os10m=1.65098  drift_mv_s_os10m=-0.21132  resid_end_mv_os10m=0.00114756  t_fs_ms_os100m=1.58802  peak_mv_os100m=33.5165  rel_step_mv_os100m=-1.90961  t_1mv_s_os100m=7.93631  final_v_os100m=1.65108  drift_mv_s_os100m=-6.1891  resid_end_mv_os100m=0.00137653
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host.json
+== amp_reset_host  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_sch_rlf7521c_ss-40_10m: exit 0, 8 s
+   job rs_sch_rlf7521c_ss-40_100m: exit 0, 21 s
+RESULT amp_reset_host ss-40: t_fs_ms_os10m=5.81542  peak_mv_os10m=5.60258  rel_step_mv_os10m=3.43324  t_1mv_s_os10m=1.1527  final_v_os10m=1.6502  drift_mv_s_os10m=-0.00875  resid_end_mv_os10m=0.00154936  t_fs_ms_os100m=5.9076  peak_mv_os100m=25.3177  rel_step_mv_os100m=-2.03127  t_1mv_s_os100m=6.4223  final_v_os100m=1.65026  drift_mv_s_os100m=-4.46799  resid_end_mv_os100m=0.00070279
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host.json
+### 06:30:34 AFE/layout/tb/tb_amp_ac.py --junction
+== amp_ac_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_typ: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_typ: exit 0, 0 s
+RESULT amp_ac_junction typ: idd_ua=74.3008  vout_v=0.797018  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=26.5952  g_pk_db=26.6037  f_lo_hz=0.00272676  f_hi_hz=11030.7  g_300_db=26.601  g_0p5_db=26.5861  v1_v=1.82994  g1_mid_db=39.9747  hf_1k=-0.0270584  hf_3k=-0.305015  hf_10k=-2.59392  hf_30k=-8.77924  hf_100k=-15.5843  hf_300k=-20.5593  hf_1M=-32.0851
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac_junction.json
+== amp_ac_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_ff85: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_ac_junction ff85: idd_ua=118.811  vout_v=1.65109  vbn_v=0.508889  vcm_v=1.64861  vg1_v=1.849  vcmo_v=1.64985  vg2_v=2.5499  vrs_v=1.2221  g_mid_db=60.0413  g_pk_db=60.0451  f_lo_hz=0.0737377  f_hi_hz=998.903  g_300_db=59.6766  g_0p5_db=59.9383  v1_v=1.65065  g1_mid_db=39.9731  hf_1k=-3.00085  hf_3k=-9.99163  hf_10k=-20.0445  hf_30k=-29.6332  hf_100k=-40.9177  hf_300k=-53.6459  hf_1M=-65.4925
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac_junction.json
+== amp_ac_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_ss-40: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=46.9536  vout_v=0.399669  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=-3.88586  g_pk_db=13.5639  f_lo_hz=10752.8  f_hi_hz=234662  g_300_db=-3.71826  g_0p5_db=-3.89623  v1_v=2.16284  g1_mid_db=39.975  hf_1k=1.50519  hf_3k=6.55354  hf_10k=14.1001  hf_30k=17.2075  hf_100k=16.9755  hf_300k=13.1264  hf_1M=2.37315
+   -> AFE/layout/sim/recpad/sch_probe/amp_ac_junction.json
+### 06:30:36 AFE/layout/tb/tb_amp_pwrup.py --junction
+== amp_pwrup_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_schprdiff_rlf7521c_typ: exit 0, 0 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.43206  vout_100ms_v=1.64834  vout_1s_v=1.64191  err_1s_mv=8.08887  codes_from_mid_1s=10.04  vbn_end_v=0.647681  vrs_end_v=1.02178
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_schprdiff_rlf7521c_ff85: exit 0, 0 s
+RESULT amp_pwrup_junction ff85: t_wait_s=0.2  vout_before_v=1.14143  vout_100ms_v=1.64863  vout_1s_v=1.64328  err_1s_mv=6.7197  codes_from_mid_1s=8.34057  vbn_end_v=0.508889  vrs_end_v=1.21615
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction.json
+== amp_pwrup_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_schprdiff_rlf7521c_ss-40: exit 0, 1 s
+RESULT amp_pwrup_junction ss-40: t_wait_s=1.5  vout_before_v=0.398978  vout_100ms_v=1.64786  vout_1s_v=1.64186  err_1s_mv=8.13701  codes_from_mid_1s=10.0998  vbn_end_v=0.804863  vrs_end_v=0.807597
+   -> AFE/layout/sim/recpad/sch_probe/amp_pwrup_junction.json
+### 06:30:38 AFE/layout/tb/tb_amp_reset.py --junction --os 10m,100m --host-rst 0.1
+== amp_reset_host_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_schprdiff_rlf7521c_typ_10m: exit 0, 7 s
+   job rs_schprdiff_rlf7521c_typ_100m: exit 0, 20 s
+RESULT amp_reset_host_junction typ: t_fs_ms_os10m=2.95438  peak_mv_os10m=15.6398  rel_step_mv_os10m=-2.02956  t_1mv_s_os10m=9.75942  final_v_os10m=1.63294  drift_mv_s_os10m=-0.519408  resid_end_mv_os10m=0.160859  t_fs_ms_os100m=2.93021  peak_mv_os100m=1091.75  rel_step_mv_os100m=-1.98887  t_1mv_s_os100m=14.5836  final_v_os100m=2.73408  drift_mv_s_os100m=84.3099  resid_end_mv_os100m=0.025045
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_schprdiff_rlf7521c_ff85_10m: exit 0, 7 s
+   job rs_schprdiff_rlf7521c_ff85_100m: exit 0, 21 s
+RESULT amp_reset_host_junction ff85: t_fs_ms_os10m=1.67194  peak_mv_os10m=11.0148  rel_step_mv_os10m=-2.07023  t_1mv_s_os10m=5.73564  final_v_os10m=1.6506  drift_mv_s_os10m=0.950198  resid_end_mv_os10m=0.0186074  t_fs_ms_os100m=1.71781  peak_mv_os100m=185.244  rel_step_mv_os100m=-1.99553  t_1mv_s_os100m=nan  final_v_os100m=1.82829  drift_mv_s_os100m=21.4106  resid_end_mv_os100m=1.99973
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host_junction.json
+== amp_reset_host_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:31  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job rs_schprdiff_rlf7521c_ss-40_10m: exit 0, 7 s
+   job rs_schprdiff_rlf7521c_ss-40_100m: exit 0, 22 s
+RESULT amp_reset_host_junction ss-40: t_fs_ms_os10m=5.90514  peak_mv_os10m=28.0563  rel_step_mv_os10m=14.1843  t_1mv_s_os10m=11.0667  final_v_os10m=1.63668  drift_mv_s_os10m=-1.63501  resid_end_mv_os10m=0.4759  t_fs_ms_os100m=5.90197  peak_mv_os100m=1309.79  rel_step_mv_os100m=-21.2903  t_1mv_s_os100m=35.6769  final_v_os100m=2.93087  drift_mv_s_os100m=75.3339  resid_end_mv_os100m=0.211654
+   -> AFE/layout/sim/recpad/sch_probe/amp_reset_host_junction.json
+### 06:31:41 DONE sch probe

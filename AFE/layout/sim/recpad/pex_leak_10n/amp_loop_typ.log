@@ -1,0 +1,3 @@
+== amp_loop  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 07:03  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job loop_pex83fcca1f2cac_rl4d8c35_typ: exit 0, 1 s
+RESULT amp_loop typ: t_100hz_db=48.1676  fu_hz=250067  pm_deg=439.303

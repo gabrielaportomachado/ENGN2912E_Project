@@ -1,0 +1,3 @@
+== amp_thd  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:24  REC pad load AFE/layout/sim/recpad/models/pad_open.spice
+   job thd_sch_rl8811b8_ff85: exit 0, 1 s
+RESULT amp_thd ff85: thd_pct=2.40035  out_max_v=2.18956  out_min_v=1.22032  gain_db=59.9077  hd2_dbc=-36.2571  hd3_dbc=-37.9182  out_mean_v=1.68939

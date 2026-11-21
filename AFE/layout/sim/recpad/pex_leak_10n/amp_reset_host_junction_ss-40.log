@@ -1,0 +1,4 @@
+== amp_reset_host_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 07:09  REC pad load AFE/layout/sim/recpad/models/pad_leak_10n.spice
+   job rs_pexe3100c69eb97_rl4d8c35_ss-40_10m: exit 0, 16 s
+   job rs_pexe3100c69eb97_rl4d8c35_ss-40_100m: exit 0, 43 s
+RESULT amp_reset_host_junction ss-40: t_fs_ms_os10m=6.02611  peak_mv_os10m=109.887  rel_step_mv_os10m=-168.124  t_1mv_s_os10m=nan  final_v_os10m=1.58164  drift_mv_s_os10m=9.20486  resid_end_mv_os10m=2.74281  t_fs_ms_os100m=5.95333  peak_mv_os100m=1523.74  rel_step_mv_os100m=-229.02  t_1mv_s_os100m=35.1101  final_v_os100m=2.93127  drift_mv_s_os100m=85.0864  resid_end_mv_os100m=0.158964

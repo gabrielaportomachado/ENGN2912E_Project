@@ -1,0 +1,3 @@
+== r13_recac  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:36
+   job recac_sch_typ: exit 0, 0 s
+RESULT r13_recac typ: g_mid_db=60.0531  f_lo_hz=0.24589  f_hi_hz=653.497  noise_tgate_real_uv=1.51437  vrec_dc_v=1.65  vout_dc_v=1.65064  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=2.00895e-10  rec_node_gain_300hz_db=-7.80863e-06  f_rec_3db_hz=278325

@@ -1,0 +1,47 @@
+{
+ "check": "amp_noise",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:24",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_noise_ff85.log",
+   "values": {
+    "g_mid_db": 60.0574,
+    "noise_d8_uv": 2.1392271858195717,
+    "noise_real_uv": 1.732284429354073
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:24",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_noise_ss-40.log",
+   "values": {
+    "g_mid_db": 60.0381,
+    "noise_d8_uv": 1.7320950126792192,
+    "noise_real_uv": 1.3865048428456208
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:24",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_open/amp_noise_typ.log",
+   "values": {
+    "g_mid_db": 60.053,
+    "noise_d8_fn1_uv": 5.015201898105987,
+    "noise_d8_uv": 1.89041220981378,
+    "noise_real_fn1_uv": 4.879206791856152,
+    "noise_real_uv": 1.4953675955900854
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_open.spice",
+ "written_by": "AFE/layout/tb/tb_amp_noise.py"
+}

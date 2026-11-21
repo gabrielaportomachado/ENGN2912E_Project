@@ -1,0 +1,3 @@
+== amp_pwrup_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job pu_schprdiff_rlf7521c_typ: exit 0, 0 s
+RESULT amp_pwrup_junction typ: t_wait_s=0.2  vout_before_v=2.43206  vout_100ms_v=1.64834  vout_1s_v=1.64191  err_1s_mv=8.08887  codes_from_mid_1s=10.04  vbn_end_v=0.647681  vrs_end_v=1.02178

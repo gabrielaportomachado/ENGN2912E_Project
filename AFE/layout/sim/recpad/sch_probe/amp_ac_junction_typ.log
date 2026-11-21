@@ -1,0 +1,4 @@
+== amp_ac_junction  netlist schematic  corner typ (typical, 27 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_typ: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_typ: exit 0, 0 s
+RESULT amp_ac_junction typ: idd_ua=74.3008  vout_v=0.797018  vbn_v=0.647681  vcm_v=1.64889  vg1_v=1.84928  vcmo_v=1.64983  vg2_v=2.54989  vrs_v=1.02818  g_mid_db=26.5952  g_pk_db=26.6037  f_lo_hz=0.00272676  f_hi_hz=11030.7  g_300_db=26.601  g_0p5_db=26.5861  v1_v=1.82994  g1_mid_db=39.9747  hf_1k=-0.0270584  hf_3k=-0.305015  hf_10k=-2.59392  hf_30k=-8.77924  hf_100k=-15.5843  hf_300k=-20.5593  hf_1M=-32.0851

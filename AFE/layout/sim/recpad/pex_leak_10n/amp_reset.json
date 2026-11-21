@@ -1,0 +1,123 @@
+{
+ "check": "amp_reset",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 07:05",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_10n/amp_reset_ff85.log",
+   "values": {
+    "drift_mv_s_os0": 0.897223211750009,
+    "drift_mv_s_os100m": -5.2881813807500455,
+    "drift_mv_s_os10m": -0.5076436600001122,
+    "drift_mv_s_os1m": 1.0943176350001194,
+    "final_v_os0": 1.650093187161892,
+    "final_v_os100m": 1.6510896857164281,
+    "final_v_os10m": 1.650978504818394,
+    "final_v_os1m": 1.6499717492471686,
+    "peak_mv_os0": 292.3505871618921,
+    "peak_mv_os100m": 323.5072657164282,
+    "peak_mv_os10m": 291.7760048183939,
+    "peak_mv_os1m": 288.27710924716854,
+    "rel_step_mv_os0": -297.1759088158994,
+    "rel_step_mv_os100m": -325.6637531568003,
+    "rel_step_mv_os10m": -291.32187727247884,
+    "rel_step_mv_os1m": -292.908863569749,
+    "resid_end_mv_os0": 0.07498283810791762,
+    "resid_end_mv_os100m": 0.0014242835719713298,
+    "resid_end_mv_os10m": 0.004425181606038109,
+    "resid_end_mv_os1m": 0.08727075283143648,
+    "t_1mv_s_os0": 4.47069051,
+    "t_1mv_s_os100m": 7.377721770000001,
+    "t_1mv_s_os10m": 2.93336555,
+    "t_1mv_s_os1m": 4.61009444,
+    "t_fs_ms_os0": 1.698783000000037,
+    "t_fs_ms_os100m": 1.684617999999971,
+    "t_fs_ms_os10m": 1.6606200000000015,
+    "t_fs_ms_os1m": 1.7118750000000293
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 07:06",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_10n/amp_reset_ss-40.log",
+   "values": {
+    "drift_mv_s_os0": 0.41626903899993906,
+    "drift_mv_s_os100m": -4.256294824749984,
+    "drift_mv_s_os10m": 0.30854421850001756,
+    "drift_mv_s_os1m": 0.39409015199998176,
+    "final_v_os0": 1.6499581908594272,
+    "final_v_os100m": 1.6502591295830418,
+    "final_v_os10m": 1.650202676137954,
+    "final_v_os1m": 1.649983710559627,
+    "peak_mv_os0": 238.96588085942727,
+    "peak_mv_os100m": 235.08737958304172,
+    "peak_mv_os10m": 245.70249613795391,
+    "peak_mv_os1m": 247.44393055962698,
+    "rel_step_mv_os0": -54.13095999987982,
+    "rel_step_mv_os100m": -41.34600324256876,
+    "rel_step_mv_os10m": 0.0029400000001178483,
+    "rel_step_mv_os1m": -54.113769999879715,
+    "resid_end_mv_os0": 0.02418914057278343,
+    "resid_end_mv_os100m": 0.0004504169581753814,
+    "resid_end_mv_os10m": 0.0001261379540817842,
+    "resid_end_mv_os1m": 0.020929440373018693,
+    "t_1mv_s_os0": 3.08580124,
+    "t_1mv_s_os100m": 6.12748577,
+    "t_1mv_s_os10m": 1.6080826199999998,
+    "t_1mv_s_os1m": 2.87999394,
+    "t_fs_ms_os0": 6.001239999999797,
+    "t_fs_ms_os100m": 6.0120499999998245,
+    "t_fs_ms_os10m": 5.88261999999995,
+    "t_fs_ms_os1m": 6.018939999999695
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 07:04",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_10n/amp_reset_typ.log",
+   "values": {
+    "drift_mv_s_os0": 1.3207093980001083,
+    "drift_mv_s_os100m": -8.708238977000015,
+    "drift_mv_s_os10m": 0.9189996824999769,
+    "drift_mv_s_os1m": 1.7190338320001164,
+    "final_v_os0": 1.6493775955762822,
+    "final_v_os100m": 1.6507439109399058,
+    "final_v_os10m": 1.650620493172276,
+    "final_v_os1m": 1.649059507401732,
+    "peak_mv_os0": 272.2686655762823,
+    "peak_mv_os100m": 222.28164906009428,
+    "peak_mv_os10m": 275.3916731722761,
+    "peak_mv_os1m": 255.15776740173203,
+    "rel_step_mv_os0": -204.4102700000001,
+    "rel_step_mv_os100m": -127.54231999999988,
+    "rel_step_mv_os10m": -254.11191,
+    "rel_step_mv_os1m": -192.51490999999987,
+    "resid_end_mv_os0": 0.11016442371780677,
+    "resid_end_mv_os100m": 0.0011090600942065265,
+    "resid_end_mv_os10m": 0.000526827723890122,
+    "resid_end_mv_os1m": 0.1345825982679294,
+    "t_1mv_s_os0": 4.82676506,
+    "t_1mv_s_os100m": 7.21753188,
+    "t_1mv_s_os10m": 5.89025678,
+    "t_1mv_s_os1m": 5.00099632,
+    "t_fs_ms_os0": 2.965055999999966,
+    "t_fs_ms_os100m": 3.131879999999976,
+    "t_fs_ms_os10m": 3.0614740000000085,
+    "t_fs_ms_os1m": 2.9963189999999695
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_leak_10n.spice",
+ "written_by": "AFE/layout/tb/tb_amp_reset.py"
+}

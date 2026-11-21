@@ -1,0 +1,4 @@
+== amp_ac_junction  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 06:30  REC pad load AFE/layout/sim/recpad/models/pad_probe.spice
+   job settle_schprdiff_rlf7521c_ss-40: exit 0, 0 s
+   job ac_schprdiff_rlf7521c_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=46.9536  vout_v=0.399669  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=-3.88586  g_pk_db=13.5639  f_lo_hz=10752.8  f_hi_hz=234662  g_300_db=-3.71826  g_0p5_db=-3.89623  v1_v=2.16284  g1_mid_db=39.975  hf_1k=1.50519  hf_3k=6.55354  hf_10k=14.1001  hf_30k=17.2075  hf_100k=16.9755  hf_300k=13.1264  hf_1M=2.37315

@@ -1,0 +1,4 @@
+== r13_recac  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 06:36
+   job settletg_pex83fcca1f2cac_ff85: exit 0, 1 s
+   job recac_pex83fcca1f2cac_ff85: exit 0, 0 s
+RESULT r13_recac ff85: g_mid_db=59.8202  f_lo_hz=0.275651  f_hi_hz=972.501  noise_tgate_real_uv=1.7582  vrec_dc_v=1.65  vout_dc_v=1.65097  vrec_minus_vrece_dc_uv=0  rec_node_gain_12hz_db=9.4844e-08  rec_node_gain_300hz_db=3.11174e-06  f_rec_3db_hz=404040

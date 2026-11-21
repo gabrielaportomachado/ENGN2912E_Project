@@ -1,0 +1,111 @@
+{
+ "check": "amp_ac",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:28",
+   "info": {
+    "operating_point": "node guesses of tb_a4c_ac.spice",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_ac_ff85.log",
+   "values": {
+    "f_hi_hz": 998.6144406012544,
+    "f_lo_hz": 0.2832319885920944,
+    "g1_mid_db": 39.97615301432171,
+    "g_0p5_db": 58.9074582603864,
+    "g_300_db": 59.684487316744885,
+    "g_mid_db": 60.04744568297,
+    "g_pk_db": 60.0528206,
+    "hf_100k": -40.919256382970005,
+    "hf_10k": -20.045805982970002,
+    "hf_1M": -65.50050965297,
+    "hf_1k": -3.0005800829700036,
+    "hf_300k": -53.64926199563288,
+    "hf_30k": -29.6344583456507,
+    "hf_3k": -9.992609538342833,
+    "idd_ua": 118.81099999999999,
+    "v1_v": 1.64916,
+    "vbn_v": 0.508889,
+    "vcm_v": 1.64861,
+    "vcmo_v": 1.64985,
+    "vg1_v": 1.849,
+    "vg2_v": 2.5499,
+    "vout_v": 1.65095,
+    "vrs_v": 1.2221
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:28",
+   "info": {
+    "operating_point": "node guesses of tb_a4c_ac.spice",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_ac_ss-40.log",
+   "values": {
+    "f_hi_hz": 422.93984923776287,
+    "f_lo_hz": 0.2885254867321495,
+    "g1_mid_db": 39.977905949532996,
+    "g_0p5_db": 58.872150583940865,
+    "g_300_db": 58.270682824631194,
+    "g_mid_db": 60.028328306712694,
+    "g_pk_db": 60.0292265,
+    "hf_100k": -49.3780870067127,
+    "hf_10k": -27.500168506712697,
+    "hf_1M": -66.7408006767127,
+    "hf_1k": -8.180115306712693,
+    "hf_300k": -61.31722413409124,
+    "hf_30k": -37.23893271317625,
+    "hf_3k": -17.096310211652025,
+    "idd_ua": 47.1326,
+    "v1_v": 1.64959,
+    "vbn_v": 0.804863,
+    "vcm_v": 1.64911,
+    "vcmo_v": 1.64977,
+    "vg1_v": 1.84956,
+    "vg2_v": 2.54986,
+    "vout_v": 1.65019,
+    "vrs_v": 0.814347
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:28",
+   "info": {
+    "operating_point": "node guesses of tb_a4c_ac.spice",
+    "probes": "simulation names",
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_ac_typ.log",
+   "values": {
+    "f_hi_hz": 654.4669069515759,
+    "f_lo_hz": 0.24663408320366642,
+    "g1_mid_db": 39.97784930782826,
+    "g_0p5_db": 59.17653649575418,
+    "g_300_db": 59.22729755064431,
+    "g_mid_db": 60.04321184750277,
+    "g_pk_db": 60.0460383,
+    "hf_100k": -45.061742247502764,
+    "hf_10k": -23.70301604750277,
+    "hf_1M": -66.75675819750276,
+    "hf_1k": -5.21660464750277,
+    "hf_300k": -58.08960615536681,
+    "hf_30k": -33.36380080924954,
+    "hf_3k": -13.413300399675265,
+    "idd_ua": 74.4299,
+    "v1_v": 1.64951,
+    "vbn_v": 0.647681,
+    "vcm_v": 1.64889,
+    "vcmo_v": 1.64983,
+    "vg1_v": 1.84928,
+    "vg2_v": 2.54989,
+    "vout_v": 1.65064,
+    "vrs_v": 1.02818
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe.spice",
+ "written_by": "AFE/layout/tb/tb_amp_ac.py"
+}

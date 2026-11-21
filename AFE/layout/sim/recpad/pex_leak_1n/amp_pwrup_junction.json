@@ -1,0 +1,60 @@
+{
+ "check": "amp_pwrup_junction",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 07:00",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_1n/amp_pwrup_junction_ff85.log",
+   "values": {
+    "codes_from_mid_1s": 118.86266802424237,
+    "err_1s_mv": 95.76337999999996,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.508888549,
+    "vout_100ms_v": 1.47285078280306,
+    "vout_1s_v": 1.55423662,
+    "vout_before_v": 1.148979166744708,
+    "vrs_end_v": 1.22333582
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 07:00",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_1n/amp_pwrup_junction_ss-40.log",
+   "values": {
+    "codes_from_mid_1s": 223.88343776969674,
+    "err_1s_mv": 180.3748399999998,
+    "t_wait_s": 1.5,
+    "vbn_end_v": 0.804862854,
+    "vout_100ms_v": 1.4686957111458,
+    "vout_1s_v": 1.46962516,
+    "vout_before_v": 2.3941360448911877,
+    "vrs_end_v": 0.815196178
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 07:00",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_leak_1n/amp_pwrup_junction_typ.log",
+   "values": {
+    "codes_from_mid_1s": 224.95927078787867,
+    "err_1s_mv": 181.2415999999999,
+    "t_wait_s": 0.2,
+    "vbn_end_v": 0.647681035,
+    "vout_100ms_v": 1.4670891815657998,
+    "vout_1s_v": 1.4687584,
+    "vout_before_v": 2.4497493067173766,
+    "vrs_end_v": 1.029203
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_leak_1n.spice",
+ "written_by": "AFE/layout/tb/tb_amp_pwrup_junction.py"
+}

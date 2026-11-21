@@ -1,0 +1,63 @@
+{
+ "check": "amp_loop",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_loop_ff85.log",
+   "values": {
+    "fu_hz": 363289.0,
+    "hfdev_cx10p_db": 10.180914510000008,
+    "hfdev_cx2p_db": 1.4716389986391079,
+    "hfdev_cx5p_db": 5.311569410000004,
+    "pm_cx10p_deg": 47.7867,
+    "pm_cx2p_deg": 67.4352,
+    "pm_cx5p_deg": 57.4291,
+    "pm_deg": 76.9221,
+    "t_100hz_db": 58.7002
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_loop_ss-40.log",
+   "values": {
+    "fu_hz": 189532.0,
+    "hfdev_cx10p_db": 10.661442809999997,
+    "hfdev_cx2p_db": 2.274233890000005,
+    "hfdev_cx5p_db": 6.097299509999999,
+    "pm_cx10p_deg": 59.6313,
+    "pm_cx2p_deg": 75.6278,
+    "pm_cx5p_deg": 68.3896,
+    "pm_deg": 81.3718,
+    "t_100hz_db": 58.5291
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 06:33",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/sch_probe/amp_loop_typ.log",
+   "values": {
+    "fu_hz": 253854.0,
+    "hfdev_cx10p_db": 10.58557906,
+    "hfdev_cx2p_db": 2.030288040000002,
+    "hfdev_cx5p_db": 5.898800960000003,
+    "pm_cx10p_deg": 54.2041,
+    "pm_cx2p_deg": 72.2478,
+    "pm_cx5p_deg": 63.6287,
+    "pm_deg": 79.5669,
+    "t_100hz_db": 58.8771
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe.spice",
+ "written_by": "AFE/layout/tb/tb_amp_loop.py"
+}

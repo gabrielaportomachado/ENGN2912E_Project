@@ -1,0 +1,20 @@
+* REC pad model for REVIEW.md R13 / Decision 53 (AFE/layout/sim/recpad/models/mk_pad_models.py writes this file; do not edit by hand).
+* The cell of the PDK IO library on a REC pad: gf180mcu_fd_io__asig_5p0 (gf180mcu_fd_io.spice, copied verbatim below): ESD diodes ASIG5V -> DVDD (diode_pd2nw_06v0, m=4 x 150 um2),
+* DVSS -> ASIG5V (diode_nd2ps_06v0, m=4 x 150 um2), a power clamp diode DVDD / DVSS (D0) and the supply decap cap_nmos_06v0 (X1, 36 x 15 x 15 um). It has NO series resistor.
+* Pad supplies DVDD = chip VDD, DVSS = VSS (the chip rails; the core pins VDD / VSS of the cell are unused inside the cell).
+* WHAT-IF 1n DC leakage from VDD into rec added below. Outside the cell: bond wire 2 nH + 0.25 ohm, package / board 2 pF on the board side, external end OPEN (high-impedance probe only).
+.SUBCKT gf180mcu_fd_io__asig_5p0 ASIG5V DVDD DVSS VDD VSS
+D0 DVSS DVDD diode_nd2ps_06v0 m=4.0 area=40e-12 pj=82e-6
+X1 DVDD DVSS cap_nmos_06v0 m=36.0 c_length=15e-6 c_width=15e-6
+D2 DVSS ASIG5V diode_nd2ps_06v0 m=4.0 area=150e-12 pj=106e-6
+D3 ASIG5V DVDD diode_pd2nw_06v0 m=4.0 area=150e-12 pj=106e-6
+.ENDS
+
+.subckt recpad rec vdd vss
+Rser rec pad 1m
+Xasig pad vdd vss vdd vss gf180mcu_fd_io__asig_5p0
+Lbond pad pw 2n
+Rbond pw pb 0.25
+Cpkg pb 0 2p
+Ileak vdd rec DC 1n
+.ends
