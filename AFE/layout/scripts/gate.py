@@ -9,7 +9,7 @@ It reads the reports that the kit commands wrote and judges them against AFE/lay
                 BLOCKED.md; the phase report AFE/layout/reports/<phase>.md with its 10 sections (L1a onward; the first phase after L2a also converts NOTES_L2.md into reports/L2a.md);
                 "<phase> findings" + a Results-log row (L2a: in AFE/layout/NOTES_L2.md; later phases: AFE/NOTES.md, and "L2a findings" merged there); floorplan.py check 0 FAIL
   L2a / L1a / L3a  DRC (flow.py drc, variant D) 0 violations and LVS (flow.py lvs) "Circuits match uniquely." for amp_ch / adc_ch / dbs_afe_top, both on the CURRENT GDS (sha1 in the report);
-                L1a also the Cref keep-out (nothing below Metal4 inside the Cref bottom-plate footprint); L3a also antenna, decap >= 115 / 95 pF in the LVS reference, compare.py --phase L3a
+                L1a also the Cref keep-out (nothing below Metal4 inside the Cref bottom-plate footprint); L3a also antenna, decap >= decap_min_main_pF / decap_min_dac_pF of floorplan.json params (115 / 47.5 pF) in the LVS reference, compare.py --phase L3a
   L1d           AFE/dig/final/{afe_dig.gds, afe_dig.pnl.v, afe_dig.lef, afe_dig_pins.json}, flow summary VERDICT PASS, KLayout DRC PASS on that GDS, the tap limits (a) (c) + slack, switch
                 skew, gate-level testbench failures only the accepted ones, run_top_sim.sh dig EQUIV PASS, check_lvs_netlists.py PASS with the LVS top written from the final netlist
   L2b / L1b / L3b  PEX (flow.py pex) of the current GDS: census equal to the LVS extraction, MIM correction applied, no unknown model; compare.py --phase <phase> PASS on post-layout results
@@ -350,7 +350,7 @@ def phase_dig(a):
     R(os.path.exists(cl) and 'SUMMARY: A PASS, B PASS, C PASS' in open(cl).read(), 'check_lvs_netlists.py SUMMARY A, B, C PASS', 'run: python3 AFE/layout/scripts/check_lvs_netlists.py')
     hdr = open(os.path.join(LAY, 'lvs', 'dbs_afe_top.spice')).read(800)
     R('--dig-netlist AFE/dig/final/afe_dig.pnl.v' in hdr, 'the LVS top was written from AFE/dig/final/afe_dig.pnl.v (header of AFE/layout/lvs/dbs_afe_top.spice)',
-      'run: python3 AFE/layout/scripts/mk_lvs_netlists.py --decap-n 74,64 --dig-netlist AFE/dig/final/afe_dig.pnl.v (+ the other options in the current header)')
+      'run: python3 AFE/layout/scripts/mk_lvs_netlists.py --decap-n 74,30 --cin 2,61.15,61.15 --dig-netlist AFE/dig/final/afe_dig.pnl.v (+ the other options in the current header)')
     floorplan([], os.path.join(F, 'afe_dig_pins.json') if not miss else None)
 
 
@@ -362,7 +362,9 @@ def lvs_decap():
         R(False, 'decap devices Xu_dcm / Xu_dcd with 20 x 20 um units in AFE/layout/lvs/dbs_afe_top.spice', 'regenerate with --decap 20,20 --decap-n NMAIN,NDAC (SPEC.md section 4)')
         return
     cm, cd = int(m1.group(1)) * DECAP_PF, int(m2.group(1)) * DECAP_PF
-    R(cm >= 115 and cd >= 95, 'decap in the LVS top (= drawn, LVS matched): ADC-main %d units = %.1f pF >= 115, ADC-DAC %d units = %.1f pF >= 95' % (int(m1.group(1)), cm, int(m2.group(1)), cd),
+    prm = json.load(open(os.path.join(LAY, 'floorplan.json')))['params']          # REVIEW R16: the targets are the floorplan parameters (Decision 52e: 115 / 47.5 pF), not constants
+    tm, td = float(prm['decap_min_main_pF']), float(prm['decap_min_dac_pF'])
+    R(cm >= tm and cd >= td, 'decap in the LVS top (= drawn, LVS matched): ADC-main %d units = %.1f pF >= %g, ADC-DAC %d units = %.1f pF >= %g (floorplan.json params)' % (int(m1.group(1)), cm, tm, int(m2.group(1)), cd, td),
       'draw more units (SPEC.md section 4 reserve) and regenerate with --decap-n')
 
 

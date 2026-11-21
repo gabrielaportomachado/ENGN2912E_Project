@@ -5,9 +5,9 @@ resources/info.yaml and lvs_config.json, copies in AFE/review/sim/organizer/).
   python3 AFE/layout/scripts/check_submission.py          final mode (L4): every item must PASS
   python3 AFE/layout/scripts/check_submission.py --pre    before the GDS exists (LP, L3a): items that only layout produces are PENDING (with the phase that produces them), not FAIL
 
-Checks: info.yaml (template keys, 7 io_types, 24 pads, every pad's top-level ports exist in AFE/top/dbs_afe_top.v and every top port belongs to exactly one pad, export-control file,
+Checks: info.yaml (template keys, 7 io_types, the pad count of floorplan.json (3 x n_ch + 8 = 20 pads with the REC pads, 2 x n_ch + 8 without), every pad's top-level ports exist in AFE/top/dbs_afe_top.v and every top port belongs to exactly one pad, export-control file,
 lvs_config path, ready flags), lvs_config.json (template keys, TOP_SOURCE, every file after $UPRJ_ROOT / $TOP_SOURCE / $TOP_LAYOUT substitution, the SPICE top has subckt TOP_SOURCE with
-exactly the top ports, the Verilog file defines afe_dig), the GDS (one top cell named TOP_LAYOUT, inside 1000 x 1000 um, DRC / LVS reports of flow.py on this very file), README.md
+exactly the top ports, the Verilog file defines afe_dig), the GDS (one top cell named TOP_LAYOUT, inside the outline of floorplan.json (605 x 1110 um), DRC / LVS reports of flow.py on this very file), README.md
 (no `<L4:` placeholder left).  Writes AFE/layout/sim/check_submission.log.  Exit 0 = no FAIL (and, without --pre, no PENDING)."""
 import os, re, sys, json, hashlib, argparse
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +16,9 @@ from floorplan import verilog_ports, info_pads
 LAY = os.path.normpath(os.path.join(HERE, '..'))
 REPO = os.path.normpath(os.path.join(LAY, '..', '..'))
 ORG = os.path.join(REPO, 'AFE', 'review', 'sim', 'organizer')
+FP = json.load(open(os.path.join(LAY, 'floorplan.json')))                        # REVIEW R16: pad count and outline come from the floorplan (Decisions 52 / 53), not from constants
+NPAD = (3 if FP['params'].get('rec_pads') else 2) * int(FP['params']['n_ch']) + 8      # E, IPG (and REC) per channel + REF + CS SCLK DIN RSTN DOUT + VDD VSS
+OW, OH = float(FP['outline'][2]), float(FP['outline'][3])
 TOPV = os.path.join(REPO, 'AFE', 'top', 'dbs_afe_top.v')
 IOTYPES = ('ground', 'power', 'input_cmos', 'input_schmitt', 'bidirectional', 'bidirectional_24ma', 'analog')
 BIDI_CTL = ('PD', 'PU', 'CS', 'SL', 'IE', 'OE', 'PDRV0', 'PDRV1')
@@ -80,13 +83,13 @@ def main():
     pads = info_pads(info)
     bad = [p for p in pads if p[1] not in IOTYPES]
     ok(not bad, 'info.yaml: %d pads, io_type one of the 7 template types%s' % (len(pads), (' (BAD: %s)' % bad) if bad else ''))
-    ok(len(pads) == 24 and len({p[0] for p in pads}) == 24, 'info.yaml has 24 distinct pads (Decision 45)')
+    ok(len(pads) == NPAD and len({p[0] for p in pads}) == NPAD, 'info.yaml has %d distinct pads (floorplan.json: n_ch %s, rec_pads %s; Decisions 52 / 53)' % (NPAD, FP['params']['n_ch'], FP['params'].get('rec_pads')))
     ports = verilog_ports(TOPV)
     want = [q for n, t in pads for q in pad_ports(n, t)]
     miss = [q for q in want if q not in ports]
     extra = [q for q in ports if q not in want]
     dup = sorted({q for q in want if want.count(q) > 1})
-    ok(not miss and not extra and not dup, 'top ports of AFE/top/dbs_afe_top.v (%d) = the ports the 24 pads need (%d)%s' % (len(ports), len(want),
+    ok(not miss and not extra and not dup, 'top ports of AFE/top/dbs_afe_top.v (%d) = the ports the %d pads need (%d)%s' % (len(ports), len(pads), len(want),
        ''.join(' %s: %s' % (k, v[:6]) for k, v in (('missing', miss), ('extra', extra), ('twice', dup)) if v)))
     ec = yaml_val(info, 'export_control')
     ok(ec and os.path.exists(os.path.join(REPO, ec)), 'export-control document %s exists' % ec)
@@ -131,8 +134,8 @@ def main():
             bb = ly.top_cells()[0].bbox() if tops else None
             if bb:
                 w, h = bb.width() * ly.dbu, bb.height() * ly.dbu
-                ok(bb.left >= 0 and bb.bottom >= 0 and bb.right * ly.dbu <= 1000.0 + 1e-6 and bb.top * ly.dbu <= 1000.0 + 1e-6,
-                   'GDS inside the 1000 x 1000 um outline: bbox %.3f x %.3f um at (%.3f, %.3f)' % (w, h, bb.left * ly.dbu, bb.bottom * ly.dbu), 'ACCEPT.md ladder A')
+                ok(bb.left >= 0 and bb.bottom >= 0 and bb.right * ly.dbu <= OW + 1e-6 and bb.top * ly.dbu <= OH + 1e-6,
+                   'GDS inside the %g x %g um outline of floorplan.json: bbox %.3f x %.3f um at (%.3f, %.3f)' % (OW, OH, w, h, bb.left * ly.dbu, bb.bottom * ly.dbu), 'ACCEPT.md ladder A')
         except ImportError:
             R('FAIL', 'python module klayout.db missing (run inside the course container)')
         sha = hashlib.sha1(open(g, 'rb').read()).hexdigest()
@@ -140,7 +143,7 @@ def main():
             jf = os.path.join(LAY, 'sim', 'flow', '%s.%s.json' % (top, kind))
             d = json.load(open(jf)) if os.path.exists(jf) else {}
             if d.get('gds_sha1') != sha and a.pre:
-                pend('flow.py %s report of %s (today the file is the PR-boundary GDS of Decision 45)' % (kind, os.path.relpath(g, REPO)), 'L3a (DRC / LVS of the full chip), L4 (copies the GDS)')
+                pend('flow.py %s report of %s (gds/dbs_afe_top.gds today is the old PR-boundary GDS, replaced by L4)' % (kind, os.path.relpath(g, REPO)), 'L3a (DRC / LVS of the full chip), L4 (copies the GDS)')
                 continue
             ok(d.get('gds_sha1') == sha and d.get(field) == good, 'flow.py %s report of THIS GDS: %s = %s' % (kind, field, d.get(field)),
                'run python3 AFE/layout/scripts/flow.py %s --gds %s --top %s%s' % (kind, os.path.relpath(g, REPO), top, ' --antenna' if kind == 'drc' else ' --ref AFE/layout/lvs/dbs_afe_top.spice'))

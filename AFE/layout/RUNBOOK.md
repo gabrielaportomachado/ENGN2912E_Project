@@ -1,6 +1,6 @@
 # RUNBOOK: running the layout phases alone (Atharv)
 
-> **NOW (2026-11-20, Decision 48):** run the rework round R2 -> R3 / R4 / R5 in AFE/prompts/layout_run.md section "Rework round R2-R5" before L2b, L1b, L3a. Deadline 2026-11-30 (Decision 49).
+> **NOW (2026-11-21, Decisions 51-54):** the rework rounds R2-R16 are DONE. The chip has 4 channels, 20 pads (E, IPG, REC of channels 0-3, REF, CS, SCLK, DIN, RSTN, DOUT, VDD, VSS), a 605 x 1110 um outline, the macro afe_dig 424.48 x 86.24 um and the 80-SCLK SPI frame (AFE/adc/SPI_FRAME.md). L2a, L1a, L1d, L2b and L1b are finished; the next phase is **L3a**, then L3b and L4. Deadline 2026-11-30 (Decision 49).
 
 
 Plain-language guide to AFE/prompts/layout_run.md. Nobody has to answer you: AFE/layout/ACCEPT.md is IN FORCE (user, 2026-11-20) and tells the agent what to do when something fails.
@@ -27,7 +27,7 @@ The user / monitoring session reads your reports afterwards and, if something mu
 | 4 | L2b | amplifier PEX + post-layout simulations | Sonnet 5.5 / default | 2-4 h (simulations ~1 h) | L1b | L2a |
 | 5 | L1b | ADC PEX + post-layout simulations | Sonnet 5.5 / default | 2-4 h | L2b | L1a, L1d |
 | 6 | L3a | top assembly, full-chip DRC + LVS | Sonnet 5.5 / high | 6-10 h | - | L1d, L2b, L1b |
-| 7 | L3b | system checks (supply, crosstalk, 8-channel power-up, end to end) | Sonnet 5.5 / default | 3-5 h | - | L3a |
+| 7 | L3b | system checks (supply, crosstalk, 4-channel power-up, stimulation, end to end) | Sonnet 5.5 / default | 3-5 h | - | L3a |
 | 8 | L4 | submission package | Sonnet 5.5 / default | 1-2 h | - | L3b |
 
 Two phases at once = two terminals and two Claude sessions in the same repo; the kit limits heavy jobs to 3 at a time across both (8 GB RAM). Each session commits only its own files.
@@ -51,7 +51,7 @@ If the agent stops for another reason (crash, out of credits, computer restarted
 ## Things you might type yourself
 - `python3 AFE/layout/scripts/gate.py <phase>`: is the phase finished? (prints PASS / FAIL per line and what to do)
 - `python3 AFE/layout/tb/compare.py --phase L2b` (or L1b, L3a, L3b): post-layout numbers against the limits -> AFE/layout/sim/post/compare_<phase>.md
-- `python3 AFE/layout/scripts/floorplan.py check`: does everything fit the 1000 x 1000 um outline?
+- `python3 AFE/layout/scripts/floorplan.py check`: does everything fit the 605 x 1110 um outline (the numbers are those of AFE/layout/floorplan.json)?
 - `python3 AFE/layout/scripts/check_submission.py --pre`: the submission files as far as they exist.
 - `python3 AFE/layout/scripts/check_prompts.py`: every file the prompts mention exists (or is made by a named phase).
 
@@ -64,8 +64,9 @@ If the agent stops for another reason (crash, out of credits, computer restarted
 | feedback from the user | AFE/layout/REVIEW.md (never edit it) |
 | phase reports | AFE/layout/reports/<phase>.md (template TEMPLATE.md) |
 | DRC / LVS / PEX reports | AFE/layout/sim/flow/<cell>.drc.json / .lvs.json / .pex.json (by AFE/layout/scripts/flow.py) |
-| pre-layout baselines / post-layout results | AFE/layout/baseline/, AFE/layout/sim/post/ |
-| digital macro | AFE/dig/ (recipe AFE/dig/run_dig.sh; final files AFE/dig/final/ after L1d) |
+| pre-layout baselines / post-layout results | AFE/layout/baseline/ (4 channels; `top_*_n8.json` = the 8-channel history, `*_cin20.json` = Cin 20 pF), AFE/layout/sim/post/ |
+| digital macro | AFE/dig/ (recipe AFE/dig/run_dig.sh; final files AFE/dig/final/: afe_dig 424.48 x 86.24 um, 4 channels) |
+| host interface (SPI frame, host rules) | AFE/adc/SPI_FRAME.md (normative), README.md, AFE/adc/README.md |
 | LVS references | AFE/layout/lvs/ (only AFE/layout/scripts/mk_lvs_netlists.py writes them) |
 | design record | AFE/NOTES.md (Decisions, phase findings, Results log) |
 

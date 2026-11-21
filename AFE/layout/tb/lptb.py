@@ -60,6 +60,25 @@ class TbError(Exception):
     pass
 
 
+# ------------------------------------------------------------------------------------------------ channel count of the chip (REVIEW.md R16, Decisions 52 / 54)
+N_CH = {'n': 4}                 # number of channels of the system benches tb_top_*.py: 4 = the chip (Decision 52); 8 = the legacy 8-channel baselines AFE/layout/baseline/top_*_n8.json
+# supply model of the L3b system benches: decap of the LVS top AFE/layout/lvs/dbs_afe_top.spice (one 20 x 20 um cap_nmos_03v3 unit = 1.593 pF: 74 + 30 units) and the charge of the afe_dig macro per SCLK cycle
+# (AFE/dig/reports/power_dig.log, OpenSTA at the sign-off corners: tt 3.3 V / ff -40 C 3.6 V / ss 125 C 3.0 V).  Rp / Lp / Rs / Rd are NOT re-derived: they stay at the X2 S4 defaults
+# (0.25 ohm, 2 nH ASSUMED; Rs 10 ohm, Rd 3 ohm of the strap model: no extracted layout yet, L3b of the real layout writes AFE/layout/sim/post/supply_model.json).
+UNIT_C_PF = 1.593
+SUPPLY_BY_N = {4: {'Cm': 74 * UNIT_C_PF * 1e-12, 'Cd': 30 * UNIT_C_PF * 1e-12, 'qdig_pC_per_cycle': {'typ': 17.0, 'ff-40': 19.1, 'ss125': 15.5}},
+               8: {'Cm': 0.125e-9, 'Cd': 0.1e-9, 'qdig_pC_per_cycle': {'typ': 24.0, 'ff-40': 27.0, 'ss125': 24.0}}}       # N = 8: the X2 / D3 values of the n8 baselines (ss 125: D3 gave no separate value, ESTIMATE)
+
+
+def add_nch(ap):
+    """--nch for the system benches tb_top_*.py (default 4).  A value other than 4 needs --out (the committed baselines are the 4-channel ones; the 8-channel ones are top_*_n8.json)."""
+    ap.add_argument('--nch', type=int, default=4, help='number of channels (default 4 = the chip; 8 = the legacy N = 8 benches, needs --out)')
+
+
+def set_nch(n):
+    N_CH['n'] = n
+
+
 # ------------------------------------------------------------------------------------------------ REC pad load (REVIEW.md R13, Decision 53)
 REC_LOAD = {'file': None}        # --rec-load <spice file>: subckt `recpad rec vdd vss` that hangs on the amplifier input node `rec`; None (default) = nothing is added, every netlist is unchanged
 
@@ -687,6 +706,9 @@ def cli(check, doc, corners_default, run, extra_args=None):
         if not a.out:
             ap.error('--rec-load needs --out DIR (outside AFE/layout/baseline and AFE/layout/sim/post)')
         set_rec_load(a.rec_load)
+    if getattr(a, 'nch', 4) != 4 and not a.out:
+        ap.error('--nch other than 4 needs --out DIR (the committed baselines are the 4-channel ones)')
+    set_nch(getattr(a, 'nch', 4))
     if a.prdiff:
         check = check + '_junction'
     cs = []
@@ -713,6 +735,8 @@ def cli(check, doc, corners_default, run, extra_args=None):
             rc = 2
             continue
         log('RESULT %s %s: ' % (check, c) + '  '.join('%s=%s' % (k, fmt(v)) for k, v in vals.items()))
+        if hasattr(a, 'nch'):
+            info = dict(info or {}, n_ch=a.nch)
         jf = save(check, a.netlist, c, vals, '\n'.join(lines) + '\n', a.out, info)
         print('   -> %s' % os.path.relpath(jf, REPO))
     return rc
