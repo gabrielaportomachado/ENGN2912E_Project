@@ -413,7 +413,7 @@ def x2_collect(dest, check, corner):
         if f.endswith(('_done.txt', '_summary.log')):
             os.remove(src)
         elif ('_%s' % corner) in f:
-            os.replace(src, os.path.join(dest, '%s_x2_%s' % (check, f[len(X2_PREFIX) + 1:])))
+            shutil.move(src, os.path.join(dest, '%s_x2_%s' % (check, f[len(X2_PREFIX) + 1:])))      # shutil.move: --out may be on another file system (R16)
 
 
 def model_lines(corner, extra=()):

@@ -1,0 +1,71 @@
+{
+ "check": "top_stim",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-20 07:46",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_stim_ff85_n8.log",
+   "values": {
+    "e_resid_mv": 1.0000000161269895e-05,
+    "e_resid_mv_leak": -0.010190000000021016,
+    "e_swing_v": 1.1382027000000001,
+    "e_swing_v_leak": 1.13829974,
+    "final_v": 1.650924531538974,
+    "final_v_leak": 1.6509268097534975,
+    "out_dev_mv": 0.020006439100050954,
+    "out_dev_mv_leak": 0.019283268499981077,
+    "rec_dev_mv": 0.0,
+    "rec_dev_mv_leak": 0.0,
+    "t_1mv_s": 0.9064511799999999,
+    "t_1mv_s_leak": 0.8775327600000002
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-20 07:47",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_stim_ss-40_n8.log",
+   "values": {
+    "e_resid_mv": 1.0000000161269895e-05,
+    "e_resid_mv_leak": -0.010190000000021016,
+    "e_swing_v": 0.9057730599999998,
+    "e_swing_v_leak": 0.90596382,
+    "final_v": 1.650182137981346,
+    "final_v_leak": 1.6501714304063955,
+    "out_dev_mv": 0.05571483500022012,
+    "out_dev_mv_leak": 0.04509057599988431,
+    "rec_dev_mv": 9.99999993922529e-06,
+    "rec_dev_mv_leak": 9.99999993922529e-06,
+    "t_1mv_s": 0.6673249499999998,
+    "t_1mv_s_leak": 0.65594223
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 07:46",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_stim_typ_n8.log",
+   "values": {
+    "e_resid_mv": 1.0000000161269895e-05,
+    "e_resid_mv_leak": -0.010190000000021016,
+    "e_swing_v": 1.0217493799999997,
+    "e_swing_v_leak": 1.02184456,
+    "final_v": 1.6505777316055965,
+    "final_v_leak": 1.6505955680546303,
+    "out_dev_mv": 0.023613620599993723,
+    "out_dev_mv_leak": 0.0231040566001095,
+    "rec_dev_mv": 0.0,
+    "rec_dev_mv_leak": 0.0,
+    "t_1mv_s": 0.8264474000000002,
+    "t_1mv_s_leak": 0.8778461200000001
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_top_stim.py"
+}

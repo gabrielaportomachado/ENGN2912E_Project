@@ -1,0 +1,42 @@
+{
+ "check": "top_supply",
+ "corners": {
+  "ff-40": {
+   "date": "2026-11-20 08:11",
+   "info": {
+    "model": "X2 S4 default",
+    "qdig_pC_per_ADC_per_edge": 3.375,
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_supply_ff-40_n8.log",
+   "values": {
+    "dcode_max": 1.0,
+    "dres_max_lsb": 0.496,
+    "droop_dac_mv": 0.92,
+    "droop_main_mv": 7.04,
+    "dt_max_lsb": 0.034,
+    "failed": 0.0
+   }
+  },
+  "typ": {
+   "date": "2026-11-20 08:04",
+   "info": {
+    "model": "X2 S4 default",
+    "qdig_pC_per_ADC_per_edge": 3.0,
+    "warnings": []
+   },
+   "log": "AFE/layout/baseline/top_supply_typ_n8.log",
+   "values": {
+    "dcode_max": 0.0,
+    "dres_max_lsb": 0.113,
+    "droop_dac_mv": 0.15,
+    "droop_main_mv": 3.59,
+    "dt_max_lsb": 0.019,
+    "failed": 0.0
+   }
+  }
+ },
+ "netlist": "schematic",
+ "netlist_sha1": null,
+ "written_by": "AFE/layout/tb/tb_top_supply.py"
+}

@@ -1,4 +1,4 @@
-== top_stim  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:46
-   job st_sch_ss-40: exit 0, 14 s
-   job st_sch_ss-40_leak: exit 0, 14 s
-RESULT top_stim ss-40: rec_dev_mv=1e-05  out_dev_mv=0.0557148  e_swing_v=0.905773  final_v=1.65018  e_resid_mv=1e-05  t_1mv_s=0.667325  rec_dev_mv_leak=1e-05  out_dev_mv_leak=0.0450906  e_swing_v_leak=0.905964  final_v_leak=1.65017  e_resid_mv_leak=-0.01019  t_1mv_s_leak=0.655942
+== top_stim  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 17:06
+   job st_sch_ss-40: exit 0, 10 s
+   job st_sch_ss-40_leak: exit 0, 10 s
+RESULT top_stim ss-40: rec_dev_mv=1e-05  out_dev_mv=0.0460562  e_swing_v=0.905955  final_v=1.65018  e_resid_mv=1e-05  t_1mv_s=0.658943  rec_dev_mv_leak=1e-05  out_dev_mv_leak=0.0331562  e_swing_v_leak=0.905891  final_v_leak=1.65018  e_resid_mv_leak=-0.01019  t_1mv_s_leak=0.654339

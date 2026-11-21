@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """tb_top_e2e.py (L3b item 1): end-to-end transistor-level run of ONE channel: electrode (Randles) -> routing TGATE (record) -> amplifier -> its own ADC cell -> the 12 decisions = the code the
-SPI frame carries (the digital frame itself is proven by the gate-level testbench of L1d).  It is the X2 S1 run (AFE/adc/scripts/x2_s1.py, unchanged, closed-loop PWL replay, option `tgate`):
+SPI frame carries (the digital frame itself - 80 SCLK, status word + channel words 1-4 {ID[1:0], 00, code} of AFE/adc/SPI_FRAME.md, IDs 0-3 - is proven by AFE/adc/tb/tb_adc_top.v and the gate-level testbench of L1d / R14; REVIEW R16: this bench is ONE channel, it does not depend on the channel count).  It is the X2 S1 run (AFE/adc/scripts/x2_s1.py, unchanged, closed-loop PWL replay, option `tgate`):
 9 electrode steps to outputs of 1.15 .. 2.15 V and a 450 uV pk 23.4 Hz sine at 8 phases, 3 frames at 4 kS/s each, evaluated with the definitions of x2_s1_report.py.
 Values: offset_lsb (code centre minus amplifier output, below 2.05 V), inl_lo_lsb / inl_all_lsb (INL beyond the fixed offset below 2.05 V / over 1.15-2.15 V), amp_minus_adc_lsb (largest |difference|
 to the same ADC alone: what the amplifier and the TGATE add), gain_sine_code_db (end-to-end gain from the codes), vout_min_v / vout_max_v (amplifier output reached; = the internal node the REC pad
