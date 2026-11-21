@@ -2,55 +2,55 @@
  "check": "amp_thd",
  "corners": {
   "ff85": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_thd_ff85.log",
    "values": {
-    "gain_db": 59.75109365531048,
-    "hd2_dbc": -44.688316626931474,
-    "hd3_dbc": -46.26011974632351,
-    "out_max_v": 2.2052947,
-    "out_mean_v": 1.7137120443588003,
-    "out_min_v": 1.23728995,
-    "thd_pct": 0.9437597334949211
+    "gain_db": 59.75165733362587,
+    "hd2_dbc": -44.79293761888925,
+    "hd3_dbc": -46.37112928661733,
+    "out_max_v": 2.20570762,
+    "out_mean_v": 1.7140715932512642,
+    "out_min_v": 1.2374523,
+    "thd_pct": 0.9319331370074714
    }
   },
   "ss-40": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_thd_ss-40.log",
    "values": {
-    "gain_db": 59.82176365535359,
-    "hd2_dbc": -73.91579684245261,
-    "hd3_dbc": -66.46962485031536,
-    "out_max_v": 2.16324122,
-    "out_mean_v": 1.6706824689897322,
-    "out_min_v": 1.17826842,
-    "thd_pct": 0.05182352957919399
+    "gain_db": 59.821683825543595,
+    "hd2_dbc": -73.79102636897579,
+    "hd3_dbc": -66.44035876046809,
+    "out_max_v": 2.16346308,
+    "out_mean_v": 1.6708865507260242,
+    "out_min_v": 1.1784606,
+    "thd_pct": 0.05208942390167411
    }
   },
   "typ": {
-   "date": "2026-11-21 01:04",
+   "date": "2026-11-21 18:57",
    "info": {
     "warnings": []
    },
    "log": "AFE/layout/sim/post/amp_thd_typ.log",
    "values": {
-    "gain_db": 59.8200833241819,
-    "hd2_dbc": -72.71164601895941,
-    "hd3_dbc": -69.860000747117,
-    "out_max_v": 2.16536891,
-    "out_mean_v": 1.6727332746719998,
-    "out_min_v": 1.18025596,
-    "thd_pct": 0.03976543823622242
+    "gain_db": 59.81999800426661,
+    "hd2_dbc": -72.61058987051663,
+    "hd3_dbc": -69.81680011045513,
+    "out_max_v": 2.16561016,
+    "out_mean_v": 1.6729537774047742,
+    "out_min_v": 1.18046158,
+    "thd_pct": 0.04006037394002682
    }
   }
  },
  "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
- "netlist_sha1": "e3100c69eb97",
+ "netlist_sha1": "ab3b5dd21745",
  "written_by": "AFE/layout/tb/tb_amp_thd.py"
 }

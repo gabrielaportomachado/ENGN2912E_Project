@@ -1,0 +1,74 @@
+{
+ "check": "tgate",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 18:56",
+   "info": {
+    "ports": [
+     "VDD",
+     "VSS",
+     "IN",
+     "OUT",
+     "C",
+     "CBAR"
+    ],
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/tgate_ff85.log",
+   "values": {
+    "i_off_pa": 0.010648999999999999,
+    "ron_1v65_kohm": 9.25068892,
+    "ron_max_kohm": 15.6032343,
+    "ron_min_kohm": 4.05338815,
+    "v_at_ron_max": 2.3
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 18:56",
+   "info": {
+    "ports": [
+     "VDD",
+     "VSS",
+     "IN",
+     "OUT",
+     "C",
+     "CBAR"
+    ],
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/tgate_ss-40.log",
+   "values": {
+    "i_off_pa": 0.00840052,
+    "ron_1v65_kohm": 20.7260351,
+    "ron_max_kohm": 34.2318133,
+    "ron_min_kohm": 4.4810650999999995,
+    "v_at_ron_max": 1.95
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 18:56",
+   "info": {
+    "ports": [
+     "VDD",
+     "VSS",
+     "IN",
+     "OUT",
+     "C",
+     "CBAR"
+    ],
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/tgate_typ.log",
+   "values": {
+    "i_off_pa": 0.0100418,
+    "ron_1v65_kohm": 12.7391375,
+    "ron_max_kohm": 21.018917000000002,
+    "ron_min_kohm": 4.31986579,
+    "v_at_ron_max": 2.125
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/TGATE.pex.spice",
+ "netlist_sha1": "dbd77f5b17cc",
+ "written_by": "AFE/layout/tb/tb_tgate.py"
+}

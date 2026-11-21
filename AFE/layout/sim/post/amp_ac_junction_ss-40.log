@@ -1,4 +1,4 @@
-== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:10
-   job settle_pexe3100c69eb97_ss-40: exit 0, 1 s
-   job ac_pexe3100c69eb97_ss-40: exit 0, 0 s
-RESULT amp_ac_junction ss-40: idd_ua=47.1336  vout_v=1.65923  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8164  g_pk_db=59.8245  f_lo_hz=nan  f_hi_hz=409.063  g_300_db=57.9612  g_0p5_db=59.8206  v1_v=1.6491  g1_mid_db=39.848  hf_1k=-8.40729  hf_3k=-17.3581  hf_10k=-27.7888  hf_30k=-37.7065  hf_100k=-50.6884  hf_300k=-61.7469  hf_1M=-66.7166
+== amp_ac_junction  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 19:02
+   job settle_pexab3b5dd21745_ss-40: exit 0, 1 s
+   job ac_pexab3b5dd21745_ss-40: exit 0, 0 s
+RESULT amp_ac_junction ss-40: idd_ua=47.1336  vout_v=1.65923  vbn_v=0.804863  vcm_v=1.64911  vg1_v=1.84956  vcmo_v=1.64977  vg2_v=2.54986  vrs_v=0.814347  g_mid_db=59.8165  g_pk_db=59.8245  f_lo_hz=nan  f_hi_hz=409.071  g_300_db=57.9612  g_0p5_db=59.8207  v1_v=1.6491  g1_mid_db=39.848  hf_1k=-8.40728  hf_3k=-17.3581  hf_10k=-27.7889  hf_30k=-37.7074  hf_100k=-50.6924  hf_300k=-61.746  hf_1M=-66.7149

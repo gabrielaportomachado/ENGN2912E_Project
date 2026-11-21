@@ -1,9 +1,9 @@
 {
- "bytes": 24038,
- "c_total_fF": 2608.464,
+ "bytes": 24211,
+ "c_total_fF": 2610.455,
  "census_equal_lvs": true,
  "cthresh_fF": 0.01,
- "date": "2026-11-21 01:04",
+ "date": "2026-11-21 18:57",
  "devices": {
   "cap_mim_2f0_m4m5_noshield": 11,
   "nfet_03v3": 50,
@@ -29,18 +29,18 @@
   "a_856_1244#"
  ],
  "gds": "AFE/layout/amp/amp_ch.gds",
- "gds_sha1": "2bb1643e489bbf16b13b4bd32ea71b36d5b12c9b",
+ "gds_sha1": "230ee25cdcf722e9f1f066d13e576a6da05d9619",
  "log": "AFE/layout/sim/flow/amp_ch.pex.log",
  "maxrss_mb": 69,
  "mim_fix": {
-  "c_total_fixed_fF": 2608.466,
-  "c_total_stock_fF": 2631.831,
+  "c_total_fixed_fF": 2610.465,
+  "c_total_stock_fF": 2633.83,
   "moved_fF": {
    "a_28022_1954#": 8.675,
-   "a_40238_24600#": 16.209,
+   "a_40238_24600#": 16.155,
    "a_6838_13302#": 4.206,
    "w_28620_25696#": 59.309,
-   "w_39820_39896#": 13.975,
+   "w_39820_39896#": 13.625,
    "w_5020_25696#": 59.821
   },
   "top_plate_nets": {
@@ -69,7 +69,7 @@
   "unexplained_fF": 0.0
  },
  "mode": "c",
- "n_cap": 347,
+ "n_cap": 351,
  "n_res": 6,
  "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
  "netlist_stock": "AFE/layout/sim/flow/amp_ch.pex_stock.spice",
@@ -93,5 +93,5 @@
  "tool": "magic PEX",
  "top": "amp_ch",
  "unknown_models": [],
- "wall_s": 1.4
+ "wall_s": 0.8
 }

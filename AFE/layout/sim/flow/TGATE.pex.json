@@ -1,0 +1,34 @@
+{
+ "bytes": 554,
+ "c_total_fF": 3.692,
+ "census_equal_lvs": null,
+ "cthresh_fF": 0.01,
+ "date": "2026-11-21 18:56",
+ "devices": {
+  "nfet_05v0": 1,
+  "pfet_05v0": 1
+ },
+ "floating_nodes": [],
+ "gds": "AFE/layout/top/dbs_afe_top.gds",
+ "gds_sha1": "edb9d93e468e495d65b427870c73d2952ec73098",
+ "log": "AFE/layout/sim/flow/TGATE.pex.log",
+ "maxrss_mb": 97,
+ "mim_fix": null,
+ "mode": "c",
+ "n_cap": 14,
+ "n_res": 0,
+ "netlist": "AFE/layout/sim/flow/TGATE.pex.spice",
+ "ports": [
+  "VDD",
+  "VSS",
+  "IN",
+  "OUT",
+  "C",
+  "CBAR"
+ ],
+ "ran": true,
+ "tool": "magic PEX",
+ "top": "TGATE",
+ "unknown_models": [],
+ "wall_s": 0.6
+}

@@ -1,0 +1,3 @@
+== tgate  netlist AFE/layout/sim/flow/TGATE.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 18:56
+   job tg_pexdbd77f5b17cc_ss-40: exit 0, 0 s
+RESULT tgate ss-40: ron_max_kohm=34.2318  ron_min_kohm=4.48107  ron_1v65_kohm=20.726  v_at_ron_max=1.95  i_off_pa=0.00840052

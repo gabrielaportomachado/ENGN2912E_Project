@@ -1,6 +1,6 @@
-== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 01:07
-   job rs_pex4af2778fd894_ss-40_0: exit 0, 14 s
-   job rs_pex4af2778fd894_ss-40_1m: exit 0, 15 s
-   job rs_pex4af2778fd894_ss-40_10m: exit 0, 23 s
-   job rs_pex4af2778fd894_ss-40_100m: exit 0, 53 s
-RESULT amp_reset ss-40: t_fs_ms_os0=5.86009  peak_mv_os0=261.801  rel_step_mv_os0=-0.00089  t_1mv_s_os0=5.46386  final_v_os0=1.6533  drift_mv_s_os0=-6.82893  resid_end_mv_os0=0.329082  t_fs_ms_os1m=5.85628  peak_mv_os1m=278.807  rel_step_mv_os1m=0.00056  t_1mv_s_os1m=5.43183  final_v_os1m=1.65304  drift_mv_s_os1m=-6.07408  resid_end_mv_os1m=0.300729  t_fs_ms_os10m=5.84657  peak_mv_os10m=249.06  rel_step_mv_os10m=0.00654  t_1mv_s_os10m=7.33025  final_v_os10m=1.65024  drift_mv_s_os10m=-6.9441  resid_end_mv_os10m=0.00801354  t_fs_ms_os100m=5.85146  peak_mv_os100m=256.891  rel_step_mv_os100m=-0.0029  t_1mv_s_os100m=8.25804  final_v_os100m=1.65026  drift_mv_s_os100m=-13.3803  resid_end_mv_os100m=7.26827e-06
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 18:59
+   job rs_pex2c8e9afc7dda_ss-40_0: exit 0, 9 s
+   job rs_pex2c8e9afc7dda_ss-40_1m: exit 0, 9 s
+   job rs_pex2c8e9afc7dda_ss-40_10m: exit 0, 15 s
+   job rs_pex2c8e9afc7dda_ss-40_100m: exit 0, 42 s
+RESULT amp_reset ss-40: t_fs_ms_os0=5.89365  peak_mv_os0=277.289  rel_step_mv_os0=0.00086  t_1mv_s_os0=5.40769  final_v_os0=1.65287  drift_mv_s_os0=-5.55107  resid_end_mv_os0=0.281844  t_fs_ms_os1m=5.92285  peak_mv_os1m=227.921  rel_step_mv_os1m=0.13202  t_1mv_s_os1m=5.46392  final_v_os1m=1.65329  drift_mv_s_os1m=-7.09662  resid_end_mv_os1m=0.328471  t_fs_ms_os10m=5.99704  peak_mv_os10m=279.767  rel_step_mv_os10m=-53.6847  t_1mv_s_os10m=7.3566  final_v_os10m=1.65024  drift_mv_s_os10m=-7.04177  resid_end_mv_os10m=0.00821821  t_fs_ms_os100m=5.95618  peak_mv_os100m=311.175  rel_step_mv_os100m=-61.3127  t_1mv_s_os100m=8.41456  final_v_os100m=1.65026  drift_mv_s_os100m=-14.1942  resid_end_mv_os100m=1.20708e-05

@@ -1,0 +1,3 @@
+== tgate  netlist AFE/layout/sim/flow/TGATE.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 18:56
+   job tg_pexdbd77f5b17cc_typ: exit 0, 0 s
+RESULT tgate typ: ron_max_kohm=21.0189  ron_min_kohm=4.31987  ron_1v65_kohm=12.7391  v_at_ron_max=2.125  i_off_pa=0.0100418

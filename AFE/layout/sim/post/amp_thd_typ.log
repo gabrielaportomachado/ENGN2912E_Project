@@ -1,3 +1,3 @@
-== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:04
-   job thd_pex4af2778fd894_typ: exit 0, 4 s
-RESULT amp_thd typ: thd_pct=0.0397654  out_max_v=2.16537  out_min_v=1.18026  gain_db=59.8201  hd2_dbc=-72.7116  hd3_dbc=-69.86  out_mean_v=1.67273
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 18:57
+   job thd_pex2c8e9afc7dda_typ: exit 0, 3 s
+RESULT amp_thd typ: thd_pct=0.0400604  out_max_v=2.16561  out_min_v=1.18046  gain_db=59.82  hd2_dbc=-72.6106  hd3_dbc=-69.8168  out_mean_v=1.67295

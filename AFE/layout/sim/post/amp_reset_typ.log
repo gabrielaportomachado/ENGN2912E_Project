@@ -1,6 +1,6 @@
-== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 01:04
-   job rs_pex4af2778fd894_typ_0: exit 0, 13 s
-   job rs_pex4af2778fd894_typ_1m: exit 0, 13 s
-   job rs_pex4af2778fd894_typ_10m: exit 0, 22 s
-   job rs_pex4af2778fd894_typ_100m: exit 0, 57 s
-RESULT amp_reset typ: t_fs_ms_os0=3.1504  peak_mv_os0=301.1  rel_step_mv_os0=-258.497  t_1mv_s_os0=5.59194  final_v_os0=1.65667  drift_mv_s_os0=-7.08571  resid_end_mv_os0=0.530349  t_fs_ms_os1m=3.08028  peak_mv_os1m=305.201  rel_step_mv_os1m=-262.075  t_1mv_s_os1m=5.58147  final_v_os1m=1.65643  drift_mv_s_os1m=-6.66886  resid_end_mv_os1m=0.508633  t_fs_ms_os10m=3.02456  peak_mv_os10m=288.886  rel_step_mv_os10m=-253.633  t_1mv_s_os10m=8.57061  final_v_os10m=1.6508  drift_mv_s_os10m=-7.7247  resid_end_mv_os10m=0.0279343  t_fs_ms_os100m=3.07599  peak_mv_os100m=272.145  rel_step_mv_os100m=-234.399  t_1mv_s_os100m=9.46537  final_v_os100m=1.65074  drift_mv_s_os100m=-12.976  resid_end_mv_os100m=1.24148e-05
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 18:57
+   job rs_pex2c8e9afc7dda_typ_0: exit 0, 7 s
+   job rs_pex2c8e9afc7dda_typ_1m: exit 0, 7 s
+   job rs_pex2c8e9afc7dda_typ_10m: exit 0, 13 s
+   job rs_pex2c8e9afc7dda_typ_100m: exit 0, 40 s
+RESULT amp_reset typ: t_fs_ms_os0=3.14307  peak_mv_os0=310.896  rel_step_mv_os0=-267.024  t_1mv_s_os0=5.58854  final_v_os0=1.6566  drift_mv_s_os0=-6.81688  resid_end_mv_os0=0.523472  t_fs_ms_os1m=3.06866  peak_mv_os1m=317.434  rel_step_mv_os1m=-272.696  t_1mv_s_os1m=5.59707  final_v_os1m=1.65682  drift_mv_s_os1m=-7.00347  resid_end_mv_os1m=0.542681  t_fs_ms_os10m=2.98824  peak_mv_os10m=272.052  rel_step_mv_os10m=-194.306  t_1mv_s_os10m=8.50879  final_v_os10m=1.65079  drift_mv_s_os10m=-7.50296  resid_end_mv_os10m=0.0266705  t_fs_ms_os100m=3.05438  peak_mv_os100m=284.495  rel_step_mv_os100m=-247.496  t_1mv_s_os100m=9.82915  final_v_os100m=1.65074  drift_mv_s_os100m=-15.6373  resid_end_mv_os100m=9.80302e-06
