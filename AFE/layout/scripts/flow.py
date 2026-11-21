@@ -264,6 +264,16 @@ def cmd_lvs(a):
     d = scratch('lvs_' + a.top)
     log = os.path.join(a.out, a.top + '.netgen.log')
     cmd = ['netgen', '-batch', 'lvs', '%s %s' % (net, a.top), '%s %s' % (ref, refcell), NETGEN_SETUP, out]
+    if getattr(a, 'ref_verilog', None):
+        # L3a: the reference names a hardened macro (afe_dig) that is defined by a powered gate-level Verilog netlist (LVS_VERILOG_FILES, as in the LibreLane netgen step):
+        # read the SPICE reference, the PDK standard-cell SPICE and the Verilog into circuit 2, compare the top (macro and cells are compared as devices of their class).
+        stdspice = os.path.join(PDK_ROOT, PDK, 'libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice')
+        tcl = ['set circuit1 [readnet spice %s]' % net, 'set circuit2 [readnet spice %s]' % ref, 'readnet spice %s $circuit2' % stdspice]
+        tcl += ['readnet verilog %s $circuit2' % os.path.abspath(v) for v in a.ref_verilog]
+        tcl.append('lvs "$circuit1 %s" "$circuit2 %s" %s %s%s' % (a.top, refcell, NETGEN_SETUP, out, ' -blackbox' if getattr(a, 'blackbox', False) else ''))
+        tf = os.path.join(d, 'lvs.tcl')
+        open(tf, 'w').write('\n'.join(tcl) + '\n')
+        cmd = ['netgen', '-batch', 'source', tf]
     rc, wall, rss = run(cmd, d, log, timeout=a.timeout)
     txt = open(out, errors='replace').read() if os.path.exists(out) else ''
     s = netgen_summary(txt)
@@ -662,6 +672,8 @@ def main():
             p.add_argument('--ref', required=True)
             p.add_argument('--refcell', default=None)
             p.add_argument('--timeout', type=int, default=1800)
+            p.add_argument('--ref-verilog', dest='ref_verilog', nargs='*', default=None, help='powered gate-level Verilog netlist(s) of hardened macros named in the reference (L3a: AFE/dig/final/afe_dig.pnl.v)')
+            p.add_argument('--blackbox', action='store_true', help='netgen -blackbox: standard cells and macros are compared as devices of their class (as the LibreLane netgen step)')
         if name == 'pex':
             p.add_argument('--mode', default='c', choices=('c', 'rc'))
             p.add_argument('--cthresh', type=float, default=0.01, help='fF: smaller capacitors are dropped')
