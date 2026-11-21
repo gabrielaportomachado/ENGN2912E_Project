@@ -1,6 +1,6 @@
 # ----- ------ ----- ----- ------ ----- ----- ------ -----
 # Chipathon 2026: Project configuration
-# DRAFT (pad list updated 2026-11-21, Decision 52 = 16 pads, 4 channels, outline 605 x 1110 um; was 24 pads, Decisions 44b / 45; pad ORDER = the floorplan perimeter): top cell name, team name and ready flags are provisional
+# DRAFT (pad list updated 2026-11-21, Decision 53 = 20 pads (Decision 52: 4 channels, outline 605 x 1110 um, + REC[3:0]); was 24 pads, Decisions 44b / 45; pad ORDER = the floorplan perimeter): top cell name, team name and ready flags are provisional
 # (waiting on the organizer: macro name/DEF, slot, pad allocation; defaults in AFE/layout/ACCEPT.md section 5). L4 sets the four *_ready flags to true after gate.py L4 passes. See AFE/TAPEOUT.md.
 # ----- ------ ----- ----- ------ ----- ----- ------ -----
 
@@ -16,20 +16,25 @@ project:
   lvs_ready: false
   export_control: "documents/Export_Control_GF_Rev8.2.docx"
 
-# 16 pads (Decision 52): 9 analog (E[3:0], IPG[3:0], REF) + 5 digital (CS, DIN, SCLK, RSTN, DOUT) + VDD + VSS.  No REC pads (REC is an internal net, Decision 45).
+# 20 pads (Decisions 52, 53): 13 analog (E[3:0], IPG[3:0], REC[3:0], REF) + 5 digital (CS, DIN, SCLK, RSTN, DOUT) + VDD + VSS.
+# REC[k] = raw analog recording output of channel k (record switch output = amplifier input, before amplification): high-impedance probe only.
 # Pad types: analog = ASIG5V pad; DOUT is bidirectional because there is no output-only type.
 # Top-cell ports per the organizer template (AFE/top/dbs_afe_top.v): pad DOUT -> ports DOUT_OUT (to pad A) and DOUT_IN (from pad Y, unused)
 # plus its 8 control pins, all driven inside the top cell: DOUT_OE = ~CS (the pad drives only while CS is low), DOUT_IE = 0, DOUT_PD = DOUT_PU = 0,
 # DOUT_CS = 0 (CMOS), DOUT_SL = 0 (fast), DOUT_PDRV1:0 = 00 (4 mA).  Input pads: <name>_PD / <name>_PU driven, all 0 except RSTN_PD = 1
 # (the chip stays in reset until the host drives RSTN).  Values to be confirmed in L4.
-# Pads listed clockwise from the NW corner of the 605 x 1110 um outline (AFE/layout/floorplan.json `pins`): north edge E[0] .. IPG[1] (channels 0-1),
-# east edge REF, south edge IPG[3] .. E[2] (channels 3-2), west edge VSS, the digital pads, VDD.  The order is a suggestion for the organizer's DEF; the names and types are what counts.
+# Pads listed clockwise from the NW corner of the 605 x 1110 um outline (AFE/layout/floorplan.json `pins`): north edge E[0] REC[0] IPG[0] E[1] REC[1] IPG[1] (channels 0-1),
+# east edge REF, south edge IPG[3] REC[3] E[3] IPG[2] REC[2] E[2] (channels 3-2), west edge VSS, the digital pads, VDD.  The order is a suggestion for the organizer's DEF; the names and types are what counts.
 pins:
   - name: E[0]
+    io_type: analog
+  - name: REC[0]
     io_type: analog
   - name: IPG[0]
     io_type: analog
   - name: E[1]
+    io_type: analog
+  - name: REC[1]
     io_type: analog
   - name: IPG[1]
     io_type: analog
@@ -37,9 +42,13 @@ pins:
     io_type: analog
   - name: IPG[3]
     io_type: analog
+  - name: REC[3]
+    io_type: analog
   - name: E[3]
     io_type: analog
   - name: IPG[2]
+    io_type: analog
+  - name: REC[2]
     io_type: analog
   - name: E[2]
     io_type: analog

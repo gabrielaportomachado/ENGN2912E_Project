@@ -72,10 +72,10 @@ POLY RESISTORS of the LVS reference (nominal R = 1000 ohm/sq x length / width, P
   vhalf         Xrd     ppolyf_u_1k  out vss vss  width 1u length 250u = 250.0 squares = 250.0 kOhm nominal
 
 CHANNEL CELLS from module afe_ch of AFE/top/dbs_afe_top.v
-  amp_ch (L2) = u_os (fs_oneshot_c) + u_or (gf180mcu_fd_sc_mcu7t5v0__or2_1) + u_amp (afe_chc);  pins: ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+  amp_ch (L2) = u_os (fs_oneshot_c) + u_or (gf180mcu_fd_sc_mcu7t5v0__or2_1) + u_amp (afe_chc);  pins: rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs out vdd vss
   adc_ch (L1) = u_vh (vhalf) + u_samb (gf180mcu_fd_sc_mcu7t5v0__inv_1) + u_dac (dac_sw) + u_vr (vrefs) + u_cmp (cmp_p);  pins: rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vin vdd vdd_cmp vdd_dac vss
-  afe_ch (L3) = rec_tg (TGATE) + ipg_tg (TGATE) + amp_ch + adc_ch;  pins: e ipg ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
-  internal nets of afe_ch: amp_out[u_amp,u_dac] cmp_qn[u_cmp] fs[u_amp,u_or] fs_os[u_or,u_os] m[u_dac] rec[rec_tg,u_amp] samb[u_dac,u_samb,u_vr] t[u_cmp,u_dac] vcmd[u_dac,u_vh,u_vr] vref[u_cmp,u_vr]
+  afe_ch (L3) = rec_tg (TGATE) + ipg_tg (TGATE) + amp_ch + adc_ch;  pins: e ipg rec ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
+  internal nets of afe_ch: amp_out[u_amp,u_dac] cmp_qn[u_cmp] fs[u_amp,u_or] fs_os[u_or,u_os] m[u_dac] samb[u_dac,u_samb,u_vr] t[u_cmp,u_dac] vcmd[u_dac,u_vh,u_vr] vref[u_cmp,u_vr]
   implicit power (not in the Verilog): TGATE VDD / VSS -> vdd / vss (analog strap); standard cells VDD, VNW -> vdd, VSS, VPW -> vss
   supply pins of adc_ch: vdd = u_dac.vdd, u_samb.vdd, u_samb.vnw, u_vh.vdd, u_vr.vdd;  vdd_cmp = u_cmp.vdd_cmp;  vdd_dac = u_dac.gdp, u_dac.vdd_dac
 
@@ -87,7 +87,7 @@ SUPPLY DEVICES of the top (Decision 44d, AUDIT 4.9.2)
 DIGITAL MACRO with 4 channels (Decision 52): the 8-channel logic stays inside afe_dig; 132 per-channel pin bits of channels 4-7 are NOT macro pins (the wrapper ties cmp_q[7:4] low and leaves the other outputs open): sw_rec[7] .. dac_gdn[4]
 
 TOP dbs_afe_top from AFE/top/dbs_afe_top.v
-  33 pins: E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
+  37 pins: E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REC[3] REC[2] REC[1] REC[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
   instances: 1 x afe_dig, 1 x bias_genc, 4 x afe_ch + 3 supply devices + 15 pad-control ties (output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
   pad pins that are plain nets of the macro: DOUT_OUT = afe_dig.DOUT, DOUT_OE = afe_dig.DOUT_OE;  top port without a connection inside: DOUT_IN (the pad input is not used, DOUT_IE = 0)
   net census: VDD on 8 channel pins (vdd, vdd_cmp) + bias_genc + afe_dig + decap + strap; vdd_dac on 4 channel pins + decap + strap
@@ -98,6 +98,6 @@ FILES written to AFE/layout/lvs
   afe_chc.spice          74 lines,    56 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch
   adc_ch.spice          250 lines,   220 X lines, subckts: dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch
   bias_genc.spice        24 lines,    17 X lines, subckts: bias_genc
-  dbs_afe_top.spice     415 lines,   308 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc afe_dig dbs_afe_top
+  dbs_afe_top.spice     418 lines,   308 X lines, subckts: afe_chc fs_oneshot_c gf180mcu_fd_sc_mcu7t5v0__or2_1 amp_ch dac_sw cmp_p vhalf vrefs gf180mcu_fd_sc_mcu7t5v0__inv_1 adc_ch TGATE afe_ch bias_genc afe_dig dbs_afe_top
 
 FLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch 53, adc_ch 215, afe_ch 272, bias_genc 17; chip without the digital macro: 4 x 272 + 17 + 3 supply devices = 1108 (+ 15 tie pins of afe_dig, no device in the top)

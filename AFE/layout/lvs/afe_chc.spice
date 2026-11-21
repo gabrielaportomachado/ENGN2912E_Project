@@ -67,7 +67,7 @@ X_i_5 VDD A2 net_0 VNW pfet_05v0 W=5.65e-07 L=5e-07
 X_i_1 Z Z_neg VDD VNW pfet_05v0 W=1.22e-06 L=5e-07
 .ENDS
 
-.subckt amp_ch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+.subckt amp_ch rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs out vdd vss
 Xu_os sw_rec fs_os vbn vdd vss fs_oneshot_c
 Xu_or fs_os rst_amp fs vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
 Xu_amp rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs sw_rec_b sw_rec afe_chc

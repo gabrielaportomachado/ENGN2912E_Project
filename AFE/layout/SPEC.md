@@ -12,7 +12,7 @@ Units um; origin = SW corner of the outline; "inner" = towards the digital macro
 ```
  y
 1110 +-------------------------------------------+
-     | pin ring N (26)  E0 IPG0     E1 IPG1        |
+     | pin ring N: E0 REC0 IPG0  E1 REC1 IPG1      |
 1084 |  +-------------------------------------+   |
      |  | bias corridor N (12): bias lines REF|   |
 1072 |  +-----------+-----------+-------------+   |
@@ -33,10 +33,11 @@ Units um; origin = SW corner of the outline; "inner" = towards the digital macro
   38 |  +-----------+-----------+-------------+   |
      |  | bias corridor S (12)                |   |
   26 |  +-------------------------------------+   |
-     | pin ring S (26)  E2 IPG2     E3 IPG3        |
+     | pin ring S: E2 REC2 IPG2  E3 REC3 IPG3      |
    0 +-------------------------------------------+
      0 26        263         500         579 605  x
    W edge: VSS (y 444), 21 digital / pad-control pins (y 461 .. 531, 3.5 um pitch) + DOUT_IN (534.5), VDD (y 666)
+   N / S edges per channel slot (x from the slot's west edge): E at 70, REC at 118 (Decision 53), IPG at 165 um
 ```
 
 | block | x | y | W x H | orientation | source |

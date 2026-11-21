@@ -102,3 +102,6 @@ One session: merge worktree-l2b and worktree-l1b-adc-post into main, apply R8 / 
 Status: closed (monitoring 2026-11-21: done at the user's request; report AFE/layout/reports/R11.md; floorplan check 16 PASS, top sim PASS, check_lvs_netlists A / B / C PASS)
 Decision 52: AFE/top/dbs_afe_top.v (protected) to 4 channels with the 8-channel logic and cmp_q[7:4] tied low, AFE/top/tb_top.v, info.yaml (16 pads), mk_lvs_netlists.py channel count from the top, AFE/layout/lvs/ regenerated (provisional macro black box until the macro is re-hardened). The 8-channel state is tag checkpoint-n8-final.
 
+### R12 (2026-11-21) to L3a: Decision 53, REC[3:0] pads back (20 pads)
+Status: closed (monitoring 2026-11-21: done at the user's request; report AFE/layout/reports/R12.md; floorplan check 18 PASS, top sim PASS, check_lvs_netlists A / B / C PASS, amp_ch LVS still matches)
+AFE/top/dbs_afe_top.v (protected): REC[3:0] ports, afe_ch.rec a port; tb_top.v reads REC from the ports; info.yaml 20 pads; floorplan.py rec_pads (REC pin per channel at x 118 um of the slot); AFE/layout/lvs/ regenerated. OPEN for before L3a: the pad-loading simulation of the amplifier input (Decision 53 risk).

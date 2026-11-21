@@ -4,6 +4,7 @@
   "outline_w": 605,
   "outline_h": 1110,
   "n_ch": 4,
+  "rec_pads": true,
   "ring": 26,
   "bias_corr": 12,
   "strap_corr": 25,
@@ -52,7 +53,8 @@
    "dig_w": true,
    "decap_n_dac_corr": true,
    "decap_n_main_cin": true,
-   "decap_min_dac_pF": true
+   "decap_min_dac_pF": true,
+   "rec_pads": true
   }
  },
  "outline": [
@@ -98,7 +100,7 @@
     579.0,
     1110.0
    ],
-   "what": "pin ring north: E / IPG pin escape of channels 0-1 (and any pin the organizer DEF puts here)",
+   "what": "pin ring north: E / IPG / REC pin escape of channels 0-1 (and any pin the organizer DEF puts here)",
    "layers": "analog tracks Metal4/Metal5, digital only in the outer 12 um on Metal2/Metal3"
   },
   {
@@ -1106,6 +1108,16 @@
    "to": "ch0 TGATE zone: OUT of the IPG TGATE"
   },
   {
+   "name": "REC[0]",
+   "pad": "REC[0]",
+   "side": "N",
+   "x": 144.0,
+   "y": 1110,
+   "layer": "Metal5",
+   "w": 2.0,
+   "to": "ch0 TGATE zone: OUT of the record TGATE = amp_ch.rec (amplifier input; keep the wire short and away from digital nets)"
+  },
+  {
    "name": "E[1]",
    "pad": "E[1]",
    "side": "N",
@@ -1124,6 +1136,16 @@
    "layer": "Metal5",
    "w": 2.0,
    "to": "ch1 TGATE zone: OUT of the IPG TGATE"
+  },
+  {
+   "name": "REC[1]",
+   "pad": "REC[1]",
+   "side": "N",
+   "x": 381.0,
+   "y": 1110,
+   "layer": "Metal5",
+   "w": 2.0,
+   "to": "ch1 TGATE zone: OUT of the record TGATE = amp_ch.rec (amplifier input; keep the wire short and away from digital nets)"
   },
   {
    "name": "E[2]",
@@ -1146,6 +1168,16 @@
    "to": "ch2 TGATE zone: OUT of the IPG TGATE"
   },
   {
+   "name": "REC[2]",
+   "pad": "REC[2]",
+   "side": "S",
+   "x": 144.0,
+   "y": 0.0,
+   "layer": "Metal5",
+   "w": 2.0,
+   "to": "ch2 TGATE zone: OUT of the record TGATE = amp_ch.rec (amplifier input; keep the wire short and away from digital nets)"
+  },
+  {
    "name": "E[3]",
    "pad": "E[3]",
    "side": "S",
@@ -1164,6 +1196,16 @@
    "layer": "Metal5",
    "w": 2.0,
    "to": "ch3 TGATE zone: OUT of the IPG TGATE"
+  },
+  {
+   "name": "REC[3]",
+   "pad": "REC[3]",
+   "side": "S",
+   "x": 381.0,
+   "y": 0.0,
+   "layer": "Metal5",
+   "w": 2.0,
+   "to": "ch3 TGATE zone: OUT of the record TGATE = amp_ch.rec (amplifier input; keep the wire short and away from digital nets)"
   },
   {
    "name": "REF",

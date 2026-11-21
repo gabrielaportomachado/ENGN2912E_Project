@@ -23,6 +23,7 @@ FP = os.path.join(LAY, 'floorplan.json')
 PARAMS = {
     'outline_w': 1000.0, 'outline_h': 1000.0,   # outline (Decision 45: 1000 x 1000; Decision 52: 605 x 1110)
     'n_ch': 8,                  # channels, two rows of n_ch / 2 (Decision 52: 4)
+    'rec_pads': False,          # one REC pad per channel (record TGATE OUT = amplifier input): removed by Decision 45, back by Decision 53
     'ring': 30.0,               # pin ring on all four sides: pin escape wiring, supply trunks, the west decap bank
     'bias_corr': 14.0,          # corridor between the ring and the amplifier end of each channel row: 6 bias lines + REF + the analog supply strap
     'strap_corr': 26.0,         # corridor between the digital macro and the ADC end of each row: ADC-main / ADC-DAC / vss straps (Metal4/5), the DAC-strap decap row (Metal1), control crossings (Metal2)
@@ -80,7 +81,7 @@ def build(p):
         z.append({'name': name, 'rect': [r3(x0), r3(y0), r3(x1), r3(y1)], 'what': what, 'layers': layers})
     zone('ring_w', 0, 0, R, H, 'pin ring west: the 21 digital / pad-control pin wires straight to the macro, VDD / VSS entry = star point of the three straps, west decap bank (ADC-main)', 'pins Metal3; trunks Metal4/Metal5; decap comp/poly/Metal1')
     zone('ring_e', core1, 0, W, H, 'pin ring east: REF entry, bias trunk between the two bias corridors', 'Metal3-Metal5')
-    zone('ring_n', R, bN1, core1, H, 'pin ring north: E / IPG pin escape of channels 0-%d (and any pin the organizer DEF puts here)' % (NR - 1), 'analog tracks Metal4/Metal5, digital only in the outer 12 um on Metal2/Metal3')
+    zone('ring_n', R, bN1, core1, H, 'pin ring north: E / IPG%s pin escape of channels 0-%d (and any pin the organizer DEF puts here)' % (' / REC' if p['rec_pads'] else '', NR - 1), 'analog tracks Metal4/Metal5, digital only in the outer 12 um on Metal2/Metal3')
     zone('ring_s', R, 0, core1, bS0, 'pin ring south: E / IPG pin escape of channels %d-%d' % (NR, N - 1), 'as ring_n')
     zone('bias_corr_n', core0, bN0, core1, bN1, 'bias corridor north: vbn vcm vg1 vcmo vg2 vrs + REF (daisy chain from bias_genc, east to west) under the analog vdd / vss strap', 'lines Metal2/Metal3 (1 um wide, 1 um apart, vss between); strap Metal4 (vss) / Metal5 (vdd)')
     zone('bias_corr_s', core0, bS0, core1, bS1, 'bias corridor south (channels %d-%d), same as north' % (NR, N - 1), 'as bias_corr_n')
@@ -135,6 +136,9 @@ def build(p):
         y = O if north else 0.0
         pins.append({'name': 'E[%d]' % k, 'pad': 'E[%d]' % k, 'side': 'N' if north else 'S', 'x': r3(x0 + 70.0), 'y': y, 'layer': 'Metal5', 'w': 2.0, 'to': 'ch%d TGATE zone: IN of both TGATEs' % k})
         pins.append({'name': 'IPG[%d]' % k, 'pad': 'IPG[%d]' % k, 'side': 'N' if north else 'S', 'x': r3(x0 + 165.0), 'y': y, 'layer': 'Metal5', 'w': 2.0, 'to': 'ch%d TGATE zone: OUT of the IPG TGATE' % k})
+        if p['rec_pads']:
+            pins.append({'name': 'REC[%d]' % k, 'pad': 'REC[%d]' % k, 'side': 'N' if north else 'S', 'x': r3(x0 + 118.0), 'y': y, 'layer': 'Metal5', 'w': 2.0,
+                         'to': 'ch%d TGATE zone: OUT of the record TGATE = amp_ch.rec (amplifier input; keep the wire short and away from digital nets)' % k})
     pins.append({'name': 'REF', 'pad': 'REF', 'side': 'E', 'x': W, 'y': r3(H / 2.0), 'layer': 'Metal5', 'w': 2.0, 'to': 'REF trunk: east ring -> both bias corridors -> amp_ch.ref of the %d channels (Metal5 / Metal3, never one Metal4 polygon: MIMTM.11)' % N})
     for i, nm in enumerate(W_PINS[:-1]):
         port = 'DOUT_OUT' if nm == 'DOUT' else nm
@@ -264,7 +268,8 @@ def check(args):
     miss = [a for a in nn if a not in bits]
     extra = [b for b in bits if b not in nn]
     dup = sorted(set(a for a in nn if nn.count(a) > 1))
-    R(not miss and not extra and not dup and not bad_t and len(pads) == 2 * N + 8, '3b info.yaml: %d pads (want 2 x n_ch + 8); each pad has exactly the ports the organizer template asks for its io_type, and no port is left over' % len(pads),
+    npad = (3 if fp['params'].get('rec_pads') else 2) * N + 8
+    R(not miss and not extra and not dup and not bad_t and len(pads) == npad, '3b info.yaml: %d pads (want %d); each pad has exactly the ports the organizer template asks for its io_type, and no port is left over' % (len(pads), npad),
       ' '.join(['ports missing in the top: %s' % miss] * bool(miss) + ['top ports without a pad: %s' % extra] * bool(extra) + ['twice: %s' % dup] * bool(dup) + ['unknown io_type: %s' % bad_t] * bool(bad_t)))
     padof = dict(need)
     wrong = [q['name'] for q in fp['pins'] if padof.get(q['name']) != q['pad']]

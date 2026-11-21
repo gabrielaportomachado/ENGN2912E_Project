@@ -5,7 +5,7 @@
 // Also compares REC / IPG with a real `dbs #(8)` instance (rtl/dbs.v) fed with the same mode / en / E (its channels 0-3).
 // Decision 52 (2026-11-21): the top has 4 channels (NCH); the 8-channel logic is unchanged, so the internal nets sw_rec / sw_ipg / en_o stay 8 bits wide and words 6-9 of the frame
 // carry the IDs 4-7 with the constant code TIE_CODE of a SAR logic whose comparator input is tied low.  The 8-channel testbench is in git tag checkpoint-n8-final.
-// F1 (Decisions 44b, 45): the top has DOUT_OUT / DOUT_IN instead of DOUT and NO REC ports; REC[i] below is the INTERNAL net dut.ch[i].u.rec (record TGATE OUT = amplifier input), read hierarchically.
+// F1 (Decisions 44b, 45): the top has DOUT_OUT / DOUT_IN instead of DOUT.  Decision 53: REC[3:0] are top ports again (record TGATE OUT = amplifier input).
 module tb_top;
     localparam NCH = 4;
     localparam [11:0] TIE_CODE = 12'h000;          // code of the SAR logics 4-7 (cmp_q tied low): measured, see the T3 display
@@ -16,7 +16,7 @@ module tb_top;
     assign E = eval;
     wire dout, dout_oe, d_ie, d_pd, d_pu, d_cs, d_sl, d_p0, d_p1, cs_pu, cs_pd, din_pu, din_pd, sclk_pu, sclk_pd, rstn_pu, rstn_pd;
     wire refw; assign refw = 1'b1;
-    dbs_afe_top dut (.E(E), .IPG(IPG), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT_OUT(dout), .DOUT_IN(1'b0),
+    dbs_afe_top dut (.E(E), .IPG(IPG), .REC(REC), .REF(refw), .CS(cs), .DIN(din), .SCLK(sclk), .RSTN(rstn), .DOUT_OUT(dout), .DOUT_IN(1'b0),
                      .DOUT_OE(dout_oe), .DOUT_IE(d_ie), .DOUT_PD(d_pd), .DOUT_PU(d_pu), .DOUT_CS(d_cs), .DOUT_SL(d_sl), .DOUT_PDRV0(d_p0), .DOUT_PDRV1(d_p1),
                      .CS_PU(cs_pu), .CS_PD(cs_pd), .DIN_PU(din_pu), .DIN_PD(din_pd), .SCLK_PU(sclk_pu), .SCLK_PD(sclk_pd), .RSTN_PU(rstn_pu), .RSTN_PD(rstn_pd),
                      .VDD(vdd_n), .VSS(vss_n));
@@ -37,7 +37,6 @@ module tb_top;
     real t_swi_f [0:7];
     genvar g;
     generate for (g = 0; g < NCH; g = g + 1) begin : ob
-        assign REC[g]    = dut.ch[g].u.rec;          // internal net (no REC pad, Decision 45)
         assign fs_v[g]   = dut.ch[g].u.fs;
         assign swr_v[g]  = dut.ch[g].u.sw_rec;
         assign os_n[g]   = dut.ch[g].u.u_os.n_pulses;

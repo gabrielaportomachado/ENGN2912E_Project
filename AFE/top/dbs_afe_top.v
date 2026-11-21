@@ -8,14 +8,16 @@
 // WHY dbs_ctrl + TGATE and not the dbs module: dbs wraps dbs_ctrl + the 2N TGATEs but does not bring sw_rec / sw_rec_b out, and the amplifier reset trigger and the REC park need exactly those two nets.
 // The TGATEs therefore sit inside afe_ch; the wiring is the same as dbs.v lines 99-106 (rec_tg: C = sw_rec, CBAR = sw_rec_b; ipg_tg: C = sw_ipg, CBAR = sw_ipg_b).  tb_top.v compares REC / IPG against a real `dbs #(8)` instance.
 //
-// Pads (16, Decision 52; was 24, Decision 45): analog E[3:0] IPG[3:0] REF (9); input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT (5 digital); power VDD; ground VSS.
-// REF = shared reference electrode, wired to afe_chc.ref of all 4 channels.  NO REC pads (Decision 45): rec is an internal net of afe_ch (record TGATE OUT = afe_chc.rec).
+// Pads (20, Decision 53; 16 by Decision 52, 24 by Decision 45): analog E[3:0] IPG[3:0] REC[3:0] REF (13); input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT (5 digital); power VDD; ground VSS.
+// REF = shared reference electrode, wired to afe_chc.ref of all 4 channels.  REC[k] (Decision 53, back after Decision 45 had removed it) = the raw analog recording output of channel k:
+// the record TGATE OUT = afe_chc.rec = the amplifier input, i.e. the electrode signal after the record switch, BEFORE amplification.  High-impedance probe only (it loads the amplifier input).
 // Fallback (organizer pad share): N = 2 channels (Decision 45, A-7); the older fallback "drop the REF pad and tie every afe_ch `ref` to vcm" stays possible.
 // Pad-pin names (F1, Decision 44b; checked against the organizer template, copy in AFE/review/sim/organizer/template_info.yaml lines 26-66): a bidirectional pad <name> needs the ports
 // <name>_OUT (to the pad's A) and <name>_IN (from the pad's Y) plus the 8 control pins <name>_PD _PU _CS _SL _IE _OE _PDRV0 _PDRV1; an input pad <name> needs <name> (from Y), <name>_PD, <name>_PU.
 // "All control signals must be connected" (template line 27): every one is driven below.  The VALUES (drive strength, slew, input type) are still to be confirmed in L4 (Decision 41d).
 module dbs_afe_top (
     inout  [3:0] E, IPG,
+    inout  [3:0] REC,                               // raw analog recording output per channel (record TGATE OUT = amplifier input), Decision 53
     inout        REF,
     input        CS, DIN, SCLK, RSTN,
     output       DOUT_OUT,                          // serial data to the bidirectional pad DOUT (pad pin A)
@@ -62,7 +64,7 @@ module dbs_afe_top (
     // ---- 4 channels (Decision 52) ----
     genvar i;
     generate for (i = 0; i < 4; i = i + 1) begin : ch
-        afe_ch u (.e(E[i]), .ipg(IPG[i]),
+        afe_ch u (.e(E[i]), .ipg(IPG[i]), .rec(REC[i]),
                   .sw_rec(sw_rec[i]), .sw_rec_b(sw_rec_b[i]), .sw_ipg(sw_ipg[i]), .sw_ipg_b(sw_ipg_b[i]),
                   .rst_amp(rst_amp_o),
                   .rst_sw(rst_sw[i]), .tg_on(tg_on[i]), .cmp_clk(cmp_clk[i]), .dac_gdn(dac_gdn[i]),
@@ -74,6 +76,7 @@ endmodule
 // afe_ch: ONE channel = amplifier part (L2: afe_chc + fs_oneshot_c + OR2) + ADC analog part (L1: vhalf, samb inverter, dac_sw, vrefs, cmp_p) + the 2 routing TGATEs (L3).  Pin list: AFE/layout/PLAN.md section 9.
 module afe_ch (
     inout        e, ipg,                            // electrode pad, IPG pad
+    inout        rec,                               // REC pad (Decision 53): record TGATE OUT = amplifier input (afe_chc.rec) = park node
     inout        ref,                               // REF pad: shared reference electrode (afe_chc.ref)
     input        sw_rec, sw_rec_b, sw_ipg, sw_ipg_b,// routing switch controls from dbs_ctrl (C / CBAR of the two TGATEs)
     input        rst_amp,                           // RST_AMP config bit level (adc8_top rst_amp_o), common to all channels
@@ -83,8 +86,7 @@ module afe_ch (
     input        vbn, vcm, vg1, vcmo, vg2, vrs,
     input        vdd, vdd_cmp, vdd_dac, vss         // vdd = analog strap; vdd_cmp = ADC-main strap (cmp_p); vdd_dac = ADC-DAC strap (the 13 bottom-plate drivers); AUDIT 4.9.2
 );
-    // rec = record TGATE OUT = amplifier input (afe_chc.rec) = park node.  INTERNAL net since Decision 45 (no REC pad: one pad leakage / ESD path less on the high-impedance input)
-    wire rec;
+    // rec = record TGATE OUT = amplifier input (afe_chc.rec) = park node.  A port again since Decision 53 (REC pad); it was an internal net from Decision 45 to Decision 53.
     // routing switches (5 V-device TGATE macro, TGATE/TGATE.v; dbs.v wiring).  Their VDD / VSS (wells) are on the analog strap in the LVS reference (TGATE.v has no power pins)
     TGATE rec_tg (.OUT(rec), .IN(e), .C(sw_rec), .CBAR(sw_rec_b));
     TGATE ipg_tg (.OUT(ipg), .IN(e), .C(sw_ipg), .CBAR(sw_ipg_b));

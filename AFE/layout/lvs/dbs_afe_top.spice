@@ -68,7 +68,7 @@ X_i_5 VDD A2 net_0 VNW pfet_05v0 W=5.65e-07 L=5e-07
 X_i_1 Z Z_neg VDD VNW pfet_05v0 W=1.22e-06 L=5e-07
 .ENDS
 
-.subckt amp_ch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec out vdd vss
+.subckt amp_ch rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs out vdd vss
 Xu_os sw_rec fs_os vbn vdd vss fs_oneshot_c
 Xu_or fs_os rst_amp fs vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
 Xu_amp rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs sw_rec_b sw_rec afe_chc
@@ -326,12 +326,12 @@ Xm2 out c in vss nfet_05v0 w=0.565u l=0.6u
 .ends TGATE
 
 * ---------------- one channel
-.subckt afe_ch e ipg ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7]
+.subckt afe_ch e ipg rec ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7]
 + dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5]
 + dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
 Xrec_tg rec sw_rec sw_rec_b e vdd vss TGATE
 Xipg_tg ipg sw_ipg sw_ipg_b e vdd vss TGATE
-Xamp_ch ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs rec amp_out vdd vss amp_ch
+Xamp_ch rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs amp_out vdd vss amp_ch
 Xadc_ch rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1]
 + dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q amp_out
 + vdd vdd_cmp vdd_dac vss adc_ch
@@ -377,8 +377,8 @@ Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
 .ends afe_dig
 
 * ---------------- top
-.subckt dbs_afe_top E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS
-+ DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
+.subckt dbs_afe_top E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REC[3] REC[2] REC[1] REC[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE
++ DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
 * digital macro
 Xdig VDD VSS CS SCLK DIN RSTN DOUT_OUT DOUT_OE rst_amp_o sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1] sw_rec_b[0]
 + sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0] sw_ipg_b[3] sw_ipg_b[2] sw_ipg_b[1] sw_ipg_b[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] cmp_clk[3] cmp_clk[2]
@@ -394,18 +394,21 @@ Xdig VDD VSS CS SCLK DIN RSTN DOUT_OUT DOUT_OE rst_amp_o sw_rec[3] sw_rec[2] sw_
 + RSTN_PD afe_dig
 * shared bias and the 4 channels
 Xu_bias vbn vcm vg1 vcmo vg2 vrs VDD VSS bias_genc
-Xch0 E[0] IPG[0] REF sw_rec[0] sw_rec_b[0] sw_ipg[0] sw_ipg_b[0] rst_amp_o rst_sw[0] tg_on[0] cmp_clk[0] dac_gdn[0] dac_gp[11] dac_gp[10] dac_gp[9]
-+ dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7]
-+ dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q[0] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
-Xch1 E[1] IPG[1] REF sw_rec[1] sw_rec_b[1] sw_ipg[1] sw_ipg_b[1] rst_amp_o rst_sw[1] tg_on[1] cmp_clk[1] dac_gdn[1] dac_gp[23] dac_gp[22] dac_gp[21]
-+ dac_gp[20] dac_gp[19] dac_gp[18] dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gn[23] dac_gn[22] dac_gn[21] dac_gn[20]
-+ dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] cmp_q[1] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
-Xch2 E[2] IPG[2] REF sw_rec[2] sw_rec_b[2] sw_ipg[2] sw_ipg_b[2] rst_amp_o rst_sw[2] tg_on[2] cmp_clk[2] dac_gdn[2] dac_gp[35] dac_gp[34] dac_gp[33]
-+ dac_gp[32] dac_gp[31] dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32]
-+ dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] cmp_q[2] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
-Xch3 E[3] IPG[3] REF sw_rec[3] sw_rec_b[3] sw_ipg[3] sw_ipg_b[3] rst_amp_o rst_sw[3] tg_on[3] cmp_clk[3] dac_gdn[3] dac_gp[47] dac_gp[46] dac_gp[45]
-+ dac_gp[44] dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gn[47] dac_gn[46] dac_gn[45] dac_gn[44]
-+ dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38] dac_gn[37] dac_gn[36] cmp_q[3] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
+Xch0 E[0] IPG[0] REC[0] REF sw_rec[0] sw_rec_b[0] sw_ipg[0] sw_ipg_b[0] rst_amp_o rst_sw[0] tg_on[0] cmp_clk[0] dac_gdn[0] dac_gp[11] dac_gp[10]
++ dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8]
++ dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q[0] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
+Xch1 E[1] IPG[1] REC[1] REF sw_rec[1] sw_rec_b[1] sw_ipg[1] sw_ipg_b[1] rst_amp_o rst_sw[1] tg_on[1] cmp_clk[1] dac_gdn[1] dac_gp[23] dac_gp[22]
++ dac_gp[21] dac_gp[20] dac_gp[19] dac_gp[18] dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gn[23] dac_gn[22] dac_gn[21]
++ dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] cmp_q[1] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
+Xch2 E[2] IPG[2] REC[2] REF sw_rec[2] sw_rec_b[2] sw_ipg[2] sw_ipg_b[2] rst_amp_o rst_sw[2] tg_on[2] cmp_clk[2] dac_gdn[2] dac_gp[35] dac_gp[34]
++ dac_gp[33] dac_gp[32] dac_gp[31] dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gn[35] dac_gn[34] dac_gn[33]
++ dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] cmp_q[2] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
+Xch3 E[3] IPG[3] REC[3] REF sw_rec[3] sw_rec_b[3] sw_ipg[3] sw_ipg_b[3] rst_amp_o rst_sw[3] tg_on[3] cmp_clk[3] dac_gdn[3] dac_gp[47] dac_gp[46]
++ dac_gp[45] dac_gp[44] dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gn[47] dac_gn[46] dac_gn[45]
++ dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38] dac_gn[37] dac_gn[36] cmp_q[3] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
 * supply network (Decision 44d): ADC-main strap decap and ADC-DAC strap decap (MOS capacitors, gate on the rail), the strap resistor between the two straps
 Xu_rstrap VDD vdd_dac rm3 r_length=222.2u r_width=2u
 Xu_dcm VDD VSS cap_nmos_03v3 c_length=20u c_width=20u m=74
