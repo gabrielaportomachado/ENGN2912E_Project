@@ -117,6 +117,7 @@ GATE L3a: PASS  (0 FAIL)
 12. Pin shapes: the 20 pad wires are Metal5 2 um wide ending at the outline (E / REC / IPG), Metal3 0.56 um for the 21 pad-control pins, VDD pad Metal5 21 x 20 um, VSS pad Metal4 21 x 20 um (floorplan.json gives only the position and the 20 um width).
 
 ## 8. Open issues and risks
+Review notes of the monitoring session (decap net split, amp_out wire, REC buffer options, L3b checklist): AFE/layout/reports/L3a_review.md.
 1. **L2b re-run after the amp_ch change: done.** The full L2b testbench set (design and junction conventions, all corners, reset with --os 10m,100m --host-rst 0.1) was re-run on the new amp_ch PEX: `compare.py --phase L2b` 90 PASS, 0 WARN, 0 FAIL (AFE/layout/sim/post/compare_L2b.md), `gate.py L2b` PASS, `gate.py L2a` PASS. The files AFE/layout/sim/post/amp_*.json were overwritten with the new numbers (the old ones are in git). L1b is unaffected (adc_ch not changed).
 2. L3b must check: coupling of the Metal2 control lines past the amp / adc cells; the bias lines (coupling of vcmo / vg2 / vrs to neighbours from the top PEX, ladder X-1 if > 10 fF); the supply with the as-drawn decap split (section 7 item 2) and the strap resistance of the vdd_dac strap (Metal5 5 um, 440 um long); the vn2 clearance 1.5 um of amp_ch.
 3. Not done in this phase: the full-chip PEX (L3b), metal density / fill (the organizer adds fill, ACCEPT.md section 5), the organizer DEF (positions are the floorplan.json defaults; the pad wires leave at the floorplan positions, none moved).

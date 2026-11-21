@@ -1,0 +1,45 @@
+check_env.sh  2026-11-20 17:11  host 0f69dc5e3192  aarch64  repo /foss/designs/ENGN2912E_Project  commit b2a11ba
+--- A. environment
+PASS  A1 image IIC-OSIC-TOOLS 2026.04 (hpretl/iic-osic-tools:chipathon26)
+PASS  A2 klayout 0.30.8
+PASS  A2 magic 8.3.636
+PASS  A2 netgen 1.5.318
+PASS  A2 ngspice 46
+PASS  A2 iverilog 14.0
+PASS  A2 yosys 0.64
+PASS  A2 openroad 26Q2-254-g61932e897
+PASS  A2 librelane 3.0.2
+PASS  A2 sta 3.1.0
+PASS  A3 python3 3.12.3 numpy 2.4.4
+PASS  A4 PDK=gf180mcuD at /foss/pdks/gf180mcuD
+PASS  A4 PDK files: KLayout DRC + LVS decks, Magic tech, netgen setup, ngspice models, pcells, 7t5v0 library
+PASS  A4 KLayout DRC deck knows variant D = 11K top metal, MIM option B, 5 metals (common rule 9)
+PASS  A4 netgen setup: ppolyf_u_1k yes, ppolyf_u_3k no (Decision 44a), cap_mim_2f0_m4m5_noshield, rm3
+PASS  A5 ngspice runs ONE thread with a job-local .spiceinit (set num_threads=1); the kit's runners write it into every job directory
+INFO  A5 without it this machine would use 8 threads per job (5-35x slower for these netlists); SPICE_USERINIT_DIR=/foss/pdks/gf180mcuD/libs.tech/ngspice
+PASS  A6 git-lfs/3.4.1
+INFO  A6 branch main, origin git@github.com:gabrielaportomachado/ENGN2912E_Project.git
+PASS  A7 free disk on the repository file system: 17 GB (minimum 3 GB for the committed outputs)
+WARN  A7 scratch /foss/designs/ENGN2912E_Project/AFE/layout/.ptmp: 17 GB free (minimum 10, comfortable 20)
+      -> delete the scratch and old LibreLane run directories after every phase
+PASS  A8 RAM 7.8 GB total (minimum 7), 8 cores
+PASS  A8 RAM available now 6.7 GB (need >= 3)
+--- B. smoke test
+PASS  B1 KLayout batch + the PDK pcell library generate the 5 test cells (bash AFE/layout/scripts/kl.sh; needs USER, which kl.sh sets)
+PASS  B2 KLayout DRC --variant=D on lp_tgate_tap (TGATE + tap cell): 0 violations, 2.6 s, 461 MB
+PASS  B3 Magic extraction + netgen -batch LVS on the two-device cell lp_tgate_tap: Circuits match uniquely.
+PASS  B4 ngspice .op with the PDK models (nfet_03v3, nfet_06v0_nvt, ppolyf_u_1k, rm3, cap_nmos_03v3, cap_mim_2f0_m4m5_noshield): v(d) = 8.307762e-01
+PASS  B5 librelane --help
+PASS  B6 iverilog + vvp
+--- C. device facts (Decision 46) and the PEX path
+PASS  C1 rm3 (Metal3 resistor 2 x 222.2 um, the strap resistor of Decision 46e) IS an LVS-extractable device of variant D: DRC 0, LVS match, extracted 'X0 A B rm3 r_width=2u r_length=0.2222m'
+INFO  C1 it must be drawn with kpdk.metal_res (Metal3 + 110/13 + RES_MK 110/5 in ONE cell): the PDK pcell metal_resistor draws only 110/13 and Magic then extracts NO device
+PASS  C2 cap_nmos_03v3 extracts as a device, also UNDER a MIM plate (Decision 46c test cell lp_cin_decap: one 70.65 um Cin piece over 4 decap units + Metal3 shield): DRC 0, LVS match
+PASS  C3 MIM terminal order (Decision 46a): terminal 1 of cap_mim_2f0_m4m5_noshield = TOP plate (FuseTop / Metal5 side).  5 x 5 um unit with the plates labelled TOPNET / BOTNET: LVS MATCHES 'X1 TOPNET BOTNET' and does NOT match the swapped 'X1 BOTNET TOPNET' (netgen does not permute MIM terminals)
+INFO  C3 so the references of AFE/layout/lvs (mk_lvs_netlists.py --cin-top sum: summing nodes listed first) put the summing nodes physically on the top plates
+INFO  C3 AFE/layout/FLOW.md (L2a) is not in the work tree yet: nothing to compare with
+PASS  C4 PEX (flow.py pex) with the MIM correction: stock Magic puts 0.30534p between the TOP plate (summing node vn) and the shield below, the corrected netlist 10.709f (294.631 fF moved to the bottom plate rec)
+INFO  C4 Magic attaches the capacitor-to-below capacitance to MIM terminal 1 (top plate); in silicon the bottom plate shields it.  Always use flow.py pex (never a raw ext2spice) for post-layout runs
+PASS  C5 the Magic PEX netlist of lp_tgate_tap (ports 'VDD VSS IN OUT C CBAR') simulates in ngspice: ron = 1.273914e+04
+--- summary: 31 PASS, 1 WARN, 0 FAIL
+RESULT: OK, this machine can run the layout phases (next: AFE/layout/RUNBOOK.md)
