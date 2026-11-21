@@ -16,7 +16,7 @@ or if a device is not in the list of gf180mcuD LVS devices.
   4. Cin (stage1c Xcin1, Xcin2; one 100.01 um plate = 10,002 um2 > the 10,000 um2 limit) -> N pieces (default 2 squares sized for C/N each, so the capacitance and the ratio Cin : Cf1 = 100
      stay as simulated).  --cin N,W,L sets what the layout draws.
   5. Cref (vrefs) stays ONE plate (59.07 um, P-A10).   6. Resistors: ppolyf_u_1k as in the netlists (F1 item 1); ppolyf_u_3k is refused.
-  7. Top: SPICE top = 8 x afe_ch + bias_genc + the supply devices (strap resistor, MOS decap) + the digital macro afe_dig as a BLACK BOX.  The 15 constant pad-control pins of the top
+  7. Top: SPICE top = N x afe_ch (N = the generate loop of AFE/top/dbs_afe_top.v; Decision 52: 4) + bias_genc + the supply devices (strap resistor, MOS decap) + the digital macro afe_dig as a BLACK BOX.  The 15 constant pad-control pins of the top
      (`assign X = 1'b0 / 1'b1` in AFE/top/dbs_afe_top.v) are OUTPUT PINS of afe_dig, driven there by tie cells (Decision 46e, LP step 5; AFE/dig/afe_dig.v, whose tie values are
      checked against the Verilog top here): each such top pin is simply a net between the pad and the macro pin of the same name.  `--ties resistor` writes the F1 form instead
      (a 0-ohm resistor from the pin to VDD / VSS and no tie pins on afe_dig).
@@ -83,6 +83,7 @@ DIG_PINS = [('CS', 'u_adc', 'cs_n'), ('SCLK', 'u_adc', 'sclk'), ('DIN', 'u_adc',
             ('cmp_q', 'u_adc', 'cmp_q'), ('cmp_clk', 'u_adc', 'cmp_clk'), ('rst_sw', 'u_adc', 'rst_sw'), ('tg_on', 'u_adc', 'tg_on'), ('dac_gp', 'u_adc', 'dac_gp'),
             ('dac_gn', 'u_adc', 'dac_gn'), ('dac_gdn', 'u_adc', 'dac_gdn')]
 DIG_POWER = [('VDD', 'VDD'), ('VSS', 'VSS')]            # macro power pin -> net of the top (the macro sits on the ADC-main strap = net VDD)
+DIG_PER_CH = {'sw_rec': 1, 'sw_rec_b': 1, 'sw_ipg': 1, 'sw_ipg_b': 1, 'cmp_q': 1, 'cmp_clk': 1, 'rst_sw': 1, 'tg_on': 1, 'dac_gdn': 1, 'dac_gp': 12, 'dac_gn': 12}   # macro pin bits per channel (8-channel logic)
 DIG_INTERNAL = [('u_dbs', 'clk', 'u_adc', 'sclk'), ('u_dbs', 'rstn', 'u_adc', 'rstn'), ('u_dbs', 'mode', 'u_adc', 'mode_o'), ('u_dbs', 'en', 'u_adc', 'en_o')]   # nets that must be common
 
 LOG = []
@@ -845,6 +846,7 @@ def main():
     top_lines = []
     dig = {}
     supply_devs = []
+    n_ch = None       # number of afe_ch instances (Decision 52: 4; the logic stays 8-channel)
     for typ, par, iname, pins, loop in top.inst:
         if typ in ('adc8_top', 'dbs_ctrl'):
             dig[iname] = pins
@@ -852,6 +854,7 @@ def main():
             if not loop:
                 die('dbs_afe_top: afe_ch is expected in a generate loop')
             lv, n, lab = loop
+            n_ch = n
             for i in range(n):
                 nodes = []
                 for pn, _ in ch.ports:
@@ -901,8 +904,22 @@ def main():
         die('digital macro: connections %s are not in the table DIG_PINS' % left)
     dig_map = {}       # macro pin bit -> top net
     dig_w = {}
+    if n_ch is None or not 1 <= n_ch <= 8:
+        die('dbs_afe_top: expected 1 .. 8 afe_ch instances, found %s' % n_ch)
+    used_top = set(nn for l in top_lines for nn in l[1]) | set(topbits)
+    dropped = []
     for pin, inst_, port in DIG_PINS:
         b = [A(x) for x in expand(dig[inst_][port], top)]
+        if pin in DIG_PER_CH and n_ch < 8:
+            if len(b) != 8 * DIG_PER_CH[pin]:
+                die('digital macro: %s is %d bits wide, expected %d (8-channel logic)' % (pin, len(b), 8 * DIG_PER_CH[pin]))
+            keep = n_ch * DIG_PER_CH[pin]                 # MSB first: the last `keep` bits are channels 0 .. n_ch - 1
+            hi = b[:-keep]
+            bad = [x for x in hi if x in used_top]
+            if bad:
+                die('digital macro: the bits of %s for channels >= %d must not be used in the top (they stay inside afe_dig), found %s' % (pin, n_ch, bad[:4]))
+            dropped += hi
+            b = b[-keep:]
         dig_w[pin] = len(b)
         if len(b) == 1:
             dig_map[pin] = b[0]
@@ -911,6 +928,9 @@ def main():
                 dig_map['%s[%d]' % (pin, len(b) - 1 - k)] = n
     for pin, net in DIG_POWER:
         dig_map[pin] = net
+    if dropped:
+        P('\nDIGITAL MACRO with %d channels (Decision 52): the 8-channel logic stays inside afe_dig; %d per-channel pin bits of channels %d-7 are NOT macro pins '
+          '(the wrapper ties cmp_q[7:%d] low and leaves the other outputs open): %s .. %s' % (n_ch, len(dropped), n_ch, n_ch, dropped[0], dropped[-1]))
     # pad-control constants (Decision 46e): tie cells inside afe_dig, one macro output pin per constant-tied top pin, same name
     tie_pins = []
     if opt.ties == 'dig':
@@ -995,7 +1015,7 @@ def main():
     bias_file = HDR + '* File bias_genc.spice: the shared bias cell (one per chip, L3): beta-multiplier master, start-up, ladders A and B in ppolyf_u_1k, reset-level replica, C_VRS.\n\n' + cell('bias_genc')
     ch_body = [ch_lines[i] for i in rest] + [group_inst['amp_ch'], group_inst['adc_ch']]
     top_text = wrap('.subckt dbs_afe_top ' + ' '.join(topbits)) + '\n'
-    top_text += '* digital macro\n' + dev_line(top_lines[0]) + '\n* shared bias and the 8 channels\n' + '\n'.join(dev_line(l) for l in top_lines[1:]) + '\n'
+    top_text += '* digital macro\n' + dev_line(top_lines[0]) + '\n* shared bias and the %d channels\n' % n_ch + '\n'.join(dev_line(l) for l in top_lines[1:]) + '\n'
     top_text += '* supply network (Decision 44d): ADC-main strap decap and ADC-DAC strap decap (MOS capacitors, gate on the rail), the strap resistor between the two straps\n' + '\n'.join(dev_line(l) for l in supply_devs) + '\n'
     if opt.ties == 'resistor':
         top_text += ('* pad-control ties (Decision 41d / 44b): a top pin shorted to VDD or VSS, written as a 0-ohm resistor so that the pin keeps its own name.  Magic writes the same element from a layout\n'
@@ -1004,8 +1024,8 @@ def main():
         top_text += ('* pad-control ties (Decisions 41d / 44b / 46e): the %d constant pad-control pins (%s)\n'
                      '* are driven by tie cells INSIDE afe_dig (gf180mcu_fd_sc_mcu7t5v0__tiel / __tieh) and reach the top pins as plain nets: there is no device for them at this level.\n'
                      '.ends dbs_afe_top\n' % (len(ties), wrap(' '.join('%s = %s' % (p, '1' if r == 'VDD' else '0') for p, r in ties), 190).replace('\n+ ', '\n*   ')))
-    top_file = (HDR_TOP + '* File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 8 x afe_ch + supply devices%s;\n'
-                % (' + pad-control ties' if opt.ties == 'resistor' else '; the 15 pad-control constants are pins of afe_dig')
+    top_file = (HDR_TOP + '* File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + %d x afe_ch + supply devices%s;\n'
+                % (n_ch, ' + pad-control ties' if opt.ties == 'resistor' else '; the 15 pad-control constants are pins of afe_dig')
                 + '* afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.\n\n'
                 + '* ---------------- amplifier part\n' + cell('afe_chc') + '\n' + cell('fs_oneshot_c') + '\n' + ''.join(std_text[k] for k in sorted(std_text) if 'or2' in k) + '\n'
                 + subckt_text('amp_ch', group_ports['amp_ch'], group_text['amp_ch'])
@@ -1033,8 +1053,8 @@ def main():
     amp_n = per['afe_chc'] + per['fs_oneshot_c'] + sum(v for k, v in std_n.items() if 'or2' in k)
     adc_n = per['dac_sw'] + per['cmp_p'] + per['vhalf'] + per['vrefs'] + sum(v for k, v in std_n.items() if 'inv' in k)
     chn = amp_n + adc_n + 2 * per['tgate']
-    P('\nFLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch %d, adc_ch %d, afe_ch %d, bias_genc %d; chip without the digital macro: 8 x %d + %d + %d supply devices = %d (+ %d tie %s)' % (
-        amp_n, adc_n, chn, per['bias_genc'], chn, per['bias_genc'], len(supply_devs), 8 * chn + per['bias_genc'] + len(supply_devs), len(ties),
+    P('\nFLAT DEVICE COUNT (device lines; m > 1 counted once): amp_ch %d, adc_ch %d, afe_ch %d, bias_genc %d; chip without the digital macro: %d x %d + %d + %d supply devices = %d (+ %d tie %s)' % (
+        amp_n, adc_n, chn, per['bias_genc'], n_ch, chn, per['bias_genc'], len(supply_devs), n_ch * chn + per['bias_genc'] + len(supply_devs), len(ties),
         'resistors' if opt.ties == 'resistor' else 'pins of afe_dig, no device in the top'))
     open(os.path.join(opt.out, 'mk_lvs_netlists.log'), 'w').write('\n'.join(LOG) + '\n')
     print('\n'.join(LOG))

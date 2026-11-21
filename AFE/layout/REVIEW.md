@@ -97,3 +97,8 @@ proposed: accept 0.3 um, or use lever (b) bias_corr 12 -> 10 to give adc_h the r
 
 #### How R8 / R9 are applied
 One session: merge worktree-l2b and worktree-l1b-adc-post into main, apply R8 / R9 to AFE/layout/accept_limits.json and ACCEPT.md together, remove BLOCKED.md (content into the reports, section 6), restate the claims in README.md / AFE/adc/README.md, re-run `gate.py L2b` and `gate.py L1b` to PASS, commit, push. Then L3a.
+
+### R11 (2026-11-21) to L3a: Decision 52 step 1, 4-channel top netlist, 16 pads, LVS references
+Status: closed (monitoring 2026-11-21: done at the user's request; report AFE/layout/reports/R11.md; floorplan check 16 PASS, top sim PASS, check_lvs_netlists A / B / C PASS)
+Decision 52: AFE/top/dbs_afe_top.v (protected) to 4 channels with the 8-channel logic and cmp_q[7:4] tied low, AFE/top/tb_top.v, info.yaml (16 pads), mk_lvs_netlists.py channel count from the top, AFE/layout/lvs/ regenerated (provisional macro black box until the macro is re-hardened). The 8-channel state is tag checkpoint-n8-final.
+

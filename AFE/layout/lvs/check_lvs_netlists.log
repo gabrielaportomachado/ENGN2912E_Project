@@ -50,9 +50,9 @@ C. netgen -batch: each file read and its top cell compared with a copy of the sa
   bias_genc.spice    bias_genc    READ, MATCHES ITS COPY | top cell: 17 devices, 12 nets | classes: cap_mim_2f0_m4m5_noshield x1, nfet_03v3 x3, ppolyf_u_1k x7, pfet_03v3 x6 | sub-cells compared: 1 | messages: none
   afe_chc.spice      amp_ch       READ, MATCHES ITS COPY | top cell: 3 devices, 16 nets | classes: afe_chc x1, fs_oneshot_c x1, gf180mcu_fd_sc_mcu7t5v0__or2_1 x1 | sub-cells compared: 4 | messages: none
   adc_ch.spice       adc_ch       READ, MATCHES ITS COPY | top cell: 5 devices, 40 nets | classes: vrefs x1, cmp_p x1, dac_sw x1, vhalf x1, gf180mcu_fd_sc_mcu7t5v0__inv_1 x1 | sub-cells compared: 6 | messages: none
-  dbs_afe_top.spice  dbs_afe_top  READ, MATCHES ITS COPY | top cell: 13 devices, 312 nets, 1 disconnected pin | classes: rm3 x1, afe_dig x1, cap_nmos_03v3 x2, bias_genc x1, afe_ch x8 | sub-cells compared: 14 | messages: none
+  dbs_afe_top.spice  dbs_afe_top  READ, MATCHES ITS COPY | top cell: 9 devices, 172 nets, 1 disconnected pin | classes: rm3 x1, afe_dig x1, cap_nmos_03v3 x2, bias_genc x1, afe_ch x4 | sub-cells compared: 14 | messages: none
   pad-control ties: no device in the top (Decision 46e): the 15 constant pins are nets between the pads and the afe_dig pins of the same name; DOUT_IN is the 1 disconnected pin of the top.
-  C2 hierarchical read (standard-cell library, SPICE top, then AFE/dig/final/afe_dig.pnl.v): READ, MATCHES ITS COPY | afe_dig placeholder replaced by the Verilog module in 2 of 2 circuits, 2263 cell instances in afe_dig | top: 13 devices, 312 nets | cells compared: 73
+  C2 hierarchical read: not run (the top has the provisional empty black box: no --dig-netlist was given to mk_lvs_netlists.py).
   RESULT C: PASS
 
 SUMMARY: A PASS, B PASS, C PASS

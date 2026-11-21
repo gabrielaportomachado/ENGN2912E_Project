@@ -5,6 +5,7 @@ PASS  AFE/layout/REVIEW.md not edited by this phase
 PASS  open REVIEW.md items for L2a or an earlier phase (R1) are listed as handled in section 9 of a phase report
 PASS  "## L2a findings" section in AFE/layout/NOTES_L2.md
 PASS  Results-log row for L2a in AFE/layout/NOTES_L2.md
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
 --- amp_ch layout: AFE/layout/amp/amp_ch.gds
 PASS  DRC report belongs to the current GDS (sha1)
 PASS  DRC ran with the official deck, variant D
@@ -13,5 +14,5 @@ PASS  LVS report belongs to the current GDS (sha1)
 PASS  LVS reference AFE/layout/lvs/afe_chc.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
 PASS  LVS amp_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
-PASS  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/r4-amp-repack2/AFE/layout/amp/amp_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
+PASS  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/AFE/layout/amp/amp_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
 GATE L2a: PASS  (0 FAIL)

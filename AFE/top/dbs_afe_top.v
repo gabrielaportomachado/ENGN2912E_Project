@@ -1,18 +1,21 @@
 `timescale 1ns/1ps
-// dbs_afe_top: chip top level for the Chipathon macro (I0, 2026-11-14).  Digital part = rtl/dbs.v (dbs_ctrl, N = 8, read only) + AFE/adc/rtl/adc8_top (SPI frame, config word, 8 SAR logics);
-// analog part = 8 x afe_ch (routing TGATEs + REC park + amplifier + fs one-shot + ADC DAC/comparator) + 1 x bias_genc.  Single 3.3 V supply (Decision 30).  READY is tied high (Decision 35).
+// dbs_afe_top: chip top level for the Chipathon macro (I0, 2026-11-14; Decision 52, 2026-11-21: 4 channels).  Digital part = rtl/dbs.v (dbs_ctrl, N = 8, read only) + AFE/adc/rtl/adc8_top
+// (SPI frame, config word, 8 SAR logics): the 8-channel LOGIC is kept unchanged (Decision 52c); only channels 0-3 exist; the comparator inputs cmp_q[7:4] of the unused SAR logics are tied low
+// and their outputs are left open (in silicon both happen inside the afe_dig wrapper).  Words 6-9 of the 160-SCLK frame carry IDs 4-7 with a constant code; EN[7:4] has no effect.
+// analog part = 4 x afe_ch (routing TGATEs + REC park + amplifier + fs one-shot + ADC DAC/comparator) + 1 x bias_genc.  Single 3.3 V supply (Decision 30).  READY is tied high (Decision 35).
+// The 8-channel version of this file is in git tag checkpoint-n8-final.
 //
 // WHY dbs_ctrl + TGATE and not the dbs module: dbs wraps dbs_ctrl + the 2N TGATEs but does not bring sw_rec / sw_rec_b out, and the amplifier reset trigger and the REC park need exactly those two nets.
 // The TGATEs therefore sit inside afe_ch; the wiring is the same as dbs.v lines 99-106 (rec_tg: C = sw_rec, CBAR = sw_rec_b; ipg_tg: C = sw_ipg, CBAR = sw_ipg_b).  tb_top.v compares REC / IPG against a real `dbs #(8)` instance.
 //
-// Pads (24, Decision 45): analog E[7:0] IPG[7:0] REF (17); input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT (5 digital); power VDD; ground VSS.
-// REF = shared reference electrode, wired to afe_chc.ref of all 8 channels.  NO REC pads (Decision 45): rec is an internal net of afe_ch (record TGATE OUT = afe_chc.rec).
-// Fallback (organizer pad share): N = 2 channels (Decision 45); the older fallback "drop the REF pad and tie every afe_ch `ref` to vcm" stays possible.
+// Pads (16, Decision 52; was 24, Decision 45): analog E[3:0] IPG[3:0] REF (9); input_cmos CS DIN; input_schmitt SCLK RSTN; bidirectional DOUT (5 digital); power VDD; ground VSS.
+// REF = shared reference electrode, wired to afe_chc.ref of all 4 channels.  NO REC pads (Decision 45): rec is an internal net of afe_ch (record TGATE OUT = afe_chc.rec).
+// Fallback (organizer pad share): N = 2 channels (Decision 45, A-7); the older fallback "drop the REF pad and tie every afe_ch `ref` to vcm" stays possible.
 // Pad-pin names (F1, Decision 44b; checked against the organizer template, copy in AFE/review/sim/organizer/template_info.yaml lines 26-66): a bidirectional pad <name> needs the ports
 // <name>_OUT (to the pad's A) and <name>_IN (from the pad's Y) plus the 8 control pins <name>_PD _PU _CS _SL _IE _OE _PDRV0 _PDRV1; an input pad <name> needs <name> (from Y), <name>_PD, <name>_PU.
 // "All control signals must be connected" (template line 27): every one is driven below.  The VALUES (drive strength, slew, input type) are still to be confirmed in L4 (Decision 41d).
 module dbs_afe_top (
-    inout  [7:0] E, IPG,
+    inout  [3:0] E, IPG,
     inout        REF,
     input        CS, DIN, SCLK, RSTN,
     output       DOUT_OUT,                          // serial data to the bidirectional pad DOUT (pad pin A)
@@ -27,10 +30,11 @@ module dbs_afe_top (
     assign DOUT_IE = 1'b0; assign DOUT_PD = 1'b0; assign DOUT_PU = 1'b0; assign DOUT_CS = 1'b0; assign DOUT_SL = 1'b0; assign DOUT_PDRV0 = 1'b0; assign DOUT_PDRV1 = 1'b0;   // input off, no pull, CMOS, fast, 4 mA: values to be confirmed in L4
     assign CS_PU = 1'b0; assign CS_PD = 1'b0; assign DIN_PU = 1'b0; assign DIN_PD = 1'b0; assign SCLK_PU = 1'b0; assign SCLK_PD = 1'b0; assign RSTN_PU = 1'b0; assign RSTN_PD = 1'b1;   // RSTN pull-down ON (Decision 41, mismatch 9): the chip comes up in reset if the host does not drive RSTN
 
-    // ---- serial interface, config word, 8 SARs ----
+    // ---- serial interface, config word, 8 SAR logics (channels 4-7 unused, Decision 52c) ----
     wire        mode_o, rst_amp_o;
     wire [7:0]  en_o, cmp_q, cmp_clk, rst_sw, tg_on, dac_gdn;
     wire [95:0] dac_gp, dac_gn;
+    assign cmp_q[7:4] = 4'b0000;                   // unused SAR logics 4-7: comparator input tied low (inside the afe_dig wrapper in silicon); their outputs stay open
     adc8_top u_adc (.cs_n(CS), .sclk(SCLK), .din(DIN), .rstn(RSTN), .dout(DOUT_OUT), .dout_oe(dout_oe),
                     .rst_amp_o(rst_amp_o), .mode_o(mode_o), .en_o(en_o),
                     .cmp_q(cmp_q), .cmp_clk(cmp_clk), .rst_sw(rst_sw), .tg_on(tg_on), .dac_gp(dac_gp), .dac_gn(dac_gn), .dac_gdn(dac_gdn));
@@ -45,19 +49,19 @@ module dbs_afe_top (
     bias_genc u_bias (.vbn(vbn), .vcm_in(vcm), .vg1(vg1), .vcm_out(vcmo), .vg2(vg2), .vrs(vrs), .vdd(VDD), .vss(VSS));
 
     // ---- supply straps (F1, Decision 44d = the rail table of AFE/review/AUDIT.md 4.9.2).  ONE pad pair VDD / VSS, three metal straps star-connected at the pad:
-    //        analog strap   -> net VDD     : bias_genc, 8 x (afe_chc, fs_oneshot_c, OR2, vhalf, Cref switch, samb inverter, sampling-TG n-wells, routing-TGATE wells)   [afe_ch.vdd]
-    //        ADC-main strap -> net VDD     : 8 x cmp_p [afe_ch.vdd_cmp] + the digital macro; decap 0.125 nF (MOS capacitors, about 3 ohm in series)
-    //        ADC-DAC strap  -> net vdd_dac : the 13 bottom-plate drivers of each dac_sw [afe_ch.vdd_dac]; behind ONE 10 ohm strap resistor from the ADC-main strap; decap 0.1 nF
+    //        analog strap   -> net VDD     : bias_genc, 4 x (afe_chc, fs_oneshot_c, OR2, vhalf, Cref switch, samb inverter, sampling-TG n-wells, routing-TGATE wells)   [afe_ch.vdd]
+    //        ADC-main strap -> net VDD     : 4 x cmp_p [afe_ch.vdd_cmp] + the digital macro; decap 0.125 nF (MOS capacitors, about 3 ohm in series; kept for 4 channels, Decision 52e)
+    //        ADC-DAC strap  -> net vdd_dac : the 13 bottom-plate drivers of each dac_sw [afe_ch.vdd_dac]; behind ONE 10 ohm strap resistor from the ADC-main strap; decap 0.05 nF (0.1 nF for 8 ADCs, Decision 52e)
     //      The analog and the ADC-main strap are the same NET (VDD): they differ only in the layout (separate metal from the pad).  The strap resistor and the two decap banks are DEVICES of the
     //      LVS top reference (AFE/layout/lvs/dbs_afe_top.spice, written by AFE/layout/scripts/mk_lvs_netlists.py from this file); here they are the cells afe_rstrap / afe_decap (stubs_analog.v).
     wire vdd_dac;
     afe_rstrap                u_rstrap (.a(VDD), .b(vdd_dac), .vss(VSS));     // 10 ohm, ADC-main strap -> ADC-DAC strap (X2 S4: Rs = 10 ohm)
     afe_decap #(.C_NF(0.125)) u_dcm    (.p(VDD), .n(VSS));                    // ADC-main strap decap 0.125 nF (cap_nmos_03v3, 3.98 fF/um2 in the PDK model)
-    afe_decap #(.C_NF(0.100)) u_dcd    (.p(vdd_dac), .n(VSS));                // ADC-DAC strap decap 0.1 nF
+    afe_decap #(.C_NF(0.0475)) u_dcd   (.p(vdd_dac), .n(VSS));                // ADC-DAC strap decap >= 47.5 pF for 4 ADCs (Decision 52e; 0.1 nF for 8)
 
-    // ---- 8 channels ----
+    // ---- 4 channels (Decision 52) ----
     genvar i;
-    generate for (i = 0; i < 8; i = i + 1) begin : ch
+    generate for (i = 0; i < 4; i = i + 1) begin : ch
         afe_ch u (.e(E[i]), .ipg(IPG[i]),
                   .sw_rec(sw_rec[i]), .sw_rec_b(sw_rec_b[i]), .sw_ipg(sw_ipg[i]), .sw_ipg_b(sw_ipg_b[i]),
                   .rst_amp(rst_amp_o),
