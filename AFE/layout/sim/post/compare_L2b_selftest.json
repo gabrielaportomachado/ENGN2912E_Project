@@ -1,7 +1,7 @@
 {
  "title": "L2b: baseline (selftest) against AFE/layout/baseline",
  "verdict": "PASS",
- "n_pass": 93,
+ "n_pass": 90,
  "n_warn": 0,
  "n_fail": 0,
  "missing": [],
@@ -70,7 +70,7 @@
    "change": 0.0,
    "limit": "1.6 .. 1.7",
    "status": "PASS",
-   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c)"
+   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-300 LSB, Decision 51 addendum / REVIEW R10)"
   },
   {
    "check": "amp_ac",
@@ -180,7 +180,7 @@
    "change": 0.0,
    "limit": "1.6 .. 1.7",
    "status": "PASS",
-   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c)"
+   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-300 LSB, Decision 51 addendum / REVIEW R10)"
   },
   {
    "check": "amp_ac",
@@ -290,7 +290,7 @@
    "change": 0.0,
    "limit": "1.6 .. 1.7",
    "status": "PASS",
-   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c)"
+   "why": "mid-scale +-50 mV (62 LSB; the host accepts +-300 LSB, Decision 51 addendum / REVIEW R10)"
   },
   {
    "check": "amp_ac",
@@ -519,9 +519,9 @@
    "baseline": 0.579878,
    "post": 0.579878,
    "change": 0.0,
-   "limit": "0.38 .. 0.62",
+   "limit": "0.32 .. 0.68",
    "status": "PASS",
-   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579)"
+   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579) | R8 2026-11-21: was 0.38 .. 0.62 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_psrr",
@@ -563,9 +563,9 @@
    "baseline": 0.567331,
    "post": 0.567331,
    "change": 0.0,
-   "limit": "0.38 .. 0.62",
+   "limit": "0.32 .. 0.68",
    "status": "PASS",
-   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579)"
+   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579) | R8 2026-11-21: was 0.38 .. 0.62 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_psrr",
@@ -607,9 +607,9 @@
    "baseline": 0.572389,
    "post": 0.572389,
    "change": 0.0,
-   "limit": "0.38 .. 0.62",
+   "limit": "0.32 .. 0.68",
    "status": "PASS",
-   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579)"
+   "why": "the ADC is ratiometric (0.5): |gain - 0.5| <= 0.12 keeps the board-ripple requirement of 1 mV rms (D4b; baseline 0.566-0.579) | R8 2026-11-21: was 0.38 .. 0.62 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_psrr",
@@ -675,7 +675,7 @@
    "change": 0.0,
    "limit": "<= 1.25",
    "status": "PASS",
-   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28)"
+   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28) | R8 2026-11-21: was {\"typ\": 1.17, \"ss-40\": 1.17, \"ff85\": 1.25} (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_thd",
@@ -739,9 +739,9 @@
    "baseline": 1.14497969,
    "post": 1.14497969,
    "change": 0.0,
-   "limit": "<= 1.17",
+   "limit": "<= 1.19",
    "status": "PASS",
-   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28)"
+   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28) | R8 2026-11-21: was {\"typ\": 1.17, \"ss-40\": 1.17, \"ff85\": 1.25} (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_thd",
@@ -805,9 +805,9 @@
    "baseline": 1.14490514,
    "post": 1.14490514,
    "change": 0.0,
-   "limit": "<= 1.17",
+   "limit": "<= 1.19",
    "status": "PASS",
-   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28)"
+   "why": "bottom of the range; ff 85 C 1.21-1.22 V accepted (Decision 28) | R8 2026-11-21: was {\"typ\": 1.17, \"ss-40\": 1.17, \"ff85\": 1.25} (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_thd",
@@ -849,9 +849,9 @@
    "baseline": 0.09505999999981363,
    "post": 0.09505999999981363,
    "change": 0.0,
-   "limit": "<= 10",
+   "limit": "<= 50",
    "status": "PASS",
-   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV)"
+   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV) | R8 / ladder R-6 2026-11-21: was 10.0 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_pwrup",
@@ -871,9 +871,9 @@
    "baseline": 0.6193899999999974,
    "post": 0.6193899999999974,
    "change": 0.0,
-   "limit": "<= 10",
+   "limit": "<= 50",
    "status": "PASS",
-   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV)"
+   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV) | R8 / ladder R-6 2026-11-21: was 10.0 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_pwrup",
@@ -893,9 +893,9 @@
    "baseline": 0.23516999999984023,
    "post": 0.23516999999984023,
    "change": 0.0,
-   "limit": "<= 10",
+   "limit": "<= 50",
    "status": "PASS",
-   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV)"
+   "why": "L3b item 5 / Decision 44c: 1 s after RST_AMP every output within 10 mV of 1.65 V (baseline 0.07-0.62 mV) | R8 / ladder R-6 2026-11-21: was 10.0 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_pwrup",
@@ -926,9 +926,9 @@
    "baseline": 2.98850537,
    "post": 2.98850537,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 1.5 / 3.2 / 0.7 s"
+   "why": "baseline 1.5 / 3.2 / 0.7 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -937,9 +937,9 @@
    "baseline": 2.33412537,
    "post": 2.33412537,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 0.004 / 1.4 / 0.5 s"
+   "why": "baseline 0.004 / 1.4 / 0.5 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -948,9 +948,9 @@
    "baseline": 4.37686415,
    "post": 4.37686415,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s)"
+   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s) | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1036,9 +1036,9 @@
    "baseline": 0.6545006299999998,
    "post": 0.6545006299999998,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 1.5 / 3.2 / 0.7 s"
+   "why": "baseline 1.5 / 3.2 / 0.7 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1047,9 +1047,9 @@
    "baseline": 0.39849143,
    "post": 0.39849143,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 0.004 / 1.4 / 0.5 s"
+   "why": "baseline 0.004 / 1.4 / 0.5 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1058,9 +1058,9 @@
    "baseline": 2.7357022399999997,
    "post": 2.7357022399999997,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s)"
+   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s) | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1146,9 +1146,9 @@
    "baseline": 1.79952952,
    "post": 1.79952952,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 1.5 / 3.2 / 0.7 s"
+   "why": "baseline 1.5 / 3.2 / 0.7 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1157,9 +1157,9 @@
    "baseline": 1.3957473399999998,
    "post": 1.3957473399999998,
    "change": 0.0,
-   "limit": "<= 4.5",
+   "limit": "<= 6.75",
    "status": "PASS",
-   "why": "baseline 0.004 / 1.4 / 0.5 s"
+   "why": "baseline 0.004 / 1.4 / 0.5 s | R8 / ladder R-7 (x 1.5) 2026-11-21: was 4.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1168,9 +1168,9 @@
    "baseline": 3.8015745599999997,
    "post": 3.8015745599999997,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s)"
+   "why": "Decision 38b accepted 3.4-4.7 s (baseline 4.7 / 4.6 / 3.5 s) | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset",
@@ -1245,9 +1245,9 @@
    "baseline": 3.7083687899999997,
    "post": 3.7083687899999997,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start"
+   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset_host",
@@ -1278,9 +1278,9 @@
    "baseline": 2.8915,
    "post": 2.8915,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start"
+   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset_host",
@@ -1311,9 +1311,9 @@
    "baseline": 3.88413667,
    "post": 3.88413667,
    "change": 0.0,
-   "limit": "<= 6.5",
+   "limit": "<= 9.75",
    "status": "PASS",
-   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start"
+   "why": "as amp_reset, with the host's 100 ms RST_AMP at the record start | R8 / ladder R-7 (x 1.5) 2026-11-21: was 6.5 (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset_host",
@@ -1368,7 +1368,7 @@
    "change": 0.0,
    "limit": "1.5 .. 1.8",
    "status": "PASS",
-   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check"
+   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-300 LSB check (was +-200 LSB before REVIEW R10)"
   },
   {
    "check": "amp_ac_junction",
@@ -1412,7 +1412,7 @@
    "change": 0.0,
    "limit": "1.5 .. 1.8",
    "status": "PASS",
-   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check"
+   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-300 LSB check (was +-200 LSB before REVIEW R10)"
   },
   {
    "check": "amp_ac_junction",
@@ -1456,7 +1456,7 @@
    "change": 0.0,
    "limit": "1.5 .. 1.8",
    "status": "PASS",
-   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check"
+   "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-300 LSB check (was +-200 LSB before REVIEW R10)"
   },
   {
    "check": "amp_ac_junction",
@@ -1476,9 +1476,9 @@
    "baseline": 0.9400199999998193,
    "post": 0.9400199999998193,
    "change": 0.0,
-   "limit": "<= 50",
-   "status": "PASS",
-   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB"
+   "limit": "",
+   "status": "info",
+   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB | R8: not gating, ACCEPT.md section 2 risk view; host rule 6 RST_AMP repeat, first-silicon test 4 2026-11-21: was max 50 (gating) (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_pwrup_junction",
@@ -1487,9 +1487,9 @@
    "baseline": 1.7490299999998182,
    "post": 1.7490299999998182,
    "change": 0.0,
-   "limit": "<= 50",
-   "status": "PASS",
-   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB"
+   "limit": "",
+   "status": "info",
+   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB | R8: not gating, ACCEPT.md section 2 risk view; host rule 6 RST_AMP repeat, first-silicon test 4 2026-11-21: was max 50 (gating) (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_pwrup_junction",
@@ -1498,9 +1498,9 @@
    "baseline": 1.0352000000000139,
    "post": 1.0352000000000139,
    "change": 0.0,
-   "limit": "<= 50",
-   "status": "PASS",
-   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB"
+   "limit": "",
+   "status": "info",
+   "why": "after RST_AMP the output is at mid-scale in both conventions (baseline of this convention 0.9-1.5 mV); 50 mV = 62 LSB | R8: not gating, ACCEPT.md section 2 risk view; host rule 6 RST_AMP repeat, first-silicon test 4 2026-11-21: was max 50 (gating) (accept_limits_pre_R8R9.json)"
   },
   {
    "check": "amp_reset_host_junction",
@@ -1511,7 +1511,7 @@
    "change": 0.0,
    "limit": "|x| <= 30",
    "status": "PASS",
-   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2)"
+   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-300 LSB or drifts by more than 20 LSB/s (ACCEPT.md section 2, REVIEW R10)"
   },
   {
    "check": "amp_reset_host_junction",
@@ -1555,7 +1555,7 @@
    "change": 0.0,
    "limit": "|x| <= 30",
    "status": "PASS",
-   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2)"
+   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-300 LSB or drifts by more than 20 LSB/s (ACCEPT.md section 2, REVIEW R10)"
   },
   {
    "check": "amp_reset_host_junction",
@@ -1599,7 +1599,7 @@
    "change": 0.0,
    "limit": "|x| <= 30",
    "status": "PASS",
-   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2)"
+   "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-300 LSB or drifts by more than 20 LSB/s (ACCEPT.md section 2, REVIEW R10)"
   },
   {
    "check": "amp_reset_host_junction",

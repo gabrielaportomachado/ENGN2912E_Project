@@ -1,4 +1,4 @@
-== top_stim  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-20 07:46
-   job st_sch_ff85: exit 0, 13 s
-   job st_sch_ff85_leak: exit 0, 13 s
-RESULT top_stim ff85: rec_dev_mv=0  out_dev_mv=0.0200064  e_swing_v=1.1382  final_v=1.65092  e_resid_mv=1e-05  t_1mv_s=0.906451  rec_dev_mv_leak=0  out_dev_mv_leak=0.0192833  e_swing_v_leak=1.1383  final_v_leak=1.65093  e_resid_mv_leak=-0.01019  t_1mv_s_leak=0.877533
+== top_stim  netlist schematic  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 17:06
+   job st_sch_ff85_leak: exit 0, 9 s
+   job st_sch_ff85: exit 0, 12 s
+RESULT top_stim ff85: rec_dev_mv=0  out_dev_mv=0.0316815  e_swing_v=1.13827  final_v=1.65091  e_resid_mv=1e-05  t_1mv_s=0.949413  rec_dev_mv_leak=0  out_dev_mv_leak=0.0329868  e_swing_v_leak=1.13842  final_v_leak=1.65093  e_resid_mv_leak=-0.01019  t_1mv_s_leak=0.666353

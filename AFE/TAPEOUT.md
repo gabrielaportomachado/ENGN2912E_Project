@@ -4,20 +4,20 @@ Written from 2026-11-12 on by the monitoring session as a running log. The decis
 (Decisions 29-45), which is the reference. Numbers marked ESTIMATE are not simulated. F1 (2026-11-20) added the CURRENT STATE section below and marked every
 older section that no longer holds as SUPERSEDED (the old text is kept as history; do not take numbers from a SUPERSEDED section).
 
-## CURRENT STATE (2026-11-20, after Decisions 44 and 45; kept up to date by the phases; the SPI frame text was updated on 2026-11-21 for Decision 54)
-NOTE 2026-11-21: Decisions 52-54 changed the chip to N = 4 channels, 20 pads (E[3:0], IPG[3:0], REC[3:0], REF + 5 digital + VDD, VSS), a 605 x 1110 um outline and an 80-SCLK frame. Only the SPI-frame statements of this section are updated so far (the host interface is AFE/adc/SPI_FRAME.md). Everything below that still says N = 8, 24 pads, REC[7:0] not being pads, a 1000 x 1000 um outline, the area, the power and the decap numbers is the N = 8 state and is NOT current: use Decisions 52-54 of AFE/NOTES.md and AFE/layout/SPEC.md until the pad / outline / power text is updated.
-- Chip: N = 8 channels (Decision 29); per channel: routing TGATEs, LFP amplifier (60 dB, 0.2-650 Hz), its own 12-bit SAR ADC (Decision 34), simultaneous sampling at CS falling, 4 kS/s per channel
-  (host timed), one SPI port: 80-clock frame (Decision 54; 160 clocks in the N = 8 design): word 0 = config {WR, RST_AMP, MODE, EN[3:0]} on DIN and, at the same time, the status word {1010, RST_AMP, MODE, EN[3:0], 0} (the held config) on DOUT,
+## CURRENT STATE (2026-11-21, after Decisions 44-54; restated by REVIEW R16 for N = 4, 20 pads, 605 x 1110 um and the 80-SCLK frame)
+- Chip: N = 4 channels (Decision 52; N = 8 until 2026-11-21, tag checkpoint-n8-final); per channel: routing TGATEs, LFP amplifier (60 dB, 0.2-650 Hz), its own 12-bit SAR ADC (Decision 34), simultaneous sampling at CS falling, 4 kS/s per channel
+  (host timed), one SPI port: 80-clock frame (Decision 54; it was 160 clocks in the N = 8 design): word 0 = config {WR, RST_AMP, MODE, EN[3:0]} on DIN and, at the same time, the status word {1010, RST_AMP, MODE, EN[3:0], 0} (the held config) on DOUT,
   words 1-4 = {ID[1:0], 00, code[11:0]} of channel 0-3 on DOUT; the config commits at SCLK edge 17 and only if WR = 1; SPI mode 0, MSB first; full spec AFE/adc/SPI_FRAME.md (Decisions 37, 38, 41, 54).
   Single 3.3 V supply (Decision 30), no CLK / READY / MODE / EN pads (routing control clocked by SCLK, READY tied high inside), no 5 V domain, no analog mux.
-- Pads: 24 (Decision 45; the TA asked for fewer pads and a smaller block: REC pads dropped, fallback N = 2). Pin list for info.yaml:
+- Pads: 20 (Decisions 45, 52, 53: 16 pads of Decision 52 + REC[3:0] back in Decision 53; the user accepts the 20-pad budget). Pin list for info.yaml:
 
 | Pad | io_type | Top-cell ports (AFE/top/dbs_afe_top.v) | Note |
 |---|---|---|---|
-| E[7:0] | analog (8) | E[7:0] | electrode contacts (to the record and IPG routing TGATEs) |
-| IPG[7:0] | analog (8) | IPG[7:0] | stimulation side; signals must stay inside 0..VDD |
-| REF | analog (1) | REF | shared reference electrode -> amplifier `ref` input of all 8 channels (Decision 41) |
-| CS | input_cmos | CS, CS_PU = 0, CS_PD = 0 | SPI chip select, low for the whole 80-clock frame; falling edge = sampling instant of all channels (all 8 in the N = 8 table, all 4 since Decision 52) |
+| E[3:0] | analog (4) | E[3:0] | electrode contacts (to the record and IPG routing TGATEs) |
+| IPG[3:0] | analog (4) | IPG[3:0] | stimulation side; signals must stay inside 0..VDD |
+| REC[3:0] | analog (4) | REC[3:0] | OUT of the record TGATE of channel k = the amplifier input (the electrode signal after the record switch, BEFORE amplification; Decision 53). Board rule PROPOSED, not decided (REVIEW R13 report section 8, R16): REC open, or a probe of >= 1 GOhm DC and <= 10 pF; no 10 MOhm scope probe, no AC-coupled probe, no DC source. The REC buffer question is deferred until a first L3a layout exists |
+| REF | analog (1) | REF | shared reference electrode -> amplifier `ref` input of all 4 channels (Decision 41) |
+| CS | input_cmos | CS, CS_PU = 0, CS_PD = 0 | SPI chip select, low for the whole 80-clock frame; falling edge = sampling instant of all 4 channels (all 8 in the N = 8 design) |
 | DIN | input_cmos | DIN, DIN_PU = 0, DIN_PD = 0 | config word 0 = {WR, RST_AMP, MODE, EN[3:0]} (edges 1-16; the rest of the frame is ignored) |
 | SCLK | input_schmitt | SCLK, SCLK_PU = 0, SCLK_PD = 0 | 2 MHz nominal, 3 MHz maximum; the only clock of the chip |
 | RSTN | input_schmitt | RSTN, RSTN_PU = 0, RSTN_PD = 1 | asynchronous reset, pad pull-down ON |
@@ -25,19 +25,19 @@ NOTE 2026-11-21: Decisions 52-54 changed the chip to N = 4 channels, 20 pads (E[
 | VDD | power | VDD | one 3.3 V pad |
 | VSS | ground | VSS | one ground pad |
 
-  17 analog + 5 digital + 2 supply = 24. REC[7:0] are NOT pads (REC = record TGATE output = amplifier input is an internal net; the ADC data shows the same signal).
+  13 analog (E[3:0], IPG[3:0], REC[3:0], REF) + 5 digital + 2 supply = 20 pads = 37 port bits of `dbs_afe_top` (the pad-control constants included). REC[k] is the amplifier-input net of channel k brought to a pad (Decision 53); the ADC data shows the amplified signal.
   The port names follow the organizer template (resources/info.yaml: `<name>_OUT` / `<name>_IN` and 8 control pins for a bidirectional pad, `<name>_PU` / `<name>_PD` for an input pad; every control pin driven).
-- Block outline given to the organizer: 1000 x 1000 um (gds/dbs_afe_top.gds, top cell dbs_afe_top, PR boundary only until L3a replaces it with the layout of the same outline).
-  Area ESTIMATE 0.87 mm2 (935 x 935 um; pessimistic 1.00 mm2 = 998 x 998 um, i.e. no margin against the outline in the pessimistic case), AFE/review/sim/f1_area.log (the audit had 0.86 / 0.98 mm2 before the 1 kOhm/sq poly made the ladders and dividers 3x longer).
-- Power: 2.09 mW typ in record mode (3.26 mW ff 85 C, 1.37 mW ss -40 C), 0.63 mA; no power-down (AFE/review/sim/f1_power_total.log).
-- Supply: one pad pair, three straps (analog; ADC-main with 0.125 nF MOS decap; ADC-DAC behind 10 ohm with 0.1 nF), 0.225 nF = 0.057-0.071 mm2 (Decision 44d). SCLK 0.64 MHz minimum, 2 MHz nominal, 3 MHz maximum (Decision 40c).
+- Block outline given to the organizer: 605 x 1110 um (Decision 52: W x H, 671,550 um2 = 0.672 mm2; core 553 x 1058 um inside the 26 um pin ring; AFE/layout/floorplan.json; gds/dbs_afe_top.gds, top cell dbs_afe_top, is still the PR-boundary GDS of the old 1000 x 1000 um outline until L4 replaces it with the layout).
+  Area: the placed blocks occupy 474,744 um2 = 0.475 mm2 = 70.7 % of the outline (4 channel slots of 237 x 448.88 um, afe_dig 425 x 86.24 um, bias_genc <= 108 x 116.24 um; floorplan.json `area`, floorplan.py check all PASS with the as-built cells amp_ch 220.75 x 273.25 um, adc_ch 219.50 x 103.67 um and the hardened macro 424.48 x 86.24 um). The old whole-chip estimate 0.87 mm2 (935 x 935 um) was for N = 8 and is NOT re-derived.
+- Power (re-derived 2026-11-21 for N = 4 from AFE/review/sim/f1_power_total.log: the amplifier, vhalf, comparator and DAC columns of the N = 8 table halved, ONE shared bias cell kept; the digital column replaced by the as-built 4-channel macro of AFE/dig/reports/power_dig.log, 56.0 pJ per SCLK cycle at tt = 17.0 pC, x 80 SCLK x 4000 frames/s = 17.9 uW; DOUT pad: the log's 36 rising edges per 160-SCLK frame become 20 per 80-SCLK frame (80 data bits x 0.25), C_load ASSUMED): record mode 1.05 mW typ (0.32 mA at 3.3 V), 1.64 mW ff 85 C, 0.68 mW ss -40 C, 1.24 mW at ff -40 C 3.6 V, 0.99 mW at ss 125 C 3.0 V; the three 3.3 V corners use the tt macro value (the N = 8 table varied by 3 %). The halving of the comparator / DAC columns is an ESTIMATE (both are 1-2 uW). The REC pad leakage (<= 1.9 pA, R13) is negligible. The N = 8 values were 2.09 / 3.26 / 1.37 mW. No power-down. The arithmetic per corner is in AFE/layout/reports/R16.md section 4.
+- Supply: one pad pair, three straps (analog; ADC-main with 74 decap units = 117.9 pF; ADC-DAC behind the 10 ohm strap resistor with 30 units = 47.8 pF; the 8-channel plan had 0.125 nF / 0.1 nF = 0.225 nF, Decision 44d), 165.7 pF in total (Decision 52e; ESTIMATE until L3b's supply run with 4 channels, whose first result is AFE/layout/baseline/top_supply.json). SCLK 0.64 MHz minimum, 2 MHz nominal, 3 MHz maximum (Decision 40c).
 - Layout / LVS inputs: AFE/layout/PLAN.md section 9 (pins), AFE/layout/lvs/ (LVS references written by AFE/layout/scripts/mk_lvs_netlists.py), AFE/prompts/layout_run.md (phases).
 - Host interface (frame, bit by bit): AFE/adc/SPI_FRAME.md. Host rules, power-up sequence, test plan: AFE/adc/README.md.
 - OPEN with the organizer (Decision 44k): macro name and DEF, slot size and pad positions, whether the VDD / VSS pair is ours alone and can be double bonded, native-Vt nfet_06v0_nvt allowed
-  (the follower uses it), high-resistance poly 1 kOhm/sq only (the netlists use only ppolyf_u_1k since F1), bond-wire inductance. Fallback if 8 channels are refused: N = 2 (Decision 45).
+  (the follower uses it), high-resistance poly 1 kOhm/sq only (the netlists use only ppolyf_u_1k since F1), bond-wire inductance. Fallback if 4 channels are refused: N = 2 (ACCEPT.md ladder A-7).
 
 ## Requirements received (from the course/Chipathon organizer)
-- Three groups share one frame: 2935 x 2935 um, core 2235 x 2235 um, 88 IO pads (22/side). (Later information: the organizer README states a 2040 x 2040 um design area and the TA plans 5 projects per frame; our outline is 1000 x 1000 um, 24 pads, Decision 45.)
+- Three groups share one frame: 2935 x 2935 um, core 2235 x 2235 um, 88 IO pads (22/side). (Later information: the organizer README states a 2040 x 2040 um design area and the TA plans 5 projects per frame; our outline is 605 x 1110 um with 20 pads, Decisions 52 and 53; Decision 45 had 1000 x 1000 um and 24 pads.)
   Plan for ONE THIRD: about 29 pads and about 1.66 mm2 (equal share, unconfirmed). Unknown: whether power pads count in the 88.
 - Repo (public GitHub, one per group, submission pulled from main): info.yaml (title, team, description,
   path to lvs_config.json, path to export-control doc, pin list name + io_type), lvs_config.json (top cell,

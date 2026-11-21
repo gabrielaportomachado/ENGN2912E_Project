@@ -2,20 +2,21 @@
  "check": "top_xtalk",
  "corners": {
   "typ": {
-   "date": "2026-11-20 08:14",
+   "date": "2026-11-21 17:10",
    "info": {
     "adc": "schematic",
     "amp": "schematic",
+    "n_ch": 4,
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_xtalk_typ.log",
    "values": {
-    "dcode_conv": 1.0,
-    "floor_lsb": 0.2772867878787879,
-    "kick_mv": 283.0,
-    "victim_conv_lsb": 0.001117090909090916,
-    "victim_conv_uv": 0.9000000000000057,
-    "victim_peak_mv": 0.648
+    "dcode_conv": 0.0,
+    "floor_lsb": 0.0,
+    "kick_mv": 330.0,
+    "victim_conv_lsb": 0.0004964848484848485,
+    "victim_conv_uv": 0.4,
+    "victim_peak_mv": 0.883
    }
   }
  },

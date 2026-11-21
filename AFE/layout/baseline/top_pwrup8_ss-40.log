@@ -1,3 +1,3 @@
-== top_pwrup8  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-20 07:46
-   job p8_sch_ss-40: exit 0, 5 s
-RESULT top_pwrup8 ss-40: t_wait_s=5  err_max_mv=1.20769  err_100ms_max_mv=1.71209  vrs_dip_mv=136.648  vrs_end_v=0.815224  latched_before=6
+== top_pwrup8  netlist schematic  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 17:08
+   job p8_sch_ss-40: exit 0, 3 s
+RESULT top_pwrup8 ss-40: t_wait_s=5  err_max_mv=1.19086  err_100ms_max_mv=1.59764  vrs_dip_mv=7.59604  vrs_end_v=0.814483  latched_before=4

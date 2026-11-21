@@ -2,36 +2,44 @@
  "check": "top_supply",
  "corners": {
   "ff-40": {
-   "date": "2026-11-20 08:11",
+   "date": "2026-11-21 17:15",
    "info": {
-    "model": "X2 S4 default",
-    "qdig_pC_per_ADC_per_edge": 3.375,
+    "Cd_F": 4.779e-11,
+    "Cm_F": 1.17882e-10,
+    "model": "X2 S4 default, decap / charge of N = 3 (lptb.SUPPLY_BY_N)",
+    "n_ch": 4,
+    "qdig_pC_per_ADC_per_edge": 4.775,
+    "qdig_pC_per_cycle": 19.1,
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_supply_ff-40.log",
    "values": {
     "dcode_max": 1.0,
-    "dres_max_lsb": 0.496,
-    "droop_dac_mv": 0.92,
-    "droop_main_mv": 7.04,
-    "dt_max_lsb": 0.034,
+    "dres_max_lsb": 0.559,
+    "droop_dac_mv": 1.1,
+    "droop_main_mv": 6.8,
+    "dt_max_lsb": 0.04,
     "failed": 0.0
    }
   },
   "typ": {
-   "date": "2026-11-20 08:04",
+   "date": "2026-11-21 17:12",
    "info": {
-    "model": "X2 S4 default",
-    "qdig_pC_per_ADC_per_edge": 3.0,
+    "Cd_F": 4.779e-11,
+    "Cm_F": 1.17882e-10,
+    "model": "X2 S4 default, decap / charge of N = 3 (lptb.SUPPLY_BY_N)",
+    "n_ch": 4,
+    "qdig_pC_per_ADC_per_edge": 4.25,
+    "qdig_pC_per_cycle": 17.0,
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_supply_typ.log",
    "values": {
-    "dcode_max": 0.0,
-    "dres_max_lsb": 0.113,
-    "droop_dac_mv": 0.15,
-    "droop_main_mv": 3.59,
-    "dt_max_lsb": 0.019,
+    "dcode_max": 1.0,
+    "dres_max_lsb": 0.174,
+    "droop_dac_mv": 0.06,
+    "droop_main_mv": 3.64,
+    "dt_max_lsb": 0.016,
     "failed": 0.0
    }
   }

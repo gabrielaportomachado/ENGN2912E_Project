@@ -2,54 +2,75 @@
  "check": "top_pwrup8",
  "corners": {
   "ff85": {
-   "date": "2026-11-20 07:46",
+   "date": "2026-11-21 17:08",
    "info": {
     "amp": "schematic",
     "bias": "schematic",
+    "n_ch": 4,
+    "offsets_mv": [
+     0.0,
+     -3.0,
+     10.0,
+     -10.0
+    ],
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_pwrup8_ff85.log",
    "values": {
-    "err_100ms_max_mv": 0.6501817507500451,
-    "err_max_mv": 0.4228000000001675,
-    "latched_before": 8.0,
+    "err_100ms_max_mv": 0.6397831231699236,
+    "err_max_mv": 0.47229999999998107,
+    "latched_before": 4.0,
     "t_wait_s": 0.3,
-    "vrs_dip_mv": 14.352579999999948,
-    "vrs_end_v": 1.22346793
+    "vrs_dip_mv": 7.09230448979592,
+    "vrs_end_v": 1.2227212
    }
   },
   "ss-40": {
-   "date": "2026-11-20 07:46",
+   "date": "2026-11-21 17:08",
    "info": {
     "amp": "schematic",
     "bias": "schematic",
+    "n_ch": 4,
+    "offsets_mv": [
+     0.0,
+     -3.0,
+     10.0,
+     -10.0
+    ],
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_pwrup8_ss-40.log",
    "values": {
-    "err_100ms_max_mv": 1.712091244999936,
-    "err_max_mv": 1.2076899999999835,
-    "latched_before": 6.0,
+    "err_100ms_max_mv": 1.5976350449000698,
+    "err_max_mv": 1.1908599999999048,
+    "latched_before": 4.0,
     "t_wait_s": 5.0,
-    "vrs_dip_mv": 136.64772800000003,
-    "vrs_end_v": 0.815224219
+    "vrs_dip_mv": 7.596037999999861,
+    "vrs_end_v": 0.814482687
    }
   },
   "typ": {
-   "date": "2026-11-20 07:46",
+   "date": "2026-11-21 17:08",
    "info": {
     "amp": "schematic",
     "bias": "schematic",
+    "n_ch": 4,
+    "offsets_mv": [
+     0.0,
+     -3.0,
+     10.0,
+     -10.0
+    ],
     "warnings": []
    },
    "log": "AFE/layout/baseline/top_pwrup8_typ.log",
    "values": {
-    "err_100ms_max_mv": 1.0541623407898104,
-    "err_max_mv": 0.699539999999832,
-    "latched_before": 8.0,
+    "err_100ms_max_mv": 0.9926797081598604,
+    "err_max_mv": 0.8119599999998339,
+    "latched_before": 4.0,
     "t_wait_s": 0.3,
-    "vrs_dip_mv": 15.001450816326756,
-    "vrs_end_v": 1.02927068
+    "vrs_dip_mv": 7.414156326530863,
+    "vrs_end_v": 1.02852778
    }
   }
  },

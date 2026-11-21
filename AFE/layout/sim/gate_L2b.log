@@ -2,7 +2,9 @@ gate.py L2b  (L2b)
 --- common
 PASS  ACCEPT.md limits table equals AFE/layout/accept_limits.json
 PASS  AFE/layout/REVIEW.md not edited by this phase
-PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit 79e833c
+PASS  protected files (limits, ACCEPT.md, design netlists, RTL) unchanged since the last REVIEW.md commit a69a68f
+WARN  protected files changed by REVIEW.md items (named in report section 9): AFE/layout/ACCEPT.md AFE/layout/accept_limits.json
+WARN  baselines changed since a69a68f (26 files): allowed only by ladder N-2 (native-Vt swap) or a REVIEW.md item; say so in report section 6 / 9
 PASS  open REVIEW.md items for L2b or an earlier phase (R1) are listed as handled in section 9 of a phase report
 PASS  phase report AFE/layout/reports/L2b.md with all 10 sections
 PASS  "## L2b findings" section in AFE/NOTES.md

@@ -52,7 +52,7 @@
       1.6,
       1.7
      ],
-     "why": "mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c)"
+     "why": "mid-scale +-50 mV (62 LSB; the host accepts +-300 LSB, Decision 51 addendum / REVIEW R10)"
     }
    ],
    "hf_dev_db": [
@@ -373,7 +373,7 @@
       1.5,
       1.8
      ],
-     "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check"
+     "why": "with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-300 LSB check (was +-200 LSB before REVIEW R10)"
     }
    ],
    "f_lo_hz": [
@@ -407,7 +407,7 @@
      "kind": "absmax",
      "limit": 30.0,
      "soft": true,
-     "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2)"
+     "why": "RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-300 LSB or drifts by more than 20 LSB/s (ACCEPT.md section 2, REVIEW R10)"
     }
    ],
    "final_v_os10m": [
@@ -867,13 +867,13 @@
      "kind": "dinc",
      "limit": 30.0,
      "soft": true,
-     "why": "dip of the shared reset level while 8 channels reset together; baseline 15 / 14 / 137 mV (typ / ff85 / ss-40, the cold bias is still settling at 5 s); a larger dip = more load on vrs: report"
+     "why": "dip of the shared reset level while the channels reset together; baseline of 4 channels 7.4 / 7.1 / 7.6 mV (typ / ff85 / ss-40; REVIEW R16), of 8 channels (top_pwrup8_n8.json) 15 / 14 / 137 mV (at ss-40 the cold bias was still settling at 5 s); a larger dip = more load on vrs: report"
     }
    ],
    "latched_before": [
     {
      "kind": "report",
-     "why": "8 = every channel latched before the reset, expected (A4c)"
+     "why": "N = every channel latched before the reset (N = 4 channels since Decision 52; 8 in top_pwrup8_n8.json), expected (A4c)"
     }
    ]
   }

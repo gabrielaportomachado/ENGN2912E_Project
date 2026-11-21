@@ -1,6 +1,7 @@
 # Layout run prompts for Atharv (L2a -> L4), one person, one machine
 
 Rewritten 2026-11-20 by phase LP (AFE/prompts/layout_prep.md) on top of a6aff2f; the L2a block is unchanged except for its last line (gate.py). Plain-language guide: **AFE/layout/RUNBOOK.md**.
+**Restated 2026-11-21 by REVIEW R16 (Decisions 52-54): the chip has 4 channels, 20 pads (E[3:0], IPG[3:0], REC[3:0], REF, CS, SCLK, DIN, RSTN, DOUT, VDD, VSS), an outline of 605 x 1110 um, the 425 x 86.24 um (424.48 x 86.24 um hardened) macro afe_dig with `adc_top #(.N(4))` and the 80-SCLK SPI frame of AFE/adc/SPI_FRAME.md. The 8-channel state is commit 0775d8e (tag checkpoint-n8-final). Where this file and AFE/layout/floorplan.json differ, floorplan.json wins.**
 Every prompt below is self-contained: paste the code block into a fresh Claude Code session started in the repo root. No phase waits for anybody: AFE/layout/ACCEPT.md is IN FORCE (user,
 2026-11-20) and the agent decides with its ladder. A phase is done when its gate prints PASS; then commit, `git push`, start the next phase. The user / monitoring session reviews after
 the fact through the reports AFE/layout/reports/<phase>.md and answers through AFE/layout/REVIEW.md, which every phase reads first.
@@ -15,17 +16,18 @@ the fact through the reports AFE/layout/reports/<phase>.md and answers through A
   | 1 | L2a | amplifier cell amp_ch: DRC + LVS | - | - | DONE 11-20 |
   | 2 | L1a | ADC cell adc_ch: DRC + LVS | - | - | DONE 11-20 |
   | 3 | L1d | digital macro afe_dig: final hardening | - | - | DONE 11-20 (branch worktree-l1d-dig) |
-  | 3a | REVIEW R2 + R3 | tightened floorplan; afe_dig re-hardened at 820 x 80 um (Decision 48) | L1d | - | 11-21 |
-  | 3b | REVIEW R4 | Cin 15 pF: simulations first, then amp_ch re-layout <= 222 x 285 um | R2 | R5 | 11-22 |
-  | 3c | REVIEW R5 | adc_ch re-pack <= 222 x 104 um | R2 | R4 | 11-22 |
-  | 4 | L2b | amp_ch PEX + post-layout simulations (new cell) | R4 | L1b | 11-23 |
-  | 5 | L1b | adc_ch PEX + post-layout simulations (new cell) | R5, R3 | L2b | 11-24 |
+  | 3a | REVIEW R2 + R3 | tightened floorplan; afe_dig re-hardened (8 channels, Decision 48; history) | L1d | - | DONE 11-21 |
+  | 3b | REVIEW R4 / R6 | Cin 15 pF, amp_ch 220.75 x 273.25 um (Decision 50) | R2 | R5 | DONE 11-21 |
+  | 3c | REVIEW R5 | adc_ch re-pack, 219.50 x 103.67 um | R2 | R4 | DONE 11-20 |
+  | 3d | REVIEW R11 - R16 | Decisions 52-54: 4 channels, 605 x 1110 um, 20 pads (REC back), adc_top N = 4 + 80-SCLK frame, afe_dig 424.48 x 86.24 um, kit / testbenches / documents to N = 4 | - | - | DONE 11-21 |
+  | 4 | L2b | amp_ch PEX + post-layout simulations | R4 | L1b | DONE 11-21 (Decision 51) |
+  | 5 | L1b | adc_ch PEX + post-layout simulations | R5, R3 | L2b | DONE 11-21 (Decision 51) |
   | 6 | L3a | top assembly (bias_genc, decap, straps, TGATEs), full-chip DRC + LVS | L2b, L1b | - | 11-26 |
-  | 7 | L3b | post-layout system checks (supply, crosstalk, 8-channel power-up, end-to-end) | L3a | - | 11-28 |
+  | 7 | L3b | post-layout system checks (supply, crosstalk, 4-channel power-up, end-to-end, stimulation) | L3a | - | 11-28 |
   | 8 | L4 | submission package | L3b | - | 11-29 (official deadline 11-30, Decision 49) |
   Two sessions at once = two terminals in the same repo; each commits only its own files (`git add <paths>`, never `git add -A`); `git pull --rebase` before each commit.
 - If a gate fails: the agent follows the decision ladder of AFE/layout/ACCEPT.md section 4 by itself and never waits for a human. Only if no entry applies it writes AFE/layout/BLOCKED.md, commits and pushes it and stops; you continue with a phase that does not depend on it (RUNBOOK.md "what blocks what"); the answer arrives through REVIEW.md.
-- If late, cut in this order (all pre-approved in ACCEPT.md): (1) L2b / L1b post-layout runs at typ only (`--corner typ`; compare.py then reports the other corners as missing: use `--allow-missing` and say so), (2) L3b items 3-4 at typ only, (3) N = 4 or N = 2 channels only by ladder A-6 / A-7.
+- If late, cut in this order (all pre-approved in ACCEPT.md): (1) L2b / L1b post-layout runs at typ only (`--corner typ`; compare.py then reports the other corners as missing: use `--allow-missing` and say so), (2) L3b items 3-4 at typ only, (3) N = 4 is the design (Decision 52, ladder A-6 DONE); fewer channels (N = 2) only by ladder A-7.
 
 ## Common rules (every prompt below includes "Follow AFE/prompts/layout_run.md common rules")
 1. Read AFE/NOTES.md (all Decisions, "LP findings" and the Results log), AFE/review/AUDIT.md sections 2, 3 and 4.9, AFE/TAPEOUT.md, AFE/layout/PLAN.md, AFE/layout/SPEC.md, AFE/layout/floorplan.json, AFE/layout/ACCEPT.md, AFE/layout/RUNBOOK.md and, once it exists, AFE/layout/FLOW.md, before working. ACCEPT.md is IN FORCE: decide with it, never wait for an approval. Where SPEC.md / floorplan.json / ACCEPT.md give a number, a pin position or a limit, they win over the prompt text.
@@ -89,7 +91,7 @@ Steps:
 8. Gate: python3 AFE/layout/scripts/gate.py L1d. PASS -> report sections 5 and 10, commit, git push, stop (common rule 7).
 ```
 
-## Rework round R2-R5 (Decision 48: keep 8 channels; items in AFE/layout/REVIEW.md) - run these NOW, before L2b
+## Rework round R2-R7 (Decision 48: keep 8 channels; items in AFE/layout/REVIEW.md) - HISTORY: all closed 2026-11-21, superseded by Decisions 51-54 (4 channels). Do not run these again.
 Order: R2 first and alone (minutes; R3 / R4 / R5 read the floorplan it writes). Then R3, R4 and R5 may run IN PARALLEL, each in its own git worktree / branch (as L2a / L1a / L1d did), with AFE/layout/scripts/slot.sh keeping at most 3 heavy jobs machine-wide (common rule 4). Merge conflicts to expect: AFE/NOTES.md (keep both findings) and AFE/layout/lvs/ (R3 regenerates it with --dig-netlist, R4 with --cin): whichever of R3 / R4 merges SECOND re-runs `python3 AFE/layout/scripts/mk_lvs_netlists.py` with BOTH options (and R4's --cin) on main, then check_lvs_netlists.py, then its gate again. L2b, L1b and L3a wait until R4 and R5 have passed their gates. One fresh session each (Sonnet 5.5, HIGH), `git pull` first.
 
 ### R2: tightened floorplan
@@ -117,10 +119,8 @@ Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R5 (
 Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R6 (read R1, R4 and Decision 50 first), which continues R4 at its step 2 (LVS reference) and step 3 (amp_ch re-layout <= 222 x 285 um). Update AFE/layout/reports/L2a.md (section 9 lists R1, R4, R6), run `python3 AFE/layout/scripts/gate.py L2a` until PASS, commit and push.
 ```
 
-### R7: close the 8-channel floorplan with the as-built cells (after R3, R5, R6)
-```
-Follow AFE/prompts/layout_run.md common rules. Do AFE/layout/REVIEW.md item R7 (read R1 and the R3, R5, R6 reports first). Write AFE/layout/reports/R7.md (same 10 sections; section 9 lists R1, R7); finish with `python3 AFE/layout/scripts/floorplan.py check --gds amp_ch=AFE/layout/amp/amp_ch.gds adc_ch=AFE/layout/adc/adc_ch.gds afe_dig=AFE/dig/final/afe_dig.gds --dig-pins AFE/dig/final/afe_dig_pins.json` all PASS (and `gate.py L1d` PASS if the macro was re-hardened); commit and push.
-```
+### R7: close the 8-channel floorplan with the as-built cells (closed: overtaken, REVIEW.md R7; no report file was written)
+The 4-channel floorplan check is `python3 AFE/layout/scripts/floorplan.py check --gds amp_ch=AFE/layout/amp/amp_ch.gds adc_ch=AFE/layout/adc/adc_ch.gds --dig-pins AFE/dig/final/afe_dig_pins.json` (all PASS; REVIEW R14 / R12).
 
 If a cell misses its budget by more than 3 % after its first attempt, run the same prompt once more in a fresh session; if it still misses (or R4's simulations fail a target), the agent writes AFE/layout/BLOCKED.md: push it and tell Jojo.
 
@@ -158,27 +158,27 @@ Steps:
 Follow AFE/prompts/layout_run.md common rules (start with rule 12: git pull, AFE/layout/REVIEW.md). Do phase L3a. Outputs: AFE/layout/top/ (generators mk_bias_genc.py, mk_top.py; bias_genc.gds; dbs_afe_top.gds; logs); report AFE/layout/reports/L3a.md + findings + Results-log row in AFE/NOTES.md (common rule 7).
 Inputs: AFE/layout/SPEC.md (all of it: floorplan, pins, sections 3.1 afe_ch tiling, 3.4 bias_genc, 4 supply + decap, 5 routing resources and keep-outs), AFE/layout/floorplan.json (placements, zones, pins, supply), the cells amp_ch (L2a / L2b, final GDS), adc_ch (L1a / L1b), AFE/dig/final/afe_dig.gds + .lef + afe_dig_pins.json (L1d), TGATE/TGATE.gds + one gf180mcu_fd_sc_mcu7t5v0__filltie per TGATE (SPEC.md 3.1; test cell lp_tgate_tap in mk_testcells.py shows how), the LVS top AFE/layout/lvs/dbs_afe_top.spice, the organizer answers recorded in AFE/NOTES.md (macro name, DEF; defaults in ACCEPT.md section 5).
 Steps:
-1. bias_genc: write AFE/layout/top/mk_bias_genc.py (SPEC.md 3.4: ppolyf_u_1k ladders as interleaved serpentines, the replica pfet drawn like the pseudo-resistor devices, C_VRS 49.885 um MIM top plate vrs, P+ guard ring; region <= 100 x 142 um); flow.py drc + flow.py lvs --top bias_genc --ref AFE/layout/lvs/bias_genc.spice clean.
-2. Top: write AFE/layout/top/mk_top.py that places from floorplan.json: 8 channel slots (afe_ch = adc_ch + amp_ch + 2 TGATEs with filltie + control and spur corridors; north row R0, south row MX), afe_dig, bias_genc, the bias corridors (vbn vcm vg1 vcmo vg2 vrs REF between vss lines), the straps (analog / ADC-main / ADC-DAC on the metals of SPEC.md section 5), the strap resistor with kpdk.metal_res (rm3 2 x 222.2 um), the decap units (cap_nmos_03v3 20 x 20 um: 34 per strap corridor, 38 in the west ring, 4 under each Cref; counts must equal the LVS top: --decap-n 74,64), the pin ring and the 41 pins at the floorplan.json positions (labels exactly the port names). Keep-outs of SPEC.md section 5. No SCLK / CS / DIN / DOUT / cmp_clk / dac_g* wire within 20 um of a summing node, pseudo-R, rec, vref or DAC top plate.
+1. bias_genc: write AFE/layout/top/mk_bias_genc.py (SPEC.md 3.4: ppolyf_u_1k ladders as interleaved serpentines, the replica pfet drawn like the pseudo-resistor devices, C_VRS 49.885 um MIM top plate vrs, P+ guard ring; region <= 108 x 116.24 um at (471, 496.88) of floorplan.json cells.bias_genc: the older 100 x 142 um loses to it); flow.py drc + flow.py lvs --top bias_genc --ref AFE/layout/lvs/bias_genc.spice clean.
+2. Top: write AFE/layout/top/mk_top.py that places from floorplan.json (outline 605 x 1110 um, n_ch = 4): 4 channel slots of 237 x 448.88 um (afe_ch = adc_ch + amp_ch + 2 TGATEs with filltie + control and spur corridors; channels 0-1 in the north row R0, channels 2-3 in the south row MX), afe_dig (424.48 x 86.24 um hardened, slot 425 x 86.24 um), bias_genc, the bias corridors (vbn vcm vg1 vcmo vg2 vrs REF between vss lines), the straps (analog / ADC-main / ADC-DAC on the metals of SPEC.md section 5), the strap resistor with kpdk.metal_res (rm3 2 x 222.2 um), the decap units (cap_nmos_03v3 20 x 20 um: ADC-main 74 units = 117.9 pF = 38 in the west ring + 4 under each Cref + 4 under the Cin pieces of each channel + 2 at the west end of each strap corridor; ADC-DAC 30 units = 47.8 pF = 15 per strap corridor; counts must equal the LVS top: --decap-n 74,30; gate.py L3a checks them against decap_min_main_pF / decap_min_dac_pF of floorplan.json), the pin ring and the 37 pin bits of the 20 pads (E, IPG and REC of channels 0-3, REF, the digital pads with their pad-control bits, VDD, VSS) at the floorplan.json positions (labels exactly the port names; REC[k] = the record TGATE OUT = amp_ch.rec: keep the wire short and away from digital nets, Decision 53). Keep-outs of SPEC.md section 5. No SCLK / CS / DIN / DOUT / cmp_clk / dac_g* wire within 20 um of a summing node, pseudo-R, rec, vref or DAC top plate.
 3. python3 AFE/layout/scripts/flow.py drc --gds AFE/layout/top/dbs_afe_top.gds --top dbs_afe_top --antenna   -> 0 (ladder D). Full chip DRC is long: run it once the LVS is clean on a preliminary version, or use --mode deep.
 4. python3 AFE/layout/scripts/flow.py lvs --gds AFE/layout/top/dbs_afe_top.gds --top dbs_afe_top --ref AFE/layout/lvs/dbs_afe_top.spice   -> match (afe_dig from the Verilog netlist named in the header; ladder L-6 for a netgen timeout).
 5. TGATE with its tap as placed: python3 AFE/layout/scripts/flow.py pex --gds AFE/layout/top/dbs_afe_top.gds --top <the TGATE+filltie cell name> ; python3 AFE/layout/tb/tb_tgate.py --netlist AFE/layout/sim/flow/<that cell>.pex.spice --corner all ; python3 AFE/layout/tb/compare.py --phase L3a.
 6. Re-check: the sw_rec / sw_rec_b skew at the channel cells after routing (wire lengths of the pair differ by < 100 um: state the numbers); the smallest distance achieved for each keep-out of SPEC.md section 5; total static power estimate vs AUDIT 4.6.
-7. Findings: final W x H, pin list, decap counts, keep-out distances, the commands. Results-log row.
+7. Findings: final W x H (must fit 605 x 1110 um), pin list, decap counts, keep-out distances, the commands; the REC pad question (REVIEW R13 / R16: the board rule is PROPOSED, the on-chip / board buffer question is open until this layout exists). Results-log row.
 8. Gate: python3 AFE/layout/scripts/gate.py L3a. PASS -> report sections 5 and 10, commit, git push, stop (common rule 7).
 ```
 
 ## L3b: post-layout system checks
 ```
 Follow AFE/prompts/layout_run.md common rules (start with rule 12: git pull, AFE/layout/REVIEW.md). Do phase L3b on the L3a top. Report AFE/layout/reports/L3b.md + findings + Results-log row in AFE/NOTES.md (common rule 7).
-Inputs: AFE/layout/top/dbs_afe_top.gds, the PEX netlists of L2b / L1b (AFE/layout/sim/flow/amp_ch.pex.spice, adc_ch.pex.spice), ACCEPT.md, AFE/layout/baseline/top_*.json and bias_startup.json, AFE/dig/reports/power_dig.log.
+Inputs: AFE/layout/top/dbs_afe_top.gds, the PEX netlists of L2b / L1b (AFE/layout/sim/flow/amp_ch.pex.spice, adc_ch.pex.spice), ACCEPT.md, AFE/layout/baseline/top_*.json (4 channels; top_*_n8.json = the 8-channel history) and bias_startup.json, AFE/dig/reports/power_dig.log, AFE/adc/SPI_FRAME.md (the 80-SCLK frame: words 1-4 carry the channel IDs 0-3).
 Steps:
 1. PEX: python3 AFE/layout/scripts/flow.py pex --gds AFE/layout/top/dbs_afe_top.gds --top dbs_afe_top (the gate checks its census) and --top bias_genc (-> B=AFE/layout/sim/flow/bias_genc.pex.spice). If the full-chip PEX does not finish within 2 h or runs out of memory: ladder P-1.
    A=AFE/layout/sim/flow/amp_ch.pex.spice ; D=AFE/layout/sim/flow/adc_ch.pex.spice
-2. Supply model from the layout: write AFE/layout/sim/post/supply_model.json = {"Rs": <extracted rm3 resistance, ohm>, "Cm": <74 x 1.593e-12>, "Cd": <64 x 1.593e-12>, "Rd": <ESR of the decap banks from the strap geometry, ohm>, "qdig_pC_per_cycle": <power_dig.log value of the corner>} (Rp / Lp: the organizer values if recorded in AFE/NOTES.md, else the defaults 0.25 ohm / 2 nH, ACCEPT.md section 5).
+2. Supply model from the layout: write AFE/layout/sim/post/supply_model.json = {"Rs": <extracted rm3 resistance, ohm>, "Cm": <74 x 1.593e-12>, "Cd": <30 x 1.593e-12>, "Rd": <ESR of the decap banks from the strap geometry, ohm>, "qdig_pC_per_cycle": <power_dig.log value of the corner of the 4-channel macro: 17.0 tt / 19.1 ff -40 / 15.5 ss 125>} (Rp / Lp: the organizer values if recorded in AFE/NOTES.md, else the defaults 0.25 ohm / 2 nH, ACCEPT.md section 5).
 3. Runs (each writes AFE/layout/sim/post/<check>.json):
    python3 AFE/layout/tb/tb_bias_startup.py --netlist $B --corner all
-   python3 AFE/layout/tb/tb_top_pwrup8.py --netlist $A --bias $B --corner all
+   python3 AFE/layout/tb/tb_top_pwrup8.py --netlist $A --bias $B --corner all          (4 channels: --nch defaults to 4 in tb_top_pwrup8 / tb_top_supply / tb_top_xtalk; the baselines are the 4-channel files, the 8-channel ones are top_*_n8.json)
    python3 AFE/layout/tb/tb_top_stim.py --netlist $A --corner all
    python3 AFE/layout/tb/tb_top_e2e.py --netlist $A --adc $D --corner all          (before xtalk: xtalk reuses its calibration)
    python3 AFE/layout/tb/tb_top_xtalk.py --netlist $A --adc $D --corner typ
@@ -193,11 +193,11 @@ Steps:
 Follow AFE/prompts/layout_run.md common rules (start with rule 12: git pull, AFE/layout/REVIEW.md). Do phase L4. Report AFE/layout/reports/L4.md + findings + Results-log row in AFE/NOTES.md (common rule 7).
 Inputs: README.md, info.yaml, lvs_config.json, documents/export_control_answers.md (pre-filled by LP), AFE/layout/scripts/check_submission.py, the organizer answers in AFE/NOTES.md, ACCEPT.md section 5 (defaults), AFE/review/sim/organizer/ (templates, padring fork README).
 Steps:
-1. Copy the deliverables: cp AFE/layout/top/dbs_afe_top.gds gds/dbs_afe_top.gds (replaces the PR-boundary GDS); mkdir -p spice verilog/gl; cp AFE/layout/lvs/dbs_afe_top.spice spice/dbs_afe_top.spice; cp AFE/dig/final/afe_dig.pnl.v verilog/gl/afe_dig.v. If the organizer assigned another top-cell / macro name: rename the top cell in the GDS (KLayout script), the subckt in spice/, TOP_SOURCE in lvs_config.json, and the file names (ACCEPT.md section 5).
+1. Copy the deliverables: cp AFE/layout/top/dbs_afe_top.gds gds/dbs_afe_top.gds (replaces the old 1000 x 1000 um PR-boundary GDS); mkdir -p spice verilog/gl; cp AFE/layout/lvs/dbs_afe_top.spice spice/dbs_afe_top.spice; cp AFE/dig/final/afe_dig.pnl.v verilog/gl/afe_dig.v. If the organizer assigned another top-cell / macro name: rename the top cell in the GDS (KLayout script), the subckt in spice/, TOP_SOURCE in lvs_config.json, and the file names (ACCEPT.md section 5).
 2. python3 AFE/layout/scripts/flow.py drc --gds gds/dbs_afe_top.gds --top dbs_afe_top --antenna and flow.py lvs --gds gds/dbs_afe_top.gds --top dbs_afe_top --ref spice/dbs_afe_top.spice (reports of THIS file).
 3. README.md: replace every `<L4: ...>` placeholder (GDS sha1, W x H from flow.py info, whether ladder S-2 was needed) and add the measured post-layout numbers (from AFE/layout/sim/post/compare_*.md) where the README cites pre-layout ones. info.yaml: set gf_def_ready, ws_def_ready, drc_ready, lvs_ready to true; remove the DRAFT line. Keep the pad order.
 4. Export control: the technical answers are in documents/export_control_answers.md; copy them into documents/Export_Control_GF_Rev8.2.docx only if a .docx editor is available (python-docx is not installed), otherwise leave the .docx to the signer and say so. Signature and party questions: a person.
-5. Organizer integration (padring fork, AFE/review/sim/organizer/padring_fork_README.md): the frame is built by the organizer from info.yaml (the fork's `workshop` slot, `SLOT=workshop make librelane`, about 2 h 15 min, nix-shell); we do NOT run it. Record what the organizer needs from us and that our block is 1000 x 1000 um with 24 pads.
+5. Organizer integration (padring fork, AFE/review/sim/organizer/padring_fork_README.md): the frame is built by the organizer from info.yaml (the fork's `workshop` slot, `SLOT=workshop make librelane`, about 2 h 15 min, nix-shell); we do NOT run it. Record what the organizer needs from us and that our block is 605 x 1110 um with 20 pads (Decisions 52 / 53; info.yaml).
 6. python3 AFE/layout/scripts/check_submission.py -> PASS (no PENDING).
 7. Findings: the list of every item that needs a human (signature, repository creation / push to the organizer, organizer answers still open). Results-log row.
 8. Gate: python3 AFE/layout/scripts/gate.py L4. PASS -> report sections 5 and 10, commit, git push, stop (common rule 7).

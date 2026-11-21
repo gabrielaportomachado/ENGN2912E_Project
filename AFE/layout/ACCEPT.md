@@ -15,7 +15,7 @@ property tolerance; add dummies, taps, guard rings, shields, decap units beyond 
 change floorplan parameters with `floorplan.py build --set key=value` inside the outline; apply every entry of section 4 marked PRE-APPROVED.
 
 MAY NOT: edit a simulation netlist, the RTL (`rtl/`, `AFE/adc/rtl/`, `AFE/top/dbs_afe_top.v`), a file under `AFE/layout/lvs/` by hand, `accept_limits.json`, a baseline, or this file; change a device
-size, a capacitor value or a bias tap; write a numbered Decision; edit AFE/layout/REVIEW.md; skip a gate; use a raw `ext2spice` netlist for a post-layout number; exceed the 1000 x 1000 um outline.
+size, a capacitor value or a bias tap; write a numbered Decision; edit AFE/layout/REVIEW.md; skip a gate; use a raw `ext2spice` netlist for a post-layout number; exceed the 605 x 1110 um outline (Decision 52).
 
 ## 2. NEEDS THE USER'S EYE: two conventions for the pseudo-resistor transistors (found in LP)
 
@@ -43,7 +43,7 @@ output is at mid-scale and then drifts by about (electrode offset) x 1 /s. Which
    `junction` are limits (gain, f_hi, output level after RST_AMP), the rest is the risk view.
 2. Layout rule (SPEC.md 3.2 item 4): the six devices are drawn with minimum, identical junction area.
 3. Host rules added to the README (step 7): (a) after every record start the host also sets RST_AMP for >= 100 ms (it costs 100 ms and removes the dependence on the 3 ms one-shot);
-   (b) the host watches the running mean of every channel and repeats RST_AMP when it leaves mid-scale +- 200 LSB (the power-up rule of Decision 44c, now also during recording); expect that every
+   (b) HOST OFFSET RULE (Decision 51 addendum, REVIEW R10, 2026-11-21; it replaces the +-200 LSB rule of Decision 44c): after RST_AMP the host checks every channel; a channel within +-300 LSB of mid-scale (codes 1748-2348, about +-242 mV) is accepted and its mean is subtracted in software; outside +-300 LSB, or drifting by more than 20 LSB/s, the host repeats RST_AMP (a config bit written with WR = 1 in the 80-SCLK frame of AFE/adc/SPI_FRAME.md; at most 3 times, then it flags the channel); the same check runs during recording. Reason: the as-built amp_ch has up to 181 / 96 / 182 mV (about 226 LSB) of offset after power-up in the junction-area convention (L2b amp_pwrup_junction). Expect that every
    0.5 V / (offset x 1 /s), i.e. every 5 .. 50 s for 100 .. 10 mV of electrode offset, IF silicon follows the junction convention; (c) test plan: measure f_lo and the drift after RST_AMP with a
    known DC offset on every channel first.
 4. No circuit change before tapeout. A cure (a defined DC path that does not rely on a leakage floor) is a redesign of the feedback network: after 2026-11-25.
@@ -61,7 +61,7 @@ DRC, LVS, PEX, floorplan (all phases):
 | PEX, `flow.py pex` | device census equal to the LVS extraction, no unknown device, MIM correction applied (`mim_fix` in the JSON) | mode `c` (capacitance) is the gate; `rc` is optional: use it only if its census also passes |
 | floorplan, `floorplan.py check` with the as-built GDS | 0 FAIL: inside the outline, cells inside their slots, every pin once | SPEC.md |
 | chip static power (L3a estimate, L3b) | within +-10 % of 2.09 / 3.26 / 1.37 mW (AFE/review/sim/f1_power_total.log) | no target exists; a larger change means a device or a short |
-| area | outline 1000 x 1000 um never exceeded | Decision 45 |
+| area | outline 605 x 1110 um never exceeded | Decision 52 (1000 x 1000 um in Decision 45) |
 
 Post-layout values (baseline = schematic, post = extracted; the same script and settings for both):
 
@@ -75,7 +75,7 @@ Changed 2026-11-21 by REVIEW.md R8 / R9 (user / team: as-built amp_ch / adc_ch p
 | amp_ac | L2b | f_lo_hz | all | <= 0.5 |  | Decisions 1, 2: f_lo <= 0.5 Hz (nan = no corner above 1 mHz) |
 | amp_ac | L2b | f_hi_hz | all | >= 300 |  | Decision 1: f_hi >= 300 Hz (baseline 653 / 998 / 422 Hz) |
 | amp_ac | L2b | idd_ua | all | x / baseline 0.95 .. 1.05 |  | a layout does not change the bias current: more than 5 % means a device or extraction error |
-| amp_ac | L2b | vout_v | all | 1.6 .. 1.7 |  | mid-scale +-50 mV (62 LSB; the host accepts +-200 LSB, Decision 44c) |
+| amp_ac | L2b | vout_v | all | 1.6 .. 1.7 |  | mid-scale +-50 mV (62 LSB; the host accepts +-300 LSB, Decision 51 addendum / REVIEW R10) |
 | amp_ac | L2b | hf_dev_db | all | <= 2 |  | port-level stand-in for the stage-1 loop margin: 2 dB = about 8 deg (calibration in baseline/amp_loop.json); baseline 76-81 deg, Decision 12 wants >= 60 deg |
 | amp_noise | L2b | noise_d8_post_uv | typ / ss-40 / ff85 | <= 2 / <= 2 / <= 2.2 |  | Decisions 1, 4, 8, 50: <= 2 uV rms in 0.5-300 Hz at typical flicker (ff 85 C <= 2.2 uV, Decision 50), pseudo-resistor noise as ideal resistors. = baseline noise_d8 x (post / pre of noise_real). Baseline (Cin 15 pF) 1.890 / 2.139 / 1.732 uV (typ / ff 85 / ss -40) |
 | amp_loop | L2b | pm_deg | all | >= 60 |  | Decision 12 / 21b: stage-1 loop phase margin >= 60 deg with the real stage-2 load (baseline 79.2 / 76.4 / 81.1); nan = no anchor, then hf_dev_db of amp_ac decides |
@@ -97,9 +97,9 @@ Changed 2026-11-21 by REVIEW.md R8 / R9 (user / team: as-built amp_ch / adc_ch p
 | amp_reset_host | L2b | final_v_os100m | all | 1.6 .. 1.7 |  | returns to mid-scale |
 | amp_ac_junction | L2b | g_mid_db | all | 59 .. 61 |  | Decision 1 holds in both conventions |
 | amp_ac_junction | L2b | f_hi_hz | all | >= 300 |  | Decision 1 |
-| amp_ac_junction | L2b | vout_v | all | 1.5 .. 1.8 |  | with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-200 LSB check |
+| amp_ac_junction | L2b | vout_v | all | 1.5 .. 1.8 |  | with junction area the output DC level moves (baseline of this convention 1.658 / 1.652 / 1.646 V); +-150 mV keeps it inside the host's +-300 LSB check (was +-200 LSB before REVIEW R10) |
 | amp_ac_junction | L2b | f_lo_hz | all | <= 0.5 |  | any corner below 0.5 Hz passes (Decision 2); in this convention it is below 1 mHz at typ and -40 C: report |
-| amp_reset_host_junction | L2b | drift_mv_s_os10m | all | |x| <= 30 | WARN only | RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-200 LSB (ACCEPT.md section 2) |
+| amp_reset_host_junction | L2b | drift_mv_s_os10m | all | |x| <= 30 | WARN only | RISK VIEW, not a gate: with junction area the capacitor leakage sets the DC state and the output drifts by about 1 mV/s per mV of electrode offset after every reset (baseline of this convention about 10 mV/s at 10 mV); the host re-issues RST_AMP when a channel leaves +-300 LSB or drifts by more than 20 LSB/s (ACCEPT.md section 2, REVIEW R10) |
 | adc_codes | L1b | code_offset_lsb | all | |change| <= 15 |  | a pure code shift (AC-coupled signal); F1 expects several LSB from junction and wiring capacitance (Decision 46d: L1b restates it); 15 LSB keeps the inputs of tb_adc_steps on their boundary |
 | adc_codes | L1b | inl_lo_lsb | typ / ss-40 / ff-40 / ss125 / ff85 | <= 1 / <= 1 / <= 1.2 / <= 1.2 / <= 3.1 |  | Decision 43c: INL <= 1 LSB beyond the offset for inputs <= 2.0 V (typ); at ff 85 C the claim ends at 1.9 V (baseline 1.57 LSB up to 2.05 V, accepted) | R9 2026-11-21: was {"typ": 1.0, "ss-40": 1.0, "ff-40": 1.0, "ss125": 1.0, "ff85": 2.5} (accept_limits_pre_R8R9.json) |
 | adc_codes | L1b | inl_code_lo_lsb | typ / ss-40 / ff-40 / ss125 / ff85 | <= 1.5 / <= 1.5 / <= 1.5 / <= 1.5 / <= 3 |  | code-based INL less the quantisation: contains the code-dependent threshold accepted by Decision 43b (baseline 0.25-1.07) | R9 2026-11-21: was {"typ": 1.5, "ss-40": 1.5, "ff-40": 1.5, "ss125": 1.5, "ff85": 2.0} (accept_limits_pre_R8R9.json) |
@@ -136,7 +136,7 @@ Changed 2026-11-21 by REVIEW.md R8 / R9 (user / team: as-built amp_ch / adc_ch p
 | top_supply | L3b | failed | all | <= 0 |  | every case converges |
 | top_xtalk | L3b | victim_conv_lsb | all | <= 0.5 |  | what the neighbour's conversions add at the victim's next samples: <= 0.5 LSB (pre-layout 0.002 LSB; the kick only matters within 5 us of a resume) |
 | top_pwrup8 | L3b | err_max_mv | all | <= 10 |  | L3b item 5: every output within 10 mV of 1.65 V 1 s after the common RST_AMP |
-| top_pwrup8 | L3b | vrs_dip_mv | all | change <= +30 | WARN only | dip of the shared reset level while 8 channels reset together; baseline 15 / 14 / 137 mV (typ / ff85 / ss-40, the cold bias is still settling at 5 s); a larger dip = more load on vrs: report |
+| top_pwrup8 | L3b | vrs_dip_mv | all | change <= +30 | WARN only | dip of the shared reset level while the channels reset together; baseline of 4 channels 7.4 / 7.1 / 7.6 mV (typ / ff85 / ss-40; REVIEW R16), of 8 channels (top_pwrup8_n8.json) 15 / 14 / 137 mV (at ss-40 the cold bias was still settling at 5 s); a larger dip = more load on vrs: report |
 | top_stim | L3b | rec_dev_mv | all | <= 5 |  | the parked amplifier input stays on vcm_in while the IPG path carries 2.9 V pp |
 | top_stim | L3b | out_dev_mv | all | <= 50 |  | the parked amplifier stays out of the rails during stimulation (baseline 0.02 mV) |
 | top_stim | L3b | rec_dev_mv_leak | all | <= 5 |  | same with 200 pA of pad leakage on E and REF |
@@ -213,7 +213,7 @@ Digital macro afe_dig (L1d; the limits are unchanged by Decision 54, the `trial`
 - R-5 THD / swing: out_min above the limit at typ or ss -40: the follower or its sink is wrong (LVS should have caught it): re-check the extraction. ff 85 C up to 4.5 % / 1.25 V is accepted
   (Decision 28).
 - R-6 Power-up error > 10 mV after RST_AMP: leakage on a summing node (a missing guard, a diode-connected dummy on vn). Layout fix: isolate the node. If it stays between 10 and 50 mV: PRE-APPROVED
-  (the host accepts +-200 LSB = 161 mV, Decision 44c). Above 50 mV: BLOCKED.md.
+  (the host accepts +-300 LSB = 242 mV, Decision 51 addendum / REVIEW R10; it was +-200 LSB = 161 mV in Decision 44c). Above 50 mV: BLOCKED.md.
 - R-7 Reset recovery slower than the limits, or the pulse width outside 0.7 .. 1.4 x baseline: C_T or the mirror leg. PRE-APPROVED degradation: t_1mv up to 1.5 x the limit of section 3
   (Decision 38b accepted seconds); the host RST_AMP rule of section 2 covers the rest. A pulse shorter than 0.7 x baseline: BLOCKED.md.
 - R-8 Junction-convention rows fail (output level after RST_AMP outside 1.50 .. 1.80 V, or after-reset error > 50 mV): layout fix: reduce and equalise the junction area of the six pseudo-resistor
@@ -240,7 +240,7 @@ Digital macro afe_dig (L1d; the limits are unchanged by Decision 54, the `trial`
 - C-2 Tap limits of section 3 missed after the final run: PRE-APPROVED retune WITHOUT an RTL edit is not possible (the chain length is in `AFE/adc/rtl/adc_clkgen.v`): first re-run with the
   placement seed / density of the trial; if (a) is 20.0 .. 21.0 ns or (c) is 15 .. 20 ns: PRE-APPROVED degradation (the DAC settles in 15.1 ns at that corner; the window still ends before the next
   DAC edge), state it. Outside: BLOCKED.md.
-- C-3 Routing congestion or DRC of the macro at 820 x 110: lower the utilisation by raising the height in 3.92 um steps up to 120 um (`floorplan.py build --set dig_h=...`, the channel slots
+- C-3 (history: the macro is hardened since R14 at 424.48 x 86.24 um in its 425 x 86.24 um slot; the numbers of this entry are those of the 8-channel macro and were not re-derived) Routing congestion or DRC of the macro at 820 x 110: lower the utilisation by raising the height in 3.92 um steps up to 120 um (`floorplan.py build --set dig_h=...`, the channel slots
   shrink by half of it: check the amplifier margin stays >= 8 %).
 - C-4 Gate-level testbench shows another failing assertion than the five allowed: BLOCKED.md with the assertion name and the log.
 
@@ -253,7 +253,7 @@ Ranked, cheapest first; apply in this order, re-run `floorplan.py check` after e
 - A-4 Digital macro at higher utilisation (up to 60 %): -0.019 mm2 (AUDIT 4.5 lever 3). Cost: routing effort in L1d.
 - A-5 (AUDIT 4.5 lever 1 = Decision 46c) decap under the Cin plates: already not needed for area in this floorplan (decap has no area of its own); it is the reserve for the supply ladder S.
 - A-6 N = 4: DONE, it is the design (Decisions 52 and 54): 4 channels in two rows of two in the 605 x 1110 um outline, a real 4-channel digital part (`adc_top #(.N(4))`, `dbs_ctrl #(.N(4))`, macro vectors 4 wide, no tied-off channels) and the 80-SCLK frame of AFE/adc/SPI_FRAME.md (config word with WR, status word with the sync pattern, 4 channel words). The old form (8-channel logic with `cmp_q[7:4]` tied low, 160-SCLK frame, words 6-9 reading 0) no longer exists.
-- A-7 N = 2 (Decision 45 fallback: E[1:0], IPG[1:0], REF; 700 x 600 um): PRE-APPROVED only if the organizer REFUSES the 1000 x 1000 um slot or the 24 pads in writing (then also update
+- A-7 N = 2 (Decision 45 fallback: E[1:0], IPG[1:0], REF; its 700 x 600 um outline was derived for the 8 -> 2 channel step and is NOT re-derived for 4 -> 2; with REC[1:0] it would be 9 analog + 5 digital + 2 supply = 16 pads, ESTIMATE): PRE-APPROVED only if the organizer REFUSES the 605 x 1110 um slot or the 20 pads in writing (then also update
   info.yaml and the README by the same rule). Never by the agent's own judgment of area.
 - Not available before tapeout: Cin 20 -> 10 pF (noise, full re-simulation), a shared ADC (Decision 34).
 
@@ -284,8 +284,8 @@ Ranked, cheapest first; apply in this order, re-run `floorplan.py check` after e
 |---|---|---|---|---|
 | macro / top cell name | `dbs_afe_top` | our PR boundary GDS `gds/dbs_afe_top.gds` that the organizer has (Decision 45); template placeholder `A01_topcell`, examples A44_A / A02_A are organizer-assigned | L3a, L4 | rename the top cell, `TOP_SOURCE` in lvs_config.json, the GDS file and the SPICE top by `sed` + regenerate; no layout change |
 | DEF / pin positions | floorplan.json `pins` (SPEC.md section 2) | no DEF in the repo on 2026-11-20 | L3a | re-place the pins in the ring lanes, blocks stay (G-6) |
-| slot | 1000 x 1000 um | Decision 45; organizer README: 2040 x 2040 um design area for all projects | L3a | smaller slot refused in writing: ladder A-7 |
-| pad allocation | 24 pads in the perimeter order of info.yaml: 17 analog (asig_5p0), CS / DIN input_cmos, SCLK / RSTN input_schmitt, DOUT bidirectional (bi_t, 4 mA, fast, input off), VDD (dvdd), VSS (dvss) | resources/info.yaml template (copy in AFE/review/sim/organizer); Decision 45 | L4 | fewer pads: drop nothing by yourself: BLOCKED.md (the pad list is a Decision) |
+| slot | 605 x 1110 um | Decision 52 (the organizer revised the area; 1000 x 1000 um in Decision 45); organizer README: 2040 x 2040 um design area for all projects | L3a | smaller slot refused in writing: ladder A-7 |
+| pad allocation | 20 pads in the perimeter order of info.yaml: 13 analog (asig_5p0: E[3:0], IPG[3:0], REC[3:0], REF), CS / DIN input_cmos, SCLK / RSTN input_schmitt, DOUT bidirectional (bi_t, 4 mA, fast, input off), VDD (dvdd), VSS (dvss) | resources/info.yaml template (copy in AFE/review/sim/organizer); Decisions 45, 52, 53 | L4 | fewer pads: drop nothing by yourself: BLOCKED.md (the pad list is a Decision) |
 | supply pads | ONE dvdd and ONE dvss, ours alone, single bond | template comment "subsequent power/ground cells cause a break in the I/O power rails"; padring fork: 4 + 4 for the whole frame | L3b | a shared pair: re-run tb_top_supply.py with the shared current of the other projects unknown: state it as a risk, no change |
 | bond wire / pad model | 2 nH + 0.25 ohm per supply pad, 1 pF pad capacitance (ASSUMED) | X2 S4 (Decision 43f); QFN-88 of the organizer README | L3b | other values: put them into the supply model file and re-run; ladder S |
 | native-Vt nfet_06v0_nvt | allowed (it is a device of the open-source decks) | organizer checklist lists it as optional | L2b | refused: ladder N |

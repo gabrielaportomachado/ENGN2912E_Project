@@ -2,7 +2,7 @@
  "check": "top_e2e",
  "corners": {
   "ff85": {
-   "date": "2026-11-20 08:20",
+   "date": "2026-11-21 17:14",
    "info": {
     "adc": "schematic",
     "amp": "schematic",
@@ -10,20 +10,20 @@
    },
    "log": "AFE/layout/baseline/top_e2e_ff85.log",
    "values": {
-    "amp_minus_adc_lsb": 0.07614937161026014,
-    "gain_sine_code_db": 59.86552087294924,
-    "inl_all_lsb": 4.799471569670487,
-    "inl_lo_lsb": 1.9939304925022043,
-    "kick_max_mv": 481.1861790505796,
+    "amp_minus_adc_lsb": 0.07771109427899336,
+    "gain_sine_code_db": 59.853105975567445,
+    "inl_all_lsb": 5.11157022940403,
+    "inl_lo_lsb": 1.9953927529347992,
+    "kick_max_mv": 448.30392025722233,
     "n": 34.0,
-    "offset_lsb": -40.390482210059844,
+    "offset_lsb": -40.30397935906297,
     "unresolved": 0.0,
-    "vout_max_v": 2.1528874139338647,
-    "vout_min_v": 1.2132580498988055
+    "vout_max_v": 2.1522635043071143,
+    "vout_min_v": 1.2134428387362313
    }
   },
   "ss-40": {
-   "date": "2026-11-20 08:24",
+   "date": "2026-11-21 17:17",
    "info": {
     "adc": "schematic",
     "amp": "schematic",
@@ -31,20 +31,20 @@
    },
    "log": "AFE/layout/baseline/top_e2e_ss-40.log",
    "values": {
-    "amp_minus_adc_lsb": 0.051941308176531864,
-    "gain_sine_code_db": 59.98968252896684,
-    "inl_all_lsb": 0.6472738681238965,
-    "inl_lo_lsb": 0.32424952300491583,
-    "kick_max_mv": 491.7682268270296,
+    "amp_minus_adc_lsb": 0.054055958503085144,
+    "gain_sine_code_db": 59.978459694639,
+    "inl_all_lsb": 0.9603696871686296,
+    "inl_lo_lsb": 0.4072658197171606,
+    "kick_max_mv": 493.28844450337516,
     "n": 34.0,
-    "offset_lsb": -22.112668110019264,
+    "offset_lsb": -21.98296146449274,
     "unresolved": 0.0,
-    "vout_max_v": 2.150929640753875,
-    "vout_min_v": 1.1495121536467645
+    "vout_max_v": 2.1502717267579303,
+    "vout_min_v": 1.1501464344794334
    }
   },
   "typ": {
-   "date": "2026-11-20 08:17",
+   "date": "2026-11-21 17:09",
    "info": {
     "adc": "schematic",
     "amp": "schematic",
@@ -52,16 +52,16 @@
    },
    "log": "AFE/layout/baseline/top_e2e_typ.log",
    "values": {
-    "amp_minus_adc_lsb": 0.07147209403387111,
-    "gain_sine_code_db": 60.00645634709235,
-    "inl_all_lsb": 2.93818026223844,
-    "inl_lo_lsb": 0.7593123168257065,
-    "kick_max_mv": 515.0533429106583,
+    "amp_minus_adc_lsb": 0.06900674180784439,
+    "gain_sine_code_db": 59.993779185820514,
+    "inl_all_lsb": 2.789543788970704,
+    "inl_lo_lsb": 0.7823208887333664,
+    "kick_max_mv": 444.2569075234217,
     "n": 34.0,
-    "offset_lsb": -30.217352480798034,
+    "offset_lsb": -30.266319156370074,
     "unresolved": 0.0,
-    "vout_max_v": 2.1521537024207635,
-    "vout_min_v": 1.149245979624294
+    "vout_max_v": 2.1512986951750097,
+    "vout_min_v": 1.1497001274214587
    }
   }
  },
