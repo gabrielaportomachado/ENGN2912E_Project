@@ -64,7 +64,7 @@ Both phases are DRC 0 / LVS match / PEX clean and both cells WORK after layout; 
 Proposal: accept the as-built cells, loosen the limits below, and move on to L3a (another re-layout would cost a full phase cycle each, and both cells fit their slots with < 1 um to spare).
 
 ### R8 (2026-11-21) to L2b: accept the as-built amp_ch post-layout numbers, L2b option C
-Status: open
+Status: closed (monitoring 2026-11-21: applied, Decision 51; compare L2b PASS, gate L2b PASS; old limits AFE/layout/accept_limits_pre_R8R9.json)
 Passes: gain 59.82 / 59.84 / 59.84 dB (typ / ff 85 / ss -40), f_lo 0.24-0.28 Hz, f_hi 408-973 Hz, noise_d8 1.902 / 2.153 / 1.742 uV (limits 2.0 / 2.2 / 2.0), PM >= 76.9 deg, THD 0.04 / 0.94 / 0.05 %.
 | check | post-layout | current limit | proposed |
 |---|---|---|---|
@@ -76,7 +76,7 @@ Passes: gain 59.82 / 59.84 / 59.84 dB (typ / ff 85 / ss -40), f_lo 0.24-0.28 Hz,
 Keep L2b's kit fixes (flow.py pex 1 TOhm bleeders on capacitor-only nodes; lptb.py Cin probe anchors 61.15 um).
 
 ### R9 (2026-11-21) to L1b: accept the as-built adc_ch post-layout numbers, L1b option 1
-Status: open
+Status: closed (monitoring 2026-11-21: applied, Decision 51; compare L1b PASS, gate L1b PASS; old limits AFE/layout/accept_limits_pre_R8R9.json)
 Everything passes except linearity at three corners (cause: uneven coupling of the b6 / b7 / b8 exits to the DAC top plate; L1b already trimmed b11, 7 -> 5 FAIL).
 | check | post-layout | current limit | proposed |
 |---|---|---|---|
