@@ -846,9 +846,9 @@ def main():
     top_lines = []
     dig = {}
     supply_devs = []
-    n_ch = None       # number of afe_ch instances (Decision 52: 4; the logic stays 8-channel)
+    n_ch = None       # number of afe_ch instances (Decision 52: 4; since Decision 54 / R14 the logic is 4-channel too: adc_top #(4); the 8-channel adc8_top form of R11 is still accepted)
     for typ, par, iname, pins, loop in top.inst:
-        if typ in ('adc8_top', 'dbs_ctrl'):
+        if typ in ('adc8_top', 'adc_top', 'dbs_ctrl'):
             dig[iname] = pins
         elif typ == 'afe_ch':
             if not loop:
@@ -910,9 +910,9 @@ def main():
     dropped = []
     for pin, inst_, port in DIG_PINS:
         b = [A(x) for x in expand(dig[inst_][port], top)]
-        if pin in DIG_PER_CH and n_ch < 8:
-            if len(b) != 8 * DIG_PER_CH[pin]:
-                die('digital macro: %s is %d bits wide, expected %d (8-channel logic)' % (pin, len(b), 8 * DIG_PER_CH[pin]))
+        if pin in DIG_PER_CH and len(b) not in (n_ch * DIG_PER_CH[pin], 8 * DIG_PER_CH[pin]):
+            die('digital macro: %s is %d bits wide, expected %d (%d channels) or %d (8-channel logic of Decision 52c)' % (pin, len(b), n_ch * DIG_PER_CH[pin], n_ch, 8 * DIG_PER_CH[pin]))
+        if pin in DIG_PER_CH and n_ch < 8 and len(b) == 8 * DIG_PER_CH[pin]:
             keep = n_ch * DIG_PER_CH[pin]                 # MSB first: the last `keep` bits are channels 0 .. n_ch - 1
             hi = b[:-keep]
             bad = [x for x in hi if x in used_top]
@@ -963,13 +963,13 @@ def main():
         if unused:
             die('pins expected on afe_dig but missing in %s: %s' % (opt.dig_netlist, unused[:10]))
         dig_order = dbits
-        dig_def = '* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top).  Its definition is the powered gate-level netlist %s (LVS_VERILOG_FILES);\n* the instance below lists the nets in the port order of that file.\n' % os.path.relpath(opt.dig_netlist, REPO)
+        dig_def = '* afe_dig: the digital macro (dbs_ctrl N = 4 + adc_top N = 4, Decision 54).  Its definition is the powered gate-level netlist %s (LVS_VERILOG_FILES);\n* the instance below lists the nets in the port order of that file.\n' % os.path.relpath(opt.dig_netlist, REPO)
     else:
         dig_order = [p for p, _ in DIG_POWER]
         for pin, _, _ in DIG_PINS:
             dig_order += [pin] if dig_w[pin] == 1 else ['%s[%d]' % (pin, k) for k in range(dig_w[pin] - 1, -1, -1)]
         dig_order += tie_pins
-        dig_def = ('* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top, hardened in L1d) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first'
+        dig_def = ('* afe_dig: the digital macro (dbs_ctrl N = 4 + adc_top N = 4, hardened in L1d / R14) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first'
                    + (' and the %d pad-control tie pins last' % len(tie_pins) if tie_pins else '') + '.\n'
                    '* When the powered gate-level netlist exists, run this script with --dig-netlist <file>: the instance then follows the port order of that file and this empty definition is not written\n'
                    '* (the netlist itself goes into LVS_VERILOG_FILES, as in the organizer\'s mixed-signal example).\n' + wrap('.subckt afe_dig ' + ' '.join(dig_order)) + '\n.ends afe_dig\n')

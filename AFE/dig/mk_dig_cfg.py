@@ -11,7 +11,8 @@ Floorplan input: AFE/layout/floorplan.json, key cells.afe_dig (written by LP ste
 If the file or a key is missing the built-in default = the LP floorplan contract is used: north edge channels 0-3, south edge channels 4-7, group k' starts at x = 235 k' + 8 um,
 33 pins per group at 3.0 um, order sw_rec sw_rec_b sw_ipg sw_ipg_b rst_sw tg_on dac_gdn cmp_clk cmp_q dac_gp[12k+11] dac_gn[12k+11] ... dac_gp[12k] dac_gn[12k]; west edge, south to
 north, 4 um apart: RSTN_PD RSTN_PU RSTN SCLK_PD SCLK_PU SCLK DIN_PD DIN_PU DIN CS_PD CS_PU CS DOUT DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 rst_amp_o.
-The pin NAMES must be exactly the 286 signal pins of afe_dig (the script stops otherwise).
+The pin NAMES must be exactly the signal pins of afe_dig: 22 west pins + 33 per channel (154 for N = 4, since Decision 54 / R14; 286 for the old N = 8 macro); the script stops otherwise.
+N (the number of channels) = params.n_ch of floorplan.json (default 8 if the file does not have it).
 Every pin is SNAPPED to the routing-track grid of its layer (Metal1-4: offset 0.28 um, pitch 0.56 um): a pin moves by at most 0.28 um from the floorplan value.  The planned table
 (pins_plan.json) and the as-built table (trial/afe_dig_pins.json) carry the real coordinates: use them, not the nominal ones.  A floorplan on the grid (x = 0.28 + n * 0.56) is built exactly.
 HEIGHT: the LP trial needs h >= 105.84 um with routing up to Metal4 (Metal5 free for the top level), >= 94.08 um with --m5 (table MIN_H).  If floorplan.json asks for less, this script
@@ -36,7 +37,11 @@ CORNERS = ['tt_025C_3v30', 'ss_125C_3v00', 'ss_n40C_3v00', 'ff_n40C_3v60', 'ff_1
 # Smallest die heights that completed the flow in the LP trial (2026-11-20, 286 pins at the floorplan.json positions, settings of table CFG, delay chain as one block):
 # routing up to Metal4 (Metal5 free for the top level): 105.84 um (101.92 um: global-routing overflow on Metal3, the only horizontal layer; without the chain block 98.00 um routed,
 # but the comparator windows were 7 ns late); with --m5: 94.08 um.  Default 109.76 um = one more row pair of margin (Metal3 usage 58 %).
-MIN_H = {'Metal4': 105.84, 'Metal5': 94.08}
+# R14 (N = 4, Decision 54): the 8-channel numbers above do not apply to the 4-channel macro (154 pins, 4 delay-chain taps); the smallest height that routes is searched by running the flow at
+# decreasing heights (--h), see AFE/layout/reports/R14.md.  MIN_H is therefore only a floor (one core row pair) for N = 4.
+MIN_H8 = {'Metal4': 105.84, 'Metal5': 94.08}
+MIN_H = {'Metal4': 4 * 3.92, 'Metal5': 4 * 3.92}
+NCH = 8             # number of channels of the macro; load_fp() takes params.n_ch of floorplan.json
 DEFAULT = {'w': 820.0, 'h': 109.76, 'pin_layers': {'N': 'Metal2', 'S': 'Metal2', 'W': 'Metal3'},
            'north_channels': [0, 1, 2, 3], 'south_channels': [4, 5, 6, 7], 'group_x0': 8.0, 'group_pitch': 235.0, 'pin_pitch': 3.0, 'west_y0': 4.0, 'west_pitch': 4.0}
 WEST = ['RSTN_PD', 'RSTN_PU', 'RSTN', 'SCLK_PD', 'SCLK_PU', 'SCLK', 'DIN_PD', 'DIN_PU', 'DIN', 'CS_PD', 'CS_PU', 'CS', 'DOUT', 'DOUT_OE',
@@ -47,7 +52,7 @@ PIN_W = 0.56         # um (2 x the 0.28 um minimum width, as LibreLane's own pin
 
 CFG = {
     'DESIGN_NAME': 'afe_dig',
-    'VERILOG_FILES': ['dir::afe_dig.v', 'dir::../adc/rtl/adc8_top.v', 'dir::../adc/rtl/adc_sar_ch.v', 'dir::../adc/rtl/adc_clkgen.v', 'dir::../adc/rtl/adc_dlychain.v', 'dir::../../rtl/dbs.v'],
+    'VERILOG_FILES': ['dir::afe_dig.v', 'dir::../adc/rtl/adc_top.v', 'dir::../adc/rtl/adc_sar_ch.v', 'dir::../adc/rtl/adc_clkgen.v', 'dir::../adc/rtl/adc_dlychain.v', 'dir::../../rtl/dbs.v'],
     'EXTRA_VERILOG_MODELS': ['dir::../../TGATE/TGATE.v'],          # rtl/dbs.v also holds module dbs (16 TGATEs, not used by afe_dig): the black-box model keeps lint and yosys quiet
     'CLOCK_PORT': 'SCLK',
     'CLOCK_PERIOD': 500,
@@ -100,8 +105,13 @@ def snap(v):
 
 def load_fp():
     """-> (W, H requested, layers, {side: [(name, coordinate)]}, list of notes)"""
+    global NCH
     notes = []
     fp = {}
+    try:
+        NCH = int(json.load(open(FP)).get('params', {}).get('n_ch', NCH))
+    except Exception:
+        pass
     if os.path.exists(FP):
         try:
             fp = json.load(open(FP)).get('cells', {}).get('afe_dig', {}) or {}
@@ -166,7 +176,7 @@ def chain_placement(W, core_y0, core_rows):
     LROW = 200.0                                  # um of cells per main row
     x_hi = round(min(W - 60.0, 760.0), 2)         # block = [x_hi - LROW, x_hi]
     x_lo = x_hi - LROW
-    need_rows = 2 * int(math.ceil((sum(w for _, w in dly('', 'T0')) + 7 * sum(w for _, w in dly('', 'DT'))) / (LROW - 20.0)))
+    need_rows = 2 * int(math.ceil((sum(w for _, w in dly('', 'T0')) + (NCH - 1) * sum(w for _, w in dly('', 'DT'))) / (LROW - 20.0)))
     r_top = min(core_rows - 2, (core_rows + need_rows) // 2)   # top main row; the block is in the middle rows (the rows next to the pins stay free for each ADC's own logic) and grows downwards
     if r_top - need_rows + 1 < 0:
         die('the delay-chain block needs %d rows, the core has %d' % (need_rows, core_rows))
@@ -194,7 +204,7 @@ def chain_placement(W, core_y0, core_rows):
     for name, w in dly('u_adc.ckg.t[0].first.ch', 'T0'):
         put_main(name, w)
     put_branch(0)
-    for i in range(1, 8):
+    for i in range(1, NCH):
         for name, w in dly('u_adc.ckg.t[%d].nxt.ch' % i, 'DT'):
             put_main(name, w)
         put_branch(i)
@@ -235,11 +245,11 @@ def main():
             nrow = int(round(DEFAULT['h'] / ROW))
             H = round(nrow * ROW, 3)
             warn.append(msg + '  USING %.2f um INSTEAD: UPDATE cells.afe_dig.h (and the strip that holds the macro) IN AFE/layout/floorplan.json.' % H)
-    if W > 820.0 + 1e-6:
-        die('die width %.2f um exceeds the 820 um of the floorplan contract' % W)
+    if W > 948.0 + 1e-6:
+        die('die width %.2f um exceeds the 948 um core width of the chip' % W)
     # ---- pins: snap to the track grid, check the name set
     want = set(WEST)
-    for k in range(8):
+    for k in range(NCH):
         want |= set(chan_order(k))
     names = [n for sd in plist for n, _ in plist[sd]]
     if len(names) != len(set(names)) or set(names) != want:

@@ -359,7 +359,7 @@ Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
 .ends bias_genc
 
 * ---------------- digital macro
-* afe_dig: the digital macro (dbs_ctrl N = 8 + adc8_top, hardened in L1d) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first and the 15 pad-control tie pins last.
+* afe_dig: the digital macro (dbs_ctrl N = 4 + adc_top N = 4, hardened in L1d / R14) as a BLACK BOX.  PROVISIONAL pin list = the L1d prompt (AFE/prompts/layout_run.md) with VDD VSS first and the 15 pad-control tie pins last.
 * When the powered gate-level netlist exists, run this script with --dig-netlist <file>: the instance then follows the port order of that file and this empty definition is not written
 * (the netlist itself goes into LVS_VERILOG_FILES, as in the organizer's mixed-signal example).
 .subckt afe_dig VDD VSS CS SCLK DIN RSTN DOUT DOUT_OE rst_amp_o sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1]

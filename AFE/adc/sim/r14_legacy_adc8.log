@@ -1,0 +1,2 @@
+RESULT PASS PER 500.00 frames 16 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 1536 dummy-driver errors 0
+RESULT PASS PER 500.00 frames 0 bad 0 e_dout 0  crowbar 0 contention 0 dac->cmp<TMIN 0 dac-change-in-window 0 order 0 Zbit 0 decisions 2005 dummy-driver errors 0

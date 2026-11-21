@@ -1,0 +1,12 @@
+== equiv PER 500 CORNER_TT
+EQUIV events 11427 (12524 within edges 1..16) comparator pulses 4608 mismatches 0  (comparator model decisions 1152 1152 1152 1152)
+RESULT PASS EQUIV adc8_top vs adc_top N=4: rst_sw tg_on dac_gp dac_gn dac_gdn cmp_clk of channels 0-3 identical (PER 500.00)
+== equiv PER 333.333 CORNER_TT
+EQUIV events 11427 (12524 within edges 1..16) comparator pulses 4608 mismatches 0  (comparator model decisions 1152 1152 1152 1152)
+RESULT PASS EQUIV adc8_top vs adc_top N=4: rst_sw tg_on dac_gp dac_gn dac_gdn cmp_clk of channels 0-3 identical (PER 333.33)
+== equiv PER 1562.5 CORNER_SS125
+EQUIV events 11427 (12524 within edges 1..16) comparator pulses 4608 mismatches 0  (comparator model decisions 1152 1152 1152 1152)
+RESULT PASS EQUIV adc8_top vs adc_top N=4: rst_sw tg_on dac_gp dac_gn dac_gdn cmp_clk of channels 0-3 identical (PER 1562.50)
+== equiv PER 200 CORNER_FFN40
+EQUIV events 11427 (12524 within edges 1..16) comparator pulses 4608 mismatches 0  (comparator model decisions 1152 1152 1152 1152)
+RESULT PASS EQUIV adc8_top vs adc_top N=4: rst_sw tg_on dac_gp dac_gn dac_gdn cmp_clk of channels 0-3 identical (PER 200.00)

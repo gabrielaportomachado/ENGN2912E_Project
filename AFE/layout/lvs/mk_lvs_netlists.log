@@ -84,8 +84,6 @@ SUPPLY DEVICES of the top (Decision 44d, AUDIT 4.9.2)
   decap           Xu_dcm VDD VSS: cap_nmos_03v3  74 units of 20 x 20 um (c_width x c_length) = 29600 um2, 3.98 fF/um2 at 3.3 V -> 117.90 pF  (asked: 125.0 pF; --decap-n: 74 units as placed on the ADC-main strap (the capacitance alone would need 79))   WARNING: LESS THAN ASKED
   decap           Xu_dcd vdd_dac VSS: cap_nmos_03v3  30 units of 20 x 20 um (c_width x c_length) = 12000 um2, 3.98 fF/um2 at 3.3 V -> 47.80 pF  (asked: 47.5 pF; --decap-n: 30 units as placed on the ADC-dac strap (the capacitance alone would need 30))
 
-DIGITAL MACRO with 4 channels (Decision 52): the 8-channel logic stays inside afe_dig; 132 per-channel pin bits of channels 4-7 are NOT macro pins (the wrapper ties cmp_q[7:4] low and leaves the other outputs open): sw_rec[7] .. dac_gdn[4]
-
 TOP dbs_afe_top from AFE/top/dbs_afe_top.v
   37 pins: E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REC[3] REC[2] REC[1] REC[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
   instances: 1 x afe_dig, 1 x bias_genc, 4 x afe_ch + 3 supply devices + 15 pad-control ties (output pins of afe_dig, driven by its tie cells (Decision 46e); pin-constant: DOUT_IE-VSS, DOUT_PD-VSS, DOUT_PU-VSS, DOUT_CS-VSS, DOUT_SL-VSS, DOUT_PDRV0-VSS, DOUT_PDRV1-VSS, CS_PU-VSS, CS_PD-VSS, DIN_PU-VSS, DIN_PD-VSS, SCLK_PU-VSS, SCLK_PD-VSS, RSTN_PU-VSS, RSTN_PD-VDD)
