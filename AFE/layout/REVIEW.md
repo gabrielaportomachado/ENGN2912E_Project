@@ -56,3 +56,39 @@ Levers, in this order, pre-approved (ACCEPT.md A-2 / A-4 / A-5 and Decision 46c)
 Record the final floorplan in floorplan.json / SPEC.md (floorplan.py build only), say which levers were used and their cost in report sections 6 / 7 (AFE/layout/reports/R7.md), and what L3a / L3b must verify (decap coupling into the Cin bottom plates: L3b supply / crosstalk runs; strap IR drop). Commit and push.
 
 (An earlier R6 with extra adc_ch levers was withdrawn unused on 2026-11-20 - R5 fit without it - and its number reused for the Cin 15 pF item above; see git history 1a1c17a.)
+
+## DRAFT for team review (2026-11-21): L2b and L1b post-layout results - NOT yet items
+Written by the monitoring session for the team; nothing below is an instruction to a phase yet (no `### R<n>` heading, so gate.py and the phases ignore it).
+Once the team agrees, it becomes items R8 / R9 (and the R7 correction) with `Status: open`, and one session applies them; then L3a starts.
+Both phases are DRC 0 / LVS match / PEX clean and both cells WORK after layout; each misses a few limits by small margins and wrote BLOCKED.md on its branch
+(worktree-l2b 12f8be4, worktree-l1b-adc-post c636acf; not merged). Full evidence: AFE/layout/BLOCKED.md, AFE/layout/reports/{L2b,L1b}.md and AFE/layout/sim/post/compare_{L2b,L1b}.md on those branches.
+Proposal: accept the as-built cells, loosen the limits below, and move on to L3a (another re-layout would cost a full phase cycle each, and both cells fit their slots with < 1 um to spare).
+
+#### Draft R8 to L2b: accept the as-built amp_ch post-layout numbers (L2b option C)
+Passes: gain 59.82 / 59.84 / 59.84 dB (typ / ff 85 / ss -40), f_lo 0.24-0.28 Hz, f_hi 408-973 Hz, noise_d8 1.902 / 2.153 / 1.742 uV (limits 2.0 / 2.2 / 2.0), PM >= 76.9 deg, THD 0.04 / 0.94 / 0.05 %.
+| check | post-layout | current limit | proposed |
+|---|---|---|---|
+| amp_pwrup err_1s_mv | 30.3 / 18.2 / 19.8 mV | <= 10 | <= 50 (ladder R-6, already pre-approved) |
+| amp_reset t_1mv (os0 / os1m / os10m), amp_reset_host os10m | 1.22-1.32 x the limit | 4.5 / 4.5 / 6.5 s | x 1.5 (ladder R-7, already pre-approved) |
+| amp_thd out_min_v (typ, ss -40) | 1.1803 / 1.1783 V | <= 1.17 | <= 1.19 (cause: the 0.2 dB gain loss compresses the swing) |
+| amp_psrr supply_gain_50hz (typ, ff 85) | 0.636 / 0.665 | 0.38 .. 0.62 | 0.32 .. 0.68 (cause: 1-4 fF unequal vdd / vss coupling of vn / vp; ESTIMATE: board-ripple requirement still met) |
+| amp_pwrup_junction err_1s_mv | 181 / 96 / 182 mV | <= 50 | not gating: junction convention = risk view of ACCEPT.md section 2; covered by host rule 6 (repeat RST_AMP when a channel leaves mid-scale +-200 LSB) and first-silicon test 4 |
+Keep L2b's kit fixes (flow.py pex 1 TOhm bleeders on capacitor-only nodes; lptb.py Cin probe anchors 61.15 um).
+
+#### Draft R9 to L1b: accept the as-built adc_ch post-layout numbers (L1b option 1)
+Everything passes except linearity at three corners (cause: uneven coupling of the b6 / b7 / b8 exits to the DAC top plate; L1b already trimmed b11, 7 -> 5 FAIL).
+| check | post-layout | current limit | proposed |
+|---|---|---|---|
+| adc_codes inl_lo_lsb ff -40 / ss 125 | 1.096 / 1.053 LSB | <= 1 | <= 1.2 |
+| adc_codes inl_lo_lsb ff 85 | 3.079 LSB | <= 2.5 | <= 3.1 |
+| adc_codes inl_code_lo_lsb ff 85 | 2.970 LSB | <= 2 | <= 3.0 |
+| adc_steps step_2048_lsb ff 85 | 2.295 LSB | <= 2.0 | <= 2.5 (ladder Q-2, already pre-approved) |
+README / Decision 43c claim becomes INL <= 1.1 LSB (typ 0.95) below 2.0 V, ff 85 C noted separately.
+
+#### Draft correction to R7 (L3a): the cells now fit
+R7 was written before the merges of R3 / R6 / R6b. On main 6a969a0: amp_ch 220.75 x 273.25 in 222 x 274.04, adc_ch 219.50 x 103.67 in 222 x 104, afe_dig 819.84 x 101.92;
+`floorplan.py check --gds amp_ch=... adc_ch=... --dig-pins ...` 20 PASS, 0 FAIL. Levers (a)-(d) are not needed. Only open point: R7's ">= 0.5 um margin in every slot" (adc_ch has 0.33 um height):
+proposed: accept 0.3 um, or use lever (b) bias_corr 12 -> 10 to give adc_h the room. (The paused 98 um macro attempt, worktree r3-dig98, uncommitted, would free 3.92 um but is not needed.)
+
+#### When the team agrees
+One session: merge worktree-l2b and worktree-l1b-adc-post into main, apply R8 / R9 to AFE/layout/accept_limits.json and ACCEPT.md together, remove BLOCKED.md (content into the reports, section 6), restate the claims in README.md / AFE/adc/README.md, re-run `gate.py L2b` and `gate.py L1b` to PASS, commit, push. Then L3a.
