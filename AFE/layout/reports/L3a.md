@@ -130,3 +130,4 @@ No open item for L3a or an earlier phase at the start (R1 .. R17 closed by the m
 
 ## 10. Files changed and commit
 New: AFE/layout/top/{mk_top.py, mk_afe_ch.py, toplib.py, mk_bias_genc.py, biaslib.py, dbs_afe_top.gds, bias_genc.gds, *.build.json, check_top.{py,log,json}, mk_*.log}, AFE/layout/reports/L3a.md, AFE/layout/sim/flow/{dbs_afe_top,bias_genc,TGATE}.*, AFE/layout/sim/post/{tgate,compare_L3a}.*. Changed: AFE/layout/amp/{mk_amp_ch.py, amplib.py, blocks_amp.py, amp_ch.gds, build / check files, flow reports}, AFE/layout/scripts/flow.py, AFE/layout/sim/flow/amp_ch.*, AFE/layout/sim/post/amp_*.json (L2b re-run), AFE/NOTES.md, AFE/layout/FLOW.md (section 10). Branch worktree-l3a; commit hash: see the next line (written by a second small commit).
+Commit of the phase: e241753
