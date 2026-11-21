@@ -252,7 +252,7 @@ def cmd_lvs(a):
     jf = os.path.join(a.out, a.top + '.lvs.json')
     ref = os.path.abspath(a.ref)
     refcell = a.refcell or a.top
-    res = dict(tool='magic + netgen', gds=rel(os.path.abspath(a.gds)), top=a.top, ref=rel(ref), refcell=refcell, layout_netlist=rel(net), report=rel(out), setup=rel(NETGEN_SETUP),
+    res = dict(tool='magic + netgen', gds=rel(os.path.abspath(a.gds)), top=a.top, ref=rel(ref), refcell=refcell, ref_verilog=[rel(v) for v in (getattr(a, 'ref_verilog', None) or [])], layout_netlist=rel(net), report=rel(out), setup=rel(NETGEN_SETUP),
                extract_ok=ok, ran=False, match=False, date=time.strftime('%Y-%m-%d %H:%M'))
     if not ok:
         res['why'] = 'Magic extraction failed, see ' + rel(elog)
@@ -264,6 +264,12 @@ def cmd_lvs(a):
     d = scratch('lvs_' + a.top)
     log = os.path.join(a.out, a.top + '.netgen.log')
     cmd = ['netgen', '-batch', 'lvs', '%s %s' % (net, a.top), '%s %s' % (ref, refcell), NETGEN_SETUP, out]
+    if not getattr(a, 'ref_verilog', None):
+        m_ = re.search(r'--dig-netlist\s+(\S+)', open(ref, errors='replace').read(1500))              # a reference written with --dig-netlist names its macro Verilog in the header (L3a)
+        if m_ and os.path.exists(os.path.join(REPO, m_.group(1))):
+            a.ref_verilog = [os.path.join(REPO, m_.group(1))]
+            a.blackbox = True
+    res['ref_verilog'] = [rel(v) for v in (getattr(a, 'ref_verilog', None) or [])]
     if getattr(a, 'ref_verilog', None):
         # L3a: the reference names a hardened macro (afe_dig) that is defined by a powered gate-level Verilog netlist (LVS_VERILOG_FILES, as in the LibreLane netgen step):
         # read the SPICE reference, the PDK standard-cell SPICE and the Verilog into circuit 2, compare the top (macro and cells are compared as devices of their class).

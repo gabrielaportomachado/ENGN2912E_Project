@@ -358,13 +358,13 @@ for s, Y0, chs in ((1, Y0N, (0, 1)), (-1, Y0S, (2, 3))):
         xr = chx(n, 121.0)
         y = yl(U(13))
         R('metal5', xr - 0.6, min(yl(-0.3), y), xr + 0.6, max(yl(-0.3), y))
-        stk(xr, y, 2, 5, size=0.6)
+        stk(xr, y, 2, 5, size=0.46)
         # spur: analog vdd (Metal4) into the strap, vss (Metal3) up to the vss lines
         R('metal4', chx(n, 230.5), min(yl(-0.3), yl(8.5)), chx(n, 233.5), max(yl(-0.3), yl(8.5)))
         xs = chx(n, 235.4)
         seg('metal3', xs, yl(-0.3), xs, yl(U(14)), 1.0)
         for i in range(0, 15, 2):
-            stk(xs, yl(U(i)), 2, 3, size=0.7)
+            stk(xs, yl(U(i)), 2, 3, size=0.46)
     # west tie of the vss lines to the VSS trunk (Metal4, x 12.5 .. 20.5; it ends at y = 40 / 1070)
     seg('metal3', 22.8, yl(U(0)), 22.8, yl(U(14)), 0.5)
     for i in range(0, 15, 2):
@@ -386,7 +386,10 @@ BPIN = {'vdd': 111.6, 'vss': 102.6, 'vcm_in': 90.6, 'vg1': 81.6, 'vbn': 69.6, 'v
 BMAP = {'vbn': 'vbn', 'vcm_in': 'vcm', 'vg1': 'vg1', 'vcm_out': 'vcmo', 'vg2': 'vg2', 'vrs': 'vrs'}
 for nm, yy in BPIN.items():
     xp, yp = BX0 + 106.25, BY0 + yy
-    stk(xp, yp, 3, 4, size=1.2)
+    if nm in ('vg1', 'vrs'):
+        seg('metal4', xp - 0.7, yp, xp + 0.1, yp, 0.5, cap=False)               # these two pads already carry a Metal4 wire end + via3 inside bias_genc: continue the Metal4
+    else:
+        stk(xp, yp, 3, 4, size=1.2)
     if nm in BMAP:
         xe = EV[BMAP[nm]]
         seg('metal4', xp, yp, xe, yp, 0.5, cap=False)

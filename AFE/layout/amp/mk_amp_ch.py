@@ -25,6 +25,7 @@ for _n in ('rg', 'gg', 'cg'):
     a.KNOB[_n] = float(globals().get(_n, _KD[_n]))
 a.KNOB['tm'] = int(globals().get('tm', '1' if LAY >= 3 else '0'))          # 1 = tail group xmb / xmt / xm7 as one 6-finger block (L2a rework step 2)
 a.KNOB['split'] = int(globals().get('split', '1' if LAY >= 6 else '0'))     # 1 = sn / sp split into the gate-mux + park groups (sn_a / sp_a) and the one-shot groups (sn_os / sp_os) (lay=6)
+a.KNOB['gup'] = int(globals().get('gup', '1'))                                                              # 1 = antenna fix (ladder D-5): the gate of pr3 leaves on Metal3 (amplib.pr_block gup)
 a.KNOB['osvert'] = int(globals().get('osvert', '1' if LAY >= 6 else '0'))                       # 1 = one-shot tiles stacked vertically
 ly = k.new_layout()
 TOP = ly.create_cell('amp_ch')

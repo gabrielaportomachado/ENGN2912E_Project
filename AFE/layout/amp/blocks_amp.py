@@ -106,7 +106,7 @@ def blocks(ly):
     # ------------------------------------------------------------------ pseudo resistors
     B['pr1'] = a.pr_block(ly, 'pr1', VN, V1, M1R, GM1)
     B['pr2'] = a.pr_block(ly, 'pr2', VP, 'vcm', M2R, GM1)
-    B['pr3'] = a.pr_block(ly, 'pr3', VN2, 'out', M3R, GM2)
+    B['pr3'] = a.pr_block(ly, 'pr3', VN2, 'out', M3R, GM2, gup=bool(a.KNOB.get('gup', 0)))
     # ------------------------------------------------------------------ MIM capacitors outside the Cin block
     B['cc1'] = a.mim_block(ly, 'cc1', 22.0, O1, V1)
     B['cf1'] = a.mim_block(ly, 'cf1', 8.45, VN, V1)
