@@ -1,0 +1,8 @@
+== adc_timing  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ss125 (ss, 125 C, 3 V)  2026-11-21 00:57
+TIMING ss125 Vin 1.04545 V code 1398 (ideal 1427): s_k [LSB] -0.00 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 -0.00 +0.00 +0.00 +0.00 | slowest decision 3.56 ns
+TIMING ss125 Vin 1.12522 V code 1507 (ideal 1536): s_k [LSB] -0.00 +0.01 +0.00 +0.00 +0.00 +0.00 +0.00 -0.00 +0.00 +0.00 +0.00 -0.00 | slowest decision 3.56 ns
+TIMING ss125 Vin 1.50022 V code 2018 (ideal 2048): s_k [LSB] +0.00 +0.11 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 3.71 ns
+TIMING ss125 Vin 1.72727 V code 2330 (ideal 2358): s_k [LSB] -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 3.59 ns
+TIMING ss125 Vin 1.87522 V code 2531 (ideal 2560): s_k [LSB] -0.06 -0.04 -0.04 -0.04 -0.04 -0.04 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 3.58 ns
+TIMING ss125 Vin 1.95455 V code 2638 (ideal 2668): s_k [LSB] -0.27 -0.16 -0.14 -0.11 -0.10 -0.09 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 3.65 ns
+RESULT adc_timing ss125: settle_worst_lsb=0.109399  settle_trial1_lsb=0.00132605  settle_trial2_lsb=0.109399  settle_top_lsb=0.268402  td_max_ns=3.70555  td_avail_ns=13.33  dac_to_clk_ns=86.59  late=0  failed=0

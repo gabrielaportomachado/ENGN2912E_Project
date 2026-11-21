@@ -1,0 +1,17 @@
+== adc_codes  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 00:58
+   pass 1: 12 runs in 82 s, still open 12, failed 0; disk 28.0 GB, RAM 5020 MB free | predictor: 33 decisions within 8 LSB of the threshold: misclassified by a constant threshold 0, by the bit-dependent threshold 0; theta0 -23.88 LSB, per-bit shift b11..b0 [LSB] -0.00 +0.00 -0.00 +0.00 +0.00 +0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00
+   pass 2: 12 runs in 77 s, still open 8, failed 0; disk 28.0 GB, RAM 5057 MB free | predictor: 136 decisions within 8 LSB of the threshold: misclassified by a constant threshold 21, by the bit-dependent threshold 0; theta0 -22.60 LSB, per-bit shift b11..b0 [LSB] -0.24 +0.24 -0.15 -0.03 +0.14 -0.17 +0.02 -0.13 -0.07 -0.18 +0.23 +0.07
+   pass 3: 8 runs in 29 s, still open 0, failed 0; disk 28.0 GB, RAM 5098 MB free | predictor: 216 decisions within 8 LSB of the threshold: misclassified by a constant threshold 9, by the bit-dependent threshold 0; theta0 -22.52 LSB, per-bit shift b11..b0 [LSB] -0.29 +0.29 -0.33 -0.07 +0.01 -0.18 +0.00 -0.04 -0.03 -0.01 +0.03 +0.05
+ADC ss-40 vin 1.183300 code 1445 ideal 1468 diff -23 | T +23.999 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.273515 code 1557 ideal 1580 diff -23 | T +23.221 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.363245 code 1668 ideal 1692 diff -24 | T +23.200 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.453099 code 1778 ideal 1803 diff -25 | T +24.624 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.543407 code 1891 ideal 1915 diff -24 | T +24.129 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.633473 code 2003 ideal 2027 diff -24 | T +24.165 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.723148 code 2115 ideal 2138 diff -23 | T +22.884 LSB | passes 2 unresolved 0
+ADC ss-40 vin 1.813166 code 2227 ideal 2250 diff -23 | T +23.043 LSB | passes 3 unresolved 0
+ADC ss-40 vin 1.903486 code 2339 ideal 2362 diff -23 | T +22.545 LSB | passes 2 unresolved 0
+ADC ss-40 vin 1.993386 code 2451 ideal 2474 diff -23 | T +22.531 LSB | passes 3 unresolved 0
+ADC ss-40 vin 2.100000 code 2583 ideal 2606 diff -23 | T +22.053 LSB | passes 2 unresolved 0
+ADC ss-40 vin 2.150000 code 2644 ideal 2668 diff -24 | T +22.871 LSB | passes 2 unresolved 0
+RESULT adc_codes ss-40: code_offset_lsb=-23.5  t_offset_lsb=23.4342  inl_lo_lsb=1.19007  inl_code_lo_lsb=1.05897  top_2v10_lsb=-1.38093  top_2v15_lsb=-0.563658  gain_err_pct=0.129758  alpha=0.977848  theta_lsb=-22.5189  unresolved=0  failed=0  first_conv_dlsb=0.374682  n_inputs=12

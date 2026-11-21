@@ -1,0 +1,38 @@
+{
+ "check": "adc_overlap",
+ "corners": {
+  "ff-40": {
+   "date": "2026-11-21 00:59",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_overlap_ff-40.log",
+   "values": {
+    "dcode_max": 0.0,
+    "dt_max_lsb": 0.0029524185588343244,
+    "n": 6.0,
+    "overlap_ns": 0.21,
+    "t_offset_nom_lsb": 38.647990466621344,
+    "t_offset_ovl_lsb": 38.647743621579515
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 00:54",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/post/adc_overlap_typ.log",
+   "values": {
+    "dcode_max": 0.0,
+    "dt_max_lsb": 0.0022450934297921776,
+    "n": 6.0,
+    "overlap_ns": 0.21,
+    "t_offset_nom_lsb": 32.689203610396284,
+    "t_offset_ovl_lsb": 32.68859055585627
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/adc_ch.pex.spice",
+ "netlist_sha1": "5f8fbd3523ab",
+ "written_by": "AFE/layout/tb/tb_adc_overlap.py"
+}

@@ -1,0 +1,17 @@
+== adc_codes  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ss125 (ss, 125 C, 3 V)  2026-11-21 01:35
+   pass 1: 12 runs in 49 s, still open 11, failed 0; disk 28.3 GB, RAM 5321 MB free | predictor: 64 decisions within 8 LSB of the threshold: misclassified by a constant threshold 2, by the bit-dependent threshold 0; theta0 -27.35 LSB, per-bit shift b11..b0 [LSB] -0.12 +0.12 -0.09 +0.03 +0.16 -0.19 +0.05 -0.02 -0.12 -0.12 -0.19 +0.06
+   pass 2: 11 runs in 42 s, still open 1, failed 0; disk 28.3 GB, RAM 5344 MB free | predictor: 170 decisions within 8 LSB of the threshold: misclassified by a constant threshold 4, by the bit-dependent threshold 0; theta0 -27.36 LSB, per-bit shift b11..b0 [LSB] -0.18 +0.18 -0.07 -0.12 +0.15 -0.16 +0.17 +0.10 +0.05 +0.05 -0.30 +0.03
+   pass 3: 1 runs in 5 s, still open 0, failed 0; disk 28.3 GB, RAM 5335 MB free | predictor: 180 decisions within 8 LSB of the threshold: misclassified by a constant threshold 4, by the bit-dependent threshold 0; theta0 -27.37 LSB, per-bit shift b11..b0 [LSB] -0.18 +0.18 -0.06 -0.13 +0.16 -0.15 +0.18 +0.10 +0.06 +0.06 -0.29 +0.02
+ADC ss125 vin 1.075727 code 1440 ideal 1468 diff -28 | T +28.482 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.157741 code 1553 ideal 1580 diff -27 | T +27.659 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.239313 code 1664 ideal 1692 diff -28 | T +27.607 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.320999 code 1774 ideal 1803 diff -29 | T +29.342 LSB | passes 3 unresolved 0
+ADC ss125 vin 1.403097 code 1886 ideal 1915 diff -29 | T +28.806 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.484976 code 1998 ideal 2027 diff -29 | T +28.755 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.566498 code 2109 ideal 2138 diff -29 | T +29.271 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.648333 code 2221 ideal 2250 diff -29 | T +29.217 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.730442 code 2333 ideal 2362 diff -29 | T +28.698 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.812169 code 2445 ideal 2474 diff -29 | T +28.755 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.909091 code 2577 ideal 2606 diff -29 | T +28.534 LSB | passes 2 unresolved 0
+ADC ss125 vin 1.954545 code 2637 ideal 2668 diff -31 | T +30.258 LSB | passes 1 unresolved 0
+RESULT adc_codes ss125: code_offset_lsb=-28.6  t_offset_lsb=28.6592  inl_lo_lsb=1.05248  inl_code_lo_lsb=0.942753  top_2v10_lsb=-0.125294  top_2v15_lsb=1.59847  gain_err_pct=-0.0949876  alpha=0.977595  theta_lsb=-27.3712  unresolved=0  failed=0  first_conv_dlsb=0.129258  n_inputs=12

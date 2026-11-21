@@ -1,0 +1,8 @@
+== adc_timing  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ff-40 (ff, -40 C, 3.6 V)  2026-11-21 01:27
+TIMING ff-40 Vin 1.25455 V code 1389 (ideal 1427): s_k [LSB] -0.01 +0.01 -0.00 +0.00 -0.00 -0.00 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | slowest decision 1.27 ns
+TIMING ff-40 Vin 1.35026 V code 1497 (ideal 1536): s_k [LSB] -0.01 +0.05 -0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 | slowest decision 1.39 ns
+TIMING ff-40 Vin 1.80026 V code 2009 (ideal 2048): s_k [LSB] -0.01 +0.14 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 | slowest decision 1.28 ns
+TIMING ff-40 Vin 2.07273 V code 2320 (ideal 2358): s_k [LSB] -0.01 +0.01 -0.01 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 | slowest decision 1.37 ns
+TIMING ff-40 Vin 2.25026 V code 2520 (ideal 2560): s_k [LSB] -0.43 -0.14 -0.15 -0.12 -0.09 -0.07 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 | slowest decision 1.28 ns
+TIMING ff-40 Vin 2.34545 V code 2627 (ideal 2668): s_k [LSB] -1.41 -0.26 -0.22 -0.13 -0.11 -0.09 +0.00 -0.00 +0.00 -0.00 -0.00 -0.00 | slowest decision 1.31 ns
+RESULT adc_timing ff-40: settle_worst_lsb=0.144458  settle_trial1_lsb=0.0107171  settle_trial2_lsb=0.144458  settle_top_lsb=1.4088  td_max_ns=1.39399  td_avail_ns=3.42  dac_to_clk_ns=21.96  late=0  failed=0

@@ -1,0 +1,64 @@
+
+Magic 8.3 revision 636 - Compiled on Thu Apr 16 09:17:18 PM CEST 2026.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+WARNING: RLIMIT_NOFILE is above 1024 and Tcl_Version<9 this may cause runtime issues [rlim_cur=1048576]
+Using NULL graphics device.
+Processing system .magicrc file
+Switching to WIRING tool.
+Switching to NETLIST tool.
+Switching to PICK tool.
+Switching to BOX tool.
+Sourcing design .magicrc for technology gf180mcuD ...
+10 Magic internal units = 1 Lambda
+Input style import: scaleFactor=10, multiplier=2
+The following types are not handled by extraction and will be treated as non-electrical types:
+    obsactive mvobsactive filldiff fillpoly m1hole obsm1 fillm1 obsv1 m2hole obsm2 fillm2 obsv2 m3hole obsm3 fillm3 m4hole obsm4 fillm4 m5hole obsm5 fillm5 glass fillblock lvstext obscomment 
+Scaled tech values by 10 / 1 to match internal grid scaling
+Loading gf180mcuD Device Generator Menu ...
+Loading "/foss/designs/ENGN2912E_Project/.claude/worktrees/l1b-adc-post/AFE/layout/.ptmp/pex_adc_ch/stock/run.tcl" from command line.
+Warning: Calma reading is not undoable!  I hope that's OK.
+Library written using GDS-II Release 6.0
+Library name: LIB
+Reading "pfet__8".
+Reading "nfet__7".
+Reading "nfet__6".
+Reading "nfet__5".
+Reading "pfet__4".
+Reading "cap_mim__2".
+Reading "pfet__1".
+Reading "nfet__0".
+Reading "cxa_x".
+Reading "cp_x".
+Reading "cn_x".
+Reading "pair_x".
+Reading "nfet__13".
+Reading "vh_seg".
+CIF file read warning: CIF style import: units rescaled by factor of 5 / 1
+CIF file read warning: Input off lambda grid by 1/5; snapped to grid.
+Reading "cap_mim__12".
+Reading "cap_mim__11".
+Reading "pfet__10".
+Reading "nfet__9".
+Reading "cc_n".
+Reading "cc_p".
+Reading "cmp_side".
+Reading "cap_mim__3".
+Reading "xr1".
+Reading "xr0".
+Reading "vhalf_res".
+Reading "cref".
+Reading "vh_cap".
+Reading "iv_p".
+Reading "iv_n".
+Reading "sw_p".
+Reading "sw_n".
+Reading "cmp_blk".
+Reading "dac".
+Reading "row_b2".
+Reading "row_b1".
+Reading "row_a".
+Reading "adc_ch".
+Extracting adc_ch_pexflat into /foss/designs/ENGN2912E_Project/.claude/worktrees/l1b-adc-post/AFE/layout/.ptmp/pex_adc_ch/stock/adc_ch_pexflat.ext:
+exttospice finished.
+FLOW_PEX_DONE

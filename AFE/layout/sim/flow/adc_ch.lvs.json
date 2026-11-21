@@ -1,5 +1,5 @@
 {
- "date": "2026-11-20 22:51",
+ "date": "2026-11-21 01:24",
  "devices_layout": {
   "cmp_blk": 1,
   "cref": 1,
@@ -19,7 +19,7 @@
  "extract_ok": true,
  "final": "Circuits match uniquely.",
  "gds": "AFE/layout/adc/adc_ch.gds",
- "gds_sha1": "d6b23a88cdd130fd909f08cc581ef7e5df02ec31",
+ "gds_sha1": "3683b303ba7cd0b2b6870aedc3215c17133604c1",
  "layout_netlist": "AFE/layout/sim/flow/adc_ch.lvs.spice",
  "match": true,
  "maxrss_mb": 69,

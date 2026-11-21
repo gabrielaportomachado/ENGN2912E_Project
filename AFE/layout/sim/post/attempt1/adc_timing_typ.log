@@ -1,0 +1,8 @@
+== adc_timing  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 00:50
+TIMING typ Vin 1.15000 V code 1394 (ideal 1427): s_k [LSB] -0.00 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 -0.00 +0.00 +0.00 -0.00 | slowest decision 2.10 ns
+TIMING typ Vin 1.23774 V code 1503 (ideal 1536): s_k [LSB] +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 2.09 ns
+TIMING typ Vin 1.65024 V code 2014 (ideal 2048): s_k [LSB] +0.00 +0.10 -0.00 +0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 2.08 ns
+TIMING typ Vin 1.90000 V code 2327 (ideal 2358): s_k [LSB] -0.00 +0.00 -0.00 -0.00 -0.00 -0.00 +0.00 -0.00 -0.00 +0.00 -0.00 -0.00 | slowest decision 2.04 ns
+TIMING typ Vin 2.06274 V code 2527 (ideal 2560): s_k [LSB] -0.10 -0.06 -0.06 -0.06 -0.05 -0.05 +0.00 -0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 2.09 ns
+TIMING typ Vin 2.15000 V code 2634 (ideal 2668): s_k [LSB] -0.61 -0.24 -0.20 -0.14 -0.12 -0.10 +0.00 +0.00 -0.00 -0.00 -0.00 -0.00 | slowest decision 2.06 ns
+RESULT adc_timing typ: settle_worst_lsb=0.102274  settle_trial1_lsb=0.000495806  settle_trial2_lsb=0.102274  settle_top_lsb=0.605964  td_max_ns=2.09575  td_avail_ns=6.37  dac_to_clk_ns=41.07  late=0  failed=0

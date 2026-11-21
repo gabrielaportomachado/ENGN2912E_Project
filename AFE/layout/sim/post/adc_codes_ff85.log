@@ -1,0 +1,17 @@
+== adc_codes  netlist AFE/layout/sim/flow/adc_ch.pex.spice  corner ff85 (ff, 85 C, 3.3 V)  2026-11-21 01:28
+   pass 1: 12 runs in 76 s, still open 12, failed 0; disk 28.3 GB, RAM 4985 MB free | predictor: 47 decisions within 8 LSB of the threshold: misclassified by a constant threshold 0, by the bit-dependent threshold 0; theta0 -40.53 LSB, per-bit shift b11..b0 [LSB] -0.00 +0.00 -0.00 -0.20 -0.07 -0.00 +0.20 +0.07 -0.00 -0.00 -0.00 -0.00
+   pass 2: 12 runs in 87 s, still open 3, failed 0; disk 28.3 GB, RAM 5284 MB free | predictor: 161 decisions within 8 LSB of the threshold: misclassified by a constant threshold 11, by the bit-dependent threshold 3; theta0 -40.82 LSB, per-bit shift b11..b0 [LSB] -0.06 +0.06 -0.43 -0.17 +0.11 -0.26 +0.26 +0.29 -0.06 -0.10 +0.04 +0.09
+   pass 3: 3 runs in 10 s, still open 0, failed 0; disk 28.3 GB, RAM 5279 MB free | predictor: 191 decisions within 8 LSB of the threshold: misclassified by a constant threshold 9, by the bit-dependent threshold 3; theta0 -40.67 LSB, per-bit shift b11..b0 [LSB] -0.10 +0.10 -0.62 -0.15 +0.04 -0.12 +0.23 +0.20 -0.29 -0.30 +0.06 +0.02
+ADC ff85 vin 1.183300 code 1427 ideal 1468 diff -41 | T +41.725 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.273515 code 1539 ideal 1580 diff -41 | T +40.724 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.363245 code 1649 ideal 1692 diff -43 | T +42.350 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.453099 code 1761 ideal 1803 diff -42 | T +42.283 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.543407 code 1873 ideal 1915 diff -42 | T +41.632 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.633473 code 1985 ideal 2027 diff -42 | T +41.573 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.723148 code 2097 ideal 2138 diff -41 | T +42.236 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.813166 code 2208 ideal 2250 diff -42 | T +42.219 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.903486 code 2320 ideal 2362 diff -42 | T +41.958 LSB | passes 2 unresolved 0
+ADC ff85 vin 1.993386 code 2428 ideal 2474 diff -46 | T +45.277 LSB | passes 3 unresolved 0
+ADC ff85 vin 2.100000 code 2561 ideal 2606 diff -45 | T +44.397 LSB | passes 3 unresolved 0
+ADC ff85 vin 2.150000 code 2620 ideal 2668 diff -48 | T +46.881 LSB | passes 3 unresolved 0
+RESULT adc_codes ff85: code_offset_lsb=-42.2  t_offset_lsb=42.1979  inl_lo_lsb=3.07922  inl_code_lo_lsb=2.96974  top_2v10_lsb=2.19897  top_2v15_lsb=4.6835  gain_err_pct=-0.215635  alpha=0.975199  theta_lsb=-40.6655  unresolved=0  failed=0  first_conv_dlsb=0.0367938  n_inputs=12

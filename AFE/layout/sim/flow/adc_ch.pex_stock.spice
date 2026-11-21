@@ -1,0 +1,1238 @@
+* NGSPICE file created from adc_ch (flattened) - technology: gf180mcuD
+
+.subckt adc_ch rst_sw tg_on dac_gdn cmp_clk cmp_q dac_gp[11] dac_gn[11] dac_gp[10]
++ dac_gn[10] dac_gp[9] dac_gn[9] dac_gp[8] dac_gn[8] dac_gp[7] dac_gn[7] dac_gp[6]
++ dac_gn[6] dac_gp[5] dac_gn[5] dac_gp[4] dac_gn[4] dac_gp[3] dac_gn[3] dac_gp[2]
++ dac_gn[2] dac_gp[1] dac_gn[1] dac_gp[0] dac_gn[0] vin vdd_cmp vdd_dac vss vdd
+X0 a_11828_4060# tg_on vss vss nfet_05v0 ad=0.5986p pd=3.1u as=0.5986p ps=3.1u w=0.82u l=0.6u
+X1 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X2 a_4094_3600# dac_gp[2] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X3 vss a_23316_2302# a_28562_1800# vss nfet_03v3 ad=4.88p pd=17.22u as=4.88p ps=17.22u w=8u l=0.5u
+X4 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X5 a_2894_3600# dac_gn[0] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X6 a_28498_2660# a_27698_2060# a_36338_1800# vss nfet_03v3 ad=2.44p pd=9.22u as=2.44p ps=9.22u w=4u l=0.28u
+X7 a_23546_2302# a_26694_9400# a_35494_1800# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X8 a_3494_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X9 a_28498_2660# cmp_clk vdd_cmp vdd_cmp pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X10 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X11 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X12 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X13 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X14 a_1094_7200# a_2094_1000# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X15 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X16 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X17 a_7094_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X18 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X19 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X20 a_37294_5800# a_28498_2660# vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X21 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X22 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X23 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X24 a_2094_1000# dac_gdn vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X25 a_35494_1800# a_26694_9400# a_23546_2302# vdd_cmp pfet_03v3 ad=10.4p pd=33.3u as=4.16p ps=16.52u w=16u l=0.5u
+X26 a_23546_2302# a_21494_7200# a_23316_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X27 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X28 a_21494_7200# a_6494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X29 vdd_cmp a_26898_2260# a_26784_1800# vdd_cmp pfet_03v3 ad=2.6p pd=9.3u as=2.6p ps=9.3u w=4u l=0.28u
+X30 a_3494_3600# dac_gp[1] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X31 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X32 a_1094_7200# a_4094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X33 a_6494_3600# dac_gn[6] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X34 a_26694_9400# vss cap_mim_2f0_m4m5_noshield c_width=59.07u c_length=59.07u
+X35 a_2094_1000# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X36 a_28562_1800# a_28498_2660# a_27698_2060# vss nfet_03v3 ad=2.44p pd=9.22u as=2.44p ps=9.22u w=4u l=0.28u
+X37 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X38 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X39 a_8294_3600# dac_gp[9] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X40 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X41 a_5872_7120# a_18500_8000# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X42 a_4694_3600# dac_gn[3] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X43 a_9494_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X44 a_5894_3600# dac_gn[5] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X45 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X46 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X47 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X48 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X49 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X50 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X51 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X52 a_26694_9400# a_11828_4060# a_916_7200# vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X53 a_30098_2260# cmp_clk vdd_cmp vdd_cmp pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X54 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X55 a_35494_1800# a_30098_2260# vss vss nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=0.28u
+X56 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X57 a_2094_1000# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X58 a_4094_3600# dac_gn[2] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X59 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X60 a_916_7200# a_18500_8000# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X61 a_2894_3600# dac_gp[0] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X62 a_21494_7200# rst_sw a_916_7200# vss nfet_03v3 ad=0.305p pd=2.22u as=0.305p ps=2.22u w=0.5u l=0.28u
+X63 a_21494_7200# a_7694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X64 a_23546_2302# a_26694_9400# a_35494_1800# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X65 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X66 a_11828_4060# tg_on vdd vdd pfet_05v0 ad=0.9394p pd=3.98u as=0.9394p ps=3.98u w=1.22u l=0.5u
+X67 a_5894_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X68 a_35494_1800# a_26694_9400# a_23546_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=10.4p ps=33.3u w=16u l=0.5u
+X69 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X70 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X71 a_7694_3600# dac_gp[8] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X72 a_5872_7120# a_18500_6240# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X73 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X74 a_1094_7200# a_4094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X75 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X76 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X77 a_21494_7200# a_1094_7200# cap_mim_2f0_m4m5_noshield c_width=5.085u c_length=5u
+X78 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X79 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X80 a_1094_7200# a_3494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X81 a_1094_7200# rst_sw a_916_7200# vss nfet_03v3 ad=0.305p pd=2.22u as=0.305p ps=2.22u w=0.5u l=0.28u
+X82 a_7694_3600# dac_gn[8] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X83 a_3494_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X84 vss a_26898_2260# a_26784_1800# vss nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=0.28u
+X85 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X86 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X87 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X88 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X89 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X90 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X91 vss a_18500_6240# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X92 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X93 a_23316_2302# vss cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X94 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X95 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X96 a_7094_3600# dac_gn[7] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X97 a_2894_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X98 a_37294_5800# a_28498_2660# vdd_cmp vdd_cmp pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X99 a_21494_7200# a_7694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X100 a_4094_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X101 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X102 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X103 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X104 a_5294_3600# dac_gp[4] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X105 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X106 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X107 a_5294_3600# dac_gn[4] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X108 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X109 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X110 a_7694_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X111 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X112 cmp_q a_37294_5800# vss vss nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=0.28u
+X113 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X114 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X115 a_9494_3600# dac_gn[11] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X116 a_5294_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X117 a_8294_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X118 a_35494_1800# a_26694_9400# a_23546_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X119 vdd_cmp a_27698_2060# a_26898_2260# vdd_cmp pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X120 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X121 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X122 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X123 a_6494_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X124 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X125 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X126 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X127 a_4694_3600# dac_gp[3] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X128 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X129 a_8894_3600# dac_gn[10] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X130 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X131 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X132 a_21494_7200# a_8294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X133 a_4694_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X134 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X135 a_9494_3600# dac_gp[11] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X136 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X137 a_5894_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X138 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X139 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X140 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X141 a_21494_7200# a_7694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X142 a_1094_7200# a_2894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X143 a_23316_2302# a_21494_7200# a_23546_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X144 a_1094_7200# a_4094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X145 a_26694_9400# tg_on a_916_7200# vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X146 a_8294_3600# dac_gn[9] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X147 a_36338_1800# a_35494_1800# vss vss nfet_03v3 ad=4.88p pd=17.22u as=4.88p ps=17.22u w=8u l=0.5u
+X148 a_4094_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X149 a_28498_2660# a_27698_2060# vdd_cmp vdd_cmp pfet_03v3 ad=2.6p pd=9.3u as=2.6p ps=9.3u w=4u l=0.28u
+X150 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X151 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X152 a_2894_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X153 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X154 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X155 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X156 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X157 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X158 a_6494_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X159 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X160 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X161 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X162 a_8294_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X163 a_23546_2302# a_21494_7200# a_23316_2302# vdd_cmp pfet_03v3 ad=10.4p pd=33.3u as=4.16p ps=16.52u w=16u l=0.5u
+X164 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X165 a_1094_7200# a_5294_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X166 a_8894_3600# dac_gp[10] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X167 a_916_7200# a_18500_7560# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X168 a_2094_1000# vdd_dac vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X169 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X170 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X171 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X172 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X173 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X174 a_7094_3600# dac_gp[7] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X175 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X176 a_7694_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X177 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X178 vss a_27698_2060# a_26898_2260# vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X179 a_21494_7200# a_7694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X180 a_1094_7200# a_4094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X181 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X182 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X183 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X184 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X185 a_8894_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X186 a_21494_7200# a_7094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X187 vdd a_18500_5800# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X188 a_7094_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X189 a_5872_6680# a_18500_7560# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X190 a_4694_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X191 cmp_q a_37294_5800# vdd_cmp vdd_cmp pfet_03v3 ad=2.6p pd=9.3u as=2.6p ps=9.3u w=4u l=0.28u
+X192 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X193 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X194 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X195 vss a_30098_2260# a_23316_2302# vss nfet_03v3 ad=1.22p pd=5.22u as=1.22p ps=5.22u w=2u l=0.28u
+X196 a_23546_2302# a_30098_2260# vdd_cmp vdd_cmp pfet_03v3 ad=2.6p pd=9.3u as=2.6p ps=9.3u w=4u l=0.28u
+X197 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X198 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X199 a_21494_7200# a_7094_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X200 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X201 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X202 a_6494_3600# dac_gp[6] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X203 a_1094_7200# a_3494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X204 a_23546_2302# a_21494_7200# a_23316_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=10.4p ps=33.3u w=16u l=0.5u
+X205 a_35494_1800# vss cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X206 a_916_7200# vss cap_mim_2f0_m4m5_noshield c_width=22.18u c_length=22.18u
+X207 a_5294_3600# a_11828_4060# vin vdd pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X208 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X209 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X210 a_21494_7200# a_8894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X211 a_9494_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X212 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X213 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X214 vdd_cmp cmp_clk a_27698_2060# vdd_cmp pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X215 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X216 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X217 a_5872_6680# a_18500_5800# vss ppolyf_u_1k r_width=1u r_length=62.5u
+X218 a_23316_2302# a_21494_7200# a_23546_2302# vdd_cmp pfet_03v3 ad=4.16p pd=16.52u as=4.16p ps=16.52u w=16u l=0.5u
+X219 a_1094_7200# a_5894_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X220 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X221 a_3494_3600# dac_gn[1] vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X222 a_8894_3600# tg_on vin vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X223 vdd_cmp a_28498_2660# a_27698_2060# vdd_cmp pfet_03v3 ad=2.6p pd=9.3u as=2.6p ps=9.3u w=4u l=0.28u
+X224 a_5894_3600# dac_gp[5] vdd_dac vdd_dac pfet_03v3 ad=1.3p pd=5.3u as=1.3p ps=5.3u w=2u l=0.28u
+X225 a_30098_2260# cmp_clk vss vss nfet_03v3 ad=0.61p pd=3.22u as=0.61p ps=3.22u w=1u l=0.28u
+X226 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X227 a_21494_7200# a_9494_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+X228 a_1094_7200# a_4694_3600# cap_mim_2f0_m4m5_noshield c_width=5u c_length=5u
+C0 dac_gn[3] dac_gn[8] 0.44544f
+C1 a_6494_3600# a_916_7200# 0.13897f
+C2 dac_gp[0] dac_gn[7] 0.06362f
+C3 a_28562_1800# cmp_clk 0.02586f
+C4 a_5294_3600# cmp_clk 0.25599f
+C5 a_4694_3600# a_26784_1800# 0.11841f
+C6 dac_gp[0] dac_gp[11] 0.06302f
+C7 dac_gp[7] dac_gp[4] 0.06206f
+C8 rst_sw cmp_clk 0.32025f
+C9 a_4694_3600# dac_gn[9] 0.11005f
+C10 dac_gp[0] cmp_q 0.28236f
+C11 vdd vdd_dac 2.01938f
+C12 a_2094_1000# dac_gp[2] 0.073f
+C13 dac_gn[3] dac_gn[11] 0.05607f
+C14 dac_gn[5] dac_gn[3] 0.99863f
+C15 a_7694_3600# dac_gp[8] 0.55297f
+C16 dac_gp[0] dac_gp[9] 0.04457f
+C17 a_3494_3600# a_8894_3600# 0.01699f
+C18 dac_gp[7] dac_gp[6] 0.09327f
+C19 a_7094_3600# dac_gn[7] 0.07684f
+C20 vdd a_30098_2260# 0.06626f
+C21 tg_on a_4694_3600# 0.3015f
+C22 a_23546_2302# a_26898_2260# 0.25404f
+C23 dac_gp[3] dac_gn[8] 0.13893f
+C24 a_7094_3600# dac_gp[11] 0.04547f
+C25 a_7694_3600# a_23546_2302# 0.04769f
+C26 dac_gp[10] dac_gn[11] 0.16571f
+C27 a_5894_3600# dac_gp[4] 0.14152f
+C28 a_6494_3600# dac_gp[10] 0.05646f
+C29 dac_gp[1] dac_gn[10] 0.17435f
+C30 a_7094_3600# cmp_q 0.07971f
+C31 a_5294_3600# a_2094_1000# 4.14415f
+C32 dac_gdn rst_sw 0.10778f
+C33 rst_sw a_2094_1000# 0.26231f
+C34 vdd a_9494_3600# 1.45247f
+C35 dac_gn[4] dac_gp[4] 0.14367f
+C36 dac_gp[3] dac_gn[11] 0.06424f
+C37 a_7094_3600# dac_gp[9] 0.04564f
+C38 dac_gp[5] dac_gp[1] 0.0516f
+C39 a_4094_3600# dac_gp[0] 0.13577f
+C40 a_6494_3600# dac_gp[3] 0.05369f
+C41 a_28498_2660# a_35494_1800# 0.55406f
+C42 dac_gp[11] cmp_q 0.27608f
+C43 a_5894_3600# dac_gp[6] 0.69495f
+C44 a_3494_3600# dac_gp[8] 0.19122f
+C45 dac_gp[0] vin 0.19915f
+C46 a_23316_2302# vdd_dac 0.07189f
+C47 a_28498_2660# a_23546_2302# 0.37175f
+C48 vdd a_21494_7200# 0.20903f
+C49 dac_gp[11] dac_gp[9] 0.05818f
+C50 a_8894_3600# a_5294_3600# 0.50856f
+C51 a_3494_3600# dac_gn[2] 0.10799f
+C52 dac_gn[4] dac_gp[6] 0.07276f
+C53 a_6494_3600# vdd_dac 0.84911f
+C54 rst_sw a_8894_3600# 1.00744f
+C55 dac_gp[9] cmp_q 0.05123f
+C56 dac_gn[0] cmp_clk 0.20831f
+C57 dac_gp[8] dac_gp[2] 0.06641f
+C58 a_23316_2302# a_30098_2260# 0.08757f
+C59 tg_on a_2894_3600# 0.32507f
+C60 a_4094_3600# a_7094_3600# 0.20226f
+C61 a_7094_3600# vin 3.42576f
+C62 dac_gn[2] dac_gp[2] 0.13569f
+C63 a_23316_2302# a_9494_3600# 0.75163f
+C64 dac_gp[0] dac_gn[3] 0.05584f
+C65 vin dac_gn[7] 0.19722f
+C66 a_4094_3600# dac_gp[11] 0.16169f
+C67 dac_gdn cmp_clk 0.02449f
+C68 vdd_cmp a_35494_1800# 1.74009f
+C69 dac_gp[5] vdd 0.01388f
+C70 a_7094_3600# a_916_7200# 0.09361f
+C71 a_9494_3600# dac_gn[11] 0.08568f
+C72 dac_gp[11] vin 0.07856f
+C73 a_5294_3600# dac_gp[8] 0.04688f
+C74 dac_gp[7] dac_gn[9] 0.08349f
+C75 a_6494_3600# a_9494_3600# 0.71184f
+C76 a_4094_3600# cmp_q 0.05642f
+C77 vdd_cmp a_23546_2302# 4.31968f
+C78 rst_sw dac_gp[8] 0.0775f
+C79 dac_gp[4] dac_gp[1] 0.05123f
+C80 vin cmp_q 0.13874f
+C81 a_23316_2302# a_21494_7200# 2.33446f
+C82 dac_gp[0] dac_gp[10] 0.04457f
+C83 vdd a_11828_4060# 10.7364f
+C84 dac_gn[1] a_2894_3600# 0.1035f
+C85 dac_gn[0] a_2094_1000# 0.11062f
+C86 dac_gn[0] dac_gdn 0.04487f
+C87 a_4094_3600# dac_gp[9] 0.04733f
+C88 a_28562_1800# a_23546_2302# 0.2614f
+C89 a_5894_3600# dac_gn[6] 0.11119f
+C90 vin dac_gp[9] 0.09485f
+C91 dac_gn[10] dac_gn[8] 1.72318f
+C92 a_7694_3600# a_4694_3600# 2.71873f
+C93 a_6494_3600# a_21494_7200# 1.28897f
+C94 a_26694_9400# a_11828_4060# 0.21626f
+C95 dac_gp[7] tg_on 0.07225f
+C96 a_8894_3600# cmp_clk 0.1433f
+C97 dac_gp[6] dac_gp[1] 0.05362f
+C98 dac_gp[0] dac_gp[3] 0.06274f
+C99 dac_gn[6] dac_gn[4] 0.07537f
+C100 a_5894_3600# dac_gn[9] 0.171f
+C101 dac_gdn a_2094_1000# 0.37894f
+C102 dac_gn[3] dac_gn[7] 0.06635f
+C103 a_8294_3600# dac_gn[9] 0.07773f
+C104 dac_gp[5] dac_gn[8] 0.05123f
+C105 a_7094_3600# dac_gp[10] 0.04528f
+C106 dac_gn[10] dac_gn[11] 3.55225f
+C107 dac_gn[5] dac_gn[10] 0.0691f
+C108 dac_gp[0] vdd_dac 0.59997f
+C109 a_6494_3600# dac_gn[10] 0.02653f
+C110 dac_gn[4] dac_gn[9] 0.51052f
+C111 a_4094_3600# vin 5.31288f
+C112 dac_gp[5] dac_gn[11] 0.0583f
+C113 a_5894_3600# tg_on 0.3246f
+C114 tg_on a_8294_3600# 0.41313f
+C115 dac_gp[11] dac_gp[10] 0.12328f
+C116 dac_gp[5] dac_gn[5] 0.34755f
+C117 a_7094_3600# dac_gp[3] 0.12532f
+C118 a_28498_2660# a_37294_5800# 0.8418f
+C119 a_6494_3600# dac_gp[5] 0.22638f
+C120 dac_gp[9] dac_gn[3] 0.16876f
+C121 dac_gp[7] dac_gn[1] 0.04746f
+C122 a_23316_2302# a_11828_4060# 0.43663f
+C123 a_3494_3600# a_4694_3600# 2.52594f
+C124 a_18500_6240# a_18500_7560# 0.02293f
+C125 dac_gp[8] cmp_clk 0.07114f
+C126 dac_gp[10] cmp_q 0.05123f
+C127 a_8894_3600# a_2094_1000# 0.05344f
+C128 a_4094_3600# a_916_7200# 0.06404f
+C129 dac_gn[4] tg_on 0.16979f
+C130 a_916_7200# vin 0.12441f
+C131 a_6494_3600# a_11828_4060# 0.68407f
+C132 a_7694_3600# a_2894_3600# 0.20657f
+C133 a_7094_3600# vdd_dac 0.74932f
+C134 dac_gp[11] dac_gp[3] 0.09927f
+C135 dac_gp[9] dac_gp[10] 1.62468f
+C136 a_23546_2302# cmp_clk 1.53967f
+C137 dac_gn[0] dac_gp[8] 0.05731f
+C138 dac_gp[6] vdd 0.01161f
+C139 a_4694_3600# dac_gp[2] 0.1425f
+C140 dac_gp[0] a_9494_3600# 0.04745f
+C141 dac_gp[3] cmp_q 0.32103f
+C142 dac_gn[0] dac_gn[2] 0.4712f
+C143 a_18500_7560# a_9494_3600# 0.01513f
+C144 a_4094_3600# dac_gn[3] 0.1035f
+C145 dac_gp[11] vdd_dac 0.56777f
+C146 dac_gp[4] dac_gn[8] 0.12241f
+C147 dac_gp[9] dac_gp[3] 0.05199f
+C148 dac_gn[6] dac_gp[1] 0.06246f
+C149 vdd_cmp a_4694_3600# 0.80705f
+C150 vin dac_gn[3] 0.17666f
+C151 vdd_dac cmp_q 0.0838f
+C152 dac_gp[8] a_2094_1000# 0.06602f
+C153 dac_gn[4] dac_gn[1] 0.06764f
+C154 vdd_cmp a_37294_5800# 1.57801f
+C155 a_18500_7560# a_21494_7200# 0.01415f
+C156 a_4094_3600# dac_gp[10] 0.06965f
+C157 a_4694_3600# a_5294_3600# 3.0374f
+C158 a_7094_3600# a_9494_3600# 0.27729f
+C159 dac_gn[9] dac_gp[1] 0.06246f
+C160 dac_gp[9] vdd_dac 0.52609f
+C161 a_3494_3600# a_2894_3600# 3.40655f
+C162 vin dac_gp[10] 0.06803f
+C163 dac_gp[4] dac_gn[11] 0.06178f
+C164 a_4694_3600# rst_sw 0.50542f
+C165 dac_gp[4] dac_gn[5] 0.29793f
+C166 a_30098_2260# cmp_q 0.10836f
+C167 dac_gp[6] dac_gn[8] 0.06266f
+C168 a_6494_3600# dac_gp[4] 0.06244f
+C169 a_7694_3600# dac_gp[7] 0.0664f
+C170 dac_gp[0] dac_gn[10] 0.08463f
+C171 dac_gp[11] a_9494_3600# 0.57778f
+C172 a_7094_3600# a_21494_7200# 1.74863f
+C173 a_4094_3600# dac_gp[3] 0.2911f
+C174 tg_on dac_gp[1] 0.1317f
+C175 vin dac_gp[3] 0.14168f
+C176 dac_gp[2] a_2894_3600# 0.57613f
+C177 vdd a_27698_2060# 0.76623f
+C178 a_9494_3600# cmp_q 0.17655f
+C179 dac_gp[6] dac_gn[11] 0.06379f
+C180 dac_gp[0] dac_gp[5] 0.05189f
+C181 dac_gp[6] dac_gn[5] 0.10749f
+C182 a_6494_3600# dac_gp[6] 0.15243f
+C183 a_4094_3600# vdd_dac 0.88886f
+C184 vin vdd_dac 0.07873f
+C185 a_21494_7200# cmp_q 0.01606f
+C186 a_26784_1800# vdd 0.07764f
+C187 a_7094_3600# dac_gn[10] 0.0148f
+C188 dac_gn[3] dac_gp[10] 0.51534f
+C189 a_7694_3600# a_5894_3600# 0.66369f
+C190 a_7694_3600# a_8294_3600# 8.72278f
+C191 a_3494_3600# dac_gp[7] 0.18077f
+C192 a_5294_3600# a_2894_3600# 2.38331f
+C193 a_7094_3600# a_1094_7200# 0.28574f
+C194 a_916_7200# vdd_dac 0.08603f
+C195 rst_sw a_2894_3600# 1.26014f
+C196 dac_gn[10] dac_gn[7] 0.06037f
+C197 a_7094_3600# dac_gp[5] 0.01568f
+C198 dac_gn[1] dac_gp[1] 0.23573f
+C199 a_18500_6240# a_916_7200# 0.04388f
+C200 a_4694_3600# cmp_clk 0.08845f
+C201 dac_gn[3] dac_gp[3] 0.14082f
+C202 a_5872_6680# a_916_7200# 0.02592f
+C203 a_4094_3600# a_9494_3600# 0.05657f
+C204 dac_gp[8] dac_gn[2] 0.05552f
+C205 dac_gp[5] dac_gn[7] 0.38166f
+C206 a_7094_3600# a_11828_4060# 0.38427f
+C207 dac_gp[7] dac_gp[2] 0.06206f
+C208 tg_on vdd 1.00101f
+C209 dac_gn[6] dac_gn[8] 0.06429f
+C210 vin a_9494_3600# 0.72587f
+C211 a_23316_2302# a_27698_2060# 0.5534f
+C212 a_916_7200# a_18500_5800# 0.0274f
+C213 dac_gp[11] dac_gp[5] 1.32645f
+C214 dac_gp[10] dac_gp[3] 0.05199f
+C215 dac_gn[10] dac_gp[9] 0.09848f
+C216 dac_gp[5] cmp_q 0.1441f
+C217 a_5894_3600# a_3494_3600# 0.38251f
+C218 a_23546_2302# a_35494_1800# 5.62131f
+C219 a_26694_9400# tg_on 0.11888f
+C220 dac_gp[0] dac_gp[4] 0.06172f
+C221 dac_gn[9] dac_gn[8] 0.12787f
+C222 a_916_7200# a_9494_3600# 0.93526f
+C223 a_23316_2302# a_26784_1800# 0.31723f
+C224 dac_gn[6] dac_gn[11] 0.05547f
+C225 a_36338_1800# cmp_q 0.0776f
+C226 dac_gp[5] dac_gp[9] 0.05204f
+C227 dac_gn[6] dac_gn[5] 0.06449f
+C228 dac_gp[10] vdd_dac 0.48763f
+C229 a_6494_3600# dac_gn[6] 0.2057f
+C230 dac_gp[7] a_5294_3600# 0.0549f
+C231 a_4694_3600# a_2094_1000# 0.98873f
+C232 dac_gp[7] rst_sw 0.08212f
+C233 a_5894_3600# dac_gp[2] 0.15144f
+C234 a_8294_3600# dac_gp[2] 0.12077f
+C235 a_916_7200# a_21494_7200# 0.1962f
+C236 dac_gn[9] dac_gn[11] 0.06991f
+C237 tg_on dac_gn[8] 0.27898f
+C238 dac_gp[0] dac_gp[6] 0.06266f
+C239 dac_gn[5] dac_gn[9] 0.09571f
+C240 a_4094_3600# dac_gn[10] 0.03395f
+C241 a_2894_3600# cmp_clk 0.16108f
+C242 a_6494_3600# dac_gn[9] 0.18713f
+C243 dac_gp[3] vdd_dac 0.55855f
+C244 a_7094_3600# dac_gp[4] 0.13649f
+C245 vin dac_gn[10] 0.25189f
+C246 vdd_cmp a_8294_3600# 0.18061f
+C247 a_7694_3600# dac_gp[1] 0.12421f
+C248 a_18500_8000# a_18500_7560# 0.29096f
+C249 a_4094_3600# a_1094_7200# 2.2876f
+C250 a_23316_2302# tg_on 0.08365f
+C251 vin a_1094_7200# 0.05987f
+C252 a_4094_3600# dac_gp[5] 0.11198f
+C253 dac_gn[0] a_2894_3600# 0.23529f
+C254 dac_gp[4] dac_gn[7] 0.02949f
+C255 a_8294_3600# a_5294_3600# 0.15117f
+C256 a_4694_3600# a_8894_3600# 0.56195f
+C257 tg_on dac_gn[11] 0.28713f
+C258 vin dac_gp[5] 0.11833f
+C259 a_5894_3600# a_5294_3600# 6.72763f
+C260 tg_on dac_gn[5] 0.1649f
+C261 dac_gp[11] dac_gp[4] 0.1605f
+C262 a_6494_3600# tg_on 0.27436f
+C263 a_5894_3600# rst_sw 0.51725f
+C264 a_8294_3600# rst_sw 1.06817f
+C265 a_4094_3600# a_11828_4060# 0.13645f
+C266 dac_gp[4] cmp_q 0.61522f
+C267 a_916_7200# a_1094_7200# 0.21344f
+C268 vin a_11828_4060# 3.53028f
+C269 dac_gn[1] dac_gn[8] 0.07373f
+C270 dac_gn[4] a_5294_3600# 0.2476f
+C271 dac_gp[6] dac_gn[7] 0.19326f
+C272 a_2094_1000# a_2894_3600# 2.56399f
+C273 dac_gp[4] dac_gp[9] 0.05123f
+C274 dac_gp[11] dac_gp[6] 0.06322f
+C275 dac_gn[10] dac_gn[3] 0.30294f
+C276 a_916_7200# a_11828_4060# 0.39547f
+C277 a_18500_6240# a_18500_5800# 0.29096f
+C278 a_3494_3600# dac_gp[1] 0.30011f
+C279 dac_gp[7] cmp_clk 0.07605f
+C280 dac_gp[6] cmp_q 1.84962f
+C281 vdd_dac a_9494_3600# 3.79747f
+C282 a_26898_2260# vdd 0.49874f
+C283 a_4694_3600# dac_gp[8] 0.55086f
+C284 dac_gn[1] dac_gn[11] 0.15871f
+C285 dac_gn[5] dac_gn[1] 0.04349f
+C286 a_7694_3600# vdd 0.9493f
+C287 dac_gp[5] dac_gn[3] 0.05628f
+C288 dac_gn[10] dac_gp[10] 0.58256f
+C289 dac_gn[6] dac_gp[0] 0.07592f
+C290 dac_gp[6] dac_gp[9] 0.05123f
+C291 dac_gn[0] dac_gp[7] 0.91107f
+C292 dac_gp[1] dac_gp[2] 0.15721f
+C293 a_23546_2302# a_4694_3600# 0.21136f
+C294 a_8894_3600# a_2894_3600# 0.13667f
+C295 vdd_dac a_21494_7200# 0.03361f
+C296 a_4094_3600# dac_gp[4] 0.11409f
+C297 a_37294_5800# a_35494_1800# 0.12657f
+C298 dac_gp[5] dac_gp[10] 0.05204f
+C299 dac_gp[4] vin 0.14506f
+C300 a_5894_3600# cmp_clk 0.09135f
+C301 dac_gn[10] dac_gp[3] 0.07491f
+C302 dac_gp[0] dac_gn[9] 0.07772f
+C303 a_8294_3600# cmp_clk 0.07372f
+C304 a_37294_5800# a_23546_2302# 0.25404f
+C305 a_28498_2660# vdd 0.28909f
+C306 dac_gp[7] a_2094_1000# 0.06986f
+C307 dac_gp[5] dac_gp[3] 2.2777f
+C308 a_4094_3600# dac_gp[6] 0.77832f
+C309 a_7694_3600# dac_gn[8] 0.07714f
+C310 a_5294_3600# dac_gp[1] 0.2056f
+C311 a_3494_3600# vdd 3.72386f
+C312 rst_sw dac_gp[1] 0.07269f
+C313 vin dac_gp[6] 0.11935f
+C314 dac_gp[0] tg_on 0.49905f
+C315 a_23316_2302# a_26898_2260# 0.11343f
+C316 a_9494_3600# a_21494_7200# 18.291f
+C317 a_27698_2060# cmp_q 0.09701f
+C318 dac_gp[8] a_2894_3600# 0.15684f
+C319 dac_gn[6] dac_gn[7] 0.11061f
+C320 a_7694_3600# a_23316_2302# 0.15715f
+C321 a_7094_3600# dac_gn[9] 0.17213f
+C322 dac_gp[5] vdd_dac 0.56838f
+C323 dac_gn[0] dac_gn[4] 1.11981f
+C324 dac_gp[4] dac_gn[3] 0.06482f
+C325 a_7694_3600# dac_gn[11] 0.02626f
+C326 a_7694_3600# a_6494_3600# 0.69017f
+C327 a_5894_3600# a_2094_1000# 0.81606f
+C328 a_8294_3600# a_2094_1000# 0.04998f
+C329 dac_gn[9] dac_gn[7] 0.7332f
+C330 a_26784_1800# cmp_q 0.345f
+C331 a_7094_3600# tg_on 0.29446f
+C332 vdd_cmp vdd 7.69236f
+C333 dac_gp[4] dac_gp[10] 0.05123f
+C334 a_28498_2660# a_23316_2302# 0.3666f
+C335 dac_gp[0] dac_gn[1] 0.08825f
+C336 dac_gp[6] dac_gn[3] 0.06331f
+C337 a_9494_3600# a_1094_7200# 0.01226f
+C338 tg_on dac_gn[7] 0.28492f
+C339 vdd_cmp a_26694_9400# 2.17007f
+C340 dac_gn[9] dac_gp[9] 0.32457f
+C341 a_5294_3600# vdd 0.44952f
+C342 dac_gp[11] tg_on 0.10625f
+C343 rst_sw vdd 2.3393f
+C344 a_5894_3600# a_8894_3600# 0.26064f
+C345 dac_gp[4] dac_gp[3] 0.50749f
+C346 a_8294_3600# a_8894_3600# 3.72503f
+C347 tg_on cmp_q 0.27546f
+C348 dac_gp[7] dac_gp[8] 0.37035f
+C349 dac_gp[1] cmp_clk 0.06656f
+C350 dac_gp[6] dac_gp[10] 0.05123f
+C351 a_3494_3600# dac_gn[11] 0.02887f
+C352 a_21494_7200# a_1094_7200# 1.68158f
+C353 a_9494_3600# a_11828_4060# 1.50439f
+C354 a_6494_3600# a_3494_3600# 0.28192f
+C355 dac_gp[7] dac_gn[2] 0.20176f
+C356 dac_gn[6] vin 0.19511f
+C357 tg_on dac_gp[9] 0.06604f
+C358 dac_gp[4] vdd_dac 0.52357f
+C359 dac_gn[0] dac_gp[1] 0.34126f
+C360 dac_gp[6] dac_gp[3] 0.07353f
+C361 a_21494_7200# a_11828_4060# 0.06723f
+C362 dac_gp[2] dac_gn[11] 0.06445f
+C363 dac_gn[1] dac_gn[7] 0.07191f
+C364 a_6494_3600# dac_gp[2] 0.05399f
+C365 vin dac_gn[9] 2.81544f
+C366 dac_gp[11] dac_gn[1] 0.21876f
+C367 a_5294_3600# dac_gn[8] 0.02035f
+C368 vdd_cmp a_23316_2302# 1.57273f
+C369 a_5894_3600# dac_gp[8] 0.06204f
+C370 a_8294_3600# dac_gp[8] 0.42836f
+C371 dac_gp[5] dac_gn[10] 0.05143f
+C372 dac_gn[1] cmp_q 0.72105f
+C373 dac_gp[6] vdd_dac 0.50818f
+C374 a_23316_2302# a_28562_1800# 0.35878f
+C375 a_6494_3600# vdd_cmp 0.19688f
+C376 dac_gp[1] a_2094_1000# 0.14241f
+C377 a_7694_3600# dac_gp[0] 0.07418f
+C378 a_4094_3600# tg_on 0.32494f
+C379 a_18500_6240# a_18500_8000# 0.01615f
+C380 a_5294_3600# dac_gn[11] 0.02626f
+C381 a_23546_2302# a_8294_3600# 0.03891f
+C382 dac_gn[1] dac_gp[9] 0.07702f
+C383 vin tg_on 2.91698f
+C384 a_5294_3600# dac_gn[5] 0.13792f
+C385 dac_gn[6] dac_gn[3] 0.06445f
+C386 vdd cmp_clk 0.25435f
+C387 a_6494_3600# a_5294_3600# 0.4293f
+C388 a_6494_3600# rst_sw 0.1424f
+C389 dac_gn[4] dac_gn[2] 0.06351f
+C390 a_4694_3600# a_2894_3600# 4.87868f
+C391 a_916_7200# tg_on 0.65017f
+C392 dac_gn[9] dac_gn[3] 0.11883f
+C393 a_8894_3600# dac_gp[1] 0.04013f
+C394 a_7694_3600# a_7094_3600# 7.08625f
+C395 a_18500_8000# a_9494_3600# 0.05632f
+C396 a_3494_3600# dac_gp[0] 0.24303f
+C397 vin dac_gn[1] 0.18519f
+C398 dac_gn[9] dac_gp[10] 0.11142f
+C399 tg_on dac_gn[3] 0.1616f
+C400 a_7694_3600# dac_gp[11] 0.04742f
+C401 a_27698_2060# vdd_dac 0.24762f
+C402 dac_gp[4] dac_gn[10] 0.06164f
+C403 a_2094_1000# vdd 0.45121f
+C404 a_18500_8000# a_21494_7200# 0.0884f
+C405 a_26898_2260# cmp_q 0.12676f
+C406 a_7694_3600# cmp_q 0.08013f
+C407 dac_gn[9] dac_gp[3] 0.11252f
+C408 dac_gp[0] dac_gp[2] 4.32353f
+C409 a_23316_2302# cmp_clk 0.11531f
+C410 dac_gn[0] dac_gn[8] 0.07316f
+C411 tg_on dac_gp[10] 0.05685f
+C412 dac_gp[4] dac_gp[5] 0.57709f
+C413 dac_gp[8] dac_gp[1] 0.04883f
+C414 dac_gp[7] a_4694_3600# 0.46209f
+C415 a_27698_2060# a_30098_2260# 0.63038f
+C416 a_7694_3600# dac_gp[9] 0.22383f
+C417 a_26784_1800# vdd_dac 0.11493f
+C418 a_7094_3600# a_3494_3600# 0.0304f
+C419 a_6494_3600# cmp_clk 0.05945f
+C420 dac_gp[6] dac_gn[10] 0.06395f
+C421 dac_gp[1] dac_gn[2] 0.11983f
+C422 a_8894_3600# vdd 0.94613f
+C423 tg_on dac_gp[3] 3.22767f
+C424 dac_gn[1] dac_gn[3] 0.07194f
+C425 a_28498_2660# cmp_q 0.27966f
+C426 dac_gn[0] dac_gn[11] 0.09242f
+C427 dac_gn[0] dac_gn[5] 0.08631f
+C428 dac_gp[5] dac_gp[6] 0.65759f
+C429 a_3494_3600# dac_gp[11] 0.28246f
+C430 dac_gp[0] a_5294_3600# 0.15112f
+C431 a_7094_3600# dac_gp[2] 0.0804f
+C432 dac_gp[0] rst_sw 0.07974f
+C433 a_3494_3600# cmp_q 0.32599f
+C434 a_5894_3600# a_4694_3600# 7.30781f
+C435 a_8294_3600# a_4694_3600# 2.93748f
+C436 tg_on vdd_dac 0.10391f
+C437 dac_gn[1] dac_gp[10] 0.07001f
+C438 a_7694_3600# a_4094_3600# 0.06443f
+C439 a_26784_1800# a_9494_3600# 0.10728f
+C440 a_7694_3600# vin 1.61361f
+C441 a_7094_3600# vdd_cmp 0.25606f
+C442 dac_gp[11] dac_gp[2] 0.06453f
+C443 a_3494_3600# dac_gp[9] 0.18077f
+C444 a_6494_3600# a_2094_1000# 2.04079f
+C445 dac_gn[4] a_4694_3600# 0.10272f
+C446 dac_gp[2] cmp_q 0.49209f
+C447 dac_gn[1] dac_gp[3] 0.07646f
+C448 a_7694_3600# a_916_7200# 0.05581f
+C449 dac_gp[7] a_2894_3600# 0.16572f
+C450 a_7094_3600# a_5294_3600# 2.7828f
+C451 a_26784_1800# a_21494_7200# 0.12355f
+C452 a_7094_3600# rst_sw 0.17615f
+C453 a_35494_1800# vdd 0.67188f
+C454 dac_gp[9] dac_gp[2] 0.05123f
+C455 vdd_cmp cmp_q 3.0537f
+C456 a_23316_2302# a_8894_3600# 0.07817f
+C457 a_23546_2302# vdd 0.40807f
+C458 tg_on a_9494_3600# 1.31642f
+C459 dac_gp[11] a_5294_3600# 0.64797f
+C460 a_26694_9400# a_35494_1800# 2.42533f
+C461 a_8894_3600# dac_gn[11] 0.41649f
+C462 dac_gn[6] dac_gn[10] 0.06515f
+C463 a_4094_3600# a_3494_3600# 5.16318f
+C464 dac_gp[11] rst_sw 0.59254f
+C465 a_6494_3600# a_8894_3600# 2.72528f
+C466 a_28562_1800# cmp_q 0.05994f
+C467 a_5294_3600# cmp_q 0.05216f
+C468 a_3494_3600# vin 1.52727f
+C469 dac_gp[4] dac_gp[6] 1.86298f
+C470 a_26694_9400# a_23546_2302# 1.33618f
+C471 rst_sw cmp_q 0.10867f
+C472 a_5894_3600# a_2894_3600# 0.70896f
+C473 a_8294_3600# a_2894_3600# 0.1343f
+C474 tg_on a_21494_7200# 0.01761f
+C475 dac_gp[0] cmp_clk 0.0607f
+C476 a_36338_1800# a_27698_2060# 0.2323f
+C477 a_27698_2060# a_11828_4060# 0.99985f
+C478 dac_gp[8] dac_gn[8] 0.06612f
+C479 dac_gn[6] dac_gp[5] 0.08085f
+C480 a_5294_3600# dac_gp[9] 0.04622f
+C481 dac_gn[9] dac_gn[10] 0.42748f
+C482 a_4094_3600# dac_gp[2] 0.35078f
+C483 rst_sw dac_gp[9] 0.06561f
+C484 a_3494_3600# a_916_7200# 0.0581f
+C485 a_7694_3600# dac_gp[10] 0.05881f
+C486 vin dac_gp[2] 0.1537f
+C487 dac_gn[2] dac_gn[8] 0.06731f
+C488 dac_gn[0] dac_gp[0] 0.18438f
+C489 dac_gp[5] dac_gn[9] 0.0581f
+C490 dac_gp[8] dac_gn[11] 0.05619f
+C491 a_26784_1800# a_11828_4060# 0.07202f
+C492 a_4694_3600# dac_gp[1] 0.18315f
+C493 tg_on dac_gn[10] 0.28757f
+C494 a_7694_3600# dac_gp[3] 0.1388f
+C495 a_6494_3600# dac_gp[8] 0.11798f
+C496 a_7094_3600# cmp_clk 0.13283f
+C497 a_23316_2302# a_23546_2302# 5.58807f
+C498 dac_gn[2] dac_gn[11] 0.29365f
+C499 dac_gn[5] dac_gn[2] 0.04615f
+C500 a_4094_3600# a_5294_3600# 5.79192f
+C501 dac_gp[0] a_2094_1000# 0.4946f
+C502 a_26898_2260# vdd_dac 0.33554f
+C503 dac_gp[5] tg_on 0.06505f
+C504 vin a_5294_3600# 1.74049f
+C505 a_4094_3600# rst_sw 0.37955f
+C506 vdd_cmp a_916_7200# 0.02965f
+C507 a_6494_3600# a_23546_2302# 0.01089f
+C508 vin rst_sw 0.68001f
+C509 a_7694_3600# vdd_dac 1.62259f
+C510 dac_gp[11] cmp_clk 0.10935f
+C511 a_5894_3600# dac_gp[7] 0.06976f
+C512 a_3494_3600# dac_gp[10] 0.10411f
+C513 dac_gp[2] dac_gn[3] 0.08518f
+C514 cmp_clk cmp_q 10.5257f
+C515 tg_on a_11828_4060# 1.19174f
+C516 a_916_7200# a_5294_3600# 0.0648f
+C517 dac_gn[0] dac_gn[7] 0.13036f
+C518 a_916_7200# rst_sw 0.70179f
+C519 dac_gn[1] dac_gn[10] 0.08684f
+C520 dac_gn[0] dac_gp[11] 0.1385f
+C521 dac_gp[9] cmp_clk 0.06357f
+C522 a_3494_3600# dac_gp[3] 0.42582f
+C523 a_7094_3600# a_2094_1000# 0.06654f
+C524 dac_gn[0] cmp_q 0.08092f
+C525 dac_gp[2] dac_gp[10] 0.05123f
+C526 dac_gp[0] a_8894_3600# 0.18993f
+C527 a_4694_3600# vdd 1.40057f
+C528 a_28498_2660# vdd_dac 0.01026f
+C529 dac_gp[1] a_2894_3600# 0.7923f
+C530 dac_gp[5] dac_gn[1] 0.07801f
+C531 dac_gp[4] dac_gn[9] 0.07058f
+C532 a_5894_3600# a_8294_3600# 2.78716f
+C533 a_7694_3600# a_9494_3600# 0.59704f
+C534 dac_gn[0] dac_gp[9] 0.33763f
+C535 a_37294_5800# vdd 0.08014f
+C536 dac_gn[6] dac_gp[6] 0.2321f
+C537 dac_gp[11] a_2094_1000# 0.06008f
+C538 a_3494_3600# vdd_dac 2.81792f
+C539 dac_gp[2] dac_gp[3] 0.35968f
+C540 a_28498_2660# a_30098_2260# 0.71773f
+C541 a_5894_3600# dac_gn[4] 0.02018f
+C542 a_7694_3600# a_21494_7200# 2.2788f
+C543 a_5294_3600# dac_gp[10] 0.31363f
+C544 dac_gp[4] tg_on 0.08164f
+C545 a_4094_3600# cmp_clk 0.07698f
+C546 a_7094_3600# a_8894_3600# 1.0041f
+C547 dac_gp[6] dac_gn[9] 0.0674f
+C548 vin cmp_clk 0.14307f
+C549 rst_sw dac_gp[10] 0.06436f
+C550 dac_gp[0] dac_gp[8] 0.08075f
+C551 a_2094_1000# dac_gp[9] 0.05545f
+C552 dac_gp[2] vdd_dac 0.56547f
+C553 a_4094_3600# dac_gn[0] 0.01391f
+C554 a_5294_3600# dac_gp[3] 0.1387f
+C555 dac_gp[11] a_8894_3600# 0.23344f
+C556 dac_gp[0] dac_gn[2] 0.06882f
+C557 dac_gn[0] vin 0.66551f
+C558 rst_sw dac_gp[3] 0.25797f
+C559 a_3494_3600# a_9494_3600# 0.01691f
+C560 vdd_cmp vdd_dac 0.87089f
+C561 tg_on dac_gp[6] 0.10623f
+C562 dac_gp[7] dac_gp[1] 0.05362f
+C563 a_8894_3600# cmp_q 0.08056f
+C564 a_7694_3600# dac_gn[10] 0.02247f
+C565 a_23316_2302# a_4694_3600# 0.61377f
+C566 vdd a_2894_3600# 0.70049f
+C567 a_5294_3600# vdd_dac 1.02886f
+C568 a_4694_3600# dac_gn[11] 0.02378f
+C569 a_28562_1800# vdd_dac 0.04099f
+C570 dac_gp[4] dac_gn[1] 0.07801f
+C571 a_7094_3600# dac_gp[8] 0.14724f
+C572 a_6494_3600# a_4694_3600# 0.40129f
+C573 vdd_cmp a_30098_2260# 2.80739f
+C574 a_4094_3600# a_2094_1000# 4.26872f
+C575 rst_sw vdd_dac 3.20418f
+C576 vin a_2094_1000# 1.30261f
+C577 vin dac_gdn 0.36064f
+C578 a_26898_2260# a_11828_4060# 0.08511f
+C579 a_7694_3600# a_11828_4060# 0.2264f
+C580 a_7094_3600# a_23546_2302# 0.03647f
+C581 dac_gp[11] dac_gp[8] 0.06724f
+C582 a_8294_3600# dac_gp[1] 0.14948f
+C583 a_5894_3600# dac_gp[1] 0.19352f
+C584 vdd_cmp a_9494_3600# 0.42088f
+C585 dac_gp[6] dac_gn[1] 0.06925f
+C586 dac_gn[0] dac_gn[3] 0.35045f
+C587 a_916_7200# a_2094_1000# 0.07219f
+C588 dac_gn[2] dac_gn[7] 0.06553f
+C589 dac_gp[8] cmp_q 0.05862f
+C590 dac_gp[10] cmp_clk 0.06353f
+C591 dac_gp[11] dac_gn[2] 0.05714f
+C592 dac_gn[6] dac_gn[9] 0.08351f
+C593 a_5294_3600# a_9494_3600# 0.06742f
+C594 a_4094_3600# a_8894_3600# 0.0516f
+C595 a_35494_1800# cmp_q 0.56185f
+C596 dac_gn[4] dac_gp[1] 0.05046f
+C597 dac_gp[8] dac_gp[9] 0.90663f
+C598 vdd_cmp a_21494_7200# 2.02968f
+C599 a_3494_3600# a_1094_7200# 1.81331f
+C600 rst_sw a_9494_3600# 0.29414f
+C601 vin a_8894_3600# 1.61584f
+C602 a_23546_2302# cmp_q 0.95977f
+C603 dac_gn[0] dac_gp[10] 0.12566f
+C604 dac_gp[3] cmp_clk 0.22621f
+C605 a_916_7200# a_5872_7120# 0.12221f
+C606 a_36338_1800# a_28498_2660# 0.76547f
+C607 a_3494_3600# dac_gp[5] 0.10549f
+C608 a_28498_2660# a_11828_4060# 0.2661f
+C609 dac_gn[10] dac_gp[2] 0.11169f
+C610 dac_gn[2] dac_gp[9] 0.05942f
+C611 a_916_7200# a_8894_3600# 0.21302f
+C612 dac_gn[6] tg_on 0.16031f
+C613 a_6494_3600# a_2894_3600# 0.32506f
+C614 rst_sw a_21494_7200# 0.08498f
+C615 a_3494_3600# a_11828_4060# 0.86962f
+C616 dac_gn[0] dac_gp[3] 0.16727f
+C617 tg_on a_26784_1800# 1.93011f
+C618 vdd_dac cmp_clk 6.28862f
+C619 dac_gp[5] dac_gp[2] 0.05933f
+C620 a_2094_1000# dac_gp[10] 0.0501f
+C621 a_4094_3600# dac_gp[8] 0.05021f
+C622 tg_on dac_gn[9] 0.37395f
+C623 a_5894_3600# vdd 1.03526f
+C624 a_8294_3600# vdd 2.03943f
+C625 vin dac_gp[8] 0.06309f
+C626 a_5294_3600# dac_gn[10] 0.01609f
+C627 dac_gp[7] dac_gn[8] 0.12361f
+C628 a_30098_2260# cmp_clk 2.41395f
+C629 dac_gp[0] a_4694_3600# 0.13817f
+C630 a_4094_3600# dac_gn[2] 0.22468f
+C631 a_2094_1000# dac_gp[3] 0.06948f
+C632 vin dac_gn[2] 0.18881f
+C633 a_5294_3600# a_1094_7200# 8.61918f
+C634 dac_gn[6] dac_gn[1] 0.07115f
+C635 rst_sw a_1094_7200# 0.24259f
+C636 vdd_cmp a_11828_4060# 0.73702f
+C637 dac_gp[5] a_5294_3600# 0.3353f
+C638 dac_gp[5] rst_sw 0.36953f
+C639 a_9494_3600# cmp_clk 0.39477f
+C640 a_8894_3600# dac_gp[10] 0.5071f
+C641 dac_gp[7] dac_gn[11] 0.05591f
+C642 a_2094_1000# vdd_dac 1.4682f
+C643 a_6494_3600# dac_gp[7] 0.24746f
+C644 a_3494_3600# dac_gp[4] 1.06918f
+C645 a_5294_3600# a_11828_4060# 0.14562f
+C646 dac_gn[9] dac_gn[1] 0.05197f
+C647 rst_sw a_11828_4060# 0.0974f
+C648 a_7094_3600# a_4694_3600# 5.73825f
+C649 a_21494_7200# cmp_clk 0.01869f
+C650 dac_gp[8] dac_gn[3] 0.08207f
+C651 dac_gp[4] dac_gp[2] 2.91401f
+C652 a_23316_2302# a_8294_3600# 0.20741f
+C653 dac_gn[4] dac_gn[8] 0.20252f
+C654 a_3494_3600# dac_gp[6] 0.0478f
+C655 dac_gn[2] dac_gn[3] 2.84712f
+C656 dac_gp[11] a_4694_3600# 0.12752f
+C657 tg_on dac_gn[1] 0.1596f
+C658 a_5894_3600# dac_gn[11] 0.02626f
+C659 a_8294_3600# dac_gn[11] 0.02937f
+C660 a_5894_3600# dac_gn[5] 0.2166f
+C661 dac_gp[8] dac_gp[10] 0.05534f
+C662 a_8894_3600# vdd_dac 0.75083f
+C663 dac_gp[0] a_2894_3600# 0.42766f
+C664 a_4694_3600# cmp_q 0.0681f
+C665 a_26898_2260# a_27698_2060# 0.60485f
+C666 a_5894_3600# a_6494_3600# 0.29258f
+C667 a_6494_3600# a_8294_3600# 3.23636f
+C668 a_2094_1000# a_9494_3600# 0.06403f
+C669 a_5872_6680# a_5872_7120# 0.29096f
+C670 dac_gn[2] dac_gp[10] 0.46593f
+C671 a_37294_5800# cmp_q 0.72669f
+C672 dac_gp[6] dac_gp[2] 0.06589f
+C673 dac_gn[4] dac_gn[11] 0.0581f
+C674 dac_gn[4] dac_gn[5] 0.26124f
+C675 a_4694_3600# dac_gp[9] 0.16262f
+C676 a_6494_3600# dac_gn[4] 0.02008f
+C677 dac_gp[8] dac_gp[3] 0.0637f
+C678 dac_gp[4] a_5294_3600# 0.42001f
+C679 dac_gp[5] cmp_clk 0.1061f
+C680 a_26898_2260# a_26784_1800# 0.57081f
+C681 dac_gn[0] dac_gn[10] 0.10435f
+C682 dac_gp[4] rst_sw 0.07532f
+C683 a_7694_3600# a_26784_1800# 0.01136f
+C684 dac_gn[2] dac_gp[3] 0.06318f
+C685 a_7094_3600# a_2894_3600# 0.16733f
+C686 dac_gp[8] vdd_dac 0.55916f
+C687 a_8894_3600# a_9494_3600# 10.1182f
+C688 a_11828_4060# cmp_clk 0.0339f
+C689 a_7694_3600# dac_gn[9] 0.48664f
+C690 a_28498_2660# a_27698_2060# 3.34736f
+C691 dac_gn[0] dac_gp[5] 0.219f
+C692 a_5294_3600# dac_gp[6] 0.12398f
+C693 rst_sw dac_gp[6] 0.06953f
+C694 a_4094_3600# a_4694_3600# 1.71519f
+C695 dac_gp[11] a_2894_3600# 0.14646f
+C696 dac_gp[7] dac_gp[0] 0.0554f
+C697 tg_on a_26898_2260# 0.04924f
+C698 a_23546_2302# vdd_dac 0.16485f
+C699 vin a_4694_3600# 7.19181f
+C700 a_8894_3600# a_21494_7200# 8.84708f
+C701 a_2894_3600# cmp_q 0.02595f
+C702 dac_gp[1] dac_gn[8] 0.06246f
+C703 a_2094_1000# a_1094_7200# 0.99613f
+C704 a_7694_3600# tg_on 0.3473f
+C705 dac_gp[5] a_2094_1000# 0.06948f
+C706 a_35494_1800# a_30098_2260# 0.08757f
+C707 a_916_7200# a_4694_3600# 0.09754f
+C708 dac_gp[9] a_2894_3600# 0.13953f
+C709 a_23546_2302# a_30098_2260# 0.79523f
+C710 dac_gp[1] dac_gn[11] 4.13974f
+C711 a_2094_1000# a_11828_4060# 0.13784f
+C712 dac_gn[5] dac_gp[1] 0.06396f
+C713 a_8894_3600# dac_gn[10] 0.09248f
+C714 a_7094_3600# dac_gp[7] 0.48329f
+C715 a_6494_3600# dac_gp[1] 0.11409f
+C716 a_26694_9400# vdd 1.13727f
+C717 a_5894_3600# dac_gp[0] 0.16702f
+C718 dac_gp[0] a_8294_3600# 0.08637f
+C719 dac_gp[4] cmp_clk 0.06882f
+C720 vdd_cmp a_27698_2060# 3.50999f
+C721 a_23546_2302# a_9494_3600# 0.14773f
+C722 a_8894_3600# a_1094_7200# 0.18434f
+C723 a_4694_3600# dac_gn[3] 0.22232f
+C724 dac_gp[7] dac_gn[7] 0.02616f
+C725 a_28562_1800# a_27698_2060# 0.76547f
+C726 dac_gp[0] dac_gn[4] 0.05189f
+C727 dac_gn[0] dac_gp[4] 0.219f
+C728 dac_gp[7] dac_gp[11] 0.07146f
+C729 dac_gn[9] dac_gp[2] 0.11846f
+C730 a_3494_3600# tg_on 0.31027f
+C731 a_4094_3600# a_2894_3600# 2.05084f
+C732 vdd_cmp a_26784_1800# 1.98271f
+C733 dac_gp[7] cmp_q 0.06206f
+C734 dac_gp[6] cmp_clk 0.06694f
+C735 a_23546_2302# a_21494_7200# 1.33618f
+C736 vin a_2894_3600# 2.17238f
+C737 a_8894_3600# a_11828_4060# 0.22866f
+C738 a_4694_3600# dac_gp[10] 0.07204f
+C739 a_5894_3600# a_7094_3600# 0.57697f
+C740 a_7094_3600# a_8294_3600# 2.24597f
+C741 dac_gp[8] dac_gn[10] 0.0532f
+C742 dac_gp[7] dac_gp[9] 0.19276f
+C743 tg_on dac_gp[2] 0.67241f
+C744 a_23316_2302# vdd 0.33543f
+C745 dac_gn[0] dac_gp[6] 0.10447f
+C746 a_916_7200# a_2894_3600# 0.06133f
+C747 dac_gp[4] a_2094_1000# 0.05735f
+C748 a_5894_3600# dac_gn[7] 0.07603f
+C749 a_5294_3600# dac_gn[9] 0.17213f
+C750 a_7094_3600# dac_gn[4] 0.0368f
+C751 dac_gn[10] dac_gn[2] 0.21793f
+C752 a_4694_3600# dac_gp[3] 0.42838f
+C753 a_5894_3600# dac_gp[11] 0.09436f
+C754 dac_gp[11] a_8294_3600# 0.0594f
+C755 dac_gp[5] dac_gp[8] 0.06182f
+C756 a_6494_3600# vdd 1.40025f
+C757 vdd_cmp tg_on 1.17238f
+C758 a_5894_3600# cmp_q 0.06911f
+C759 a_3494_3600# dac_gn[1] 0.22645f
+C760 a_8294_3600# cmp_q 0.08134f
+C761 dac_gn[4] dac_gn[7] 0.71774f
+C762 dac_gp[5] dac_gn[2] 0.05548f
+C763 dac_gp[6] a_2094_1000# 0.0617f
+C764 tg_on a_5294_3600# 0.32138f
+C765 a_4694_3600# vdd_dac 1.54678f
+C766 a_5894_3600# dac_gp[9] 0.05836f
+C767 a_8294_3600# dac_gp[9] 0.60511f
+C768 a_4094_3600# dac_gp[7] 0.24962f
+C769 a_36338_1800# a_35494_1800# 0.35878f
+C770 tg_on rst_sw 0.40556f
+C771 dac_gp[7] vin 0.07516f
+C772 dac_gn[1] dac_gp[2] 0.06925f
+C773 a_36338_1800# a_23546_2302# 0.2614f
+C774 dac_gp[0] dac_gp[1] 6.17372f
+C775 a_27698_2060# cmp_clk 1.38235f
+C776 a_23546_2302# a_11828_4060# 0.14983f
+C777 a_2894_3600# dac_gp[10] 0.13818f
+C778 dac_gn[4] dac_gp[9] 0.01941f
+C779 dac_gn[11] dac_gn[8] 0.06709f
+C780 dac_gn[5] dac_gn[8] 1.03414f
+C781 a_6494_3600# dac_gn[8] 0.01172f
+C782 a_26784_1800# cmp_clk 0.11715f
+C783 a_2894_3600# dac_gp[3] 0.14674f
+C784 a_28498_2660# a_26898_2260# 0.13464f
+C785 a_4094_3600# a_5894_3600# 0.39496f
+C786 a_4694_3600# a_9494_3600# 2.9354f
+C787 a_4094_3600# a_8294_3600# 0.05067f
+C788 a_6494_3600# a_23316_2302# 0.31041f
+C789 a_5894_3600# vin 2.75624f
+C790 vin a_8294_3600# 1.83707f
+C791 dac_gn[5] dac_gn[11] 0.06881f
+C792 dac_gp[4] dac_gp[8] 0.06078f
+C793 dac_gn[6] dac_gn[0] 0.10592f
+C794 a_7094_3600# dac_gp[1] 0.12421f
+C795 a_6494_3600# dac_gn[11] 0.10484f
+C796 dac_gp[7] dac_gn[3] 0.53432f
+C797 a_7694_3600# a_3494_3600# 0.01922f
+C798 a_4694_3600# a_21494_7200# 0.89322f
+C799 a_2894_3600# vdd_dac 1.758f
+C800 dac_gp[4] dac_gn[2] 0.05685f
+C801 a_5894_3600# a_916_7200# 0.21099f
+C802 a_916_7200# a_8294_3600# 0.07425f
+C803 dac_gn[4] vin 0.19626f
+C804 dac_gp[1] dac_gn[7] 0.05342f
+C805 dac_gn[0] dac_gn[9] 0.15423f
+C806 dac_gp[11] dac_gp[1] 0.06745f
+C807 tg_on cmp_clk 0.20545f
+C808 dac_gp[6] dac_gp[8] 0.0592f
+C809 dac_gp[7] dac_gp[10] 0.06917f
+C810 dac_gp[1] cmp_q 0.06735f
+C811 a_7694_3600# dac_gp[2] 0.11295f
+C812 dac_gp[6] dac_gn[2] 0.07444f
+C813 a_4694_3600# dac_gn[10] 0.0179f
+C814 dac_gn[0] tg_on 0.32795f
+C815 dac_gp[1] dac_gp[9] 0.04457f
+C816 vdd_cmp a_26898_2260# 1.50804f
+C817 dac_gp[7] dac_gp[3] 0.06528f
+C818 a_7694_3600# vdd_cmp 0.26361f
+C819 a_2894_3600# a_9494_3600# 0.14452f
+C820 a_4694_3600# a_1094_7200# 4.4572f
+C821 a_7094_3600# vdd 1.28306f
+C822 dac_gp[5] a_4694_3600# 0.12956f
+C823 dac_gn[4] dac_gn[3] 0.16983f
+C824 a_5894_3600# dac_gp[10] 0.05792f
+C825 a_8294_3600# dac_gp[10] 0.1614f
+C826 a_7694_3600# a_5294_3600# 0.50752f
+C827 dac_gp[7] vdd_dac 0.60791f
+C828 dac_gp[0] dac_gn[8] 0.07772f
+C829 tg_on a_2094_1000# 0.25898f
+C830 tg_on dac_gdn 0.46519f
+C831 a_7694_3600# rst_sw 0.20177f
+C832 a_2894_3600# a_21494_7200# 0.02143f
+C833 a_4694_3600# a_11828_4060# 0.35117f
+C834 dac_gn[4] dac_gp[10] 0.47057f
+C835 a_3494_3600# dac_gp[2] 0.32421f
+C836 a_4094_3600# dac_gp[1] 0.18915f
+C837 a_5894_3600# dac_gp[3] 0.15294f
+C838 a_28498_2660# vdd_cmp 3.61735f
+C839 dac_gn[0] dac_gn[1] 0.24053f
+C840 a_36338_1800# a_37294_5800# 0.01866f
+C841 vin dac_gp[1] 0.26996f
+C842 vdd cmp_q 0.60609f
+C843 dac_gp[0] dac_gn[11] 0.47657f
+C844 dac_gp[0] dac_gn[5] 0.07266f
+C845 a_28498_2660# a_28562_1800# 0.2323f
+C846 a_6494_3600# dac_gp[0] 0.0552f
+C847 a_35494_1800# a_27698_2060# 0.3666f
+C848 dac_gn[4] dac_gp[3] 0.15302f
+C849 a_7094_3600# dac_gn[8] 0.38663f
+C850 a_26694_9400# cmp_q 0.18281f
+C851 a_5894_3600# vdd_dac 2.18286f
+C852 a_8294_3600# vdd_dac 1.69989f
+C853 tg_on a_8894_3600# 0.30778f
+C854 a_23546_2302# a_27698_2060# 0.35306f
+C855 a_3494_3600# a_5294_3600# 0.93248f
+C856 a_2894_3600# a_1094_7200# 1.84777f
+C857 a_7094_3600# a_23316_2302# 0.12624f
+C858 dac_gn[6] dac_gn[2] 0.06445f
+C859 a_3494_3600# rst_sw 1.17251f
+C860 dac_gn[7] dac_gn[8] 0.2303f
+C861 dac_gp[5] a_2894_3600# 0.1513f
+C862 dac_gn[9] dac_gp[8] 0.48335f
+C863 dac_gp[4] a_4694_3600# 0.22203f
+C864 a_7094_3600# dac_gn[11] 0.02626f
+C865 a_23546_2302# a_26784_1800# 0.57068f
+C866 a_26898_2260# cmp_clk 0.0915f
+C867 a_6494_3600# a_7094_3600# 1.40131f
+C868 dac_gp[1] dac_gn[3] 0.0501f
+C869 a_2894_3600# a_11828_4060# 0.16555f
+C870 a_5294_3600# dac_gp[2] 0.14526f
+C871 dac_gn[9] dac_gn[2] 0.05198f
+C872 a_7694_3600# cmp_clk 0.16554f
+C873 a_4094_3600# vdd 0.4261f
+C874 rst_sw dac_gp[2] 0.08442f
+C875 dac_gn[11] dac_gn[7] 0.04787f
+C876 dac_gn[5] dac_gn[7] 0.17101f
+C877 a_5894_3600# a_9494_3600# 0.61488f
+C878 a_8294_3600# a_9494_3600# 2.22339f
+C879 vin vdd 4.3594f
+C880 a_23316_2302# cmp_q 0.13076f
+C881 a_6494_3600# dac_gn[7] 0.50063f
+C882 tg_on dac_gp[8] 0.13296f
+C883 dac_gp[11] dac_gn[11] 0.50839f
+C884 a_6494_3600# dac_gp[11] 0.08473f
+C885 dac_gp[1] dac_gp[10] 0.04457f
+C886 a_4694_3600# dac_gp[6] 0.11874f
+C887 vdd_cmp a_28562_1800# 0.01936f
+C888 dac_gp[7] dac_gn[10] 0.21955f
+C889 tg_on dac_gn[2] 0.16292f
+C890 a_6494_3600# cmp_q 0.06465f
+C891 a_916_7200# vdd 1.76484f
+C892 a_5894_3600# a_21494_7200# 0.01226f
+C893 tg_on a_23546_2302# 0.94816f
+C894 a_8294_3600# a_21494_7200# 4.52775f
+C895 dac_gp[9] dac_gn[11] 0.04523f
+C896 a_28498_2660# cmp_clk 1.36293f
+C897 dac_gp[1] dac_gp[3] 0.05372f
+C898 rst_sw a_5294_3600# 0.11548f
+C899 a_6494_3600# dac_gp[9] 0.07196f
+C900 dac_gp[7] dac_gp[5] 0.06533f
+C901 a_26694_9400# a_916_7200# 0.62324f
+C902 a_7694_3600# a_2094_1000# 0.07038f
+C903 a_3494_3600# cmp_clk 0.06528f
+C904 dac_gp[4] a_2894_3600# 0.13829f
+C905 dac_gn[1] dac_gp[8] 0.0781f
+C906 vin dac_gn[8] 0.18155f
+C907 dac_gp[1] vdd_dac 0.50603f
+C908 a_5894_3600# dac_gn[10] 0.0148f
+C909 a_8294_3600# dac_gn[10] 0.3967f
+C910 dac_gn[1] dac_gn[2] 3.76854f
+C911 a_3494_3600# dac_gn[0] 0.0142f
+C912 a_5894_3600# a_1094_7200# 16.4619f
+C913 a_8294_3600# a_1094_7200# 0.18211f
+C914 dac_gp[2] cmp_clk 0.44355f
+C915 a_4094_3600# dac_gn[11] 0.0323f
+C916 dac_gn[4] dac_gn[10] 0.07778f
+C917 a_4094_3600# a_6494_3600# 0.98061f
+C918 vin dac_gn[11] 0.75483f
+C919 a_5894_3600# dac_gp[5] 0.51512f
+C920 dac_gp[6] a_2894_3600# 0.1124f
+C921 vin dac_gn[5] 0.17814f
+C922 a_6494_3600# vin 2.93928f
+C923 a_7694_3600# a_8894_3600# 5.17515f
+C924 a_23316_2302# a_916_7200# 0.13183f
+C925 a_7094_3600# dac_gp[0] 0.07418f
+C926 vdd_cmp cmp_clk 4.99756f
+C927 dac_gn[0] dac_gp[2] 0.10709f
+C928 a_5894_3600# a_11828_4060# 0.18541f
+C929 a_37294_5800# a_27698_2060# 0.13888f
+C930 a_8294_3600# a_11828_4060# 0.24944f
+C931 dac_gn[4] dac_gp[5] 0.07019f
+C932 a_3494_3600# a_2094_1000# 0.70204f
+C933 cmp_q vss 7.17098f
+C934 cmp_clk vss 5.71186f
+C935 dac_gn[11] vss 0.85782f
+C936 dac_gn[10] vss 0.91478f
+C937 dac_gn[9] vss 1.1575f
+C938 dac_gn[8] vss 0.81432f
+C939 dac_gn[7] vss 0.85735f
+C940 dac_gn[6] vss 0.64924f
+C941 dac_gn[5] vss 0.67069f
+C942 dac_gn[4] vss 1.90181f
+C943 dac_gn[3] vss 0.96432f
+C944 dac_gn[2] vss 0.90147f
+C945 dac_gn[1] vss 2.87378f
+C946 dac_gn[0] vss 6.345f
+C947 dac_gdn vss 1.33272f
+C948 vin vss 7.74738f
+C949 dac_gp[11] vss 0.95205f
+C950 dac_gp[10] vss 0.37539f
+C951 dac_gp[9] vss 0.49613f
+C952 dac_gp[8] vss 0.41543f
+C953 dac_gp[7] vss 1.00596f
+C954 dac_gp[6] vss 0.40599f
+C955 dac_gp[5] vss 1.60946f
+C956 dac_gp[4] vss 0.57937f
+C957 dac_gp[3] vss 3.22065f
+C958 dac_gp[2] vss 0.70138f
+C959 dac_gp[1] vss 0.81768f
+C960 dac_gp[0] vss 1.12482f
+C961 rst_sw vss 5.94928f
+C962 tg_on vss 15.1881f
+C963 vdd_cmp vss 0.1922p
+C964 vdd_dac vss 69.6064f
+C965 vdd vss 0.12518p
+C966 a_36338_1800# vss 1.57618f
+C967 a_35494_1800# vss 5.62377f
+C968 a_28562_1800# vss 1.56644f
+C969 a_37294_5800# vss 1.77686f
+C970 a_30098_2260# vss 3.51542f
+C971 a_27698_2060# vss 5.02784f
+C972 a_26784_1800# vss 1.66199f
+C973 a_28498_2660# vss 4.71078f
+C974 a_26898_2260# vss 1.65352f
+C975 a_23546_2302# vss 5.27808f
+C976 a_23316_2302# vss 5.2968f
+C977 a_9494_3600# vss 13.6274f
+C978 a_8894_3600# vss 7.70481f
+C979 a_8294_3600# vss 7.3629f
+C980 a_7694_3600# vss 4.13869f
+C981 a_7094_3600# vss 6.66275f
+C982 a_6494_3600# vss 5.68727f
+C983 a_5894_3600# vss 12.7967f
+C984 a_5294_3600# vss 6.02635f
+C985 a_4694_3600# vss 10.601f
+C986 a_4094_3600# vss 4.08497f
+C987 a_3494_3600# vss 5.24933f
+C988 a_2894_3600# vss 5.08952f
+C989 a_2094_1000# vss 3.38083f
+C990 a_21494_7200# vss 22.2644f
+C991 a_18500_5800# vss 0.73078f
+C992 a_18500_6240# vss 0.87016f
+C993 a_5872_6680# vss 0.74999f
+C994 a_5872_7120# vss 0.88327f
+C995 a_1094_7200# vss 22.3039f
+C996 a_18500_7560# vss 0.72948f
+C997 a_26694_9400# vss 40.7825f
+C998 a_18500_8000# vss 0.91636f
+C999 a_916_7200# vss 30.6796f
+C1000 a_11828_4060# vss 2.81243f
+.ends
+

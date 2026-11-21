@@ -1,0 +1,118 @@
+{
+ "bytes": 56050,
+ "c_total_fF": 1295.432,
+ "census_equal_lvs": true,
+ "cthresh_fF": 0.01,
+ "date": "2026-11-21 01:24",
+ "devices": {
+  "cap_mim_2f0_m4m5_noshield": 132,
+  "nfet_03v3": 40,
+  "nfet_05v0": 1,
+  "pfet_03v3": 47,
+  "pfet_05v0": 1,
+  "ppolyf_u_1k": 8
+ },
+ "devices_lvs_extraction": {
+  "cap_mim_2f0_m4m5_noshield": 132,
+  "nfet_03v3": 40,
+  "nfet_05v0": 1,
+  "pfet_03v3": 47,
+  "pfet_05v0": 1,
+  "ppolyf_u_1k": 8
+ },
+ "gds": "AFE/layout/adc/adc_ch.gds",
+ "gds_sha1": "3683b303ba7cd0b2b6870aedc3215c17133604c1",
+ "log": "AFE/layout/sim/flow/adc_ch.pex.log",
+ "maxrss_mb": 69,
+ "mim_fix": {
+  "c_total_fixed_fF": 1295.43,
+  "c_total_stock_fF": 1326.551,
+  "moved_fF": {
+   "a_1094_7200#": 13.247,
+   "a_21494_7200#": 13.535,
+   "a_23316_2302#": 0.345,
+   "a_26694_9400#": 26.735,
+   "a_35494_1800#": 0.211,
+   "a_916_7200#": 4.111
+  },
+  "top_plate_nets": {
+   "a_1094_7200#": {
+    "a_2094_1000#": 25.0,
+    "a_2894_3600#": 25.0,
+    "a_3494_3600#": 50.0,
+    "a_4094_3600#": 100.0,
+    "a_4694_3600#": 200.0,
+    "a_5294_3600#": 400.0,
+    "a_5894_3600#": 800.0
+   },
+   "a_21494_7200#": {
+    "a_1094_7200#": 25.43,
+    "a_6494_3600#": 25.0,
+    "a_7094_3600#": 50.0,
+    "a_7694_3600#": 100.0,
+    "a_8294_3600#": 200.0,
+    "a_8894_3600#": 400.0,
+    "a_9494_3600#": 800.0
+   },
+   "a_23316_2302#": {
+    "vss": 25.0
+   },
+   "a_26694_9400#": {
+    "vss": 3489.26
+   },
+   "a_35494_1800#": {
+    "vss": 25.0
+   },
+   "a_916_7200#": {
+    "vss": 491.95
+   }
+  },
+  "unexplained_fF": 0.0
+ },
+ "mode": "c",
+ "n_cap": 1013,
+ "n_res": 0,
+ "netlist": "AFE/layout/sim/flow/adc_ch.pex.spice",
+ "netlist_stock": "AFE/layout/sim/flow/adc_ch.pex_stock.spice",
+ "ports": [
+  "rst_sw",
+  "tg_on",
+  "dac_gdn",
+  "cmp_clk",
+  "cmp_q",
+  "dac_gp[11]",
+  "dac_gn[11]",
+  "dac_gp[10]",
+  "dac_gn[10]",
+  "dac_gp[9]",
+  "dac_gn[9]",
+  "dac_gp[8]",
+  "dac_gn[8]",
+  "dac_gp[7]",
+  "dac_gn[7]",
+  "dac_gp[6]",
+  "dac_gn[6]",
+  "dac_gp[5]",
+  "dac_gn[5]",
+  "dac_gp[4]",
+  "dac_gn[4]",
+  "dac_gp[3]",
+  "dac_gn[3]",
+  "dac_gp[2]",
+  "dac_gn[2]",
+  "dac_gp[1]",
+  "dac_gn[1]",
+  "dac_gp[0]",
+  "dac_gn[0]",
+  "vin",
+  "vdd_cmp",
+  "vdd_dac",
+  "vss",
+  "vdd"
+ ],
+ "ran": true,
+ "tool": "magic PEX",
+ "top": "adc_ch",
+ "unknown_models": [],
+ "wall_s": 0.8
+}
