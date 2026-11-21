@@ -183,7 +183,7 @@
  ],
  "cells": {
   "afe_dig": {
-   "what": "digital macro (LibreLane): dbs_ctrl N = 8 + adc8_top + 15 pad-control tie cells; channels 0-3 brought out to pins, 4-7 tied off inside the wrapper (Decision 52)",
+   "what": "digital macro (LibreLane): dbs_ctrl #(N = 4) + adc_top #(N = 4) + 15 pad-control tie cells; real 4-channel logic and the 80-SCLK frame, no tied-off channels (Decisions 52, 54)",
    "w": 425,
    "h": 86.24,
    "x": 26,

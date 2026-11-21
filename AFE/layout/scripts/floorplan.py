@@ -95,7 +95,7 @@ def build(p):
     by0, by1 = sS0 + p['bias_ys'], sN1 - p['bias_ys']
     fp['zones'] = z
     cells = {}
-    cells['afe_dig'] = {'what': 'digital macro (LibreLane): dbs_ctrl N = 8 + adc8_top + 15 pad-control tie cells' + ('' if N == 8 else '; channels 0-%d brought out to pins, 4-7 tied off inside the wrapper (Decision 52)' % (N - 1)), 'w': p['dig_w'], 'h': p['dig_h'], 'x': core0, 'y': r3(dig_y0), 'orient': 'R0',
+    cells['afe_dig'] = {'what': ('digital macro (LibreLane): dbs_ctrl N = 8 + adc8_top + 15 pad-control tie cells' if N == 8 else 'digital macro (LibreLane): dbs_ctrl #(N = %d) + adc_top #(N = %d) + 15 pad-control tie cells; real %d-channel logic and the 80-SCLK frame, no tied-off channels (Decisions 52, 54)' % (N, N, N)), 'w': p['dig_w'], 'h': p['dig_h'], 'x': core0, 'y': r3(dig_y0), 'orient': 'R0',
                         'rail': 'ADC-main strap (net VDD), vss', 'guard': 'P+ substrate ring on vss and N-well ring on VDD around the macro, inside the strap corridors (2 um each); >= 20 um to any analog device',
                         'pin_layers': {'N': 'Metal2', 'S': 'Metal2', 'W': 'Metal3'}, 'pins': {'N': [], 'S': [], 'W': []}}
     for edge, base in (('N', 0), ('S', NR)):
