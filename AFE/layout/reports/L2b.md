@@ -107,4 +107,4 @@ Kit files edited by this phase: AFE/layout/scripts/flow.py (bleed_floating) and 
 - R2 .. R7: not addressed to L2b (R7 is for L3a, still open, not touched).
 
 ## 10. Files changed and commit
-AFE/layout/scripts/flow.py, AFE/layout/tb/lptb.py, AFE/layout/sim/flow/amp_ch.{drc,lvs,pex}.json and logs, AFE/layout/sim/post/*, AFE/layout/BLOCKED.md, AFE/layout/reports/L2b.md, AFE/NOTES.md (L2b findings + Results-log row). Commit hash: written after the commit (branch worktree-l2b).
+AFE/layout/scripts/flow.py, AFE/layout/tb/lptb.py, AFE/layout/sim/flow/amp_ch.{drc,lvs,pex}.json and logs, AFE/layout/sim/post/*, AFE/layout/BLOCKED.md, AFE/layout/reports/L2b.md, AFE/NOTES.md (L2b findings + Results-log row). Commit hash: 88260bc (branch worktree-l2b).
