@@ -9,6 +9,7 @@ PASS  "## L3a findings" section in AFE/NOTES.md
 PASS  Results-log row for L3a in AFE/NOTES.md
 PASS  L2a findings of AFE/layout/NOTES_L2.md are merged into AFE/NOTES.md
 PASS  L2a report AFE/layout/reports/L2a.md (converted from NOTES_L2.md) with all 10 sections
+WARN  scratch AFE/layout/.ptmp is not empty: delete it at the end of the phase (common rule 4)
 --- dbs_afe_top layout: AFE/layout/top/dbs_afe_top.gds
 PASS  DRC report belongs to the current GDS (sha1)
 PASS  DRC ran with the official deck, variant D
@@ -21,5 +22,5 @@ PASS  the reference was written by mk_lvs_netlists.py (header)
 PASS  decap in the LVS top (= drawn, LVS matched): ADC-main 74 units = 117.9 pF >= 115, ADC-DAC 30 units = 47.8 pF >= 47.5 (floorplan.json params)
 PASS  compare.py --phase L3a: PASS (9 PASS, 0 WARN, 0 FAIL, 0 missing)
 PASS  post-layout results were simulated on extracted netlists
-PASS  floorplan.py check --gds dbs_afe_top=/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/top/dbs_afe_top.gds --dig-pins /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 19 PASS, 0 FAIL
+PASS  floorplan.py check --gds dbs_afe_top=/foss/designs/ENGN2912E_Project/AFE/layout/top/dbs_afe_top.gds --dig-pins /foss/designs/ENGN2912E_Project/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 19 PASS, 0 FAIL
 GATE L3a: PASS  (0 FAIL)

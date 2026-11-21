@@ -14,5 +14,5 @@ PASS  LVS report belongs to the current GDS (sha1)
 PASS  LVS reference AFE/layout/lvs/afe_chc.spice is a generated reference of AFE/layout/lvs or the phase's own AFE/layout/<cell dir>/lvs
 PASS  LVS amp_ch: Circuits match uniquely.
 PASS  the reference was written by mk_lvs_netlists.py (header)
-PASS  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/amp/amp_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
+PASS  floorplan.py check --gds amp_ch=/foss/designs/ENGN2912E_Project/AFE/layout/amp/amp_ch.gds: floorplan.py check: 17 PASS, 0 FAIL
 GATE L2a: PASS  (0 FAIL)
