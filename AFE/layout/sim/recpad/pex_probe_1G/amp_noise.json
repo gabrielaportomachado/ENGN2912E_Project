@@ -1,0 +1,43 @@
+{
+ "check": "amp_noise",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 16:18",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_noise_ff85.log",
+   "values": {
+    "g_mid_db": 59.82,
+    "noise_real_uv": 1.743631916039835
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 16:18",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_noise_ss-40.log",
+   "values": {
+    "g_mid_db": 59.8432,
+    "noise_real_uv": 1.394131430986342
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 16:18",
+   "info": {
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_noise_typ.log",
+   "values": {
+    "g_mid_db": 59.8391,
+    "noise_real_fn1_uv": 4.910088671686045,
+    "noise_real_uv": 1.5044523832913523
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe_1G.spice",
+ "written_by": "AFE/layout/tb/tb_amp_noise.py"
+}

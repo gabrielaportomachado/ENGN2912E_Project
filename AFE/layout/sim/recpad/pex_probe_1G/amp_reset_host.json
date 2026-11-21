@@ -1,0 +1,81 @@
+{
+ "check": "amp_reset_host",
+ "corners": {
+  "ff85": {
+   "date": "2026-11-21 16:23",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_reset_host_ff85.log",
+   "values": {
+    "drift_mv_s_os100m": -10.675978023999999,
+    "drift_mv_s_os10m": -3.78968986799999,
+    "final_v_os100m": 1.6510888614048593,
+    "final_v_os10m": 1.6510644030489838,
+    "peak_mv_os100m": 189.6723314048594,
+    "peak_mv_os10m": 189.7348830489838,
+    "rel_step_mv_os100m": -189.47720404595736,
+    "rel_step_mv_os10m": -189.55970219884355,
+    "resid_end_mv_os100m": 0.004918595140734894,
+    "resid_end_mv_os10m": 0.013143048983810246,
+    "t_1mv_s_os100m": 9.13186376,
+    "t_1mv_s_os10m": 7.424660640000001,
+    "t_fs_ms_os100m": 1.7325040000000236,
+    "t_fs_ms_os10m": 1.5655620000000203
+   }
+  },
+  "ss-40": {
+   "date": "2026-11-21 16:23",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_reset_host_ss-40.log",
+   "values": {
+    "drift_mv_s_os100m": -8.540826717500005,
+    "drift_mv_s_os10m": -3.465202500000042,
+    "final_v_os100m": 1.650263388118188,
+    "final_v_os10m": 1.650224497200933,
+    "peak_mv_os100m": 135.02948811818817,
+    "peak_mv_os10m": 164.53869720093306,
+    "rel_step_mv_os100m": -127.50238831798933,
+    "rel_step_mv_os10m": -155.18265951532473,
+    "resid_end_mv_os100m": 0.002221881811870219,
+    "resid_end_mv_os10m": 0.0067072009330981786,
+    "t_1mv_s_os100m": 7.506547430000001,
+    "t_1mv_s_os10m": 6.4757,
+    "t_fs_ms_os100m": 5.922629999999707,
+    "t_fs_ms_os10m": 5.9212699999999785
+   }
+  },
+  "typ": {
+   "date": "2026-11-21 16:22",
+   "info": {
+    "probe_ct": true,
+    "warnings": []
+   },
+   "log": "AFE/layout/sim/recpad/pex_probe_1G/amp_reset_host_typ.log",
+   "values": {
+    "drift_mv_s_os100m": -11.43530420000005,
+    "drift_mv_s_os10m": -3.825591609500023,
+    "final_v_os100m": 1.650743024369563,
+    "final_v_os10m": 1.6507244677307564,
+    "peak_mv_os100m": 171.46058436956312,
+    "peak_mv_os10m": 171.56429773075632,
+    "rel_step_mv_os100m": -169.4772682474992,
+    "rel_step_mv_os10m": -169.5766190123531,
+    "resid_end_mv_os100m": 0.0008443695631576986,
+    "resid_end_mv_os10m": 0.016567730756422705,
+    "t_1mv_s_os100m": 9.14242105,
+    "t_1mv_s_os10m": 7.62881498,
+    "t_fs_ms_os100m": 3.0887939999999503,
+    "t_fs_ms_os10m": 2.979278999999946
+   }
+  }
+ },
+ "netlist": "AFE/layout/sim/flow/amp_ch.pex.spice",
+ "netlist_sha1": "e3100c69eb97",
+ "rec_load": "AFE/layout/sim/recpad/models/pad_probe_1G.spice",
+ "written_by": "AFE/layout/tb/tb_amp_reset_host.py"
+}

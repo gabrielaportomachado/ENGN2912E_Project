@@ -1,0 +1,6 @@
+== amp_reset  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner typ (typical, 27 C, 3.3 V)  2026-11-21 16:18  REC pad load AFE/layout/sim/recpad/models/pad_probe_1G.spice
+   job rs_pex83fcca1f2cac_rlbeec15_typ_0: exit 0, 9 s
+   job rs_pex83fcca1f2cac_rlbeec15_typ_1m: exit 0, 9 s
+   job rs_pex83fcca1f2cac_rlbeec15_typ_10m: exit 0, 15 s
+   job rs_pex83fcca1f2cac_rlbeec15_typ_100m: exit 0, 44 s
+RESULT amp_reset typ: t_fs_ms_os0=3.10751  peak_mv_os0=354.526  rel_step_mv_os0=-268.091  t_1mv_s_os0=5.62471  final_v_os0=1.65769  drift_mv_s_os0=-7.44591  resid_end_mv_os0=0.617083  t_fs_ms_os1m=2.97455  peak_mv_os1m=355.207  rel_step_mv_os1m=-215.225  t_1mv_s_os1m=5.62377  final_v_os1m=1.65764  drift_mv_s_os1m=-7.36098  resid_end_mv_os1m=0.610939  t_fs_ms_os10m=3.06622  peak_mv_os10m=335.444  rel_step_mv_os10m=-254.735  t_1mv_s_os10m=8.78607  final_v_os10m=1.65083  drift_mv_s_os10m=-8.34759  resid_end_mv_os10m=0.0374014  t_fs_ms_os100m=3.10585  peak_mv_os100m=268.619  rel_step_mv_os100m=-192.58  t_1mv_s_os100m=9.91411  final_v_os100m=1.65074  drift_mv_s_os100m=-16.1268  resid_end_mv_os100m=0.00237911

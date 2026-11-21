@@ -1,0 +1,13 @@
+schematic typ   amp    bench + tag: IDENTICAL
+schematic typ   ampch  bench + tag: IDENTICAL
+schematic ff85  amp    bench + tag: IDENTICAL
+schematic ff85  ampch  bench + tag: IDENTICAL
+schematic ss-40 amp    bench + tag: IDENTICAL
+schematic ss-40 ampch  bench + tag: IDENTICAL
+amp_ch.pex.spice typ   amp    bench + tag: IDENTICAL
+amp_ch.pex.spice typ   ampch  bench + tag: IDENTICAL
+amp_ch.pex.spice ff85  amp    bench + tag: IDENTICAL
+amp_ch.pex.spice ff85  ampch  bench + tag: IDENTICAL
+amp_ch.pex.spice ss-40 amp    bench + tag: IDENTICAL
+amp_ch.pex.spice ss-40 ampch  bench + tag: IDENTICAL
+IDENTITY PASS (12 benches, 0 different)

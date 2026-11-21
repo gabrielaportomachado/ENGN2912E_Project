@@ -1,0 +1,3 @@
+== amp_thd  netlist AFE/layout/sim/flow/amp_ch.pex.spice  corner ss-40 (ss, -40 C, 3.3 V)  2026-11-21 16:18  REC pad load AFE/layout/sim/recpad/models/pad_probe_1G.spice
+   job thd_pex83fcca1f2cac_rlbeec15_ss-40: exit 0, 3 s
+RESULT amp_thd ss-40: thd_pct=0.0518127  out_max_v=2.16315  out_min_v=1.17821  gain_db=59.8216  hd2_dbc=-73.9249  hd3_dbc=-66.4701  out_mean_v=1.67061

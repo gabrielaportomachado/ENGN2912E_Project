@@ -9,7 +9,7 @@ LAY = os.path.normpath(os.path.join(HERE, '..', '..'))
 REPO = os.path.normpath(os.path.join(LAY, '..', '..'))
 LIM = json.load(open(os.path.join(LAY, 'accept_limits.json')))
 CASES = ['pex_open', 'pex_probe', 'sch_open', 'sch_probe']
-WHATIF = ['pex_probe_100M', 'pex_probe_ac', 'pex_probe_rs100k', 'pex_leak_1n', 'pex_leak_10n', 'pex_ctl_1f', 'pex_check_nodiodes']      # `mk_tables.py --whatif`: tables of the what-if / control runs (only the checks that were run)
+WHATIF = ['pex_probe_1G', 'pex_probe_100M', 'pex_probe_ac', 'pex_probe_rs100k', 'pex_leak_1n', 'pex_leak_10n', 'pex_ctl_1f', 'pex_check_nodiodes']      # `mk_tables.py --whatif`: tables of the what-if / control runs (only the checks that were run)
 
 
 def key(r):
@@ -40,7 +40,7 @@ def load_rows(path):
 
 def main():
     whatif = '--whatif' in sys.argv
-    cases = [c for c in (sys.argv[1:] or (WHATIF if whatif else CASES)) if not c.startswith('--')]
+    cases = [c for c in sys.argv[1:] if not c.startswith('--')] or (WHATIF if whatif else CASES)
     run = '--run' in sys.argv
     out, summary = [], []
     allj = {}
