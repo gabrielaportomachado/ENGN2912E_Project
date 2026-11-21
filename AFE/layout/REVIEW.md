@@ -55,6 +55,10 @@ Levers, in this order, pre-approved (ACCEPT.md A-2 / A-4 / A-5 and Decision 46c)
 (d) Only if (a)-(c) fail: 10 um of height may move to amp_ch with an amp_ch re-pack, or write BLOCKED.md with the as-built numbers and the best floorplan found (R1 checkpoint; the user decides vs N = 4).
 Record the final floorplan in floorplan.json / SPEC.md (floorplan.py build only), say which levers were used and their cost in report sections 6 / 7 (AFE/layout/reports/R7.md), and what L3a / L3b must verify (decap coupling into the Cin bottom plates: L3b supply / crosstalk runs; strap IR drop). Commit and push.
 
+### R10 (2026-11-21) to L3a: host offset rule +-300 LSB (Decision 51, user-approved, missing from the applied R8)
+Status: open
+The as-built amp_ch has an offset of up to 181 / 96 / 182 mV (~226 LSB) after power-up in the junction-area convention (L2b amp_pwrup_junction), which the current host rule (+-200 LSB, else repeat RST_AMP) would answer by resetting forever. Change the HOST RULES everywhere they are stated (README.md steps 4 and 6, AFE/adc/README.md, ACCEPT.md section 2, info.yaml / test plan / export answers if quoted): after RST_AMP the host checks every channel; a channel within +-300 LSB of mid-scale (codes 1748-2348, about +-242 mV) is accepted and its mean is subtracted in software; outside +-300 LSB, or drifting by more than 20 LSB/s, repeat RST_AMP (at most 3 times, then flag the channel); the same check runs during recording. Documentation only, no limit or circuit change. List R10 in the L3a report section 9.
+
 (An earlier R6 with extra adc_ch levers was withdrawn unused on 2026-11-20 - R5 fit without it - and its number reused for the Cin 15 pF item above; see git history 1a1c17a.)
 
 ## Team review (2026-11-21): L2b and L1b post-layout results - ACCEPTED by the user / team, now items R8 and R9
