@@ -1,10 +1,10 @@
 #!/bin/bash
 # AUDIT step 4: build and run the assertion testbench AFE/review/tb/tb_audit.v.
-#   RTL builds : adc8_top RTL + per-corner cell models (AFE/adc/tb/cells_sim.v) + STA-derived port delays (tb/audit_delays.vh), 5 corners + the MIXED corner, SCLK 2 and 3 MHz
+#   RTL builds : adc_top N = 4 RTL (R14, Decision 54: the 80-SCLK frame; the 8-channel adc8_top version of this testbench is in git tag checkpoint-n8-final) + per-corner cell models (AFE/adc/tb/cells_sim.v) + STA-derived port delays (tb/audit_delays.vh), 5 corners + the MIXED corner, SCLK 2 and 3 MHz
 #   GLS builds : delay-annotated copy of the hardened netlist AFE/adc/lg/runs/d3/final/nl/adc8_top.nl.v (gen_gl.py, SDF IOPATH delays, 5 corners + MIXED) + PDK functional cell models
 # usage: bash run_tb_audit.sh [rtl|gls|all]      logs: AFE/review/sim/tb_audit_<build>_<corner>_<f>MHz_<scen>.log, summary: AFE/review/sim/tb_audit_summary.log
 #   DIG builds (LP step 5 / L1d; nothing above changes): bash run_tb_audit.sh dig <LibreLane final dir of afe_dig>
-#               the same testbench and scenarios on the hardened macro afe_dig (adc8_top + dbs_ctrl + clock buffer + switch pairs + tie cells): gen_gl.py on <final dir>/nl/afe_dig.nl.v
+#               the same testbench and scenarios on the hardened macro afe_dig (adc_top + dbs_ctrl + clock buffer + switch pairs + tie cells): gen_gl.py on <final dir>/nl/afe_dig.nl.v
 #               and its SDF, wrapper AFE/dig/top_ba_dig.v.  Logs: AFE/dig/sim/tb_audit_dig_<corner>_<f>MHz_<scen>.log, summary AFE/dig/sim/tb_audit_dig_summary.log (env DIG_OUT = another
 #               log directory, DIG_TMP = scratch for the compiled files, default /tmp/lp_dig/tb).  The AFE/review/sim logs are not touched in this mode.
 R="$(cd "$(dirname "$0")/.." && pwd)"; AFE="$R/.."; REPO="$AFE/.."
@@ -48,7 +48,7 @@ if [ "$what" = gls ] || [ "$what" = all ]; then
 fi
 if [ "$what" = dig ]; then
   # gate level of the macro afe_dig: mode_o / en_o are internal nets that the wrapper reads by name
-  grep -q '^ wire mode_o;' "$DIGF/nl/afe_dig.nl.v" && grep -q '^ wire .en_o\[7\] ;' "$DIGF/nl/afe_dig.nl.v" || { echo "STOP: the netlist has no nets mode_o / en_o[7] (AFE/dig/top_ba_dig.v reads them)" >&2; exit 1; }
+  grep -q '^ wire mode_o;' "$DIGF/nl/afe_dig.nl.v" && grep -q '^ wire .en_o\[3\] ;' "$DIGF/nl/afe_dig.nl.v" || { echo "STOP: the netlist has no nets mode_o / en_o[3] (AFE/dig/top_ba_dig.v reads them)" >&2; exit 1; }
   for c in ff_n40C_3v60:FFN40 ff_125C_3v60:FF125 tt_025C_3v30:TT ss_n40C_3v00:SSN40 ss_125C_3v00:SS125 ff_n40C_3v60:FFN40_MIXED; do
     lc=${c%%:*}; k=${c##*:}; defs="-DCORNER_${k%_MIXED}"; [ "$k" = FFN40_MIXED ] && defs="$defs -DMIXED"; [ "$k" = TT ] && defs=""
     python3 "$R/scripts/gen_gl.py" $lc "$T/gl_dig_$lc.v" "$DIGF" afe_dig > /dev/null

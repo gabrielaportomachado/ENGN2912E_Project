@@ -1,13 +1,14 @@
 `timescale 1ns/1ps
 // AUDIT step 4: back-annotated COPY of the top wrapper AFE/top/dbs_afe_top.v (module dbs_afe_top).  The original file is not edited; it is still compiled for its module
 // afe_ch (the channel cell, used here UNCHANGED).  Differences to dbs_afe_top:
-//   * the outputs of adc8_top and dbs_ctrl pass through `assign #delay` elements that carry the STA-derived delays the RTL abstracts (values per corner in audit_delays.vh,
+//   * the outputs of adc_top (N = 4) and dbs_ctrl pass through `assign #delay` elements that carry the STA-derived delays the RTL abstracts (values per corner in audit_delays.vh,
 //     source AFE/review/sim/sta_audit.log).  With +define+GLS adc8_top is the HARDENED gate-level netlist with its SDF, so no delay is added on its outputs.
 //   * dbs_ctrl is RTL in both builds (it is not in the hardened netlist): its NAND3 / inverter delays are ESTIMATES (T_SWB, T_SWI).
 `include "audit_delays.vh"
-//   F1 (2026-11-20): ports and supply nets follow AFE/top/dbs_afe_top.v again (DOUT_OUT / DOUT_IN, no REC ports, vdd_cmp / vdd_dac, strap resistor and decap cells: Decisions 44b, 44d, 45).
+//   F1 (2026-11-20): ports and supply nets follow AFE/top/dbs_afe_top.v.  R14 (2026-11-21, Decisions 52-54): 4 channels, REC[3:0] ports, adc_top #(.N(4)), dbs_ctrl #(.N(4)), 80-SCLK frame.
 module dbs_afe_top_ba (
-    inout  [7:0] E, IPG,
+    inout  [3:0] E, IPG,
+    inout  [3:0] REC,
     inout        REF,
     input        CS, DIN, SCLK, RSTN,
     output       DOUT_OUT,
@@ -22,11 +23,11 @@ module dbs_afe_top_ba (
     assign CS_PU = 1'b0; assign CS_PD = 1'b0; assign DIN_PU = 1'b0; assign DIN_PD = 1'b0; assign SCLK_PU = 1'b0; assign SCLK_PD = 1'b0; assign RSTN_PU = 1'b0; assign RSTN_PD = 1'b1;
 
     wire        mode_o, rst_amp_o, dout_r;
-    wire [7:0]  en_o, cmp_q, cmp_clk, rst_sw, tg_on, dac_gdn;
-    wire [95:0] dac_gp, dac_gn;
-    wire [7:0]  cmp_clk_r, rst_sw_r, tg_on_r, dac_gdn_r;
-    wire [95:0] dac_gp_r, dac_gn_r;
-    adc8_top u_adc (.cs_n(CS), .sclk(SCLK), .din(DIN), .rstn(RSTN), .dout(dout_r), .dout_oe(dout_oe),
+    wire [3:0]  en_o, cmp_q, cmp_clk, rst_sw, tg_on, dac_gdn;
+    wire [47:0] dac_gp, dac_gn;
+    wire [3:0]  cmp_clk_r, rst_sw_r, tg_on_r, dac_gdn_r;
+    wire [47:0] dac_gp_r, dac_gn_r;
+    adc_top #(.N(4)) u_adc (.cs_n(CS), .sclk(SCLK), .din(DIN), .rstn(RSTN), .dout(dout_r), .dout_oe(dout_oe),
                     .rst_amp_o(rst_amp_o), .mode_o(mode_o), .en_o(en_o),
                     .cmp_q(cmp_q), .cmp_clk(cmp_clk_r), .rst_sw(rst_sw_r), .tg_on(tg_on_r), .dac_gp(dac_gp_r), .dac_gn(dac_gn_r), .dac_gdn(dac_gdn_r));
 `ifdef GLS
@@ -41,9 +42,9 @@ module dbs_afe_top_ba (
     assign #(`T_GPGN) dac_gn  = dac_gn_r;
 `endif
 
-    wire [7:0] sw_rec, sw_rec_b, sw_ipg, sw_ipg_b;
-    wire [7:0] sw_rec_r, sw_rec_b_r, sw_ipg_r, sw_ipg_b_r;
-    dbs_ctrl #(.N(8)) u_dbs (.clk(SCLK), .rstn(RSTN), .mode(mode_o), .en(en_o), .ready(1'b1),
+    wire [3:0] sw_rec, sw_rec_b, sw_ipg, sw_ipg_b;
+    wire [3:0] sw_rec_r, sw_rec_b_r, sw_ipg_r, sw_ipg_b_r;
+    dbs_ctrl #(.N(4)) u_dbs (.clk(SCLK), .rstn(RSTN), .mode(mode_o), .en(en_o), .ready(1'b1),
                              .sw_rec(sw_rec_r), .sw_rec_b(sw_rec_b_r), .sw_ipg(sw_ipg_r), .sw_ipg_b(sw_ipg_b_r));
     assign #(`T_SWB)          sw_rec_b = sw_rec_b_r;         // clk->Q + NAND3 (ESTIMATE)
     assign #(`T_SWB + `T_SWI) sw_rec   = sw_rec_r;           // + inverter (ESTIMATE): sw_rec lags sw_rec_b (I0 mismatch 8)
@@ -56,11 +57,11 @@ module dbs_afe_top_ba (
     wire vdd_dac;
     afe_rstrap                u_rstrap (.a(VDD), .b(vdd_dac), .vss(VSS));
     afe_decap #(.C_NF(0.125)) u_dcm    (.p(VDD), .n(VSS));
-    afe_decap #(.C_NF(0.100)) u_dcd    (.p(vdd_dac), .n(VSS));
+    afe_decap #(.C_NF(0.0475)) u_dcd    (.p(vdd_dac), .n(VSS));
 
     genvar i;
-    generate for (i = 0; i < 8; i = i + 1) begin : ch
-        afe_ch u (.e(E[i]), .ipg(IPG[i]),
+    generate for (i = 0; i < 4; i = i + 1) begin : ch
+        afe_ch u (.e(E[i]), .ipg(IPG[i]), .rec(REC[i]),
                   .sw_rec(sw_rec[i]), .sw_rec_b(sw_rec_b[i]), .sw_ipg(sw_ipg[i]), .sw_ipg_b(sw_ipg_b[i]),
                   .rst_amp(rst_amp_o),
                   .rst_sw(rst_sw[i]), .tg_on(tg_on[i]), .cmp_clk(cmp_clk[i]), .dac_gdn(dac_gdn[i]),
