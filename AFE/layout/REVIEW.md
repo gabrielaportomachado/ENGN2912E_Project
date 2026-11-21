@@ -16,7 +16,7 @@ The monitoring session sets `Status: closed` once it has seen the item handled.
 ## Items
 
 ### R1 (2026-11-20) to all: 8-channel closure plan (Decision 48), order of work
-Status: open
+Status: closed (monitoring 2026-11-21: superseded by Decision 52 (4 channels, 605 x 1110 um); its order of work R2 .. R7 is done and the N = 8 checkpoint rule no longer applies)
 The as-built cells do not fit 8 channels in the 1000 x 1000 um outline (L1a report section 8: amp_ch 218.75 x 309.25, adc_ch 265.85 x 126.25 against the 235 x 375 um channel slot). The user keeps N = 8 (Decision 48). Do the items in this order, one phase session each, gate + report + push after each: R2 (floorplan) -> R3 (afe_dig re-harden) -> R4 (Cin 15 pF, then amp_ch rework) -> R5 (adc_ch re-pack) -> then L2b and L1b on the NEW cells -> L3a. Do not run L2b / L1b / L3a on the current cells (wasted PEX). CHECKPOINT (deadline now 2026-11-30, Decision 49): a cell that misses its budget by more than 3 % in either dimension gets ONE more re-pack attempt in a fresh session; if it still misses after that, or R4's simulations fail a Decision 1 target, write AFE/layout/BLOCKED.md with the as-built sizes / numbers and stop that line (the user decides between more rework and N = 4, ladder A-6); the other items may continue.
 
 ### R2 (2026-11-20) to L3a: tightened floorplan for 8 channels
@@ -107,7 +107,7 @@ Status: closed (monitoring 2026-11-21: done at the user's request; report AFE/la
 AFE/top/dbs_afe_top.v (protected): REC[3:0] ports, afe_ch.rec a port; tb_top.v reads REC from the ports; info.yaml 20 pads; floorplan.py rec_pads (REC pin per channel at x 118 um of the slot); AFE/layout/lvs/ regenerated. OPEN for before L3a: the pad-loading simulation of the amplifier input (Decision 53 risk).
 
 ### R13 (2026-11-21) to L3a: REC pad loading on the amplifier input (Decision 53 risk), simulation only
-Status: open
+Status: closed (monitoring 2026-11-21: done and merged; report AFE/layout/reports/R13.md; REC open pad harmless, 10 MOhm probe fails; board rule PROPOSED in README, the REC buffer question is deferred until a first L3a layout)
 Decision 53 puts an analog pad on each channel's rec node (record TGATE OUT = amp_ch.rec = the amplifier input). Quantify what the pad does to the amplifier BEFORE L3a. Simulation only: no layout, cell, design-netlist (AFE/amp/spice, AFE/adc/spice) or limit (accept_limits.json / ACCEPT.md) change.
 1. Pad model: the analog pad of the PDK IO library (the asig cell in /foss/pdks/gf180mcuD/libs.ref/gf180mcu_fd_io/spice/gf180mcu_fd_io.spice; state the cell name and what it contains: ESD devices, resistors), plus bond wire 2 nH + 0.25 ohm, package / board 2 pF and an OPEN external end (the board rule will be 'high-impedance probe only'); a second case with a 10 pF / 10 MOhm scope probe. If the PDK cell cannot be simulated, use its ESD diodes as PDK diode devices with the cell's sizes and say so. Pad supplies = the chip VDD / VSS.
 2. Runs, typ 27 / ff 85 / ss -40 (common rule 8), on BOTH the schematic and the post-layout amp_ch (AFE/layout/sim/flow/amp_ch.pex.spice, the L2b netlist; flow.py pex is already done), with the pad model on rec and, for comparison, without it: the golden amplifier testbenches AFE/layout/tb/tb_amp_{ac,noise,psrr,thd,loop,pwrup,reset}.py and the junction-convention runs (--junction) of ac / pwrup / reset. Add the pad model through a NEW option of AFE/layout/tb/lptb.py (e.g. --rec-load <spice file>, default none = unchanged behaviour, so every existing baseline and gate stays byte-identical); outputs under AFE/layout/sim/recpad/ (not AFE/layout/baseline, not AFE/layout/sim/post).
@@ -116,7 +116,7 @@ Decision 53 puts an analog pad on each channel's rec node (record TGATE OUT = am
 Report AFE/layout/reports/R13.md (the 10 sections), '## R13 findings' + a Results-log row in AFE/NOTES.md. Commit only AFE/layout/tb/lptb.py, AFE/layout/sim/recpad/, AFE/layout/reports/R13.md and AFE/NOTES.md; push.
 
 ### R14 (2026-11-21) to L3a: Decision 54, real 4-channel digital RTL + the new 80-SCLK SPI frame, macro re-hardened
-Status: open
+Status: closed (monitoring 2026-11-21: done and merged; report AFE/layout/reports/R14.md; gate L1d PASS; macro 424.48 x 86.24 um confirmed by the user)
 Read Decisions 52, 53 and 54 of AFE/NOTES.md first: Decision 54 defines the frame bit by bit (normative); implement exactly that. This item changes protected files (AFE/adc/rtl, AFE/top/dbs_afe_top.v, AFE/dig/afe_dig.v): name each in section 9 of the report.
 Do NOT touch the analog cells (AFE/layout/amp, AFE/layout/adc), the R13 files (AFE/layout/tb/lptb.py, AFE/layout/sim/recpad) or the limits. A parallel session (R13) edits AFE/NOTES.md: `git pull --rebase` before every push and keep both sets of text.
 1. RTL: adc_clkgen with a parameter N (default 8: the legacy adc8_top must compile and tb_adc8 must still PASS unchanged); new AFE/adc/rtl/adc_top.v #(parameter N = 4) implementing the Decision 54 frame (frame counter to 16 * (N + 1), config word with WR, status word with the sync pattern and a DOUT bit 15 valid at edge 1, commit at edge 17 only if WR = 1, channel words {ID[1:0], 2'b00, code}, edges beyond the frame ignored, CS rising / RSTN behaviour as before); dbs_ctrl #(.N(N)) is used as is. Remove the AUDIT-era assumptions of 8 channels (EN width, 3-bit ID) wherever they are in the new files.
