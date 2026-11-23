@@ -151,6 +151,7 @@ def control(tstop):
     return "\n".join([
         ".options abstol=1e-12 reltol=1e-3 method=gear",
         ".temp 27",
+        ".save v(cs) v(sclk) v(din) v(dout) v(e0) v(e1) v(vdd)",     # keep only what decode_dout.py needs (full chip = huge)
         f".tran 50n {tstop:g} 0 200n",
         ".control",
         "set num_threads=1",
