@@ -1,0 +1,18 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1795413554" />
+    <testcase name="reset_status_is_a000" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="14" time="0.006254911422729492" sim_time_ns="42700.0" ratio_time="6826635.441204498" />
+    <testcase name="worked_example" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="22" time="0.017301559448242188" sim_time_ns="124100.0" ratio_time="7172763.840811376" />
+    <testcase name="wr0_changes_nothing" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="35" time="0.016237497329711914" sim_time_ns="124099.99999999997" ratio_time="7642803.412377944" />
+    <testcase name="rst_amp_is_a_held_level" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="44" time="0.03893852233886719" sim_time_ns="286900.0" ratio_time="7368024.8444771" />
+    <testcase name="ids_and_codes_for_many_values" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="56" time="0.032854318618774414" sim_time_ns="246200.0" ratio_time="7493687.598783754" />
+    <testcase name="short_frame_commits_nothing" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="65" time="0.0026702880859375" sim_time_ns="19900.0" ratio_time="7452379.428571428" />
+    <testcase name="edges_beyond_80_read_zero" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="74" time="0.006197690963745117" sim_time_ns="47700.0" ratio_time="7696414.725908829" />
+    <testcase name="reset_clears_config" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="81" time="0.011562108993530273" sim_time_ns="85400.0" ratio_time="7386195.7232704405" />
+    <testcase name="dout_oe_follows_cs" classname="test_frames" file="/foss/designs/final_project/dbs_afe_tb/tb/test_frames.py" lineno="90" time="0.00029778480529785156" sim_time_ns="2010.0" ratio_time="6749840.704563651" />
+    <testcase name="record_spikes_all_channels" classname="test_neural" file="/foss/designs/final_project/dbs_afe_tb/tb/test_neural.py" lineno="46" time="8.048439741134644" sim_time_ns="492524100.0" ratio_time="61194978.88302081" />
+    <testcase name="disabled_channels_stay_parked" classname="test_neural" file="/foss/designs/final_project/dbs_afe_tb/tb/test_neural.py" lineno="68" time="0.7773690223693848" sim_time_ns="73752700.0" ratio_time="94874760.7348762" />
+    <testcase name="stimulate_mode_disconnects_amplifiers" classname="test_neural" file="/foss/designs/final_project/dbs_afe_tb/tb/test_neural.py" lineno="80" time="0.5179762840270996" sim_time_ns="49182700.0" ratio_time="94951644.53789327" />
+    <testcase name="rst_amp_forces_midscale" classname="test_neural" file="/foss/designs/final_project/dbs_afe_tb/tb/test_neural.py" lineno="90" time="0.25899839401245117" sim_time_ns="24612700.0" ratio_time="95030318.98652144" />
+  </testsuite>
+</testsuites>

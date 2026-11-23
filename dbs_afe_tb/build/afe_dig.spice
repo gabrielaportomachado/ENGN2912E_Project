@@ -1,0 +1,1777 @@
+* afe_dig: converted from ../AFE/dig/final/afe_dig.pnl.v by pnl2spice.py (1693 cell instances)
+.subckt afe_dig cs cs_pd cs_pu din din_pd din_pu dout dout_cs dout_ie dout_oe dout_pd dout_pdrv0 dout_pdrv1
++ dout_pu dout_sl rstn rstn_pd rstn_pu sclk sclk_pd sclk_pu rst_amp_o vdd vss cmp_clk[3] cmp_clk[2] cmp_clk[1]
++ cmp_clk[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] dac_gdn[3] dac_gdn[2] dac_gdn[1] dac_gdn[0] dac_gn[47]
++ dac_gn[46] dac_gn[45] dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38]
++ dac_gn[37] dac_gn[36] dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29]
++ dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] dac_gn[23] dac_gn[22] dac_gn[21] dac_gn[20]
++ dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] dac_gn[11]
++ dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1]
++ dac_gn[0] dac_gp[47] dac_gp[46] dac_gp[45] dac_gp[44] dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39]
++ dac_gp[38] dac_gp[37] dac_gp[36] dac_gp[35] dac_gp[34] dac_gp[33] dac_gp[32] dac_gp[31] dac_gp[30]
++ dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gp[23] dac_gp[22] dac_gp[21]
++ dac_gp[20] dac_gp[19] dac_gp[18] dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12]
++ dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2]
++ dac_gp[1] dac_gp[0] rst_sw[3] rst_sw[2] rst_sw[1] rst_sw[0] sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0]
++ sw_ipg_b[3] sw_ipg_b[2] sw_ipg_b[1] sw_ipg_b[0] sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3]
++ sw_rec_b[2] sw_rec_b[1] sw_rec_b[0] tg_on[3] tg_on[2] tg_on[1] tg_on[0]
+Xfiller_0_101 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_104 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_138 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_0_146 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_148 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_154 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_181 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_197 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_201 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_203 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_240 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_274 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_278 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_29 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_299 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_303 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_305 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_308 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_33 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_342 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_376 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_40 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_410 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_414 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_444 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_478 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_482 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_488 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_495 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_499 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_506 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_518 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_522 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_529 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_531 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_537 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_541 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_543 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_546 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_548 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_56 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_560 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_567 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_0_575 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_577 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_580 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_596 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_60 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_614 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_62 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_636 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_0_644 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_648 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_682 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_0_70 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_716 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_0_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_78 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_82 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_0_88 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_0_92 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_0_99 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_122 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_138 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_159 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_181 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_10_225 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_241 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_247 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_10_255 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_264 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_280 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_284 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_286 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_310 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_314 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_351 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_371 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_402 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_440 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_442 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_451 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_523 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_53 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_535 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_10_539 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_10_541 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_55 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_576 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_640 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_10_656 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_10_664 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_10_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_10_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_102 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_104 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_139 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_11_158 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_160 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_166 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_11_198 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_11_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_212 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_11_276 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_416 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_437 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_439 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_44 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_11_474 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_534 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_541 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_545 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_572 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_60 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_11_616 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_632 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_668 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_11_68 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_11_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_11_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_11_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_11_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_80 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_11_82 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_11_98 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_12_123 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_12_131 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_135 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_137 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_172 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_174 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_12_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_12_185 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_187 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_12_240 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_244 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_247 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_12_263 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_12_271 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_288 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_328 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_332 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_12_382 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_384 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_399 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_453 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_53 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_599 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_651 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_12_659 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_12_663 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_12_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_12_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_12_89 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_13_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_136 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_150 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_185 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_13_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_201 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_209 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_212 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_249 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_257 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_261 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_273 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_277 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_29 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_13_297 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_333 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_347 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_349 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_352 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_401 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_419 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_426 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_474 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_13_545 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_559 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_570 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_61 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_615 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_617 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_666 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_13_69 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_13_698 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_13_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_13_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_13_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_13_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_13_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_14_104 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_14_139 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_14_155 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_167 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_14_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_14_181 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_216 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_239 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_256 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_351 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_369 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_377 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_421 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_429 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_434 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_453 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_501 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_14_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_599 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_639 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_14_655 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_14_663 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_14_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_14_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_14_96 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_136 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_150 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_154 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_189 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_205 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_209 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_224 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_228 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_24 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_240 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_256 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_26 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_268 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_272 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_274 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_290 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_298 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_32 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_15_333 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_337 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_359 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_361 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_396 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_398 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_407 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_411 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_422 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_438 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_465 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_467 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_473 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_477 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_500 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_516 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_520 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_522 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_534 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_536 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_546 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_558 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_572 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_580 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_582 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_623 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_15_64 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_642 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_15_674 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_68 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_690 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_698 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_15_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_15_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_15_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_15_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_15_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_101 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_16_139 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_16_155 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_163 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_167 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_172 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_174 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_185 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_193 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_197 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_232 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_240 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_244 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_247 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_257 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_295 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_303 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_31 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_317 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_16_349 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_16_387 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_395 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_404 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_406 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_441 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_449 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_453 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_16_473 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_511 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_519 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_523 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_561 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_16_593 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_16_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_16_6 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_605 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_16_609 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_630 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_16_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_16_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_119 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_17_132 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_17_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_17_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_212 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_219 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_263 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_17_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_17_314 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_352 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_384 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_17_400 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_17_408 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_466 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_47 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_17_470 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_472 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_478 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_482 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_488 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_526 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_528 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_535 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_17_55 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_551 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_553 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_559 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_572 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_576 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_583 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_590 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_598 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_600 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_17_632 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_17_696 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_17_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_17_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_17_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_82 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_17_84 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_109 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_116 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_126 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_128 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_146 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_167 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_18_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_241 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_247 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_18_311 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_317 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_18_383 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_387 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_18_395 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_4 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_404 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_408 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_41 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_18_435 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_439 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_18_489 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_49 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_509 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_516 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_518 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_53 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_538 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_550 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_594 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_18_60 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_18_661 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_18_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_18_92 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_18_96 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_18_98 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_104 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_113 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_122 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_130 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_134 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_138 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_146 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_153 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_169 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_193 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_201 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_203 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_240 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_274 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_29 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_308 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_33 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_342 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_350 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_358 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_36 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_376 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_410 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_414 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_444 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_478 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_491 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_495 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_502 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_504 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_512 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_52 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_528 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_534 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_542 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_546 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_554 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_569 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_580 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_584 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_586 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_591 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_60 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_605 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_19_609 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_611 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_614 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_648 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_682 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_19_70 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_19_716 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_19_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_78 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_19_86 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_19_93 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_131 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_148 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_150 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_168 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_212 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_272 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_274 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_352 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_359 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_1_375 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_422 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_424 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_463 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_475 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_479 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_486 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_559 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_570 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_582 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_61 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_617 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_621 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_63 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_640 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_1_672 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_1_688 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_1_696 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_1_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_1_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_1_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_82 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_84 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_1_91 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_1_99 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_2_104 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_189 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_2_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_205 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_241 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_257 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_2_265 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_267 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_317 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_2_333 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_384 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_395 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_4 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_404 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_406 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_441 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_2_449 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_45 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_2_453 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_497 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_2_505 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_509 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_515 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_519 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_527 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_2_535 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_2_539 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_541 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_547 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_582 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_594 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_599 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_2_663 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_2_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_2_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_2_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_136 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_3_150 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_193 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_3_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_209 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_224 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_226 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_248 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_261 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_3_277 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_284 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_32 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_3_352 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_393 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_395 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_406 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_410 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_422 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_424 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_435 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_437 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_448 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_450 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_485 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_489 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_492 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_494 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_536 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_540 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_551 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_579 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_581 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_590 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_592 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_3_604 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_3_612 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_616 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_64 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_666 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_3_68 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_698 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_3_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_3_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_3_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_3_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_3_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_123 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_4_131 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_169 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_173 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_4_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_185 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_4_220 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_259 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_325 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_4_333 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_382 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_384 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_454 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_465 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_500 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_518 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_522 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_524 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_571 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_597 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_4_601 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_603 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_649 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_4_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_4_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_4_87 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_4_89 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_120 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_124 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_157 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_193 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_5_209 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_256 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_272 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_5_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_5_290 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_313 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_329 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_331 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_390 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_392 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_432 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_434 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_469 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_471 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_606 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_622 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_627 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_629 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_5_632 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_636 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_648 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_5_66 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_680 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_696 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_5_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_5_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_5_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_5_80 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_5_84 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_6_107 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_6_130 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_165 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_6_173 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_6_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_6_186 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_6_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_6_218 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_234 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_247 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_32
+Xfiller_6_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_6_283 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_312 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_314 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_324 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_6_332 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_334 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_366 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_399 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_440 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_442 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_457 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_515 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_571 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_6_579 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_6_583 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_593 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_603 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_6_605 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_648 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_6_664 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_6_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_6_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_105 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_146 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_148 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_198 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_7_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_212 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_220 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_224 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_236 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_271 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_320 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_328 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_330 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_360 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_378 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_492 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_546 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_554 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_558 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_566 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_616 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_632 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_634 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_66 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_669 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_7_685 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_693 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_697 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_699 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_7_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_7_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_7_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_7_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_7_97 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_8_122 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_8_130 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_134 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_170 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_174 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_177 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_186 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_8_202 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_206 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_222 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_238 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_242 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_244 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_257 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_261 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_270 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_286 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_310 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_314 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_317 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_8_325 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_329 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_351 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_359 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_395 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_403 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_405 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_440 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_498 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_53 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_537 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_8_541 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_55 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_586 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_602 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_604 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_639 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_646 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_8_662 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_8_664 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_8_667 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_8_731 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_114 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_9_130 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_9_138 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_9_142 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_9_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_9_246 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_253 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_265 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_9_273 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_277 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_9_279 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_282 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_286 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_312 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_316 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_325 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_343 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_439 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_492 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_1
+Xfiller_9_548 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_9_556 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_562 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xfiller_9_621 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_632 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_64
+Xfiller_9_66 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_696 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_702 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_16
+Xfiller_9_718 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_9_72 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_8
+Xfiller_9_726 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fillcap_4
+Xfiller_9_730 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__fill_2
+Xphy_edge_row_0_left_20 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_0_right_0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_10_left_30 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_10_right_10 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_11_left_31 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_11_right_11 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_12_left_32 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_12_right_12 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_13_left_33 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_13_right_13 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_14_left_34 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_14_right_14 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_15_left_35 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_15_right_15 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_16_left_36 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_16_right_16 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_17_left_37 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_17_right_17 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_18_left_38 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_18_right_18 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_19_left_39 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_19_right_19 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_1_left_21 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_1_right_1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_2_left_22 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_2_right_2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_3_left_23 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_3_right_3 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_4_left_24 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_4_right_4 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_5_left_25 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_5_right_5 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_6_left_26 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_6_right_6 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_7_left_27 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_7_right_7 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_8_left_28 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_8_right_8 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_9_left_29 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xphy_edge_row_9_right_9 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__endcap
+Xtap_tapcell_row_0_40 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_41 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_42 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_43 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_44 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_45 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_46 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_47 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_48 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_49 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_50 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_51 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_52 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_53 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_54 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_55 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_56 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_57 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_58 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_59 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_0_60 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_151 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_152 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_153 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_154 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_155 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_156 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_157 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_158 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_159 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_10_160 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_161 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_162 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_163 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_164 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_165 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_166 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_167 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_168 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_169 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_11_170 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_171 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_172 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_173 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_174 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_175 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_176 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_177 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_178 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_179 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_12_180 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_181 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_182 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_183 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_184 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_185 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_186 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_187 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_188 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_189 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_13_190 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_191 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_192 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_193 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_194 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_195 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_196 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_197 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_198 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_199 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_14_200 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_201 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_202 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_203 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_204 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_205 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_206 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_207 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_208 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_209 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_15_210 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_211 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_212 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_213 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_214 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_215 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_216 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_217 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_218 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_219 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_16_220 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_221 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_222 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_223 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_224 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_225 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_226 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_227 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_228 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_229 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_17_230 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_231 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_232 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_233 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_234 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_235 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_236 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_237 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_238 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_239 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_18_240 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_241 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_242 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_243 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_244 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_245 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_246 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_247 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_248 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_249 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_250 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_251 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_252 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_253 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_254 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_255 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_256 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_257 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_258 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_259 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_260 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_19_261 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_61 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_62 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_63 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_64 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_65 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_66 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_67 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_68 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_69 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_1_70 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_71 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_72 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_73 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_74 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_75 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_76 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_77 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_78 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_79 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_2_80 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_81 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_82 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_83 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_84 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_85 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_86 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_87 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_88 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_89 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_3_90 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_100 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_91 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_92 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_93 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_94 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_95 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_96 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_97 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_98 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_4_99 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_101 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_102 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_103 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_104 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_105 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_106 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_107 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_108 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_109 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_5_110 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_111 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_112 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_113 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_114 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_115 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_116 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_117 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_118 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_119 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_6_120 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_121 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_122 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_123 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_124 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_125 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_126 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_127 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_128 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_129 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_7_130 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_131 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_132 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_133 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_134 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_135 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_136 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_137 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_138 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_139 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_8_140 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_141 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_142 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_143 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_144 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_145 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_146 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_147 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_148 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_149 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+Xtap_tapcell_row_9_150 vdd vss gf180mcu_fd_sc_mcu7t5v0__filltie
+X_299_ u_adc.cnt[1] _078_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_300_ u_adc.cnt[0] _079_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_301_ u_adc.cnt[3] _080_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_302_ u_adc.cnt[2] _081_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_303_ u_adc.ch[3].u.code[10] _082_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_304_ u_adc.ch[3].u.cap_r _083_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_305_ u_adc.ch[2].u.drv_en _084_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_306_ u_adc.ch[2].u.cap_r _085_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_307_ u_adc.ch[1].u.drv_en _086_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_308_ u_adc.ch[1].u.cap_r _087_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_309_ u_adc.ch[0].u.drv_en _088_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_310_ u_adc.ch[0].u.code[8] _089_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_311_ u_adc.ch[0].u.cap_r _090_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_312_ u_adc.ch[0].u.done _091_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_313_ rstn _092_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_314_ u_adc.ch[2].u.shift_in _093_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_315_ u_adc.ch[3].u.drv_en _094_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_316_ tg_on[3] dac_gdn[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_317_ tg_on[2] dac_gdn[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_318_ tg_on[1] dac_gdn[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_319_ tg_on[0] dac_gdn[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_320_ _084_ u_adc.ch[2].u.code[0] dac_gn[24] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_321_ _084_ u_adc.ch[2].u.code[1] dac_gn[25] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_322_ _084_ u_adc.ch[2].u.code[2] dac_gn[26] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_323_ _084_ u_adc.ch[2].u.code[3] dac_gn[27] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_324_ _084_ u_adc.ch[2].u.code[4] dac_gn[28] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_325_ _084_ u_adc.ch[2].u.code[5] dac_gn[29] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_326_ _084_ u_adc.ch[2].u.code[6] dac_gn[30] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_327_ _084_ u_adc.ch[2].u.code[7] dac_gn[31] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_328_ _084_ u_adc.ch[2].u.code[8] dac_gn[32] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_329_ _084_ u_adc.ch[2].u.code[9] dac_gn[33] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_330_ _084_ u_adc.ch[2].u.code[10] dac_gn[34] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_331_ _084_ u_adc.ch[1].u.shift_in dac_gn[35] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_332_ _086_ u_adc.ch[1].u.code[0] dac_gn[12] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_333_ _086_ u_adc.ch[1].u.code[1] dac_gn[13] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_334_ _086_ u_adc.ch[1].u.code[2] dac_gn[14] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_335_ _086_ u_adc.ch[1].u.code[3] dac_gn[15] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_336_ _086_ u_adc.ch[1].u.code[4] dac_gn[16] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_337_ _086_ u_adc.ch[1].u.code[5] dac_gn[17] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_338_ _086_ u_adc.ch[1].u.code[6] dac_gn[18] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_339_ _086_ u_adc.ch[1].u.code[7] dac_gn[19] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_340_ _086_ u_adc.ch[1].u.code[8] dac_gn[20] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_341_ _086_ u_adc.ch[1].u.code[9] dac_gn[21] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_342_ _086_ u_adc.ch[1].u.code[10] dac_gn[22] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_343_ _086_ u_adc.ch[0].u.shift_in dac_gn[23] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_344_ _088_ u_adc.ch[0].u.code[0] dac_gn[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_345_ _088_ u_adc.ch[0].u.code[1] dac_gn[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_346_ _088_ u_adc.ch[0].u.code[2] dac_gn[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_347_ _088_ u_adc.ch[0].u.code[3] dac_gn[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_348_ _088_ u_adc.ch[0].u.code[4] dac_gn[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_349_ _088_ u_adc.ch[0].u.code[5] dac_gn[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_350_ _088_ u_adc.ch[0].u.code[6] dac_gn[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_351_ _088_ u_adc.ch[0].u.code[7] dac_gn[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_352_ _088_ u_adc.ch[0].u.code[8] dac_gn[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_353_ _088_ u_adc.ch[0].u.code[9] dac_gn[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_354_ _088_ u_adc.ch[0].u.code[10] dac_gn[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_355_ _088_ u_adc.ch[0].u.code[11] dac_gn[11] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_356_ u_adc.ch[3].u.done cs u_adc.ch[3].trk vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_357_ cs u_adc.ch[2].u.done u_adc.ch[2].trk vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_358_ cs u_adc.ch[1].u.done u_adc.ch[1].trk vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_2
+X_359_ cs u_adc.ch[0].u.done u_adc.ch[0].trk vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_2
+X_360_ cs _092_ u_adc.ch[0].u.frame_rn vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_4
+X_361_ mode_o u_dbs.fsm_inst.rec_en _000_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_362_ mode_o u_dbs.fsm_inst.s0 _001_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_363_ u_adc.cnt[4] u_adc.cnt[5] u_adc.cnt[6] _095_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_364_ u_adc.cnt[4] u_adc.cnt[5] u_adc.cnt[6] _096_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_365_ u_adc.cnt[3] _081_ _097_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_366_ _080_ u_adc.cnt[2] _098_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_367_ u_adc.cnt[1] _079_ _099_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_368_ _078_ u_adc.cnt[0] _100_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_369_ mode_o _097_ _099_ _101_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_370_ _080_ u_adc.cnt[2] _102_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_371_ u_adc.cnt[3] _081_ _103_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_372_ en_o[0] _099_ _102_ _104_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_373_ u_adc.cnt[1] u_adc.cnt[0] _105_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_374_ u_adc.cnt[1] u_adc.cnt[0] _106_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_375_ en_o[1] _102_ _105_ _107_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_376_ _078_ u_adc.cnt[0] _108_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_377_ en_o[3] _097_ _108_ _109_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_378_ _101_ _104_ _107_ _109_ _110_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand4_1
+X_379_ u_adc.cnt[1] u_adc.cnt[0] _111_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_380_ u_adc.cnt[1] u_adc.cnt[0] _112_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_381_ u_adc.cnt[2] _111_ _113_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_382_ u_adc.cnt[3] _113_ _114_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_383_ rst_amp_o _097_ _105_ _115_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_384_ u_adc.cnt[3] u_adc.cnt[2] _116_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_385_ u_adc.cnt[3] u_adc.cnt[2] _117_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_386_ u_adc.cnt[0] _117_ _115_ _118_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_387_ en_o[2] _114_ _118_ _110_ _119_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_388_ u_adc.cnt[4] u_adc.cnt[5] u_adc.cnt[6] _120_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_389_ _105_ _116_ _121_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_390_ u_adc.cnt[4] u_adc.cnt[5] _122_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xor2_1
+X_391_ u_adc.cnt[4] _100_ _117_ _121_ _122_ _123_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai32_1
+X_392_ _096_ _120_ _123_ _124_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_393_ _096_ _117_ _120_ _125_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_394_ _096_ _117_ _120_ _126_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_4
+X_395_ u_adc.ch[0].u.code[11] _125_ _127_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_396_ _096_ _119_ _124_ _127_ u_adc.dbit vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai211_1
+X_397_ u_adc.ch[3].u.code[0] u_adc.ch[3].u.drv_en dac_gp[36] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_398_ u_adc.ch[3].u.code[1] u_adc.ch[3].u.drv_en dac_gp[37] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_399_ u_adc.ch[3].u.code[2] u_adc.ch[3].u.drv_en dac_gp[38] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_400_ u_adc.ch[3].u.code[3] u_adc.ch[3].u.drv_en dac_gp[39] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_401_ u_adc.ch[3].u.code[4] u_adc.ch[3].u.drv_en dac_gp[40] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_402_ u_adc.ch[3].u.code[5] u_adc.ch[3].u.drv_en dac_gp[41] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_403_ u_adc.ch[3].u.code[6] u_adc.ch[3].u.drv_en dac_gp[42] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_404_ u_adc.ch[3].u.code[7] u_adc.ch[3].u.drv_en dac_gp[43] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_405_ u_adc.ch[3].u.code[8] u_adc.ch[3].u.drv_en dac_gp[44] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_406_ u_adc.ch[3].u.code[9] u_adc.ch[3].u.drv_en dac_gp[45] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_407_ u_adc.ch[3].u.code[10] u_adc.ch[3].u.drv_en dac_gp[46] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_408_ u_adc.ch[2].u.shift_in u_adc.ch[3].u.drv_en dac_gp[47] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_409_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[0] dac_gp[24] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_410_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[1] dac_gp[25] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_411_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[2] dac_gp[26] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_412_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[3] dac_gp[27] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_413_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[4] dac_gp[28] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_414_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[5] dac_gp[29] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_415_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[6] dac_gp[30] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_416_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[7] dac_gp[31] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_417_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[8] dac_gp[32] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_418_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[9] dac_gp[33] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_419_ u_adc.ch[2].u.drv_en u_adc.ch[2].u.code[10] dac_gp[34] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_420_ u_adc.ch[2].u.drv_en u_adc.ch[1].u.shift_in dac_gp[35] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_421_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[0] dac_gp[12] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_422_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[1] dac_gp[13] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_423_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[2] dac_gp[14] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_424_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[3] dac_gp[15] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_425_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[4] dac_gp[16] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_426_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[5] dac_gp[17] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_427_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[6] dac_gp[18] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_428_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[7] dac_gp[19] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_429_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[8] dac_gp[20] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_430_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[9] dac_gp[21] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_431_ u_adc.ch[1].u.drv_en u_adc.ch[1].u.code[10] dac_gp[22] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_432_ u_adc.ch[1].u.drv_en u_adc.ch[0].u.shift_in dac_gp[23] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_433_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[0] dac_gp[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_434_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[1] dac_gp[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_435_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[2] dac_gp[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_436_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[3] dac_gp[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_437_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[4] dac_gp[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_438_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[5] dac_gp[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_439_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[6] dac_gp[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_440_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[7] dac_gp[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_441_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[8] dac_gp[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_442_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[9] dac_gp[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_443_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[10] dac_gp[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_444_ u_adc.ch[0].u.drv_en u_adc.ch[0].u.code[11] dac_gp[11] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_445_ u_dbs.fsm_inst.rec_en u_dbs.en_reg_2[3] rec_b_raw[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_446_ u_dbs.fsm_inst.rec_en u_dbs.fsm_inst.s0 _128_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_447_ u_dbs.en_reg_2[3] _128_ ipg_b_raw[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_448_ u_dbs.en_reg_2[2] _128_ ipg_b_raw[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_449_ u_dbs.fsm_inst.rec_en u_dbs.en_reg_2[2] rec_b_raw[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_450_ u_dbs.en_reg_2[1] _128_ ipg_b_raw[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_451_ u_dbs.fsm_inst.rec_en u_dbs.en_reg_2[1] rec_b_raw[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_452_ u_dbs.en_reg_2[0] _128_ ipg_b_raw[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_453_ u_dbs.fsm_inst.rec_en u_dbs.en_reg_2[0] rec_b_raw[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_454_ u_adc.cnt[3] u_adc.cnt[2] _129_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_455_ _096_ _129_ _130_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_456_ u_adc.cnt[3] u_adc.cnt[2] _095_ _131_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_457_ _096_ _117_ _132_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_458_ _095_ _116_ _133_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_459_ _111_ _133_ _131_ _134_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_460_ u_adc.cfg_sr[0] din _134_ _002_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_461_ u_adc.cfg_sr[1] u_adc.cfg_sr[0] _134_ _003_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_462_ u_adc.cfg_sr[2] u_adc.cfg_sr[1] _134_ _004_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_463_ u_adc.cfg_sr[3] u_adc.cfg_sr[2] _134_ _005_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_464_ u_adc.cfg_sr[4] u_adc.cfg_sr[3] _134_ _006_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_465_ u_adc.cfg_sr[5] u_adc.cfg_sr[4] _134_ _007_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_466_ u_adc.cfg_sr[6] u_adc.cfg_sr[5] _134_ _008_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_467_ u_adc.cnt[4] _105_ _116_ _135_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_468_ u_adc.cnt[5] _135_ _136_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_469_ u_adc.cnt[5] u_adc.cnt[6] _135_ _137_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_470_ u_adc.cfg_sr[6] _137_ _138_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_471_ u_adc.cfg_sr[0] en_o[0] _138_ _009_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_472_ u_adc.cfg_sr[1] en_o[1] _138_ _010_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_473_ u_adc.cfg_sr[2] en_o[2] _138_ _011_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_474_ u_adc.cfg_sr[3] en_o[3] _138_ _012_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_475_ u_adc.cfg_sr[4] mode_o _138_ _013_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_476_ u_adc.cfg_sr[5] rst_amp_o _138_ _014_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_477_ u_adc.cnt[6] _136_ u_adc.cnt[0] _015_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_478_ _099_ _108_ _016_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_479_ u_adc.cnt[2] _111_ _017_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xor2_1
+X_480_ _080_ _113_ _018_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xor2_1
+X_481_ _080_ _113_ _139_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_482_ u_adc.cnt[4] _139_ _140_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_483_ u_adc.cnt[4] _139_ _019_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xor2_1
+X_484_ u_adc.cnt[4] u_adc.cnt[5] _139_ _141_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_485_ u_adc.cnt[5] _140_ _020_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xnor2_1
+X_486_ u_adc.cnt[6] _141_ _021_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__xnor2_1
+X_487_ _099_ _130_ _142_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_488_ _091_ _142_ _022_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_489_ _096_ _121_ _143_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_490_ _105_ _132_ _144_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_491_ _106_ _131_ _145_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_492_ _105_ _130_ _146_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_493_ _088_ _145_ _144_ _023_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_494_ u_adc.ch[0].u.shift_in _125_ _146_ _147_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_495_ _125_ _145_ _148_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_496_ _126_ _146_ _149_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_497_ _095_ _111_ _150_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_498_ _103_ _150_ _151_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_2
+X_499_ u_adc.ch[0].u.cap_r _145_ _148_ u_adc.ch[0].u.code[0] _151_ _152_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_500_ _147_ _152_ _143_ _024_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_501_ u_adc.ch[0].u.code[0] _125_ _153_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_502_ _078_ u_adc.cnt[0] _096_ _154_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_503_ u_adc.cnt[1] _079_ _095_ _155_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_504_ _102_ _154_ _156_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_505_ _125_ _151_ _157_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_506_ u_adc.ch[0].u.cap_r _151_ _154_ _102_ _157_ u_adc.ch[0].u.code[1] _158_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__aoi222_1
+X_507_ _153_ _158_ _143_ _025_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_508_ _126_ _156_ _159_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_509_ _096_ _100_ _103_ _160_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_4
+X_510_ u_adc.ch[0].u.code[2] _159_ _160_ _161_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_511_ u_adc.ch[0].u.code[1] _126_ _156_ u_adc.ch[0].u.cap_r _144_ _162_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_512_ _161_ _162_ _026_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_513_ _125_ _160_ _163_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_514_ _096_ _103_ _106_ _164_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_515_ _095_ _102_ _105_ _165_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_516_ u_adc.ch[0].u.code[3] _164_ _166_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_517_ _090_ _160_ _143_ _167_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_518_ u_adc.ch[0].u.code[2] _126_ _160_ _167_ _168_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai31_1
+X_519_ _163_ _166_ _168_ _027_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_520_ _126_ _165_ _169_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_521_ _098_ _150_ _170_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_522_ u_adc.ch[0].u.code[4] _169_ _170_ _171_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_523_ _090_ _164_ _166_ _125_ _143_ _172_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_524_ _171_ _172_ _028_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_525_ _125_ _170_ _173_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_526_ _095_ _097_ _108_ _174_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_527_ _098_ _155_ _175_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_528_ u_adc.ch[0].u.code[5] _175_ _176_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_529_ _090_ _170_ _173_ _176_ _177_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi22_1
+X_530_ u_adc.ch[0].u.code[4] _126_ _170_ _178_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_531_ _144_ _177_ _178_ _029_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_532_ _097_ _154_ _125_ _179_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_533_ _096_ _098_ _100_ _180_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_534_ _095_ _097_ _099_ _181_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_535_ u_adc.ch[0].u.code[6] _125_ _175_ _180_ _182_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor4_1
+X_536_ u_adc.ch[0].u.cap_r _174_ _144_ _183_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_537_ _125_ _176_ _182_ _183_ _030_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_538_ _125_ _180_ _184_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_539_ _126_ _181_ _185_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_540_ u_adc.ch[0].u.code[6] u_adc.ch[0].u.cap_r _180_ _186_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_541_ _184_ _186_ _187_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_542_ u_adc.cnt[3] _081_ _096_ _106_ _188_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor4_1
+X_543_ _095_ _097_ _105_ _189_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_544_ u_adc.ch[0].u.code[7] _188_ _190_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_545_ _184_ _190_ _187_ _143_ _031_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_546_ _112_ _133_ _191_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_547_ _111_ _132_ _192_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_548_ _125_ _191_ _193_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_549_ _126_ _189_ _192_ _194_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_550_ _125_ _190_ _195_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_551_ u_adc.ch[0].u.cap_r _189_ _194_ u_adc.ch[0].u.code[8] _195_ _196_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_552_ _143_ _196_ _032_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_553_ _089_ _126_ _192_ _197_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_554_ u_adc.ch[0].u.cap_r _192_ _197_ _198_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_555_ _117_ _155_ _199_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_556_ _108_ _132_ _200_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_557_ u_adc.ch[0].u.code[9] _193_ _199_ _201_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_558_ _198_ _201_ _143_ _033_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_559_ _100_ _133_ _202_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_560_ _099_ _132_ _203_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_561_ u_adc.ch[0].u.cap_r _202_ _204_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_562_ u_adc.ch[0].u.code[11] _125_ _205_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_563_ u_adc.ch[0].u.code[10] _126_ _203_ _205_ _206_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai211_1
+X_564_ _144_ _204_ _206_ _034_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_565_ u_adc.ch[0].u.code[9] _126_ _207_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_566_ _126_ _200_ _203_ _208_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_567_ u_adc.ch[0].u.cap_r _200_ _208_ u_adc.ch[0].u.code[10] _144_ _209_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_568_ _207_ _209_ _035_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_569_ _129_ _155_ _210_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_570_ _108_ _130_ _211_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_571_ u_adc.ch[1].u.done _210_ _036_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_572_ u_adc.ch[1].u.drv_en _142_ _212_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_573_ _203_ _212_ _037_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_574_ _126_ _142_ _213_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_575_ u_adc.ch[1].u.code[0] _145_ _214_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_576_ u_adc.ch[1].u.code[0] _145_ _213_ _215_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_577_ u_adc.ch[1].u.shift_in _126_ _142_ u_adc.ch[1].u.cap_r _203_ _216_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_578_ _215_ _216_ _038_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_579_ u_adc.ch[1].u.code[1] _149_ _151_ u_adc.ch[1].u.cap_r _146_ _217_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai32_1
+X_580_ _125_ _214_ _217_ _202_ _039_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_581_ u_adc.ch[1].u.code[2] _151_ _159_ _218_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_582_ u_adc.ch[1].u.code[1] _126_ _151_ _203_ _219_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai31_1
+X_583_ _087_ _151_ _218_ _219_ _040_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_584_ u_adc.ch[1].u.code[3] _160_ _220_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_585_ u_adc.ch[1].u.code[3] _159_ _160_ _221_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_586_ u_adc.ch[1].u.code[2] _126_ _156_ u_adc.ch[1].u.cap_r _203_ _222_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_587_ _221_ _222_ _041_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_588_ u_adc.ch[1].u.code[4] _164_ _223_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_589_ _163_ _223_ _224_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_590_ _087_ _160_ _220_ _125_ _202_ _225_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_591_ _224_ _225_ _042_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_592_ u_adc.ch[1].u.code[5] _169_ _170_ _226_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_593_ u_adc.ch[1].u.cap_r _165_ _203_ _227_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_594_ _125_ _223_ _226_ _227_ _043_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_595_ u_adc.ch[1].u.code[6] _175_ _228_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_596_ _087_ _170_ _173_ _228_ _229_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi22_1
+X_597_ u_adc.ch[1].u.code[5] _126_ _170_ _230_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_598_ _203_ _229_ _230_ _044_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_599_ u_adc.ch[1].u.code[7] net1 _231_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_600_ _179_ _231_ _232_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_601_ u_adc.ch[1].u.cap_r _174_ _203_ _233_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_602_ _125_ _228_ _232_ _233_ _045_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_603_ u_adc.ch[1].u.code[8] _185_ _188_ _234_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_604_ _087_ net1 _231_ _125_ _202_ _235_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_605_ _234_ _235_ _046_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_606_ u_adc.ch[1].u.code[8] _126_ _188_ _236_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_607_ u_adc.ch[1].u.cap_r _189_ _194_ u_adc.ch[1].u.code[9] _236_ _237_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_608_ _202_ _237_ _047_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_609_ _087_ _199_ _238_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_610_ u_adc.ch[1].u.code[10] _126_ _208_ u_adc.ch[0].u.shift_in _238_ _239_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_611_ _239_ _048_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_1
+X_612_ u_adc.ch[1].u.code[10] _192_ _240_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_613_ u_adc.ch[1].u.code[9] _125_ _191_ u_adc.ch[1].u.cap_r _199_ _241_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_614_ _208_ _240_ _241_ _049_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_615_ _112_ _131_ _242_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_616_ _111_ _130_ _243_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_617_ u_adc.ch[2].u.done _242_ _050_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_618_ _084_ _210_ _200_ _051_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_619_ u_adc.ch[2].u.shift_in _126_ _211_ _244_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_620_ u_adc.ch[2].u.cap_r _210_ _245_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_621_ u_adc.ch[2].u.code[0] _210_ _213_ _246_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_622_ _244_ _245_ _246_ _199_ _052_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_623_ u_adc.ch[2].u.code[1] _145_ _247_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_624_ u_adc.ch[2].u.code[1] _145_ _213_ _248_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_625_ u_adc.ch[2].u.code[0] _126_ _142_ u_adc.ch[2].u.cap_r _200_ _249_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_626_ _248_ _249_ _053_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_627_ u_adc.ch[2].u.code[2] _149_ _151_ u_adc.ch[2].u.cap_r _146_ _250_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai32_1
+X_628_ _125_ _247_ _250_ _199_ _054_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_629_ u_adc.ch[2].u.code[3] _151_ _159_ _251_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_630_ u_adc.ch[2].u.code[2] _126_ _151_ _200_ _252_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai31_1
+X_631_ _085_ _151_ _251_ _252_ _055_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_632_ u_adc.ch[2].u.code[4] _159_ _160_ _253_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_633_ u_adc.ch[2].u.code[3] _126_ _156_ u_adc.ch[2].u.cap_r _200_ _254_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_634_ _253_ _254_ _056_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_635_ u_adc.ch[2].u.code[4] u_adc.ch[2].u.cap_r _160_ _255_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_636_ _163_ _255_ _256_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_637_ u_adc.ch[2].u.code[5] _164_ _257_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_638_ _163_ _257_ _256_ _199_ _057_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_639_ u_adc.ch[2].u.code[6] _169_ _170_ _258_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_640_ _125_ _257_ _259_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_641_ _085_ _164_ _199_ _260_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_642_ _258_ _259_ _260_ _058_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_643_ u_adc.ch[2].u.code[7] _175_ _261_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_644_ _085_ _170_ _173_ _261_ _262_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi22_1
+X_645_ u_adc.ch[2].u.code[6] _126_ _170_ _263_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_646_ _200_ _262_ _263_ _059_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_647_ u_adc.ch[2].u.code[8] _180_ _264_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_648_ _125_ _175_ _264_ _265_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_649_ u_adc.ch[2].u.cap_r _174_ _200_ _266_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_650_ _125_ _261_ _265_ _266_ _060_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_651_ u_adc.ch[2].u.cap_r _181_ _185_ _264_ _267_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai211_1
+X_652_ u_adc.ch[2].u.code[9] _184_ _188_ _268_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_653_ _267_ _268_ _199_ _061_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_654_ u_adc.ch[1].u.shift_in _125_ _191_ _269_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_655_ u_adc.ch[2].u.code[10] _126_ _192_ u_adc.ch[2].u.cap_r _270_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai22_1
+X_656_ _269_ _270_ _200_ _062_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_657_ u_adc.ch[2].u.code[9] _126_ _188_ _271_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_658_ u_adc.ch[2].u.cap_r _189_ _194_ u_adc.ch[2].u.code[10] _271_ _272_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_659_ _199_ _272_ _063_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_660_ u_adc.ch[3].u.done _137_ _064_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+X_661_ _094_ _242_ _192_ _065_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_662_ u_adc.ch[3].u.code[0] _193_ _243_ _273_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_663_ _083_ _243_ _273_ _211_ _066_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai211_1
+X_664_ u_adc.ch[3].u.code[0] _126_ _211_ _274_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_665_ u_adc.ch[3].u.cap_r _210_ _275_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand2_1
+X_666_ u_adc.ch[3].u.code[1] _210_ _213_ _276_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_667_ _274_ _275_ _276_ _191_ _067_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_668_ u_adc.ch[3].u.code[2] _145_ _277_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_669_ u_adc.ch[3].u.code[2] _145_ _213_ _278_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_670_ u_adc.ch[3].u.code[1] _126_ _142_ u_adc.ch[3].u.cap_r _192_ _279_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_671_ _278_ _279_ _068_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_672_ u_adc.ch[3].u.code[3] _149_ _151_ _146_ u_adc.ch[3].u.cap_r _280_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai32_1
+X_673_ _125_ _277_ _280_ _191_ _069_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_674_ u_adc.ch[3].u.code[4] _151_ _159_ _281_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_675_ u_adc.ch[3].u.code[3] _126_ _151_ _192_ _282_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai31_1
+X_676_ _083_ _151_ _281_ _282_ _070_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_677_ u_adc.ch[3].u.code[5] _159_ _160_ _283_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor3_1
+X_678_ u_adc.ch[3].u.code[4] _126_ _156_ u_adc.ch[3].u.cap_r _192_ _284_ vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__oai221_1
+X_679_ _283_ _284_ _071_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_680_ u_adc.ch[3].u.code[6] _164_ _285_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_681_ _083_ _160_ _191_ _286_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_682_ u_adc.ch[3].u.code[5] _126_ _160_ _286_ _287_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai31_1
+X_683_ _163_ _285_ _287_ _072_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_684_ u_adc.ch[3].u.code[7] _169_ _170_ _288_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_685_ _083_ _164_ _285_ _125_ _191_ _289_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi221_1
+X_686_ _288_ _289_ _073_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and2_1
+X_687_ _097_ _154_ u_adc.ch[3].u.code[8] _290_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi21_1
+X_688_ _083_ _170_ _173_ _290_ _291_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi22_1
+X_689_ u_adc.ch[3].u.code[7] _126_ _170_ _292_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or3_1
+X_690_ _192_ _291_ _292_ _074_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+X_691_ _083_ _175_ _179_ _290_ _293_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_692_ u_adc.ch[3].u.code[9] _179_ net1 _293_ _294_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__aoi211_1
+X_693_ _191_ _294_ _075_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_694_ _082_ _189_ _192_ _295_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nand3_1
+X_695_ u_adc.ch[3].u.cap_r _189_ _194_ _295_ _296_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai211_1
+X_696_ _093_ _194_ _296_ _076_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai21_1
+X_697_ u_adc.ch[3].u.cap_r u_adc.ch[3].u.code[9] _181_ _297_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__mux2_2
+X_698_ net1 _194_ _297_ _188_ _298_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai22_1
+X_699_ _082_ net1 _194_ _298_ _191_ _077_ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__oai32_1
+X_700_ u_adc.ch[3].u.code[0] _094_ dac_gn[36] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_701_ u_adc.ch[3].u.code[5] _094_ dac_gn[41] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_702_ u_adc.ch[3].u.code[4] _094_ dac_gn[40] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_703_ u_adc.ch[3].u.code[3] _094_ dac_gn[39] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_704_ u_adc.ch[3].u.code[2] _094_ dac_gn[38] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_705_ u_adc.ch[3].u.code[6] _094_ dac_gn[42] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_706_ u_adc.ch[3].u.code[7] _094_ dac_gn[43] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_707_ u_adc.ch[3].u.code[8] _094_ dac_gn[44] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_708_ u_adc.ch[3].u.code[9] _094_ dac_gn[45] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_709_ u_adc.ch[3].u.code[10] _094_ dac_gn[46] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_710_ u_adc.ch[2].u.shift_in _094_ dac_gn[47] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_711_ u_adc.ch[3].u.code[1] _094_ dac_gn[37] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__nor2_1
+X_712_ _002_ rstn sclk_i u_adc.cfg_sr[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_713_ _003_ rstn sclk_i u_adc.cfg_sr[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_714_ _004_ rstn sclk_i u_adc.cfg_sr[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_715_ _005_ rstn sclk_i u_adc.cfg_sr[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_716_ _006_ rstn sclk_i u_adc.cfg_sr[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_717_ _007_ rstn sclk_i u_adc.cfg_sr[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_718_ _008_ rstn sclk_i u_adc.cfg_sr[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_719_ _009_ rstn sclk_i en_o[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_720_ _010_ rstn sclk_i en_o[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_721_ _011_ rstn sclk_i en_o[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_722_ _012_ rstn sclk_i en_o[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_723_ _013_ rstn sclk_i mode_o vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_724_ _014_ rstn sclk_i rst_amp_o vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_725_ _015_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_726_ _016_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_727_ _017_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_728_ _018_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_729_ _019_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_730_ _020_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_731_ _021_ u_adc.ch[0].u.frame_rn sclk_i u_adc.cnt[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_732_ _022_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[0].u.done vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_733_ _023_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[0].u.drv_en vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_734_ _024_ rstn sclk_i u_adc.ch[0].u.code[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_735_ _025_ rstn sclk_i u_adc.ch[0].u.code[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_736_ _026_ rstn sclk_i u_adc.ch[0].u.code[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_737_ _027_ rstn sclk_i u_adc.ch[0].u.code[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_738_ _028_ rstn sclk_i u_adc.ch[0].u.code[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_739_ _029_ rstn sclk_i u_adc.ch[0].u.code[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_740_ _030_ rstn sclk_i u_adc.ch[0].u.code[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_741_ _031_ rstn sclk_i u_adc.ch[0].u.code[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_742_ _032_ rstn sclk_i u_adc.ch[0].u.code[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_743_ _033_ rstn sclk_i u_adc.ch[0].u.code[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_744_ _034_ rstn sclk_i u_adc.ch[0].u.code[11] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_745_ _035_ rstn sclk_i u_adc.ch[0].u.code[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_746_ _036_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[1].u.done vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_747_ _037_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[1].u.drv_en vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_748_ _038_ rstn sclk_i u_adc.ch[1].u.code[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_749_ _039_ rstn sclk_i u_adc.ch[1].u.code[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_750_ _040_ rstn sclk_i u_adc.ch[1].u.code[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_751_ _041_ rstn sclk_i u_adc.ch[1].u.code[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_752_ _042_ rstn sclk_i u_adc.ch[1].u.code[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_753_ _043_ rstn sclk_i u_adc.ch[1].u.code[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_754_ _044_ rstn sclk_i u_adc.ch[1].u.code[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_755_ _045_ rstn sclk_i u_adc.ch[1].u.code[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_756_ _046_ rstn sclk_i u_adc.ch[1].u.code[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_757_ _047_ rstn sclk_i u_adc.ch[1].u.code[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_758_ _048_ rstn sclk_i u_adc.ch[0].u.shift_in vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_759_ _049_ rstn sclk_i u_adc.ch[1].u.code[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_760_ _050_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[2].u.done vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_761_ _051_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[2].u.drv_en vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_762_ _052_ rstn sclk_i u_adc.ch[2].u.code[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_763_ _053_ rstn sclk_i u_adc.ch[2].u.code[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_764_ _054_ rstn sclk_i u_adc.ch[2].u.code[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_765_ _055_ rstn sclk_i u_adc.ch[2].u.code[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_766_ _056_ rstn sclk_i u_adc.ch[2].u.code[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_767_ _057_ rstn sclk_i u_adc.ch[2].u.code[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_768_ _058_ rstn sclk_i u_adc.ch[2].u.code[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_769_ _059_ rstn sclk_i u_adc.ch[2].u.code[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_770_ _060_ rstn sclk_i u_adc.ch[2].u.code[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_771_ _061_ rstn sclk_i u_adc.ch[2].u.code[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_772_ _062_ rstn sclk_i u_adc.ch[1].u.shift_in vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_773_ _063_ rstn sclk_i u_adc.ch[2].u.code[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_774_ _064_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[3].u.done vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_775_ _065_ u_adc.ch[0].u.frame_rn sclk_i u_adc.ch[3].u.drv_en vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_776_ _066_ rstn sclk_i u_adc.ch[3].u.code[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_777_ _067_ rstn sclk_i u_adc.ch[3].u.code[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_778_ _068_ rstn sclk_i u_adc.ch[3].u.code[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_779_ _069_ rstn sclk_i u_adc.ch[3].u.code[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_780_ _070_ rstn sclk_i u_adc.ch[3].u.code[4] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_781_ _071_ rstn sclk_i u_adc.ch[3].u.code[5] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_782_ _072_ rstn sclk_i u_adc.ch[3].u.code[6] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_783_ _073_ rstn sclk_i u_adc.ch[3].u.code[7] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_784_ _074_ rstn sclk_i u_adc.ch[3].u.code[8] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_785_ _075_ rstn sclk_i u_adc.ch[3].u.code[9] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_786_ _076_ rstn sclk_i u_adc.ch[2].u.shift_in vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_787_ _077_ rstn sclk_i u_adc.ch[3].u.code[10] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_788_ cmp_q[3] u_adc.ch[3].u.cap_clk u_adc.ch[3].u.cap_r vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffq_1
+X_789_ cmp_q[2] u_adc.ch[2].u.cap_clk u_adc.ch[2].u.cap_r vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffq_1
+X_790_ cmp_q[1] u_adc.ch[1].u.cap_clk u_adc.ch[1].u.cap_r vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffq_1
+X_791_ cmp_q[0] u_adc.ch[0].u.cap_clk u_adc.ch[0].u.cap_r vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffq_1
+X_792_ u_adc.dbit u_adc.ch[0].u.frame_rn sclk_i dout vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffnsnq_4
+X_793_ _001_ rstn sclk_i u_dbs.fsm_inst.rec_en vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_794_ _000_ rstn sclk_i u_dbs.fsm_inst.s0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffsnq_1
+X_795_ net5 rstn sclk_i u_dbs.en_reg_2[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_796_ net2 rstn sclk_i u_dbs.en_reg_2[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_797_ net4 rstn sclk_i u_dbs.en_reg_2[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_798_ net3 rstn sclk_i u_dbs.en_reg_2[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_799_ en_o[0] rstn sclk_i u_dbs.en_reg_1[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_800_ en_o[1] rstn sclk_i u_dbs.en_reg_1[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_801_ en_o[2] rstn sclk_i u_dbs.en_reg_1[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_802_ en_o[3] rstn sclk_i u_dbs.en_reg_1[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dffrnq_1
+X_803_ u_adc.ch[0].trk rst_sw[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__buf_3
+X_804_ u_adc.ch[1].trk rst_sw[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__buf_3
+X_805_ u_adc.ch[2].trk rst_sw[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__buf_2
+X_806_ u_adc.ch[3].trk rst_sw[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__buf_2
+Xck_u_ckbuf sclk sclk_i vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_20
+Xhold2 u_dbs.en_reg_1[1] net2 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xhold3 u_dbs.en_reg_1[3] net3 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xhold4 u_dbs.en_reg_1[2] net4 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xhold5 u_dbs.en_reg_1[0] net5 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xmax_cap1 _180_ net1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__buf_2
+Xsw_0__u_ipg ipg_b_raw[0] sw_ipg[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_0__u_ipg_b ipg_b_raw[0] sw_ipg_b[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_0__u_rec rec_b_raw[0] sw_rec[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_0__u_rec_b rec_b_raw[0] sw_rec_b[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_1__u_ipg ipg_b_raw[1] sw_ipg[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_1__u_ipg_b ipg_b_raw[1] sw_ipg_b[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_1__u_rec rec_b_raw[1] sw_rec[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_1__u_rec_b rec_b_raw[1] sw_rec_b[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_2__u_ipg ipg_b_raw[2] sw_ipg[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_2__u_ipg_b ipg_b_raw[2] sw_ipg_b[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_2__u_rec rec_b_raw[2] sw_rec[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_2__u_rec_b rec_b_raw[2] sw_rec_b[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_3__u_ipg ipg_b_raw[3] sw_ipg[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_3__u_ipg_b ipg_b_raw[3] sw_ipg_b[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xsw_3__u_rec rec_b_raw[3] sw_rec[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_4
+Xsw_3__u_rec_b rec_b_raw[3] sw_rec_b[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkbuf_8
+Xu_adc_ch_0__utg u_adc.ch[0].trk tg_on[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ch_1__utg u_adc.ch[1].trk tg_on[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ch_2__utg u_adc.ch[2].trk tg_on[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ch_3__utg u_adc.ch[3].trk tg_on[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_0__d_u sclk_i u_adc.ckg.t[0].first.ch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_10__d_u u_adc.ckg.t[0].first.ch.w[10] u_adc.ckg.t[0].first.ch.w[11] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_11__d_u u_adc.ckg.t[0].first.ch.w[11] u_adc.ckg.t[0].first.ch.w[12] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_12__d_u u_adc.ckg.t[0].first.ch.w[12] u_adc.ckg.t[0].first.ch.w[13] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_13__genblk1_genblk1_a_u u_adc.ckg.t[0].first.ch.w[13] u_adc.ckg.t[0].first.ch.w[14]
++ vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlya_1
+Xu_adc_ckg_t_0__first_ch_g_14__genblk1_genblk1_a_u u_adc.ckg.t[0].first.ch.w[14] u_adc.ckg.t[0].first.ch.z vdd
++ vdd vss vss gf180mcu_fd_sc_mcu7t5v0__dlya_1
+Xu_adc_ckg_t_0__first_ch_g_1__d_u u_adc.ckg.t[0].first.ch.w[1] u_adc.ckg.t[0].first.ch.w[2] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_2__d_u u_adc.ckg.t[0].first.ch.w[2] u_adc.ckg.t[0].first.ch.w[3] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_3__d_u u_adc.ckg.t[0].first.ch.w[3] u_adc.ckg.t[0].first.ch.w[4] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_4__d_u u_adc.ckg.t[0].first.ch.w[4] u_adc.ckg.t[0].first.ch.w[5] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_5__d_u u_adc.ckg.t[0].first.ch.w[5] u_adc.ckg.t[0].first.ch.w[6] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_6__d_u u_adc.ckg.t[0].first.ch.w[6] u_adc.ckg.t[0].first.ch.w[7] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_7__d_u u_adc.ckg.t[0].first.ch.w[7] u_adc.ckg.t[0].first.ch.w[8] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_8__d_u u_adc.ckg.t[0].first.ch.w[8] u_adc.ckg.t[0].first.ch.w[9] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__first_ch_g_9__d_u u_adc.ckg.t[0].first.ch.w[9] u_adc.ckg.t[0].first.ch.w[10] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__ug u_adc.ckg.t[0].first.ch.z u_adc.ckg.tapw_b[0] u_adc.ch[0].u.drv_en cmp_clk[0] vdd vdd vss
++ vss gf180mcu_fd_sc_mcu7t5v0__and3_1
+Xu_adc_ckg_t_0__ui u_adc.ch[0].u.cap_clk u_adc.ckg.tapw_b[0] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__inv_1
+Xu_adc_ckg_t_0__wch_g_0__d_u u_adc.ckg.t[0].first.ch.z u_adc.ckg.t[0].wch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_0__wch_g_1__genblk1_c_u u_adc.ckg.t[0].wch.w[1] u_adc.ch[0].u.cap_clk vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xu_adc_ckg_t_1__nxt_ch_g_0__d_u u_adc.ckg.t[0].first.ch.z u_adc.ckg.t[1].nxt.ch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_1__nxt_ch_g_1__d_u u_adc.ckg.t[1].nxt.ch.w[1] u_adc.ckg.t[1].nxt.ch.w[2] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_1__nxt_ch_g_2__d_u u_adc.ckg.t[1].nxt.ch.w[2] u_adc.ckg.t[1].nxt.ch.w[3] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_1__nxt_ch_g_3__d_u u_adc.ckg.t[1].nxt.ch.w[3] u_adc.ckg.t[1].nxt.ch.z vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_1__ug u_adc.ckg.t[1].nxt.ch.z u_adc.ckg.tapw_b[1] u_adc.ch[1].u.drv_en cmp_clk[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__and3_1
+Xu_adc_ckg_t_1__ui u_adc.ch[1].u.cap_clk u_adc.ckg.tapw_b[1] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__inv_1
+Xu_adc_ckg_t_1__wch_g_0__d_u u_adc.ckg.t[1].nxt.ch.z u_adc.ckg.t[1].wch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_1__wch_g_1__genblk1_c_u u_adc.ckg.t[1].wch.w[1] u_adc.ch[1].u.cap_clk vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xu_adc_ckg_t_2__nxt_ch_g_0__d_u u_adc.ckg.t[1].nxt.ch.z u_adc.ckg.t[2].nxt.ch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_2__nxt_ch_g_1__d_u u_adc.ckg.t[2].nxt.ch.w[1] u_adc.ckg.t[2].nxt.ch.w[2] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_2__nxt_ch_g_2__d_u u_adc.ckg.t[2].nxt.ch.w[2] u_adc.ckg.t[2].nxt.ch.w[3] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_2__nxt_ch_g_3__d_u u_adc.ckg.t[2].nxt.ch.w[3] u_adc.ckg.t[2].nxt.ch.z vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_2__ug u_adc.ckg.t[2].nxt.ch.z u_adc.ckg.tapw_b[2] u_adc.ch[2].u.drv_en cmp_clk[2] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__and3_1
+Xu_adc_ckg_t_2__ui u_adc.ch[2].u.cap_clk u_adc.ckg.tapw_b[2] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__inv_1
+Xu_adc_ckg_t_2__wch_g_0__d_u u_adc.ckg.t[2].nxt.ch.z u_adc.ckg.t[2].wch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_2__wch_g_1__genblk1_c_u u_adc.ckg.t[2].wch.w[1] u_adc.ch[2].u.cap_clk vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xu_adc_ckg_t_3__nxt_ch_g_0__d_u u_adc.ckg.t[2].nxt.ch.z u_adc.ckg.t[3].nxt.ch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_3__nxt_ch_g_1__d_u u_adc.ckg.t[3].nxt.ch.w[1] u_adc.ckg.t[3].nxt.ch.w[2] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_3__nxt_ch_g_2__d_u u_adc.ckg.t[3].nxt.ch.w[2] u_adc.ckg.t[3].nxt.ch.w[3] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_3__nxt_ch_g_3__d_u u_adc.ckg.t[3].nxt.ch.w[3] u_adc.ckg.t[3].nxt.ch.z vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_3__ug u_adc.ckg.t[3].nxt.ch.z u_adc.ckg.tapw_b[3] u_adc.ch[3].u.drv_en cmp_clk[3] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__and3_1
+Xu_adc_ckg_t_3__ui u_adc.ch[3].u.cap_clk u_adc.ckg.tapw_b[3] vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__inv_1
+Xu_adc_ckg_t_3__wch_g_0__d_u u_adc.ckg.t[3].nxt.ch.z u_adc.ckg.t[3].wch.w[1] vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyd_1
+Xu_adc_ckg_t_3__wch_g_1__genblk1_c_u u_adc.ckg.t[3].wch.w[1] u_adc.ch[3].u.cap_clk vdd vdd vss vss
++ gf180mcu_fd_sc_mcu7t5v0__dlyc_1
+Xu_oe cs dout_oe vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__clkinv_20
+Xu_tie_cs_pd cs_pd vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_cs_pu cs_pu vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_din_pd din_pd vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_din_pu din_pu vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_cs dout_cs vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_ie dout_ie vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_pd dout_pd vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_pdrv0 dout_pdrv0 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_pdrv1 dout_pdrv1 vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_pu dout_pu vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_dout_sl dout_sl vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_rstn_pd rstn_pd vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tieh
+Xu_tie_rstn_pu rstn_pu vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_sclk_pd sclk_pd vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+Xu_tie_sclk_pu sclk_pu vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__tiel
+.ends afe_dig
