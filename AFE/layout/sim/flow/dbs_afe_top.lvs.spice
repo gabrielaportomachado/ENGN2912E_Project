@@ -2996,28 +2996,28 @@ Xbg_lad_a_0 vg1 bg_lad_b_0/a_11872_8700# bg_lad_b_0/a_1072_8700# vdd vss vcm_in 
 + vss bg_lad_a
 .ends
 
-.subckt dbs_afe_top VDD REF E[0] REC[0] IPG[0] E[1] REC[1] IPG[1] E[2] REC[2] IPG[2]
-+ E[3] REC[3] IPG[3] RSTN_PD RSTN_PU RSTN SCLK_PD SCLK_PU SCLK DIN_PD DIN_PU DIN CS_PD
+.subckt dbs_afe_top VDD E[2] REC[2] IPG[2] E[3] REC[3] IPG[3] E[0] REC[0] IPG[0] E[1]
++ REC[1] IPG[1] REF RSTN_PD RSTN_PU RSTN SCLK_PD SCLK_PU SCLK DIN_PD DIN_PU DIN CS_PD
 + CS_PU CS DOUT_OUT DOUT_OE DOUT_IE DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1
 + DOUT_IN VSS
-Xcap_nmos_35 VDD VSS cap_nmos
-Xcap_nmos_24 VDD VSS cap_nmos
-Xcap_nmos_46 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_57 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_79 VDD VSS cap_nmos
+Xcap_nmos_24 VDD VSS cap_nmos
+Xcap_nmos_35 VDD VSS cap_nmos
+Xcap_nmos_46 VDD VSS cap_nmos
+Xcap_nmos_13 VDD VSS cap_nmos
 Xcap_nmos_68 VDD VSS cap_nmos
-Xcap_nmos_13 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_36 VDD VSS cap_nmos
+Xcap_nmos_57 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_25 VDD VSS cap_nmos
-Xcap_nmos_47 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_58 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_36 VDD VSS cap_nmos
+Xcap_nmos_47 VDD VSS cap_nmos
+Xcap_nmos_14 VDD VSS cap_nmos
 Xcap_nmos_69 VDD VSS cap_nmos
-Xcap_nmos_14 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_37 VDD VSS cap_nmos
+Xcap_nmos_58 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_26 VDD VSS cap_nmos
-Xcap_nmos_48 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_37 VDD VSS cap_nmos
+Xcap_nmos_48 VDD VSS cap_nmos
+Xcap_nmos_15 VDD VSS cap_nmos
 Xcap_nmos_59 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_15 afe_ch_3/vdd_dac VSS cap_nmos
 Xafe_ch_0 E[2] REC[2] IPG[2] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3/vcmo
 + afe_ch_3/vg2 afe_ch_3/vrs afe_ch_0/sw_rec afe_ch_0/sw_rec_b afe_ch_0/sw_ipg afe_ch_0/sw_ipg_b
 + afe_ch_3/rst_amp afe_ch_0/rst_sw afe_ch_0/tg_on afe_ch_0/dac_gdn afe_ch_0/cmp_clk
@@ -3056,8 +3056,8 @@ Xafe_dig_0 CS CS_PD CS_PU DIN DIN_PD DIN_PU DOUT_OUT DOUT_CS DOUT_IE DOUT_OE DOU
 + afe_ch_2/sw_ipg_b afe_ch_2/dac_gp[1] afe_ch_2/dac_gp[2] afe_ch_2/dac_gp[3] afe_ch_2/sw_rec
 + afe_ch_2/dac_gn[3] afe_ch_2/dac_gp[4] afe_ch_2/dac_gp[5] afe_ch_2/sw_rec_b afe_ch_2/dac_gp[6]
 + afe_ch_2/dac_gp[7] afe_ch_2/dac_gp[8] afe_ch_2/tg_on VDD VSS afe_dig
-Xcap_nmos_38 VDD VSS cap_nmos
 Xcap_nmos_27 VDD VSS cap_nmos
+Xcap_nmos_38 VDD VSS cap_nmos
 Xcap_nmos_16 VDD VSS cap_nmos
 Xcap_nmos_49 afe_ch_3/vdd_dac VSS cap_nmos
 Xafe_ch_1 E[0] REC[0] IPG[0] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3/vcmo
@@ -3069,9 +3069,9 @@ Xafe_ch_1 E[0] REC[0] IPG[0] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3
 + afe_ch_1/dac_gp[4] afe_ch_1/dac_gn[4] afe_ch_1/dac_gp[3] afe_ch_1/dac_gn[3] afe_ch_1/dac_gp[2]
 + afe_ch_1/dac_gn[2] afe_ch_1/dac_gp[1] afe_ch_1/dac_gn[1] afe_ch_1/dac_gp[0] afe_ch_1/dac_gn[0]
 + VDD afe_ch_3/vdd_dac VDD VSS afe_ch
-Xcap_nmos_39 VDD VSS cap_nmos
+Xcap_nmos_17 VDD VSS cap_nmos
 Xcap_nmos_28 VDD VSS cap_nmos
-Xcap_nmos_17 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_39 VDD VSS cap_nmos
 Xafe_ch_2 E[3] REC[3] IPG[3] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3/vcmo
 + afe_ch_3/vg2 afe_ch_3/vrs afe_ch_2/sw_rec afe_ch_2/sw_rec_b afe_ch_2/sw_ipg afe_ch_2/sw_ipg_b
 + afe_ch_3/rst_amp afe_ch_2/rst_sw afe_ch_2/tg_on afe_ch_2/dac_gdn afe_ch_2/cmp_clk
@@ -3081,8 +3081,8 @@ Xafe_ch_2 E[3] REC[3] IPG[3] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3
 + afe_ch_2/dac_gp[4] afe_ch_2/dac_gn[4] afe_ch_2/dac_gp[3] afe_ch_2/dac_gn[3] afe_ch_2/dac_gp[2]
 + afe_ch_2/dac_gn[2] afe_ch_2/dac_gp[1] afe_ch_2/dac_gn[1] afe_ch_2/dac_gp[0] afe_ch_2/dac_gn[0]
 + VDD afe_ch_3/vdd_dac VDD VSS afe_ch
-Xcap_nmos_29 VDD VSS cap_nmos
-Xcap_nmos_18 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_18 VDD VSS cap_nmos
+Xcap_nmos_29 afe_ch_3/vdd_dac VSS cap_nmos
 Xafe_ch_3 E[1] REC[1] IPG[1] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3/vcmo
 + afe_ch_3/vg2 afe_ch_3/vrs afe_ch_3/sw_rec afe_ch_3/sw_rec_b afe_ch_3/sw_ipg afe_ch_3/sw_ipg_b
 + afe_ch_3/rst_amp afe_ch_3/rst_sw afe_ch_3/tg_on afe_ch_3/dac_gdn afe_ch_3/cmp_clk
@@ -3092,7 +3092,7 @@ Xafe_ch_3 E[1] REC[1] IPG[1] REF afe_ch_3/vbn afe_ch_3/vcm afe_ch_3/vg1 afe_ch_3
 + afe_ch_3/dac_gp[4] afe_ch_3/dac_gn[4] afe_ch_3/dac_gp[3] afe_ch_3/dac_gn[3] afe_ch_3/dac_gp[2]
 + afe_ch_3/dac_gn[2] afe_ch_3/dac_gp[1] afe_ch_3/dac_gn[1] afe_ch_3/dac_gp[0] afe_ch_3/dac_gn[0]
 + VDD afe_ch_3/vdd_dac VDD VSS afe_ch
-Xcap_nmos_19 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_19 VDD VSS cap_nmos
 Xcap_nmos_100 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_101 VDD VSS cap_nmos
 Xcap_nmos_102 afe_ch_3/vdd_dac VSS cap_nmos
@@ -3102,75 +3102,75 @@ Xcap_nmos_103 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_0 VDD VSS cap_nmos
 Xcap_nmos_1 VDD VSS cap_nmos
 Xcap_nmos_2 VDD VSS cap_nmos
-Xcap_nmos_3 VDD VSS cap_nmos
-Xcap_nmos_4 VDD VSS cap_nmos
-Xcap_nmos_90 VDD VSS cap_nmos
-Xcap_nmos_5 VDD VSS cap_nmos
-Xcap_nmos_91 VDD VSS cap_nmos
+Xcap_nmos_3 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_4 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_90 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_5 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_80 VDD VSS cap_nmos
+Xcap_nmos_91 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_6 VDD VSS cap_nmos
-Xcap_nmos_92 VDD VSS cap_nmos
 Xcap_nmos_81 VDD VSS cap_nmos
+Xcap_nmos_92 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_70 VDD VSS cap_nmos
 Xcap_nmos_7 VDD VSS cap_nmos
-Xcap_nmos_93 VDD VSS cap_nmos
 Xcap_nmos_82 VDD VSS cap_nmos
-Xcap_nmos_60 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_93 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_71 VDD VSS cap_nmos
+Xcap_nmos_60 VDD VSS cap_nmos
 Xcap_nmos_8 VDD VSS cap_nmos
-Xcap_nmos_94 VDD VSS cap_nmos
-Xcap_nmos_50 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_83 VDD VSS cap_nmos
-Xcap_nmos_61 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_72 VDD VSS cap_nmos
+Xcap_nmos_61 VDD VSS cap_nmos
+Xcap_nmos_50 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_94 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_83 VDD VSS cap_nmos
 Xcap_nmos_9 VDD VSS cap_nmos
+Xcap_nmos_73 VDD VSS cap_nmos
 Xcap_nmos_84 VDD VSS cap_nmos
 Xcap_nmos_40 VDD VSS cap_nmos
-Xcap_nmos_51 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_62 VDD VSS cap_nmos
-Xcap_nmos_73 VDD VSS cap_nmos
-Xcap_nmos_95 VDD VSS cap_nmos
+Xcap_nmos_51 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_95 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_41 VDD VSS cap_nmos
 Xcap_nmos_30 VDD VSS cap_nmos
 Xcap_nmos_52 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_85 VDD VSS cap_nmos
-Xcap_nmos_63 VDD VSS cap_nmos
 Xcap_nmos_74 VDD VSS cap_nmos
+Xcap_nmos_63 VDD VSS cap_nmos
 Xcap_nmos_96 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_86 VDD VSS cap_nmos
-Xcap_nmos_42 VDD VSS cap_nmos
-Xcap_nmos_31 VDD VSS cap_nmos
-Xcap_nmos_20 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_53 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_64 VDD VSS cap_nmos
+Xcap_nmos_85 VDD VSS cap_nmos
 Xcap_nmos_75 VDD VSS cap_nmos
+Xcap_nmos_20 VDD VSS cap_nmos
+Xcap_nmos_42 VDD VSS cap_nmos
+Xcap_nmos_64 VDD VSS cap_nmos
+Xcap_nmos_31 VDD VSS cap_nmos
+Xcap_nmos_53 afe_ch_3/vdd_dac VSS cap_nmos
 Xcap_nmos_97 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_87 VDD VSS cap_nmos
-Xcap_nmos_43 VDD VSS cap_nmos
-Xcap_nmos_32 VDD VSS cap_nmos
-Xcap_nmos_10 VDD VSS cap_nmos
-Xcap_nmos_21 VDD VSS cap_nmos
-Xcap_nmos_54 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_65 VDD VSS cap_nmos
+Xcap_nmos_86 VDD VSS cap_nmos
 Xcap_nmos_76 VDD VSS cap_nmos
-Xcap_nmos_98 VDD VSS cap_nmos
-Xcap_nmos_66 VDD VSS cap_nmos
-Xcap_nmos_88 VDD VSS cap_nmos
-Xcap_nmos_33 VDD VSS cap_nmos
-Xcap_nmos_22 VDD VSS cap_nmos
-Xcap_nmos_44 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_55 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_21 VDD VSS cap_nmos
+Xcap_nmos_43 VDD VSS cap_nmos
+Xcap_nmos_65 VDD VSS cap_nmos
+Xcap_nmos_10 VDD VSS cap_nmos
+Xcap_nmos_32 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_54 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_98 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_87 VDD VSS cap_nmos
 Xcap_nmos_77 VDD VSS cap_nmos
-Xcap_nmos_99 VDD VSS cap_nmos
+Xcap_nmos_22 VDD VSS cap_nmos
+Xcap_nmos_44 VDD VSS cap_nmos
+Xcap_nmos_66 VDD VSS cap_nmos
 Xcap_nmos_11 VDD VSS cap_nmos
-Xcap_nmos_67 VDD VSS cap_nmos
-Xcap_nmos_89 VDD VSS cap_nmos
-Xcap_nmos_34 VDD VSS cap_nmos
-Xcap_nmos_23 VDD VSS cap_nmos
-Xcap_nmos_45 afe_ch_3/vdd_dac VSS cap_nmos
-Xcap_nmos_56 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_33 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_55 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_99 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_88 VDD VSS cap_nmos
 Xcap_nmos_78 VDD VSS cap_nmos
+Xcap_nmos_23 VDD VSS cap_nmos
+Xcap_nmos_34 VDD VSS cap_nmos
+Xcap_nmos_45 VDD VSS cap_nmos
+Xcap_nmos_67 VDD VSS cap_nmos
 Xcap_nmos_12 VDD VSS cap_nmos
+Xcap_nmos_56 afe_ch_3/vdd_dac VSS cap_nmos
+Xcap_nmos_89 VDD VSS cap_nmos
 X0 VDD afe_ch_3/vdd_dac rm3 r_width=2u r_length=0.2222m
 .ends
 

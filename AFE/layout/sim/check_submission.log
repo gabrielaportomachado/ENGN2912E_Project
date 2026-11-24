@@ -1,0 +1,24 @@
+PASS    info.yaml project keys equal the template (title team discord description lvs_config gf_def_ready ws_def_ready drc_ready lvs_ready export_control)
+PASS    info.yaml: 20 pads, io_type one of the 7 template types
+PASS    info.yaml has 20 distinct pads (floorplan.json: n_ch 4, rec_pads True; Decisions 52 / 53)
+PASS    top ports of AFE/top/dbs_afe_top.v (37) = the ports the 20 pads need (37)
+PASS    export-control document documents/Export_Control_GF_Rev8.2.docx exists
+PASS    lvs_config lvs_config.json exists
+FAIL    info.yaml ready flags {'gf_def_ready': 'false', 'ws_def_ready': 'false', 'drc_ready': 'false', 'lvs_ready': 'false'} (set to true when gate.py L4 passes)
+        -> produced by phase L4
+PASS    lvs_config.json keys equal the template
+PASS    TOP_SOURCE = dbs_afe_top (default name, ACCEPT.md section 5: rename here, in the GDS and in the SPICE top if the organizer assigns one)
+PASS    lvs_config file spice/dbs_afe_top.spice exists
+PASS    lvs_config file verilog/gl/afe_dig.v exists
+PASS    lvs_config file gds/dbs_afe_top.gds exists
+PASS    SPICE top spice/dbs_afe_top.spice: subckt dbs_afe_top with exactly the 37 top ports
+PASS    Verilog verilog/gl/afe_dig.v defines module afe_dig
+PASS    GDS has one top cell dbs_afe_top (['dbs_afe_top'])
+PASS    GDS inside the 1405 x 605 um outline of floorplan.json: bbox 1405.000 x 605.000 um at (0.000, 0.000)
+PASS    flow.py drc report of THIS GDS: total = 0
+PASS    flow.py lvs report of THIS GDS: match = True
+PASS    README.md has the sections Block diagram, Pins, Host rules, Board needs, Test plan
+FAIL    README.md still has 4 `<L4: ...>` placeholders
+        -> produced by phase L4
+PASS    technical answers for the export-control form: documents/export_control_answers.md (the signer copies them into the .docx and signs)
+RESULT check_submission: FAIL  (19 PASS, 0 PENDING, 2 FAIL)

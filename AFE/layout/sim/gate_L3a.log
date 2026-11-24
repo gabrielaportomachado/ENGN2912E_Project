@@ -22,5 +22,5 @@ PASS  the reference was written by mk_lvs_netlists.py (header)
 PASS  decap in the LVS top (= drawn, LVS matched): ADC-main 74 units = 117.9 pF >= 115, ADC-DAC 30 units = 47.8 pF >= 47.5 (floorplan.json params)
 PASS  compare.py --phase L3a: PASS (9 PASS, 0 WARN, 0 FAIL, 0 missing)
 PASS  post-layout results were simulated on extracted netlists
-PASS  floorplan.py check --gds dbs_afe_top=/foss/designs/ENGN2912E_Project/AFE/layout/top/dbs_afe_top.gds --dig-pins /foss/designs/ENGN2912E_Project/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 19 PASS, 0 FAIL
+PASS  floorplan.py check --gds dbs_afe_top=/foss/designs/ENGN2912E/ENGN2912E_Project/AFE/layout/top/dbs_afe_top.gds --dig-pins /foss/designs/ENGN2912E/ENGN2912E_Project/AFE/dig/final/afe_dig_pins.json: floorplan.py check: 19 PASS, 0 FAIL
 GATE L3a: PASS  (0 FAIL)

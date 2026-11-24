@@ -5,4 +5,5 @@ corridor decap done: {'VDD': 4, 'vdd_dac': 30}
 west bank: 38 units
 Cref plate in the slot: x 169.00 .. 228.07, y 44.00 .. 103.07
 decap units: {'VDD': 74, 'vdd_dac': 30}
-wrote AFE/layout/top/dbs_afe_top.gds: 605.000 x 1110.000 um (bbox 0.000 0.000 605.000 1110.000); decap units {'VDD': 74, 'vdd_dac': 30}
+rotated into the organizer frame: 1405 x 605 um, 7 pads re-routed to the top edge
+wrote AFE/layout/top/dbs_afe_top.gds: 1405.000 x 605.000 um (bbox 0.000 0.000 1405.000 605.000); decap units {'VDD': 74, 'vdd_dac': 30}

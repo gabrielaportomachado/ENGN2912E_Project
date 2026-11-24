@@ -18,7 +18,8 @@ REPO = os.path.normpath(os.path.join(LAY, '..', '..'))
 ORG = os.path.join(REPO, 'AFE', 'review', 'sim', 'organizer')
 FP = json.load(open(os.path.join(LAY, 'floorplan.json')))                        # REVIEW R16: pad count and outline come from the floorplan (Decisions 52 / 53), not from constants
 NPAD = (3 if FP['params'].get('rec_pads') else 2) * int(FP['params']['n_ch']) + 8      # E, IPG (and REC) per channel + REF + CS SCLK DIN RSTN DOUT + VDD VSS
-OW, OH = float(FP['outline'][2]), float(FP['outline'][3])
+_TFP = os.path.join(LAY, 'top_frame.json')                                         # tapeout-todos: the organizer frame (core rotated, 1405 x 605 um) when it exists
+OW, OH = [float(v) for v in (json.load(open(_TFP)) if os.path.exists(_TFP) else FP)['outline'][2:4]]
 TOPV = os.path.join(REPO, 'AFE', 'top', 'dbs_afe_top.v')
 IOTYPES = ('ground', 'power', 'input_cmos', 'input_schmitt', 'bidirectional', 'bidirectional_24ma', 'analog')
 BIDI_CTL = ('PD', 'PU', 'CS', 'SL', 'IE', 'OE', 'PDRV0', 'PDRV1')
@@ -117,7 +118,7 @@ def main():
     if sp and os.path.exists(sp[0]):
         txt = open(sp[0]).read()
         m = re.search(r'(?ims)^\.subckt\s+%s\s+(.*?)\n(?!\+)' % re.escape(top), txt)
-        sp_ports = m.group(1).split() if m else []
+        sp_ports = [t for t in m.group(1).split() if t != '+'] if m else []         # '+' = SPICE continuation line, not a port
         ok(sorted(sp_ports) == sorted(ports), 'SPICE top %s: subckt %s with exactly the %d top ports' % (os.path.relpath(sp[0], REPO), top, len(ports)))
     vf = [f for f in files if f.endswith('.v')]
     if vf and os.path.exists(vf[0]):

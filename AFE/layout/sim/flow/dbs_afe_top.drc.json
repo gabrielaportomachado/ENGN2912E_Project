@@ -4,13 +4,13 @@
   "AFE/layout/sim/flow/drc_dbs_afe_top/dbs_afe_top_antenna.lyrdb",
   "AFE/layout/sim/flow/drc_dbs_afe_top/dbs_afe_top_main.lyrdb"
  ],
- "date": "2026-11-21 18:54",
- "deck": "../../../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
+ "date": "2026-11-24 23:45",
+ "deck": "../../../pdks/gf180mcuD/libs.tech/klayout/tech/drc/run_drc.py",
  "density": false,
  "gds": "AFE/layout/top/dbs_afe_top.gds",
- "gds_sha1": "edb9d93e468e495d65b427870c73d2952ec73098",
+ "gds_sha1": "b4d80be9392441f5c63c3371052bb12353e29321",
  "log": "AFE/layout/sim/flow/dbs_afe_top.drc.log",
- "maxrss_mb": 656,
+ "maxrss_mb": 669,
  "mode": "flat",
  "offgrid": true,
  "ran": true,
@@ -19,5 +19,5 @@
  "top": "dbs_afe_top",
  "total": 0,
  "variant": "D",
- "wall_s": 89.7
+ "wall_s": 62.8
 }

@@ -581,8 +581,8 @@ Circuit 1: nfet_06v0_nvt                   |Circuit 2: nfet_06v0_nvt
 4                                          |4                                          
 ---------------------------------------------------------------------------------------
 Cell pin lists are equivalent.
-Comparison output logged to file /foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/sim/flow/dbs_afe_top.lvs.out
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/sim/flow/dbs_afe_top.lvs.out" enabled
+Comparison output logged to file /foss/designs/ENGN2912E/ENGN2912E_Project/AFE/layout/sim/flow/dbs_afe_top.lvs.out
+Logging to file "/foss/designs/ENGN2912E/ENGN2912E_Project/AFE/layout/sim/flow/dbs_afe_top.lvs.out" enabled
 Circuit cap_mim_2f0_m4m5_noshield contains no devices.
 Circuit nfet_03v3 contains no devices.
 Circuit pfet_03v3 contains no devices.
@@ -865,5 +865,5 @@ Circuit 1 contains 176 nets,    Circuit 2 contains 176 nets.
 Final result: 
 Circuits match uniquely.
 .
-Logging to file "/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a/AFE/layout/sim/flow/dbs_afe_top.lvs.out" disabled
+Logging to file "/foss/designs/ENGN2912E/ENGN2912E_Project/AFE/layout/sim/flow/dbs_afe_top.lvs.out" disabled
 LVS Done.

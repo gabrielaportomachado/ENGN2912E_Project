@@ -314,7 +314,9 @@ def check(args):
             continue
         w, h = t['w_um'], t['h_um']
         if cell == 'dbs_afe_top':
-            R(w <= W + 1e-6 and h <= O + 1e-6, '5  as-built dbs_afe_top %.3f x %.3f um <= outline %g x %g' % (w, h, W, O))
+            tfp = os.path.join(os.path.dirname(FP), 'top_frame.json')          # tapeout-todos: the core rotated into the organizer frame, when it exists
+            TW, TH = (json.load(open(tfp))['outline'][2:4] if os.path.exists(tfp) else (W, O))
+            R(w <= TW + 1e-6 and h <= TH + 1e-6, '5  as-built dbs_afe_top %.3f x %.3f um <= outline %g x %g%s' % (w, h, TW, TH, ' (top_frame.json)' if os.path.exists(tfp) else ''))
             continue
         c = fp['cells'].get(cell)
         if c is None:

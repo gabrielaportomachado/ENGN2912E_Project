@@ -6,14 +6,18 @@
 3. sw_rec / sw_rec_b wire lengths (macro pin -> TGATE pin) per channel and their difference (from the drawn constants of mk_afe_ch.py / mk_top.py)
 4. decap units per net (count of cap_nmos devices by their gate net is checked by LVS; here the count of the pcell instances) and the Cref-decap placement
 Uses only klayout.db (python3 -I is not needed: no file of the repository is imported)."""
+import os
 import sys
 import json
 import math
 import klayout.db as db
 
-REPO = '/foss/designs/ENGN2912E_Project/.claude/worktrees/l3a'
+REPO = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
 gds = sys.argv[1] if len(sys.argv) > 1 else REPO + '/AFE/layout/top/dbs_afe_top.gds'
 FP = json.load(open(REPO + '/AFE/layout/floorplan.json'))
+# tapeout-todos: the top is the core (floorplan.json) rotated into the organizer frame (top_frame.json). Section 1 checks the outline and the pins in that frame,
+# then the cell is rotated back so that sections 2-4 run in the core frame unchanged.
+TF = json.load(open(REPO + '/AFE/layout/top_frame.json')) if os.path.exists(REPO + '/AFE/layout/top_frame.json') else None
 ly = db.Layout()
 ly.read(gds)
 top = ly.cell('dbs_afe_top')
@@ -44,8 +48,16 @@ def mind(a, b, hi=2000.0):
 
 # ------------------------------------------------------------------ 1. pins
 bb = top.dbbox()
+OL = (TF or FP)['outline']
 res['outline_um'] = [round(bb.width(), 3), round(bb.height(), 3)]
-print('outline: %.3f x %.3f um (limit 605 x 1110)' % (bb.width(), bb.height()))
+res['outline_ok'] = bb.left >= 0 and bb.bottom >= 0 and bb.right * 1.0 <= OL[2] + 1e-6 and bb.top <= OL[3] + 1e-6
+print('outline: %.3f x %.3f um (limit %g x %g, %s)' % (bb.width(), bb.height(), OL[2], OL[3], 'top_frame.json' if TF else 'floorplan.json'))
+PINS = (TF or FP)['pins']
+if TF:
+    sides = sorted(set(q['side'] for q in PINS))
+    pads = {s: [p['n'] for p in TF['pads'] if p['side'] == s] for s in 'WN'}
+    res['pin_sides'] = sides
+    print('pin sides: %s (want W and N only); pads on W: %s, on N: %s' % (sides, pads['W'], pads['N']))
 labels = {}
 for li in ly.layer_indexes():
     info = ly.get_info(li)
@@ -55,7 +67,7 @@ for li in ly.layer_indexes():
         if sh.is_text():
             labels.setdefault(sh.text.string, []).append((info.layer, round(sh.text.x * dbu, 2), round(sh.text.y * dbu, 2)))
 bad = []
-for q in FP['pins']:
+for q in PINS:
     got = labels.get(q['name'])
     if not got or len(got) != 1:
         bad.append('%s: %s' % (q['name'], got))
@@ -66,8 +78,11 @@ for q in FP['pins']:
     near = (abs(x - q['x']) <= 2.0 if q['side'] in 'WE' else abs(x - q['x']) <= 0.3) and (abs(y - q['y']) <= 2.0 if q['side'] in 'NS' else abs(y - q['y']) <= 10.5)
     if not near:
         bad.append('%s at (%.2f, %.2f), floorplan (%.2f, %.2f)' % (q['name'], x, y, q['x'], q['y']))
-print('pin bits: %d in floorplan.json, %d labels on the top cell (%d distinct names); mismatches: %s' % (len(FP['pins']), sum(len(v) for v in labels.values()), len(labels), bad or 'none'))
+print('pin bits: %d in %s, %d labels on the top cell (%d distinct names); mismatches: %s' % (len(PINS), 'top_frame.json' if TF else 'floorplan.json', sum(len(v) for v in labels.values()), len(labels), bad or 'none'))
 res['pins_bad'] = bad
+if TF:
+    top.transform(db.DTrans(db.DTrans.R90, db.DVector(float(TF['core_outline'][2]), 0.0)))      # top frame -> core frame (inverse of top_frame.json core_trans)
+    print('(sections 2-4 in the core frame of floorplan.json)')
 # ------------------------------------------------------------------ 2. keep-outs
 pl = {q['inst']: q for q in FP['placements']}
 dig = pl['u_dig']
@@ -142,6 +157,8 @@ for p in m5.each():
     b = p.bbox()
     if (b.top * dbu >= 1109.0 or b.bottom * dbu <= 1.0) and b.width() * dbu < 3.0:
         pad.insert(p)
+    elif b.bottom * dbu >= 1109.0:
+        pad.insert(p)                                     # re-routed pad wires in the extension (top_frame.json): beyond the core north edge in this frame
 d_pad = mind(pad, keep + digbox)
 print('smallest distance pad wires (E / REC / IPG Metal5, %d shapes) -> digital side: %s um' % (pad.count(), d_pad))
 res['keepout_um']['pad_wires_to_digital'] = d_pad

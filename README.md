@@ -8,7 +8,7 @@ Academic demonstrator: the stimulation path is a bench demonstration (tens of uA
 | item | value |
 |---|---|
 | top cell / GDS | `dbs_afe_top` (macro name pending the organizer) / `gds/dbs_afe_top.gds` `<L4: final GDS, sha1>` |
-| size | outline 605 x 1110 um (Decision 52); drawn `<L4: W x H from flow.py info>` |
+| size | block 1405 x 605 um (W x H; organizer range 1405 .. 1620 x 605): the 605 x 1110 um layout of Decision 52 rotated 90 deg clockwise (`AFE/layout/top_frame.json`); drawn `<L4: W x H from flow.py info>` |
 | pads | 20: 13 analog (E[3:0], IPG[3:0], REC[3:0], REF), 5 digital, VDD, VSS (`info.yaml`; Decisions 52, 53) |
 | supply | one 3.3 V pad pair (3.0 .. 3.6 V); about 1.0 mW in every mode (re-derived for 4 channels from `AFE/review/sim/f1_power_total.log` and `AFE/dig/reports/power_dig.log`, `AFE/TAPEOUT.md`: 1.05 / 1.64 / 0.68 mW typ / ff 85 / ss -40; ESTIMATE, not measured; the 8-channel numbers were 2.09 / 3.26 / 1.37 mW) |
 | channels | 4 x (electrode routing switch -> AC-coupled amplifier, 60 dB, 0.2 Hz .. 0.42-1.0 kHz -> 12-bit SAR ADC); all 4 sampled at the same instant |
@@ -24,9 +24,12 @@ Academic demonstrator: the stimulation path is a bench demonstration (tens of uA
  afe_dig (one hardened macro, 424.48 x 86.24 um): dbs_ctrl #(4) (routing FSM, EN, MODE, RST_AMP) + adc_top #(4) (80-SCLK SPI frame, SAR logics, staggered comparator clocks) <┘
  CS, SCLK, DIN, RSTN ──> afe_dig ──> DOUT (driven only while CS is low)
 ```
-Floorplan: two rows of two channels, the digital macro between them, the bias cell at the east end (`AFE/layout/SPEC.md`, `AFE/layout/floorplan.json`).
+Floorplan: two rows of two channels, the digital macro between them, the bias cell at one end (`AFE/layout/SPEC.md`, `AFE/layout/floorplan.json`), rotated 90 deg clockwise into the organizer block;
+the 7 pads that land on the right / bottom edge (E, REC, IPG of channels 0-1 and REF) are re-routed on Metal5 through the empty east extension to the top edge (`AFE/layout/top_frame.json`).
 
-## Pins (pad order clockwise from the NW corner; `info.yaml`)
+## Pins (`info.yaml`, pad slots 1-20)
+Left edge, bottom to top: 1 IPG[3], 2 REC[3], 3 E[3], 4 IPG[2], 5 REC[2], 6 E[2]. Top edge, left to right: 7 VSS, 8 RSTN, 9 SCLK, 10 DIN, 11 CS, 12 DOUT, 13 VDD, 14 E[0], 15 REC[0], 16 IPG[0], 17 E[1], 18 REC[1], 19 IPG[1], 20 REF (20 of 22 slots).
+
 | pad | type | function |
 |---|---|---|
 | E[0] .. E[3] | analog | electrode k: to the amplifier (record) or to IPG[k] (stimulate) through 5 V transmission gates; keep inside 0..VDD |

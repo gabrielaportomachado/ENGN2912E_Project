@@ -1,0 +1,404 @@
+* LVS REFERENCE netlist, written by AFE/layout/scripts/mk_lvs_netlists.py from the simulation netlists (AFE/review/AUDIT.md 4.9.3, Decision 44e).
+* DO NOT EDIT: change the simulation netlist or the script and run the script again.  Options of this run: --decap-n 74,30 --cin 2,61.15,61.15 --dig-netlist AFE/dig/final/afe_dig.pnl.v
+* MIM = cap_mim_2f0_m4m5_noshield (terminal 1 = top plate, 2 = bottom plate, NOT interchangeable in LVS); all sizes are numbers; no ideal element.
+* File dbs_afe_top.spice: the LVS top (L3), self-contained.  dbs_afe_top = afe_dig (black box) + bias_genc + 4 x afe_ch + supply devices; the 15 pad-control constants are pins of afe_dig;
+* afe_ch = 2 routing TGATEs (TGATE/TGATE.spice, wells on the analog strap) + amp_ch + adc_ch.  The cell definitions are the same text as in afe_chc.spice, adc_ch.spice, bias_genc.spice.
+
+* ---------------- amplifier part
+.subckt afe_chc rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs pkc pkcb
+Xsink1 ibias1 vbn vss vss nfet_03v3 w=16u l=4u m=24
+Xmp1 gm1 fs vg1 vdd pfet_03v3 w=0.5u l=0.5u
+Xmn1 gm1 fs vrs vss nfet_03v3 w=0.5u l=0.5u
+Xmp2 gm2 fs vg2 vdd pfet_03v3 w=0.5u l=0.5u
+Xmn2 gm2 fs vrs vss nfet_03v3 w=0.5u l=0.5u
+Xpkn rec pkc vcm vss nfet_03v3 w=1u l=0.5u
+Xpkp rec pkcb vcm vdd pfet_03v3 w=2u l=0.5u
+Xs1_xota_xmb ibias1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xmt xs1_xota_tail ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xm1 xs1_xota_d1 xs1_vn xs1_xota_tail vdd pfet_03v3 w=50u l=2u m=16
+Xs1_xota_xm2 xs1_xota_o1 xs1_vp xs1_xota_tail vdd pfet_03v3 w=50u l=2u m=16
+Xs1_xota_xm3 xs1_xota_d1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
+Xs1_xota_xm4 xs1_xota_o1 xs1_xota_d1 vss vss nfet_03v3 w=50u l=16u m=2
+Xs1_xota_xm6 v1 xs1_xota_o1 vss vss nfet_03v3 w=50u l=16u m=4
+Xs1_xota_xm7 v1 ibias1 vdd vdd pfet_03v3 w=50u l=4u m=2
+Xs1_xota_xcc xs1_xota_o1 v1 cap_mim_2f0_m4m5_noshield c_length=22u c_width=22u
+Xs1_xcin1_1 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin1_2 xs1_vn rec cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin2_1 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcin2_2 xs1_vp ref cap_mim_2f0_m4m5_noshield c_length=61.15u c_width=61.15u
+Xs1_xcf1 xs1_vn v1 cap_mim_2f0_m4m5_noshield c_length=8.445791u c_width=8.445791u
+Xs1_xcf2 xs1_vp vcm cap_mim_2f0_m4m5_noshield c_length=8.445791u c_width=8.445791u
+Xs1_xr1_xm1 xs1_xr1_m gm1 xs1_vn xs1_vn pfet_03v3 w=0.22u l=0.5u
+Xs1_xr1_xm2 xs1_xr1_m gm1 v1 v1 pfet_03v3 w=0.22u l=0.5u
+Xs1_xr2_xm1 xs1_xr2_m gm1 xs1_vp xs1_vp pfet_03v3 w=0.22u l=0.5u
+Xs1_xr2_xm2 xs1_xr2_m gm1 vcm vcm pfet_03v3 w=0.22u l=0.5u
+Xs2_xota2_xmt xs2_xota2_tail vbn vss vss nfet_03v3 w=1u l=20u
+Xs2_xota2_xm1 xs2_xota2_d1 vcmo xs2_xota2_tail vss nfet_03v3 w=1u l=40u
+Xs2_xota2_xm2 xs2_xota2_o2 xs2_vn2 xs2_xota2_tail vss nfet_03v3 w=1u l=40u
+Xs2_xota2_xm3 xs2_xota2_d1 xs2_xota2_d1 vdd vdd pfet_03v3 w=1u l=20u
+Xs2_xota2_xm4 xs2_xota2_o2 xs2_xota2_d1 vdd vdd pfet_03v3 w=1u l=20u
+Xs2_xota2_xmf vdd xs2_xota2_o2 out vss nfet_06v0_nvt w=10u l=2u
+Xs2_xota2_xms out vbn vss vss nfet_03v3 w=16u l=4u m=6
+Xs2_xota2_xcc xs2_xota2_o2 vss cap_mim_2f0_m4m5_noshield c_length=31.463538u c_width=31.463538u
+Xs2_xcin xs2_vn2 v1 cap_mim_2f0_m4m5_noshield c_length=38.588264u c_width=38.588264u
+Xs2_xcf xs2_vn2 out cap_mim_2f0_m4m5_noshield c_length=11.917642u c_width=11.917642u
+Xs2_xr_xm1 xs2_xr_m gm2 xs2_vn2 xs2_vn2 pfet_03v3 w=0.22u l=0.5u
+Xs2_xr_xm2 xs2_xr_m gm2 out out pfet_03v3 w=0.22u l=0.5u
+.ends afe_chc
+
+.subckt fs_oneshot_c trig fs vbn vdd vss
+Xpu t trig vdd vdd pfet_03v3 w=1u l=0.5u
+Xlt t vbn vss vss nfet_03v3 w=0.28u l=40u
+Xct t vss cap_mim_2f0_m4m5_noshield c_length=44.594726u c_width=44.594726u
+Xnp1 nd trig vdd vdd pfet_03v3 w=1u l=0.5u
+Xnp2 nd t vdd vdd pfet_03v3 w=1u l=0.5u
+Xnn1 nd trig mm vss nfet_03v3 w=1u l=0.5u
+Xnn2 mm t vss vss nfet_03v3 w=1u l=0.5u
+Xop fs nd vdd vdd pfet_03v3 w=2u l=0.5u
+Xon fs nd vss vss nfet_03v3 w=1u l=0.5u
+.ends fs_oneshot_c
+
+* standard cell, copied unchanged from the PDK (gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice)
+.SUBCKT gf180mcu_fd_sc_mcu7t5v0__or2_1 A1 A2 Z VDD VNW VPW VSS
+X_i_2 Z_neg A1 VSS VPW nfet_05v0 W=3.6e-07 L=6e-07
+X_i_3 VSS A2 Z_neg VPW nfet_05v0 W=3.6e-07 L=6e-07
+X_i_0 Z Z_neg VSS VPW nfet_05v0 W=8.2e-07 L=6e-07
+X_i_4 net_0 A1 Z_neg VNW pfet_05v0 W=5.65e-07 L=5e-07
+X_i_5 VDD A2 net_0 VNW pfet_05v0 W=5.65e-07 L=5e-07
+X_i_1 Z Z_neg VDD VNW pfet_05v0 W=1.22e-06 L=5e-07
+.ENDS
+
+.subckt amp_ch rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs out vdd vss
+Xu_os sw_rec fs_os vbn vdd vss fs_oneshot_c
+Xu_or fs_os rst_amp fs vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__or2_1
+Xu_amp rec ref out vdd vss vbn vcm vg1 vcmo vg2 vrs fs sw_rec_b sw_rec afe_chc
+.ends amp_ch
+
+* ---------------- ADC analog part
+.subckt dac_sw vin t m vcm vdd vdd_dac vss rst rstm sam samb gp0 gp1 gp2 gp3 gp4 gp5 gp6 gp7 gp8 gp9 gp10 gp11 gdp gn0 gn1 gn2 gn3 gn4 gn5 gn6 gn7 gn8
++ gn9 gn10 gn11 gdn
+Xd_xc0_0 m b0 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc1_1 m b1 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc1_2 m b1 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc2_3 m b2 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc2_4 m b2 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc2_5 m b2 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc2_6 m b2 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_7 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_8 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_9 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_10 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_11 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_12 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_13 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc3_14 m b3 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_15 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_16 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_17 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_18 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_19 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_20 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_21 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_22 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_23 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_24 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_25 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_26 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_27 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_28 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_29 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc4_30 m b4 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_31 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_32 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_33 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_34 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_35 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_36 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_37 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_38 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_39 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_40 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_41 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_42 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_43 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_44 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_45 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_46 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_47 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_48 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_49 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_50 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_51 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_52 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_53 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_54 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_55 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_56 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_57 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_58 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_59 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_60 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_61 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc5_62 m b5 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc6_64 t b6 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc7_65 t b7 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc7_66 t b7 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc8_67 t b8 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc8_68 t b8 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc8_69 t b8 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc8_70 t b8 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_71 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_72 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_73 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_74 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_75 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_76 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_77 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc9_78 t b9 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_79 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_80 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_81 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_82 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_83 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_84 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_85 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_86 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_87 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_88 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_89 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_90 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_91 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_92 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_93 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc10_94 t b10 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_95 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_96 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_97 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_98 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_99 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_100 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_101 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_102 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_103 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_104 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_105 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_106 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_107 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_108 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_109 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_110 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_111 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_112 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_113 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_114 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_115 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_116 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_117 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_118 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_119 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_120 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_121 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_122 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_123 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_124 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_125 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xc11_126 t b11 cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xcd m bd cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xd_xcb t m cap_mim_2f0_m4m5_noshield c_length=5u c_width=5.082993u
+Xr0_xn t rst vcm vss nfet_03v3 w=0.5u l=0.28u
+Xr1_xn m rstm vcm vss nfet_03v3 w=0.5u l=0.28u
+Xdv0_xp b0 gp0 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv0_xn b0 gn0 vss vss nfet_03v3 w=1u l=0.28u
+Xdv1_xp b1 gp1 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv1_xn b1 gn1 vss vss nfet_03v3 w=1u l=0.28u
+Xdv2_xp b2 gp2 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv2_xn b2 gn2 vss vss nfet_03v3 w=1u l=0.28u
+Xdv3_xp b3 gp3 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv3_xn b3 gn3 vss vss nfet_03v3 w=1u l=0.28u
+Xdv4_xp b4 gp4 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv4_xn b4 gn4 vss vss nfet_03v3 w=1u l=0.28u
+Xdv5_xp b5 gp5 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv5_xn b5 gn5 vss vss nfet_03v3 w=1u l=0.28u
+Xdv6_xp b6 gp6 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv6_xn b6 gn6 vss vss nfet_03v3 w=1u l=0.28u
+Xdv7_xp b7 gp7 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv7_xn b7 gn7 vss vss nfet_03v3 w=1u l=0.28u
+Xdv8_xp b8 gp8 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv8_xn b8 gn8 vss vss nfet_03v3 w=1u l=0.28u
+Xdv9_xp b9 gp9 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv9_xn b9 gn9 vss vss nfet_03v3 w=1u l=0.28u
+Xdv10_xp b10 gp10 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv10_xn b10 gn10 vss vss nfet_03v3 w=1u l=0.28u
+Xdv11_xp b11 gp11 vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdv11_xn b11 gn11 vss vss nfet_03v3 w=1u l=0.28u
+Xdvd_xp bd gdp vdd_dac vdd_dac pfet_03v3 w=2u l=0.28u
+Xdvd_xn bd gdn vss vss nfet_03v3 w=1u l=0.28u
+Xt0_xn vin sam b0 vss nfet_03v3 w=1u l=0.28u
+Xt0_xp vin samb b0 vdd pfet_03v3 w=2u l=0.28u
+Xt1_xn vin sam b1 vss nfet_03v3 w=1u l=0.28u
+Xt1_xp vin samb b1 vdd pfet_03v3 w=2u l=0.28u
+Xt2_xn vin sam b2 vss nfet_03v3 w=1u l=0.28u
+Xt2_xp vin samb b2 vdd pfet_03v3 w=2u l=0.28u
+Xt3_xn vin sam b3 vss nfet_03v3 w=1u l=0.28u
+Xt3_xp vin samb b3 vdd pfet_03v3 w=2u l=0.28u
+Xt4_xn vin sam b4 vss nfet_03v3 w=1u l=0.28u
+Xt4_xp vin samb b4 vdd pfet_03v3 w=2u l=0.28u
+Xt5_xn vin sam b5 vss nfet_03v3 w=1u l=0.28u
+Xt5_xp vin samb b5 vdd pfet_03v3 w=2u l=0.28u
+Xt6_xn vin sam b6 vss nfet_03v3 w=1u l=0.28u
+Xt6_xp vin samb b6 vdd pfet_03v3 w=2u l=0.28u
+Xt7_xn vin sam b7 vss nfet_03v3 w=1u l=0.28u
+Xt7_xp vin samb b7 vdd pfet_03v3 w=2u l=0.28u
+Xt8_xn vin sam b8 vss nfet_03v3 w=1u l=0.28u
+Xt8_xp vin samb b8 vdd pfet_03v3 w=2u l=0.28u
+Xt9_xn vin sam b9 vss nfet_03v3 w=1u l=0.28u
+Xt9_xp vin samb b9 vdd pfet_03v3 w=2u l=0.28u
+Xt10_xn vin sam b10 vss nfet_03v3 w=1u l=0.28u
+Xt10_xp vin samb b10 vdd pfet_03v3 w=2u l=0.28u
+Xt11_xn vin sam b11 vss nfet_03v3 w=1u l=0.28u
+Xt11_xp vin samb b11 vdd pfet_03v3 w=2u l=0.28u
+Xtd_xn vin sam bd vss nfet_03v3 w=1u l=0.28u
+Xtd_xp vin samb bd vdd pfet_03v3 w=2u l=0.28u
+.ends dac_sw
+
+.subckt cmp_p inp inn clk outp outn vdd_cmp vss
+Xic_xn clkb clk vss vss nfet_03v3 w=1u l=0.28u
+Xic_xp clkb clk vdd_cmp vdd_cmp pfet_03v3 w=2u l=0.28u
+Xmt1 tl clkb vdd_cmp vdd_cmp pfet_03v3 w=4u l=0.28u
+Xm1 a1 inp tl vdd_cmp pfet_03v3 w=80u l=0.5u
+Xm2 a2 inn tl vdd_cmp pfet_03v3 w=80u l=0.5u
+Xmr1 a1 clkb vss vss nfet_03v3 w=2u l=0.28u
+Xmr2 a2 clkb vss vss nfet_03v3 w=2u l=0.28u
+Xcxa1 a1 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xcxa2 a2 vss cap_mim_2f0_m4m5_noshield c_length=5u c_width=5u
+Xmc1 s1 a1 vss vss nfet_03v3 w=8u l=0.5u
+Xmc2 s2 a2 vss vss nfet_03v3 w=8u l=0.5u
+Xmn1 o1 o2 s1 vss nfet_03v3 w=4u l=0.28u
+Xmn2 o2 o1 s2 vss nfet_03v3 w=4u l=0.28u
+Xmq1 o1 o2 vdd_cmp vdd_cmp pfet_03v3 w=4u l=0.28u
+Xmq2 o2 o1 vdd_cmp vdd_cmp pfet_03v3 w=4u l=0.28u
+Xmp1 o1 clk vdd_cmp vdd_cmp pfet_03v3 w=2u l=0.28u
+Xmp2 o2 clk vdd_cmp vdd_cmp pfet_03v3 w=2u l=0.28u
+Xb1_xn b1 o1 vss vss nfet_03v3 w=1u l=0.28u
+Xb1_xp b1 o1 vdd_cmp vdd_cmp pfet_03v3 w=2u l=0.28u
+Xb2_xn outp b1 vss vss nfet_03v3 w=2u l=0.28u
+Xb2_xp outp b1 vdd_cmp vdd_cmp pfet_03v3 w=4u l=0.28u
+Xb3_xn b2 o2 vss vss nfet_03v3 w=1u l=0.28u
+Xb3_xp b2 o2 vdd_cmp vdd_cmp pfet_03v3 w=2u l=0.28u
+Xb4_xn outn b2 vss vss nfet_03v3 w=2u l=0.28u
+Xb4_xp outn b2 vdd_cmp vdd_cmp pfet_03v3 w=4u l=0.28u
+.ends cmp_p
+
+.subckt vhalf out vdd vss
+Xru vdd out vss ppolyf_u_1k r_length=250u r_width=1u
+Xrd out vss vss ppolyf_u_1k r_length=250u r_width=1u
+Xc out vss cap_mim_2f0_m4m5_noshield c_length=22.178574u c_width=22.178574u
+.ends vhalf
+
+.subckt vrefs in out c cb vdd vss
+Xn in c out vss nfet_03v3 w=1u l=0.28u
+Xp in cb out vdd pfet_03v3 w=2u l=0.28u
+Xc out vss cap_mim_2f0_m4m5_noshield c_length=59.070243u c_width=59.070243u
+.ends vrefs
+
+* standard cell, copied unchanged from the PDK (gf180mcuD/libs.ref/gf180mcu_fd_sc_mcu7t5v0/spice/gf180mcu_fd_sc_mcu7t5v0.spice)
+.SUBCKT gf180mcu_fd_sc_mcu7t5v0__inv_1 I ZN VDD VNW VPW VSS
+X_i_0 ZN I VSS VPW nfet_05v0 W=8.2e-07 L=6e-07
+X_i_1 ZN I VDD VNW pfet_05v0 W=1.22e-06 L=5e-07
+.ENDS
+
+.subckt adc_ch rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2]
++ dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q
++ vin vdd vdd_cmp vdd_dac vss
+Xu_vh vcmd vdd vss vhalf
+Xu_samb tg_on samb vdd vdd vss vss gf180mcu_fd_sc_mcu7t5v0__inv_1
+Xu_dac vin t m vcmd vdd vdd_dac vss rst_sw rst_sw tg_on samb dac_gp[0] dac_gp[1] dac_gp[2] dac_gp[3] dac_gp[4] dac_gp[5] dac_gp[6] dac_gp[7] dac_gp[8]
++ dac_gp[9] dac_gp[10] dac_gp[11] vdd_dac dac_gn[0] dac_gn[1] dac_gn[2] dac_gn[3] dac_gn[4] dac_gn[5] dac_gn[6] dac_gn[7] dac_gn[8] dac_gn[9]
++ dac_gn[10] dac_gn[11] dac_gdn dac_sw
+Xu_vr vcmd vref tg_on samb vdd vss vrefs
+Xu_cmp vref t cmp_clk cmp_q cmp_qn vdd_cmp vss cmp_p
+.ends adc_ch
+
+* ---------------- routing switch (5 V devices), from TGATE/TGATE.spice
+.subckt TGATE out c cbar in vdd vss
+Xm1 out cbar in vdd pfet_05v0 w=1.22u l=0.6u
+Xm2 out c in vss nfet_05v0 w=0.565u l=0.6u
+.ends TGATE
+
+* ---------------- one channel
+.subckt afe_ch e ipg rec ref sw_rec sw_rec_b sw_ipg sw_ipg_b rst_amp rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7]
++ dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5]
++ dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q vbn vcm vg1 vcmo vg2 vrs vdd vdd_cmp vdd_dac vss
+Xrec_tg rec sw_rec sw_rec_b e vdd vss TGATE
+Xipg_tg ipg sw_ipg sw_ipg_b e vdd vss TGATE
+Xamp_ch rec ref sw_rec sw_rec_b rst_amp vbn vcm vg1 vcmo vg2 vrs amp_out vdd vss amp_ch
+Xadc_ch rst_sw tg_on cmp_clk dac_gdn dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1]
++ dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q amp_out
++ vdd vdd_cmp vdd_dac vss adc_ch
+.ends afe_ch
+
+* ---------------- shared bias
+.subckt bias_genc vbn vcm_in vg1 vcm_out vg2 vrs vdd vss
+Xmp2 a a vdd vdd pfet_03v3 w=40u l=4u
+Xmp1 vbn a vdd vdd pfet_03v3 w=40u l=4u
+Xmn1 vbn vbn vss vss nfet_03v3 w=16u l=4u
+Xmn2 a vbn r1 vss nfet_03v3 w=16u l=4u m=4
+Xrb r1 vss vss ppolyf_u_1k r_length=120u r_width=2u
+Xs1 s1 s1 vdd vdd pfet_03v3 w=0.5u l=4u
+Xs2 s2 s2 s1 vdd pfet_03v3 w=0.5u l=4u
+Xs3 vbn vbn s2 vdd pfet_03v3 w=0.5u l=4u
+Xra1 vdd vg1 vss ppolyf_u_1k r_length=725u r_width=1u
+Xra2 vg1 vcm_in vss ppolyf_u_1k r_length=100u r_width=1u
+Xra3 vcm_in vss vss ppolyf_u_1k r_length=825u r_width=1u
+Xrep vrs vrs vcm_in vcm_in pfet_03v3 w=0.22u l=0.5u
+Xsr vrs vbn vss vss nfet_03v3 w=0.28u l=40u
+Xcvrs vrs vss cap_mim_2f0_m4m5_noshield c_length=49.886545u c_width=49.886545u
+Xrb1 vdd vg2 vss ppolyf_u_1k r_length=375u r_width=1u
+Xrb2 vg2 vcm_out vss ppolyf_u_1k r_length=450u r_width=1u
+Xrb3 vcm_out vss vss ppolyf_u_1k r_length=825u r_width=1u
+.ends bias_genc
+
+* ---------------- digital macro
+* afe_dig: the digital macro (dbs_ctrl N = 4 + adc_top N = 4, Decision 54).  Its definition is the powered gate-level netlist AFE/dig/final/afe_dig.pnl.v (LVS_VERILOG_FILES);
+* the instance below lists the nets in the port order of that file.
+
+* ---------------- top
+.subckt dbs_afe_top E[3] E[2] E[1] E[0] IPG[3] IPG[2] IPG[1] IPG[0] REC[3] REC[2] REC[1] REC[0] REF CS DIN SCLK RSTN DOUT_OUT DOUT_IN DOUT_OE DOUT_IE
++ DOUT_PD DOUT_PU DOUT_CS DOUT_SL DOUT_PDRV0 DOUT_PDRV1 CS_PU CS_PD DIN_PU DIN_PD SCLK_PU SCLK_PD RSTN_PU RSTN_PD VDD VSS
+* digital macro
+Xdig CS CS_PD CS_PU DIN DIN_PD DIN_PU DOUT_OUT DOUT_CS DOUT_IE DOUT_OE DOUT_PD DOUT_PDRV0 DOUT_PDRV1 DOUT_PU DOUT_SL RSTN RSTN_PD RSTN_PU SCLK SCLK_PD
++ SCLK_PU rst_amp_o VDD VSS cmp_clk[3] cmp_clk[2] cmp_clk[1] cmp_clk[0] cmp_q[3] cmp_q[2] cmp_q[1] cmp_q[0] dac_gdn[3] dac_gdn[2] dac_gdn[1]
++ dac_gdn[0] dac_gn[47] dac_gn[46] dac_gn[45] dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38] dac_gn[37] dac_gn[36]
++ dac_gn[35] dac_gn[34] dac_gn[33] dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] dac_gn[23]
++ dac_gn[22] dac_gn[21] dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] dac_gn[11] dac_gn[10]
++ dac_gn[9] dac_gn[8] dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] dac_gp[47] dac_gp[46] dac_gp[45] dac_gp[44]
++ dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gp[35] dac_gp[34] dac_gp[33] dac_gp[32] dac_gp[31]
++ dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gp[23] dac_gp[22] dac_gp[21] dac_gp[20] dac_gp[19] dac_gp[18]
++ dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gp[11] dac_gp[10] dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4]
++ dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] rst_sw[3] rst_sw[2] rst_sw[1] rst_sw[0] sw_ipg[3] sw_ipg[2] sw_ipg[1] sw_ipg[0] sw_ipg_b[3] sw_ipg_b[2]
++ sw_ipg_b[1] sw_ipg_b[0] sw_rec[3] sw_rec[2] sw_rec[1] sw_rec[0] sw_rec_b[3] sw_rec_b[2] sw_rec_b[1] sw_rec_b[0] tg_on[3] tg_on[2] tg_on[1] tg_on[0]
++ afe_dig
+* shared bias and the 4 channels
+Xu_bias vbn vcm vg1 vcmo vg2 vrs VDD VSS bias_genc
+Xch0 E[0] IPG[0] REC[0] REF sw_rec[0] sw_rec_b[0] sw_ipg[0] sw_ipg_b[0] rst_amp_o rst_sw[0] tg_on[0] cmp_clk[0] dac_gdn[0] dac_gp[11] dac_gp[10]
++ dac_gp[9] dac_gp[8] dac_gp[7] dac_gp[6] dac_gp[5] dac_gp[4] dac_gp[3] dac_gp[2] dac_gp[1] dac_gp[0] dac_gn[11] dac_gn[10] dac_gn[9] dac_gn[8]
++ dac_gn[7] dac_gn[6] dac_gn[5] dac_gn[4] dac_gn[3] dac_gn[2] dac_gn[1] dac_gn[0] cmp_q[0] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac VSS afe_ch
+Xch1 E[1] IPG[1] REC[1] REF sw_rec[1] sw_rec_b[1] sw_ipg[1] sw_ipg_b[1] rst_amp_o rst_sw[1] tg_on[1] cmp_clk[1] dac_gdn[1] dac_gp[23] dac_gp[22]
++ dac_gp[21] dac_gp[20] dac_gp[19] dac_gp[18] dac_gp[17] dac_gp[16] dac_gp[15] dac_gp[14] dac_gp[13] dac_gp[12] dac_gn[23] dac_gn[22] dac_gn[21]
++ dac_gn[20] dac_gn[19] dac_gn[18] dac_gn[17] dac_gn[16] dac_gn[15] dac_gn[14] dac_gn[13] dac_gn[12] cmp_q[1] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
+Xch2 E[2] IPG[2] REC[2] REF sw_rec[2] sw_rec_b[2] sw_ipg[2] sw_ipg_b[2] rst_amp_o rst_sw[2] tg_on[2] cmp_clk[2] dac_gdn[2] dac_gp[35] dac_gp[34]
++ dac_gp[33] dac_gp[32] dac_gp[31] dac_gp[30] dac_gp[29] dac_gp[28] dac_gp[27] dac_gp[26] dac_gp[25] dac_gp[24] dac_gn[35] dac_gn[34] dac_gn[33]
++ dac_gn[32] dac_gn[31] dac_gn[30] dac_gn[29] dac_gn[28] dac_gn[27] dac_gn[26] dac_gn[25] dac_gn[24] cmp_q[2] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
+Xch3 E[3] IPG[3] REC[3] REF sw_rec[3] sw_rec_b[3] sw_ipg[3] sw_ipg_b[3] rst_amp_o rst_sw[3] tg_on[3] cmp_clk[3] dac_gdn[3] dac_gp[47] dac_gp[46]
++ dac_gp[45] dac_gp[44] dac_gp[43] dac_gp[42] dac_gp[41] dac_gp[40] dac_gp[39] dac_gp[38] dac_gp[37] dac_gp[36] dac_gn[47] dac_gn[46] dac_gn[45]
++ dac_gn[44] dac_gn[43] dac_gn[42] dac_gn[41] dac_gn[40] dac_gn[39] dac_gn[38] dac_gn[37] dac_gn[36] cmp_q[3] vbn vcm vg1 vcmo vg2 vrs VDD VDD vdd_dac
++ VSS afe_ch
+* supply network (Decision 44d): ADC-main strap decap and ADC-DAC strap decap (MOS capacitors, gate on the rail), the strap resistor between the two straps
+Xu_rstrap VDD vdd_dac rm3 r_length=222.2u r_width=2u
+Xu_dcm VDD VSS cap_nmos_03v3 c_length=20u c_width=20u m=74
+Xu_dcd vdd_dac VSS cap_nmos_03v3 c_length=20u c_width=20u m=30
+* pad-control ties (Decisions 41d / 44b / 46e): the 15 constant pad-control pins (DOUT_IE = 0 DOUT_PD = 0 DOUT_PU = 0 DOUT_CS = 0 DOUT_SL = 0 DOUT_PDRV0 = 0 DOUT_PDRV1 = 0 CS_PU = 0 CS_PD = 0 DIN_PU = 0 DIN_PD = 0 SCLK_PU = 0 SCLK_PD = 0 RSTN_PU = 0 RSTN_PD = 1)
+* are driven by tie cells INSIDE afe_dig (gf180mcu_fd_sc_mcu7t5v0__tiel / __tieh) and reach the top pins as plain nets: there is no device for them at this level.
+.ends dbs_afe_top

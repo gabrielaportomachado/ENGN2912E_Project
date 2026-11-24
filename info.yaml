@@ -1,6 +1,6 @@
 # ----- ------ ----- ----- ------ ----- ----- ------ -----
 # Chipathon 2026: Project configuration
-# DRAFT (pad list updated 2026-11-21, Decision 53 = 20 pads (Decision 52: 4 channels, outline 605 x 1110 um, + REC[3:0]); was 24 pads, Decisions 44b / 45; pad ORDER = the floorplan perimeter): top cell name, team name and ready flags are provisional
+# DRAFT (pad list updated 2026-11-21, Decision 53 = 20 pads (Decision 52: 4 channels, outline 605 x 1110 um, + REC[3:0]; rotated to 1405 x 605 um on branch tapeout-todos); was 24 pads, Decisions 44b / 45; pad ORDER = the floorplan perimeter): top cell name, team name and ready flags are provisional
 # (waiting on the organizer: macro name/DEF, slot, pad allocation; defaults in AFE/layout/ACCEPT.md section 5). L4 sets the four *_ready flags to true after gate.py L4 passes. See AFE/TAPEOUT.md.
 # ----- ------ ----- ----- ------ ----- ----- ------ -----
 
@@ -23,23 +23,10 @@ project:
 # plus its 8 control pins, all driven inside the top cell: DOUT_OE = ~CS (the pad drives only while CS is low), DOUT_IE = 0, DOUT_PD = DOUT_PU = 0,
 # DOUT_CS = 0 (CMOS), DOUT_SL = 0 (fast), DOUT_PDRV1:0 = 00 (4 mA).  Input pads: <name>_PD / <name>_PU driven, all 0 except RSTN_PD = 1
 # (the chip stays in reset until the host drives RSTN).  Values to be confirmed in L4.
-# Pads listed clockwise from the NW corner of the 605 x 1110 um outline (AFE/layout/floorplan.json `pins`): north edge E[0] REC[0] IPG[0] E[1] REC[1] IPG[1] (channels 0-1),
-# east edge REF, south edge IPG[3] REC[3] E[3] IPG[2] REC[2] E[2] (channels 3-2), west edge VSS, the digital pads, VDD.  The order is a suggestion for the organizer's DEF; the names and types are what counts.
+# Pads listed in pad-slot order 1-20 (tapeout-todos, AFE/layout/top_frame.json): the organizer block is 605 um tall x 1405 um wide (allowed 1405 .. 1620), the L3a layout rotated 90 deg clockwise.
+# Left edge, south to north: 1-6 = IPG[3] REC[3] E[3] IPG[2] REC[2] E[2]; top edge, west to east: 7-13 = VSS RSTN SCLK DIN CS DOUT VDD, 14-19 = E[0] REC[0] IPG[0] E[1] REC[1] IPG[1], 20 = REF.
+# 20 of the 22 slots used. The order is a suggestion for the organizer's DEF; the names and types are what counts.
 pins:
-  - name: E[0]
-    io_type: analog
-  - name: REC[0]
-    io_type: analog
-  - name: IPG[0]
-    io_type: analog
-  - name: E[1]
-    io_type: analog
-  - name: REC[1]
-    io_type: analog
-  - name: IPG[1]
-    io_type: analog
-  - name: REF
-    io_type: analog
   - name: IPG[3]
     io_type: analog
   - name: REC[3]
@@ -66,3 +53,17 @@ pins:
     io_type: bidirectional
   - name: VDD
     io_type: power
+  - name: E[0]
+    io_type: analog
+  - name: REC[0]
+    io_type: analog
+  - name: IPG[0]
+    io_type: analog
+  - name: E[1]
+    io_type: analog
+  - name: REC[1]
+    io_type: analog
+  - name: IPG[1]
+    io_type: analog
+  - name: REF
+    io_type: analog

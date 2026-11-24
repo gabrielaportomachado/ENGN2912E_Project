@@ -20,7 +20,10 @@ FP = json.load(open(os.path.join(REPO, 'AFE/layout/floorplan.json')))
 PINS_DIG = {q['name']: q for q in json.load(open(os.path.join(REPO, 'AFE/dig/final/afe_dig_pins.json')))['pins']}
 STAGE = int(globals().get('stage', '99'))
 DECAP = int(globals().get('decap', '1'))
+ROT = int(globals().get('rot', '1'))           # 1 (tapeout-todos): rotate into the organizer frame of AFE/layout/top_frame.json; 0: the L3a core frame (605 x 1110 um)
 outgds = globals().get('out', 'AFE/layout/top/dbs_afe_top.gds')
+TF = json.load(open(os.path.join(REPO, 'AFE/layout/top_frame.json'))) if ROT else None
+REF_TAP_Y = TF['reroute'][-1]['core_tap'][1] if ROT else None
 
 W, H = FP['outline'][2], FP['outline'][3]
 PL = {q['inst']: q for q in FP['placements']}
@@ -400,10 +403,15 @@ for nm, yy in BPIN.items():
     else:
         seg('metal4', xp, yp, 593.0, yp, 1.0, cap=False)
         T.stkbox(TOP, 4, 5, 592.0, yp - 0.5, 594.0, yp + 0.5)
-# REF pad (east edge) -> Metal3 vertical of REF
-R('metal5', 603.0, 554.0, 605.0, 556.0)
-stk(EV['REF'], 555.0, 3, 5, size=0.6)
-lab('metal5', 'REF', 604.0, 555.0)
+if not ROT:
+    # REF pad (east edge) -> Metal3 vertical of REF
+    R('metal5', 603.0, 554.0, 605.0, 556.0)
+    stk(EV['REF'], 555.0, 3, 5, size=0.6)
+    lab('metal5', 'REF', 604.0, 555.0)
+else:
+    # REF leaves at the north end of its Metal3 vertical (same 3-5 stack as above) on a Metal5 wire to the core north edge; the rest is drawn in the extension
+    stk(EV['REF'], REF_TAP_Y, 3, 5, size=0.6)
+    R('metal5', 602.6, REF_TAP_Y - 1.0, 604.6, H)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # pad wires of the channels (E, REC, IPG: Metal5, 2 um) and labels
@@ -413,11 +421,13 @@ for n in range(4):
         x = chx(n, xl)
         if SLOT[n]['orient'] == 'R0':
             R('metal5', x - 1.0, Y0N - 0.5, x + 1.0, H)
-            lab('metal5', '%s[%d]' % (nm, n), x, H - 1.0)
+            if not ROT:
+                lab('metal5', '%s[%d]' % (nm, n), x, H - 1.0)       # ROT: the label sits at the end of the re-routed wire (extension)
         else:
             R('metal5', x - 1.0, 0.0, x + 1.0, Y0S + 0.5)
             lab('metal5', '%s[%d]' % (nm, n), x, 1.0)
-R('pr_bndry', 0.0, 0.0, W, H)
+if not ROT:
+    R('pr_bndry', 0.0, 0.0, W, H)
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # decap rows with Metal2 gate rails: 4 units under the Cref plate of every adc_ch (VDD via the analog spur) and 8 + 8 units in the two spare regions east of the channels (analog VDD trunk)
@@ -462,6 +472,25 @@ if DECAP and STAGE >= 3:
 log('decap units: %s' % NDEC)
 
 #DECAP_REST2#
+
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# organizer frame (ROT): rotate everything 90 deg clockwise, core (x, y) -> (y, W - x), widen the outline east, re-route the 7 pads of the right / bottom edge to the top edge
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+if ROT:
+    TOP.transform(pya.DTrans(pya.DTrans.R270, pya.DVector(0.0, W)))
+    TW, TH = TF['outline'][2], TF['outline'][3]
+    assert abs(TH - W) < 1e-6
+    for rr in TF['reroute']:
+        xv, yw = rr['riser_x'], rr['wire_y']
+        if rr['name'] == 'REF':
+            R('metal5', H - 1.0, 0.4, xv + 1.0, 2.4)                   # along the bottom edge (0.4 um inside), continues the core Metal5 at y 0.4 .. 2.4
+            R('metal5', xv - 1.0, 0.4, xv + 1.0, TH)
+        else:
+            R('metal5', H - 1.0, yw - 1.0, xv + 1.0, yw + 1.0)           # continues the core pad wire (it ends at the core edge x = H)
+            R('metal5', xv - 1.0, yw - 1.0, xv + 1.0, TH)
+        lab('metal5', rr['name'], xv, TH - 1.0)
+    R('pr_bndry', 0.0, 0.0, TW, TH)
+    log('rotated into the organizer frame: %g x %g um, %d pads re-routed to the top edge' % (TW, TH, len(TF['reroute'])))
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # write

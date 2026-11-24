@@ -1,10 +1,12 @@
-outline: 605.000 x 1110.000 um (limit 605 x 1110)
-pin bits: 37 in floorplan.json, 37 labels on the top cell (37 distinct names); mismatches: none
+outline: 1405.000 x 605.000 um (limit 1405 x 605, top_frame.json)
+pin sides: ['N', 'W'] (want W and N only); pads on W: [1, 2, 3, 4, 5, 6], on N: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+pin bits: 37 in top_frame.json, 37 labels on the top cell (37 distinct names); mismatches: none
+(sections 2-4 in the core frame of floorplan.json)
 digital side: macro afe_dig, 116 adc control wires (Metal2, strap corridors)
 smallest distance macro -> any MIM top plate (summing nodes, DAC / Cref plates): 61.0 um (rule: >= 20)
 smallest distance ADC control wire (top level) -> any MIM top plate: 36.01 um (rule: >= 20, the last 10 um at the device excepted)
 smallest distance ADC supply strap (Metal5 in the strap corridors) -> any MIM top plate: 39.7 um (rule: >= 5)
-smallest distance pad wires (E / REC / IPG Metal5, 12 shapes) -> digital side: 448.39 um
+smallest distance pad wires (E / REC / IPG Metal5, 27 shapes) -> digital side: 448.39 um
 bias_genc to the macro: 21.03 um (rule: >= 20)
 channel 0: sw_rec 550.6 um, sw_rec_b 559.2 um, difference 8.6 um (limit 100)
 channel 1: sw_rec 550.4 um, sw_rec_b 559.0 um, difference 8.6 um (limit 100)
