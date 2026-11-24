@@ -67,8 +67,10 @@ async def short_frame_commits_nothing(dut):
     await reset(dut)
     await frame(dut, cfg=spi.config_word(1, 0, 1, 0xF), n_edges=16)              # < 17 edges
     assert int(dut.en_o.value) == 0
+    assert (await frame_words(dut))[0] == 0xA000                                  # the DUT's own status agrees: nothing committed
     await frame(dut, cfg=spi.config_word(1, 0, 1, 0xF), n_edges=17)              # exactly 17 edges commits
     assert int(dut.en_o.value) == 0xF
+    assert (await frame_words(dut))[0] == spi.status_word(0, 1, 0xF)
 
 
 @cocotb.test()
